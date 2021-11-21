@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+        <EmptyBorder/>
+      </Border>
+    </Property>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[767, 677]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jXPanel3" alignment="0" max="32767" attributes="1"/>
+                  <Component id="jXPanel2" alignment="0" max="32767" attributes="1"/>
+                  <Component id="jXPanel1" alignment="0" max="32767" attributes="1"/>
+              </Group>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="jXPanel1" min="-2" max="-2" attributes="1"/>
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="jXPanel2" min="-2" max="-2" attributes="1"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jXPanel3" min="-2" pref="330" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Experiment Identifier (File Name)">
+              <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jXLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtSiteCode" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="txtInstituteCode" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="txtExperimentNumber" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="txtYear" alignment="0" pref="77" max="32767" attributes="1"/>
+                              </Group>
+                              <Component id="cbFileType" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="imagePanel" min="-2" pref="113" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="txtCropName" pref="537" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="bnSelectCrop" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbFileType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtInstituteCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtSiteCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtExperimentNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="imagePanel" min="-2" pref="113" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="bnSelectCrop" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCropName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File Type"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Institute Code"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Site Code"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbFileType">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Experimental"/>
+                <StringItem index="1" value="Sequential"/>
+                <StringItem index="2" value="Seasonal"/>
+                <StringItem index="3" value="Spatial"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbFileTypeItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFileTypeActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="txtYear">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="2010" minimum="1900" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtYearStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Year"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="txtExperimentNumber">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="1" maximum="99" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtExperimentNumberStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Crop"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Experiment Number"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="bnSelectCrop">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="..."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectCropActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtInstituteCode">
+          <Properties>
+            <Property name="columns" type="int" value="2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSiteCode">
+          <Properties>
+            <Property name="columns" type="int" value="2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtCropName">
+        </Component>
+        <Component class="javax.swing.JLabel" name="imagePanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel2">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="General Information">
+              <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jXLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="txtAddress" alignment="1" max="32767" attributes="1"/>
+                      <Component id="txtPeople" alignment="0" max="32767" attributes="1"/>
+                      <Component id="txtSite" alignment="0" max="32767" attributes="1"/>
+                      <Component id="txtExperimentName" alignment="0" pref="566" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtExperimentName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jXLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPeople" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtSite" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jXLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Experiment Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtExperimentName">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="People"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Address"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel10">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Site"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPeople">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtAddress">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSite">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel3">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Plot">
+              <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jXPanel7" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jXPanel6" alignment="0" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jXPanel6" min="-2" pref="170" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Component id="jXPanel7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel6">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Plot Information">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jXLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel14" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel15" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel16" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtPRNO" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtPAREA" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtPLEN" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtPLDR" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtPLSP" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtPLAY" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jXLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jXLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jXLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jXLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPAREA" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPRNO" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPLEN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPLDR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPLSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPLAY" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JFormattedTextField" name="txtPAREA">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtPRNO">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtPLEN">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtPLDR">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtPLSP">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtPLAY">
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel11">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gross Plot Area per rep"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel12">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Row per Plot"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel13">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Plot Length"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel14">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Plots Relative to Drains"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Plot Spacing"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Plot Layout"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel18">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="m"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel19">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="degrees"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel20">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cm"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel7">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Harvest Information">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jXLabel22" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel23" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel25" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtHARM" alignment="1" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtHAREA" alignment="1" min="-2" pref="121" max="-2" attributes="1"/>
+                                  <Component id="txtHLEN" alignment="1" min="-2" pref="121" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jXLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jXLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="txtHRNO" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
+                      </Group>
+                      <EmptySpace pref="274" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtHAREA" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtHRNO" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtHLEN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtHARM" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JFormattedTextField" name="txtHRNO">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtHAREA">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtHLEN">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtHARM">
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel22">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Harvest Area"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel23">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Harvest Row Number"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel24">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Harvest Row Length"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel25">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Harvest Method"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel26">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel27">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="m"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
