@@ -17,6 +17,20 @@ public class Simulation implements Cloneable {
     public Simulation(String SNAME)
     {
         this.SNAME = SNAME;
+        
+        this.FNAME = "N";
+        this.OVVEW = "Y";
+        this.SUMRY = "Y";
+        this.FROPT = 99;
+        this.GROUT = "Y";
+        this.CAOUT = "Y";
+        this.WAOUT = "Y";
+        this.NIOUT = "Y";
+        this.MIOUT = "Y";
+        this.DIOUT = "Y";
+        this.VBOSE = "Y";
+        this.CHOUT = "Y";
+        this.OPOUT = "Y";
     }
 
     public Simulation()
