@@ -21,7 +21,7 @@ public class Simulation implements Cloneable {
         this.FNAME = "N";
         this.OVVEW = "Y";
         this.SUMRY = "Y";
-        this.FROPT = 99;
+        this.FROPT = 1;
         this.GROUT = "Y";
         this.CAOUT = "Y";
         this.WAOUT = "Y";
@@ -31,6 +31,7 @@ public class Simulation implements Cloneable {
         this.VBOSE = "Y";
         this.CHOUT = "Y";
         this.OPOUT = "Y";
+        this.FMOPT = "A";
     }
 
     public Simulation()
@@ -126,7 +127,7 @@ public class Simulation implements Cloneable {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="OUTPUTS">
-    public String FNAME;
+    public String FNAME;    
     public String OVVEW;
     public String SUMRY;
     public Integer FROPT;
@@ -139,6 +140,7 @@ public class Simulation implements Cloneable {
     public String VBOSE;
     public String CHOUT;
     public String OPOUT;
+    public String FMOPT;
     // </editor-fold>
     
     public Simulation clone() throws CloneNotSupportedException {

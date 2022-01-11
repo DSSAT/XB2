@@ -785,7 +785,7 @@ public class FileX {
                 pw.print(" " + Tools.PadLeft(sim.HARVS, 5, ' '));
                 pw.println();
 
-                pw.println("@N OUTPUTS     FNAME OVVEW SUMRY FROPT GROUT CAOUT WAOUT NIOUT MIOUT DIOUT VBOSE CHOUT OPOUT");
+                pw.println("@N OUTPUTS     FNAME OVVEW SUMRY FROPT GROUT CAOUT WAOUT NIOUT MIOUT DIOUT VBOSE CHOUT OPOUT FMOPT");
                 pw.print(Tools.PadLeft(level, 2, ' '));
                 pw.print(" OU         ");
                 pw.print(" " + Tools.PadLeft(sim.FNAME, 5, ' '));
@@ -801,6 +801,7 @@ public class FileX {
                 pw.print(" " + Tools.PadLeft(sim.VBOSE, 5, ' '));
                 pw.print(" " + Tools.PadLeft(sim.CHOUT, 5, ' '));
                 pw.print(" " + Tools.PadLeft(sim.OPOUT, 5, ' '));
+                pw.print(" " + Tools.PadLeft(sim.FMOPT, 5, ' '));
                 pw.println();
 
                 pw.println();
@@ -1824,6 +1825,10 @@ public class FileX {
                     sim.VBOSE = GetString(simOutputHeader, tmp, "VBOSE", 5);
                     sim.CHOUT = GetString(simOutputHeader, tmp, "CHOUT", 5);
                     sim.OPOUT = GetString(simOutputHeader, tmp, "OPOUT", 5);
+                    sim.FMOPT = GetString(simOutputHeader, tmp, "FMOPT", 5);
+
+                    if(sim.FMOPT == "" || sim.FMOPT == null)
+                        sim.FMOPT = "A";
 
                     if(level > simulationList.GetSize()) {
                         simulationList.AddNew(sim);

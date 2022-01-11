@@ -192,6 +192,11 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
 			add(new ModelItem("N", "Default"));
 		}});
 		
+		groupFormat = new XButtonGroup(sim, "FMOPT", sim.FMOPT, new ArrayList<ModelItem>() {{ 
+			add(new ModelItem("A", "Text Format (ASCII)"));
+			add(new ModelItem("C", "Comma Separated Values (CSV)"));
+		}});
+		
         groupOverview = new XButtonGroup(sim, "OVVEW", sim.OVVEW, new ArrayList<ModelItem>() {{ 
 			add(new ModelItem("Y", "Yes"));
 			add(new ModelItem("N", "No"));
@@ -242,13 +247,17 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
 			add(new ModelItem("N", "No"));
 		}});
 		
-        groupOutputVerbose = new XButtonGroup(sim, "OPOUT", sim.OPOUT, new ArrayList<ModelItem>() {{ 
+        groupOutputVerbose = new XButtonGroup(sim, "VBOSE", sim.VBOSE, new ArrayList<ModelItem>() {{ 
 			add(new ModelItem("O", "Only SUMMARY.OUT"));
 			add(new ModelItem("D", "Detailed Output"));
 			add(new ModelItem("N", "Minimal Output"));
 			add(new ModelItem("Y", "Normal Output"));
 		}});
 		
+        groupFormat = new XButtonGroup(sim, "FMOPT", sim.FMOPT, new ArrayList<ModelItem>() {{ 
+			add(new ModelItem("A", "Text Format (ASCII)"));
+			add(new ModelItem("C", "Comma Separated Values (CSV)"));
+		}});
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         dpSDATE = new XDatePicker(sim, "SDATE", sim.SDATE);
@@ -414,9 +423,9 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdRESID_D = new XRadioButton();
         rdRESID_N = new XRadioButton();
         rdRESID_R = new XRadioButton();
-        txtRIPCN = new javax.swing.JTextField();
-        txtRTIME = new javax.swing.JTextField();
-        txtRIDEP = new javax.swing.JTextField();
+        txtRIPCN = new XTextField(sim, "RIPCN", sim.RIPCN);
+        txtRTIME = new XTextField(sim, "RTIME", sim.RTIME);
+        txtRIDEP = new XTextField(sim, "RIDEP", sim.RIDEP);
         lbIncorporationPercentage = new org.jdesktop.swingx.JXLabel();
         lbIncorporation = new org.jdesktop.swingx.JXLabel();
         lbIncorporationDepth = new org.jdesktop.swingx.JXLabel();
@@ -482,6 +491,9 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdVBOSE_N = new XRadioButton();
         rdVBOSE_Y = new XRadioButton();
         jXLabel41 = new org.jdesktop.swingx.JXLabel();
+        jXLabel42 = new org.jdesktop.swingx.JXLabel();
+        jRadioButton1 = new XRadioButton();
+        jRadioButton2 = new XRadioButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -527,7 +539,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jXPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Runs", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Runs", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N  
 
         jXLabel1.setText("Years");
 
@@ -653,25 +665,25 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXLabel14.setText("Tillage");
 
         groupTillage.add(rdTILL_Y);
-        rdTILL_Y.setText("Yes");
+        rdTILL_Y.setText("Yes"); 
 
         groupTillage.add(rdTILL_N);
-        rdTILL_N.setText("No");
+        rdTILL_N.setText("No");  
 
         groupDiseases.add(rdDISES_N);
-        rdDISES_N.setText("No");
+        rdDISES_N.setText("No"); 
 
         groupDiseases.add(rdDISES_Y);
-        rdDISES_Y.setText("Yes");
+        rdDISES_Y.setText("Yes");  
 
         groupChemical.add(rdCHEM_Y);
-        rdCHEM_Y.setText("Yes");
+        rdCHEM_Y.setText("Yes"); 
 
         groupChemical.add(rdCHEM_N);
         rdCHEM_N.setText("No");
 
         groupPotassium.add(rdPOTAS_N);
-        rdPOTAS_N.setText("No");
+        rdPOTAS_N.setText("No"); 
 
         groupPotassium.add(rdPOTAS_Y);
         rdPOTAS_Y.setText("Yes");
@@ -683,26 +695,26 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdPHOSP_N.setText("No");
 
         groupSymbiosis.add(rdSYMBI_N);
-        rdSYMBI_N.setText("No");
+        rdSYMBI_N.setText("No"); 
 
         groupSymbiosis.add(rdSYMBI_Y);
-        rdSYMBI_Y.setText("Yes");
+        rdSYMBI_Y.setText("Yes");  
 
         groupNitrogen.add(rdNITRO_Y);
-        rdNITRO_Y.setText("Yes");
+        rdNITRO_Y.setText("Yes");  
 
         groupNitrogen.add(rdNITRO_N);
-        rdNITRO_N.setText("No");
+        rdNITRO_N.setText("No");  
 
         groupWater.add(rdWATER_N);
-        rdWATER_N.setText("No");
+        rdWATER_N.setText("No"); 
 
         groupWater.add(rdWATER_Y);
-        rdWATER_Y.setText("Yes");
+        rdWATER_Y.setText("Yes"); 
 
         jXLabel15.setText("<html>CO<sub>2</sub></html>");
 
-        cbCO2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Use default value (380 vpm)", "<html>Actual CO<sub>2</sub>;Mauna Loa, Hawaii (Keeling Curve)<html>", "Read from weather file" }));
+        cbCO2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Use default value (380 vpm)", "<html>Actual CO<sub>2</sub>;Mauna Loa, Hawaii (Keeling Curve)<html>", "Read from weather file" }));  
 
         javax.swing.GroupLayout jXPanel13Layout = new javax.swing.GroupLayout(jXPanel13);
         jXPanel13.setLayout(jXPanel13Layout);
@@ -830,16 +842,16 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXRadioGroup2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Weather", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         groupWeather.add(rdWTHER_G);
-        rdWTHER_G.setText("Generated (WTG files)");
+        rdWTHER_G.setText("Generated (WTG files)"); 
 
         groupWeather.add(rdWTHER_M);
-        rdWTHER_M.setText("Measure Data");
+        rdWTHER_M.setText("Measure Data"); 
 
         groupWeather.add(rdWTHER_S);
-        rdWTHER_S.setText("Simulated (SIMMETEO)");
+        rdWTHER_S.setText("Simulated (SIMMETEO)"); 
 
         groupWeather.add(rdWTHER_W);
-        rdWTHER_W.setText("Simulated Internal (WGEN)");
+        rdWTHER_W.setText("Simulated Internal (WGEN)");  
 
         javax.swing.GroupLayout jXRadioGroup2Layout = new javax.swing.GroupLayout(jXRadioGroup2);
         jXRadioGroup2.setLayout(jXRadioGroup2Layout);
@@ -868,10 +880,10 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXRadioGroup3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Initial Soil Condition", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         groupInitSoil.add(rdINCON_M);
-        rdINCON_M.setText("As Reported");
+        rdINCON_M.setText("As Reported");  
 
         groupInitSoil.add(rdINCON_S);
-        rdINCON_S.setText("Simulated Output From Previous Model");
+        rdINCON_S.setText("Simulated Output From Previous Model"); 
 
         javax.swing.GroupLayout jXRadioGroup3Layout = new javax.swing.GroupLayout(jXRadioGroup3);
         jXRadioGroup3.setLayout(jXRadioGroup3Layout);
@@ -958,7 +970,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdPHOTO_L.setText("Leaf Photosynthesis Response Curve");
 
         groupPhoto.add(rdPHOTO_R);
-        rdPHOTO_R.setText("Radiation Efficiency");
+        rdPHOTO_R.setText("Radiation Efficiency"); 
 
         javax.swing.GroupLayout jXRadioGroup6Layout = new javax.swing.GroupLayout(jXRadioGroup6);
         jXRadioGroup6.setLayout(jXRadioGroup6Layout);
@@ -1006,7 +1018,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdMESOM_G.setText("Ceres (Godwin)");
 
         groupMethodSoil.add(rdMESOM_P);
-        rdMESOM_P.setText("Century (Paton)");
+        rdMESOM_P.setText("Century (Paton)"); 
 
         javax.swing.GroupLayout jXRadioGroup8Layout = new javax.swing.GroupLayout(jXRadioGroup8);
         jXRadioGroup8.setLayout(jXRadioGroup8Layout);
@@ -1055,13 +1067,13 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXRadioGroup10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil Layer Distribution", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         groupSoilLayer.add(rdMESOL_1);
-        rdMESOL_1.setText("Original Soil Profile");
+        rdMESOL_1.setText("Original Soil Profile"); 
 
         groupSoilLayer.add(rdMESOL_2);
-        rdMESOL_2.setText("Modified");
+        rdMESOL_2.setText("Modified"); 
 
         groupSoilLayer.add(rdMESOL_3);
-        rdMESOL_3.setText("User Distribution");
+        rdMESOL_3.setText("User Distribution"); 
 
         javax.swing.GroupLayout jXRadioGroup10Layout = new javax.swing.GroupLayout(jXRadioGroup10);
         jXRadioGroup10.setLayout(jXRadioGroup10Layout);
@@ -1167,7 +1179,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
 
         dpPFRST.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
 
-        dpPLAST.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpPLAST.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US"))); 
 
         jXLabel16.setText("Earliest");
 
@@ -1719,10 +1731,10 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Organic Amendments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         groupOrganic.add(rdRESID_D);
-        rdRESID_D.setText("Days After Planting");
+        rdRESID_D.setText("Days After Planting"); 
 
         groupOrganic.add(rdRESID_N);
-        rdRESID_N.setText("No Applications");
+        rdRESID_N.setText("No Applications"); 
 
         groupOrganic.add(rdRESID_R);
         rdRESID_R.setText("On Reported Dates");
@@ -1990,20 +2002,20 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdOVVEW_N.setText("No");
 
         groupOutput.add(rdFNAME_Y);
-        rdFNAME_Y.setText("Experiment");
+        rdFNAME_Y.setText("Experiment"); 
 
         groupOutput.add(rdFNAME_N);
         rdFNAME_N.setText("Default");
 
         groupSummary.add(rdSUMRY_Y);
-        rdSUMRY_Y.setText("Yes");
+        rdSUMRY_Y.setText("Yes"); 
 
         groupSummary.add(rdSUMRY_N);
-        rdSUMRY_N.setText("No");
+        rdSUMRY_N.setText("No"); 
 
         jXLabel29.setText("Frequency of Output (days)");
 
-        jXLabel30.setText("Output File");
+        jXLabel30.setText("Output Files");
 
         jXLabel31.setText("Overview");
 
@@ -2012,49 +2024,49 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         groupOutputGrowth.add(rdGROUT_Y);
-        rdGROUT_Y.setText("Yes");
+        rdGROUT_Y.setText("Yes"); 
 
         groupOutputGrowth.add(rdGROUT_N);
-        rdGROUT_N.setText("No");
+        rdGROUT_N.setText("No"); 
 
         groupOutputCarbon.add(rdCAOUT_Y);
-        rdCAOUT_Y.setText("Yes");
+        rdCAOUT_Y.setText("Yes"); 
 
         groupOutputCarbon.add(rdCAOUT_N);
-        rdCAOUT_N.setText("No");
+        rdCAOUT_N.setText("No"); 
 
         groupOutputWater.add(rdWAOUT_Y);
-        rdWAOUT_Y.setText("Yes");
+        rdWAOUT_Y.setText("Yes"); 
 
         groupOutputWater.add(rdWAOUT_N);
-        rdWAOUT_N.setText("No");
+        rdWAOUT_N.setText("No"); 
 
         groupOutputNitrogen.add(rdNIOUT_Y);
-        rdNIOUT_Y.setText("Yes");
+        rdNIOUT_Y.setText("Yes"); 
 
         groupOutputNitrogen.add(rdNIOUT_N);
-        rdNIOUT_N.setText("No");
+        rdNIOUT_N.setText("No"); 
 
         groupOutputPhosphorus.add(rdMIOUT_Y);
         rdMIOUT_Y.setText("Yes");
 
         groupOutputPhosphorus.add(rdMIOUT_N);
-        rdMIOUT_N.setText("No");
-		
+        rdMIOUT_N.setText("No");		 
+
         groupOutputDiseases.add(rdDIOUT_Y);
-        rdDIOUT_Y.setText("Yes");
+        rdDIOUT_Y.setText("Yes"); 
 
         groupOutputDiseases.add(rdDIOUT_N);
         rdDIOUT_N.setText("No");
 
         groupOutputChemical.add(rdCHOUT_Y);
-        rdCHOUT_Y.setText("Yes");
+        rdCHOUT_Y.setText("Yes");  
 
         groupOutputChemical.add(rdCHOUT_N);
-        rdCHOUT_N.setText("No");
+        rdCHOUT_N.setText("No"); 
 
         groupOutputOperation.add(rdOPOUT_Y);
-        rdOPOUT_Y.setText("Yes");
+        rdOPOUT_Y.setText("Yes"); 
 
         groupOutputOperation.add(rdOPOUT_N);
         rdOPOUT_N.setText("No");
@@ -2079,7 +2091,8 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         rdVBOSE_O.setText("Only SUMMARY.OUT");
 
         groupOutputVerbose.add(rdVBOSE_D);
-        rdVBOSE_D.setText("Detailed Output");
+        rdVBOSE_D.setText("Detailed Output"); 
+
         groupOutputVerbose.add(rdVBOSE_N);
         rdVBOSE_N.setText("Minimal Output");
 
@@ -2199,6 +2212,14 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jXLabel42.setText("Format");
+
+        groupFormat.add(jRadioButton1);
+        jRadioButton1.setText("Text Format (ASCII)");
+
+        groupFormat.add(jRadioButton2);
+        jRadioButton2.setText("Comma Separated Values (CSV)");
+
         javax.swing.GroupLayout jXPanel16Layout = new javax.swing.GroupLayout(jXPanel16);
         jXPanel16.setLayout(jXPanel16Layout);
         jXPanel16Layout.setHorizontalGroup(
@@ -2209,8 +2230,22 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                         .addGap(141, 141, 141)
                         .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jXLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jXPanel16Layout.createSequentialGroup()
+                                .addComponent(rdFNAME_N)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdFNAME_Y))
+                            .addComponent(snFROPT, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jXPanel16Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jXPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel16Layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jXLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2223,14 +2258,10 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rdOVVEW_N))
                             .addGroup(jXPanel16Layout.createSequentialGroup()
-                                .addComponent(rdFNAME_N)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdFNAME_Y))
-                            .addComponent(snFROPT, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jXPanel16Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jXPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButton2)))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jXPanel16Layout.setVerticalGroup(
             jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2246,6 +2277,11 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                     .addComponent(jXLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jXLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdOVVEW_Y)
                     .addComponent(rdOVVEW_N)
                     .addComponent(jXLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2256,7 +2292,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
                     .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jXPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
@@ -2291,7 +2327,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 627, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2665,6 +2701,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     private XButtonGroup groupChemical;
     private XButtonGroup groupDiseases;
     private XButtonGroup groupEvap;
+    private XButtonGroup groupFormat;
     private XButtonGroup groupHarvest;
     private XButtonGroup groupHydrology;
     private XButtonGroup groupInfiltration;
@@ -2697,6 +2734,8 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     private XButtonGroup groupTillage;
     private XButtonGroup groupWater;
     private XButtonGroup groupWeather;
+    private XRadioButton jRadioButton1;
+    private XRadioButton jRadioButton2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private org.jdesktop.swingx.JXLabel jXLabel1;
@@ -2734,6 +2773,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     private org.jdesktop.swingx.JXLabel jXLabel4;
     private org.jdesktop.swingx.JXLabel jXLabel40;
     private org.jdesktop.swingx.JXLabel jXLabel41;
+    private org.jdesktop.swingx.JXLabel jXLabel42;
     private org.jdesktop.swingx.JXLabel jXLabel5;
     private org.jdesktop.swingx.JXLabel jXLabel6;
     private org.jdesktop.swingx.JXLabel jXLabel7;
@@ -2903,20 +2943,20 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     private XTextField txtIROFF;
     private XTextField txtITHRL;
     private XTextField txtITHRU;
-    private javax.swing.JFormattedTextField txtNAMNT;
+    private XFormattedTextField txtNAMNT;
     private XTextField txtNAOFF;
     private XSelectTextField txtNCODE;
-    private javax.swing.JFormattedTextField txtNMDEP;
-    private javax.swing.JFormattedTextField txtNMTHR;
+    private XFormattedTextField txtNMDEP;
+    private XFormattedTextField txtNMTHR;
     private XTextField txtPH2OD;
     private XTextField txtPH2OL;
     private XTextField txtPH2OU;
     private XTextField txtPSTMN;
     private XTextField txtPSTMX;
-    private javax.swing.JTextField txtRIDEP;
-    private javax.swing.JTextField txtRIPCN;
+    private XTextField txtRIDEP;
+    private XTextField txtRIPCN;
     private XFormattedTextField txtRSEED;
-    private javax.swing.JTextField txtRTIME;
+    private XTextField txtRTIME;
     private XSelectTextField txtSMODEL;
     // End of variables declaration//GEN-END:variables
 }
