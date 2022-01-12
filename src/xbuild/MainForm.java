@@ -867,8 +867,10 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             frame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent evt) {
-                    Setup setup = new Setup();
-                    new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+                    if(frame.IsOk){
+                        Setup setup = new Setup();
+                        new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+                    }
                 }
             });
     }//GEN-LAST:event_jSetupMenuMouseClicked

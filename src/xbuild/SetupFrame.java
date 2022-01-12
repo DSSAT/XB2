@@ -24,6 +24,7 @@ import org.jdesktop.swingx.JXFrame;
 public class SetupFrame extends JXFrame {
 
     /** Creates new form SetupFrame */
+    public boolean IsOk;
     public SetupFrame() {
         initComponents();
 
@@ -175,12 +176,14 @@ public class SetupFrame extends JXFrame {
 
     private void jbCancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelMousePressed
         // TODO add your handling code here:
+        this.IsOk = false;
         dispose();
     }//GEN-LAST:event_jbCancelMousePressed
 
     private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOKActionPerformed
         Setup setup = new Setup();
         setup.SaveFile(txtDssatDirectory.getText(), cmbDssatVersion.getSelectedItem().toString());
+        this.IsOk = true;
         dispose();
     }//GEN-LAST:event_jbOKActionPerformed
 
