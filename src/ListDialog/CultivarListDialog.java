@@ -11,10 +11,10 @@
 
 package ListDialog;
 
-import FileX.FileX;
-import Library.Crop;
-import Library.Cultivar;
-import Library.CultivarList;
+import FileXModel.FileX;
+import DSSATModel.Crop;
+import DSSATModel.Cultivar;
+import DSSATModel.CultivarList;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Iterator;

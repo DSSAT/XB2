@@ -5,7 +5,7 @@
  */
 package xbuild.Components;
 
-import Library.BaseModel;
+import DSSATModel.BaseModel;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Level;

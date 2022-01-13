@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.SoilAnalysisMethodPh;
+import DSSATModel.SoilAnalysisMethodPhList;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

@@ -11,8 +11,8 @@
 
 package ListDialog;
 
-import Library.WeatherStation;
-import Library.WeatherStationList;
+import DSSATModel.WeatherStation;
+import DSSATModel.WeatherStationList;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.tree.DefaultMutableTreeNode;

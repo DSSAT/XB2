@@ -11,7 +11,9 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.CropModelList;
+import DSSATModel.CropModel;
+import DSSATModel.BaseModel;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

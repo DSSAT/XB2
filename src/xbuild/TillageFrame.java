@@ -11,8 +11,9 @@
 
 package xbuild;
 
-import FileX.*;
-import Tools.Utils;
+import FileXModel.Tillage;
+import FileXModel.FileX;
+import Extensions.Utils;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 

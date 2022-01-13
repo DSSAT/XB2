@@ -11,7 +11,8 @@
 
 package xbuild;
 
-import FileX.*;
+import FileXModel.Treatment;
+import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
 import FileXDialog.FieldDialog;
 import java.awt.Color;

@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.SoilTexture;
+import DSSATModel.SoilTextureList;
 import java.awt.*;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;

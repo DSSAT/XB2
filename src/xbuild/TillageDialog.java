@@ -11,9 +11,9 @@
 
 package xbuild;
 
-import FileX.TillageApplication;
-import Library.TillageImplement;
-import Library.TillageImplementList;
+import DSSATModel.TillageImplement;
+import DSSATModel.TillageImplementList;
+import FileXModel.TillageApplication;
 import ListDialog.TillageImplementDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;

@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.HarvestSizeList;
+import DSSATModel.HarvestSize;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

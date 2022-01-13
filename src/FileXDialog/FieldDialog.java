@@ -11,8 +11,9 @@
 
 package FileXDialog;
 
-import FileX.*;
-import Library.CropList;
+import FileXModel.FieldDetail;
+import FileXModel.FileX;
+import DSSATModel.CropList;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -11,14 +11,16 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.*;
+import Extensions.LimitDocument;
+import FileXModel.FileX;
+import DSSATModel.Setup;
+import DSSATModel.Tools;
+import DSSATModel.Crop;
 import ListDialog.CropListDialog;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JSpinner;
-import Tools.*;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;

@@ -11,8 +11,10 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.Tools;
+import FileXModel.Environmental;
+import FileXModel.EnvironmentApplication;
+import FileXModel.FileX;
+import DSSATModel.Tools;
 import java.awt.Rectangle;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;

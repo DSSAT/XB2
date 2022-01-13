@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.PlantingMethodList;
+import DSSATModel.PlantingMethod;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

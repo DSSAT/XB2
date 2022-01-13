@@ -11,23 +11,23 @@
 
 package xbuild;
 
-import FileX.FieldDetail;
-import Library.Drainage;
-import Library.DrainageList;
-import Library.FieldHistory;
-import Library.FieldHistoryList;
-import Library.Soil;
-import Library.SoilList;
-import Library.SoilTexture;
-import Library.SoilTextureList;
-import Library.WeatherStation;
-import Library.WeatherStationList;
+import FileXModel.FieldDetail;
+import DSSATModel.Drainage;
+import DSSATModel.DrainageList;
+import DSSATModel.FieldHistory;
+import DSSATModel.FieldHistoryList;
+import DSSATModel.Soil;
+import DSSATModel.SoilList;
+import DSSATModel.SoilTexture;
+import DSSATModel.SoilTextureList;
+import DSSATModel.WeatherStation;
+import DSSATModel.WeatherStationList;
 import ListDialog.DrainageDialog;
 import ListDialog.FieldHistoryDialog;
 import ListDialog.SoilListDialog;
 import ListDialog.SoilTextureDialog;
 import ListDialog.WeatherStationDialog;
-import Tools.LimitDocument;
+import Extensions.LimitDocument;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;

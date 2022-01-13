@@ -11,7 +11,7 @@
 
 package xbuild;
 
-import FileX.FileX;
+import FileXModel.FileX;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

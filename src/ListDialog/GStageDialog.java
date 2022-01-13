@@ -11,7 +11,9 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.GrowthStage;
+import DSSATModel.Crop;
+import DSSATModel.GrowthStageList;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

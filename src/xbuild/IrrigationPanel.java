@@ -11,9 +11,9 @@
 
 package xbuild;
 
-import FileX.Irrigation;
-import FileX.IrrigationApplication;
-import Library.IrrigationMethodList;
+import FileXModel.Irrigation;
+import FileXModel.IrrigationApplication;
+import DSSATModel.IrrigationMethodList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;

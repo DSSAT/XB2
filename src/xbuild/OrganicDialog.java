@@ -11,11 +11,11 @@
 
 package xbuild;
 
-import FileX.OrganicApplication;
-import Library.FertilizerMethod;
-import Library.FertilizerMethodList;
-import Library.Residues;
-import Library.ResiduesList;
+import DSSATModel.FertilizerMethod;
+import DSSATModel.FertilizerMethodList;
+import DSSATModel.Residues;
+import DSSATModel.ResiduesList;
+import FileXModel.OrganicApplication;
 import ListDialog.FertilizerMethodDialog;
 import ListDialog.ResiduesDialog;
 import java.awt.Dimension;

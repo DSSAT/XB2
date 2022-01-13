@@ -11,10 +11,12 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.GrowthStageList;
-import Library.HarvestComponentList;
-import Library.HarvestSizeList;
+import FileXModel.HarvestApplication;
+import FileXModel.FileX;
+import FileXModel.Harvest;
+import DSSATModel.GrowthStageList;
+import DSSATModel.HarvestComponentList;
+import DSSATModel.HarvestSizeList;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

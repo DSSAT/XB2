@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.TillageImplementList;
+import DSSATModel.TillageImplement;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

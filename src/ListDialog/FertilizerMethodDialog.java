@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.FertilizerMethodList;
+import DSSATModel.FertilizerMethod;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

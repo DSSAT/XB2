@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.Soil;
+import DSSATModel.SoilList;
 import java.awt.*;
 import java.util.Collections;
 import java.util.Comparator;

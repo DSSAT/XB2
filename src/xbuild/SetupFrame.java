@@ -11,7 +11,7 @@
 
 package xbuild;
 
-import Library.Setup;
+import DSSATModel.Setup;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFileChooser;

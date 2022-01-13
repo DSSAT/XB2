@@ -11,8 +11,9 @@
 
 package FileXDialog;
 
-import FileX.*;
-import Library.CropList;
+import FileXModel.Chemical;
+import FileXModel.FileX;
+import DSSATModel.CropList;
 import javax.swing.table.DefaultTableModel;
 
 /**

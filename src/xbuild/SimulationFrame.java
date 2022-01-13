@@ -10,13 +10,13 @@
  */
 package xbuild;
 
-import FileX.*;
-import Library.CropModel;
-import Library.CropModelList;
-import Library.FertilizerMaterial;
-import Library.FertilizerMaterialList;
-import Library.IrrigationMethod;
-import Library.IrrigationMethodList;
+import FileXModel.Simulation;
+import DSSATModel.CropModel;
+import DSSATModel.CropModelList;
+import DSSATModel.FertilizerMaterial;
+import DSSATModel.FertilizerMaterialList;
+import DSSATModel.IrrigationMethod;
+import DSSATModel.IrrigationMethodList;
 import ListDialog.CropModelDialog;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;

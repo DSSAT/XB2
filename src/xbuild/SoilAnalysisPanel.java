@@ -11,14 +11,14 @@
 
 package xbuild;
 
-import FileX.SoilAnalysis;
-import FileX.SoilAnalysisLayer;
-import Library.SoilAnalysisMethodPh;
-import Library.SoilAnalysisMethodPhList;
-import Library.SoilAnalysisMethodPhosphorus;
-import Library.SoilAnalysisMethodPhosphorusList;
-import Library.SoilAnalysisMethodPotassium;
-import Library.SoilAnalysisMethodPotassiumList;
+import FileXModel.SoilAnalysis;
+import FileXModel.SoilAnalysisLayer;
+import DSSATModel.SoilAnalysisMethodPh;
+import DSSATModel.SoilAnalysisMethodPhList;
+import DSSATModel.SoilAnalysisMethodPhosphorus;
+import DSSATModel.SoilAnalysisMethodPhosphorusList;
+import DSSATModel.SoilAnalysisMethodPotassium;
+import DSSATModel.SoilAnalysisMethodPotassiumList;
 import ListDialog.PHListDialog;
 import ListDialog.PhosphorusListDialog;
 import ListDialog.PotassiumListDialog;

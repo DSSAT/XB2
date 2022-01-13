@@ -11,8 +11,10 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.TillageImplementList;
+import FileXModel.Tillage;
+import FileXModel.FileX;
+import FileXModel.TillageApplication;
+import DSSATModel.TillageImplementList;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

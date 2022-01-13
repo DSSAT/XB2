@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.Residues;
+import DSSATModel.ResiduesList;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

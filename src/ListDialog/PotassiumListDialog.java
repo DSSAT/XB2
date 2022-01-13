@@ -11,8 +11,8 @@
 
 package ListDialog;
 
-import Library.SoilAnalysisMethodPotassium;
-import Library.SoilAnalysisMethodPotassiumList;
+import DSSATModel.SoilAnalysisMethodPotassium;
+import DSSATModel.SoilAnalysisMethodPotassiumList;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

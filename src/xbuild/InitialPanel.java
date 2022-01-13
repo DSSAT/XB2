@@ -11,10 +11,10 @@
 
 package xbuild;
 
-import FileX.InitialCondition;
-import FileX.InitialConditionApplication;
-import Library.Crop;
-import Library.CropList;
+import FileXModel.InitialCondition;
+import FileXModel.InitialConditionApplication;
+import DSSATModel.Crop;
+import DSSATModel.CropList;
 import ListDialog.CropListDialog;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

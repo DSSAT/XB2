@@ -11,14 +11,15 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.Crop;
-import Library.GrowthStage;
-import Library.GrowthStageList;
-import Library.HarvestComponent;
-import Library.HarvestComponentList;
-import Library.HarvestSize;
-import Library.HarvestSizeList;
+import FileXModel.HarvestApplication;
+import FileXModel.FileX;
+import DSSATModel.Crop;
+import DSSATModel.GrowthStage;
+import DSSATModel.GrowthStageList;
+import DSSATModel.HarvestComponent;
+import DSSATModel.HarvestComponentList;
+import DSSATModel.HarvestSize;
+import DSSATModel.HarvestSizeList;
 import ListDialog.GStageDialog;
 import ListDialog.HarvestComponentDialog;
 import ListDialog.HarvestSizeDialog;

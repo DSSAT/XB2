@@ -11,9 +11,11 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.FertilizerMethodList;
-import Library.ResiduesList;
+import FileXModel.OrganicApplication;
+import FileXModel.Organic;
+import FileXModel.FileX;
+import DSSATModel.FertilizerMethodList;
+import DSSATModel.ResiduesList;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

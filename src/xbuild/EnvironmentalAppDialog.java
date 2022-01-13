@@ -11,8 +11,9 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.*;
+import FileXModel.EnvironmentApplication;
+import DSSATModel.EnvironmentFactorList;
+import DSSATModel.Tools;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

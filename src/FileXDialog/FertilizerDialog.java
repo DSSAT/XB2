@@ -11,7 +11,8 @@
 
 package FileXDialog;
 
-import FileX.*;
+import FileXModel.Fertilizer;
+import FileXModel.FileX;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -11,8 +11,9 @@
 
 package FileXDialog;
 
-import FileX.*;
-import Library.CropList;
+import FileXModel.Planting;
+import FileXModel.FileX;
+import DSSATModel.CropList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

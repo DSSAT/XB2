@@ -11,11 +11,12 @@
 
 package xbuild;
 
-import FileX.ChemicalApplication;
-import Library.ChemicalMaterial;
-import Library.ChemicalMaterialList;
-import Library.FertilizerMethod;
-import Library.FertilizerMethodList;
+
+import DSSATModel.ChemicalMaterial;
+import DSSATModel.ChemicalMaterialList;
+import DSSATModel.FertilizerMethod;
+import DSSATModel.FertilizerMethodList;
+import FileXModel.ChemicalApplication;
 import ListDialog.ChemicalMaterialDialog;
 import ListDialog.FertilizerMethodDialog;
 import java.awt.Dimension;

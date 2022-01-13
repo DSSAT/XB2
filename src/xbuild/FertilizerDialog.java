@@ -11,11 +11,11 @@
 
 package xbuild;
 
-import FileX.FertilizerApplication;
-import Library.FertilizerMaterial;
-import Library.FertilizerMaterialList;
-import Library.FertilizerMethod;
-import Library.FertilizerMethodList;
+import FileXModel.*;
+import DSSATModel.FertilizerMaterial;
+import DSSATModel.FertilizerMaterialList;
+import DSSATModel.FertilizerMethod;
+import DSSATModel.FertilizerMethodList;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.FertilizerMethodDialog;
 import java.awt.*;

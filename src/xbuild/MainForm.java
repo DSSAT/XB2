@@ -11,9 +11,10 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.DssatProfile;
-import Library.Setup;
+import FileXModel.Simulation;
+import FileXModel.FileX;
+import DSSATModel.DssatProfile;
+import DSSATModel.Setup;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,12 +32,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
-import Tools.CustomDefaultTreeCellRenderer;
-import Tools.CustomNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeCellRenderer;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreePath;
+import Extensions.CustomDefaultTreeCellRenderer;
+import FileXService.FileXService;
 
 /**
  *
@@ -946,13 +943,13 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             File file = fc.getSelectedFile();
             if(file.exists()) {
                 if(JOptionPane.showConfirmDialog(null, "Do you want to save this file?", "File already existing", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    FileX.SaveFile(file);
+                    FileXService.SaveFile(file);
                 }
                 else {
                     return;
                 }
             }
-            FileX.SaveFile(file);
+            FileXService.SaveFile(file);
         }
     }//GEN-LAST:event_jMenuSaveFileActionPerformed
 
@@ -1003,7 +1000,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             File file = fc.getSelectedFile();
             this.setTitle(file.getName());
 
-            FileX.OpenFileX(file);
+            FileXService.OpenFileX(file);
 
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
             root.setUserObject(file.getName());

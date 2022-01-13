@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.IrrigationMethodList;
+import DSSATModel.IrrigationMethod;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

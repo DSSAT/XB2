@@ -16,11 +16,11 @@ public class ExtendFilter implements FileFilter {
 
     private String extend;
     private String filename;
-    ExtendFilter(String extend) {
+    public ExtendFilter(String extend) {
         this.extend = extend;
     }
 
-    ExtendFilter(String filename, String extend) {
+    public ExtendFilter(String filename, String extend) {
         this.extend = extend;
         this.filename = filename;
     }

@@ -11,8 +11,9 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.CropList;
+import FileXModel.Cultivar;
+import FileXModel.FileX;
+import DSSATModel.CropList;
 import ListDialog.CultivarListDialog;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
@@ -129,7 +130,7 @@ public class CultivarsFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                Library.Cultivar cul = dialog.GetData();
+                DSSATModel.Cultivar cul = dialog.GetData();
                 if(cul != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
 

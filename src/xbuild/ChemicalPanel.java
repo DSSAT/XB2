@@ -11,8 +11,11 @@
 
 package xbuild;
 
-import FileX.*;
-import Library.*;
+import FileXModel.ChemicalApplication;
+import FileXModel.FileX;
+import FileXModel.Chemical;
+import DSSATModel.ChemicalMaterialList;
+import DSSATModel.FertilizerMethodList;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;

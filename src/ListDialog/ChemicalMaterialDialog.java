@@ -11,7 +11,8 @@
 
 package ListDialog;
 
-import Library.*;
+import DSSATModel.ChemicalMaterialList;
+import DSSATModel.ChemicalMaterial;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

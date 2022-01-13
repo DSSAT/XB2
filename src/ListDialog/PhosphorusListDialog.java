@@ -11,8 +11,8 @@
 
 package ListDialog;
 
-import Library.SoilAnalysisMethodPhosphorus;
-import Library.SoilAnalysisMethodPhosphorusList;
+import DSSATModel.SoilAnalysisMethodPhosphorus;
+import DSSATModel.SoilAnalysisMethodPhosphorusList;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 

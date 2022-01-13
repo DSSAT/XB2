@@ -11,8 +11,11 @@
 
 package xbuild;
 
-import FileX.Planting;
-import Library.*;
+import DSSATModel.PlantingMethodList;
+import DSSATModel.PlantDistribution;
+import DSSATModel.PlantDistributionList;
+import DSSATModel.PlantingMethod;
+import FileXModel.Planting;
 import ListDialog.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

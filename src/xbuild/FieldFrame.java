@@ -11,8 +11,9 @@
 
 package xbuild;
 
-import FileX.*;
-import Tools.Utils;
+import FileXModel.FieldDetail;
+import FileXModel.FileX;
+import Extensions.Utils;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
