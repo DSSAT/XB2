@@ -13,12 +13,16 @@ package ListDialog;
 
 import FileXModel.FileX;
 import DSSATModel.Crop;
+import DSSATModel.CropList;
 import DSSATModel.Cultivar;
 import DSSATModel.CultivarList;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Iterator;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
@@ -47,6 +51,15 @@ public class CultivarListDialog extends javax.swing.JDialog {
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
         AddDataToTable();
+        
+//        jXTable1.getColumnModel().getColumn(0).setResizable(false);
+//        jXTable1.getColumnModel().getColumn(1).setResizable(false);
+//        jXTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+//        jXTable1.getColumnModel().getColumn(1).setMaxWidth(0);
+
+        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
+        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
+        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
     }
 
     /** This method is called from within the constructor to
@@ -58,45 +71,83 @@ public class CultivarListDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jXTreeTable1 = new org.jdesktop.swingx.JXTreeTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jXTable1 = new org.jdesktop.swingx.JXTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jXTreeTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jXTreeTable1MouseClicked(evt);
+        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Crop Code", "Cultivar Code", "Cultivar Code", "Cultivar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jXTreeTable1);
+        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jXTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jXTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXTreeTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTreeTable1MouseClicked
+    private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2) {
-            TreePath selPath = jXTreeTable1.getPathForLocation(evt.getX(), evt.getY());
-            Cultivar cul = (Cultivar)((DefaultMutableTreeNode)selPath.getLastPathComponent()).getUserObject();
+            cultivar = new Cultivar();
 
-            cultivar = cul;
+            TableModel tbModel = jXTable1.getModel();
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            
+            ListSelectionModel sel = jXTable1.getSelectionModel();
+
+            cultivar.CropCode = (String) tbModel.getValueAt(row, 0);
+            cultivar.CropName = (String) tbModel.getValueAt(row, 1);
+            cultivar.CulCode = (String) tbModel.getValueAt(row, 2);
+            cultivar.CulName = (String) tbModel.getValueAt(row, 3);
+
             dispose();
         }
-}//GEN-LAST:event_jXTreeTable1MouseClicked
+    }//GEN-LAST:event_jXTable1MouseClicked
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXTreeTable jXTreeTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables
 
     public Cultivar GetData() {
@@ -109,9 +160,13 @@ public class CultivarListDialog extends javax.swing.JDialog {
     }
 
     private void AddDataToTable() {
-        DefaultMutableTreeNode root1 = getExampleFamily();
-        TreeTableModel model = new MyTreeTableModel(root1);
-        jXTreeTable1.setTreeTableModel(model);
+        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+
+        CultivarList.GetAt(FileX.general.crop).forEach(cul -> {
+            tbModel.addRow(new Object[]{cul.CropCode, cul.CulCode, cul.CulCode, cul.CulName});
+        });
+        
+        
     }
 
     private static class MyTreeTableModel extends AbstractTreeTableModel  {

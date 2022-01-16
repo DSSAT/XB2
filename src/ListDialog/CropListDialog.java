@@ -16,7 +16,11 @@ import DSSATModel.CropList;
 import java.awt.*;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -43,7 +47,7 @@ public class CropListDialog extends javax.swing.JDialog {
         Dimension winSize = getSize();
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
-        AddCropToTable(selCrop);
+        AddCropToTable(selCrop);    
     }
 
     /** This method is called from within the constructor to
@@ -91,8 +95,10 @@ public class CropListDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(jXTable1);
-        jXTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-        jXTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
+        if (jXTable1.getColumnModel().getColumnCount() > 0) {
+            jXTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jXTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +108,9 @@ public class CropListDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

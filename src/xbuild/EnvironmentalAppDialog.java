@@ -13,7 +13,7 @@ package xbuild;
 
 import FileXModel.EnvironmentApplication;
 import DSSATModel.EnvironmentFactorList;
-import DSSATModel.Tools;
+import Extensions.Utils;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -82,7 +82,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtRadiation.setText(Tools.FloatToString(envApp.ERAD));
+            txtRadiation.setText(Utils.FloatToString(envApp.ERAD));
         } catch (Exception e) {
         }
         try {
@@ -90,7 +90,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtMaxTemp.setText(Tools.FloatToString(envApp.EMAX));
+            txtMaxTemp.setText(Utils.FloatToString(envApp.EMAX));
         } catch (Exception e) {
         }
         try {
@@ -98,7 +98,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtMinTemp.setText(Tools.FloatToString(envApp.EMIN));
+            txtMinTemp.setText(Utils.FloatToString(envApp.EMIN));
         } catch (Exception e) {
         }
         try {
@@ -106,7 +106,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtPrecipitation.setText(Tools.FloatToString(envApp.ERAIN));
+            txtPrecipitation.setText(Utils.FloatToString(envApp.ERAIN));
         } catch (Exception e) {
         }
         try {
@@ -114,7 +114,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtCo2.setText(Tools.FloatToString(envApp.ECO2));
+            txtCo2.setText(Utils.FloatToString(envApp.ECO2));
         } catch (Exception e) {
         }
         try {
@@ -122,7 +122,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtHumidity.setText(Tools.FloatToString(envApp.EDEW));
+            txtHumidity.setText(Utils.FloatToString(envApp.EDEW));
         } catch (Exception e) {
         }
         try {
@@ -130,7 +130,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtWind.setText(Tools.FloatToString(envApp.EWIND));
+            txtWind.setText(Utils.FloatToString(envApp.EWIND));
         } catch (Exception e) {
         }
         try {

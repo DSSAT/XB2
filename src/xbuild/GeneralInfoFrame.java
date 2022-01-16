@@ -14,8 +14,8 @@ package xbuild;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import DSSATModel.Setup;
-import DSSATModel.Tools;
 import DSSATModel.Crop;
+import Extensions.Utils;
 import ListDialog.CropListDialog;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -673,7 +673,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         String doc = "FileX";
         try
         {
-            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Tools.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
+            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
             if(cbFileType.getSelectedItem().toString().equals("Experimental"))
             {
                 doc += "." + crop.CropCode + "X";
@@ -884,7 +884,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         catch(Exception ex) {}
         try
         {
-            txtPAREA.setText(Tools.FloatToString(FileX.general.PAREA));
+            txtPAREA.setText(Utils.FloatToString(FileX.general.PAREA));
         }
         catch(Exception ex) {}
         try
@@ -894,7 +894,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         catch(Exception ex) {}
         try
         {
-            txtPLEN.setText(Tools.FloatToString(FileX.general.PLEN));
+            txtPLEN.setText(Utils.FloatToString(FileX.general.PLEN));
         }
         catch(Exception ex) {}
         try
@@ -904,7 +904,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         catch(Exception ex) {}
         try
         {
-            txtPLSP.setText(Tools.FloatToString(FileX.general.PLSP));
+            txtPLSP.setText(Utils.FloatToString(FileX.general.PLSP));
         }
         catch(Exception ex) {}
         try
@@ -914,7 +914,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         catch(Exception ex) {}
         try
         {
-            txtHAREA.setText(Tools.FloatToString(FileX.general.HAREA));
+            txtHAREA.setText(Utils.FloatToString(FileX.general.HAREA));
         }
         catch(Exception ex) {}
         try
@@ -924,7 +924,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         catch(Exception ex) {}
         try
         {
-            txtHLEN.setText(Tools.FloatToString(FileX.general.HLEN));
+            txtHLEN.setText(Utils.FloatToString(FileX.general.HLEN));
         }
         catch(Exception ex) {}
         try
