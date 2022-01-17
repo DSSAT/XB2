@@ -15,11 +15,10 @@ import DSSATModel.WeatherStation;
 import DSSATModel.WeatherStationList;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreePath;
-import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
-import org.jdesktop.swingx.treetable.TreeTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -42,7 +41,13 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         Dimension winSize = getSize();
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
+        TableColumnModel tcm = jXTable1.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(200);
+        tcm.getColumn(1).setPreferredWidth(screenWidth - 200);
+        
         AddDataToTable();
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -54,143 +59,94 @@ public class WeatherStationDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jXTreeTable1 = new org.jdesktop.swingx.JXTreeTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jXTable1 = new org.jdesktop.swingx.JXTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jXTreeTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jXTreeTable1MouseClicked(evt);
+        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "WSTA", "Station Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jXTreeTable1);
+        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jXTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jXTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXTreeTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTreeTable1MouseClicked
-        if(evt.getClickCount() == 2)
-        {
-             TreePath selPath = jXTreeTable1.getPathForLocation(evt.getX(), evt.getY());
-             wsta = (WeatherStation)((DefaultMutableTreeNode)selPath.getLastPathComponent()).getUserObject();
-             dispose();
+    private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
+        if(evt.getClickCount() == 2) {
+            wsta = new WeatherStation();
+
+            TableModel tbModel = jXTable1.getModel();
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            
+            ListSelectionModel sel = jXTable1.getSelectionModel();
+
+            wsta.Code = (String) tbModel.getValueAt(row, 0);
+            wsta.StationName = (String) tbModel.getValueAt(row, 1);
+
+            dispose();
         }
-    }//GEN-LAST:event_jXTreeTable1MouseClicked
+    }//GEN-LAST:event_jXTable1MouseClicked
 
     public WeatherStation GetSelected() {
         return wsta;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXTreeTable jXTreeTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables
 
     private void AddDataToTable() {
-        DefaultMutableTreeNode root1 = getExampleFamily();
-        TreeTableModel model = new MyTreeTableModel(root1);
-        jXTreeTable1.setTreeTableModel(model);
-    }
+        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
 
-    private static class MyTreeTableModel extends AbstractTreeTableModel  {
-
-        public MyTreeTableModel(Object root) {
-            super(root);
-        }
-
-    /**
-     * Error in AbstractTreeTableModel !!!
-     * Without overriding this method you can't expand the tree!
-     */
-        @Override
-        public Class getColumnClass(int column)
-        {
-          switch (column)
-          {
-          case 0:
-            return TreeTableModel.class;
-          default:
-            return Object.class;
-          }
-        }
-
-        public Object getChild(Object parent, int index)
-        {
-          assert parent instanceof MutableTreeNode;
-          MutableTreeNode treenode = (MutableTreeNode) parent;
-          return treenode.getChildAt(index);
-        }
-
-        public int getChildCount(Object parent)
-        {
-          assert parent instanceof MutableTreeNode;
-          MutableTreeNode treenode = (MutableTreeNode) parent;
-          return treenode.getChildCount();
-        }
-
-        public int getColumnCount()
-        {
-          return 2;
-        }
-
-            @Override
-        public String getColumnName(int column)
-        {
-          switch (column)
-          {
-          case 0:
-            return "WSTA";
-          case 1:
-            return "Station Name";
-
-          default:
-            return null;
-          }
-
-        }
-
-        public Object getValueAt(Object node, int column)
-        {
-          assert node instanceof DefaultMutableTreeNode;
-          DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) node;
-          //Person person = (Person) treenode.getUserObject();
-          WeatherStation wsta = (WeatherStation) treenode.getUserObject();
-          switch (column)
-          {
-              case 0: return wsta.Code;
-              case 1: return wsta.StationName;
-
-              default: return null;
-          }
-
-        }
-
-            public int getIndexOfChild(Object parent, Object child) {
-                return 0;
-            }
-      }
-
-    private static DefaultMutableTreeNode getExampleFamily() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new WeatherStation());
-        //DefaultMutableTreeNode child1 = null;
         WeatherStationList.GetAll().forEach(wsta ->
         {
-            root.add(new DefaultMutableTreeNode(wsta));
+            tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
         });
-        return root;
-      }
+    }
 }
 
 
