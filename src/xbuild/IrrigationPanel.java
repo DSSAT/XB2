@@ -255,13 +255,21 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
     private Vector SetRow(IrrigationApplication irrigApp) {
 
         Vector vector = new Vector();
-        if(rdDaysAfterPlanting.isSelected())
-            vector.add(irrigApp.IDAY);
-        else
+        
+        try
         {
             Locale l = new Locale("en", "US");
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
             vector.addElement(df.format(irrigApp.IDATE));
+
+            rdDaysAfterPlanting.setSelected(false);
+            rdReportedDates.setSelected(true);
+        }
+        catch(Exception ex)
+        {
+            vector.add(irrigApp.IDAY);
+            rdDaysAfterPlanting.setSelected(true);
+            rdReportedDates.setSelected(false);
         }
         
         vector.add(irrigApp.IRVAL);

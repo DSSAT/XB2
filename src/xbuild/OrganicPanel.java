@@ -286,11 +286,13 @@ public class OrganicPanel extends javax.swing.JPanel {
             vector.addElement(df.format(organicApp.RDATE));
 
             rdDaysAfterPlanting.setSelected(false);
+            rdReportedDates.setSelected(true);
         }
         catch(Exception ex)
         {
             vector.add(organicApp.RDAY);
             rdDaysAfterPlanting.setSelected(true);
+            rdReportedDates.setSelected(false);
         }
 
         try

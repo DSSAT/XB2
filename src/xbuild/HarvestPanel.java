@@ -281,11 +281,13 @@ public class HarvestPanel extends javax.swing.JPanel {
             vector.addElement(df.format(harvestApp.HDATE));
 
             rdDaysAfterPlanting.setSelected(false);
+            rdReportedDates.setSelected(true);
         }
         catch(Exception ex)
         {
             vector.add(harvestApp.HDAY);
             rdDaysAfterPlanting.setSelected(true);
+            rdReportedDates.setSelected(false);
         }
 
         try

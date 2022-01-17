@@ -15,10 +15,12 @@ import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
 import DSSATModel.Crop;
 import DSSATModel.CropList;
+import Extensions.Utils;
 import ListDialog.CropListDialog;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Vector;
@@ -625,7 +627,11 @@ public class InitialPanel extends javax.swing.JPanel implements KeyListener {
         Vector vector = new Vector();
 
         vector.add(initApp.ICBL);
-        vector.add(initApp.SH2O);
+        
+        DecimalFormat df = new DecimalFormat(".000");
+        String val = df.format(initApp.SH2O);
+        
+        vector.add(val);
         vector.add(initApp.SNH4);
         vector.add(initApp.SNO3);
 
