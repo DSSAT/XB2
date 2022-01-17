@@ -928,7 +928,21 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
         String target = null;
         try {
-            target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
+            if (FileX.general.crop != null) {
+                target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
+            }
+            else if("Seasonal".equals(FileX.general.FileType)){
+                target = DssatProfile.GetAt("ASD");
+            }
+            else if("Sequential".equals(FileX.general.FileType)){
+                target = DssatProfile.GetAt("AQD");
+            }
+            else if("Spatial".equals(FileX.general.FileType)){
+                target = DssatProfile.GetAt("APD");
+            }
+            else{
+                target = new Setup().GetDSSATPath();
+            }
         } catch (Exception e) {
             target = new Setup().GetDSSATPath();
         }

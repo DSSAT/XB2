@@ -12,20 +12,15 @@
 package ListDialog;
 
 import FileXModel.FileX;
-import DSSATModel.Crop;
-import DSSATModel.CropList;
 import DSSATModel.Cultivar;
 import DSSATModel.CultivarList;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.Iterator;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreePath;
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 import org.jdesktop.swingx.treetable.TreeTableModel;
 
@@ -51,15 +46,6 @@ public class CultivarListDialog extends javax.swing.JDialog {
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
         AddDataToTable();
-        
-//        jXTable1.getColumnModel().getColumn(0).setResizable(false);
-//        jXTable1.getColumnModel().getColumn(1).setResizable(false);
-//        jXTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-//        jXTable1.getColumnModel().getColumn(1).setMaxWidth(0);
-
-        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
-        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
-        jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
     }
 
     /** This method is called from within the constructor to
@@ -81,7 +67,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Crop Code", "Cultivar Code", "Cultivar Code", "Cultivar"
+                "Crop Code", "Crop Name", "Cultivar Code", "Cultivar Name"
             }
         ) {
             Class[] types = new Class [] {
@@ -162,10 +148,24 @@ public class CultivarListDialog extends javax.swing.JDialog {
     private void AddDataToTable() {
         DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
 
-        CultivarList.GetAt(FileX.general.crop).forEach(cul -> {
-            tbModel.addRow(new Object[]{cul.CropCode, cul.CulCode, cul.CulCode, cul.CulName});
-        });
-        
+        if (FileX.general.FileType != null && FileX.general.FileType.equalsIgnoreCase("Experimental"))  {
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
+
+            CultivarList.GetAt(FileX.general.crop).forEach(cul -> {
+                tbModel.addRow(new Object[]{cul.CropCode, cul.CropName, cul.CulCode, cul.CulName});
+            });
+        }
+        else{
+            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
+            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
+            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
+
+            CultivarList.GetAll().forEach(cul -> {
+                tbModel.addRow(new Object[]{cul.CropCode, cul.CropName, cul.CulCode, cul.CulName});
+            });
+        }
         
     }
 
