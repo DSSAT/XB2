@@ -5,6 +5,12 @@
 
 package FileXModel;
 
+import DSSATModel.GrowthStage;
+import static DSSATModel.GrowthStageList.growthStage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -43,6 +49,29 @@ public class Harvest implements Cloneable {
     public HarvestApplication[] GetApps()
     {
         return (HarvestApplication[]) harvestApps.toArray();
+    }
+    
+    public List<HarvestApplication> GetAll(){
+        List<HarvestApplication> list = new ArrayList<HarvestApplication>();
+
+        Object[] object = harvestApps.toArray();
+
+        for (int i = 0; i < object.length; i++) {
+            list.add((HarvestApplication) object[i]);
+        }
+
+        Collections.sort(list, new Comparator<HarvestApplication>() {
+            public int compare(GrowthStage c1, GrowthStage c2) {
+                return c1.Code.compareTo(c2.Code);
+            }
+
+            @Override
+            public int compare(HarvestApplication o1, HarvestApplication o2) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        return list;
     }
 
     public HarvestApplication GetApp(int level)

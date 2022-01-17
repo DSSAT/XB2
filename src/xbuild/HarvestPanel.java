@@ -21,6 +21,8 @@ import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -231,6 +233,7 @@ public class HarvestPanel extends javax.swing.JPanel {
             harvestDialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
+                    
                     HarvestApplication harApp = harvestDialog.GetData();
                     if(harApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
@@ -340,9 +343,8 @@ public class HarvestPanel extends javax.swing.JPanel {
         }
 
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-        for(int i = 0;i < harvestApp.GetSize();i++)
-        {
-            model.addRow(SetRow(harvestApp.GetApp(i)));
-        }
+        harvestApp.GetAll().forEach(harvest -> {
+            model.addRow(SetRow(harvest));
+        });
     }
 }

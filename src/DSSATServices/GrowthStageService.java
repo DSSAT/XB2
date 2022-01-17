@@ -30,13 +30,16 @@ public class GrowthStageService extends DSSATServiceBase {
             String tmp = gStage.get(i);
 
             try {
-                growth.Code = tmp.substring(0, 5).trim();
-                growth.Name = tmp.substring(5, 10).trim();
-                growth.Description = tmp.substring(12, 81).trim();
-                Crop crop = CropList.GetAtName(tmp.substring(82, tmp.length()));
-                if (crop != null) {
-                    growth.crop = crop;
-                    GrowthStageList.AddNew(growth);
+                if (tmp.length() > 82) {
+                    growth.Code = tmp.substring(0, 5).trim();
+                    growth.Name = tmp.substring(5, 10).trim();
+                    growth.Description = tmp.substring(12, 81).trim();
+
+                    Crop crop = CropList.GetAtName(tmp.substring(82, tmp.length()));
+                    if (crop != null) {
+                        growth.crop = crop;
+                        GrowthStageList.AddNew(growth);
+                    }
                 }
             } catch (Exception ex) {
                 isValid = false;

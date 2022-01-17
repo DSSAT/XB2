@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.FileX;
 import FileXModel.Harvest;
 import Extensions.Utils;
+import FileXModel.HarvestApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,24 @@ public class HarvestFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Harvest harvest = FileX.harvestList.Clone(jTabbedPane1.getSelectedIndex(), r);
+//            Harvest harvest = FileX.harvestList.Clone(jTabbedPane1.getSelectedIndex(), r);
+//            FileX.harvestList.AddNew(harvest);
+
+            Harvest harvest = new Harvest();
+            harvest.HNAME = r;
+            
+            FileX.harvestList.GetAt(jTabbedPane1.getSelectedIndex()).GetAll().forEach(h -> {
+                HarvestApplication ha = new HarvestApplication();
+                ha.HDATE = h.HDATE;
+                ha.HDAY = h.HDAY;
+                ha.HSTG = h.HSTG;
+                ha.HCOM = h.HCOM;
+                ha.HSIZE = h.HSIZE;
+                ha.HPC = h.HPC;
+                ha.HBPC = h.HBPC;
+                
+                harvest.AddApp(ha);
+            });            
             FileX.harvestList.AddNew(harvest);
 
             jTabbedPane1.insertTab(newTitle, null, new HarvestPanel(harvest), "", jTabbedPane1.getTabCount() - 1);

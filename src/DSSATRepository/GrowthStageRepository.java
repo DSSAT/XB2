@@ -31,7 +31,7 @@ public class GrowthStageRepository extends DSSATRepositoryBase {
         System.out.println("Start Read Growth Stage : " + df.format(new Date()));
 
         try {
-            FileReader file = new FileReader(rootPath + "\\DETAIL.CDE");
+            FileReader file = new FileReader(rootPath + "\\GRSTAGE.cde");
 
             BufferedReader br = new BufferedReader(file);
             String strRead = null;
@@ -53,7 +53,6 @@ public class GrowthStageRepository extends DSSATRepositoryBase {
                         }
                     } else {
                         bGStage = false;
-                        break;
                     }
                 }
             }

@@ -6,6 +6,7 @@
 package FileXModel;
 
 import java.util.Vector;
+import java.util.function.Consumer;
 
 /**
  *
