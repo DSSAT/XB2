@@ -61,8 +61,13 @@ public class XTextField extends JTextField {
                     this.value = val;
                     break;
                 case Float:
+                    try {
                     this.value = Float.parseFloat(val);
+                } catch (NumberFormatException ex) {
+                    this.setText("");
+                }
                     break;
+
             }
         } else {
             this.value = null;

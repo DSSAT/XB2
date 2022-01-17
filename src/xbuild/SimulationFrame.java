@@ -20,9 +20,6 @@ import DSSATModel.IrrigationMethodList;
 import ListDialog.CropModelDialog;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -277,7 +274,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         bnSMODEL = new javax.swing.JButton();
-        txtRSEED = new XFormattedTextField(sim, "RSEED", sim.RSEED);
+        txtRSEED = new XTextField(sim, "RSEED", sim.RSEED);
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jXPanel13 = new org.jdesktop.swingx.JXPanel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
@@ -2955,7 +2952,7 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     private XTextField txtPSTMX;
     private XTextField txtRIDEP;
     private XTextField txtRIPCN;
-    private XFormattedTextField txtRSEED;
+    private XTextField txtRSEED;
     private XTextField txtRTIME;
     private XSelectTextField txtSMODEL;
     // End of variables declaration//GEN-END:variables
