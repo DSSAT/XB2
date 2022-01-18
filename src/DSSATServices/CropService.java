@@ -48,6 +48,9 @@ public class CropService extends DSSATServiceBase {
                     if (culFile != null && !"".equals(culFile)) {
                         CultivarList.AddNew(crop, culFile);
                     }
+                    else{
+                        CultivarList.AddNew(crop, "");
+                    }
                 } catch (Exception ex) {
                     //taskOutput.append("!Error:" + e.getMessage() + "\n");
                     isValid = false;

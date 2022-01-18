@@ -25,31 +25,40 @@ public class CultivarList {
     public static Vector cultivars = new Vector();
 
     public static void AddNew(Crop crop, String culFile) {
-        try {
-            FileReader file = null;
+        if(culFile.length() > 0){
             try {
-                file = new FileReader(culFile);
-            } catch (FileNotFoundException ex) {
-                System.out.println(ex);
-            }
-            BufferedReader br = new BufferedReader(file);
-            String strRead = "";
-            while ((strRead = br.readLine()) != null) {
-                if (!strRead.startsWith("!") && !strRead.startsWith("*") && !strRead.startsWith("@") && !strRead.startsWith("$") && strRead.length() >= 8)
-                {
-                    try {
-                        int end = (strRead.length() > 23) ? 23 : strRead.length();
-                        Cultivar cul = new Cultivar(crop);
-                        cul.CulCode = strRead.substring(0, 6).trim();
-                        cul.CulName = strRead.substring(7, end).trim();
-                        cultivars.addElement(cul);
-                    } catch (Exception e) {
-                        System.out.println(strRead + "\n" + e.getMessage());
+                FileReader file = null;
+                try {
+                    file = new FileReader(culFile);
+                } catch (FileNotFoundException ex) {
+                    System.out.println(ex);
+                }
+                BufferedReader br = new BufferedReader(file);
+                String strRead = "";
+                while ((strRead = br.readLine()) != null) {
+                    if (!strRead.startsWith("!") && !strRead.startsWith("*") && !strRead.startsWith("@") && !strRead.startsWith("$") && strRead.trim().length() >= 8) {
+                        try {
+                            int end = (strRead.length() > 23) ? 23 : strRead.length();
+                            Cultivar cul = new Cultivar(crop);
+                            cul.CulCode = strRead.substring(0, 6).trim();
+                            cul.CulName = strRead.substring(7, end).trim();
+                            cultivars.addElement(cul);
+                        } catch (Exception e) {
+                            System.out.println(strRead + "\n" + e.getMessage());
+                        }
                     }
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(CultivarList.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(CultivarList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else{
+            Cultivar cul = new Cultivar(crop);
+            if(crop.CropCode.equals("FA")){
+               cul.CulCode = "IB0001";
+               cul.CulName = crop.CropName;
+            }
+            cultivars.addElement(cul);
         }
     }
 
