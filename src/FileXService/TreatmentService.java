@@ -1,6 +1,7 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.FileX;
 import static FileXModel.FileX.treaments;
 import FileXModel.Treatment;
 import java.io.BufferedReader;
@@ -37,7 +38,14 @@ public class TreatmentService {
                         continue;
                     }
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
+                    
                     Treatment treatment = new Treatment();
+                    if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
+                        treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
+                        treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
+                        treatment.C = Utils.GetString(treatmentHeader, strRead, "C", 1);
+                    }
+                    
                     treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);
                     treatment.CU = Utils.GetInteger(treatmentHeader, strRead, "CU", 2);
                     treatment.FL = Utils.GetInteger(treatmentHeader, strRead, "FL", 2);
@@ -71,7 +79,39 @@ public class TreatmentService {
                 Treatment treat = treaments.GetAt(i);
                 Integer level = i + 1;
                 pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" 1 0 0");
+                
+                if(!FileX.general.FileType.equalsIgnoreCase("Sequential"))
+                    pw.print(" 1 0 0");
+                else{
+                    try {
+                        if (!treat.R.isEmpty()) {
+                            pw.print(' ' + treat.R.substring(0, 1));
+                        } else {
+                            pw.print(' ' + "0");
+                        }
+                    } catch (Exception e) {
+                        pw.print(' ' + "0");
+                    }
+                    try {
+                        if (!treat.O.isEmpty()) {
+                            pw.print(' ' + treat.O.substring(0, 1));
+                        } else {
+                            pw.print(' ' + "0");
+                        }
+                    } catch (Exception e) {
+                        pw.print(' ' + "0");
+                    }
+                    try {
+                        if (!treat.C.isEmpty()) {
+                            pw.print(' ' + treat.C.substring(0, 1));
+                        } else {
+                            pw.print(' ' + "0");
+                        }
+                    } catch (Exception e) {
+                        pw.print(' ' + "0");
+                    }
+                }               
+                
                 try {
                     if (!treat.TNAME.isEmpty()) {
                         pw.print(" " + Utils.PadRight(treat.TNAME, 25, ' '));

@@ -11,6 +11,7 @@
 
 package xbuild;
 
+import Extensions.Utils;
 import FileXModel.Treatment;
 import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
@@ -35,22 +36,10 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
         initComponents();
-
         LoadTreament();
 
-        TableModel tbModel1 = jXTable1.getModel();
-        tbModel1.addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent e) {
-                int col = e.getColumn();
-                if(col != 1) return;
-
-                int row = e.getFirstRow();
-
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-                FileX.treaments.GetAt(row).TNAME = (String)tbModel.getValueAt(row, col);
-            }
-        });
+        //TableModel tbModel1 = jXTable1.getModel();
+        
     }
 
     /** This method is called from within the constructor to
@@ -91,11 +80,11 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Level", "Description", "Cultivar", "Field", "<html>Soil<br>Anal.<html>", "<html>Init.<br>Cond.<html>", "Plant", "Irrigat.", "Fertil.", "Resid.", "<html><p align='center'>Chem<br>App.</p></html>", "Tillage", "<html><p align='center'>Env.<br>Mod</p></html>", "Harvest", "<html><p align='center'>Sim.<br>Contr.</p></html>"
+                "Level", "<html>Rot.<br>Number</html>", "<html>Rot.<br>Option</html>", "<html>Crop<br>Comp.</html>", "Description", "Cultivar", "Field", "<html>Soil<br>Anal.<html>", "<html>Init.<br>Cond.<html>", "Plant", "Irrigat.", "Fertil.", "Resid.", "<html><p align='center'>Chem<br>App.</p></html>", "Tillage", "<html><p align='center'>Env.<br>Mod</p></html>", "Harvest", "<html><p align='center'>Sim.<br>Contr.</p></html>"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -108,14 +97,15 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jXTable1);
-        jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jXTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        if (jXTable1.getColumnModel().getColumnCount() > 0) {
+            jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jXTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -128,7 +118,6 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -156,21 +145,22 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             p.x += jXTable1.getColumnModel().getColumn(i).getWidth();
 
         p.y += (row + 1) * jXTable1.getRowHeight();
-        
 
-        if(col == 2) ShowCultivar(col, row, p);
-        else if(col == 3) ShowField(col, row, p);
-        else if(col == 4) ShowSoilAnalysis(col, row, p);
-        else if(col == 5) ShowInitial(col, row, p);
-        else if(col == 6) ShowPlant(col, row, p);
-        else if(col == 7) ShowIrrigation(col, row, p);
-        else if(col == 8) ShowFertilizer(col, row, p);
-        else if(col == 9) ShowOrganic(col, row, p);
-        else if(col == 10) ShowChemical(col, row, p);
-        else if(col == 11) ShowTillage(col, row, p);
-        else if(col == 12) ShowEnvironment(col, row, p);
-        else if(col == 13) ShowHarvest(col, row, p);
-        else if(col == 14) ShowSimulation(col, row, p);
+        int addCol = FileX.general.FileType == "Sequential" ? 3 : 0;
+
+        if(col == 2 + addCol) ShowCultivar(col, row, p);
+        else if(col == 3 + addCol) ShowField(col, row, p);
+        else if(col == 4 + addCol) ShowSoilAnalysis(col, row, p);
+        else if(col == 5 + addCol) ShowInitial(col, row, p);
+        else if(col == 6 + addCol) ShowPlant(col, row, p);
+        else if(col == 7 + addCol) ShowIrrigation(col, row, p);
+        else if(col == 8 + addCol) ShowFertilizer(col, row, p);
+        else if(col == 9 + addCol) ShowOrganic(col, row, p);
+        else if(col == 10 + addCol) ShowChemical(col, row, p);
+        else if(col == 11 + addCol) ShowTillage(col, row, p);
+        else if(col == 12 + addCol) ShowEnvironment(col, row, p);
+        else if(col == 13 + addCol) ShowHarvest(col, row, p);
+        else if(col == 14 + addCol) ShowSimulation(col, row, p);
     }//GEN-LAST:event_jXTable1MouseClicked
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
@@ -179,41 +169,55 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         int row = jXTable1.getSelectedRow();
         Treatment treatment = new Treatment();
         if(row >= 0){
-            treatment.TNAME = tbModel.getValueAt(row, 1).toString();
-            treatment.CU = (int)tbModel.getValueAt(row, 2);
-            treatment.FL = (int)tbModel.getValueAt(row, 3);
-            treatment.SA = (int)tbModel.getValueAt(row, 4);
-            treatment.IC = (int)tbModel.getValueAt(row, 5);
-            treatment.MP = (int)tbModel.getValueAt(row, 6);
-            treatment.MI = (int)tbModel.getValueAt(row, 7);
-            treatment.MF = (int)tbModel.getValueAt(row, 8);
-            treatment.MR = (int)tbModel.getValueAt(row, 9);
-            treatment.MC = (int)tbModel.getValueAt(row, 10);
-            treatment.MT = (int)tbModel.getValueAt(row, 11);
-            treatment.ME = (int)tbModel.getValueAt(row, 12);
-            treatment.MH = (int)tbModel.getValueAt(row, 13);
-            treatment.SM = (int)tbModel.getValueAt(row, 14);
+            if(FileX.general.FileType.equalsIgnoreCase("Sequential")){
+                treatment.R = tbModel.getValueAt(row, 1).toString();
+                treatment.O = tbModel.getValueAt(row, 2).toString();
+                treatment.C = tbModel.getValueAt(row, 3).toString();
+            }
             
-            tbModel.addRow(new Object[] {jXTable1.getRowCount()+1, 
-                treatment.TNAME, treatment.CU, treatment.FL, treatment.SA, treatment.IC, treatment.MP, treatment.MI, 
-                treatment.MF, treatment.MR, treatment.MC, treatment.MT, treatment.ME, treatment.MH, treatment.SM});
+            treatment.TNAME = tbModel.getValueAt(row, 4).toString();
+            treatment.CU = Utils.ParseInteger(tbModel.getValueAt(row, 5));
+            treatment.FL = Utils.ParseInteger(tbModel.getValueAt(row, 6));
+            treatment.SA = Utils.ParseInteger(tbModel.getValueAt(row, 7));
+            treatment.IC = Utils.ParseInteger(tbModel.getValueAt(row, 8));
+            treatment.MP = Utils.ParseInteger(tbModel.getValueAt(row, 9));
+            treatment.MI = Utils.ParseInteger(tbModel.getValueAt(row, 10));
+            treatment.MF = Utils.ParseInteger(tbModel.getValueAt(row, 11));
+            treatment.MR = Utils.ParseInteger(tbModel.getValueAt(row, 12));
+            treatment.MC = Utils.ParseInteger(tbModel.getValueAt(row, 13));
+            treatment.MT = Utils.ParseInteger(tbModel.getValueAt(row, 14));
+            treatment.ME = Utils.ParseInteger(tbModel.getValueAt(row, 15));
+            treatment.MH = Utils.ParseInteger(tbModel.getValueAt(row, 16));
+            treatment.SM = Utils.ParseInteger(tbModel.getValueAt(row, 17));
+            try {
+                tbModel.addRow(new Object[]{jXTable1.getRowCount() + 1,
+                    treatment.R, treatment.O, treatment.C,
+                    treatment.TNAME, treatment.CU, treatment.FL, treatment.SA, treatment.IC, treatment.MP, treatment.MI,
+                    treatment.MF, treatment.MR, treatment.MC, treatment.MT, treatment.ME, treatment.MH, treatment.SM});
+            } catch (Exception ex) {
+
+            }
         }
         else{
-            tbModel.addRow(new Object[] {jXTable1.getRowCount()+1, "", "", "", "", "", "", "", "", "", "", "", "", "", ""});
-        }
-        
+            try {
+                tbModel.addRow(new Object[]{jXTable1.getRowCount() + 1, "", "", "", "", "", "", "", "", "", "", "", "", "", ""});
+            } catch (Exception ex) {
+
+            }
+        }        
 
         FileX.treaments.AddNew(treatment);
+        LoadTreament();
     }//GEN-LAST:event_bnAddLayerActionPerformed
 
     private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+        //DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
         int row = jXTable1.getSelectedRow();
-        tbModel.removeRow(row);
+        //tbModel.removeRow(row);
         FileX.treaments.RemoveAt(row);
-
-        for(int i = row; i < jXTable1.getRowCount();i++)
-            tbModel.setValueAt(i + 1, i, 0);
+        LoadTreament();
+//        for(int i = row; i < jXTable1.getRowCount();i++)
+//            tbModel.setValueAt(i + 1, i, 0);
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
 
@@ -248,6 +252,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).CU = level;
+                    LoadTreament();
                 }
             }
         });
@@ -277,6 +282,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).FL = level;
+                    LoadTreament();
                 }
             }
         });
@@ -306,6 +312,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).SA = level;
+                    LoadTreament();
                 }
             }
         });
@@ -335,6 +342,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).IC = level;
+                    LoadTreament();
                 }
             }
         });
@@ -364,6 +372,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).SM = level;
+                    LoadTreament();
                 }
             }
         });
@@ -393,6 +402,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MH = level;
+                    LoadTreament();
                 }
             }
         });
@@ -422,6 +432,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).ME = level;
+                    LoadTreament();
                 }
             }
         });
@@ -451,6 +462,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MT = level;
+                    LoadTreament();
                 }
             }
         });
@@ -480,6 +492,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MC = level;
+                    LoadTreament();
                 }
             }
         });
@@ -509,6 +522,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MR = level;
+                    LoadTreament();
                 }
             }
         });
@@ -538,6 +552,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MF = level;
+                    LoadTreament();
                 }
             }
         });
@@ -567,6 +582,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MI = level;
+                    LoadTreament();
                 }
             }
         });
@@ -596,89 +612,136 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 if(level != null){
                     tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MP = level;
+                    LoadTreament();
                 }
             }
         });
     }
 
     private void LoadTreament() {
-        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+        DefaultTableModel tbModel = new DefaultTableModel();
+        
+        DefaultTableModel oldModel = (DefaultTableModel)jXTable1.getModel();
+        
+        for(int i = 0; i < oldModel.getColumnCount();i++){
+            tbModel.addColumn(oldModel.getColumnName(i));
+        }       
+        
+        jXTable1.setModel(tbModel);
         for(int i = 0;i < FileX.treaments.GetSize();i++)
         {
             Treatment treatment = FileX.treaments.GetAt(i);
-            Object row[] = new Object[15];
+            Object row[] = new Object[18];
             row[0] = i + 1;
             try {
-                row[1] = treatment.TNAME;
+                row[1] = treatment.R;
             } catch (Exception e) {
                 row[1] = "";
             }
             try {
-                row[2] = treatment.CU;
+                row[2] = treatment.O;
             } catch (Exception e) {
                 row[2] = "";
             }
             try {
-                row[3] = treatment.FL;
+                row[3] = treatment.C;
             } catch (Exception e) {
                 row[3] = "";
             }
+            
             try {
-                row[4] = treatment.SA;
+                row[4] = treatment.TNAME;
             } catch (Exception e) {
                 row[4] = "";
             }
             try {
-                row[5] = treatment.IC;
+                row[5] = treatment.CU;
             } catch (Exception e) {
                 row[5] = "";
             }
             try {
-                row[6] = treatment.MP;
+                row[6] = treatment.FL;
             } catch (Exception e) {
                 row[6] = "";
             }
             try {
-                row[7] = treatment.MI;
+                row[7] = treatment.SA;
             } catch (Exception e) {
                 row[7] = "";
             }
             try {
-                row[8] = treatment.MF;
+                row[8] = treatment.IC;
             } catch (Exception e) {
                 row[8] = "";
             }
             try {
-                row[9] = treatment.MR;
+                row[9] = treatment.MP;
             } catch (Exception e) {
-                row[9] = "";
+                row[0] = "";
             }
             try {
-                row[10] = treatment.MC;
+                row[10] = treatment.MI;
             } catch (Exception e) {
                 row[10] = "";
             }
             try {
-                row[11] = treatment.MT;
+                row[11] = treatment.MF;
             } catch (Exception e) {
                 row[11] = "";
             }
             try {
-                row[12] = treatment.ME;
+                row[12] = treatment.MR;
             } catch (Exception e) {
                 row[12] = "";
             }
             try {
-                row[13] = treatment.MH;
+                row[13] = treatment.MC;
             } catch (Exception e) {
                 row[13] = "";
             }
             try {
-                row[14] = treatment.SM;
+                row[14] = treatment.MT;
             } catch (Exception e) {
                 row[14] = "";
             }
+            try {
+                row[15] = treatment.ME;
+            } catch (Exception e) {
+                row[15] = "";
+            }
+            try {
+                row[16] = treatment.MH;
+            } catch (Exception e) {
+                row[16] = "";
+            }
+            try {
+                row[17] = treatment.SM;
+            } catch (Exception e) {
+                row[17] = "";
+            }
             tbModel.addRow(row);
+        }
+        
+        tbModel.addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent e) {
+                int row = e.getFirstRow();
+
+                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+                FileX.treaments.GetAt(row).TNAME = (String)tbModel.getValueAt(row, 4);
+                
+                if(FileX.general.FileType.equalsIgnoreCase("Sequential")){
+                    FileX.treaments.GetAt(row).R = (String)tbModel.getValueAt(row, 1);
+                    FileX.treaments.GetAt(row).O = (String)tbModel.getValueAt(row, 2);
+                    FileX.treaments.GetAt(row).C = (String)tbModel.getValueAt(row, 3);
+                }
+            }
+        });
+        
+        if(FileX.general.FileType != "Sequential"){
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(3));
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
         }
     }
 
