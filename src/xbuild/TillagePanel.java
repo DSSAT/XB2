@@ -152,7 +152,14 @@ public class TillagePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        TillageApplication til = selectedRowIndex < 0 ? new TillageApplication() : tillage.GetApp(selectedRowIndex);
+        TillageApplication til = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < tillage.GetSize()) {
+            TillageApplication tmp = tillage.GetApp(selectedRowIndex);
+            til = tmp.Clone();
+        } else {
+            til = new TillageApplication();
+        }
+        
         final TillageDialog tilDialog = new TillageDialog(null, true, til);
         tilDialog.show();
 

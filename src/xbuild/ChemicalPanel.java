@@ -155,7 +155,14 @@ public class ChemicalPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnAddApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddApplicationActionPerformed
-        ChemicalApplication chemApp = selectedRowIndex < 0 ? new ChemicalApplication() : chem.GetApp(selectedRowIndex);
+        ChemicalApplication chemApp = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < chem.GetSize()) {
+            ChemicalApplication tmp = chem.GetApp(selectedRowIndex);
+            chemApp = tmp.Clone();
+        } else {
+            chemApp = new ChemicalApplication();
+        }
+        
         final ChemicalDialog chemDialog = new ChemicalDialog(null, true, chemApp);
         chemDialog.show();
 

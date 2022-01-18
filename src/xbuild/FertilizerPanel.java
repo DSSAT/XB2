@@ -186,7 +186,14 @@ public class FertilizerPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        FertilizerApplication fer = selectedRowIndex < 0 ? new FertilizerApplication() : fertil.GetApp(selectedRowIndex);
+        FertilizerApplication fer = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < fertil.GetSize()) {
+            FertilizerApplication tmp = fertil.GetApp(selectedRowIndex);
+            fer = tmp.Clone();
+        } else {
+            fer = new FertilizerApplication();
+        }
+        
         final FertilizerDialog ferDialog = new FertilizerDialog(null, true, rdDaysAfterPlanting.isSelected(), fer);
         ferDialog.show();
 

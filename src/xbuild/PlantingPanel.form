@@ -252,6 +252,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpEDATEActionPerformed"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpEDATEPropertyChange"/>
           </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="dpPDATE">
@@ -262,6 +263,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpPDATEActionPerformed"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpPDATEPropertyChange"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bnSelectPlantingMethod">
@@ -341,7 +343,7 @@
                           <Component id="jXLabel16" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="232" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

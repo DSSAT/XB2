@@ -5,13 +5,25 @@
 
 package FileXModel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Jazzy
  */
-public class InitialConditionApplication {
+public class InitialConditionApplication implements Cloneable {
     public Float ICBL;
     public Float SH2O;
     public Float SNH4;
     public Float SNO3;
+    
+    public InitialConditionApplication Clone(){
+        try {
+            return (InitialConditionApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(InitialConditionApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

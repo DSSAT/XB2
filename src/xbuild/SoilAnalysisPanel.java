@@ -330,8 +330,13 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
 }//GEN-LAST:event_bnSelectPotassiumActionPerformed
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-       
-        SoilAnalysisLayer soil = selectedRowIndex < 0 ? new SoilAnalysisLayer() : soilAnalysis.GetLayer(selectedRowIndex);
+        SoilAnalysisLayer soil = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < soilAnalysis.GetSize()) {
+            SoilAnalysisLayer tmp = soilAnalysis.GetLayer(selectedRowIndex);
+            soil = tmp.Clone();
+        } else {
+            soil = new SoilAnalysisLayer();
+        }
         
         final SoilAnalysisDialog dialog = new SoilAnalysisDialog(null, true, soil);
         dialog.show();

@@ -568,7 +568,13 @@ public class InitialPanel extends javax.swing.JPanel implements KeyListener {
     }//GEN-LAST:event_dpICDATActionPerformed
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        InitialConditionApplication initCond = selectedRowIndex < 0 ? new InitialConditionApplication() : init.GetApp(selectedRowIndex);
+        InitialConditionApplication initCond = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < init.GetSize()) {
+            InitialConditionApplication tmp = init.GetApp(selectedRowIndex);
+            initCond = tmp.Clone();
+        } else {
+            initCond = new InitialConditionApplication();
+        }
         
         final InitialDialog dialog = new InitialDialog(null, true, initCond);
         dialog.show();

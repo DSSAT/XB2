@@ -141,11 +141,21 @@ public class PlantingPanel extends javax.swing.JPanel implements KeyListener {
                 dpEDATEActionPerformed(evt);
             }
         });
+        dpEDATE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dpEDATEPropertyChange(evt);
+            }
+        });
 
         dpPDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
         dpPDATE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dpPDATEActionPerformed(evt);
+            }
+        });
+        dpPDATE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dpPDATEPropertyChange(evt);
             }
         });
 
@@ -316,7 +326,7 @@ public class PlantingPanel extends javax.swing.JPanel implements KeyListener {
                         .addComponent(txtPLWT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,6 +414,28 @@ public class PlantingPanel extends javax.swing.JPanel implements KeyListener {
             }
         });
     }//GEN-LAST:event_bnSelectPlantingDistributionActionPerformed
+
+    private void dpPDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpPDATEPropertyChange
+        try
+        {
+            planting.PDATE = dpPDATE.getDate();
+        }
+        catch(Exception ex) {
+            planting.PDATE = null;
+            dpPDATE.setDate(null);
+        }
+    }//GEN-LAST:event_dpPDATEPropertyChange
+
+    private void dpEDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpEDATEPropertyChange
+        try
+        {
+            planting.EDATE = dpEDATE.getDate();
+        }
+        catch(Exception ex) {
+            planting.EDATE = null;
+            dpEDATE.setDate(null);
+        }
+    }//GEN-LAST:event_dpEDATEPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

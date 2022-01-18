@@ -192,7 +192,14 @@ public class EnvironmentalPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_jXTable2MouseClicked
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        EnvironmentApplication env = selectedRowIndex < 0 ? new EnvironmentApplication() : environment.GetApp(selectedRowIndex);
+        EnvironmentApplication env = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < environment.GetSize()) {
+            EnvironmentApplication tmp = environment.GetApp(selectedRowIndex);
+            env = tmp.Clone();
+        } else {
+            env = new EnvironmentApplication();
+        }
+        
         final EnvironmentalAppDialog appDialog = new EnvironmentalAppDialog(null, true, env);
         appDialog.show();
 

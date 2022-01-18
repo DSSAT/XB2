@@ -223,7 +223,14 @@ public class HarvestPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnAddAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddAppActionPerformed
-        HarvestApplication harvApp = selectedRowIndex < 0 || harvestApp.GetSize() < 1 ? new HarvestApplication() : harvestApp.GetApp(selectedRowIndex);
+        HarvestApplication harvApp = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < harvestApp.GetSize()) {
+            HarvestApplication tmp = harvestApp.GetApp(selectedRowIndex);
+            harvApp = tmp.Clone();
+        } else {
+            harvApp = new HarvestApplication();
+        }
+        
         final HarvestDialog harvestDialog = new HarvestDialog(null, true, rdDaysAfterPlanting.isSelected(), harvApp);
         harvestDialog.show();
 

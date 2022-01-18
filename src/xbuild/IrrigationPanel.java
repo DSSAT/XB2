@@ -191,7 +191,14 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        IrrigationApplication ir = selectedRowIndex < 0 ? new IrrigationApplication() : irrig.GetApp(selectedRowIndex);
+        IrrigationApplication ir = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < irrig.GetSize()) {
+            IrrigationApplication tmp = irrig.GetApp(selectedRowIndex);
+            ir = tmp.Clone();
+        } else {
+            ir = new IrrigationApplication();
+        }
+     
         final IrrigationDialog appDialog = new IrrigationDialog(null, true, rdDaysAfterPlanting.isSelected(), ir);
         appDialog.show();
 
@@ -214,7 +221,17 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2)
         {
-            final IrrigationDialog appDialog = new IrrigationDialog(null, true, rdDaysAfterPlanting.isSelected(), irrig.GetApp(jXTable1.getSelectedRow()));
+            int nRow = jXTable1.getSelectedRow();
+            IrrigationApplication ir = null;
+            if(nRow > 0){
+                IrrigationApplication tmp = irrig.GetApp(nRow);
+                ir = tmp.Clone();
+            }
+            else{
+                ir = new IrrigationApplication();
+            }
+            
+            final IrrigationDialog appDialog = new IrrigationDialog(null, true, rdDaysAfterPlanting.isSelected(), ir);
             appDialog.show();
 
             appDialog.addWindowListener(new java.awt.event.WindowAdapter() {

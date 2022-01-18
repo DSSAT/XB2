@@ -201,7 +201,14 @@ public class OrganicPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rdDaysAfterPlantingStateChanged
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        OrganicApplication org = selectedRowIndex < 0 ? new OrganicApplication() : organic.GetApp(selectedRowIndex);
+        OrganicApplication org = null;
+        if (selectedRowIndex > 0 && selectedRowIndex < organic.GetSize()) {
+            OrganicApplication tmp = organic.GetApp(selectedRowIndex);
+            org = tmp.Clone();
+        } else {
+            org = new OrganicApplication();
+        }
+        
         final OrganicDialog organicDialog = new OrganicDialog(null, true, rdDaysAfterPlanting.isSelected(), org);
         organicDialog.show();
 
