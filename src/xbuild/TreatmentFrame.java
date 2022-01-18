@@ -16,16 +16,11 @@ import FileXModel.Treatment;
 import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
 import FileXDialog.FieldDialog;
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowListener;
-import javax.swing.JDialog;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -146,7 +141,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         p.y += (row + 1) * jXTable1.getRowHeight();
 
-        int addCol = FileX.general.FileType == "Sequential" ? 3 : 0;
+        int addCol = "Sequential".equals(FileX.general.FileType) ? 3 : 0;
 
         if(col == 2 + addCol) ShowCultivar(col, row, p);
         else if(col == 3 + addCol) ShowField(col, row, p);
@@ -190,7 +185,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             treatment.MH = Utils.ParseInteger(tbModel.getValueAt(row, 16));
             treatment.SM = Utils.ParseInteger(tbModel.getValueAt(row, 17));
             try {
-                tbModel.addRow(new Object[]{jXTable1.getRowCount() + 1,
+                tbModel.addRow(new Object[]{1,
                     treatment.R, treatment.O, treatment.C,
                     treatment.TNAME, treatment.CU, treatment.FL, treatment.SA, treatment.IC, treatment.MP, treatment.MI,
                     treatment.MF, treatment.MR, treatment.MC, treatment.MT, treatment.ME, treatment.MH, treatment.SM});
@@ -200,7 +195,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         }
         else{
             try {
-                tbModel.addRow(new Object[]{jXTable1.getRowCount() + 1, "", "", "", "", "", "", "", "", "", "", "", "", "", ""});
+                tbModel.addRow(new Object[]{1, "", "", "", "", "", "", "", "", "", "", "", "", "", ""});
             } catch (Exception ex) {
 
             }
@@ -211,13 +206,9 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bnAddLayerActionPerformed
 
     private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
-        //DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
         int row = jXTable1.getSelectedRow();
-        //tbModel.removeRow(row);
         FileX.treaments.RemoveAt(row);
         LoadTreament();
-//        for(int i = row; i < jXTable1.getRowCount();i++)
-//            tbModel.setValueAt(i + 1, i, 0);
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
 
@@ -235,10 +226,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -265,10 +258,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -295,10 +290,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -325,10 +322,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -355,10 +354,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -385,10 +386,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -415,10 +418,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -445,10 +450,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -475,10 +482,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -505,10 +514,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -535,10 +546,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -565,10 +578,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -595,10 +610,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
 
             }
 
+            @Override
             public void windowLostFocus(WindowEvent e) {
                 dialog.dispose();
             }
@@ -632,7 +649,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         {
             Treatment treatment = FileX.treaments.GetAt(i);
             Object row[] = new Object[18];
-            row[0] = i + 1;
+            row[0] = 1;
             try {
                 row[1] = treatment.R;
             } catch (Exception e) {
@@ -722,23 +739,18 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             tbModel.addRow(row);
         }
         
-        tbModel.addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent e) {
-                int row = e.getFirstRow();
-
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-                FileX.treaments.GetAt(row).TNAME = (String)tbModel.getValueAt(row, 4);
-                
-                if(FileX.general.FileType.equalsIgnoreCase("Sequential")){
-                    FileX.treaments.GetAt(row).R = (String)tbModel.getValueAt(row, 1);
-                    FileX.treaments.GetAt(row).O = (String)tbModel.getValueAt(row, 2);
-                    FileX.treaments.GetAt(row).C = (String)tbModel.getValueAt(row, 3);
-                }
+        tbModel.addTableModelListener((TableModelEvent e) -> {
+            int row = e.getFirstRow();
+            DefaultTableModel tbModel1 = (DefaultTableModel) jXTable1.getModel();
+            FileX.treaments.GetAt(row).TNAME = (String) tbModel1.getValueAt(row, 4);
+            if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
+                FileX.treaments.GetAt(row).R = (String) tbModel1.getValueAt(row, 1);
+                FileX.treaments.GetAt(row).O = (String) tbModel1.getValueAt(row, 2);
+                FileX.treaments.GetAt(row).C = (String) tbModel1.getValueAt(row, 3);
             }
         });
         
-        if(FileX.general.FileType != "Sequential"){
+        if(!"Sequential".equals(FileX.general.FileType)){
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(3));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
