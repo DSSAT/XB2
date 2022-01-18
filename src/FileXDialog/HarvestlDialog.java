@@ -11,6 +11,7 @@
 
 package FileXDialog;
 
+import Extensions.Utils;
 import FileXModel.Harvest;
 import FileXModel.FileX;
 import javax.swing.table.DefaultTableModel;
@@ -105,7 +106,8 @@ public class HarvestlDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        level = jXTable1.getSelectedRow();
+        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+        level = Utils.ParseInteger(tbModel.getValueAt(jXTable1.getSelectedRow(), 0));
         dispose();
     }//GEN-LAST:event_jXTable1MouseClicked
 
@@ -122,7 +124,7 @@ public class HarvestlDialog extends javax.swing.JDialog {
 
     private void LoadDataTable() {
         DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-        tbModel.addRow(new Object[] {0, ""});
+        tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.harvestList.GetSize();i++)
         {
             Harvest harvest = FileX.harvestList.GetAt(i);

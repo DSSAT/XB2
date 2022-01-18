@@ -109,7 +109,7 @@ public class PlantingDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        level = jXTable1.getSelectedRow() + 1;
+        level = jXTable1.getSelectedRow();
         dispose();
     }//GEN-LAST:event_jXTable1MouseClicked
 
@@ -126,6 +126,7 @@ public class PlantingDialog extends javax.swing.JDialog {
 
     private void LoadDataTable() {
         DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+        tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.plantings.GetSize();i++)
         {
             Planting plant = FileX.plantings.GetAt(i);

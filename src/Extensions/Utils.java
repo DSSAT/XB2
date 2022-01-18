@@ -89,7 +89,7 @@ public class Utils {
     }
     
     public static Integer GetInteger(String Header, String value, String field, int fieldLength) {
-        int start = Header.indexOf(" " + field) + field.length() - fieldLength;
+        int start = Header.indexOf(field.startsWith("@") ? field : " " + field) + field.length() - fieldLength;
         Integer val = null;
         
         if(start >= 0) {

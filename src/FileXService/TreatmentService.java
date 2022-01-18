@@ -40,6 +40,7 @@ public class TreatmentService {
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     
                     Treatment treatment = new Treatment();
+                    treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
                         treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
                         treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
@@ -77,7 +78,7 @@ public class TreatmentService {
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treaments.GetSize(); i++) {
                 Treatment treat = treaments.GetAt(i);
-                pw.print(Utils.PadLeft(1, 2, ' '));
+                pw.print(Utils.PadLeft(treat.N, 2, ' '));
                 
                 if(!FileX.general.FileType.equalsIgnoreCase("Sequential"))
                     pw.print(" 1 0 0");

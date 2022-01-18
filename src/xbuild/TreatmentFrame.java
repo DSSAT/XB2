@@ -79,7 +79,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false
+                true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -170,6 +170,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
                 treatment.C = tbModel.getValueAt(row, 3).toString();
             }
             
+            treatment.N = Utils.ParseInteger(tbModel.getValueAt(row, 0));
             treatment.TNAME = tbModel.getValueAt(row, 4).toString();
             treatment.CU = Utils.ParseInteger(tbModel.getValueAt(row, 5));
             treatment.FL = Utils.ParseInteger(tbModel.getValueAt(row, 6));
@@ -185,7 +186,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             treatment.MH = Utils.ParseInteger(tbModel.getValueAt(row, 16));
             treatment.SM = Utils.ParseInteger(tbModel.getValueAt(row, 17));
             try {
-                tbModel.addRow(new Object[]{1,
+                tbModel.addRow(new Object[]{treatment.N,
                     treatment.R, treatment.O, treatment.C,
                     treatment.TNAME, treatment.CU, treatment.FL, treatment.SA, treatment.IC, treatment.MP, treatment.MI,
                     treatment.MF, treatment.MR, treatment.MC, treatment.MT, treatment.ME, treatment.MH, treatment.SM});
@@ -649,7 +650,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         {
             Treatment treatment = FileX.treaments.GetAt(i);
             Object row[] = new Object[18];
-            row[0] = 1;
+            row[0] = treatment.N;
             try {
                 row[1] = treatment.R;
             } catch (Exception e) {
@@ -742,7 +743,9 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         tbModel.addTableModelListener((TableModelEvent e) -> {
             int row = e.getFirstRow();
             DefaultTableModel tbModel1 = (DefaultTableModel) jXTable1.getModel();
+            
             FileX.treaments.GetAt(row).TNAME = (String) tbModel1.getValueAt(row, 4);
+            FileX.treaments.GetAt(row).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
             if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
                 FileX.treaments.GetAt(row).R = (String) tbModel1.getValueAt(row, 1);
                 FileX.treaments.GetAt(row).O = (String) tbModel1.getValueAt(row, 2);

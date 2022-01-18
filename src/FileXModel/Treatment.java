@@ -10,6 +10,8 @@ package FileXModel;
  * @author Jazzy
  */
 public class Treatment {
+    public Integer N;
+    
     public String R;
     public String O;
     public String C;
