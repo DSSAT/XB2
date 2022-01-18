@@ -88,9 +88,19 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
         jXLabel1.setText("Analysis Date");
 
         dpAnalysisDate.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpAnalysisDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                dpAnalysisDateFocusLost(evt);
+            }
+        });
         dpAnalysisDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dpAnalysisDateActionPerformed(evt);
+            }
+        });
+        dpAnalysisDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dpAnalysisDatePropertyChange(evt);
             }
         });
 
@@ -253,7 +263,7 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
                         .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
                     .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -267,7 +277,7 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -382,6 +392,18 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
             }
         }
     }//GEN-LAST:event_jXTable2MouseClicked
+
+    private void dpAnalysisDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dpAnalysisDateFocusLost
+        Update();
+    }//GEN-LAST:event_dpAnalysisDateFocusLost
+
+    private void dpAnalysisDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpAnalysisDatePropertyChange
+        try {
+            soilAnalysis.SADAT = dpAnalysisDate.getDate();
+        } catch (Exception e) {
+            soilAnalysis.SADAT = null;
+        }
+    }//GEN-LAST:event_dpAnalysisDatePropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

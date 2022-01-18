@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class Fertilizer implements Cloneable {
 
-    protected Vector  ferApps = new Vector();
+    protected ArrayList<FertilizerApplication>  ferApps = new ArrayList<>();
     public String FERNAME;
 
     public Fertilizer(String FERNAME)
@@ -40,9 +41,9 @@ public class Fertilizer implements Cloneable {
         ferApps.set(level, fer);
     }
 
-    public FertilizerApplication[] GetApps()
+    public ArrayList<FertilizerApplication> GetApps()
     {
-        return (FertilizerApplication[]) ferApps.toArray();
+        return ferApps;
     }
 
     public FertilizerApplication GetApp(int level)

@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class Irrigation implements Cloneable {
 
-    protected Vector  irrigApps = new Vector();
+    protected ArrayList<IrrigationApplication>  irrigApps = new ArrayList<>();
     public Float EFIR;
     //IDEP
     //ITHR
@@ -47,9 +48,9 @@ public class Irrigation implements Cloneable {
         irrigApps.set(level, irrig);
     }
 
-    public IrrigationApplication[] GetApps()
+    public ArrayList<IrrigationApplication> GetApps()
     {
-        return (IrrigationApplication[]) irrigApps.toArray();
+        return irrigApps;
     }
 
     public IrrigationApplication GetApp(int level)

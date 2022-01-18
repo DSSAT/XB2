@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Vector;
  * @author Jazzy
  */
 public class SoilAnalysisList {
-    protected Vector soilAnalysis = new Vector();
+    protected ArrayList<SoilAnalysis> soilAnalysis = new ArrayList<>();
 
     public void AddAnalysis(SoilAnalysis soil)
     {
@@ -23,15 +24,20 @@ public class SoilAnalysisList {
     {
         soilAnalysis.remove(level);
     }
+    
+    public SoilAnalysis GetAt(int level)
+    {
+        return (SoilAnalysis)soilAnalysis.get(level);
+    }
 
     public void SetAt(int level, SoilAnalysis env)
     {
         soilAnalysis.set(level, env);
     }
 
-    public SoilAnalysis[] GetAnalysises()
+    public ArrayList<SoilAnalysis>GetAnalysises()
     {
-        return (SoilAnalysis[]) soilAnalysis.toArray();
+        return soilAnalysis;
     }
 
     public SoilAnalysis GetAnalysis(int level)

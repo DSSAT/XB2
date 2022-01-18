@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.Irrigation;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.IrrigationApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,15 @@ public class IrrigationFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Irrigation irrig = FileX.irrigations.Clone(jTabbedPane1.getSelectedIndex(), r);
+            //Irrigation irrig = FileX.irrigations.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Irrigation irrig = new Irrigation();
+            irrig.IRNAME = r;
+            
+            FileX.irrigations.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(ir -> {
+                IrrigationApplication ia = (IrrigationApplication) ir.Clone();                
+                irrig.AddApp(ia);
+            });
+            
             FileX.irrigations.AddNew(irrig);
 
             jTabbedPane1.insertTab(newTitle, null, new IrrigationPanel(irrig), "", jTabbedPane1.getTabCount() - 1);

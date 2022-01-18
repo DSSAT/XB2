@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class EnvironmentalList {
 
-    protected Vector environmental = new Vector();
+    protected ArrayList<Environmental> environmental = new ArrayList<>();
 
     public void AddNew(Environmental env)
     {
@@ -30,9 +31,9 @@ public class EnvironmentalList {
         environmental.set(level, env);
     }
 
-    public Environmental[] GetAll()
+    public ArrayList<Environmental> GetAll()
     {
-        return (Environmental[]) environmental.toArray();
+        return environmental;
     }
 
     public Environmental GetAt(int level)

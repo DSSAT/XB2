@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class Tillage implements Cloneable {
 
-    protected Vector  tillAps = new Vector();
+    protected ArrayList<TillageApplication>  tillAps = new ArrayList<>();
     public String TNAME;
 
     public Tillage(String TNAME)
@@ -40,9 +41,9 @@ public class Tillage implements Cloneable {
         tillAps.set(level, till);
     }
 
-    public TillageApplication[] GetApps()
+    public ArrayList<TillageApplication>GetApps()
     {
-        return (TillageApplication[]) tillAps.toArray();
+        return tillAps;
     }
 
     public TillageApplication GetApp(int level)

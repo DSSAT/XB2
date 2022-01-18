@@ -5,11 +5,14 @@
 
 package FileXModel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Jazzy
  */
-public class SoilAnalysisLayer {
+public class SoilAnalysisLayer implements Cloneable {
     public Float SABL;
     public Float SADM;
     public Float SAOC;
@@ -19,4 +22,13 @@ public class SoilAnalysisLayer {
     public Float SAPX;
     public Float SAKE;
     public Float SASC;
+    
+    public SoilAnalysisLayer Clone(){
+        try {
+            return (SoilAnalysisLayer) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(SoilAnalysisLayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

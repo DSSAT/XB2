@@ -296,11 +296,13 @@ public class FertilizerPanel extends javax.swing.JPanel {
             vector.addElement(df.format(ferApp.FDATE));
 
             rdDaysAfterPlanting.setSelected(false);
+            rdReportedDates.setSelected(true);
         }
         catch(Exception ex)
         {
             vector.add(ferApp.FDAY);
             rdDaysAfterPlanting.setSelected(true);
+            rdReportedDates.setSelected(false);
         }
         /*
         if(rdDaysAfterPlanting.isSelected())

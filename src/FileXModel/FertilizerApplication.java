@@ -6,12 +6,14 @@
 package FileXModel;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Jazzy
  */
-public class FertilizerApplication {
+public class FertilizerApplication implements Cloneable {
     public Date FDATE;
     public Integer FDAY;
     public String FMCD;
@@ -23,4 +25,13 @@ public class FertilizerApplication {
     public Integer FAMC;
     public Integer FAMO;
     public String FOCD;
+    
+    public FertilizerApplication Clone(){
+        try {
+            return (FertilizerApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(FertilizerApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

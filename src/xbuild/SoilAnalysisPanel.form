@@ -66,7 +66,9 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dpAnalysisDateFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpAnalysisDateActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpAnalysisDatePropertyChange"/>
       </Events>
     </Component>
     <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel1">

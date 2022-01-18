@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.Environmental;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.EnvironmentApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -170,7 +171,11 @@ public class EnvironmentalFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Environmental env = FileX.environmentals.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Environmental env = new Environmental(r);
+            FileX.environmentals.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(e -> {
+                EnvironmentApplication ea = (EnvironmentApplication) e.Clone();
+                env.AddApp(ea);
+            });
             FileX.environmentals.AddNew(env);
 
             jTabbedPane1.insertTab(newTitle, null, new EnvironmentalPanel(env), "", jTabbedPane1.getTabCount() - 1);

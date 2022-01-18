@@ -13,7 +13,6 @@ package xbuild;
 
 import FileXModel.HarvestApplication;
 import FileXModel.FileX;
-import DSSATModel.Crop;
 import DSSATModel.GrowthStage;
 import DSSATModel.GrowthStageList;
 import DSSATModel.HarvestComponent;

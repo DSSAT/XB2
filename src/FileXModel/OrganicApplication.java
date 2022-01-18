@@ -6,12 +6,14 @@
 package FileXModel;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Jazzy
  */
-public class OrganicApplication {
+public class OrganicApplication implements Cloneable {
     public Date RDATE;
     public Integer RDAY;
     public String RCOD;
@@ -22,4 +24,13 @@ public class OrganicApplication {
     public Integer RINP;
     public Integer RDEP;
     public String RMET;
+    
+    public OrganicApplication Clone(){
+        try {
+            return (OrganicApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(OrganicApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -6,13 +6,25 @@
 package FileXModel;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Jazzy
  */
-public class TillageApplication {
+public class TillageApplication implements Cloneable {
     public Date TDATE;
     public String TIMPL;
     public Integer TDEP;
+    
+    public TillageApplication Clone(){
+        try {
+            return (TillageApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(TillageApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 }

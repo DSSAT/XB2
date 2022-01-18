@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class Organic implements Cloneable {
 
-    protected Vector  organicApps = new Vector();
+    protected ArrayList<OrganicApplication>  organicApps = new ArrayList<>();
     public Float EFIR;
 
     public String RENAME;
@@ -42,9 +43,9 @@ public class Organic implements Cloneable {
         organicApps.set(level, organic);
     }
 
-    public OrganicApplication[] GetApps()
+    public ArrayList<OrganicApplication> GetApps()
     {
-        return (OrganicApplication[]) organicApps.toArray();
+        return organicApps;
     }
 
     public OrganicApplication GetApp(int level)

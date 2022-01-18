@@ -53,7 +53,7 @@ public class Utils {
             if(!tmp.equals("-99")){
                 try {
                     Integer year = Integer.parseInt(tmp.substring(0, 2));
-                    if (year >= 80) {
+                    if (year >= 60) {
                         year += 1900;
                     } else {
                         year += 2000;

@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -13,7 +14,7 @@ import java.util.Vector;
  * @author Jazzy
  */
 public class SoilAnalysis implements Cloneable {
-     protected Vector  soilLayer = new Vector();
+     protected ArrayList<SoilAnalysisLayer>  soilLayer = new ArrayList<>();
      public Date SADAT;
      public String SMHB;;
      public String SMPX;
@@ -43,9 +44,9 @@ public class SoilAnalysis implements Cloneable {
         soilLayer.set(level, sLayer);
     }
 
-    public SoilAnalysisLayer[] GetLayers()
+    public ArrayList<SoilAnalysisLayer> GetLayers()
     {
-        return (SoilAnalysisLayer[]) soilLayer.toArray();
+        return soilLayer;
     }
 
     public SoilAnalysisLayer GetLayer(int level)

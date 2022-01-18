@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.Organic;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.OrganicApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,12 @@ public class OrganicFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Organic organic = FileX.organicList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Organic organic = new Organic(r);
+            
+            FileX.organicList.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(o -> {
+                OrganicApplication oa = (OrganicApplication) o.Clone();
+                organic.AddApp(oa);
+            });
             FileX.organicList.AddNew(organic);
 
             jTabbedPane1.insertTab(newTitle, null, new OrganicPanel(organic), "", jTabbedPane1.getTabCount() - 1);

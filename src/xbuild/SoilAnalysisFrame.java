@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.SoilAnalysis;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.SoilAnalysisLayer;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -171,7 +172,17 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            SoilAnalysis soilAnalysis = FileX.soilAnalysis.Clone(jTabbedPane1.getSelectedIndex(), r);
+            SoilAnalysis s1 = FileX.soilAnalysis.GetAt(jTabbedPane1.getSelectedIndex());
+            SoilAnalysis soilAnalysis = new SoilAnalysis(r);
+            soilAnalysis.SADAT = s1.SADAT;
+            soilAnalysis.SMHB = s1.SMHB;
+            soilAnalysis.SMPX = s1.SMPX;
+            soilAnalysis.SMKE = s1.SMKE;
+            FileX.soilAnalysis.GetAt(jTabbedPane1.getSelectedIndex()).GetLayers().forEach(s -> {
+                SoilAnalysisLayer sa = (SoilAnalysisLayer) s.Clone();
+                soilAnalysis.AddLayer(sa);
+            });
+            
             FileX.soilAnalysis.AddAnalysis(soilAnalysis);
 
             jTabbedPane1.insertTab(newTitle, null, new SoilAnalysisPanel(soilAnalysis), "", jTabbedPane1.getTabCount() - 1);

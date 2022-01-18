@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.FileX;
 import FileXModel.Chemical;
 import Extensions.Utils;
+import FileXModel.ChemicalApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,11 @@ public class ChemicalFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Chemical chem = FileX.chemicalList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Chemical chem = new Chemical(r);
+            FileX.chemicalList.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(c -> {
+                ChemicalApplication ca = (ChemicalApplication) c.Clone();
+                chem.AddApp(ca);
+            });
             FileX.chemicalList.AddNew(chem);
 
             jTabbedPane1.insertTab(newTitle, null, new ChemicalPanel(chem), "", jTabbedPane1.getTabCount() - 1);

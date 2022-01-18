@@ -95,7 +95,11 @@ public class HarvestService {
                     else
                         pw.print(" " + Utils.PadLeft("-99", 5, ' '));
 
-                    pw.print("  " + Utils.PadRight(harvestApp.HSTG, 4, ' '));
+                    if(harvestApp.HSTG != null)
+                        pw.print(" " + Utils.PadRight(harvestApp.HSTG, 5, ' '));
+                    else
+                        pw.print(" " + ' ' + "-99" + ' ');
+                    
                     pw.print(" " + Utils.PadLeft(harvestApp.HCOM, 5, ' '));
                     pw.print(" " + Utils.PadLeft(harvestApp.HSIZE, 5, ' '));
                     pw.print(" " + Utils.PadLeft(harvestApp.HPC, 5, ' '));

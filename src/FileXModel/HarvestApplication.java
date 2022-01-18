@@ -6,12 +6,14 @@
 package FileXModel;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Jazzy
  */
-public class HarvestApplication {
+public class HarvestApplication implements Cloneable {
     public Date HDATE;
     public Integer HDAY;
     public String HSTG;
@@ -19,4 +21,13 @@ public class HarvestApplication {
     public String HSIZE;
     public Float HPC;
     public Float HBPC;
+    
+    public HarvestApplication Clone(){
+        try {
+            return (HarvestApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(HarvestApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

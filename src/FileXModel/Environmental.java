@@ -12,7 +12,7 @@ import java.util.*;
  * @author Jazzy
  */
 public class Environmental implements Cloneable {
-    protected Vector  envApps = new Vector();
+    protected ArrayList<EnvironmentApplication>  envApps = new ArrayList<>();
     public String ENVNAME;
 
     public Environmental(String ENVNAME)
@@ -39,9 +39,9 @@ public class Environmental implements Cloneable {
         envApps.set(level, env);
     }
 
-    public EnvironmentApplication[] GetApps()
+    public ArrayList<EnvironmentApplication> GetApps()
     {
-        return (EnvironmentApplication[]) envApps.toArray();
+        return envApps;
     }
 
     public EnvironmentApplication GetApp(int level)

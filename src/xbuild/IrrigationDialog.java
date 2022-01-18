@@ -213,6 +213,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
     }//GEN-LAST:event_dpIDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
+        Update();
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 

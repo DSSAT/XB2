@@ -5,6 +5,7 @@
 
 package DSSATModel;
 
+import static FileXModel.FileX.cultivars;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,11 +17,11 @@ import java.util.Vector;
  * @author Jazzy
  */
 public class GrowthStageList {
-    public static Vector growthStage = new Vector();
+    public static ArrayList<GrowthStage> growthStage = new ArrayList<>();
 
     public static void AddNew(GrowthStage gStage)
     {
-        growthStage.addElement(gStage);
+        growthStage.add(gStage);
     }
 
     public static int size()
@@ -39,15 +40,31 @@ public class GrowthStageList {
 
         return gStage;
     }
+    
+    public static GrowthStage GetAt(String Code)
+    {
+        GrowthStage gStage = null;
+        for(int i = 0;i < growthStage.size();i++)
+        {
+            if(((GrowthStage)growthStage.get(i)).Code.equals(Code))
+                gStage = (GrowthStage)growthStage.get(i);
+        }
+
+        return gStage;
+    }
 
     public static List<GrowthStage>GetAt(Crop crop)
     {
         List<GrowthStage> gList = new ArrayList<>();
-        for(int i = 0;i < growthStage.size();i++)
-        {
-            if(((GrowthStage)growthStage.get(i)).crop.CropCode.equals(crop.CropCode))
-                gList.add((GrowthStage)growthStage.get(i));
-        }
+        
+        
+        growthStage.forEach(growth -> {
+            cultivars.GetAll().forEach(cul -> {
+                if(growth.crop.CropCode.equalsIgnoreCase(cul.CR)){
+                    gList.add(growth);
+                }
+            });
+        });
         
         Collections.sort(gList, new Comparator<GrowthStage>() {
             @Override

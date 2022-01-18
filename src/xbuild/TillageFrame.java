@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.Tillage;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.TillageApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,11 @@ public class TillageFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Tillage tillage = FileX.tillageList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Tillage tillage = new Tillage(r);
+            FileX.tillageList.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(t -> {
+                TillageApplication ta = (TillageApplication) t.Clone();
+                tillage.AddApp(ta);
+            });
             FileX.tillageList.AddNew(tillage);
 
             jTabbedPane1.insertTab(newTitle, null, new TillagePanel(tillage), "", jTabbedPane1.getTabCount() - 1);

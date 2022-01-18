@@ -5,6 +5,7 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Vector;
  */
 public class Chemical implements Cloneable {
 
-    protected Vector  chems = new Vector();
+    protected ArrayList<ChemicalApplication>  chems = new ArrayList<>();
     public String CHNAME;
 
     public Chemical(String CHNAME)
@@ -40,9 +41,9 @@ public class Chemical implements Cloneable {
         chems.set(level, chem);
     }
 
-    public ChemicalApplication[] GetApps()
+    public ArrayList<ChemicalApplication> GetApps()
     {
-        return (ChemicalApplication[]) chems.toArray();
+        return chems;
     }
 
     public ChemicalApplication GetApp(int level)

@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.Fertilizer;
 import FileXModel.FileX;
 import Extensions.Utils;
+import FileXModel.FertilizerApplication;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 
@@ -169,7 +170,14 @@ public class FertilizerFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            Fertilizer fertil = FileX.fertilizerList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            Fertilizer fertil = new Fertilizer();
+            fertil.FERNAME = r;
+            
+            FileX.fertilizerList.GetAt(jTabbedPane1.getSelectedIndex()).GetApps().forEach(f -> {
+                FertilizerApplication fa = (FertilizerApplication) f.Clone();
+                fertil.AddApp(fa);
+            });
+            
             FileX.fertilizerList.AddNew(fertil);
 
             jTabbedPane1.insertTab(newTitle, null, new FertilizerPanel(fertil), "", jTabbedPane1.getTabCount() - 1);

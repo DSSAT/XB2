@@ -7,12 +7,14 @@ package FileXModel;
 
 import DSSATModel.EnvironmentFactor;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Jazzy
  */
-public class EnvironmentApplication {
+public class EnvironmentApplication implements Cloneable {
     public Date ODATE;
     public Integer EDAY;
     public EnvironmentFactor EDAY_Fact;
@@ -30,4 +32,13 @@ public class EnvironmentApplication {
     public EnvironmentFactor EDEW_Fact;
     public Float EWIND;
     public EnvironmentFactor EWIND_Fact;
+    
+    public EnvironmentApplication Clone(){
+        try {
+            return (EnvironmentApplication) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(EnvironmentApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

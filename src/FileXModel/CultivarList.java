@@ -5,14 +5,14 @@
 
 package FileXModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
 public class CultivarList {
-    protected Vector cultivars = new Vector();
+    protected ArrayList<Cultivar> cultivars = new ArrayList<>();
 
     public void AddNew(Cultivar cul)
     {
@@ -29,9 +29,9 @@ public class CultivarList {
         cultivars.set(level, cul);
     }
 
-    public Cultivar[] GetAll()
+    public ArrayList<Cultivar> GetAll()
     {
-        return (Cultivar[]) cultivars.toArray();
+        return cultivars;
     }
 
     public Cultivar GetAt(int level)
