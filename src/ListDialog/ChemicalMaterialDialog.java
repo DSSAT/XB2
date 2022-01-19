@@ -15,6 +15,7 @@ import DSSATModel.ChemicalMaterialList;
 import DSSATModel.ChemicalMaterial;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -103,9 +104,18 @@ public class ChemicalMaterialDialog extends javax.swing.JDialog {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2) {
             chem = new ChemicalMaterial();
-            DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            chem.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            chem.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
+            
+            TableModel tbModel = jXTable1.getModel();
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            
+            chem.Code = (String) tbModel.getValueAt(row, 0);
+            chem.Description = (String) tbModel.getValueAt(row, 1);
             dispose();
         }
 }//GEN-LAST:event_jXTable1MouseClicked

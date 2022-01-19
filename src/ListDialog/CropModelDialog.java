@@ -16,6 +16,7 @@ import DSSATModel.CropModel;
 import DSSATModel.BaseModel;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -105,10 +106,19 @@ public class CropModelDialog extends javax.swing.JDialog {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2) {
             cropModel = new CropModel();
-            DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            cropModel.ModelCode = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            cropModel.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
-            cropModel.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 2);
+            
+            TableModel tbModel = jXTable1.getModel();
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            
+            cropModel.ModelCode = (String) tbModel.getValueAt(row, 0);
+            cropModel.Code = (String) tbModel.getValueAt(row, 1);
+            cropModel.Description = (String) tbModel.getValueAt(row, 2);
             dispose();
         }
 }//GEN-LAST:event_jXTable1MouseClicked

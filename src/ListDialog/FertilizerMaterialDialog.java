@@ -16,6 +16,7 @@ import DSSATModel.FertilizerMaterial;
 import DSSATModel.BaseModel;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -104,9 +105,18 @@ public class FertilizerMaterialDialog extends javax.swing.JDialog {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2) {
             fertil = new FertilizerMaterial();
-            DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            fertil.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            fertil.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
+            
+            TableModel tbModel = jXTable1.getModel();
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+
+            fertil.Code = (String) tbModel.getValueAt(row, 0);
+            fertil.Description = (String) tbModel.getValueAt(row, 1);
             dispose();
         }
 }//GEN-LAST:event_jXTable1MouseClicked

@@ -108,9 +108,16 @@ public class GStageDialog extends javax.swing.JDialog {
         if(evt.getClickCount() == 2) {
             gStage = new GrowthStage();
             DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            gStage.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            gStage.Name = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
-            gStage.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 2);
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            gStage.Code = (String) tbModel.getValueAt(row, 0);
+            gStage.Name = (String) tbModel.getValueAt(row, 1);
+            gStage.Description = (String) tbModel.getValueAt(row, 2);
             gStage.crop = crop;
             dispose();
         }

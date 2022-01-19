@@ -108,8 +108,15 @@ public class PotassiumListDialog extends javax.swing.JDialog {
         if(evt.getClickCount() == 2) {
             potassium = new SoilAnalysisMethodPotassium();
             DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            potassium.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            potassium.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            potassium.Code = (String) tbModel.getValueAt(row, 0);
+            potassium.Description = (String) tbModel.getValueAt(row, 1);
             dispose();
         }
 }//GEN-LAST:event_jXTable1MouseClicked

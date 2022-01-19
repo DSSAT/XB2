@@ -106,8 +106,15 @@ public class PlantingMethodDialog extends javax.swing.JDialog {
         if(evt.getClickCount() == 2) {
             plantingMethod = new PlantingMethod();
             DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-            plantingMethod.Code = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 0);
-            plantingMethod.Description = (String) tbModel.getValueAt(jXTable1.getSelectedRow(), 1);
+            int viewRow = jXTable1.getSelectedRow();
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            plantingMethod.Code = (String) tbModel.getValueAt(row, 0);
+            plantingMethod.Description = (String) tbModel.getValueAt(row, 1);
             dispose();
         }
 }//GEN-LAST:event_jXTable1MouseClicked
