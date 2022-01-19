@@ -133,7 +133,7 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
         jXLabel2.setText("Fertilizer Application");
 
-        jXLabel3.setText("Dept");
+        jXLabel3.setText("Depth");
 
         jXLabel4.setText("N");
 
@@ -143,7 +143,7 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
         jXLabel7.setText("Ca");
 
-        jXLabel8.setText("Othor Elements");
+        jXLabel8.setText("Other Elements");
 
         jXLabel9.setText("Other Element Code");
 

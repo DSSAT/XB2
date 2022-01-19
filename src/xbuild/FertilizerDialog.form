@@ -258,7 +258,7 @@
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dept"/>
+        <Property name="text" type="java.lang.String" value="Depth"/>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">
@@ -283,7 +283,7 @@
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Othor Elements"/>
+        <Property name="text" type="java.lang.String" value="Other Elements"/>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel9">
