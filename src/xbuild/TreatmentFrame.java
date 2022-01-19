@@ -159,9 +159,12 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         Treatment treatment = null;
         if (row >= 0) {
             treatment = FileX.treaments.GetAt(row).Clone();
+            if(!"Sequential".equals(FileX.general.FileType)){
+                treatment.N = jXTable1.getRowCount() + 1;
+            }
         } else {
             treatment = new Treatment();
-            treatment.N = 1;
+            treatment.N = "Sequential".equals(FileX.general.FileType) ? 1 : jXTable1.getRowCount() + 1;
         }
 
         FileX.treaments.AddNew(treatment);
