@@ -31,10 +31,7 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
         initComponents();
-        LoadTreament();
-
-        //TableModel tbModel1 = jXTable1.getModel();
-        
+        LoadTreament();        
     }
 
     /** This method is called from within the constructor to
@@ -127,7 +124,6 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        //JOptionPane.showMessageDialog(null, "Col = " + jXTable1.getSelectedColumn() + " : Row = " + jXTable1.getSelectedRow());
         int row = jXTable1.getSelectedRow();
 
         if(row > jXTable1.getRowCount());
@@ -159,48 +155,14 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jXTable1MouseClicked
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-        
         int row = jXTable1.getSelectedRow();
-        Treatment treatment = new Treatment();
-        if(row >= 0){
-            if(FileX.general.FileType.equalsIgnoreCase("Sequential")){
-                treatment.R = tbModel.getValueAt(row, 1).toString();
-                treatment.O = tbModel.getValueAt(row, 2).toString();
-                treatment.C = tbModel.getValueAt(row, 3).toString();
-            }
-            
-            treatment.N = Utils.ParseInteger(tbModel.getValueAt(row, 0));
-            treatment.TNAME = tbModel.getValueAt(row, 4).toString();
-            treatment.CU = Utils.ParseInteger(tbModel.getValueAt(row, 5));
-            treatment.FL = Utils.ParseInteger(tbModel.getValueAt(row, 6));
-            treatment.SA = Utils.ParseInteger(tbModel.getValueAt(row, 7));
-            treatment.IC = Utils.ParseInteger(tbModel.getValueAt(row, 8));
-            treatment.MP = Utils.ParseInteger(tbModel.getValueAt(row, 9));
-            treatment.MI = Utils.ParseInteger(tbModel.getValueAt(row, 10));
-            treatment.MF = Utils.ParseInteger(tbModel.getValueAt(row, 11));
-            treatment.MR = Utils.ParseInteger(tbModel.getValueAt(row, 12));
-            treatment.MC = Utils.ParseInteger(tbModel.getValueAt(row, 13));
-            treatment.MT = Utils.ParseInteger(tbModel.getValueAt(row, 14));
-            treatment.ME = Utils.ParseInteger(tbModel.getValueAt(row, 15));
-            treatment.MH = Utils.ParseInteger(tbModel.getValueAt(row, 16));
-            treatment.SM = Utils.ParseInteger(tbModel.getValueAt(row, 17));
-            try {
-                tbModel.addRow(new Object[]{treatment.N,
-                    treatment.R, treatment.O, treatment.C,
-                    treatment.TNAME, treatment.CU, treatment.FL, treatment.SA, treatment.IC, treatment.MP, treatment.MI,
-                    treatment.MF, treatment.MR, treatment.MC, treatment.MT, treatment.ME, treatment.MH, treatment.SM});
-            } catch (Exception ex) {
-
-            }
+        Treatment treatment = null;
+        if (row >= 0) {
+            treatment = FileX.treaments.GetAt(row).Clone();
+        } else {
+            treatment = new Treatment();
+            treatment.N = 1;
         }
-        else{
-            try {
-                tbModel.addRow(new Object[]{1, "", "", "", "", "", "", "", "", "", "", "", "", "", ""});
-            } catch (Exception ex) {
-
-            }
-        }        
 
         FileX.treaments.AddNew(treatment);
         LoadTreament();
@@ -241,10 +203,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).CU = level;
                     LoadTreament();
                 }
@@ -273,10 +233,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).FL = level;
                     LoadTreament();
                 }
@@ -305,10 +263,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).SA = level;
                     LoadTreament();
                 }
@@ -337,10 +293,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).IC = level;
                     LoadTreament();
                 }
@@ -369,10 +323,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).SM = level;
                     LoadTreament();
                 }
@@ -401,10 +353,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MH = level;
                     LoadTreament();
                 }
@@ -433,10 +383,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).ME = level;
                     LoadTreament();
                 }
@@ -465,10 +413,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MT = level;
                     LoadTreament();
                 }
@@ -497,10 +443,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MC = level;
                     LoadTreament();
                 }
@@ -529,10 +473,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MR = level;
                     LoadTreament();
                 }
@@ -561,10 +503,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MF = level;
                     LoadTreament();
                 }
@@ -593,10 +533,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MI = level;
                     LoadTreament();
                 }
@@ -625,10 +563,8 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    tbModel.setValueAt(level, row, col);
                     FileX.treaments.GetAt(row).MP = level;
                     LoadTreament();
                 }

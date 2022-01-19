@@ -5,11 +5,14 @@
 
 package FileXModel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Jazzy
  */
-public class Treatment {
+public class Treatment implements Cloneable {
     public Integer N;
     
     public String R;
@@ -30,4 +33,13 @@ public class Treatment {
     public Integer ME;
     public Integer MH;
     public Integer SM;
+    
+    public Treatment Clone(){
+        try {
+            return (Treatment) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Treatment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } 
 }

@@ -5,14 +5,14 @@
 
 package FileXModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
 public class TreatmentList {
-    protected Vector treatments = new Vector();
+    protected ArrayList<Treatment> treatments = new ArrayList<>();
 
     public void AddNew(Treatment treat)
     {
@@ -29,14 +29,14 @@ public class TreatmentList {
         treatments.set(level, treat);
     }
 
-    public Treatment[] GetAll()
+    public ArrayList<Treatment> GetAll()
     {
-        return (Treatment[]) treatments.toArray();
+        return treatments;
     }
 
     public Treatment GetAt(int level)
     {
-        return (Treatment)treatments.get(level);
+        return treatments.get(level);
     }
 
     public int GetSize()
