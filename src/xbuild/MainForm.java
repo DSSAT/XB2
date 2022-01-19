@@ -984,22 +984,17 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             model.reload(simsChild);
         }
         
-        
-        
         jMenuNewFile.setEnabled(true);
         jMenuSaveFile.setEnabled(false);
         jMenuCloseFile.setEnabled(false);
         jMenuOpenFile.setEnabled(true);
         
-        
-        
-        
-
         for(JInternalFrame innerFrame : desktopPane.getAllFrames())
             innerFrame.dispose();
         jXTree1.setVisible(false);
 
         FileX.CloseFile();
+        this.setTitle("");
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
