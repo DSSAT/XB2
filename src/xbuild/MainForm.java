@@ -34,6 +34,8 @@ import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
 import Extensions.CustomDefaultTreeCellRenderer;
 import FileXService.FileXService;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 /**
  *
@@ -922,6 +924,25 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
+        if(FileX.treaments.GetSize() == 0){
+            final ConfirmDialog d = new ConfirmDialog(this, true);
+            d.show();
+
+            d.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(d.isContinue){
+                        saveFile();
+                    }
+                }
+            });
+        }
+        else{
+            saveFile();
+        }
+    }//GEN-LAST:event_jMenuSaveFileActionPerformed
+
+    private void saveFile(){
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
         File f = new File(root.getUserObject().toString());
@@ -965,8 +986,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             }
             FileXService.SaveFile(file);
         }
-    }//GEN-LAST:event_jMenuSaveFileActionPerformed
-
+    }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
         DefaultMutableTreeNode simsChild = null;
