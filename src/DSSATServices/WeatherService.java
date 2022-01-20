@@ -25,19 +25,23 @@ public class WeatherService extends DSSATServiceBase {
         try {
             ArrayList<String> weatherList = this.weatherRepository.Parse();
             
-            for(int i = 0;i < weatherList.size();i++)
-            {
-                String tmp = weatherList.get(i);
-                
-                WeatherStation weather = new WeatherStation();
-                weather.StationName = tmp.substring(18, 45).trim();
-                weather.Code = tmp.substring(5, 9).trim();
-                if (!WeatherStationList.Exists(weather)) {
-                    WeatherStationList.AddNew(weather);
+            weatherList.forEach(w ->{
+                WeatherStation wsta = new WeatherStation();
+                String tmp[] = w.split(":");
+                try
+                {
+                    wsta.Code = tmp[0];
+                    wsta.StationName = tmp[1];
+                    if(WeatherStationList.GetAt(wsta.Code) == null)
+                        WeatherStationList.AddNew(wsta);
                 }
-            }
-        } catch (Exception ex) {
-            throw ex;
+                catch(Exception ex) {
+                    System.out.print(ex.getMessage());
+                }
+            });
+        }
+        catch(Exception ex){
+           isValid = false; 
         }
         
         if(!isValid){

@@ -7,9 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Vector;
 
 /**
  *
@@ -17,33 +15,21 @@ import java.util.Vector;
  */
 public class WeatherStationList {
     //protected static Hashtable wStation = new Hashtable();
-    protected static Vector wStation = new Vector();
+    protected static ArrayList<WeatherStation> wStation = new ArrayList<>();
 
     public static void AddNew(WeatherStation weather)
     {
-        //wStation.put(weather.Code, weather);
-        wStation.addElement(weather);
+        wStation.add(weather);
     }
 
     public static WeatherStation GetAt(String Code)
     {
         WeatherStation weather = null;
-        /*
-        try{
-            weather = (WeatherStation) wStation.get(Code);
-        }
-        catch(Exception ex) {}
-         *
-         */
-        for(int i = 0;i < wStation.size();i++)
-        {
-            if(((WeatherStation)wStation.get(i)).Code.equals(Code))
-            {
-                try{
-                    weather = (WeatherStation) wStation.get(i);
-                }
-                catch(Exception ex) {}
-            }
+        for(WeatherStation w : wStation) {
+           if(w.Code.equalsIgnoreCase(Code)){
+               weather = w;
+               break;
+           } 
         }
         return weather;
     }
@@ -68,12 +54,7 @@ public class WeatherStationList {
             weatherList.add((WeatherStation) object);
         }
         
-        Collections.sort(weatherList, new Comparator<WeatherStation>() {
-            @Override
-            public int compare(WeatherStation w1, WeatherStation w2) {
-                return w1.StationName.compareTo(w2.StationName);
-            }
-        });
+        Collections.sort(weatherList, (WeatherStation w1, WeatherStation w2) -> w1.StationName.compareTo(w2.StationName));
 
         return weatherList;
     }
