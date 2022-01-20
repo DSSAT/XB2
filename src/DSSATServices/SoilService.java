@@ -24,19 +24,15 @@ public class SoilService extends DSSATServiceBase {
         try {
             ArrayList<String> soilList = this.soilRepository.Parse();
             
-            for(int i = 0;i < soilList.size();i++)
+            for(String soilTemp : soilList)
             {
-                String tmp = soilList.get(i);
-                String soilFileCode = tmp.substring(5, 13).trim();
-                String soilFileExt = tmp.substring(14, 17).trim();
-                String soilCode = tmp.substring(18, 28).trim();
-                String soilDescription = tmp.substring(44, tmp.length() - 1).trim();
+                String[] tmp = soilTemp.split(":");
+                String soilCode = tmp[0];
+                String soilDescription = tmp[1];
 
                 Soil soil = new Soil();
                 soil.Code = soilCode;
                 soil.Description = soilDescription;
-                soil.Unknow1 = soilFileCode;
-                soil.Unknow2 = soilFileExt;
                 
                 SoilList.AddNew(soil);
             }

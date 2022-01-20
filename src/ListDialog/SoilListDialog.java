@@ -61,14 +61,14 @@ public class SoilListDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Code", "Description", "", ""
+                "Code", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,8 +88,6 @@ public class SoilListDialog extends javax.swing.JDialog {
         if (jXTable1.getColumnModel().getColumnCount() > 0) {
             jXTable1.getColumnModel().getColumn(0).setPreferredWidth(110);
             jXTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jXTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jXTable1.getColumnModel().getColumn(3).setPreferredWidth(40);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,8 +119,6 @@ public class SoilListDialog extends javax.swing.JDialog {
 
             soil.Code = (String) tbModel.getValueAt(row, 0);
             soil.Description = (String) tbModel.getValueAt(row, 1);
-            soil.Unknow1 = (String) tbModel.getValueAt(row, 2);
-            soil.Unknow2 = (String) tbModel.getValueAt(row, 3);
             
 
             dispose();
@@ -146,7 +142,7 @@ public class SoilListDialog extends javax.swing.JDialog {
 
         for(Soil soilTmp : sList)
         {
-            tbModel.addRow(new Object[]{soilTmp.Code, soilTmp.Description, soilTmp.Unknow1, soilTmp.Unknow2});
+            tbModel.addRow(new Object[]{soilTmp.Code, soilTmp.Description});
         }
     }
 

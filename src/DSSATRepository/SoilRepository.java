@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import xbuild.ExtendFilter;
 import xbuild.LoadingDataFrame;
 
 /**
@@ -25,36 +26,37 @@ public class SoilRepository extends DSSATRepositoryBase {
     }
     
     @Override
-    public ArrayList<String> Parse() {        
+    public ArrayList<String> Parse() throws IOException {        
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US);
         System.out.println("Start Read Soil.LST : " + df.format(new Date()));
 
-        ArrayList<String> soilList = new ArrayList<String>();
+        ArrayList<String> soilList = new ArrayList<>();
         try {
-            File soilFile = new File(rootPath + "\\Soil\\Soil.lst");
-            FileReader soilFileRead = new FileReader(soilFile);
+            File sPath = new File(rootPath + "\\Soil");
+            File soilFileList[] = sPath.listFiles(new ExtendFilter(".sol"));
+            
+            for (File sFile : soilFileList) {
+                FileReader fileRead = new FileReader(sFile);
+                BufferedReader sReader = new BufferedReader(fileRead);
 
-            String strSRead = "";
-            try {
-                BufferedReader soilBufferReader = new BufferedReader(soilFileRead);
-                boolean isStartAdd = false;
-                while ((strSRead = soilBufferReader.readLine()) != null) {
-                    if (!isStartAdd && strSRead.startsWith("@#")) {
-                        isStartAdd = true;
-                    } else if (isStartAdd) {                        
-                        soilList.add(strSRead);
+                String strRead = "";
+                
+                while ((strRead = sReader.readLine()) != null) {
+                    if(strRead.startsWith("*") && !strRead.toLowerCase().startsWith("*soils")){
+                        try{
+                        String soilCode = strRead.substring(1, 11).trim();
+                        String soilDescription = strRead.length() <= 36 ? soilCode : strRead.substring(37, strRead.length()).trim();
+                        soilList.add(soilCode + ":" + soilDescription);
+                        }
+                        catch(Exception error){
+                            
+                        }
                     }
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(LoadingDataFrame.class.getName()).log(Level.SEVERE, null, ex);
+                
+                fileRead.close();
+                sReader.close();
             }
-
-            try {
-                soilFileRead.close();
-            } catch (IOException ex) {
-                Logger.getLogger(LoadingDataFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
 
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
