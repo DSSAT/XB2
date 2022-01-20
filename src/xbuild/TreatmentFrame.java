@@ -11,6 +11,7 @@
 
 package xbuild;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.Treatment;
 import FileXModel.FileX;
@@ -685,14 +686,14 @@ public class TreatmentFrame extends javax.swing.JInternalFrame {
             
             FileX.treaments.GetAt(row).TNAME = (String) tbModel1.getValueAt(row, 4);
             FileX.treaments.GetAt(row).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
-            if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
+            if (FileX.general.FileType == ExperimentType.Sequential) {
                 FileX.treaments.GetAt(row).R = (String) tbModel1.getValueAt(row, 1);
                 FileX.treaments.GetAt(row).O = (String) tbModel1.getValueAt(row, 2);
                 FileX.treaments.GetAt(row).C = (String) tbModel1.getValueAt(row, 3);
             }
         });
         
-        if(!"Sequential".equals(FileX.general.FileType)){
+        if(ExperimentType.Sequential != FileX.general.FileType){
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(3));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));

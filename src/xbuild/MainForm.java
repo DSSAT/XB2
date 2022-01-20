@@ -15,6 +15,7 @@ import FileXModel.Simulation;
 import FileXModel.FileX;
 import DSSATModel.DssatProfile;
 import DSSATModel.Setup;
+import DSSATModel.SimulationControlDefaults;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -1119,7 +1120,9 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 }
             }
             
-            Simulation sim = new Simulation(r);
+            //Simulation sim = new Simulation(r);
+            Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
+            sim.SNAME = r;
             FileX.simulationList.AddNew(sim);
 
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();

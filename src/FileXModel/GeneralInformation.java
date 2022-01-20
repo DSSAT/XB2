@@ -6,6 +6,7 @@
 package FileXModel;
 
 import DSSATModel.Crop;
+import DSSATModel.ExperimentType;
 
 /**
  *
@@ -13,10 +14,10 @@ import DSSATModel.Crop;
  */
 public class GeneralInformation {
     public GeneralInformation (){
-        FileType = "Experimental";
+        FileType = ExperimentType.Experimental;
     }
     
-    public String FileType;
+    public ExperimentType FileType;
     public String ExperimentName;
     public String InstituteCode;
     public String SiteCode;

@@ -1,5 +1,6 @@
 package FileXService;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.FileX;
 import static FileXModel.FileX.treaments;
@@ -41,7 +42,7 @@ public class TreatmentService {
                     
                     Treatment treatment = new Treatment();
                     treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
-                    if (FileX.general.FileType.equalsIgnoreCase("Sequential")) {
+                    if (FileX.general.FileType == ExperimentType.Sequential) {
                         treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
                         treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
                         treatment.C = Utils.GetString(treatmentHeader, strRead, "C", 1);
@@ -80,7 +81,7 @@ public class TreatmentService {
                 Treatment treat = treaments.GetAt(i);
                 pw.print(Utils.PadLeft(treat.N, 2, ' '));
                 
-                if(!FileX.general.FileType.equalsIgnoreCase("Sequential"))
+                if(FileX.general.FileType != ExperimentType.Sequential)
                     pw.print(" 1 0 0");
                 else{
                     try {

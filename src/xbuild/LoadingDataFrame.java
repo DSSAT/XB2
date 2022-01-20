@@ -90,6 +90,16 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
                     isValid = false;
                 }
             });
+            
+            try{
+                taskOutput.append("Loading Simulation Default....\n");
+                SimulationDefaultService simulationDefaultService = new SimulationDefaultService(dir);
+                simulationDefaultService.Parse();
+            }
+            catch(Exception ex){
+                taskOutput.append("!Simulation Default loading error: " + ex.getMessage() + " \n");
+                isValid = false;
+            }
 
             return null;
         }

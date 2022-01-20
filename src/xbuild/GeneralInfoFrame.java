@@ -15,6 +15,7 @@ import Extensions.LimitDocument;
 import FileXModel.FileX;
 import DSSATModel.Setup;
 import DSSATModel.Crop;
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import ListDialog.CropListDialog;
 import java.awt.event.*;
@@ -704,7 +705,7 @@ public class GeneralInfoFrame extends javax.swing.JInternalFrame implements KeyL
         if(!bUpdate) return;
         try
         {
-            FileX.general.FileType = cbFileType.getSelectedItem().toString();
+            FileX.general.FileType = ExperimentType.valueOf(cbFileType.getSelectedItem().toString());
         }
         catch(Exception ex) {}
         try

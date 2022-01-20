@@ -30,7 +30,7 @@ public class FileXService {
         TillageService.Read(fileName);
         EnvironmentService.Read(fileName);
         HarvestService.Read(fileName);
-        SimulationControlService.Read(fileName);
+        FileX.simulationList = SimulationControlService.Read(fileName.getAbsolutePath());
     }
     
     public static void SaveFile(File file) {

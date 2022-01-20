@@ -14,6 +14,7 @@ package ListDialog;
 import FileXModel.FileX;
 import DSSATModel.Cultivar;
 import DSSATModel.CultivarList;
+import DSSATModel.ExperimentType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ListSelectionModel;
@@ -148,7 +149,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
     private void AddDataToTable() {
         DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
 
-        if (FileX.general.FileType != null && FileX.general.FileType.equalsIgnoreCase("Experimental"))  {
+        if (FileX.general.FileType != null && FileX.general.FileType == ExperimentType.Experimental)  {
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
@@ -203,12 +204,12 @@ public class CultivarListDialog extends javax.swing.JDialog {
         }
 
         public int getColumnCount() {
-          return FileX.general.FileType.equalsIgnoreCase("Experimental") ? 1 : 2;
+          return FileX.general.FileType == ExperimentType.Experimental ? 1 : 2;
         }
 
             @Override
         public String getColumnName(int column) {
-            if (FileX.general.FileType.equalsIgnoreCase("Experimental")) {
+            if (FileX.general.FileType == ExperimentType.Experimental) {
                 switch (column) {
                     case 0:
                         return "Cultivar";
@@ -234,7 +235,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
             DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) node;
             //Person person = (Person) treenode.getUserObject();
             Cultivar cul = (Cultivar) treenode.getUserObject();
-            if (FileX.general.FileType.equalsIgnoreCase("Experimental")) {
+            if (FileX.general.FileType == ExperimentType.Experimental) {
                 switch (column) {
                     case 0:
                         return cul.CulName;
@@ -262,7 +263,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
 
     private static DefaultMutableTreeNode getExampleFamily() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(new Cultivar());
-        if(FileX.general.FileType != null && FileX.general.FileType.equalsIgnoreCase("Experimental") 
+        if(FileX.general.FileType != null && FileX.general.FileType == ExperimentType.Experimental 
                 && FileX.general.crop != null && !FileX.general.crop.CropCode.equalsIgnoreCase("")){
             for (Cultivar cul : CultivarList.GetAt(FileX.general.crop)) {
                 Cultivar c = new Cultivar();

@@ -1,6 +1,7 @@
 package FileXService;
 
 import DSSATModel.CropList;
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import static FileXModel.FileX.general;
 import java.io.BufferedReader;
@@ -23,13 +24,13 @@ public class GeneralService {
             general.ExperimentNumber = xFile.substring(6, 8);
 
             if (xFile.endsWith("SQX")) {
-                general.FileType = "Sequential";
+                general.FileType = ExperimentType.Sequential;
             } else if (xFile.endsWith("SNX")) {
-                general.FileType = "Seasonal";
+                general.FileType = ExperimentType.Seasonal;
             } else if (xFile.endsWith("GSX")) {
-                general.FileType = "Spatial";
+                general.FileType = ExperimentType.Spatial;
             } else {
-                general.FileType = "Experimental";
+                general.FileType = ExperimentType.Experimental;
                 try {
                     general.crop = CropList.GetAt(xFile.substring(9, 11));
                 } catch (Exception e) {

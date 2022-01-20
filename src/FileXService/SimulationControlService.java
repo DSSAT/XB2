@@ -1,10 +1,10 @@
 package FileXService;
 
 import Extensions.Utils;
-import static FileXModel.FileX.simulationList;
+import FileXModel.FileX;
 import FileXModel.Simulation;
+import FileXModel.SimulationList;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
@@ -13,7 +13,9 @@ import java.io.PrintWriter;
  * @author Jazzy
  */
 public class SimulationControlService {
-    public static void Read(File fileName) {
+    public static SimulationList Read(String fileName) {
+        SimulationList simulationList = new SimulationList();
+        
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
@@ -335,16 +337,18 @@ public class SimulationControlService {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        
+        return simulationList;
     }
     
     public static void Extract(PrintWriter pw) {
         // <editor-fold defaultstate="collapsed" desc="Simulation Options">
-        if (simulationList.GetSize() > 0) {
+        if (FileX.simulationList.GetSize() > 0) {
             pw.println();
             pw.println();
             pw.println("*SIMULATION CONTROLS");
-            for (int i = 0; i < simulationList.GetSize(); i++) {
-                Simulation sim = simulationList.GetAt(i);
+            for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
+                Simulation sim = FileX.simulationList.GetAt(i);
                 Integer level = i + 1;
 
                 pw.println("@N GENERAL     NYERS NREPS START SDATE RSEED SNAME.................... SMODEL");
