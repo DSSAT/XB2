@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +21,7 @@ import java.util.logging.Logger;
  * @author Jazzy
  */
 public class CultivarList {
-    public static Vector cultivars = new Vector();
+    public static ArrayList<Cultivar> cultivars = new ArrayList<>();
 
     public static void AddNew(Crop crop, String culFile) {
         if(culFile.length() > 0){
@@ -42,7 +41,7 @@ public class CultivarList {
                             Cultivar cul = new Cultivar(crop);
                             cul.CulCode = strRead.substring(0, 6).trim();
                             cul.CulName = strRead.substring(7, end).trim();
-                            cultivars.addElement(cul);
+                            cultivars.add(cul);
                         } catch (Exception e) {
                             System.out.println(strRead + "\n" + e.getMessage());
                         }
@@ -58,7 +57,7 @@ public class CultivarList {
                cul.CulCode = "IB0001";
                cul.CulName = crop.CropName;
             }
-            cultivars.addElement(cul);
+            cultivars.add(cul);
         }
     }
 
