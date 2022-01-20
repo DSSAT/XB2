@@ -118,14 +118,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuTreatment">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Treatment"/>
-          </Properties>
-          <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenuTreatmentMenuSelected"/>
-          </Events>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuRefresh">
           <Properties>
             <Property name="text" type="java.lang.String" value="Refresh"/>
@@ -225,7 +217,7 @@
         <Component class="org.jdesktop.swingx.JXTree" name="jXTree1">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="FileX&#xa; General Information&#xa;  Notes&#xa; Environment&#xa;  Fields&#xa;  Initial Conditions&#xa;  Soil Analysis&#xa;  Environmental Modifications&#xa; Management&#xa;  Cultivars&#xa;  Planting&#xa;  Irrigation&#xa;  Fertilizer&#xa;  Organic Amendments&#xa;  Tillage&#xa;  Harvest&#xa;  Chemical Applications&#xa; Simulation Controls"/>
+              <TreeModel code="FileX&#xa; General Information&#xa;  Notes&#xa; Environment&#xa;  Fields&#xa;  Initial Conditions&#xa;  Soil Analysis&#xa;  Environmental Modifications&#xa; Management&#xa;  Cultivars&#xa;  Planting&#xa;  Irrigation&#xa;  Fertilizer&#xa;  Organic Amendments&#xa;  Tillage&#xa;  Harvest&#xa;  Chemical Applications&#xa; Simulation Controls&#xa; Treatment"/>
             </Property>
           </Properties>
           <Events>

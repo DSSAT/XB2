@@ -90,8 +90,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         }
 
         setIconImage(image);
-
-        jMenuTreatment.setEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -121,7 +119,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jMenuSaveAsFile = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuExit = new javax.swing.JMenuItem();
-        jMenuTreatment = new javax.swing.JMenu();
         jMenuRefresh = new javax.swing.JMenu();
         jSetupMenu = new javax.swing.JMenu();
         jMenuHelp = new javax.swing.JMenu();
@@ -189,6 +186,8 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Simulation Controls");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Treatment");
         treeNode1.add(treeNode2);
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jXTree1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -263,18 +262,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jMenuFile.add(jMenuExit);
 
         jMenuBar1.add(jMenuFile);
-
-        jMenuTreatment.setText("Treatment");
-        jMenuTreatment.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenuTreatmentMenuSelected(evt);
-            }
-        });
-        jMenuBar1.add(jMenuTreatment);
 
         jMenuRefresh.setText("Refresh");
         jMenuRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -783,7 +770,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             }
             //</editor-fold>
             // <editor-fold defaultstate="collapsed" desc="Treaments">
-            else if(nodeInfo.toString().equals("Treaments")) {
+            else if(nodeInfo.toString().equals("Treatment")) {
                 if(treatmentFrame != null) {
                     treatmentFrame.dispose();
                     treatmentFrame = null;
@@ -917,10 +904,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         }
         generalFrame.show();
 
-        generalFrame.addMyEventListener(this);
-
-        jMenuTreatment.setEnabled(false);
-        
+        generalFrame.addMyEventListener(this);        
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
@@ -1079,40 +1063,9 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             jMenuCloseFile.setEnabled(true);
             jMenuOpenFile.setEnabled(false);
 
-            checkTreatment();
+            //checkTreatment();
         }
     }//GEN-LAST:event_jMenuOpenFileActionPerformed
-
-    private void jMenuTreatmentMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuTreatmentMenuSelected
-        if(treatmentFrame != null) {
-            treatmentFrame.dispose();
-            treatmentFrame = null;
-        }
-
-        if(treatmentFrame == null){
-            treatmentFrame = new TreatmentFrame();
-
-            setRootPaneCheckingEnabled(false);
-            javax.swing.plaf.InternalFrameUI ui = treatmentFrame.getUI();
-            ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-            desktopPane.add(treatmentFrame);
-            try {
-                treatmentFrame.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            treatmentFrame.show();
-        }
-        /*else if(!treatmentFrame.isSelected()){
-             try {
-                treatmentFrame.setSelected(true);
-             }
-             catch (PropertyVetoException ex) {
-                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }*/
-    }//GEN-LAST:event_jMenuTreatmentMenuSelected
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -1289,7 +1242,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     private javax.swing.JMenu jMenuRefresh;
     private javax.swing.JMenuItem jMenuSaveAsFile;
     private javax.swing.JMenuItem jMenuSaveFile;
-    private javax.swing.JMenu jMenuTreatment;
     private javax.swing.JPopupMenu jPopupMenuSimAdd;
     private javax.swing.JPopupMenu jPopupMenuSimItem;
     private javax.swing.JMenuItem jPopupMenuSimItemCopy;
@@ -1308,7 +1260,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jXTree1.collapseAll();
         jXTree1.expandAll();
 
-        checkTreatment();
+        //checkTreatment();
     }
 
     private void ShowFrame(JInternalFrame frame) {
@@ -1345,24 +1297,24 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
          }*/
     }
 
-    private void checkTreatment() {
-        if(!FileX.GetStatus()) jMenuTreatment.setEnabled(false);
-        if(FileX.general != null) {
-            if(FileX.general.InstituteCode.length() == 2 && FileX.general.SiteCode.length() == 2 && FileX.general.Year.length() == 4 && FileX.general.ExperimentNumber.length() > 0) {
-                if(FileX.general.FileType.equals("Experimental")) {
-                    if(FileX.general.crop != null) {
-                        jMenuTreatment.setEnabled(true);
-                    } else {
-                        jMenuTreatment.setEnabled(false);
-                    }
-                } else {
-                    jMenuTreatment.setEnabled(true);
-                }
-            } else {
-                jMenuTreatment.setEnabled(false);
-            }
-        }
-    }
+//    private void checkTreatment() {
+//        if(!FileX.GetStatus()) jMenuTreatment.setEnabled(false);
+//        if(FileX.general != null) {
+//            if(FileX.general.InstituteCode.length() == 2 && FileX.general.SiteCode.length() == 2 && FileX.general.Year.length() == 4 && FileX.general.ExperimentNumber.length() > 0) {
+//                if(FileX.general.FileType.equals("Experimental")) {
+//                    if(FileX.general.crop != null) {
+//                        jMenuTreatment.setEnabled(true);
+//                    } else {
+//                        jMenuTreatment.setEnabled(false);
+//                    }
+//                } else {
+//                    jMenuTreatment.setEnabled(true);
+//                }
+//            } else {
+//                jMenuTreatment.setEnabled(false);
+//            }
+//        }
+//    }
 }
 
 
