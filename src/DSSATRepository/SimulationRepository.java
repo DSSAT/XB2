@@ -1,26 +1,6 @@
 package DSSATRepository;
 
-import DSSATModel.SimulationOptionWater;
-import DSSATModel.SimulationMethodEvap;
-import DSSATModel.SimulationManageFertilzation;
-import DSSATModel.SimulationOptionSymbiosis;
-import DSSATModel.SimulationMethodSoilEvap;
-import DSSATModel.SimulationMethodInfil;
-import DSSATModel.SimulationMethodInitial;
-import DSSATModel.SimulationManageHarvest;
-import DSSATModel.SimulationOutput;
-import DSSATModel.SimulationMethodSOM;
-import DSSATModel.SimulationOutputVerbose;
-import DSSATModel.SimulationManagePlanting;
-import DSSATModel.SimulationOutputOption;
-import DSSATModel.SimulationMethodHydrology;
-import DSSATModel.SimulationManageResidue;
-import DSSATModel.SimulationManagerIrrigation;
-import DSSATModel.SimulationMethodSoilLayer;
-import DSSATModel.SimulationStart;
-import DSSATModel.SimulationMethodPhoto;
-import DSSATModel.SimulationMethodWeather;
-import DSSATModel.SimulationOptionCO2;
+import DSSATModel.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -76,7 +56,32 @@ public class SimulationRepository extends DSSATRepositoryBase {
             Boolean bSimOutput = false;
             Boolean bSimOutputOption = false;
             Boolean bSimOutputVerbose = false;
+            Boolean bSimOutputFormat = false;
             Boolean bCropModel = false;
+            
+            SimulationStart.Clear();
+            SimulationOptionWater.Clear();
+            SimulationOptionSymbiosis.Clear();
+            SimulationOptionCO2.Clear();
+            SimulationMethodWeather.Clear();
+            SimulationMethodInitial.Clear();
+            SimulationMethodEvap.Clear();
+            SimulationMethodInfil.Clear();
+            SimulationMethodPhoto.Clear();
+            SimulationMethodHydrology.Clear();
+            SimulationMethodSOM.Clear();
+            SimulationMethodSoilEvap.Clear();
+            SimulationMethodSoilLayer.Clear();
+            SimulationManagePlanting.Clear();
+            SimulationManagerIrrigation.Clear();
+            SimulationManageFertilzation.Clear();
+            SimulationManageResidue.Clear();
+            SimulationManageHarvest.Clear();
+            SimulationOutput.Clear();
+            SimulationOutputOption.Clear();
+            SimulationOutputVerbose.Clear();
+            SimulationOutputFormat.Clear();
+            
 
             String strRead = null;
             while ((strRead = br.readLine()) != null) {
@@ -371,7 +376,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                     }
                 } // </editor-fold>
                 // <editor-fold defaultstate="collapsed" desc="Simulation/Outputs">
-                else if (strRead.trim().startsWith("*Simulation/Outputs")) {
+                else if (strRead.trim().equalsIgnoreCase("*Simulation/Outputs")) {
                     bSimOutput = true;
                 } else if (bSimOutput) {
                     if (!strRead.trim().isEmpty()) {
@@ -415,6 +420,22 @@ public class SimulationRepository extends DSSATRepositoryBase {
                         }
                     } else {
                         bSimOutputVerbose = false;
+
+                    }
+                } // </editor-fold>
+                // <editor-fold defaultstate="collapsed" desc="Simulation/Outputs/Format">
+                else if (strRead.trim().startsWith("*Simulation/Outputs/Format")) {
+                    bSimOutputFormat = true;
+                } else if (bSimOutputFormat) {
+                    if (!strRead.trim().isEmpty()) {
+                        if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
+                            String tmp = strRead.trim();
+                            String Code = tmp.substring(0, 8).trim();
+                            String Description = tmp.substring(9, tmp.length() - 2).trim();
+                            SimulationOutputFormat.AddNew(Code, Description);
+                        }
+                    } else {
+                        bSimOutputFormat = false;
 
                     }
                 } // </editor-fold>

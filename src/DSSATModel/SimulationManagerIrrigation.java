@@ -2,13 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DSSATModel;
 
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,63 +12,34 @@ import java.util.Set;
  */
 public class SimulationManagerIrrigation {
 
-    private static Hashtable sim = new Hashtable();
+    private static final ArrayList<String[]> sim = new ArrayList<>();
 
     public static void Clear() {
         sim.clear();
     }
 
-    public static void AddNew(String Code, String Description){
-        sim.put(Code, Description);
+    public static void AddNew(String Code, String Description) {
+        sim.add(new String[]{Code, Description});
     }
 
-    public static int GetSize()
-    {
+    public static int GetSize() {
         return sim.size();
     }
 
     public static String[] GetAt(String Code) {
-
-        String s[] = new String[2];
-        try
-        {
-            s[1] = (String) sim.get(Code);
-            s[0] = Code;
-        }
-        catch(Exception ex){
-
-        }
-        return s;
-    }
-
-    public static String[] GetAt(int n)
-    {
-        String s[] = new String[2];
-        Set set = sim.entrySet();
-        Iterator it = set.iterator();
-        int i = 0;
-        while (it.hasNext()) {
-            if(i == n) {
-                Map.Entry entry = (Map.Entry) it.next();
-                s[1] = (String) entry.getValue();
-                s[0] = (String) entry.getKey();
+        for (String[] s : sim) {
+            if (s[0].equalsIgnoreCase(Code)) {
+                return s;
             }
         }
-        return s;
+        return null;
     }
 
-    public static String[][] GetAll()
-    {
-        String s[][] = new String[sim.size()][2];
-        Set set = sim.entrySet();
-        Iterator it = set.iterator();
-        int i = 0;
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            s[i][0] = (String) entry.getKey();
-            s[i][1] = (String) entry.getValue();
-            i++;
-        }
-        return s;
+    public static String[] GetAt(int n) {
+        return sim.get(n);
+    }
+
+    public static ArrayList<String[]> GetAll() {
+        return sim;
     }
 }

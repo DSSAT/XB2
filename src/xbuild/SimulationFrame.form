@@ -167,7 +167,7 @@
                               <Component id="jXPanel12" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -220,68 +220,15 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rdSTART_E" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdSTART_I" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdSTART_P" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdSTART_S" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="rdSTART_E" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="rdSTART_I" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="rdSTART_P" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="rdSTART_S" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
-              <SubComponents>
-                <Component class="xbuild.Components.XRadioButton" name="rdSTART_E">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupStart"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="On reported emergence date"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="rdSTART_I">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupStart"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="When initial condition measured"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="rdSTART_P">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupStart"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="On reported planting date"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="rdSTART_S">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupStart"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="On specified date"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
             </Container>
             <Component class="xbuild.Components.XSelectTextField" name="txtSMODEL">
             </Component>
@@ -396,7 +343,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                       <Component id="jXPanel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="158" max="32767" attributes="0"/>
+                      <EmptySpace pref="160" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -837,64 +784,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdWTHER_G" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_M" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_S" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_W" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="102" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdWTHER_G" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_M" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_S" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdWTHER_W" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_G">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupWeather"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Generated (WTG files)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_M">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupWeather"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Measure Data"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_S">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupWeather"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Simulated (SIMMETEO)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_W">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupWeather"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Simulated Internal (WGEN)"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup3">
                   <Properties>
@@ -910,42 +808,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdINCON_M" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdINCON_S" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="356" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdINCON_M" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdINCON_S" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdINCON_M">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupInitSoil"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="As Reported"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdINCON_S">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupInitSoil"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Simulated Output From Previous Model"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup4">
                   <Properties>
@@ -961,42 +832,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdEVAPO_F" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdEVAPO_R" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="462" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdEVAPO_F" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdEVAPO_R" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdEVAPO_F">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupEvap"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="FAO-56"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdEVAPO_R">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupEvap"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Priestley-Talor/Richie"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup5">
                   <Properties>
@@ -1012,53 +856,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdINFIL_N" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdINFIL_R" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdINFIL_S" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="285" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdINFIL_N" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdINFIL_R" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdINFIL_S" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_N">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupInfiltration"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="No Mulch Effects"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_R">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupInfiltration"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Ritchie Method"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_S">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupInfiltration"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Soil Conservation Service"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup6">
                   <Properties>
@@ -1074,53 +880,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdPHOTO_C" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdPHOTO_L" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdPHOTO_R" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="183" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdPHOTO_C" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdPHOTO_L" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdPHOTO_R" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_C">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupPhoto"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Canopy Curve (daily)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_L">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupPhoto"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Leaf Photosynthesis Response Curve"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_R">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupPhoto"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Radiation Efficiency"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup7">
                   <Properties>
@@ -1136,29 +904,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdHYDRO_R" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="541" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rdHYDRO_R" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdHYDRO_R">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupHydrology"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Ritche Water Balance"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup8">
                   <Properties>
@@ -1174,42 +928,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdMESOM_G" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdMESOM_P" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="450" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdMESOM_G" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdMESOM_P" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESOM_G">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupMethodSoil"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Ceres (Godwin)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESOM_P">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupMethodSoil"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Century (Paton)"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup9">
                   <Properties>
@@ -1225,42 +952,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdMESEV_R" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdMESEV_S" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="462" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdMESEV_R" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdMESEV_S" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESEV_R">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupSoilEvap"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Ritche-Ceres"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESEV_S">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupSoilEvap"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Suleiman-Ritchie"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup10">
                   <Properties>
@@ -1276,53 +976,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdMESOL_1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdMESOL_2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdMESOL_3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="351" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="rdMESOL_1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdMESOL_2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdMESOL_3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_1">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupSoilLayer"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Original Soil Profile"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_2">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupSoilLayer"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Modified"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_3">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupSoilLayer"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="User Distribution"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
@@ -1377,7 +1039,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel15" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="158" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1386,7 +1048,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel15" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="144" max="32767" attributes="0"/>
+                              <EmptySpace pref="178" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1406,62 +1068,42 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jXRadioGroup11" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="panelDate" alignment="0" max="32767" attributes="1"/>
-                                              <Component id="panelSoilTemperature" alignment="0" max="32767" attributes="1"/>
-                                              <Component id="panelSoilWater" alignment="1" min="-2" max="-2" attributes="1"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="rdPLANT_A" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="panelSoilWater" max="32767" attributes="1"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="panelDate" min="-2" max="-2" attributes="1"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rdPLANT_R" min="-2" max="-2" attributes="0"/>
+                                          <Component id="panelSoilTemperature" min="-2" max="-2" attributes="1"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jXRadioGroup11" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="rdPLANT_A" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdPLANT_R" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="panelSoilTemperature" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="panelDate" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="panelDate" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="panelSoilTemperature" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Component id="panelSoilWater" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="28" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="xbuild.Components.XRadioButton" name="rdPLANT_A">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupPlanting"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Automatic"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdPLANT_R">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupPlanting"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="On Reported date"/>
-                          </Properties>
-                        </Component>
                         <Container class="org.jdesktop.swingx.JXPanel" name="panelDate">
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1565,7 +1207,7 @@
                                           <Component id="jXLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jXLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="152" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1640,9 +1282,9 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="txtPH2OU" alignment="1" pref="59" max="32767" attributes="1"/>
-                                          <Component id="txtPH2OD" alignment="1" pref="59" max="32767" attributes="1"/>
-                                          <Component id="txtPH2OL" alignment="1" pref="59" max="32767" attributes="1"/>
+                                          <Component id="txtPH2OU" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="txtPH2OD" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="txtPH2OL" alignment="1" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1718,6 +1360,24 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup11">
+                          <AccessibilityProperties>
+                            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+                          </AccessibilityProperties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="641" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="104" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -1737,7 +1397,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel19" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="147" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1746,7 +1406,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel19" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="138" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1766,54 +1426,57 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="lbManagementDepth" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbThreshold" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbEndPoint" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbEndApplication" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbAmount" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbEfficiencyFraction" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbMethod" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtIREFF" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtIRAMT" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lbManagementDepth" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbThreshold" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbEndPoint" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbEndApplication" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbAmount" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbEfficiencyFraction" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbMethod" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbAmountUnit" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtIREFF" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtIRAMT" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbAmountUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtIROFF" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbEndApplicationUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtITHRU" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbEndPointUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtITHRL" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbThresholdUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtIMDEP" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbManagementUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtIMETH" min="-2" pref="374" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="bnIMETH" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtIROFF" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbEndApplicationUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtITHRU" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbEndPointUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtITHRL" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbThresholdUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="rdIRRIG_R" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdIRRIG_N" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdIRRIG_F" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdIRRIG_D" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdIRRIG_A" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtIMDEP" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbManagementUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtIMETH" min="-2" pref="374" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="bnIMETH" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                                          <Component id="jXRadioGroup12" min="-2" pref="347" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -1824,16 +1487,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="rdIRRIG_A" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdIRRIG_D" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdIRRIG_F" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdIRRIG_N" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdIRRIG_R" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="jXRadioGroup12" min="-2" pref="143" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtIMDEP" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbManagementDepth" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1880,46 +1535,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_A">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupIrrigation"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Automatic When Required"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_D">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupIrrigation"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Days After Planting"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_F">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupIrrigation"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Fixed Amount Automatic"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_N">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupIrrigation"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Not Irrigated"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_R">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupIrrigation"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="On Reported Date"/>
-                          </Properties>
-                        </Component>
                         <Component class="xbuild.Components.XTextField" name="txtIMDEP">
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtITHRL">
@@ -2006,6 +1621,10 @@
                             <Property name="text" type="java.lang.String" value="Method"/>
                           </Properties>
                         </Component>
+                        <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup12">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2013,8 +1632,8 @@
                 <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel9">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Nitrogen">
-                        <Property name="tabTitle" type="java.lang.String" value="Nitrogen"/>
+                      <JTabbedPaneConstraints tabName="Fertilization">
+                        <Property name="tabTitle" type="java.lang.String" value="Fertilization"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -2025,7 +1644,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel20" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="90" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2034,7 +1653,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel20" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="229" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2044,7 +1663,7 @@
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                            <TitledBorder title="Nitrogen">
+                            <TitledBorder title="Fertilization">
                               <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
                             </TitledBorder>
                           </Border>
@@ -2066,11 +1685,6 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtNCODE" min="-2" pref="374" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="bnNCODE" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="txtNAOFF" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Component id="lbEndOfApplicationUnit" min="-2" max="-2" attributes="0"/>
@@ -2080,10 +1694,6 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="lbNitrogenDepthUnit" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="rdFERTI_R" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdFERTI_N" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdFERTI_F" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdFERTI_D" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="txtNAMNT" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
@@ -2091,6 +1701,14 @@
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="lbNitrogenThresholdUnit" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jXRadioGroup13" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtNCODE" alignment="0" pref="374" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="bnNCODE" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -2100,15 +1718,8 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jXRadioGroup13" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="rdFERTI_D" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdFERTI_F" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdFERTI_N" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdFERTI_R" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lbNitrogenDepth" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -2145,38 +1756,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_D">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupNitrogen"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Days After Planting"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_F">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupNitrogen"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Fixed Amount Automatic"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_N">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupNitrogen"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Not Fertilized"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_R">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupNitrogen"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="On Reported Date"/>
-                          </Properties>
-                        </Component>
                         <Component class="xbuild.Components.XTextField" name="txtNAOFF">
                         </Component>
                         <Component class="xbuild.Components.XSelectTextField" name="txtNCODE">
@@ -2254,6 +1833,10 @@
                             </Property>
                           </Properties>
                         </Component>
+                        <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup13">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2273,7 +1856,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel21" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="318" max="32767" attributes="0"/>
+                              <EmptySpace pref="320" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2282,7 +1865,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel21" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="289" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2311,39 +1894,37 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtRIDEP" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbIncorporationDepthUnit" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jXRadioGroup14" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtRIDEP" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbIncorporationDepthUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtRTIME" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbIncorporationUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtRIPCN" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbIncorporationPercentageUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtRTIME" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbIncorporationUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtRIPCN" min="-2" pref="70" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbIncorporationPercentageUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="rdRESID_D" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdRESID_R" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdRESID_N" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                  <Component id="rdRESID_D" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                  <Component id="rdRESID_N" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdRESID_R" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jXRadioGroup14" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtRIPCN" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbIncorporationPercentage" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2367,30 +1948,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_D">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupOrganic"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Days After Planting"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_N">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupOrganic"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="No Applications"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_R">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupOrganic"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="On Reported Dates"/>
-                          </Properties>
-                        </Component>
                         <Component class="xbuild.Components.XTextField" name="txtRIPCN">
                           <Properties>
                             <Property name="enabled" type="boolean" value="false"/>
@@ -2442,6 +1999,10 @@
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
+                        <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup14">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2461,7 +2022,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel22" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="268" max="32767" attributes="0"/>
+                              <EmptySpace pref="270" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2470,7 +2031,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXPanel22" min="-2" pref="304" max="-2" attributes="0"/>
-                              <EmptySpace pref="234" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2500,39 +2061,35 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rdHARVS_R" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdHARVS_M" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdHARVS_D" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdHARVS_A" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtHPCNR" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbResidueHarvestedUnit" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jXRadioGroup15" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtHPCNR" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtHPCNP" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lbProductHarvestedUnit" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="dpHLAST" alignment="0" min="-2" max="-2" attributes="1"/>
+                                              <Component id="txtHFRST" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="112" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtHPCNP" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="lbProductHarvestedUnit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="dpHLAST" alignment="0" min="-2" max="-2" attributes="1"/>
-                                      <Component id="txtHFRST" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="116" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="rdHARVS_A" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdHARVS_D" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="rdHARVS_M" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="rdHARVS_R" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jXRadioGroup15" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="lbHarvestEarliest" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtHFRST" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -2560,38 +2117,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_A">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupHarvest"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Automatic"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_D">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupHarvest"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Days After Planting"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_R">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupHarvest"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="On Reported Date(s)"/>
-                          </Properties>
-                        </Component>
-                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_M">
-                          <Properties>
-                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                              <ComponentRef name="groupHarvest"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="At Maturity"/>
-                          </Properties>
-                        </Component>
                         <Component class="xbuild.Components.XDatePicker" name="dpHLAST">
                           <Properties>
                             <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -2650,6 +2175,10 @@
                             </Property>
                           </Properties>
                         </Component>
+                        <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup15">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2672,8 +2201,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jXPanel16" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jXPanel16" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="128" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2703,78 +2232,85 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jXLabel29" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jXLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jXLabel31" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jXLabel32" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="jXLabel29" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jXLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="jXLabel42" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jXRadioGroup17" max="32767" attributes="0"/>
+                                              <Component id="snFROPT" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <Component id="jXRadioGroup16" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="rdFNAME_N" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rdFNAME_Y" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="snFROPT" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
-                                  <Component id="jXLabel42" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jXLabel31" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rdOVVEW_Y" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="rdOVVEW_N" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jXLabel32" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rdSUMRY_Y" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="rdSUMRY_N" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rdSUMRY_Y" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rdSUMRY_N" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rdOVVEW_Y" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rdOVVEW_N" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Component id="jXPanel17" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="112" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="jXPanel17" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jXLabel29" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="snFROPT" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rdFNAME_N" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdFNAME_Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jXLabel30" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXRadioGroup16" min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jXLabel42" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXRadioGroup17" alignment="1" min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -2790,7 +2326,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jXPanel17" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="63" max="32767" attributes="0"/>
+                          <EmptySpace pref="56" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2817,22 +2353,6 @@
                       <ComponentRef name="groupOverview"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="rdFNAME_Y">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupOutput"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Experiment"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="rdFNAME_N">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupOutput"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Default"/>
                   </Properties>
                 </Component>
                 <Component class="xbuild.Components.XRadioButton" name="rdSUMRY_Y">
@@ -2886,7 +2406,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jXLabel33" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jXLabel34" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -2900,10 +2420,6 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rdVBOSE_Y" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdVBOSE_N" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdVBOSE_D" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdVBOSE_O" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="rdOPOUT_Y" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -2944,8 +2460,9 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="rdGROUT_N" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jXRadioGroup18" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="160" max="32767" attributes="0"/>
+                              <EmptySpace pref="113" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3000,17 +2517,13 @@
                                   <Component id="jXLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="rdVBOSE_O" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jXLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jXLabel41" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jXRadioGroup18" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rdVBOSE_D" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rdVBOSE_N" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rdVBOSE_Y" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3184,43 +2697,15 @@
                         <Property name="text" type="java.lang.String" value="Operations Output"/>
                       </Properties>
                     </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_O">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupOutputVerbose"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Only SUMMARY.OUT"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_D">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupOutputVerbose"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Detailed Output"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_N">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupOutputVerbose"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Minimal Output"/>
-                      </Properties>
-                    </Component>
-                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_Y">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="groupOutputVerbose"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Normal Output"/>
-                      </Properties>
-                    </Component>
                     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel41">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Verbose"/>
                       </Properties>
                     </Component>
+                    <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup18">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                    </Container>
                   </SubComponents>
                 </Container>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel42">
@@ -3228,22 +2713,14 @@
                     <Property name="text" type="java.lang.String" value="Format"/>
                   </Properties>
                 </Component>
-                <Component class="xbuild.Components.XRadioButton" name="jRadioButton1">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupFormat"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Text Format (ASCII)"/>
-                  </Properties>
-                </Component>
-                <Component class="xbuild.Components.XRadioButton" name="jRadioButton2">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="groupFormat"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Comma Separated Values (CSV)"/>
-                  </Properties>
-                </Component>
+                <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup16">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                </Container>
+                <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup17">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                </Container>
               </SubComponents>
             </Container>
           </SubComponents>

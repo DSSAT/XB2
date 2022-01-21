@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DSSATModel;
 
 import java.util.ArrayList;
@@ -10,8 +6,7 @@ import java.util.ArrayList;
  *
  * @author Jazzy
  */
-public class SimulationMethodInitial {
-
+public class SimulationOutputFormat {
     private static final ArrayList<String[]> sim = new ArrayList<>();
 
     public static void Clear() {
