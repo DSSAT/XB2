@@ -218,4 +218,8 @@ public class Utils {
 
         return d;
     }
+    
+    public static boolean IsEmpty(String text){
+        return text == null || text.isEmpty();
+    }
 }

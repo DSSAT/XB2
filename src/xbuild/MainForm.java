@@ -33,10 +33,10 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
-import Extensions.CustomDefaultTreeCellRenderer;
 import FileXService.FileXService;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import xbuild.Components.CustomDefaultTreeCellRenderer;
 
 /**
  *
