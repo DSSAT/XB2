@@ -2,77 +2,77 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="groupStart">
+    <Component class="xbuild.Components.XButtonGroup" name="groupStart">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupWater">
+    <Component class="xbuild.Components.XButtonGroup" name="groupWater">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupNitrogen">
+    <Component class="xbuild.Components.XButtonGroup" name="groupNitrogen">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupSymbiosis">
+    <Component class="xbuild.Components.XButtonGroup" name="groupSymbiosis">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupPhosphosrus">
+    <Component class="xbuild.Components.XButtonGroup" name="groupPhosphosrus">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupPotassium">
+    <Component class="xbuild.Components.XButtonGroup" name="groupPotassium">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupChemical">
+    <Component class="xbuild.Components.XButtonGroup" name="groupChemical">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupDiseases">
+    <Component class="xbuild.Components.XButtonGroup" name="groupDiseases">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupTillage">
+    <Component class="xbuild.Components.XButtonGroup" name="groupTillage">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupWeather">
+    <Component class="xbuild.Components.XButtonGroup" name="groupWeather">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupInitSoil">
+    <Component class="xbuild.Components.XButtonGroup" name="groupInitSoil">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupEvap">
+    <Component class="xbuild.Components.XButtonGroup" name="groupEvap">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupInfiltration">
+    <Component class="xbuild.Components.XButtonGroup" name="groupInfiltration">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupPhoto">
+    <Component class="xbuild.Components.XButtonGroup" name="groupPhoto">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupHydrology">
+    <Component class="xbuild.Components.XButtonGroup" name="groupHydrology">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupMethodSoil">
+    <Component class="xbuild.Components.XButtonGroup" name="groupMethodSoil">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupSoilEvap">
+    <Component class="xbuild.Components.XButtonGroup" name="groupSoilEvap">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupSoilLayer">
+    <Component class="xbuild.Components.XButtonGroup" name="groupSoilLayer">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupPlanting">
+    <Component class="xbuild.Components.XButtonGroup" name="groupPlanting">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupIrrigation">
+    <Component class="xbuild.Components.XButtonGroup" name="groupIrrigation">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupManagementNitrogen">
+    <Component class="xbuild.Components.XButtonGroup" name="groupManagementNitrogen">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOrganic">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOrganic">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupHarvest">
+    <Component class="xbuild.Components.XButtonGroup" name="groupHarvest">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutput">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutput">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOverview">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOverview">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupSummary">
+    <Component class="xbuild.Components.XButtonGroup" name="groupSummary">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputGrowth">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputGrowth">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputCarbon">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputCarbon">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputWater">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputWater">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputNitrogen">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputNitrogen">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputPhosphorus">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputPhosphorus">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputDiseases">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputDiseases">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputChemical">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputChemical">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputOperation">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputOperation">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupOutputVerbose">
+    <Component class="xbuild.Components.XButtonGroup" name="groupOutputVerbose">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="groupFormat">
+    <Component class="xbuild.Components.XButtonGroup" name="groupFormat">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -150,13 +150,16 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtRSEED" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="dpSDATE" alignment="0" min="-2" pref="176" max="-2" attributes="1"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtSMODEL" min="-2" pref="375" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="bnSMODEL" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jXRadioGroup1" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Component id="dpSDATE" min="-2" pref="176" max="-2" attributes="1"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -205,15 +208,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="dpSDATE">
+            <Component class="xbuild.Components.XDatePicker" name="dpSDATE">
               <Properties>
                 <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpSDATEActionPerformed"/>
-              </Events>
             </Component>
             <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup1">
 
@@ -249,7 +249,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="rdSTART_E">
+                <Component class="xbuild.Components.XRadioButton" name="rdSTART_E">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupStart"/>
@@ -257,7 +257,7 @@
                     <Property name="text" type="java.lang.String" value="On reported emergence date"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSTART_I">
+                <Component class="xbuild.Components.XRadioButton" name="rdSTART_I">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupStart"/>
@@ -265,7 +265,7 @@
                     <Property name="text" type="java.lang.String" value="When initial condition measured"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSTART_P">
+                <Component class="xbuild.Components.XRadioButton" name="rdSTART_P">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupStart"/>
@@ -273,7 +273,7 @@
                     <Property name="text" type="java.lang.String" value="On reported planting date"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSTART_S">
+                <Component class="xbuild.Components.XRadioButton" name="rdSTART_S">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupStart"/>
@@ -283,7 +283,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="txtSMODEL">
+            <Component class="xbuild.Components.XSelectTextField" name="txtSMODEL">
             </Component>
             <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel12">
               <Properties>
@@ -333,12 +333,9 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JSpinner" name="snNYERS">
+                <Component class="xbuild.Components.XSpinner" name="snNYERS">
                 </Component>
-                <Component class="javax.swing.JSpinner" name="snNREPS">
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="snNREPSStateChanged"/>
-                  </Events>
+                <Component class="xbuild.Components.XSpinner" name="snNREPS">
                 </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
                   <Properties>
@@ -380,7 +377,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSMODELActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtRSEED">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtRSEED">
             </Component>
           </SubComponents>
         </Container>
@@ -590,181 +587,133 @@
                     <Property name="text" type="java.lang.String" value="Tillage"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdTILL_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdTILL_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupTillage"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdTILL_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdTILL_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdTILL_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupTillage"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdTILL_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdDISES_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdDISES_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupDiseases"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdDISES_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdDISES_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdDISES_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupDiseases"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdDISES_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdCHEM_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdCHEM_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupChemical"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCHEM_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdCHEM_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdCHEM_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupChemical"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCHEM_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdPOTAS_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdPOTAS_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupPotassium"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPOTAS_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdPOTAS_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdPOTAS_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupPotassium"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPOTAS_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdPHOSP_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdPHOSP_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupPhosphosrus"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPHOSP_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdPHOSP_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdPHOSP_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupPhosphosrus"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPHOSP_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSYMBI_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdSYMBI_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupSymbiosis"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdSYMBI_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSYMBI_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdSYMBI_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupSymbiosis"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdSYMBI_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdNITRO_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdNITRO_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupNitrogen"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdNITRO_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdNITRO_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdNITRO_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupNitrogen"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdNITRO_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdWATER_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdWATER_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupWater"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWATER_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdWATER_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdWATER_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupWater"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWATER_YStateChanged"/>
-                  </Events>
                 </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">
                   <Properties>
@@ -781,9 +730,6 @@
                       </StringArray>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCO2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -916,49 +862,37 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdWTHER_G">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_G">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupWeather"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Generated (WTG files)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWTHER_GStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdWTHER_M">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_M">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupWeather"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Measure Data"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWTHER_MStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdWTHER_S">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_S">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupWeather"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Simulated (SIMMETEO)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWTHER_SStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdWTHER_W">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWTHER_W">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupWeather"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Simulated Internal (WGEN)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWTHER_WStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -995,27 +929,21 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdINCON_M">
+                    <Component class="xbuild.Components.XRadioButton" name="rdINCON_M">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupInitSoil"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="As Reported"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdINCON_MStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdINCON_S">
+                    <Component class="xbuild.Components.XRadioButton" name="rdINCON_S">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupInitSoil"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Simulated Output From Previous Model"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdINCON_SStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1052,27 +980,21 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdEVAPO_F">
+                    <Component class="xbuild.Components.XRadioButton" name="rdEVAPO_F">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupEvap"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="FAO-56"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdEVAPO_FStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdEVAPO_R">
+                    <Component class="xbuild.Components.XRadioButton" name="rdEVAPO_R">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupEvap"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Priestley-Talor/Richie"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdEVAPO_RStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1112,38 +1034,29 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdINFIL_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupInfiltration"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No Mulch Effects"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdINFIL_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdINFIL_R">
+                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_R">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupInfiltration"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ritchie Method"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdINFIL_RStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdINFIL_S">
+                    <Component class="xbuild.Components.XRadioButton" name="rdINFIL_S">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupInfiltration"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Soil Conservation Service"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdINFIL_SStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1183,38 +1096,29 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdPHOTO_C">
+                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_C">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupPhoto"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Canopy Curve (daily)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPHOTO_CStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdPHOTO_L">
+                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_L">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupPhoto"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Leaf Photosynthesis Response Curve"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPHOTO_LStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdPHOTO_R">
+                    <Component class="xbuild.Components.XRadioButton" name="rdPHOTO_R">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupPhoto"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Radiation Efficiency"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPHOTO_RStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1246,16 +1150,13 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdHYDRO_R">
+                    <Component class="xbuild.Components.XRadioButton" name="rdHYDRO_R">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupHydrology"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ritche Water Balance"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdHYDRO_RStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1292,27 +1193,21 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdMESOM_G">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESOM_G">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupMethodSoil"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ceres (Godwin)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESOM_GStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMESOM_P">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESOM_P">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupMethodSoil"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Century (Paton)"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESOM_PStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1349,27 +1244,21 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdMESEV_R">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESEV_R">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupSoilEvap"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ritche-Ceres"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESEV_RStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMESEV_S">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESEV_S">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupSoilEvap"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Suleiman-Ritchie"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESEV_SStateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1409,38 +1298,29 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdMESOL_1">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_1">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupSoilLayer"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Original Soil Profile"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESOL_1StateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMESOL_2">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_2">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupSoilLayer"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Modified"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESOL_2StateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMESOL_3">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMESOL_3">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupSoilLayer"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="User Distribution"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMESOL_3StateChanged"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1566,27 +1446,21 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JRadioButton" name="rdPLANT_A">
+                        <Component class="xbuild.Components.XRadioButton" name="rdPLANT_A">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupPlanting"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Automatic"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPLANT_AStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdPLANT_R">
+                        <Component class="xbuild.Components.XRadioButton" name="rdPLANT_R">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupPlanting"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="On Reported date"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdPLANT_RStateChanged"/>
-                          </Events>
                         </Component>
                         <Container class="org.jdesktop.swingx.JXPanel" name="panelDate">
                           <Properties>
@@ -1635,25 +1509,19 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="org.jdesktop.swingx.JXDatePicker" name="dpPFRST">
+                            <Component class="xbuild.Components.XDatePicker" name="dpPFRST">
                               <Properties>
                                 <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                                   <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                                 </Property>
                               </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpPFRSTActionPerformed"/>
-                              </Events>
                             </Component>
-                            <Component class="org.jdesktop.swingx.JXDatePicker" name="dpPLAST">
+                            <Component class="xbuild.Components.XDatePicker" name="dpPLAST">
                               <Properties>
                                 <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                                   <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                                 </Property>
                               </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpPLASTActionPerformed"/>
-                              </Events>
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel16">
                               <Properties>
@@ -1741,9 +1609,9 @@
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;C&lt;sup&gt;&#xe50;&lt;/sup&gt;&lt;/html&gt;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtPSTMX">
+                            <Component class="xbuild.Components.XTextField" name="txtPSTMX">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtPSTMN">
+                            <Component class="xbuild.Components.XTextField" name="txtPSTMN">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1812,11 +1680,11 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JTextField" name="txtPH2OL">
+                            <Component class="xbuild.Components.XTextField" name="txtPH2OL">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtPH2OU">
+                            <Component class="xbuild.Components.XTextField" name="txtPH2OU">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtPH2OD">
+                            <Component class="xbuild.Components.XTextField" name="txtPH2OD">
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel21">
                               <Properties>
@@ -2012,74 +1880,59 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JRadioButton" name="rdIRRIG_A">
+                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_A">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupIrrigation"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Automatic When Required"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdIRRIG_AStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdIRRIG_D">
+                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_D">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupIrrigation"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Days After Planting"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdIRRIG_DStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdIRRIG_F">
+                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_F">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupIrrigation"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Fixed Amount Automatic"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdIRRIG_FStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdIRRIG_N">
+                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_N">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupIrrigation"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Not Irrigated"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdIRRIG_NStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdIRRIG_R">
+                        <Component class="xbuild.Components.XRadioButton" name="rdIRRIG_R">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupIrrigation"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="On Reported Date"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdIRRIG_RStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtIMDEP">
+                        <Component class="xbuild.Components.XTextField" name="txtIMDEP">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtITHRL">
+                        <Component class="xbuild.Components.XTextField" name="txtITHRL">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtITHRU">
+                        <Component class="xbuild.Components.XTextField" name="txtITHRU">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtIROFF">
+                        <Component class="xbuild.Components.XTextField" name="txtIROFF">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtIRAMT">
+                        <Component class="xbuild.Components.XTextField" name="txtIRAMT">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtIREFF">
+                        <Component class="xbuild.Components.XTextField" name="txtIREFF">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtIMETH">
+                        <Component class="xbuild.Components.XSelectTextField" name="txtIMETH">
                         </Component>
                         <Component class="javax.swing.JButton" name="bnIMETH">
                           <Properties>
@@ -2292,53 +2145,41 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JRadioButton" name="rdFERTI_D">
+                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_D">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupNitrogen"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Days After Planting"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFERTI_DStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdFERTI_F">
+                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_F">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupNitrogen"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Fixed Amount Automatic"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFERTI_FStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdFERTI_N">
+                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_N">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupNitrogen"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Not Fertilized"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFERTI_NStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdFERTI_R">
+                        <Component class="xbuild.Components.XRadioButton" name="rdFERTI_R">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupNitrogen"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="On Reported Date"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFERTI_RStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNAOFF">
+                        <Component class="xbuild.Components.XTextField" name="txtNAOFF">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtNCODE">
+                        <Component class="xbuild.Components.XSelectTextField" name="txtNCODE">
                         </Component>
                         <Component class="javax.swing.JButton" name="bnNCODE">
                           <Properties>
@@ -2392,21 +2233,21 @@
                             <Property name="text" type="java.lang.String" value="Material"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtNMDEP">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtNMDEP">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtNMTHR">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtNMTHR">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtNAMNT">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtNAMNT">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
@@ -2526,50 +2367,41 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JRadioButton" name="rdRESID_D">
+                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_D">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupOrganic"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Days After Planting"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdRESID_DStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdRESID_N">
+                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_N">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupOrganic"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="No Applications"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdRESID_NStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdRESID_R">
+                        <Component class="xbuild.Components.XRadioButton" name="rdRESID_R">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupOrganic"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="On Reported Dates"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdRESID_RStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtRIPCN">
+                        <Component class="xbuild.Components.XTextField" name="txtRIPCN">
                           <Properties>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtRTIME">
+                        <Component class="xbuild.Components.XTextField" name="txtRTIME">
                           <Properties>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtRIDEP">
+                        <Component class="xbuild.Components.XTextField" name="txtRIDEP">
                           <Properties>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
@@ -2728,59 +2560,44 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JRadioButton" name="rdHARVS_A">
+                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_A">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupHarvest"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Automatic"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdHARVS_AStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdHARVS_D">
+                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_D">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupHarvest"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Days After Planting"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdHARVS_DStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdHARVS_R">
+                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_R">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupHarvest"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="On Reported Date(s)"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdHARVS_RStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="rdHARVS_M">
+                        <Component class="xbuild.Components.XRadioButton" name="rdHARVS_M">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="groupHarvest"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="At Maturity"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdHARVS_MStateChanged"/>
-                          </Events>
                         </Component>
-                        <Component class="org.jdesktop.swingx.JXDatePicker" name="dpHLAST">
+                        <Component class="xbuild.Components.XDatePicker" name="dpHLAST">
                           <Properties>
                             <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                               <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                             </Property>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpHLASTActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="org.jdesktop.swingx.JXLabel" name="lbHarvestEarliest">
                           <Properties>
@@ -2812,21 +2629,21 @@
                             <Property name="text" type="java.lang.String" value="%"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtHFRST">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtHFRST">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtHPCNP">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtHPCNP">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JFormattedTextField" name="txtHPCNR">
+                        <Component class="xbuild.Components.XFormattedTextField" name="txtHPCNR">
                           <Properties>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
@@ -2978,78 +2795,60 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JSpinner" name="snFROPT">
+                <Component class="xbuild.Components.XSpinner" name="snFROPT">
                   <Properties>
                     <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="1" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdOVVEW_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdOVVEW_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupOverview"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdOVVEW_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdOVVEW_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdOVVEW_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupOverview"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdOVVEW_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdFNAME_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdFNAME_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupOutput"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Experiment"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFNAME_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdFNAME_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdFNAME_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupOutput"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Default"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdFNAME_NStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSUMRY_Y">
+                <Component class="xbuild.Components.XRadioButton" name="rdSUMRY_Y">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupSummary"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Yes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdSUMRY_YStateChanged"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="rdSUMRY_N">
+                <Component class="xbuild.Components.XRadioButton" name="rdSUMRY_N">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupSummary"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="No"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdSUMRY_NStateChanged"/>
-                  </Events>
                 </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel29">
                   <Properties>
@@ -3216,181 +3015,133 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdGROUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdGROUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputGrowth"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdGROUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdGROUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdGROUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputGrowth"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdGROUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdCAOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdCAOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputCarbon"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCAOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdCAOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdCAOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputCarbon"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCAOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdWAOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWAOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputWater"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWAOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdWAOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdWAOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputWater"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdWAOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdNIOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdNIOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputNitrogen"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdNIOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdNIOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdNIOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputNitrogen"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdNIOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMIOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMIOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputPhosphorus"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMIOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdMIOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdMIOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputPhosphorus"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdMIOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdDIOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdDIOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputDiseases"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdDIOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdDIOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdDIOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputDiseases"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdDIOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdCHOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdCHOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputChemical"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCHOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdCHOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdCHOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputChemical"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdCHOUT_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdOPOUT_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdOPOUT_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputOperation"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Yes"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdOPOUT_YStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdOPOUT_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdOPOUT_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputOperation"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="No"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdOPOUT_NStateChanged"/>
-                      </Events>
                     </Component>
                     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel33">
                       <Properties>
@@ -3432,49 +3183,37 @@
                         <Property name="text" type="java.lang.String" value="Operations Output"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdVBOSE_O">
+                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_O">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputVerbose"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Only SUMMARY.OUT"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdVBOSE_OStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdVBOSE_D">
+                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_D">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputVerbose"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Detailed Output"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdVBOSE_DStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdVBOSE_N">
+                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_N">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputVerbose"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Minimal Output"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdVBOSE_NStateChanged"/>
-                      </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdVBOSE_Y">
+                    <Component class="xbuild.Components.XRadioButton" name="rdVBOSE_Y">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="groupOutputVerbose"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Normal Output"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdVBOSE_YStateChanged"/>
-                      </Events>
                     </Component>
                     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel41">
                       <Properties>
@@ -3488,7 +3227,7 @@
                     <Property name="text" type="java.lang.String" value="Format"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+                <Component class="xbuild.Components.XRadioButton" name="jRadioButton1">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupFormat"/>
@@ -3496,7 +3235,7 @@
                     <Property name="text" type="java.lang.String" value="Text Format (ASCII)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+                <Component class="xbuild.Components.XRadioButton" name="jRadioButton2">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="groupFormat"/>

@@ -16,13 +16,16 @@ public class XFormattedTextField extends JFormattedTextField {
     private String fieldName;
     private Object value;
     private FieldType fieldType;
+
+    public XFormattedTextField() {
+    }
     
-    public XFormattedTextField(Object model, String fieldName, String value) {
+    public void Init(Object model, String fieldName, String value) {
         setValue(model, fieldName, value);
         fieldType = FieldType.String;
     }
 
-    public XFormattedTextField(Object model, String fieldName, Float value) {
+    public void Init(Object model, String fieldName, Float value) {
         setValue(model, fieldName, value);
         fieldType = FieldType.Float;
     }

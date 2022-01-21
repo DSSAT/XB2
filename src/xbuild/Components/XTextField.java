@@ -18,18 +18,21 @@ public class XTextField extends JTextField {
     private Object value;
     private FieldType fieldType;
 
+    public XTextField() {
+    }
+
     /**
      *
      * @param model
      * @param fieldName
      * @param value
      */
-    public XTextField(Object model, String fieldName, String value) {
+    public void Init(Object model, String fieldName, String value) {
         setValue(model, fieldName, value);
         fieldType = FieldType.String;
     }
 
-    public XTextField(Object model, String fieldName, Float value) {
+    public void Init(Object model, String fieldName, Float value) {
         setValue(model, fieldName, value);
         fieldType = FieldType.Float;
     }

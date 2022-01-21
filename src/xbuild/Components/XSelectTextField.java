@@ -23,22 +23,25 @@ public class XSelectTextField extends JTextField {
     private Object value;
     private List<BaseModel> modelList;
     private String keyField;
+
+    public XSelectTextField() {
+    }
     
-    public XSelectTextField(Object model, String fieldName, String value, List<BaseModel> modelList) {
+    public void Init(Object model, String fieldName, String value, List<BaseModel> modelList) {
         
         setValue(model, fieldName, value, modelList);
 
         if (value != null) {
-            this.setText(value.toString());
+            this.setText(value);
         }
     }
     
-    public XSelectTextField(Object model, String fieldName, String value, List<BaseModel> modelList, String keyField) {
+    public void Init(Object model, String fieldName, String value, List<BaseModel> modelList, String keyField) {
         setValue(model, fieldName, value, modelList);
         this.keyField = keyField;
         
         if (value != null) {
-            this.setText(value.toString());
+            this.setText(value);
         }
     }
     

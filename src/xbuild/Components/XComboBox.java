@@ -24,6 +24,9 @@ public class XComboBox extends JComboBox {
     private String value;
     private List<XComboBoxItem> items;
     private int index;
+
+    public XComboBox() {
+    }
     
     public XComboBox(Object model, String fieldName, String value, List<XComboBoxItem> items) {
         this.model = model;

@@ -17,6 +17,9 @@ public class XRadioButton extends JRadioButton {
     
     private List<ModelItem> modelItems;
     private String value;
+
+    public XRadioButton() {
+    }
     
     public void setSelectedItem(List<ModelItem> modelItems, String value){
         this.modelItems = modelItems;

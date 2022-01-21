@@ -17,8 +17,11 @@ public class XDatePicker extends JXDatePicker {
     private Object model;
     private String fieldName;
     private Date value;
-    
-    public XDatePicker(Object model, String fieldName, Date value) {
+
+    public XDatePicker(){
+    }
+
+    public void Init(Object model, String fieldName, Date value) {
         this.model = model;
         this.fieldName = fieldName;
         this.value = value;

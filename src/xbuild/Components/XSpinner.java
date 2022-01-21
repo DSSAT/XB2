@@ -19,8 +19,11 @@ public class XSpinner extends JSpinner {
     private Integer value;
     private Object model;
     private String fieldName;
+
+    public XSpinner() {
+    }
     
-    public XSpinner(Object model, String fieldName, Integer value){
+    public void Init(Object model, String fieldName, Integer value){
         DefaultEditor editor = (DefaultEditor)this.getEditor();
         this.textField = (JTextField)editor.getTextField();
         this.model = model;
