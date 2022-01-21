@@ -33,6 +33,10 @@ public class WeatherStationList {
         }
         return weather;
     }
+    
+    public static void Clear(){
+        wStation.clear();
+    }
 
     public static WeatherStation GetAt(int n)
     {

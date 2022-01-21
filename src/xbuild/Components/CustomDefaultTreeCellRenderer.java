@@ -7,6 +7,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Collections;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -33,7 +35,7 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         }
 
         if (enabled && nodeName.equals("Treatment")) {
-            enabled = FileX.fieldList != null && FileX.fieldList.GetSize() > 0 && FileX.fieldList.GetAt(0).WSTA != null && FileX.fieldList.GetAt(0).ID_SOIL != null
+            enabled = FileX.fieldList != null && FileX.fieldList.GetSize() > 0 && !Utils.IsEmpty(FileX.fieldList.GetAt(0).WSTA) && !Utils.IsEmpty(FileX.fieldList.GetAt(0).ID_SOIL)
                     && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
                     && FileX.plantings != null && FileX.plantings.GetSize() > 0
                     && FileX.simulationList != null && FileX.simulationList.GetSize() > 0;
@@ -47,7 +49,17 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
                     Collections.singletonMap(
                             TextAttribute.WEIGHT, TextAttribute.WEIGHT_ULTRABOLD));
 
-            treeCellRendererComponent.setFont(font);
+            //treeCellRendererComponent.setFont(font);
+            
+            JLabel label = new JLabel();
+
+            ImageIcon icon;
+            icon = new ImageIcon(getClass().getResource("/icons/requirednode.png"));
+            label.setIcon(icon);
+            label.setText(nodeName);
+            label.setFont(font);
+            label.setEnabled(enabled);
+            return label;        
         }
         else{
             Font font = treeCellRendererComponent.getFont();

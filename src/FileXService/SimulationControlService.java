@@ -85,7 +85,7 @@ public class SimulationControlService {
 
                     tmp = Utils.PadRight(tmp, simGeneralHeader.length(), ' ');
 
-                    sim.NYERS = Utils.GetInteger(simGeneralHeader, tmp, "NREPS", 5);
+                    sim.NYERS = Utils.GetInteger(simGeneralHeader, tmp, "NYERS", 5);
                     sim.NREPS = Utils.GetInteger(simGeneralHeader, tmp, "NREPS", 5);
                     sim.START = Utils.GetString(simGeneralHeader, tmp, "START", 5);
                     sim.SDATE = Utils.GetDate(simGeneralHeader, tmp, "SDATE", 5);

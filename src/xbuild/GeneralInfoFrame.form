@@ -70,31 +70,48 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jXLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="jXLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jXLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbFileType" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtSiteCode" alignment="0" max="32767" attributes="1"/>
                                   <Component id="txtInstituteCode" alignment="0" max="32767" attributes="1"/>
                                   <Component id="txtExperimentNumber" alignment="0" max="32767" attributes="1"/>
                                   <Component id="txtYear" alignment="0" pref="77" max="32767" attributes="1"/>
                               </Group>
-                              <Component id="cbFileType" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="imagePanel" min="-2" pref="113" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtCropName" pref="537" max="32767" attributes="0"/>
+                      <Component id="txtCropName" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="bnSelectCrop" min="-2" pref="23" max="-2" attributes="0"/>
@@ -112,24 +129,30 @@
                               <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtInstituteCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtInstituteCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtSiteCode" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtExperimentNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -139,10 +162,12 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtCropName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bnSelectCrop" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCropName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,16 +176,25 @@
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="File Type"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Institute Code"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Site Code"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbFileType">
@@ -195,6 +229,9 @@
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Year"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="txtExperimentNumber">
@@ -215,6 +252,9 @@
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Experiment Number"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="bnSelectCrop">
@@ -244,6 +284,46 @@
             </Property>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel2">
@@ -261,7 +341,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jXLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -269,11 +349,13 @@
                       <Component id="jXLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="txtAddress" alignment="1" max="32767" attributes="1"/>
-                      <Component id="txtPeople" alignment="0" max="32767" attributes="1"/>
-                      <Component id="txtSite" alignment="0" max="32767" attributes="1"/>
-                      <Component id="txtExperimentName" alignment="0" pref="566" max="32767" attributes="1"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtSite" min="-2" pref="547" max="-2" attributes="1"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtAddress" alignment="1" pref="547" max="32767" attributes="1"/>
+                          <Component id="txtPeople" alignment="1" max="32767" attributes="1"/>
+                          <Component id="txtExperimentName" alignment="1" max="32767" attributes="1"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -417,7 +499,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -590,7 +672,7 @@
                           </Group>
                           <Component id="txtHRNO" alignment="0" min="-2" pref="121" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace pref="274" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

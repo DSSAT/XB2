@@ -24,7 +24,7 @@ public class WeatherService extends DSSATServiceBase {
         
         try {
             ArrayList<String> weatherList = this.weatherRepository.Parse();
-            
+            WeatherStationList.Clear();
             weatherList.forEach(w ->{
                 WeatherStation wsta = new WeatherStation();
                 String tmp[] = w.split(":");

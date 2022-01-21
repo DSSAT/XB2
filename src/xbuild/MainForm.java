@@ -1110,7 +1110,8 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
     private void jMenuItemSimAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimAddActionPerformed
         // TODO add your handling code here:
-        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", "UNKNOWN");
+        Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
+        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", sim.SNAME);
         if(r.length() > 0) {
             for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
                 Simulation s = FileX.simulationList.GetAt(i);
@@ -1120,8 +1121,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 }
             }
             
-            //Simulation sim = new Simulation(r);
-            Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
+            //Simulation sim = new Simulation(r);            
             sim.SNAME = r;
             FileX.simulationList.AddNew(sim);
 
