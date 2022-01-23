@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,20 +15,16 @@ import java.util.List;
  * @author Jazzy
  */
 public class CropList {
-    /*public static Crop crops[];
-
-    public static void setSize(int size)
-    {
-        Crop crops[] = new Crop[size];
-
-        CropList.crops = crops;
-    }*/
-
-    protected static Hashtable crops = new Hashtable();
+    protected static HashMap crops = new HashMap();
 
     public static void AddNew(Crop crop)
     {
         crops.put(crop.CropCode, crop);
+    }
+    
+    public static void Clear()
+    {
+        crops.clear();
     }
 
     public static Crop GetAt(String Code)
@@ -61,20 +56,15 @@ public class CropList {
     }
     
     public static List<Crop> GetAll(){
-        List<Crop> cropList = new ArrayList<Crop>();
+        List<Crop> cropList = new ArrayList<>();
 
-        Object[] object = crops.values().toArray();
+        Object[] objects = crops.values().toArray();
 
-        for (int i = 0; i < object.length; i++) {
-            cropList.add((Crop) object[i]);
+        for (Object object : objects) {
+            cropList.add((Crop) object);
         }
 
-        Collections.sort(cropList, new Comparator<Crop>() {
-            @Override
-            public int compare(Crop c1, Crop c2) {
-                return c1.CropCode.compareTo(c2.CropCode);
-            }
-        });
+        Collections.sort(cropList, (Crop c1, Crop c2) -> c1.CropCode.compareTo(c2.CropCode));
         
         return cropList;
     }
@@ -85,7 +75,6 @@ public class CropList {
             Object[] object = crops.values().toArray();
             for(int i = 0;i < object.length;i++)
             {
-
                 if(((Crop)object[i]).CropName.equals(CropName))
                 {
                     crop = (Crop) object[i];

@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,11 +16,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class SoilTextureList {
-    protected static Hashtable soils = new Hashtable();
+    protected static HashMap soils = new HashMap();
 
     public static void AddNew(SoilTexture soil)
     {
         soils.put(soil.Code, soil);
+    }
+    
+    public static void Clear(){
+        soils.clear();
     }
 
     public static SoilTexture GetAt(String Code)
@@ -54,12 +58,7 @@ public class SoilTextureList {
             soilTextureList.add((SoilTexture) object);
         }
         
-        Collections.sort(soilTextureList, new Comparator<SoilTexture>() {
-            @Override
-            public int compare(SoilTexture s1, SoilTexture s2) {
-                return s1.Description.compareTo(s2.Description);
-            }
-        });
+        Collections.sort(soilTextureList, (SoilTexture s1, SoilTexture s2) -> s1.Description.compareTo(s2.Description));
 
         return soilTextureList;
     }

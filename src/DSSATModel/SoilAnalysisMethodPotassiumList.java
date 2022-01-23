@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,24 +16,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class SoilAnalysisMethodPotassiumList {
-
-    /*
-    public static SoilAnalysisMethodPotassium methods[];
-
-    public static void setSize(int size)
-    {
-        SoilAnalysisMethodPotassium methodList[] = new SoilAnalysisMethodPotassium[size];
-
-        SoilAnalysisMethodPotassiumList.methods = methodList;
-    }
-     *
-     */
-
-    protected static Hashtable methods = new Hashtable();
+    protected static HashMap methods = new HashMap();
 
     public static void AddNew(SoilAnalysisMethodPotassium potass)
     {
         methods.put(potass.Code, potass);
+    }
+    
+    public static void Clear(){
+        methods.clear();
     }
 
     public static SoilAnalysisMethodPotassium GetAt(String Code)
@@ -67,12 +58,7 @@ public class SoilAnalysisMethodPotassiumList {
             spList.add((SoilAnalysisMethodPotassium) object);
         }
         
-        Collections.sort(spList, new Comparator<SoilAnalysisMethodPotassium>() {
-            @Override
-            public int compare(SoilAnalysisMethodPotassium p1, SoilAnalysisMethodPotassium p2) {
-                return p1.Description.compareTo(p2.Description);
-            }
-        });
+        Collections.sort(spList, (SoilAnalysisMethodPotassium p1, SoilAnalysisMethodPotassium p2) -> p1.Description.compareTo(p2.Description));
 
         return spList;
     }

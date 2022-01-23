@@ -86,15 +86,12 @@ public class CultivarList {
             culs.add((Cultivar)cultivars.get(i));
         }
         
-        Collections.sort(culs, new Comparator<Cultivar>() {
-            @Override
-            public int compare(Cultivar c1, Cultivar c2) {
-                int c = c1.CropName.compareTo(c2.CropName);
-                if(c == 0)
-                    c = c1.CulName.compareTo(c2.CulName);
-                
-                return c;
-            }
+        Collections.sort(culs, (Cultivar c1, Cultivar c2) -> {
+            int c = c1.CropName.compareTo(c2.CropName);
+            if(c == 0)
+                c = c1.CulName.compareTo(c2.CulName);
+            
+            return c;
         });
 
         return culs;
@@ -110,12 +107,7 @@ public class CultivarList {
                 culs.add((Cultivar)cultivars.get(i));
         }
         
-        Collections.sort(culs, new Comparator<Cultivar>() {
-            @Override
-            public int compare(Cultivar c1, Cultivar c2) {
-                return c1.CulName.compareTo(c2.CulName);
-            }
-        });
+        Collections.sort(culs, (Cultivar c1, Cultivar c2) -> c1.CulName.compareTo(c2.CulName));
 
         return culs;
     }

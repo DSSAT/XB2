@@ -23,6 +23,7 @@ public class TillageService extends DSSATServiceBase {
         
         try {
             ArrayList<String> tillageList = this.tillageRepository.Parse();
+            TillageImplementList.Clear();
             
             for(int i = 0;i < tillageList.size();i++)
             {

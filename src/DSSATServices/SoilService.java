@@ -23,7 +23,7 @@ public class SoilService extends DSSATServiceBase {
         
         try {
             ArrayList<String> soilList = this.soilRepository.Parse();
-            
+            SoilList.Clear();
             for(String soilTemp : soilList)
             {
                 String[] tmp = soilTemp.split(":");

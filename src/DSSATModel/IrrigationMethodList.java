@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,11 +15,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class IrrigationMethodList {
-    protected static Hashtable irrigs = new Hashtable();
+    protected static HashMap irrigs = new HashMap();
 
     public static void AddNew(IrrigationMethod irrig)
     {
         irrigs.put(irrig.Code, irrig);
+    }
+    
+    public static void Clear(){
+        irrigs.clear();
     }
 
     public static IrrigationMethod GetAt(String Code)
@@ -54,12 +57,7 @@ public class IrrigationMethodList {
             irrigList.add((IrrigationMethod) object);
         }
         
-        Collections.sort(irrigList, new Comparator<BaseModel>() {
-            @Override
-            public int compare(BaseModel i1, BaseModel i2) {
-                return i1.Description.compareTo(i2.Description);
-            }
-        });
+        Collections.sort(irrigList, (BaseModel i1, BaseModel i2) -> i1.Description.compareTo(i2.Description));
 
         return irrigList;
     }

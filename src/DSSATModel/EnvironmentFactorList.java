@@ -5,23 +5,14 @@
 
 package DSSATModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
 public class EnvironmentFactorList {
-    //protected static EnvironmentFactor factors[];
-
-    protected static Vector factors = new Vector();
-
-    //public static void setSize(int size)
-    //{
-    //    EnvironmentFactor factorList[] = new EnvironmentFactor[size];
-
-        //EnvironmentFactorList.factors = factorList;
-    //}
+    protected static ArrayList<EnvironmentFactor> factors = new ArrayList<>();
     
     public static void Clear()
     {

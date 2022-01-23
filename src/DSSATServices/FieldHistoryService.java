@@ -25,6 +25,7 @@ public class FieldHistoryService extends DSSATServiceBase {
         
         try {
             ArrayList<String> fieldHistoryList = this.fieldHistoryRepository.Parse();
+            FieldHistoryList.Clear();
             
             for(int i = 0;i < fieldHistoryList.size();i++)
             {

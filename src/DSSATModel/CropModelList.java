@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,23 +15,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class CropModelList {
-    /*
-    public static CropModel cropModels[];
-
-    public static void setSize(int size)
-    {
-        CropModel cropModelList[] = new CropModel[size];
-
-        CropModelList.cropModels = cropModelList;
-    }
-     * 
-     */
-
-    protected static Hashtable cropModels = new Hashtable();
+    protected static HashMap cropModels = new HashMap();
 
     public static void AddNew(CropModel cropModel)
     {
         cropModels.put(cropModel.ModelCode, cropModel);
+    }
+    
+    public static void Clear(){
+        cropModels.clear();
     }
 
     public static CropModel GetAt(String ModelCode)
@@ -61,17 +52,12 @@ public class CropModelList {
     public static List<BaseModel> GetAll()
     {
         List<BaseModel> cropModelList = new ArrayList<>();
-        Object[] object = cropModels.values().toArray();
-        for (int i = 0; i < object.length; i++) {
-            cropModelList.add((CropModel) object[i]);
+        Object[] objects = cropModels.values().toArray();
+        for (Object object : objects) {
+            cropModelList.add((CropModel) object);
         }
 
-        Collections.sort(cropModelList, new Comparator<BaseModel>() {
-            @Override
-            public int compare(BaseModel c1, BaseModel c2) {
-                return c1.Code.compareTo(c2.Description);
-            }
-        });
+        Collections.sort(cropModelList, (BaseModel c1, BaseModel c2) -> c1.Code.compareTo(c2.Description));
         
         return cropModelList;
     }

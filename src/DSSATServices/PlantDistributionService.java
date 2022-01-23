@@ -24,6 +24,7 @@ public class PlantDistributionService extends DSSATServiceBase {
         
         try {
             ArrayList<String> plantDistribution = this.plantDistributionRepository.Parse();
+            PlantDistributionList.Clear();
             
             for(int i = 0;i < plantDistribution.size();i++)
             {

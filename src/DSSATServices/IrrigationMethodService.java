@@ -23,6 +23,7 @@ public class IrrigationMethodService extends DSSATServiceBase {
         
         try {
             ArrayList<String> irrigationMethod = this.irrigationMethodRepository.Parse();
+            IrrigationMethodList.Clear();
             
             for(int i = 0;i < irrigationMethod.size();i++)
             {

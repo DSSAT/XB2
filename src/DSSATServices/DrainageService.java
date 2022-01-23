@@ -21,6 +21,8 @@ public class DrainageService extends DSSATServiceBase {
     public void Parse() throws Exception{
         try {
             ArrayList<String> drainList = this.drainageRepository.Parse();
+            DrainageList.Clear();
+            
             for (int i = 0; i < drainList.size(); i++) {
                 Drainage drain = new Drainage();
                 String tmp = drainList.get(i);

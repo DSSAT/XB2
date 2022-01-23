@@ -23,6 +23,7 @@ public class FertilizerMethodService extends DSSATServiceBase {
         
         try {
             ArrayList<String> fertilizerMethodList = this.fertilizerMethodRepository.Parse();
+            FertilizerMethodList.Clear();
             
             for(int i = 0;i < fertilizerMethodList.size();i++)
             {

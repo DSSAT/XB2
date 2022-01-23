@@ -5,11 +5,9 @@
 
 package DSSATModel;
 
-import static DSSATModel.CropList.crops;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,7 +17,7 @@ import java.util.List;
 public class ChemicalMaterialList {
 
     //public static ChemicalMaterial chemicals[];
-    protected static Hashtable chemicals = new Hashtable();
+    protected static HashMap chemicals = new HashMap();
 
     public static void Clear()
     {
@@ -57,18 +55,13 @@ public class ChemicalMaterialList {
     public static List<ChemicalMaterial> GetAll(){
         List<ChemicalMaterial> chemicalList = new ArrayList<>();
 
-        Object[] object = chemicals.values().toArray();
+        Object[] objects = chemicals.values().toArray();
 
-        for (int i = 0; i < object.length; i++) {
-            chemicalList.add((ChemicalMaterial) object[i]);
+        for (Object object : objects) {
+            chemicalList.add((ChemicalMaterial) object);
         }
 
-        Collections.sort(chemicalList, new Comparator<ChemicalMaterial>() {
-            @Override
-            public int compare(ChemicalMaterial c1, ChemicalMaterial c2) {
-                return c1.Description.compareTo(c2.Description);
-            }
-        });
+        Collections.sort(chemicalList, (ChemicalMaterial c1, ChemicalMaterial c2) -> c1.Description.compareTo(c2.Description));
         
         return chemicalList;
     }

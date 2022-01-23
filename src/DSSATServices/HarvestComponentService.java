@@ -26,6 +26,7 @@ public class HarvestComponentService extends DSSATServiceBase {
         
         try {
             ArrayList<String> harvestCompList = this.harvestComponentRepository.Parse();
+            HarvestComponentList.Clear();
             
             for(int i = 0;i < harvestCompList.size();i++)
             {

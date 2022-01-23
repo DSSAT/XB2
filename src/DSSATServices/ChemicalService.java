@@ -22,6 +22,7 @@ public class ChemicalService extends DSSATServiceBase {
     public void Parse() throws Exception {
         try {
             ArrayList<String> chemList = this.chemicalRepository.Parse();
+            ChemicalMaterialList.Clear();
 
             for (int i = 0; i < chemList.size(); i++) {
                 ChemicalMaterial chem = new ChemicalMaterial();

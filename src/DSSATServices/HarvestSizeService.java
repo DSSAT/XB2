@@ -24,6 +24,7 @@ public class HarvestSizeService extends DSSATServiceBase {
         
         try {
             ArrayList<String> harvestSizeList = this.harvestSizeRepository.Parse();
+            HarvestSizeList.Clear();
             
             for(int i = 0;i < harvestSizeList.size();i++)
             {

@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,11 +27,15 @@ public class PlantingMethodList {
      *
      */
 
-    protected static Hashtable pMethod = new Hashtable();
+    protected static HashMap pMethod = new HashMap();
 
     public static void AddNew(PlantingMethod plant)
     {
         pMethod.put(plant.Code, plant);
+    }
+    
+    public static void Clear(){
+        pMethod.clear();
     }
 
     public static PlantingMethod GetAt(String Code)
@@ -65,12 +69,7 @@ public class PlantingMethodList {
             plantingMethodList.add((PlantingMethod) object);
         }
         
-        Collections.sort(plantingMethodList, new Comparator<PlantingMethod>() {
-            @Override
-            public int compare(PlantingMethod p1, PlantingMethod p2) {
-                return p1.Description.compareTo(p2.Description);
-            }
-        });
+        Collections.sort(plantingMethodList, (PlantingMethod p1, PlantingMethod p2) -> p1.Description.compareTo(p2.Description));
 
         return plantingMethodList;
     }

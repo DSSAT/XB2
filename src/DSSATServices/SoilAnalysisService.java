@@ -28,6 +28,9 @@ public class SoilAnalysisService extends DSSATServiceBase {
         
         try {
             ArrayList<String> soilAnalysis = this.soilAnalysisRepository.Parse();
+            SoilAnalysisMethodPhosphorusList.Clear();
+            SoilAnalysisMethodPhList.Clear();
+            SoilAnalysisMethodPotassiumList.Clear();
             
             for(int i = 0;i < soilAnalysis.size();i++)
             {

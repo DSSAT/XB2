@@ -9,7 +9,6 @@ import java.util.HashMap;
  */
 public class SimulationControlDefaults {
     
-    //private static final String[] experimentList = new String[] {"Experimental", "Sequential", "Seasonal", "Spatial"};
     private static final HashMap<ExperimentType, Simulation> simulations = new HashMap<ExperimentType, Simulation>() {};
     static {
         for (ExperimentType exp : ExperimentType.values()) {

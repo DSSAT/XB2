@@ -23,6 +23,7 @@ public class PlantingMethodService extends DSSATServiceBase {
         
         try {
             ArrayList<String> plantingMethod = this.plantingMethodRepository.Parse();
+            PlantingMethodList.Clear();
             
             for(int i = 0;i < plantingMethod.size();i++)
             {

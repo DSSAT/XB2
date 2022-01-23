@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,20 +15,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class FertilizerMaterialList {
-    /*
-    public static FertilizerMethod fertilizer[];
-
-    public static void setSize(int size)
-    {
-        fertilizer = new FertilizerMethod[size];
-    }
-    */
-
-    protected static Hashtable fertilizer = new Hashtable();
+    protected static HashMap fertilizer = new HashMap();
 
     public static void AddNew(FertilizerMaterial fertil)
     {
         fertilizer.put(fertil.Code, fertil);
+    }
+    
+    public static void Clear(){
+        fertilizer.clear();
     }
 
     public static FertilizerMaterial GetAt(String Code)
@@ -63,12 +57,7 @@ public class FertilizerMaterialList {
             fertils.add((FertilizerMaterial) object);
         }
         
-        Collections.sort(fertils, new Comparator<BaseModel>() {
-            @Override
-            public int compare(BaseModel f1, BaseModel f2) {
-                return f1.Description.compareTo(f2.Description);
-            }
-        });
+        Collections.sort(fertils, (BaseModel f1, BaseModel f2) -> f1.Description.compareTo(f2.Description));
 
         return fertils;
     }

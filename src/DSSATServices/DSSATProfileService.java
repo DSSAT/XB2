@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Jazzy
  */
 public class DSSATProfileService {
-    private DSSATProfileRepository dssatProfileRepository;
+    private final DSSATProfileRepository dssatProfileRepository;
     
     public DSSATProfileService(String version, String rootPath){
         this.dssatProfileRepository = new DSSATProfileRepository(version, rootPath);

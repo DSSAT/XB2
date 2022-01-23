@@ -24,6 +24,7 @@ public class GrowthStageService extends DSSATServiceBase {
     public void Parse() throws Exception{
         ArrayList<String> gStage = this.growthStageRepository.Parse();
         boolean isValid = true;
+        GrowthStageList.Clear();
         
         for (int i = 0; i < gStage.size(); i++) {
             GrowthStage growth = new GrowthStage();

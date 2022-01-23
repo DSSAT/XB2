@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,24 +16,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class SoilAnalysisMethodPhList {
-
-    /*
-    public static SoilAnalysisMethodPh methods[];
-
-    public static void setSize(int size)
-    {
-        SoilAnalysisMethodPh methodList[] = new SoilAnalysisMethodPh[size];
-
-        SoilAnalysisMethodPhList.methods = methodList;
-    }
-     *
-     */
-
-    protected static Hashtable methods = new Hashtable();
+    protected static HashMap methods = new HashMap();
 
     public static void AddNew(SoilAnalysisMethodPh ph)
     {
         methods.put(ph.Code, ph);
+    }
+    
+    public static void Clear(){
+        methods.clear();
     }
 
     public static SoilAnalysisMethodPh GetAt(String Code)
@@ -67,12 +58,7 @@ public class SoilAnalysisMethodPhList {
             soilAnalysisList.add((SoilAnalysisMethodPh) object);
         }
         
-        Collections.sort(soilAnalysisList, new Comparator<SoilAnalysisMethodPh>() {
-            @Override
-            public int compare(SoilAnalysisMethodPh s1, SoilAnalysisMethodPh s2) {
-                return s1.Description.compareTo(s2.Description);
-            }
-        });
+        Collections.sort(soilAnalysisList, (SoilAnalysisMethodPh s1, SoilAnalysisMethodPh s2) -> s1.Description.compareTo(s2.Description));
 
         return soilAnalysisList;
     }

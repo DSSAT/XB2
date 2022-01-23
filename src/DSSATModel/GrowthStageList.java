@@ -8,9 +8,7 @@ package DSSATModel;
 import static FileXModel.FileX.cultivars;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Vector;
 
 /**
  *
@@ -66,31 +64,21 @@ public class GrowthStageList {
             });
         });
         
-        Collections.sort(gList, new Comparator<GrowthStage>() {
-            @Override
-            public int compare(GrowthStage g1, GrowthStage g2) {
-                return g1.Description.compareTo(g2.Description);
-            }
-        });
+        Collections.sort(gList, (GrowthStage g1, GrowthStage g2) -> g1.Description.compareTo(g2.Description));
 
         return gList;
     }
     
     public static List<GrowthStage> GetAll(){
-        List<GrowthStage> growthStageList = new ArrayList<GrowthStage>();
+        List<GrowthStage> growthStageList = new ArrayList<>();
 
-        Object[] object = growthStage.toArray();
+        Object[] objects = growthStage.toArray();
 
-        for (int i = 0; i < object.length; i++) {
-            growthStageList.add((GrowthStage) object[i]);
+        for (Object object : objects) {
+            growthStageList.add((GrowthStage) object);
         }
 
-        Collections.sort(growthStageList, new Comparator<GrowthStage>() {
-            @Override
-            public int compare(GrowthStage c1, GrowthStage c2) {
-                return c1.Code.compareTo(c2.Code);
-            }
-        });
+        Collections.sort(growthStageList, (GrowthStage c1, GrowthStage c2) -> c1.Code.compareTo(c2.Code));
         
         return growthStageList;
     }

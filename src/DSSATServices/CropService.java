@@ -27,6 +27,9 @@ public class CropService extends DSSATServiceBase {
         try {
             ArrayList<String> cropList = this.cropRepository.Parse();
             
+            CropList.Clear();
+            CultivarList.Clear();
+            
             for (int i = 0; i < cropList.size(); i++) {
                 try {
                     Crop crop = new Crop();

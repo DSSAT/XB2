@@ -24,6 +24,7 @@ public class ResiduesService extends DSSATServiceBase {
         
         try {
             ArrayList<String> residuesList = this.residuesRepository.Parse();
+            ResiduesList.Clear();
             
             for(int i = 0;i < residuesList.size();i++)
             {

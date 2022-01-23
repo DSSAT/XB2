@@ -24,6 +24,7 @@ public class EnvironmentService extends DSSATServiceBase {
         
         try {
             ArrayList<String> environmentList = this.environmentRepository.Parse();
+            EnvironmentFactorList.Clear();
             
             for(int i = 0;i < environmentList.size();i++)
             {

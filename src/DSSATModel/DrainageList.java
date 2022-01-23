@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,11 +15,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class DrainageList {
-    protected static Hashtable drainages = new Hashtable();
+    protected static HashMap drainages = new HashMap();
 
     public static void AddNew(Drainage drainage)
     {
         drainages.put(drainage.Code, drainage);
+    }
+    
+    public static void Clear(){
+        drainages.clear();
     }
 
     public static Drainage GetAt(String Code)
@@ -54,12 +57,7 @@ public class DrainageList {
             drains.add((Drainage) drainage);
         }
         
-        Collections.sort(drains, new Comparator<Drainage>() {
-            @Override
-            public int compare(Drainage d1, Drainage d2) {
-                return d1.Description.compareTo(d2.Description);
-            }
-        });
+        Collections.sort(drains, (Drainage d1, Drainage d2) -> d1.Description.compareTo(d2.Description));
         
         return drains;
     }

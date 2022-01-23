@@ -7,8 +7,7 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,11 +16,15 @@ import java.util.List;
  */
 public class FieldHistoryList {
 
-    protected static Hashtable fieldHistory = new Hashtable();
+    protected static HashMap fieldHistory = new HashMap();
 
     public static void AddNew(FieldHistory fHist)
     {
         fieldHistory.put(fHist.Code, fHist);
+    }
+    
+    public static void Clear(){
+        fieldHistory.clear();
     }
 
     public static FieldHistory GetAt(String Code)
@@ -55,12 +58,7 @@ public class FieldHistoryList {
             ferMethods.add((FieldHistory) object);
         }
         
-        Collections.sort(ferMethods, new Comparator<FieldHistory>() {
-            @Override
-            public int compare(FieldHistory f1, FieldHistory f2) {
-                return f1.Description.compareTo(f2.Description);
-            }
-        });
+        Collections.sort(ferMethods, (FieldHistory f1, FieldHistory f2) -> f1.Description.compareTo(f2.Description));
 
         return ferMethods;
     }

@@ -24,6 +24,7 @@ public class SoilTextureService extends DSSATServiceBase {
 
         try {
             ArrayList<String> soilTextureList = this.soilTextureRepository.Parse();
+            SoilTextureList.Clear();
 
             for(int i = 0;i < soilTextureList.size();i++)
             {

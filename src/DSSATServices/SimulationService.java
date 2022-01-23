@@ -24,6 +24,7 @@ public class SimulationService extends DSSATServiceBase {
         
         try {
             ArrayList<String> cropModel = this.simulationRepository.Parse();
+            CropModelList.Clear();
             
             for(int i = 0;i < cropModel.size();i++)
             {

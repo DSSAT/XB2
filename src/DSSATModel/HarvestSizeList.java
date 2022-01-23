@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,11 +17,15 @@ import java.util.List;
  */
 public class HarvestSizeList {
 
-    protected static Hashtable harvestSize = new Hashtable();
+    protected static HashMap harvestSize = new HashMap();
 
     public static void AddNew(HarvestSize harvest)
     {
         harvestSize.put(harvest.Code, harvest);
+    }
+    
+    public static void Clear(){
+        harvestSize.clear();
     }
 
     public static HarvestSize GetAt(String Code)
@@ -55,12 +59,7 @@ public class HarvestSizeList {
             havestSizeList.add((HarvestSize) object);
         }
         
-        Collections.sort(havestSizeList, new Comparator<HarvestSize>() {
-            @Override
-            public int compare(HarvestSize h1, HarvestSize h2) {
-                return h1.Description.compareTo(h2.Description);
-            }
-        });
+        Collections.sort(havestSizeList, (HarvestSize h1, HarvestSize h2) -> h1.Description.compareTo(h2.Description));
 
         return havestSizeList;
     }

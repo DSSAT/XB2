@@ -6,7 +6,7 @@
 package DSSATModel;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,11 +14,15 @@ import java.util.List;
  * @author Jazzy
  */
 public class SoilList {
-    protected static Hashtable soils = new Hashtable();
+    protected static HashMap soils = new HashMap();
 
     public static void AddNew(Soil soil)
     {
         soils.put(soil.Code, soil);
+    }
+    
+    public static void Clear(){
+        soils.clear();
     }
 
     public static Soil GetAt(String Code)
@@ -51,7 +55,7 @@ public class SoilList {
     
     public static List<Soil> GetAll()
     {
-        List<Soil> soilList = new ArrayList<Soil>();
+        List<Soil> soilList = new ArrayList<>();
         for(int i = 0;i < soils.size();i++){
             soilList.add(GetAt(i));
         }

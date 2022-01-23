@@ -8,7 +8,7 @@ package DSSATModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,11 +17,15 @@ import java.util.List;
  */
 public class TillageImplementList {
 
-    protected static Hashtable tillages = new Hashtable();
+    protected static HashMap tillages = new HashMap();
 
     public static void AddNew(TillageImplement tillage)
     {
         tillages.put(tillage.Code, tillage);
+    }
+    
+    public static void Clear(){
+        tillages.clear();
     }
 
     public static TillageImplement GetAt(String Code)
@@ -55,12 +59,7 @@ public class TillageImplementList {
             tillageList.add((TillageImplement) object);
         }
         
-        Collections.sort(tillageList, new Comparator<TillageImplement>() {
-            @Override
-            public int compare(TillageImplement t1, TillageImplement t2) {
-                return t1.Description.compareTo(t2.Description);
-            }
-        });
+        Collections.sort(tillageList, (TillageImplement t1, TillageImplement t2) -> t1.Description.compareTo(t2.Description));
 
         return tillageList;
     }
