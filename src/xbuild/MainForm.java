@@ -55,7 +55,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         {
             put("General Information", "GeneralInfoFrame");
             put("Notes", "GeneralNotesFrame");
-            put("Fields", "FieldPanel");
+            put("Fields", "FieldFrame");
             put("Initial Conditions", "InitialConditionFrame");
             put("Soil Analysis", "SoilAnalysisFrame");
             put("Environmental Modifications", "EnvironmentalFrame");

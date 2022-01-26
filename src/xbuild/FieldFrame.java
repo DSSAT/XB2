@@ -4,35 +4,95 @@
  */
 
 /*
- * FieldFrame.java
+ * FieldPanel.java
  *
- * Created on Mar 14, 2010, 2:32:18 PM
+ * Created on Mar 14, 2010, 2:35:42 PM
  */
 
 package xbuild;
 
 import FileXModel.FieldDetail;
+import DSSATModel.Drainage;
+import DSSATModel.DrainageList;
+import DSSATModel.FieldHistory;
+import DSSATModel.FieldHistoryList;
+import DSSATModel.Soil;
+import DSSATModel.SoilList;
+import DSSATModel.SoilTexture;
+import DSSATModel.SoilTextureList;
+import DSSATModel.WeatherStation;
+import DSSATModel.WeatherStationList;
+import ListDialog.DrainageDialog;
+import ListDialog.FieldHistoryDialog;
+import ListDialog.SoilListDialog;
+import ListDialog.SoilTextureDialog;
+import ListDialog.WeatherStationDialog;
+import Extensions.LimitDocument;
 import FileXModel.FileX;
-import Extensions.Utils;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import org.jdesktop.swingx.JXFrame;
+import FileXModel.IModelXBase;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
 
 /**
  *
  * @author Jazzy
  */
-public class FieldFrame extends javax.swing.JInternalFrame {
+public class FieldFrame extends javax.swing.JInternalFrame implements KeyListener {
 
-    /** Creates new form FieldFrame */
-    public FieldFrame() {
+    /** Creates new form FieldPanel */
+
+    private String ID_SOIL;
+    private String FLDT;
+    private String SLTX;
+    private String FLHST;
+    private String WSTA;
+
+    private FieldDetail field;
+   
+
+    public FieldFrame(String nodeName) {
+        FieldDetail field = null;
+        
+        for (IModelXBase f : FileX.fieldList.GetAll()) {
+            if (((FieldDetail)f).FLNAME.equalsIgnoreCase(nodeName)) {
+                field = (FieldDetail)f;
+                break;
+            }
+        }
+        if(field == null)
+            field = new FieldDetail(nodeName);
+        
         initComponents();
 
+        txtID_FIELD.setDocument(new LimitDocument(8));
+
+        this.field = field;
+
+        txtID_FIELD.addKeyListener(this);
+        txtWSTA.addKeyListener(this);
+        txtFLSA.addKeyListener(this);
+        txtFLOB.addKeyListener(this);
+        txtFLDT.addKeyListener(this);
+        txtFLDD.addKeyListener(this);
+        txtFLDS.addKeyListener(this);
+        txtFLST.addKeyListener(this);
+        txtSLTX.addKeyListener(this);
+        txtSLDP.addKeyListener(this);
+        txtID_SOIL.addKeyListener(this);
+        txtXCRD.addKeyListener(this);
+        txtYCRD.addKeyListener(this);
+        txtELEV.addKeyListener(this);
+        txtAREA.addKeyListener(this);
+        txtSLEN.addKeyListener(this);
+        txtFLWR.addKeyListener(this);
+        txtSLAS.addKeyListener(this);
+        txtFLHST.addKeyListener(this);
+        txtFHDUR.addKeyListener(this);
+        
         LoadField();
     }
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -43,180 +103,919 @@ public class FieldFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        mnuCopy = new javax.swing.JMenuItem();
-        mnuRemove = new javax.swing.JMenuItem();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        popupMenu1 = new java.awt.PopupMenu();
+        menuItem1 = new java.awt.MenuItem();
+        jXPanel2 = new org.jdesktop.swingx.JXPanel();
+        jXPanel6 = new org.jdesktop.swingx.JXPanel();
+        jXLabel11 = new org.jdesktop.swingx.JXLabel();
+        jXLabel12 = new org.jdesktop.swingx.JXLabel();
+        jXLabel13 = new org.jdesktop.swingx.JXLabel();
+        jXLabel14 = new org.jdesktop.swingx.JXLabel();
+        txtXCRD = new javax.swing.JFormattedTextField();
+        txtYCRD = new javax.swing.JFormattedTextField();
+        txtELEV = new javax.swing.JFormattedTextField();
+        jXPanel7 = new org.jdesktop.swingx.JXPanel();
+        txtFLHST = new javax.swing.JTextField();
+        jXLabel15 = new org.jdesktop.swingx.JXLabel();
+        jXLabel17 = new org.jdesktop.swingx.JXLabel();
+        jXLabel19 = new org.jdesktop.swingx.JXLabel();
+        jXLabel20 = new org.jdesktop.swingx.JXLabel();
+        jXLabel23 = new org.jdesktop.swingx.JXLabel();
+        jXLabel24 = new org.jdesktop.swingx.JXLabel();
+        bnFLHST = new javax.swing.JButton();
+        jXLabel22 = new org.jdesktop.swingx.JXLabel();
+        jXLabel21 = new org.jdesktop.swingx.JXLabel();
+        jXLabel16 = new org.jdesktop.swingx.JXLabel();
+        jXLabel18 = new org.jdesktop.swingx.JXLabel();
+        jXLabel27 = new org.jdesktop.swingx.JXLabel();
+        jXLabel28 = new org.jdesktop.swingx.JXLabel();
+        txtAREA = new javax.swing.JFormattedTextField();
+        txtFLWR = new javax.swing.JFormattedTextField();
+        txtFLSA = new javax.swing.JFormattedTextField();
+        txtSLAS = new javax.swing.JFormattedTextField();
+        txtFHDUR = new javax.swing.JFormattedTextField();
+        txtSLEN = new javax.swing.JFormattedTextField();
+        txtFLOB = new javax.swing.JFormattedTextField();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
+        jXPanel3 = new org.jdesktop.swingx.JXPanel();
+        txtWSTA = new javax.swing.JTextField();
+        bnWSTA = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jXPanel5 = new org.jdesktop.swingx.JXPanel();
+        txtFLDT = new javax.swing.JTextField();
+        jXLabel10 = new org.jdesktop.swingx.JXLabel();
+        bnFLDT = new javax.swing.JButton();
+        jXLabel6 = new org.jdesktop.swingx.JXLabel();
+        jXLabel7 = new org.jdesktop.swingx.JXLabel();
+        jXLabel8 = new org.jdesktop.swingx.JXLabel();
+        jXLabel9 = new org.jdesktop.swingx.JXLabel();
+        txtFLDS = new javax.swing.JFormattedTextField();
+        txtFLDD = new javax.swing.JFormattedTextField();
+        jXPanel4 = new org.jdesktop.swingx.JXPanel();
+        txtID_SOIL = new javax.swing.JTextField();
+        txtSLTX = new javax.swing.JTextField();
+        jXLabel1 = new org.jdesktop.swingx.JXLabel();
+        jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        jXLabel3 = new org.jdesktop.swingx.JXLabel();
+        jXLabel4 = new org.jdesktop.swingx.JXLabel();
+        jXLabel5 = new org.jdesktop.swingx.JXLabel();
+        bnID_SOIL = new javax.swing.JButton();
+        bnSLTX = new javax.swing.JButton();
+        txtFLST = new javax.swing.JFormattedTextField();
+        txtSLDP = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtID_FIELD = new javax.swing.JTextField();
+        jXLabel25 = new org.jdesktop.swingx.JXLabel();
 
-        mnuCopy.setText("Copy");
-        mnuCopy.addActionListener(new java.awt.event.ActionListener() {
+        popupMenu1.setLabel("popupMenu1");
+        popupMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCopyActionPerformed(evt);
+                popupMenu1ActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(mnuCopy);
 
-        mnuRemove.setText("Remove");
-        mnuRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRemoveActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(mnuRemove);
+        menuItem1.setLabel("menuItem1");
+        popupMenu1.add(menuItem1);
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        setPreferredSize(new java.awt.Dimension(767, 677));
+        setPreferredSize(new java.awt.Dimension(744, 631));
 
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseReleased(evt);
+        jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Additional Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel2.setPreferredSize(new java.awt.Dimension(635, 360));
+
+        jXPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel6.setPreferredSize(new java.awt.Dimension(605, 110));
+
+        jXLabel11.setText("X-Coordinate in a field (e.g. Longtitude)");
+
+        jXLabel12.setText("Y-Coordinate in a field (e.g. Latitude)");
+
+        jXLabel13.setText("Elevation above mean sea level");
+
+        jXLabel14.setText("m");
+
+        txtXCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtYCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtELEV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
+        jXPanel6.setLayout(jXPanel6Layout);
+        jXPanel6Layout.setHorizontalGroup(
+            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel6Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel6Layout.createSequentialGroup()
+                        .addComponent(txtELEV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtXCRD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtYCRD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(319, Short.MAX_VALUE))
+        );
+        jXPanel6Layout.setVerticalGroup(
+            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel6Layout.createSequentialGroup()
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtXCRD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtYCRD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtELEV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel7.setPreferredSize(new java.awt.Dimension(605, 200));
+
+        jXLabel15.setText("Size of field");
+
+        jXLabel17.setText("Field of length to with ratio");
+
+        jXLabel19.setText("Slope and aspect");
+
+        jXLabel20.setText("Slope aspect");
+
+        jXLabel23.setText("Field history duration");
+
+        jXLabel24.setText("Field history");
+
+        bnFLHST.setText("...");
+        bnFLHST.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnFLHSTActionPerformed(evt);
             }
         });
+
+        jXLabel22.setText("degree from horizontol plus direction");
+
+        jXLabel21.setText("degree clockwise from North");
+
+        jXLabel16.setText("Length");
+
+        jXLabel18.setText("Obstruction to sun");
+
+        jXLabel27.setText("m");
+
+        jXLabel28.setText("degree");
+
+        txtAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtFLWR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtFLSA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+
+        txtSLAS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtFHDUR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtSLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtFLOB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        javax.swing.GroupLayout jXPanel7Layout = new javax.swing.GroupLayout(jXPanel7);
+        jXPanel7.setLayout(jXPanel7Layout);
+        jXPanel7Layout.setHorizontalGroup(
+            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel7Layout.createSequentialGroup()
+                        .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFHDUR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFLHST, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(jXPanel7Layout.createSequentialGroup()
+                        .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAREA, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFLWR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFLSA, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSLAS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jXLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel7Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSLEN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFLOB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jXLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jXLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap())
+        );
+        jXPanel7Layout.setVerticalGroup(
+            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel7Layout.createSequentialGroup()
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAREA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSLEN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLWR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFLSA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSLAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFHDUR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnFLHST)
+                    .addComponent(txtFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
+        jXPanel2.setLayout(jXPanel2Layout);
+        jXPanel2Layout.setHorizontalGroup(
+            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                    .addComponent(jXPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jXPanel2Layout.setVerticalGroup(
+            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel2Layout.createSequentialGroup()
+                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Field Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel1.setPreferredSize(new java.awt.Dimension(635, 300));
+
+        jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Weather Station", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel3.setPreferredSize(new java.awt.Dimension(605, 50));
+
+        bnWSTA.setText("...");
+        bnWSTA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnWSTAActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel5.setText("*");
+
+        javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
+        jXPanel3.setLayout(jXPanel3Layout);
+        jXPanel3Layout.setHorizontalGroup(
+            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtWSTA)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bnWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jXPanel3Layout.setVerticalGroup(
+            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel3Layout.createSequentialGroup()
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnWSTA)
+                    .addComponent(jLabel5))
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        jXPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drainage", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel5.setPreferredSize(new java.awt.Dimension(605, 87));
+
+        jXLabel10.setText("Drainage Type");
+
+        bnFLDT.setText("...");
+        bnFLDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnFLDTActionPerformed(evt);
+            }
+        });
+
+        jXLabel6.setText("Drain Dept");
+
+        jXLabel7.setText("cm");
+
+        jXLabel8.setText("Drain Spacing");
+
+        jXLabel9.setText("m");
+
+        txtFLDS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtFLDD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        javax.swing.GroupLayout jXPanel5Layout = new javax.swing.GroupLayout(jXPanel5);
+        jXPanel5.setLayout(jXPanel5Layout);
+        jXPanel5Layout.setHorizontalGroup(
+            jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel5Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jXPanel5Layout.createSequentialGroup()
+                        .addComponent(txtFLDD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                        .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFLDT, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bnFLDT, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jXPanel5Layout.setVerticalGroup(
+            jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel5Layout.createSequentialGroup()
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFLDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnFLDT)
+                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLDD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jXPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel4.setPreferredSize(new java.awt.Dimension(605, 116));
+
+        jXLabel1.setText("Name");
+
+        jXLabel2.setText("Surface Texture");
+
+        jXLabel3.setText("Dept");
+
+        jXLabel4.setText("cm");
+
+        jXLabel5.setText("Surface Stones");
+
+        bnID_SOIL.setText("...");
+        bnID_SOIL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnID_SOILActionPerformed(evt);
+            }
+        });
+
+        bnSLTX.setText("...");
+        bnSLTX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSLTXActionPerformed(evt);
+            }
+        });
+
+        txtFLST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtSLDP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jLabel4.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel4.setText("*");
+
+        javax.swing.GroupLayout jXPanel4Layout = new javax.swing.GroupLayout(jXPanel4);
+        jXPanel4.setLayout(jXPanel4Layout);
+        jXPanel4Layout.setHorizontalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel4Layout.createSequentialGroup()
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel4Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel4))
+                    .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel4Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtID_SOIL, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addComponent(txtSLTX, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel4Layout.createSequentialGroup()
+                        .addComponent(txtSLDP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                        .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bnID_SOIL, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnSLTX, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jXPanel4Layout.setVerticalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel4Layout.createSequentialGroup()
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID_SOIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnID_SOIL)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSLTX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnSLTX))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSLDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jXLabel25.setText("Field ID");
 
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jXPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jXPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                            .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jXPanel1Layout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        jTabbedPane1.addTab("<html><center>Add New Level<br>Click Here</center></html>", jXPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        if(evt.getClickCount() == 1) {
-            if(jTabbedPane1.getSelectedIndex() == jTabbedPane1.getTabCount()-1)   // Add New App
-            {
-                String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description","UNKNOWN");
-                if(r.length() > 0) {
-                    int newLevel = 1;
-                    try {
-                        String newTitle = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()-1);
-                        newLevel = Integer.parseInt(newTitle.substring(29, 31).trim()) + 1;
-                    } catch(Exception ex) {}
+    private void bnID_SOILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnID_SOILActionPerformed
+        final SoilListDialog dialog = new SoilListDialog(null, true, SoilList.GetAt(ID_SOIL));
+        dialog.show();
 
-                    String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
-
-                    FieldDetail field = new FieldDetail(r);
-                    FileX.fieldList.AddNew(field);
-
-                    //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
-                    jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount()-2);
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                Soil soil = dialog.GetSelected();
+                if(soil != null) {
+                    txtID_SOIL.setText(soil.Description);
+                    ID_SOIL = soil.Code;
+                    Update();
                 }
+                dialog.SetNull();
             }
-        } 
-        else if(evt.getClickCount() == 2 && jTabbedPane1.getSelectedIndex() < jTabbedPane1.getTabCount()-1) // Edit
-        {
-            String renameTitle = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex());
-            String[] tmp = renameTitle.split("<br>");
-            boolean b = false;
-            String level = "";
-            String description = "";
+        });
+    }//GEN-LAST:event_bnID_SOILActionPerformed
 
-            for(int i = 0;i < tmp[0].length();i++) {
-                if(tmp[0].charAt(i) == '<') b = false;
-                else if(tmp[0].charAt(i) == '>') b = true;
-                else if(b)
-                    level += tmp[0].charAt(i);
+    private void bnFLHSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnFLHSTActionPerformed
+        final FieldHistoryDialog dialog = new FieldHistoryDialog(null, true, FieldHistoryList.GetAt(FLHST));
+        dialog.show();
+
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                FieldHistory field = dialog.GetSelected();
+                if(field != null) {
+                    txtFLHST.setText(field.Description);
+                    FLHST = field.Code;
+                    Update();
+                }
+                dialog.SetNull();
             }
-            b = true;
-            for(int i = 0;i < tmp[1].length();i++) {
-                if(tmp[1].charAt(i) == '<') b = false;
-                else if(tmp[1].charAt(i) == '>') b = true;
-                else if(b)
-                    description += tmp[1].charAt(i);
+        });
+    }//GEN-LAST:event_bnFLHSTActionPerformed
+
+    private void bnWSTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnWSTAActionPerformed
+        final WeatherStationDialog dialog = new WeatherStationDialog(null, true);
+        dialog.show();
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                WeatherStation wsta = dialog.GetSelected();
+                if(wsta != null){
+                    txtWSTA.setText(wsta.StationName);
+                    WSTA = wsta.Code;
+                }
+                Update();
             }
-            String r = (String) JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", level, 0, null, null, description);
-            String newTitle = "<html><p align='center'>" + level + "<br>" + r + "</p></html>";
-            jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), newTitle);
+        });
+    }//GEN-LAST:event_bnWSTAActionPerformed
 
-//            FieldDetail field = FileX.fieldList.GetAt(jTabbedPane1.getSelectedIndex());
-//            field.FLNAME = r;
-        }
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+    private void bnSLTXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSLTXActionPerformed
+        final SoilTextureDialog dialog = new SoilTextureDialog(null, true, SoilTextureList.GetAt(SLTX));
+        dialog.show();
 
-    private void jTabbedPane1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseReleased
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                SoilTexture soil = dialog.GetSelected();
+                if(soil != null) {
+                    txtSLTX.setText(soil.Description);
+                    SLTX = soil.Code;
+                    Update();
+                }
+                dialog.SetNull();
+            }
+        });
+    }//GEN-LAST:event_bnSLTXActionPerformed
+
+    private void bnFLDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnFLDTActionPerformed
+        final DrainageDialog dialog = new DrainageDialog(null, true, DrainageList.GetAt(FLDT));
+        dialog.show();
+
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                Drainage drain = dialog.GetSelected();
+                if(drain != null) {
+                    txtFLDT.setText(drain.Description);
+                    FLDT = drain.Code;
+                    Update();
+                }
+                dialog.SetNull();
+            }
+        });
+    }//GEN-LAST:event_bnFLDTActionPerformed
+
+    private void popupMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupMenu1ActionPerformed
         // TODO add your handling code here:
-        if(evt.getButton() == 3 && jTabbedPane1.getSelectedIndex() < jTabbedPane1.getTabCount()-1){
-            if(evt.isPopupTrigger()){
-                jPopupMenu1.show(this, evt.getX() + 5, evt.getY() + 5);
-            }
+    }//GEN-LAST:event_popupMenu1ActionPerformed
+
+    private void Update() {
+        field.ID_FIELD = txtID_FIELD.getText();
+        if (!txtWSTA.getText().equals("")) {
+            field.WSTA = WSTA;
+        } else {
+            field.WSTA = "";
         }
-    }//GEN-LAST:event_jTabbedPane1MouseReleased
-
-    private void mnuCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCopyActionPerformed
-        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", "UNKNOWN");
-        if (r.length() > 0) {
-            int newLevel = 1;
-            try {
-                String selectedTitle = jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex());
-                newLevel = Integer.parseInt(selectedTitle.substring(29, 31).trim()) + 1;
-            } catch (Exception ex) {
-            }
-
-            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
-
-            //FieldDetail field = FileX.fieldList.Clone(jTabbedPane1.getSelectedIndex(), r);
-            //FileX.fieldList.AddNew(field);
-
-            //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount() - 1);
-            jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 2);
+        try {
+            field.FLSA = Float.parseFloat(txtFLSA.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLSA = null;
+            System.out.println(numberFormatException.getMessage());
         }
-    }//GEN-LAST:event_mnuCopyActionPerformed
-
-    private void mnuRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRemoveActionPerformed
-        if(JOptionPane.showConfirmDialog(new JXFrame(), "Do you want to delete this level") == 0){            
-            int index = jTabbedPane1.getSelectedIndex();
-//            FileX.fieldList.RemoveAt(index);
-            jTabbedPane1.remove(index);
-            Utils.setTimeout(() -> jTabbedPane1.setSelectedIndex(Math.min(0, index - 1)), 100);
+        try {
+            field.FLOB = Float.parseFloat(txtFLOB.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLOB = null;
+            System.out.println(numberFormatException.getMessage());
         }
-    }//GEN-LAST:event_mnuRemoveActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private org.jdesktop.swingx.JXPanel jXPanel1;
-    private javax.swing.JMenuItem mnuCopy;
-    private javax.swing.JMenuItem mnuRemove;
-    // End of variables declaration//GEN-END:variables
-
+        if (!txtFLDT.getText().equals("")) {
+            field.FLDT = FLDT;
+        } else {
+            field.FLDT = "";
+        }
+        try {
+            field.FLDD = Float.parseFloat(txtFLDD.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLDD = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.FLDS = Float.parseFloat(txtFLDS.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLDS = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.FLST = Float.parseFloat(txtFLST.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLST = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        if (!txtSLTX.getText().equals("")) {
+            field.SLTX = SLTX;
+        } else {
+            field.SLTX = "";
+        }
+        try {
+            field.SLDP = Float.parseFloat(txtSLDP.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.SLDP = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        if (!txtID_SOIL.getText().equals("")) {
+            field.ID_SOIL = ID_SOIL;
+        } else {
+            field.ID_SOIL = "";
+        }
+        try {
+            field.XCRD = Float.parseFloat(txtXCRD.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.XCRD = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.YCRD = Float.parseFloat(txtYCRD.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.YCRD = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.ELEV = Float.parseFloat(txtELEV.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.ELEV = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.AREA = Float.parseFloat(txtAREA.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.AREA = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.SLEN = Float.parseFloat(txtSLEN.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.SLEN = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.FLWR = Float.parseFloat(txtFLWR.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FLWR = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        try {
+            field.SLAS = Float.parseFloat(txtSLAS.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.SLAS = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+        if (!txtFLHST.getText().equals("")) {
+            field.FLHST = FLHST;
+        } else {
+            field.FLHST = "";
+        }
+        try {
+            field.FHDUR = Float.parseFloat(txtFHDUR.getText());
+        } catch (NumberFormatException numberFormatException) {
+            field.FHDUR = null;
+            System.out.println(numberFormatException.getMessage());
+        }
+    }
+    
     private void LoadField() {
-        for(int n = 0;n < FileX.fieldList.GetSize();n++){
-            int newLevel = n + 1;
-//            FieldDetail field = FileX.fieldList.GetAt(n);
-//            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + field.FLNAME + "</p></html>";
-            //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
+        txtID_FIELD.setText(field.ID_FIELD);
+        try {
+            WeatherStation wsta = WeatherStationList.GetAt(field.WSTA);
+            txtWSTA.setText(wsta.StationName);
+            WSTA = wsta.Code;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        jTabbedPane1.setSelectedIndex(0);
+        try {
+            txtFLSA.setText(field.FLSA.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtFLOB.setText(field.FLOB.toString());
+        } catch (Exception e) {
+        }
+        try {
+            Drainage drain = DrainageList.GetAt(field.FLDT);
+            txtFLDT.setText(drain.Description);
+            FLDT = drain.Code;
+        } catch (Exception e) {
+        }
+        try {
+            txtFLDD.setText(field.FLDD.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtFLDS.setText(field.FLDS.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtFLST.setText(field.FLST.toString());
+        } catch (Exception e) {
+        }
+        try {
+            SoilTexture soil = SoilTextureList.GetAt(field.SLTX);
+            txtSLTX.setText(soil.Description);
+            SLTX = soil.Code;
+        } catch (Exception e) {
+        }
+        try {
+            txtSLDP.setText(field.SLDP.toString());
+        } catch (Exception e) {
+        }
+        try {
+            Soil soil = SoilList.GetAt(field.ID_SOIL);
+            txtID_SOIL.setText(soil.Description);
+            ID_SOIL = soil.Code;
+        } catch (Exception e) {
+        }
+        try {
+            txtXCRD.setText(field.XCRD.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtYCRD.setText(field.YCRD.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtELEV.setText(field.ELEV.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtAREA.setText(field.AREA.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtSLEN.setText(field.SLEN.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtFLWR.setText(field.FLWR.toString());
+        } catch (Exception e) {
+        }
+        try {
+            txtSLAS.setText(field.SLAS.toString());
+        } catch (Exception e) {
+        }
+        try {
+            FieldHistory fHist = FieldHistoryList.GetAt(field.FLHST);
+            txtFLHST.setText(fHist.Description);
+            FLHST = fHist.Code;
+        } catch (Exception e) {
+        }
+        try {
+            txtFHDUR.setText(field.FHDUR.toString());
+        } catch (Exception e) {
+        }
     }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnFLDT;
+    private javax.swing.JButton bnFLHST;
+    private javax.swing.JButton bnID_SOIL;
+    private javax.swing.JButton bnSLTX;
+    private javax.swing.JButton bnWSTA;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private org.jdesktop.swingx.JXLabel jXLabel1;
+    private org.jdesktop.swingx.JXLabel jXLabel10;
+    private org.jdesktop.swingx.JXLabel jXLabel11;
+    private org.jdesktop.swingx.JXLabel jXLabel12;
+    private org.jdesktop.swingx.JXLabel jXLabel13;
+    private org.jdesktop.swingx.JXLabel jXLabel14;
+    private org.jdesktop.swingx.JXLabel jXLabel15;
+    private org.jdesktop.swingx.JXLabel jXLabel16;
+    private org.jdesktop.swingx.JXLabel jXLabel17;
+    private org.jdesktop.swingx.JXLabel jXLabel18;
+    private org.jdesktop.swingx.JXLabel jXLabel19;
+    private org.jdesktop.swingx.JXLabel jXLabel2;
+    private org.jdesktop.swingx.JXLabel jXLabel20;
+    private org.jdesktop.swingx.JXLabel jXLabel21;
+    private org.jdesktop.swingx.JXLabel jXLabel22;
+    private org.jdesktop.swingx.JXLabel jXLabel23;
+    private org.jdesktop.swingx.JXLabel jXLabel24;
+    private org.jdesktop.swingx.JXLabel jXLabel25;
+    private org.jdesktop.swingx.JXLabel jXLabel27;
+    private org.jdesktop.swingx.JXLabel jXLabel28;
+    private org.jdesktop.swingx.JXLabel jXLabel3;
+    private org.jdesktop.swingx.JXLabel jXLabel4;
+    private org.jdesktop.swingx.JXLabel jXLabel5;
+    private org.jdesktop.swingx.JXLabel jXLabel6;
+    private org.jdesktop.swingx.JXLabel jXLabel7;
+    private org.jdesktop.swingx.JXLabel jXLabel8;
+    private org.jdesktop.swingx.JXLabel jXLabel9;
+    private org.jdesktop.swingx.JXPanel jXPanel1;
+    private org.jdesktop.swingx.JXPanel jXPanel2;
+    private org.jdesktop.swingx.JXPanel jXPanel3;
+    private org.jdesktop.swingx.JXPanel jXPanel4;
+    private org.jdesktop.swingx.JXPanel jXPanel5;
+    private org.jdesktop.swingx.JXPanel jXPanel6;
+    private org.jdesktop.swingx.JXPanel jXPanel7;
+    private java.awt.MenuItem menuItem1;
+    private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JFormattedTextField txtAREA;
+    private javax.swing.JFormattedTextField txtELEV;
+    private javax.swing.JFormattedTextField txtFHDUR;
+    private javax.swing.JFormattedTextField txtFLDD;
+    private javax.swing.JFormattedTextField txtFLDS;
+    private javax.swing.JTextField txtFLDT;
+    private javax.swing.JTextField txtFLHST;
+    private javax.swing.JFormattedTextField txtFLOB;
+    private javax.swing.JFormattedTextField txtFLSA;
+    private javax.swing.JFormattedTextField txtFLST;
+    private javax.swing.JFormattedTextField txtFLWR;
+    private javax.swing.JTextField txtID_FIELD;
+    private javax.swing.JTextField txtID_SOIL;
+    private javax.swing.JFormattedTextField txtSLAS;
+    private javax.swing.JFormattedTextField txtSLDP;
+    private javax.swing.JFormattedTextField txtSLEN;
+    private javax.swing.JTextField txtSLTX;
+    private javax.swing.JTextField txtWSTA;
+    private javax.swing.JFormattedTextField txtXCRD;
+    private javax.swing.JFormattedTextField txtYCRD;
+    // End of variables declaration//GEN-END:variables
+
+    public void keyTyped(KeyEvent e) {
+        Update();
+    }
+
+    public void keyPressed(KeyEvent e) {
+        Update();
+    }
+
+    public void keyReleased(KeyEvent e) {
+        Update();
+    }
 }
