@@ -9,11 +9,11 @@ package FileXModel;
  *
  * @author Jazzy
  */
-public class FieldDetail implements Cloneable {
+public class FieldDetail implements Cloneable, IModelXBase {
     public String FLNAME;
-
-    public FieldDetail() {
-
+    
+    public FieldDetail(){
+        
     }
     
     public FieldDetail(String FLNAME) {
@@ -43,5 +43,15 @@ public class FieldDetail implements Cloneable {
     
     public FieldDetail clone() throws CloneNotSupportedException {
         return (FieldDetail)super.clone();
+    }
+    
+    @Override
+    public String GetName(){
+        return this.FLNAME == null ? "" : this.FLNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        FLNAME = name;
     }
 }

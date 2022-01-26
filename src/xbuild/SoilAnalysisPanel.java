@@ -19,6 +19,8 @@ import DSSATModel.SoilAnalysisMethodPhosphorus;
 import DSSATModel.SoilAnalysisMethodPhosphorusList;
 import DSSATModel.SoilAnalysisMethodPotassium;
 import DSSATModel.SoilAnalysisMethodPotassiumList;
+import FileXModel.FileX;
+import FileXModel.IModelXBase;
 import ListDialog.PHListDialog;
 import ListDialog.PhosphorusListDialog;
 import ListDialog.PotassiumListDialog;
@@ -34,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jazzy
  */
-public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener {
+public class SoilAnalysisPanel extends javax.swing.JInternalFrame implements KeyListener {
 
     /** Creates new form SoilAnalysisPanel */
     private SoilAnalysis soilAnalysis;
@@ -44,10 +46,17 @@ public class SoilAnalysisPanel extends javax.swing.JPanel implements KeyListener
     
     private int selectedRowIndex = -1;
 
-    public SoilAnalysisPanel(SoilAnalysis soilAnalysis) {
+    public SoilAnalysisPanel(String nodeName) {
         initComponents();
+        
+        for(IModelXBase s: FileX.soilAnalysis.GetAll()){
+            if(((SoilAnalysis)s).SANAME.equals(nodeName)){
+                this.soilAnalysis = (SoilAnalysis) s;
+                break;
+            }
+        }
 
-        this.soilAnalysis = soilAnalysis;
+        //this.soilAnalysis = soilAnalysis;
 
         LoadSoilAnalysis();
         

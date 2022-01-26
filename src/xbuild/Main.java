@@ -7,6 +7,7 @@ package xbuild;
 
 import DSSATModel.Setup;
 import java.awt.event.*;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,7 +20,9 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        new MainForm().show();
+        MainForm mainForm = new MainForm();
+        mainForm.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainForm.show();
         
         final Setup setup = new Setup();
         if(setup.GetDSSATPath() == null)

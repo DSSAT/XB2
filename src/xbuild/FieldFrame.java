@@ -127,7 +127,7 @@ public class FieldFrame extends javax.swing.JInternalFrame {
                     FieldDetail field = new FieldDetail(r);
                     FileX.fieldList.AddNew(field);
 
-                    jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
+                    //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
                     jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount()-2);
                 }
             }
@@ -157,8 +157,8 @@ public class FieldFrame extends javax.swing.JInternalFrame {
             String newTitle = "<html><p align='center'>" + level + "<br>" + r + "</p></html>";
             jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), newTitle);
 
-            FieldDetail field = FileX.fieldList.GetAt(jTabbedPane1.getSelectedIndex());
-            field.FLNAME = r;
+//            FieldDetail field = FileX.fieldList.GetAt(jTabbedPane1.getSelectedIndex());
+//            field.FLNAME = r;
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
@@ -183,10 +183,10 @@ public class FieldFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            FieldDetail field = FileX.fieldList.Clone(jTabbedPane1.getSelectedIndex(), r);
-            FileX.fieldList.AddNew(field);
+            //FieldDetail field = FileX.fieldList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            //FileX.fieldList.AddNew(field);
 
-            jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount() - 1);
+            //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount() - 1);
             jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 2);
         }
     }//GEN-LAST:event_mnuCopyActionPerformed
@@ -194,7 +194,7 @@ public class FieldFrame extends javax.swing.JInternalFrame {
     private void mnuRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRemoveActionPerformed
         if(JOptionPane.showConfirmDialog(new JXFrame(), "Do you want to delete this level") == 0){            
             int index = jTabbedPane1.getSelectedIndex();
-            FileX.fieldList.RemoveAt(index);
+//            FileX.fieldList.RemoveAt(index);
             jTabbedPane1.remove(index);
             Utils.setTimeout(() -> jTabbedPane1.setSelectedIndex(Math.min(0, index - 1)), 100);
         }
@@ -212,9 +212,9 @@ public class FieldFrame extends javax.swing.JInternalFrame {
     private void LoadField() {
         for(int n = 0;n < FileX.fieldList.GetSize();n++){
             int newLevel = n + 1;
-            FieldDetail field = FileX.fieldList.GetAt(n);
-            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + field.FLNAME + "</p></html>";
-            jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
+//            FieldDetail field = FileX.fieldList.GetAt(n);
+//            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + field.FLNAME + "</p></html>";
+            //jTabbedPane1.insertTab(newTitle, null, new FieldPanel(field), "", jTabbedPane1.getTabCount()-1);
         }
         jTabbedPane1.setSelectedIndex(0);
     }

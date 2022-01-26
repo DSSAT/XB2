@@ -7,13 +7,12 @@ package FileXModel;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class SoilAnalysis implements Cloneable {
+public class SoilAnalysis implements Cloneable, IModelXBase {
      protected ArrayList<SoilAnalysisLayer>  soilLayer = new ArrayList<>();
      public Date SADAT;
      public String SMHB;;
@@ -64,7 +63,18 @@ public class SoilAnalysis implements Cloneable {
         return soilLayer.size();
     }
     
+     @Override
     public SoilAnalysis clone() throws CloneNotSupportedException{
         return (SoilAnalysis)super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.SANAME == null ? "" : this.SANAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        SANAME = name;
     }
 }

@@ -5,52 +5,32 @@
 
 package FileXModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
-public class FertilizerList {
-    protected Vector fertils = new Vector();
-
-    public void AddNew(Fertilizer fertil)
-    {
-        fertils.add(fertil);
-    }
-
-    public void RemoveAt(int level)
-    {
-        fertils.remove(level);
-    }
-
-    public void SetAt(int level, Fertilizer fertil)
-    {
-        fertils.set(level, fertil);
-    }
-
-    public Fertilizer[] GetAll()
-    {
-        return (Fertilizer[]) fertils.toArray();
-    }
-
-    public Fertilizer GetAt(int level)
-    {
-        return (Fertilizer)fertils.get(level);
-    }
-
-    public int GetSize()
-    {
-        return fertils.size();
+public class FertilizerList extends ManagementList {
+    
+    @Override
+    public void AddNew(String name){
+        modelList.add(new Fertilizer(name));
     }
     
-    public Fertilizer Clone(int level, String newName){
-        Fertilizer source = GetAt(level);
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        Fertilizer source = (Fertilizer) GetAt(sourceName);
         Fertilizer newSource = null;
         
-        try{
-            newSource = source.clone();
+        try{            
+            newSource = new Fertilizer();
             newSource.FERNAME = newName;
+            
+            for(FertilizerApplication f : source.GetApps()) {
+                FertilizerApplication fa = (FertilizerApplication) f.Clone();
+                newSource.AddApp(fa);
+            }
         }
         catch(Exception ex){
             

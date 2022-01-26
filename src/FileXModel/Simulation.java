@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class Simulation implements Cloneable {
+public class Simulation implements Cloneable, IModelXBase {
     public String SNAME;
 
     public Simulation(String SNAME)
@@ -128,7 +128,20 @@ public class Simulation implements Cloneable {
     public String FMOPT;
     // </editor-fold>
     
+    @Override
     public Simulation clone() throws CloneNotSupportedException {
-        return (Simulation)super.clone();    // return shallow copy
+        Simulation sim = (Simulation)super.clone();    // return shallow copy
+        sim.SNAME = this.SNAME;
+        return sim;
+    }
+
+    @Override
+    public String GetName() {
+        return SNAME == null ? "" : SNAME;
+    }
+
+    @Override
+    public void SetName(String name) {
+        SNAME = name;
     }
 }

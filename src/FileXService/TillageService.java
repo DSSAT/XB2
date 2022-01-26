@@ -47,7 +47,7 @@ public class TillageService {
                     if(level > tillageList.GetSize()) {
                         tillage = new Tillage();
                     } else {
-                        tillage = tillageList.GetAt(level - 1);
+                        tillage = (Tillage)tillageList.GetAt(level - 1);
                     }
 
                     tillageApp.TDATE = Utils.GetDate(tillageHeader, tmp, "TDATE", 5);
@@ -74,7 +74,7 @@ public class TillageService {
             pw.println("*TILLAGE AND ROTATIONS");
             pw.println("@T TDATE TIMPL  TDEP TNAME");
             for (int i = 0; i < tillageList.GetSize(); i++) {
-                Tillage tillage = tillageList.GetAt(i);
+                Tillage tillage = (Tillage)tillageList.GetAt(i);
                 for (int n = 0; n < tillage.GetSize(); n++) {
                     TillageApplication tilApp = tillage.GetApp(n);
 

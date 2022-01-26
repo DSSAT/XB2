@@ -5,63 +5,40 @@
 
 package FileXModel;
 
-import java.util.ArrayList;
-import java.util.Vector;
-
 /**
  *
  * @author Jazzy
  */
-public class SoilAnalysisList {
-    protected ArrayList<SoilAnalysis> soilAnalysis = new ArrayList<>();
-
-    public void AddAnalysis(SoilAnalysis soil)
+public class SoilAnalysisList extends ManagementList {   
+       
+    @Override
+    public void AddNew(String sName)
     {
-        soilAnalysis.add(soil);
-    }
-
-    public void RemoveAt(int level)
-    {
-        soilAnalysis.remove(level);
+        modelList.add(new SoilAnalysis(sName));
     }
     
-    public SoilAnalysis GetAt(int level)
-    {
-        return (SoilAnalysis)soilAnalysis.get(level);
-    }
-
-    public void SetAt(int level, SoilAnalysis env)
-    {
-        soilAnalysis.set(level, env);
-    }
-
-    public ArrayList<SoilAnalysis>GetAnalysises()
-    {
-        return soilAnalysis;
-    }
-
-    public SoilAnalysis GetAnalysis(int level)
-    {
-        return (SoilAnalysis)soilAnalysis.get(level);
-    }
-
-    public int GetSize()
-    {
-        return soilAnalysis.size();
-    }
-    
-    public SoilAnalysis Clone(int level, String newName){
-        SoilAnalysis source = GetAnalysis(level);
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        SoilAnalysis source = (SoilAnalysis)GetAt(sourceName);
         SoilAnalysis newSource = null;
         
-        try{
-            newSource = source.clone();
+        try{            
+            newSource = new SoilAnalysis();
             newSource.SANAME = newName;
+            newSource.SADAT = source.SADAT;
+            newSource.SMHB = source.SMHB;
+            newSource.SMPX = source.SMPX;
+            newSource.SMKE = source.SMKE;
+            
+            for(SoilAnalysisLayer c : source.GetLayers()) {
+                SoilAnalysisLayer ca = (SoilAnalysisLayer) c.Clone();           
+                newSource.AddLayer(ca);
+            }
         }
         catch(Exception ex){
             
         }
         
         return newSource;
-    }
+    }    
 }

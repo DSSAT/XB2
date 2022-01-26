@@ -6,13 +6,12 @@
 package FileXModel;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Irrigation implements Cloneable {
+public class Irrigation implements Cloneable, IModelXBase {
 
     protected ArrayList<IrrigationApplication>  irrigApps = new ArrayList<>();
     public Float EFIR;
@@ -63,7 +62,18 @@ public class Irrigation implements Cloneable {
         return irrigApps.size();
     }
     
+    @Override
     public Irrigation clone() throws CloneNotSupportedException{
         return (Irrigation) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.IRNAME == null ? "" : this.IRNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        IRNAME = name;
     }
 }

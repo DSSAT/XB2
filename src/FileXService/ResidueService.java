@@ -47,7 +47,7 @@ public class ResidueService {
                     if(level > organicList.GetSize()) {
                         organic = new Organic();
                     } else {
-                        organic = organicList.GetAt(level - 1);
+                        organic = (Organic)organicList.GetAt(level - 1);
                     }
 
                     try {
@@ -85,7 +85,7 @@ public class ResidueService {
             pw.println("*RESIDUES AND ORGANIC FERTILIZER");
             pw.println("@R RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET RENAME");
             for (int i = 0; i < organicList.GetSize(); i++) {
-                Organic organ = organicList.GetAt(i);
+                Organic organ = (Organic)organicList.GetAt(i);
                 for (int n = 0; n < organ.GetSize(); n++) {
                     OrganicApplication organApp = organ.GetApp(n);
 

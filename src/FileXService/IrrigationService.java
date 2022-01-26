@@ -62,7 +62,7 @@ public class IrrigationService {
                     //@I IDATE  IROP IRVAL
                     try {
                         Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
-                        Irrigation irrig = irrigations.GetAt(level);
+                        Irrigation irrig = (Irrigation)irrigations.GetAt(level);
                         IrrigationApplication irrigApp = new IrrigationApplication();
                         try{
                             irrigApp.IDATE = Utils.GetDate(irrigHeader2, tmp, "IDATE", 5);
@@ -93,7 +93,7 @@ public class IrrigationService {
 
             for (int i = 0; i < irrigations.GetSize(); i++) {
                 Integer level = i + 1;
-                Irrigation irrig = irrigations.GetAt(i);
+                Irrigation irrig = (Irrigation)irrigations.GetAt(i);
 
                 pw.println("@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));

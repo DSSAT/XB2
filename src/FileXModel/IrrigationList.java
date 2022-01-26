@@ -5,52 +5,31 @@
 
 package FileXModel;
 
-import java.util.Vector;
-
 /**
  *
  * @author Jazzy
  */
-public class IrrigationList {
-    protected Vector irrigs = new Vector();
-
-    public void AddNew(Irrigation irrig)
+public class IrrigationList extends ManagementList {
+    
+    @Override
+    public void AddNew(String name)
     {
-        irrigs.add(irrig);
-    }
-
-    public void RemoveAt(int level)
-    {
-        irrigs.remove(level);
-    }
-
-    public void SetAt(int level, Irrigation irrig)
-    {
-        irrigs.set(level, irrig);
-    }
-
-    public Irrigation[] GetAll()
-    {
-        return (Irrigation[]) irrigs.toArray();
-    }
-
-    public Irrigation GetAt(int level)
-    {
-        return (Irrigation)irrigs.get(level);
-    }
-
-    public int GetSize()
-    {
-        return irrigs.size();
+        modelList.add(new Irrigation(name));
     }
     
-    public Irrigation Clone(int level, String newName){
-        Irrigation source = GetAt(level);
+    public IModelXBase Clone(String sourceName, String newName){
+        Irrigation source = (Irrigation) GetAt(sourceName);
         Irrigation newSource = null;
         
         try{
-            newSource = source.clone();
+            newSource = new Irrigation();
             newSource.IRNAME = newName;
+            newSource.EFIR = source.EFIR;
+            
+            for(IrrigationApplication ir : source.GetApps()) {
+                IrrigationApplication ia = (IrrigationApplication) ir.Clone();                
+                newSource.AddApp(ia);
+            }
         }
         catch(Exception ex){
             

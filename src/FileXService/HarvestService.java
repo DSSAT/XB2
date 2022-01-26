@@ -47,7 +47,7 @@ public class HarvestService {
                     if(level > harvestList.GetSize()) {
                         harvest = new Harvest();
                     } else {
-                        harvest = harvestList.GetAt(level - 1);
+                        harvest = (Harvest)harvestList.GetAt(level - 1);
                     }
 
                     try {
@@ -81,7 +81,7 @@ public class HarvestService {
             pw.println("*HARVEST DETAILS");
             pw.println("@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME");
             for (int i = 0; i < harvestList.GetSize(); i++) {
-                Harvest harvest = harvestList.GetAt(i);
+                Harvest harvest = (Harvest)harvestList.GetAt(i);
                 for (int n = 0; n < harvest.GetSize(); n++) {
                     HarvestApplication harvestApp = harvest.GetApp(n);
 

@@ -123,7 +123,7 @@ public class InitialFrame extends javax.swing.JInternalFrame {
                     InitialCondition init = new InitialCondition(r);
                     FileX.initialList.AddNew(init);
 
-                    jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount()-1);
+                    //jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount()-1);
                     jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount()-2);
                 }
             }
@@ -152,8 +152,8 @@ public class InitialFrame extends javax.swing.JInternalFrame {
             String newTitle = "<html><p align='center'>" + level + "<br>" + r + "</p></html>";
             jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), newTitle);
 
-            InitialCondition init = FileX.initialList.GetAt(jTabbedPane1.getSelectedIndex());
-            init.ICNAME = r;
+//            InitialCondition init = FileX.initialList.GetAt(jTabbedPane1.getSelectedIndex());
+//            init.ICNAME = r;
         }
 }//GEN-LAST:event_jTabbedPane1MouseClicked
 
@@ -169,10 +169,10 @@ public class InitialFrame extends javax.swing.JInternalFrame {
 
             String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + r + "</p></html>";
 
-            InitialCondition init = FileX.initialList.Clone(jTabbedPane1.getSelectedIndex(), r);
-            FileX.initialList.AddNew(init);
+            //InitialCondition init = FileX.initialList.Clone(jTabbedPane1.getSelectedIndex(), r);
+            //FileX.initialList.AddNew(init);
 
-            jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount() - 1);
+            //jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount() - 1);
             jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 2);
         }
     }//GEN-LAST:event_mnuCopyActionPerformed
@@ -180,7 +180,7 @@ public class InitialFrame extends javax.swing.JInternalFrame {
     private void mnuRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRemoveActionPerformed
         if(JOptionPane.showConfirmDialog(new JXFrame(), "Do you want to delete this level") == 0){
             int index = jTabbedPane1.getSelectedIndex();
-            FileX.initialList.RemoveAt(index);
+//            FileX.initialList.RemoveAt(index);
             jTabbedPane1.remove(index);
             Utils.setTimeout(() -> jTabbedPane1.setSelectedIndex(Math.min(0, index - 1)), 100);
         }
@@ -206,9 +206,9 @@ public class InitialFrame extends javax.swing.JInternalFrame {
     private void LoadInitial() {
         for(int n = 0;n < FileX.initialList.GetSize();n++){
             int newLevel = n + 1;
-            InitialCondition init = FileX.initialList.GetAt(n);
-            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + init.ICNAME + "</p></html>";
-            jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount()-1);
+//            InitialCondition init = FileX.initialList.GetAt(n);
+//            String newTitle = "<html><p align='center'>Level " + newLevel + "<br>" + init.ICNAME + "</p></html>";
+            //jTabbedPane1.insertTab(newTitle, null, new InitialPanel(init), "", jTabbedPane1.getTabCount()-1);
         }
         jTabbedPane1.setSelectedIndex(0);
     }

@@ -11,11 +11,12 @@
 
 package xbuild;
 
-import FileXModel.Simulation;
 import FileXModel.FileX;
 import DSSATModel.DssatProfile;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
+import FileXModel.ManagementList;
+import FileXModel.IModelXBase;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -23,7 +24,6 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
 import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -34,9 +34,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
 import FileXService.FileXService;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
+import FileXService.FileXValidationService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.SwingUtilities;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
+import xbuild.Components.XInternalFrame;
 
 /**
  *
@@ -45,28 +48,50 @@ import xbuild.Components.CustomDefaultTreeCellRenderer;
 public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
     /** Creates new form MainForm */
-
-    protected GeneralInfoFrame generalFrame;
-    protected GeneralNotesFrame generalNoteFrame;
-    protected FieldFrame fieldFrame;
-    protected InitialFrame initialFrame;
-    protected SoilAnalysisFrame soilAnalysisFrame;
-    protected EnvironmentalFrame environmentalFrame;
-    protected CultivarsFrame cultivarsFrame;
-    protected PlantingFrame plantingFrame;
-    protected IrrigationFrame irrigationFrame;
-    protected FertilizerFrame fertilizerFrame;
-    protected OrganicFrame organicFrame;
-    protected TillageFrame tillageFrame;
-    protected HarvestFrame harvestFrame;
-    protected ChemicalFrame chemicalFrame;
-    protected SimulationFrame simulationFrame;
-    protected TreatmentFrame treatmentFrame;
-
-    protected Vector eventListner = new Vector();
+        
     protected Content content;
-
+    
+    private final HashMap<String, String> mainMenuList = new HashMap<String, String>() {
+        {
+            put("General Information", "GeneralInfoFrame");
+            put("Notes", "GeneralNotesFrame");
+            put("Fields", "FieldPanel");
+            put("Initial Conditions", "InitialConditionFrame");
+            put("Soil Analysis", "SoilAnalysisFrame");
+            put("Environmental Modifications", "EnvironmentalFrame");
+            put("Cultivars", "CultivarsFrame");
+            put("Planting", "PlantingFrame");
+            put("Irrigation", "IrrigationFrame");
+            put("Fertilizer", "FertilizerFrame");
+            put("Organic Amendments", "OrganicFrame");
+            put("Tillage", "TillageFrame");
+            put("Harvest", "HarvestFrame");
+            put("Chemical Applications", "ChemicalFrame");
+            put("Treatment", "TreatmentFrame");
+            put("Simulation Controls", "SimulationFrame");
+        }
+    };
+    
+    private final ArrayList<String> menuNoFrame = new ArrayList<String>() {{ 
+        add("Fields");
+        add("Initial Conditions");
+        add("Soil Analysis");
+        add("Environmental Modifications");
+        //add("Cultivars");
+        add("Planting");
+        add("Irrigation");
+        add("Fertilizer");
+        add("Organic Amendments");
+        add("Tillage");
+        add("Harvest");
+        add("Chemical Applications");
+        add("Simulation Controls");
+    
+    }};
+    private final ArrayList<String> menuIgnore = new ArrayList<String>() {{ add("General Information"); add("Notes"); add("Cultivars"); add("Treatment"); }};
+    
     public MainForm() {
+
         initComponents();
 
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -77,7 +102,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
         jXTree1.setVisible(false);
-        jXTree1.expandAll();
         jXTree1.setCellRenderer(new CustomDefaultTreeCellRenderer());
 
         BufferedImage image = null;
@@ -102,9 +126,9 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenuSimAdd = new javax.swing.JPopupMenu();
+        jPopupMenuAdd = new javax.swing.JPopupMenu();
         jMenuItemSimAdd = new javax.swing.JMenuItem();
-        jPopupMenuSimItem = new javax.swing.JPopupMenu();
+        jPopupMenuItem = new javax.swing.JPopupMenu();
         jPopupMenuSimItemCopy = new javax.swing.JMenuItem();
         jPopupMenuSimItemRemove = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
@@ -133,7 +157,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 jMenuItemSimAddActionPerformed(evt);
             }
         });
-        jPopupMenuSimAdd.add(jMenuItemSimAdd);
+        jPopupMenuAdd.add(jMenuItemSimAdd);
 
         jPopupMenuSimItemCopy.setText("Copy Level");
         jPopupMenuSimItemCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +165,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 jPopupMenuSimItemCopyActionPerformed(evt);
             }
         });
-        jPopupMenuSimItem.add(jPopupMenuSimItemCopy);
+        jPopupMenuItem.add(jPopupMenuSimItemCopy);
 
         jPopupMenuSimItemRemove.setText("Remove Level");
         jPopupMenuSimItemRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -149,47 +173,11 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 jPopupMenuSimItemRemoveActionPerformed(evt);
             }
         });
-        jPopupMenuSimItem.add(jPopupMenuSimItemRemove);
+        jPopupMenuItem.add(jPopupMenuSimItemRemove);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("FileX");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("General Information");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Notes");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Environment");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fields");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Initial Conditions");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Soil Analysis");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Environmental Modifications");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Management");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Cultivars");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Planting");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Irrigation");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fertilizer");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Organic Amendments");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Tillage");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Harvest");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Chemical Applications");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Simulation Controls");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Treatment");
-        treeNode1.add(treeNode2);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jXTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -310,9 +298,9 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,513 +313,39 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
     @SuppressWarnings("empty-statement")
     private void jXTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jXTree1ValueChanged
-        // TODO add your handling code here:
-
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
 
-        if (node == null) return;
-
-        Object nodeInfo = node.getUserObject();
-        //if (node.isLeaf())
-        {
-            // <editor-fold defaultstate="collapsed" desc="General Information">
-            if(nodeInfo.toString().equals("General Information")) {
-                if(generalFrame != null) {
-                    generalFrame.dispose();
-                    generalFrame = null;
-                }
-
-                if(generalFrame == null){
-                    generalFrame = new GeneralInfoFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(generalFrame);
-                    try {
-                        generalFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    generalFrame.show();
-                }
-                /*else if(!generalFrame.isSelected()){
-                     try {
-                        generalFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-
-                generalFrame.addMyEventListener(this);
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="General Information - Notes">
-            else if(nodeInfo.toString().equals("Notes")) {
-                if(generalNoteFrame != null) {
-                    generalNoteFrame.dispose();
-                    generalNoteFrame = null;
-                }
-
-                if(generalNoteFrame == null){
-                    generalNoteFrame = new GeneralNotesFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = generalNoteFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(generalNoteFrame);
-                    try {
-                        generalNoteFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    generalNoteFrame.show();
-                }
-                /*else if(!generalFrame.isSelected()){
-                     try {
-                        generalFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            //<editor-fold defaultstate="collapsed" desc="Fields">
-            else if(nodeInfo.toString().equals("Fields")) {
-                if(fieldFrame != null) {
-                    fieldFrame.dispose();
-                    fieldFrame = null;
-                }
-
-                if(fieldFrame == null){
-                    fieldFrame = new FieldFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = fieldFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(fieldFrame);
-                    try {
-                        fieldFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    fieldFrame.show();
-                }
-                /*else if(!fieldFrame.isSelected()){
-                     try {
-                        fieldFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Initial Conditions">
-            else if(nodeInfo.toString().equals("Initial Conditions")) {
-                if(initialFrame != null) {
-                    initialFrame.dispose();
-                    initialFrame = null;
-                }
-
-                if(initialFrame == null){
-                    initialFrame = new InitialFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = initialFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(initialFrame);
-                    try {
-                        initialFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    initialFrame.show();
-                }
-                /*else if(!initialFrame.isSelected()){
-                     try {
-                        initialFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            // </editor-fold>
-            //<editor-fold defaultstate="collapsed" desc="Soil Analysis">
-            else if(nodeInfo.toString().equals("Soil Analysis")) {
-                if(soilAnalysisFrame != null) {
-                    soilAnalysisFrame.dispose();
-                    soilAnalysisFrame = null;
-                }
-
-                if(soilAnalysisFrame == null){
-                    soilAnalysisFrame = new SoilAnalysisFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = soilAnalysisFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(soilAnalysisFrame);
-                    try {
-                        soilAnalysisFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    soilAnalysisFrame.show();
-                }
-                /*else if(!soilAnalysisFrame.isSelected()){
-                     try {
-                        soilAnalysisFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            // </editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Environmental Modifications">
-            else if(nodeInfo.toString().equals("Environmental Modifications")) {
-                if(environmentalFrame != null) {
-                    environmentalFrame.dispose();
-                    environmentalFrame = null;
-                }
-
-                if(environmentalFrame == null){
-                    environmentalFrame = new EnvironmentalFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = environmentalFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(environmentalFrame);
-                    try {
-                        environmentalFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    environmentalFrame.show();
-                }
-                /*else if(!environmentalFrame.isSelected()){
-                     try {
-                        environmentalFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Cultivars">
-            else if(nodeInfo.toString().equals("Cultivars")) {
-                if(cultivarsFrame != null) {
-                    cultivarsFrame.dispose();
-                    cultivarsFrame = null;
-                }
-
-                if(cultivarsFrame == null){
-                    cultivarsFrame = new CultivarsFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = cultivarsFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(cultivarsFrame);
-                    try {
-                        cultivarsFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    cultivarsFrame.show();
-                }
-                /*else if(!cultivarsFrame.isSelected()){
-                     try {
-                        cultivarsFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Planting">
-            else if(nodeInfo.toString().equals("Planting")) {
-                if(plantingFrame != null) {
-                    plantingFrame.dispose();
-                    plantingFrame = null;
-                }
-
-                if(plantingFrame == null){
-                    plantingFrame = new PlantingFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = plantingFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(plantingFrame);
-                    try {
-                        plantingFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    plantingFrame.show();
-                }
-                /*else if(!plantingFrame.isSelected()){
-                     try {
-                        plantingFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Irrigation">
-            else if(nodeInfo.toString().equals("Irrigation")) {
-                if(irrigationFrame != null) {
-                    irrigationFrame.dispose();
-                    irrigationFrame = null;
-                }
-
-                if(irrigationFrame == null){
-                    irrigationFrame = new IrrigationFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = irrigationFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(irrigationFrame);
-                    try {
-                        irrigationFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    irrigationFrame.show();
-                }
-                /*else if(!irrigationFrame.isSelected()){
-                     try {
-                        irrigationFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Fertilizer">
-            else if(nodeInfo.toString().equals("Fertilizer")) {
-                if(fertilizerFrame != null) {
-                    fertilizerFrame.dispose();
-                    fertilizerFrame = null;
-                }
-
-                if(fertilizerFrame == null){
-                    fertilizerFrame = new FertilizerFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = fertilizerFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(fertilizerFrame);
-                    try {
-                        fertilizerFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    fertilizerFrame.show();
-                }
-                /*else if(!fertilizerFrame.isSelected()){
-                     try {
-                        fertilizerFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Organic Amendments">
-            else if(nodeInfo.toString().equals("Organic Amendments")) {
-                if(organicFrame != null) {
-                    organicFrame.dispose();
-                    organicFrame = null;
-                }
-
-                if(organicFrame == null){
-                    organicFrame = new OrganicFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = organicFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(organicFrame);
-                    try {
-                        organicFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    organicFrame.show();
-                }
-                /*else if(!organicFrame.isSelected()){
-                     try {
-                        organicFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Tillage">
-            else if(nodeInfo.toString().equals("Tillage")) {
-                if(tillageFrame != null) {
-                    tillageFrame.dispose();
-                    tillageFrame = null;
-                }
-
-                if(tillageFrame == null){
-                    tillageFrame = new TillageFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = tillageFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(tillageFrame);
-                    try {
-                        tillageFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    tillageFrame.show();
-                }
-                /*else if(!tillageFrame.isSelected()){
-                     try {
-                        tillageFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Harvest">
-            else if(nodeInfo.toString().equals("Harvest")) {
-                if(harvestFrame != null) {
-                    harvestFrame.dispose();
-                    harvestFrame = null;
-                }
-
-                if(harvestFrame == null){
-                    harvestFrame = new HarvestFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = harvestFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(harvestFrame);
-                    try {
-                        harvestFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    harvestFrame.show();
-                }
-                /*else if(!tillageFrame.isSelected()){
-                     try {
-                        tillageFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Chemical Applications">
-            else if(nodeInfo.toString().equals("Chemical Applications")) {
-                if(chemicalFrame != null) {
-                    chemicalFrame.dispose();
-                    chemicalFrame = null;
-                }
-
-                if(chemicalFrame == null){
-                    chemicalFrame = new ChemicalFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = chemicalFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(chemicalFrame);
-                    try {
-                        chemicalFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    chemicalFrame.show();
-                }
-                /*else if(!chemicalFrame.isSelected()){
-                     try {
-                        chemicalFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Treaments">
-            else if(nodeInfo.toString().equals("Treatment")) {
-                if(treatmentFrame != null) {
-                    treatmentFrame.dispose();
-                    treatmentFrame = null;
-                }
-
-                if(treatmentFrame == null){
-                    treatmentFrame = new TreatmentFrame();
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = treatmentFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(treatmentFrame);
-                    try {
-                        treatmentFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    treatmentFrame.show();
-                }
-                /*else if(!treatmentFrame.isSelected()){
-                     try {
-                        treatmentFrame.setSelected(true);
-                     } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                 }*/
-            }
-            //</editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="Simulation Controls">
-            else if(node != null && node.getParent() != null && node.getParent().toString().equals("Simulation Controls")) {
-                if(simulationFrame != null) {
-                    simulationFrame.dispose();
-                    simulationFrame = null;
-                }
-
-                if(simulationFrame == null){
-                    for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
-                        Simulation s = FileX.simulationList.GetAt(i);
-                        if (s.SNAME.equalsIgnoreCase(nodeInfo.toString())) {
-                            simulationFrame = new SimulationFrame(s);
-                            break;
-                        }
-                    }  
-
-                    setRootPaneCheckingEnabled(false);
-                    javax.swing.plaf.InternalFrameUI ui = simulationFrame.getUI();
-                    ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
-
-                    desktopPane.add(simulationFrame);
-                    try {
-                        simulationFrame.setMaximum(true);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    simulationFrame.show();
-                }
-            }
-            //</editor-fold>
+        boolean isValid = true;
+        if (node == null || menuNoFrame.contains(node.toString()))
+            return;
+        
+        if("General Information".equalsIgnoreCase(node.toString())){
+            isValid = true;
         }
+        else if(!FileXValidationService.IsGeneralValid())
+            isValid = false;
+        else if("Treatment".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsMinimumRequired())
+            isValid = false;
+        
+        if(isValid){
+            String nodeName = node.toString();
+            if (mainMenuList.get(nodeName) == null) {
+                nodeName = node.getParent().toString();
+            }
+
+            JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
+            ShowFrame(frame);
+        }
+        else{
+            if(evt.getOldLeadSelectionPath() == null){
+             jXTree1.setSelectionRow(1);
+            }
+            else{
+                jXTree1.setSelectionPath(evt.getOldLeadSelectionPath());
+            }
+        }
+        //frame.addMyEventListener();
+        
 }//GEN-LAST:event_jXTree1ValueChanged
 
     private void jMenuSaveAsFileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSaveAsFileMouseClicked
@@ -870,28 +384,10 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
         FileX.NewFileX();
 
-        jXTree1.setVisible(true);
-        
-//        DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();       
-//        
-//        for (int i = 0; i < model.getChildCount(model.getRoot()); i++) {
-//            DefaultMutableTreeNode child = (DefaultMutableTreeNode) model.getChild(model.getRoot(), i);
-//            for (int c = 0; c < child.getChildCount(); c++) {
-//                CustomNode cc = (CustomNode) model.getChild(child, c);
-//                cc.setEnabled(false);
-//            }
-//        }
-        
-//        TreePath[] path = jXTree1.getSelectionPaths();
-//        if (path == null) return;
-//        CustomNode node = null;
-//        for (int i = 0; i < path.length; i++){
-//            node = (CustomNode) path[i].getLastPathComponent();
-//            node.setEnabled(false);
-//        }
-        
+        ResetTree();
+        jXTree1.setVisible(true);            
 
-        generalFrame = new GeneralInfoFrame();
+        GeneralInfoFrame generalFrame = new GeneralInfoFrame();
 
         setRootPaneCheckingEnabled(false);
         javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
@@ -1011,6 +507,8 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         int returnVal = fc.showOpenDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            ResetTree();
+            
             File file = fc.getSelectedFile();
             this.setTitle(file.getName());
 
@@ -1018,33 +516,25 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
             root.setUserObject(file.getName());
-
-            DefaultMutableTreeNode simsChild = null;
-            for (int i = 0; i < root.getChildCount(); i++) {
-                DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
-                if (child.toString().equals("Simulation Controls")) {
-                    simsChild = child;
-                    break;
-                }
-            }
-
-            if (simsChild != null) {
-                simsChild.removeAllChildren();
-                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-                model.reload(simsChild);
-                
-                for (Simulation sim : FileX.simulationList.GetAll()) {
-                    DefaultMutableTreeNode newSim = new DefaultMutableTreeNode();
-                    newSim.setUserObject(sim.SNAME + "");
-                    simsChild.add(newSim);
-                }
-            }
+            
+            AddTreeMenu("Environment", "Fields");
+            AddTreeMenu("Environment", "Initial Conditions");
+            AddTreeMenu("Environment", "Soil Analysis");
+            AddTreeMenu("Environment", "Environmental Modifications");
+            //AddTreeMenu("Management", "Cultivars");
+            AddTreeMenu("Management", "Planting");
+            AddTreeMenu("Management", "Irrigation");
+            AddTreeMenu("Management", "Fertilizer");
+            AddTreeMenu("Management", "Organic Amendments");
+            AddTreeMenu("Management", "Tillage");
+            AddTreeMenu("Management", "Harvest");
+            AddTreeMenu(root, "Simulation Controls");
             
             jXTree1.collapseAll();
             jXTree1.expandAll();
             jXTree1.setVisible(true);
             
-            generalFrame = new GeneralInfoFrame();
+            GeneralInfoFrame generalFrame = new GeneralInfoFrame();
 
             setRootPaneCheckingEnabled(false);
             javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
@@ -1073,90 +563,67 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
-        // TODO add your handling code here:
-       
-       
-
-              
-                 desktopPane.add(content);
-
-
-
-                    content.show();
-
-      
+        desktopPane.add(content);
+        content.show();      
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
-        // TODO add your handling code here:
-        int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
-        jXTree1.setSelectionRow(row);
-        
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        if (node == null) return;
-        Object nodeInfo = node.getUserObject();
-        
-        if(nodeInfo.toString().equals("Simulation Controls")){
-            if(evt.isPopupTrigger()){
-                jPopupMenuSimAdd.show(this, evt.getX() + 10, evt.getY() + 55);
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+            jXTree1.setSelectionRow(row);
+
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+            if (node == null) {
+                return;
             }
-        }
-        else if(node.getParent().toString().equals("Simulation Controls")){
-            if(evt.isPopupTrigger()){
-                jPopupMenuSimItem.show(this, evt.getX() + 10, evt.getY() + 55);
+            
+            if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
+                jPopupMenuAdd.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            else if(node.getParent() != null && mainMenuList.keySet().contains(node.getParent().toString())){
+                jPopupMenuItem.show(evt.getComponent(), evt.getX(), evt.getY());
             }
         }
     }//GEN-LAST:event_jXTree1MouseReleased
 
     private void jMenuItemSimAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimAddActionPerformed
-        // TODO add your handling code here:
-        Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
-        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", sim.SNAME);
-        if(r.length() > 0) {
-            for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
-                Simulation s = FileX.simulationList.GetAt(i);
-                if (s.SNAME.equalsIgnoreCase(r)) {
-                    JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
-                    return;
+
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();        
+        ManagementList modelList = (ManagementList) GetManagementList(node.toString());
+        
+        if(modelList != null){
+            String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
+            String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
+            if (nodeName.length() > 0) {
+                for (IModelXBase m : modelList.GetAll()) {
+                    if (m.GetName().equalsIgnoreCase(nodeName)) {
+                        JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
+                        return;
+                    }
                 }
-            }
-            
-            //Simulation sim = new Simulation(r);            
-            sim.SNAME = r;
-            FileX.simulationList.AddNew(sim);
+                if ("Simulation Controls".equals(node.toString())) {
+                    IModelXBase sim = SimulationControlDefaults.Get(FileX.general.FileType);
+                    sim.SetName(nodeName);
+                    modelList.AddNew(sim);
+                } else {
+                    modelList.AddNew(nodeName);
+                }
+                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+                newNode.setUserObject(nodeName);
+                node.add(newNode);
 
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-            if (node == null) return;
-            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-            newNode.setUserObject(r);
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(node);
 
-            node.add(newNode);
-
-            DefaultTreeModel model = (DefaultTreeModel)jXTree1.getModel();
-            model.reload(node);
-            
-            jXTree1.expandAll();
-            int[] rows =  jXTree1.getSelectionRows();
-            jXTree1.setSelectionRow(rows[0] + FileX.simulationList.GetSize());
-            
-            if(simulationFrame != null) {
-                simulationFrame.dispose();
-                simulationFrame = null;
-            }
-            
-            if(simulationFrame == null){
-                simulationFrame = new SimulationFrame(sim);
+                jXTree1.expandAll();
+                int[] rows = jXTree1.getSelectionRows();               
                 
-                setRootPaneCheckingEnabled(false);
-                javax.swing.plaf.InternalFrameUI ui = simulationFrame.getUI();
-                ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);           
-                desktopPane.add(simulationFrame);
-                try {
-                    simulationFrame.setMaximum(true);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                simulationFrame.show();
+                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
+                                
+                String parentNode = node.getParent().toString();
+                JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());                
+                
+                ShowFrame(frame);
             }
         }
     }//GEN-LAST:event_jMenuItemSimAddActionPerformed
@@ -1171,61 +638,44 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             model.reload(parentNode);
             desktopPane.removeAll();
             desktopPane.repaint();
-            FileX.simulationList.RemoveAt(node.toString());
+            
+            ManagementList modelList = GetManagementList(parentNode.toString());
+            modelList.RemoveAt(node.toString());
         }
     }//GEN-LAST:event_jPopupMenuSimItemRemoveActionPerformed
 
     private void jPopupMenuSimItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemCopyActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        String newName = FileX.simulationList.GetCopyName(node.toString());
+        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
+        
+        ManagementList modelList = GetManagementList(parentNode.toString());
+        String newName = modelList.GetCopyName(node.toString());
         
         String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
         if(r.length() > 0) {
-            for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
-                Simulation s = FileX.simulationList.GetAt(i);
-                if (s.SNAME.equalsIgnoreCase(r)) {
-                    JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
-                    return;
-                }
+            if (modelList.GetAt(r) != null) {
+                JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
+                return;
             }
             
-            Simulation sim = FileX.simulationList.Copy(node.toString(), r);
-            FileX.simulationList.AddNew(sim);
-
+            IModelXBase modelClone = modelList.Clone(node.toString(), r);
+            modelList.AddNew(modelClone);
+            
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
             newNode.setUserObject(r);
-            
-            DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
             parentNode.add(newNode);
-
+            
             DefaultTreeModel model = (DefaultTreeModel)jXTree1.getModel();
             model.reload(parentNode);
-            
             jXTree1.expandAll();
+            
             int[] rows =  jXTree1.getSelectionRows();
             if(rows.length > 0)
                 jXTree1.setSelectionRow(rows[0] + FileX.simulationList.GetSize());
             
-            if(simulationFrame != null) {
-                simulationFrame.dispose();
-                simulationFrame = null;
-            }
-            
-            if(simulationFrame == null){
-                simulationFrame = new SimulationFrame(sim);
-                
-                setRootPaneCheckingEnabled(false);
-                javax.swing.plaf.InternalFrameUI ui = simulationFrame.getUI();
-                ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);           
-                desktopPane.add(simulationFrame);
-                try {
-                    simulationFrame.setMaximum(true);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                simulationFrame.show();
-            }
+            JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
+            ShowFrame(frame);
         }
     }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
 
@@ -1245,8 +695,8 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     private javax.swing.JMenu jMenuRefresh;
     private javax.swing.JMenuItem jMenuSaveAsFile;
     private javax.swing.JMenuItem jMenuSaveFile;
-    private javax.swing.JPopupMenu jPopupMenuSimAdd;
-    private javax.swing.JPopupMenu jPopupMenuSimItem;
+    private javax.swing.JPopupMenu jPopupMenuAdd;
+    private javax.swing.JPopupMenu jPopupMenuItem;
     private javax.swing.JMenuItem jPopupMenuSimItemCopy;
     private javax.swing.JMenuItem jPopupMenuSimItemRemove;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1262,23 +712,11 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
         jXTree1.collapseAll();
         jXTree1.expandAll();
-
-        //checkTreatment();
     }
 
     private void ShowFrame(JInternalFrame frame) {
-        if(frame != null) {
-            frame.dispose();
-            frame = null;
-        }
 
-        if(frame == null){
-            if(frame instanceof GeneralInfoFrame)   frame = new GeneralInfoFrame();
-            else if(frame instanceof SoilAnalysisFrame)   frame = new SoilAnalysisFrame();
-            else if(frame instanceof EnvironmentalFrame)   frame = new EnvironmentalFrame();
-            else if(frame instanceof CultivarsFrame)   frame = new CultivarsFrame();
-            else if(frame instanceof PlantingFrame)   frame = new PlantingFrame();
-
+        if(frame != null){
             setRootPaneCheckingEnabled(false);
             javax.swing.plaf.InternalFrameUI ui = frame.getUI();
             ((javax.swing.plaf.basic.BasicInternalFrameUI)ui).setNorthPane(null);
@@ -1291,34 +729,154 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             }
             frame.show();
         }
-        /*else if(!frame.isSelected()){
-             try {
-                frame.setSelected(true);
-             } catch (PropertyVetoException ex) {
-                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }*/
+    }
+    
+    private DefaultMutableTreeNode GetNode(String parentNode, String childNode) {
+
+        DefaultMutableTreeNode returnNode = null;
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
+            if (child.toString().equals(parentNode)) {
+                for (int n = 0; n < child.getChildCount(); n++) {
+                    DefaultMutableTreeNode leaf = (DefaultMutableTreeNode) child.getChildAt(n);
+                    if (leaf.toString().equals(childNode)) {
+
+                        leaf.removeAllChildren();
+                        DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                        model.reload(leaf);
+
+                        returnNode = leaf;
+                        break;
+                    }
+                }
+            }
+        }
+        return returnNode;
     }
 
-//    private void checkTreatment() {
-//        if(!FileX.GetStatus()) jMenuTreatment.setEnabled(false);
-//        if(FileX.general != null) {
-//            if(FileX.general.InstituteCode.length() == 2 && FileX.general.SiteCode.length() == 2 && FileX.general.Year.length() == 4 && FileX.general.ExperimentNumber.length() > 0) {
-//                if(FileX.general.FileType.equals("Experimental")) {
-//                    if(FileX.general.crop != null) {
-//                        jMenuTreatment.setEnabled(true);
-//                    } else {
-//                        jMenuTreatment.setEnabled(false);
-//                    }
-//                } else {
-//                    jMenuTreatment.setEnabled(true);
-//                }
-//            } else {
-//                jMenuTreatment.setEnabled(false);
-//            }
-//        }
-//    }
-}
+    private ManagementList GetManagementList(String nodeName){
+        if(null != nodeName)
+            switch (nodeName) {
+            case "Fields":
+                return FileX.fieldList;
+            case "Initial Conditions":
+                return FileX.initialList;
+            case "Soil Analysis":
+                return FileX.soilAnalysis;
+            case "Environmental Modifications":
+                return FileX.environmentals;
+            case "Planting":
+                return FileX.plantings;
+            case "Irrigation":
+                return FileX.irrigations;
+            case "Fertilizer":
+                return FileX.fertilizerList;
+            case "Organic Amendments":
+                return FileX.organicList;
+            case "Tillage":
+                return FileX.tillageList;
+            case "Harvest":
+                return FileX.harvestList;
+            case "Chemical Applications":
+                return FileX.chemicalList;
+            case "Simulation Controls":
+                return FileX.simulationList;
+            default:
+                break;
+        }
+        
+        return null;
+    }
+    
+    private void ResetTree(){
+        jXTree1.removeAll();
+        
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("FileX");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("General Information");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Notes");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Environment");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fields");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Initial Conditions");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Soil Analysis");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Environmental Modifications");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Management");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Cultivars");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Planting");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Irrigation");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fertilizer");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Organic Amendments");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Tillage");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Harvest");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Chemical Applications");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Simulation Controls");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Treatment");
+        treeNode1.add(treeNode2);
+        jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        
+        jXTree1.expandAll();
+    }
+    
+    private void AddTreeMenu(DefaultMutableTreeNode root, String node){
+        DefaultMutableTreeNode parent = null;
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DefaultMutableTreeNode tmp = (DefaultMutableTreeNode) root.getChildAt(i);
+            if (tmp.toString().equals(node)) {
+                parent = tmp;
+                break;
+            }
+        }
+
+        if (parent != null) {
+            parent.removeAllChildren();
+            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+            model.reload(parent);
+            
+            AddToParent(parent, node);
+        }
+    }
+    private void AddTreeMenu(String parent, String child){
+        
+        DefaultMutableTreeNode parentNode = GetNode(parent, child);
+        AddToParent(parentNode, child);
+    }
+    
+    private void AddToParent(DefaultMutableTreeNode parentNode, String child){
+        int level = 1;
+        ManagementList list = GetManagementList(child);
+        for (IModelXBase item : list.GetAll()) {
+            try{
+            DefaultMutableTreeNode leaf = new DefaultMutableTreeNode();
+            if (item.GetName().isEmpty()) {
+                item.SetName("Level " + level);
+            }
+            leaf.setUserObject(item.GetName());
+            level++;
+            parentNode.add(leaf);
+            }
+            catch(Exception ex){
+                String me = ex.getMessage();
+            }
+        }
+    }
+}      
 
 
 class ExtensionFileFilter extends FileFilter {
@@ -1356,18 +914,7 @@ class ExtensionFileFilter extends FileFilter {
     } else {
         String fileName = file.getName().toLowerCase();
         if(fileName.endsWith("x")) return true;
-        /*
-         *
-         *
-      String path = file.getAbsolutePath().toLowerCase();
-      for (int i = 0, n = extensions.length; i < n; i++) {
-        String extension = extensions[i];
-        if ((path.endsWith(extension) && (path.charAt(path.length() - extension.length() - 1)) == '.')) {
-          return true;
-        }
-      }
-      */
     }
     return false;
-  }
+  } 
 }

@@ -13,7 +13,6 @@ package FileXDialog;
 
 import FileXModel.Chemical;
 import FileXModel.FileX;
-import DSSATModel.CropList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -126,7 +125,7 @@ public class ChemicalDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.chemicalList.GetSize();i++)
         {
-            Chemical chem = FileX.chemicalList.GetAt(i);
+            Chemical chem = (Chemical)FileX.chemicalList.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

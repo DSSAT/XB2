@@ -2,6 +2,8 @@ package DSSATModel;
 
 import FileXModel.Simulation;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +19,15 @@ public class SimulationControlDefaults {
     }
     
     public static Simulation Get(ExperimentType experimentType){
-        return simulations.get(experimentType);
+        Simulation sim = simulations.get(experimentType);
+        
+        Simulation newSim = null;
+        try {
+            newSim = sim.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(SimulationControlDefaults.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newSim; 
     }
     
     public static void Update(ExperimentType experimentType, Simulation sim){

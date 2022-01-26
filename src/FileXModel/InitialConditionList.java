@@ -5,57 +5,48 @@
 
 package FileXModel;
 
-import java.util.Vector;
-
 /**
  *
  * @author Jazzy
  */
-public class InitialConditionList {
-    protected Vector inits = new Vector();
-
-    public void AddNew(InitialCondition init)
+public class InitialConditionList extends ManagementList {
+    
+    @Override
+    public void AddNew(String name)
     {
-        inits.add(init);
-    }
-
-    public void RemoveAt(int level)
-    {
-        inits.remove(level);
-    }
-
-    public void SetAt(int level, InitialCondition init)
-    {
-        inits.set(level, init);
-    }
-
-    public InitialCondition[] GetAll()
-    {
-        return (InitialCondition[]) inits.toArray();
-    }
-
-    public InitialCondition GetAt(int level)
-    {
-        return (InitialCondition)inits.get(level);
-    }
-
-    public int GetSize()
-    {
-        return inits.size();
+        modelList.add(new InitialCondition(name));
     }
     
-    public InitialCondition Clone(int level, String newName){
-        InitialCondition source = GetAt(level);
-        InitialCondition newfield = null;
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        InitialCondition source = (InitialCondition) GetAt(sourceName);
+        InitialCondition newSource = null;
         
         try{
-            newfield = source.clone();
-            newfield.ICNAME = newName;
+            newSource = new InitialCondition();
+            newSource.ICNAME = newName;
+            newSource.PCR = source.PCR;
+            newSource.ICDAT = source.ICDAT;
+            newSource.ICRT = source.ICRT;
+            newSource.ICND = source.ICND;
+            newSource.ICRN = source.ICRN;
+            newSource.ICRE = source.ICRE;
+            newSource.ICWD = source.ICWD;
+            newSource.ICRES = source.ICRES;
+            newSource.ICREN = source.ICREN;
+            newSource.ICREP = source.ICREP;
+            newSource.ICRIP = source.ICRIP;
+            newSource.ICRID = source.ICRID;
+            
+            for(InitialConditionApplication c : source.GetApps()) {
+                InitialConditionApplication ca = (InitialConditionApplication) c.Clone();           
+                newSource.AddApp(ca);
+            }
         }
         catch(Exception ex){
             
         }
         
-        return newfield;
+        return newSource;
     }
 }

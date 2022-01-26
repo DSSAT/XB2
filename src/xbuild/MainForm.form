@@ -2,7 +2,7 @@
 
 <Form version="1.7" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenuSimAdd">
+    <Container class="javax.swing.JPopupMenu" name="jPopupMenuAdd">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
@@ -18,7 +18,7 @@
         </MenuItem>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenuSimItem">
+    <Container class="javax.swing.JPopupMenu" name="jPopupMenuItem">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
@@ -187,9 +187,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="221" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="320" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="desktopPane" pref="773" max="32767" attributes="0"/>
+              <Component id="desktopPane" pref="718" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -217,7 +217,7 @@
         <Component class="org.jdesktop.swingx.JXTree" name="jXTree1">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="FileX&#xa; General Information&#xa;  Notes&#xa; Environment&#xa;  Fields&#xa;  Initial Conditions&#xa;  Soil Analysis&#xa;  Environmental Modifications&#xa; Management&#xa;  Cultivars&#xa;  Planting&#xa;  Irrigation&#xa;  Fertilizer&#xa;  Organic Amendments&#xa;  Tillage&#xa;  Harvest&#xa;  Chemical Applications&#xa; Simulation Controls&#xa; Treatment"/>
+              <TreeModel code=""/>
             </Property>
           </Properties>
           <Events>

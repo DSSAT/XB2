@@ -46,7 +46,7 @@ public class FertilizerService {
                     if(level > fertilizerList.GetSize()) {
                         fertil = new Fertilizer();
                     } else {
-                        fertil = fertilizerList.GetAt(level - 1);
+                        fertil = (Fertilizer)fertilizerList.GetAt(level - 1);
                     }
 
                     FertilizerApplication fertilApp = new FertilizerApplication();
@@ -88,7 +88,7 @@ public class FertilizerService {
             pw.println("*FERTILIZERS (INORGANIC)");
             pw.println("@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME");
             for (int i = 0; i < fertilizerList.GetSize(); i++) {
-                Fertilizer fertil = fertilizerList.GetAt(i);
+                Fertilizer fertil = (Fertilizer)fertilizerList.GetAt(i);
                 for (int n = 0; n < fertil.GetSize(); n++) {
                     FertilizerApplication ferApp = fertil.GetApp(n);
 

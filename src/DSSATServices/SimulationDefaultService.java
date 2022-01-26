@@ -2,6 +2,7 @@ package DSSATServices;
 
 import DSSATModel.ExperimentType;
 import DSSATModel.SimulationControlDefaults;
+import FileXModel.Simulation;
 import FileXService.SimulationControlService;
 import FileXModel.SimulationList;
 
@@ -38,7 +39,7 @@ public class SimulationDefaultService {
                 
                 SimulationList sims = SimulationControlService.Read(fileName);
                 if(sims != null && sims.GetSize() > 0)
-                    SimulationControlDefaults.Update(exp, sims.GetAt(0));
+                    SimulationControlDefaults.Update(exp, (Simulation)sims.GetAt(0));
             }
         } catch (Exception ex) {
             throw new Exception("Simulation Default parse failed");

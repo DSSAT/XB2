@@ -5,53 +5,35 @@
 
 package FileXModel;
 
-import java.util.Vector;
-
 /**
  *
  * @author Jazzy
  */
-public class HarvestList {
-
-    protected Vector harvests = new Vector();
-
-    public void AddNew(Harvest harvest)
-    {
-        harvests.add(harvest);
-    }
-
-    public void RemoveAt(int level)
-    {
-        harvests.remove(level);
-    }
-
-    public void SetAt(int level, Harvest harvest)
-    {
-        harvests.set(level, harvest);
-    }
-
-    public Harvest GetAt(int level)
-    {
-        return (Harvest)harvests.get(level);
-    }
-
-    public int GetSize()
-    {
-        return harvests.size();
-    }
+public class HarvestList extends ManagementList {
     
-    public Harvest Clone(int level, String newName){
-        Harvest source = GetAt(level);
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        Harvest source = (Harvest) GetAt(sourceName);
         Harvest newSource = null;
         
-        try{
-            newSource = source.clone();
+        try {
+            newSource = new Harvest();
             newSource.HNAME = newName;
+            
+            for(HarvestApplication c : source.GetAll()) {
+                HarvestApplication ca = (HarvestApplication) c.Clone();           
+                newSource.AddApp(ca);
+            }
         }
         catch(Exception ex){
             
         }
         
         return newSource;
+    }
+
+    @Override
+    public void AddNew(String name) {
+        modelList.add(new Harvest(name));
     }
 }

@@ -125,7 +125,7 @@ public class IrrigationDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.irrigations.GetSize();i++)
         {
-            Irrigation irrig = FileX.irrigations.GetAt(i);
+            Irrigation irrig = (Irrigation) FileX.irrigations.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

@@ -5,14 +5,14 @@
 
 package FileXModel;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class InitialCondition implements Cloneable {
+public class InitialCondition implements Cloneable, IModelXBase {
     public String PCR;
     public Date ICDAT;
     public Float ICRT;
@@ -26,7 +26,7 @@ public class InitialCondition implements Cloneable {
     public Float ICRIP;
     public Float ICRID;
     public String ICNAME;
-    protected Vector  InitApps = new Vector();
+    protected ArrayList<InitialConditionApplication>  InitApps = new ArrayList<>();
 
     public InitialCondition(String ICNAME)
     {
@@ -36,6 +36,15 @@ public class InitialCondition implements Cloneable {
     public InitialCondition()
     {
         
+    }
+    
+    public String GetName(){
+        return this.ICNAME == null ? "" : this.ICNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        ICNAME = name;
     }
 
     public void AddApp(InitialConditionApplication initApp)
@@ -53,9 +62,9 @@ public class InitialCondition implements Cloneable {
         InitApps.set(level, initApp);
     }
 
-    public InitialConditionApplication[] GetApps()
+    public ArrayList<InitialConditionApplication> GetApps()
     {
-        return (InitialConditionApplication[]) InitApps.toArray();
+        return InitApps;
     }
 
     public InitialConditionApplication GetApp(int level)
@@ -68,6 +77,7 @@ public class InitialCondition implements Cloneable {
         return InitApps.size();
     }
     
+    @Override
     public InitialCondition clone() throws CloneNotSupportedException {
         return (InitialCondition)super.clone();
     } 

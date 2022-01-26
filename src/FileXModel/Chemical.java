@@ -6,13 +6,12 @@
 package FileXModel;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Chemical implements Cloneable {
+public class Chemical implements Cloneable, IModelXBase {
 
     protected ArrayList<ChemicalApplication>  chems = new ArrayList<>();
     public String CHNAME;
@@ -56,8 +55,19 @@ public class Chemical implements Cloneable {
         return chems.size();
     }
     
+    @Override
     public Chemical clone() throws CloneNotSupportedException
     {
         return (Chemical) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.CHNAME == null ? "" : this.CHNAME;
+    }
+
+    @Override
+    public void SetName(String name) {
+        this.CHNAME = name;
     }
 }

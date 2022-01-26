@@ -47,7 +47,7 @@ public class ChemicalApplicationService {
                     if (level > chemicalList.GetSize()) {
                         chem = new Chemical();
                     } else {
-                        chem = chemicalList.GetAt(level - 1);
+                        chem = (Chemical)chemicalList.GetAt(level - 1);
                     }
 
                     chemApp.CDATE = Utils.GetDate(chemicalHeader, tmp, "CDATE", 5);
@@ -77,7 +77,7 @@ public class ChemicalApplicationService {
             pw.println("*CHEMICAL APPLICATIONS");
             pw.println("@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME");
             for (int i = 0; i < chemicalList.GetSize(); i++) {
-                Chemical chem = chemicalList.GetAt(i);
+                Chemical chem = (Chemical)chemicalList.GetAt(i);
                 for (int n = 0; n < chem.GetSize(); n++) {
                     ChemicalApplication chemApp = chem.GetApp(n);
 

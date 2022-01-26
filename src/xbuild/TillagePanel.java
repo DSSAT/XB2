@@ -15,6 +15,7 @@ import FileXModel.Tillage;
 import FileXModel.FileX;
 import FileXModel.TillageApplication;
 import DSSATModel.TillageImplementList;
+import FileXModel.IModelXBase;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -25,16 +26,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jazzy
  */
-public class TillagePanel extends javax.swing.JPanel {
+public class TillagePanel extends javax.swing.JInternalFrame {
 
     /** Creates new form TillagePanel */
     protected Tillage tillage;
     private int selectedRowIndex = -1;
 
-    public TillagePanel(Tillage tillage) {
+    public TillagePanel(String nodeName) {
         initComponents();
-
-        this.tillage = tillage;
+        
+        for(IModelXBase til : FileX.tillageList.GetAll()){
+            if(til.GetName().equals(nodeName)){
+                this.tillage = (Tillage)til;
+            }
+        }
 
         LoadTillage();
     }

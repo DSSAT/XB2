@@ -5,57 +5,35 @@
 
 package FileXModel;
 
-import java.util.Vector;
-
 /**
  *
  * @author Jazzy
  */
-public class ChemicalList {
-    protected Vector chems = new Vector();
-
-    public void AddNew(Chemical chem)
-    {
-        chems.add(chem);
-    }
-
-    public void RemoveAt(int level)
-    {
-        chems.remove(level);
-    }
-
-    public void SetAt(int level, Chemical chem)
-    {
-        chems.set(level, chem);
-    }
-
-    public Chemical[] GetAll()
-    {
-        return (Chemical[]) chems.toArray();
-    }
-
-    public Chemical GetAt(int level)
-    {
-        return (Chemical)chems.get(level);
-    }
-
-    public int GetSize()
-    {
-        return chems.size();
-    }
+public class ChemicalList extends ManagementList {
     
-    public Chemical Clone(int level, String newName){
-        Chemical source = GetAt(level);
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        Chemical source = (Chemical) GetAt(sourceName);
         Chemical newSource = null;
         
-        try{
-            newSource = source.clone();
+        try{            
+            newSource = new Chemical();
             newSource.CHNAME = newName;
+            
+            for(ChemicalApplication c : source.GetApps()) {
+                ChemicalApplication ca = (ChemicalApplication) c.Clone();           
+                newSource.AddApp(ca);
+            }
         }
         catch(Exception ex){
             
         }
         
         return newSource;
+    }
+
+    @Override
+    public void AddNew(String name) {
+        modelList.add(new Chemical(name));
     }
 }

@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Jazzy
  */
-public class Environmental implements Cloneable {
+public class Environmental implements Cloneable, IModelXBase {
     protected ArrayList<EnvironmentApplication>  envApps = new ArrayList<>();
     public String ENVNAME;
 
@@ -54,7 +54,18 @@ public class Environmental implements Cloneable {
         return envApps.size();
     }
     
+    @Override
     public Environmental clone() throws CloneNotSupportedException{
         return (Environmental) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.ENVNAME == null ? "" : this.ENVNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        ENVNAME = name;
     }
 }

@@ -13,7 +13,6 @@ package FileXDialog;
 
 import FileXModel.Simulation;
 import FileXModel.FileX;
-import DSSATModel.CropList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -129,7 +128,7 @@ public class SimulationDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.simulationList.GetSize();i++)
         {
-            Simulation sim = FileX.simulationList.GetAt(i);
+            Simulation sim = (Simulation)FileX.simulationList.GetAt(i);
             Object object[] = new Object[3];
             object[0] = i + 1;
             try{

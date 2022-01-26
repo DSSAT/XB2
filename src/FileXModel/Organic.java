@@ -6,13 +6,12 @@
 package FileXModel;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Organic implements Cloneable {
+public class Organic implements Cloneable, IModelXBase {
 
     protected ArrayList<OrganicApplication>  organicApps = new ArrayList<>();
     public Float EFIR;
@@ -58,8 +57,19 @@ public class Organic implements Cloneable {
         return organicApps.size();
     }
     
+    @Override
     public Organic clone() throws CloneNotSupportedException
     {
         return (Organic) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.RENAME == null ? "" : this.RENAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        RENAME = name;
     }
 }

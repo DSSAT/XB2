@@ -125,7 +125,7 @@ public class EnvironmentalDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.environmentals.GetSize();i++)
         {
-            Environmental env = FileX.environmentals.GetAt(i);
+            Environmental env = (Environmental)FileX.environmentals.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

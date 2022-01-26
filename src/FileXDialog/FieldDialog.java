@@ -13,7 +13,6 @@ package FileXDialog;
 
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
-import DSSATModel.CropList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -126,7 +125,7 @@ public class FieldDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.fieldList.GetSize();i++)
         {
-            FieldDetail field = FileX.fieldList.GetAt(i);
+            FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

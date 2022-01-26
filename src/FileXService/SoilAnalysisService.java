@@ -54,7 +54,7 @@ public class SoilAnalysisService {
                     soil.SMKE = Utils.GetString(soilHeader1, tmp, " SMKE", 5);
                     soil.SANAME = Utils.GetString(soilHeader1, tmp, "SANAME", tmp.length() - soilHeader1.indexOf("SANAME"));
 
-                    soilAnalysis.AddAnalysis(soil);
+                    soilAnalysis.AddNew(soil);
                 } else if (bSoil && bSoilHeader1 && bSoilHeader2) {
                     if (tmp.trim().isEmpty()) {
                         bSoil = false;
@@ -66,7 +66,7 @@ public class SoilAnalysisService {
 
                     try {
                         Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
-                        SoilAnalysis soil = soilAnalysis.GetAnalysis(level);
+                        SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAt(level);
                         SoilAnalysisLayer soilLayer = new SoilAnalysisLayer();
 
                         soilLayer.SABL = Utils.GetFloat(soilHeader2, tmp, "SABL", 5);
@@ -97,7 +97,7 @@ public class SoilAnalysisService {
             pw.println("*SOIL ANALYSIS");
             for (int i = 0; i < soilAnalysis.GetSize(); i++) {
                 Integer level = i + 1;
-                SoilAnalysis soil = soilAnalysis.GetAnalysis(i);
+                SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAt(i);
 
                 pw.println("@A SADAT  SMHB  SMPX  SMKE  SANAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));

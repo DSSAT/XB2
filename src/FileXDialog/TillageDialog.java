@@ -125,7 +125,7 @@ public class TillageDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.tillageList.GetSize();i++)
         {
-            Tillage til = FileX.tillageList.GetAt(i);
+            Tillage til = (Tillage) FileX.tillageList.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

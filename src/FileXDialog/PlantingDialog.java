@@ -129,7 +129,7 @@ public class PlantingDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.plantings.GetSize();i++)
         {
-            Planting plant = FileX.plantings.GetAt(i);
+            Planting plant = (Planting) FileX.plantings.GetAt(i);
             Object object[] = new Object[3];
             object[0] = i + 1;
             try{

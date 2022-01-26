@@ -130,7 +130,7 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.soilAnalysis.GetSize();i++)
         {
-            SoilAnalysis soil = FileX.soilAnalysis.GetAnalysis(i);
+            SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAt(i);
             Object object[] = new Object[3];
             object[0] = i + 1;
             try{

@@ -126,7 +126,7 @@ public class OrganicDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.organicList.GetSize();i++)
         {
-            Organic organic = FileX.organicList.GetAt(i);
+            Organic organic = (Organic) FileX.organicList.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

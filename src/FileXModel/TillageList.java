@@ -5,52 +5,33 @@
 
 package FileXModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
-public class TillageList {
-    protected Vector tillages = new Vector();
+public class TillageList extends ManagementList {
 
-    public void AddNew(Tillage tillage)
+    @Override
+    public void AddNew(String name)
     {
-        tillages.add(tillage);
-    }
-
-    public void RemoveAt(int level)
-    {
-        tillages.remove(level);
-    }
-
-    public void SetAt(int level, Tillage tillage)
-    {
-        tillages.set(level, tillage);
-    }
-
-    public Tillage[] GetAll()
-    {
-        return (Tillage[]) tillages.toArray();
-    }
-
-    public Tillage GetAt(int level)
-    {
-        return (Tillage)tillages.get(level);
-    }
-
-    public int GetSize()
-    {
-        return tillages.size();
+        modelList.add(new Tillage(name));
     }
     
-    public Tillage Clone(int level, String newName){
-        Tillage source = GetAt(level);
+    @Override
+    public IModelXBase Clone(String sourceName, String newName){
+        Tillage source = (Tillage)GetAt(sourceName);
         Tillage newSource = null;
         
-        try{
-            newSource = source.clone();
+        try{            
+            newSource = new Tillage();
             newSource.TNAME = newName;
+            
+            for(TillageApplication c : source.GetApps()) {
+                TillageApplication ca = (TillageApplication) c.Clone();           
+                newSource.AddApp(ca);
+            }
         }
         catch(Exception ex){
             

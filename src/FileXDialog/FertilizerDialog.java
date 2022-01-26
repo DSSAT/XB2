@@ -125,7 +125,7 @@ public class FertilizerDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.fertilizerList.GetSize();i++)
         {
-            Fertilizer fertil = FileX.fertilizerList.GetAt(i);
+            Fertilizer fertil = (Fertilizer)FileX.fertilizerList.GetAt(i);
             Object object[] = new Object[2];
             object[0] = i + 1;
             try {

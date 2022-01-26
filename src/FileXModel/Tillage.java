@@ -6,13 +6,12 @@
 package FileXModel;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Tillage implements Cloneable {
+public class Tillage implements Cloneable, IModelXBase {
 
     protected ArrayList<TillageApplication>  tillAps = new ArrayList<>();
     public String TNAME;
@@ -41,7 +40,7 @@ public class Tillage implements Cloneable {
         tillAps.set(level, till);
     }
 
-    public ArrayList<TillageApplication>GetApps()
+    public ArrayList<TillageApplication> GetApps()
     {
         return tillAps;
     }
@@ -56,7 +55,18 @@ public class Tillage implements Cloneable {
         return tillAps.size();
     }
     
+    @Override
     public Tillage clone() throws CloneNotSupportedException{
         return (Tillage) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.TNAME == null ? "" : this.TNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        TNAME = name;
     }
 }

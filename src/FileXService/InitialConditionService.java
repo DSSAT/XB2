@@ -74,7 +74,7 @@ public class InitialConditionService {
 
                     try {
                         Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
-                        InitialCondition init = initialList.GetAt(level);
+                        InitialCondition init = (InitialCondition)initialList.GetAt(level);
                         InitialConditionApplication initApp = new InitialConditionApplication();
 
                         initApp.ICBL = Utils.GetFloat(initHeader2, tmp, "ICBL", 5);
@@ -100,7 +100,7 @@ public class InitialConditionService {
             pw.println("*INITIAL CONDITIONS");
             for (int i = 0; i < initialList.GetSize(); i++) {
                 Integer level = i + 1;
-                InitialCondition init = initialList.GetAt(i);
+                InitialCondition init = (InitialCondition)initialList.GetAt(i);
 
                 pw.println("@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICRIP ICRID ICNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));

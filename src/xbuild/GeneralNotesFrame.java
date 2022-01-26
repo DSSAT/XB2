@@ -14,13 +14,18 @@ package xbuild;
 import FileXModel.FileX;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class GeneralNotesFrame extends javax.swing.JInternalFrame implements KeyListener {
+public class GeneralNotesFrame extends JInternalFrame implements KeyListener {
 
+    public JInternalFrame NewFrame(){
+        return new GeneralNotesFrame();
+    }
+    
     /** Creates new form GeneralNotesFrame */
     public GeneralNotesFrame() {
         initComponents();

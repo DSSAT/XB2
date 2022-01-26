@@ -20,6 +20,7 @@ import FileXDialog.FieldDialog;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import javax.swing.JInternalFrame;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,8 +28,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jazzy
  */
-public class TreatmentFrame extends javax.swing.JInternalFrame {
+public class TreatmentFrame extends JInternalFrame {
 
+    public JInternalFrame NewFrame(){
+        return new TreatmentFrame();
+    }
+    
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
         initComponents();

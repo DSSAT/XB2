@@ -6,20 +6,18 @@
 package FileXModel;
 
 import DSSATModel.GrowthStage;
-import static DSSATModel.GrowthStageList.growthStage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Harvest implements Cloneable {
+public class Harvest implements Cloneable, IModelXBase {
 
-    protected Vector  harvestApps = new Vector();
+    protected ArrayList<HarvestApplication>  harvestApps = new ArrayList<>();
     public String HNAME;
 
     public Harvest(String HNAME)
@@ -46,19 +44,17 @@ public class Harvest implements Cloneable {
         harvestApps.set(level, harvestApp);
     }
 
-    public HarvestApplication[] GetApps()
+    public ArrayList<HarvestApplication> GetApps()
     {
-        return (HarvestApplication[]) harvestApps.toArray();
+        return harvestApps;
     }
     
     public List<HarvestApplication> GetAll(){
-        List<HarvestApplication> list = new ArrayList<HarvestApplication>();
+        List<HarvestApplication> list = new ArrayList<>();
 
-        Object[] object = harvestApps.toArray();
-
-        for (int i = 0; i < object.length; i++) {
-            list.add((HarvestApplication) object[i]);
-        }
+        harvestApps.forEach(obj -> {
+            list.add((HarvestApplication) obj);
+        });
 
         Collections.sort(list, new Comparator<HarvestApplication>() {
             public int compare(GrowthStage c1, GrowthStage c2) {
@@ -84,8 +80,19 @@ public class Harvest implements Cloneable {
         return harvestApps.size();
     }
     
+    @Override
     public Harvest clone() throws CloneNotSupportedException
     {
         return (Harvest) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.HNAME == null ? "" : this.HNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        HNAME = name;
     }
 }

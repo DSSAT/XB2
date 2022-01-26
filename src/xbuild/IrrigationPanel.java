@@ -14,6 +14,8 @@ package xbuild;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
 import DSSATModel.IrrigationMethodList;
+import FileXModel.FileX;
+import FileXModel.IModelXBase;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -27,16 +29,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jazzy
  */
-public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
+public class IrrigationPanel extends javax.swing.JInternalFrame implements KeyListener {
 
     /** Creates new form IrrigationPanel */
     protected Irrigation irrig;
     private int selectedRowIndex = -1;
 
-    public IrrigationPanel(Irrigation irrig) {
+    public IrrigationPanel(String nodeName) {
         initComponents();
-
-        this.irrig = irrig;
+        
+        for(IModelXBase ir : FileX.irrigations.GetAll()){
+            if(((Irrigation)ir).IRNAME.equals(nodeName)){
+                this.irrig = (Irrigation)ir;
+                break;
+            }
+        }
         
         txtEFIR.addKeyListener(this);
 
@@ -124,9 +131,11 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
             }
         });
         jScrollPane1.setViewportView(jXTable1);
-        jXTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-        jXTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-        jXTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
+        if (jXTable1.getColumnModel().getColumnCount() > 0) {
+            jXTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jXTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
+            jXTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
+        }
 
         txtEFIR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
@@ -134,7 +143,6 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -165,7 +173,6 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +181,6 @@ public class IrrigationPanel extends javax.swing.JPanel implements KeyListener {
                     .addComponent(rdDaysAfterPlanting)
                     .addComponent(rdReportedDates)
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)

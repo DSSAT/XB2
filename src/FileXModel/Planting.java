@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class Planting implements Cloneable {
+public class Planting implements Cloneable, IModelXBase {
     public Planting(String PLNAME)
     {
         this.PLNAME = PLNAME;
@@ -39,5 +39,15 @@ public class Planting implements Cloneable {
     
     public Planting clone() throws CloneNotSupportedException{
         return (Planting) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.PLNAME == null ? "" : this.PLNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        PLNAME = name;
     }
 }

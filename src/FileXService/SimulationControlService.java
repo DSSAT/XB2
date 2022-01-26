@@ -80,7 +80,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     tmp = Utils.PadRight(tmp, simGeneralHeader.length(), ' ');
@@ -106,7 +106,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.WATER = Utils.GetString(simOptionHeader, tmp, "WATER", 5);
@@ -132,7 +132,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.WTHER = Utils.GetString(simMethodHeader, tmp, "WTHER", 5);
@@ -160,7 +160,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.PLANT = Utils.GetString(simManagementHeader, tmp, "PLANT", 5);
@@ -182,7 +182,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.FNAME = Utils.GetString(simOutputHeader, tmp, "FNAME", 5);
@@ -216,7 +216,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     try{
@@ -250,7 +250,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.IMDEP = Utils.GetFloat(simIrrigationHeader, tmp, "IMDEP", 5);
@@ -274,7 +274,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.NMDEP = Utils.GetFloat(simNitrogenHeader, tmp, "NMDEP", 5);
@@ -295,7 +295,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.RIPCN = Utils.GetFloat(simResidueHeader, tmp, "RIPCN", 5);
@@ -315,7 +315,7 @@ public class SimulationControlService {
                     if(level > simulationList.GetSize()) {
                         sim = new Simulation();
                     } else {
-                        sim = simulationList.GetAt(level - 1);
+                        sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
                     sim.HFRST = Utils.GetFloat(simHarvestHeader, tmp, "HFRST", 5);
@@ -348,7 +348,7 @@ public class SimulationControlService {
             pw.println();
             pw.println("*SIMULATION CONTROLS");
             for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
-                Simulation sim = FileX.simulationList.GetAt(i);
+                Simulation sim = (Simulation)FileX.simulationList.GetAt(i);
                 Integer level = i + 1;
 
                 pw.println("@N GENERAL     NYERS NREPS START SDATE RSEED SNAME.................... SMODEL");

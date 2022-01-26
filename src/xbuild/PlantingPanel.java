@@ -15,6 +15,8 @@ import DSSATModel.PlantingMethodList;
 import DSSATModel.PlantDistribution;
 import DSSATModel.PlantDistributionList;
 import DSSATModel.PlantingMethod;
+import FileXModel.FileX;
+import FileXModel.IModelXBase;
 import FileXModel.Planting;
 import ListDialog.*;
 import java.awt.event.KeyEvent;
@@ -27,15 +29,20 @@ import java.util.Locale;
  *
  * @author Jazzy
  */
-public class PlantingPanel extends javax.swing.JPanel implements KeyListener {
+public class PlantingPanel extends javax.swing.JInternalFrame implements KeyListener {
 
     /** Creates new form PlantingPanel */
     protected Planting planting;
 
-    public PlantingPanel(Planting planting) {
+    public PlantingPanel(String nodeName) {
         initComponents();
-
-        this.planting = planting;
+        
+        for(IModelXBase p : FileX.plantings.GetAll()){
+            if(((Planting)p).PLNAME.equals(nodeName)){
+                this.planting = (Planting)p;
+                break;
+            }
+        }
 
         txtPAGE.addKeyListener(this);
         txtPENV.addKeyListener(this);

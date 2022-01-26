@@ -48,7 +48,7 @@ public class EnvironmentService {
                     if(level > environmentals.GetSize()) {
                         env = new Environmental();
                     } else {
-                        env = environmentals.GetAt(level - 1);
+                        env = (Environmental)environmentals.GetAt(level - 1);
                     }
 
                     envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
@@ -90,7 +90,7 @@ public class EnvironmentService {
             pw.println("@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME");
 
             for (int i = 0; i < environmentals.GetSize(); i++) {
-                Environmental env = environmentals.GetAt(i);
+                Environmental env = (Environmental) environmentals.GetAt(i);
                 for (int n = 0; n < env.GetSize(); n++) {
                     EnvironmentApplication envApp = env.GetApp(n);
 

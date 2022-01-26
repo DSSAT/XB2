@@ -14,6 +14,8 @@ import FileXModel.Simulation;
 
 import DSSATModel.*;
 import DSSATModel.SimulationStart;
+import FileXModel.FileX;
+import FileXModel.IModelXBase;
 import ListDialog.CropModelDialog;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
@@ -21,13 +23,14 @@ import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 
 /**
  *
  * @author Jazzy
  */
-public class SimulationFrame extends javax.swing.JInternalFrame {
+public class SimulationFrame extends JInternalFrame {
 
     private Simulation sim;
 
@@ -36,10 +39,17 @@ public class SimulationFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form SimulationFrame
      *
-     * @param sim
+     * @param nodeName
+     * @return 
      */
-    public SimulationFrame(Simulation sim) {
-        this.sim = sim;
+    
+    public SimulationFrame (String nodeName){
+        for (IModelXBase s : FileX.simulationList.GetAll()) {
+            if (s.GetName().equalsIgnoreCase(nodeName)) {
+                sim = (Simulation)s;
+                break;
+            }
+        }
 
         initComponents();
         initComponentsValues();

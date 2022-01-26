@@ -13,7 +13,6 @@ package FileXDialog;
 
 import FileXModel.InitialCondition;
 import FileXModel.FileX;
-import DSSATModel.CropList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -129,7 +128,7 @@ public class InitialDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.initialList.GetSize();i++)
         {
-            InitialCondition init = FileX.initialList.GetAt(i);
+            InitialCondition init = (InitialCondition) FileX.initialList.GetAt(i);
             Object object[] = new Object[3];
             object[0] = i + 1;
             try{

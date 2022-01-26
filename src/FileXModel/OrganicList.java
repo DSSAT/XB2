@@ -5,52 +5,32 @@
 
 package FileXModel;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jazzy
  */
-public class OrganicList {
-    protected Vector organics = new Vector();
-
-    public void AddNew(Organic organic)
+public class OrganicList extends ManagementList {
+    
+    @Override
+    public void AddNew(String name)
     {
-        organics.add(organic);
-    }
-
-    public void RemoveAt(int level)
-    {
-        organics.remove(level);
-    }
-
-    public void SetAt(int level, Organic organic)
-    {
-        organics.set(level, organic);
-    }
-
-    public Organic[] GetAll()
-    {
-        return (Organic[]) organics.toArray();
-    }
-
-    public Organic GetAt(int level)
-    {
-        return (Organic)organics.get(level);
-    }
-
-    public int GetSize()
-    {
-        return organics.size();
+        modelList.add(new Organic(name));
     }
     
-    public Organic Clone(int level, String newName){
-        Organic source = GetAt(level);
+    public IModelXBase Clone(String sourceName, String newName){
+        Organic source = (Organic)GetAt(sourceName);
         Organic newSource = null;
         
-        try{
-            newSource = source.clone();
+        try {
+            newSource = new Organic();
             newSource.RENAME = newName;
+            
+            for(OrganicApplication c : source.GetApps()) {
+                OrganicApplication ca = (OrganicApplication) c.Clone();           
+                newSource.AddApp(ca);
+            }
         }
         catch(Exception ex){
             

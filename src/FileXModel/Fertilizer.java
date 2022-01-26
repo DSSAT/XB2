@@ -12,7 +12,7 @@ import java.util.Vector;
  *
  * @author Jazzy
  */
-public class Fertilizer implements Cloneable {
+public class Fertilizer implements Cloneable, IModelXBase {
 
     protected ArrayList<FertilizerApplication>  ferApps = new ArrayList<>();
     public String FERNAME;
@@ -56,7 +56,18 @@ public class Fertilizer implements Cloneable {
         return ferApps.size();
     }
     
+    @Override
     public Fertilizer clone() throws CloneNotSupportedException{
         return (Fertilizer) super.clone();
+    }
+
+    @Override
+    public String GetName() {
+        return this.FERNAME == null ? "" : this.FERNAME;
+    }
+    
+    @Override
+    public void SetName(String name) {
+        FERNAME = name;
     }
 }

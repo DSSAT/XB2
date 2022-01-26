@@ -15,6 +15,7 @@ import Extensions.Utils;
 import FileXModel.Environmental;
 import FileXModel.EnvironmentApplication;
 import FileXModel.FileX;
+import FileXModel.IModelXBase;
 import java.awt.Rectangle;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
@@ -26,17 +27,23 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jazzy
  */
-public class EnvironmentalPanel extends javax.swing.JPanel {
+public class EnvironmentalPanel extends javax.swing.JInternalFrame {
 
     /** Creates new form EnvironmentalPanel */
     private Environmental environment;
     private int selectedRowIndex = -1;
     
-    public EnvironmentalPanel(Environmental environment) {
+    public EnvironmentalPanel(String nodeName) {
         initComponents();
+        
+        for(IModelXBase env : FileX.environmentals.GetAll()){
+            if(((Environmental)env).ENVNAME.equals(nodeName)){
+                this.environment = (Environmental)env;
+                break;
+            }
+        }
 
         txtYear.setText(FileX.general.Year);
-        this.environment = environment;
 
         LoadEnvApp();
     }

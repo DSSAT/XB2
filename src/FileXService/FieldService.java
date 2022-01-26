@@ -70,7 +70,7 @@ public class FieldService {
 
                     try {
                         Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
-                        FieldDetail field = fieldList.GetAt(level);
+                        FieldDetail field = (FieldDetail)fieldList.GetAt(level);
 
                         field.XCRD = Utils.GetFloat(fieldHeader2, tmp, "XCRD", 15);
                         field.YCRD = Utils.GetFloat(fieldHeader2, tmp, "YCRD", 15);
@@ -99,7 +99,7 @@ public class FieldService {
             pw.println("@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME");
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 Integer level = i + 1;
-                FieldDetail field = fieldList.GetAt(i);
+                FieldDetail field = (FieldDetail)fieldList.GetAt(i);
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadRight(field.ID_FIELD, 8, ' '));
                 pw.print(" " + Utils.PadRight(field.WSTA, 8, ' '));
@@ -123,7 +123,7 @@ public class FieldService {
             pw.println("@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR");
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 Integer level = i + 1;
-                FieldDetail field = fieldList.GetAt(i);
+                FieldDetail field = (FieldDetail)fieldList.GetAt(i);
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadLeft(field.XCRD, 15, ' '));
                 pw.print(" " + Utils.PadLeft(field.YCRD, 15, ' '));
