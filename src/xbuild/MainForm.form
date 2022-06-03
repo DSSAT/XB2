@@ -26,14 +26,31 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="jPopupMenuSimItemCopy">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/file_copy.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Copy Level"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPopupMenuSimItemCopyActionPerformed"/>
           </Events>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="jPopupMenuSimItemRename">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/text_format.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Rename Level"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPopupMenuSimItemRenameActionPerformed"/>
+          </Events>
+        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jPopupMenuSimItemRemove">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/delete_forever.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Remove Level"/>
           </Properties>
           <Events>

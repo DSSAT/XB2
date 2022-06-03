@@ -130,6 +130,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jMenuItemSimAdd = new javax.swing.JMenuItem();
         jPopupMenuItem = new javax.swing.JPopupMenu();
         jPopupMenuSimItemCopy = new javax.swing.JMenuItem();
+        jPopupMenuSimItemRename = new javax.swing.JMenuItem();
         jPopupMenuSimItemRemove = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -159,6 +160,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         });
         jPopupMenuAdd.add(jMenuItemSimAdd);
 
+        jPopupMenuSimItemCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file_copy.png"))); // NOI18N
         jPopupMenuSimItemCopy.setText("Copy Level");
         jPopupMenuSimItemCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +169,16 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         });
         jPopupMenuItem.add(jPopupMenuSimItemCopy);
 
+        jPopupMenuSimItemRename.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/text_format.png"))); // NOI18N
+        jPopupMenuSimItemRename.setText("Rename Level");
+        jPopupMenuSimItemRename.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPopupMenuSimItemRenameActionPerformed(evt);
+            }
+        });
+        jPopupMenuItem.add(jPopupMenuSimItemRename);
+
+        jPopupMenuSimItemRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_forever.png"))); // NOI18N
         jPopupMenuSimItemRemove.setText("Remove Level");
         jPopupMenuSimItemRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -679,6 +691,30 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         }
     }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
 
+    private void jPopupMenuSimItemRenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemRenameActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
+        
+        ManagementList modelList = GetManagementList(parentNode.toString());
+        String oldName = node.toString();
+        
+        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", oldName);
+        if((null == oldName ? r != null : !oldName.equals(r)) && 0 <= r.length()) {
+            if (modelList.GetAt(r) != null) {
+                JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
+                return;
+            }
+            
+            modelList.Rename(oldName, r);
+            node.setUserObject(r);
+            
+            DefaultTreeModel model = (DefaultTreeModel)jXTree1.getModel();
+            model.reload(parentNode);
+            jXTree1.expandAll();
+        }
+    }//GEN-LAST:event_jPopupMenuSimItemRenameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
@@ -699,6 +735,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     private javax.swing.JPopupMenu jPopupMenuItem;
     private javax.swing.JMenuItem jPopupMenuSimItemCopy;
     private javax.swing.JMenuItem jPopupMenuSimItemRemove;
+    private javax.swing.JMenuItem jPopupMenuSimItemRename;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;

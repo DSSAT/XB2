@@ -59,4 +59,13 @@ public abstract class ManagementList {
         
         return name + " (" + (max + 1) + ")";
     }
+    
+    public void Rename(String oldName, String newName){
+        for(IModelXBase model : GetAll()){
+            if(model.GetName().equals(oldName)){
+                model.SetName(newName);
+                break;
+            }
+        }
+    }
 }
