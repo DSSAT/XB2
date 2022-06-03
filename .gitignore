@@ -47,3 +47,5 @@ Thumbs.db
 
 *.zip
 build/
+XBuild.fle
+nbproject/
