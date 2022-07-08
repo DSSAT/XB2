@@ -19,12 +19,13 @@ import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements KeyListener {
+public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
 
     private SoilAnalysis soilAnalysis;
     private String SMHB;
@@ -38,8 +39,10 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
     public SoilAnalysisFrame(String nodeName) {
         initComponents();
         
+        Integer level = 0;
         for(IModelXBase s: FileX.soilAnalysis.GetAll()){
-            if(((SoilAnalysis)s).SANAME.equals(nodeName)){
+            level++;
+            if(getLevel(nodeName) == level){
                 this.soilAnalysis = (SoilAnalysis) s;
                 break;
             }
@@ -52,6 +55,26 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
         txtSMHB.addKeyListener(this);
         txtSMPX.addKeyListener(this);
         txtSMKE.addKeyListener(this);
+        
+        lblLevel.setText("Level " + level.toString());
+        lblDescription.setText(getDescription(nodeName));
+    }
+    
+    /**
+     *
+     * @param name
+     */
+    @Override
+    public void updatePanelName(String name){
+        Integer level = 0;
+        for (IModelXBase f : FileX.soilAnalysis.GetAll()) {
+            level++;
+            if(getLevel(name) == level){                
+                lblLevel.setText("Level " + level.toString());
+                lblDescription.setText(getDescription(name));                
+                break;
+            }
+        }        
     }
 
     /**
@@ -80,6 +103,8 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
         bnDeleteLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable2 = new org.jdesktop.swingx.JXTable();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        lblDescription = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -232,7 +257,7 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
         jXPanel2.setLayout(jXPanel2Layout);
         jXPanel2Layout.setHorizontalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(bnAddLayer)
@@ -246,35 +271,51 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
                     .addComponent(bnDeleteLayer)
                     .addComponent(bnAddLayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        lblDescription.setText("Description");
+        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jXPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -506,6 +547,8 @@ public class SoilAnalysisFrame extends javax.swing.JInternalFrame implements Key
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXTable jXTable2;
+    private org.jdesktop.swingx.JXLabel lblDescription;
+    private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JTextField txtSMHB;
     private javax.swing.JTextField txtSMKE;
     private javax.swing.JTextField txtSMPX;

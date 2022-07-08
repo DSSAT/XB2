@@ -9,16 +9,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyListener {
+public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
     protected Irrigation irrig;
     private int selectedRowIndex = -1;
@@ -28,8 +28,10 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
     public IrrigationFrame(String nodeName) {
         initComponents();
         
+        Integer level = 0;
         for(IModelXBase ir : FileX.irrigations.GetAll()){
-            if(((Irrigation)ir).IRNAME.equals(nodeName)){
+            level++;
+            if(getLevel(nodeName) == level){
                 this.irrig = (Irrigation)ir;
                 break;
             }
@@ -38,6 +40,26 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
         txtEFIR.addKeyListener(this);
 
         LoadIrrigationApp();
+        
+        lblLevel.setText("Level " + level.toString());
+        lblDescription.setText(getDescription(nodeName));
+    }
+    
+    /**
+     *
+     * @param name
+     */
+    @Override
+    public void updatePanelName(String name){
+        Integer level = 0;
+        for (IModelXBase f : FileX.irrigations.GetAll()) {
+            level++;
+            if(getLevel(name) == level){                
+                lblLevel.setText("Level " + level.toString());
+                lblDescription.setText(getDescription(name));
+                break;
+            }
+        }        
     }
 
     /**
@@ -61,6 +83,8 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         txtYear = new javax.swing.JTextField();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        lblDescription = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -127,19 +151,29 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
 
         txtYear.setEditable(false);
 
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        lblDescription.setText("Description");
+        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
+                                .addGap(67, 67, 67)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,7 +188,7 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
                                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bnAddLayer)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(bnDeleteLayer)))
@@ -162,8 +196,12 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,8 +220,8 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
                             .addComponent(bnDeleteLayer)
                             .addComponent(bnAddLayer))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -343,6 +381,8 @@ public class IrrigationFrame extends javax.swing.JInternalFrame implements KeyLi
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;
     private org.jdesktop.swingx.JXTable jXTable1;
+    private org.jdesktop.swingx.JXLabel lblDescription;
+    private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JRadioButton rdDaysAfterPlanting;
     private javax.swing.JRadioButton rdReportedDates;
     private javax.swing.JFormattedTextField txtEFIR;

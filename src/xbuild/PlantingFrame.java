@@ -14,12 +14,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class PlantingFrame extends javax.swing.JInternalFrame implements KeyListener {
+public class PlantingFrame extends IXInternalFrame implements KeyListener {
 
     /**
      * Creates new form PlantingFrame
@@ -29,8 +30,10 @@ public class PlantingFrame extends javax.swing.JInternalFrame implements KeyList
     public PlantingFrame(String nodeName) {
         initComponents();
         
+        Integer level = 0;
         for(IModelXBase p : FileX.plantings.GetAll()){
-            if(((Planting)p).PLNAME.equals(nodeName)){
+            level++;
+            if(getLevel(nodeName) == level){
                 this.planting = (Planting)p;
                 break;
             }
@@ -50,6 +53,26 @@ public class PlantingFrame extends javax.swing.JInternalFrame implements KeyList
         txtSPRL.addKeyListener(this);
 
         LoadPlanting();
+        
+        lblLevel.setText("Level " + level.toString());
+        lblDescription.setText(getDescription(nodeName));
+    }
+    
+    /**
+     *
+     * @param name
+     */
+    @Override
+    public void updatePanelName(String name){
+        Integer level = 0;
+        for (IModelXBase f : FileX.plantings.GetAll()) {
+            level++;
+            if(getLevel(name) == level){                
+                lblLevel.setText("Level " + level.toString());
+                lblDescription.setText(getDescription(name));                
+                break;
+            }
+        }   
     }
 
     /**
@@ -103,6 +126,8 @@ public class PlantingFrame extends javax.swing.JInternalFrame implements KeyList
         jXLabel23 = new org.jdesktop.swingx.JXLabel();
         jXLabel24 = new org.jdesktop.swingx.JXLabel();
         jXLabel25 = new org.jdesktop.swingx.JXLabel();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        lblDescription = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -361,24 +386,40 @@ public class PlantingFrame extends javax.swing.JInternalFrame implements KeyList
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        lblDescription.setText("Description");
+        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -684,6 +725,8 @@ public class PlantingFrame extends javax.swing.JInternalFrame implements KeyList
     private org.jdesktop.swingx.JXLabel jXLabel9;
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXPanel jXPanel3;
+    private org.jdesktop.swingx.JXLabel lblDescription;
+    private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JFormattedTextField txtPAGE;
     private javax.swing.JFormattedTextField txtPENV;
     private javax.swing.JFormattedTextField txtPLDP;

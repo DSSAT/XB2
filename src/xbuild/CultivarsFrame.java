@@ -18,12 +18,13 @@ import ListDialog.CultivarListDialog;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class CultivarsFrame extends javax.swing.JInternalFrame {
+public class CultivarsFrame extends IXInternalFrame {
 
     /** Creates new form CultivarsFrame */
     public CultivarsFrame() {

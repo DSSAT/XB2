@@ -31,6 +31,7 @@ public class FileXService {
         EnvironmentService.Read(fileName);
         HarvestService.Read(fileName);
         FileX.simulationList = SimulationControlService.Read(fileName.getAbsolutePath());
+        FileX.SetAbsoluteFileName(fileName.getAbsolutePath());
     }
     
     public static void SaveFile(File file) {

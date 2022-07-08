@@ -36,6 +36,7 @@ public abstract class ManagementList {
     
     public IModelXBase GetAt(String name)
     {
+        name = ExtractDescription(name);
         for(IModelXBase model : GetAll()){
             if(model.GetName().equals(name)){
                 return model;
@@ -47,6 +48,18 @@ public abstract class ManagementList {
     public IModelXBase GetAt(int level)
     {
         return modelList.get(level);
+    }
+    
+    public int GetLevel(String name)
+    {
+        int level = -1;
+        for(IModelXBase model : GetAll()){
+            level++;
+            if(model.GetName().equals(name)){
+                break;
+            }
+        }
+        return level;
     }
     
     public String GetCopyName(String name){
@@ -68,4 +81,23 @@ public abstract class ManagementList {
             }
         }
     }
+    
+    public String ExtractDescription(String name){
+        String description = name;
+ 
+        if(name.matches("^Level\\s[0-9]+?[?::].*")){
+            description = name.split(":")[1].trim();
+        }
+        
+        return description;
+    }
+    
+    public int ExtractLevel(String name){
+        int level = -1;
+        if(name.matches("^Level\\s[0-9]+?[?::].*")){
+            level = Integer.parseInt(name.split(":")[0].split(" ")[1].trim());
+        }
+        
+        return level;
+    } 
 }

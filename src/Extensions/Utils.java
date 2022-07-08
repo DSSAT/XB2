@@ -128,9 +128,12 @@ public class Utils {
             int stop = start + fieldLength;
 
             String tmp = value.substring(start,stop).trim();
+            if(tmp.isEmpty())
+                val = "-99";
+            else
+                val = tmp;
 
-
-            if(!tmp.equals("-99")) val = tmp;
+            //if(!tmp.equals("-99")) val = tmp;
         }
         return val;
     }

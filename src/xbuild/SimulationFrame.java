@@ -23,14 +23,14 @@ import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import javax.swing.JInternalFrame;
+import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 
 /**
  *
  * @author Jazzy
  */
-public class SimulationFrame extends JInternalFrame {
+public class SimulationFrame extends IXInternalFrame {
 
     private Simulation sim;
 
@@ -44,8 +44,10 @@ public class SimulationFrame extends JInternalFrame {
      */
     
     public SimulationFrame (String nodeName){
+        Integer level = 0;
         for (IModelXBase s : FileX.simulationList.GetAll()) {
-            if (s.GetName().equalsIgnoreCase(nodeName)) {
+            level++;
+            if(getLevel(nodeName) == level){
                 sim = (Simulation)s;
                 break;
             }
@@ -54,9 +56,29 @@ public class SimulationFrame extends JInternalFrame {
         initComponents();
         initComponentsValues();
         initEvents();
-        
 
         bUpdate = true;
+        
+        lblLevel.setText("Level " + level.toString());
+        lblDescription.setText(getDescription(nodeName));
+    }
+    
+    /**
+     *
+     * @param name
+     */
+    @Override
+    public void updatePanelName(String name){
+        Integer level = 0;
+        for (IModelXBase f : FileX.simulationList.GetAll()) {
+            level++;
+            if(getLevel(name) == level){                
+                lblLevel.setText("Level " + level.toString());
+                lblDescription.setText(getDescription(name));                
+                break;
+            }
+        }
+        
     }
 
     /**
@@ -292,6 +314,8 @@ public class SimulationFrame extends JInternalFrame {
         jXLabel42 = new org.jdesktop.swingx.JXLabel();
         jXRadioGroup16 = new org.jdesktop.swingx.JXRadioGroup();
         jXRadioGroup17 = new org.jdesktop.swingx.JXRadioGroup();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        lblDescription = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -386,7 +410,7 @@ public class SimulationFrame extends JInternalFrame {
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jXPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jXPanel2Layout.setVerticalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +437,7 @@ public class SimulationFrame extends JInternalFrame {
                     .addComponent(bnSMODEL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jXPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("General", jXPanel2);
@@ -597,14 +621,14 @@ public class SimulationFrame extends JInternalFrame {
             .addGroup(jXPanel3Layout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jXPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Option", jXPanel3);
@@ -617,7 +641,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup2.setLayout(jXRadioGroup2Layout);
         jXRadioGroup2Layout.setHorizontalGroup(
             jXRadioGroup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup2Layout.setVerticalGroup(
             jXRadioGroup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -630,7 +654,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup3.setLayout(jXRadioGroup3Layout);
         jXRadioGroup3Layout.setHorizontalGroup(
             jXRadioGroup3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup3Layout.setVerticalGroup(
             jXRadioGroup3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,7 +667,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup4.setLayout(jXRadioGroup4Layout);
         jXRadioGroup4Layout.setHorizontalGroup(
             jXRadioGroup4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup4Layout.setVerticalGroup(
             jXRadioGroup4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,7 +680,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup5.setLayout(jXRadioGroup5Layout);
         jXRadioGroup5Layout.setHorizontalGroup(
             jXRadioGroup5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup5Layout.setVerticalGroup(
             jXRadioGroup5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,7 +693,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup6.setLayout(jXRadioGroup6Layout);
         jXRadioGroup6Layout.setHorizontalGroup(
             jXRadioGroup6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup6Layout.setVerticalGroup(
             jXRadioGroup6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -682,7 +706,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup7.setLayout(jXRadioGroup7Layout);
         jXRadioGroup7Layout.setHorizontalGroup(
             jXRadioGroup7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup7Layout.setVerticalGroup(
             jXRadioGroup7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,7 +719,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup8.setLayout(jXRadioGroup8Layout);
         jXRadioGroup8Layout.setHorizontalGroup(
             jXRadioGroup8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup8Layout.setVerticalGroup(
             jXRadioGroup8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,7 +732,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup9.setLayout(jXRadioGroup9Layout);
         jXRadioGroup9Layout.setHorizontalGroup(
             jXRadioGroup9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup9Layout.setVerticalGroup(
             jXRadioGroup9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -721,7 +745,7 @@ public class SimulationFrame extends JInternalFrame {
         jXRadioGroup10.setLayout(jXRadioGroup10Layout);
         jXRadioGroup10Layout.setHorizontalGroup(
             jXRadioGroup10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         jXRadioGroup10Layout.setVerticalGroup(
             jXRadioGroup10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,7 +875,7 @@ public class SimulationFrame extends JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelSoilTemperatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPSTMX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPSTMN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                    .addComponent(txtPSTMN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelSoilTemperatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jXLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -988,7 +1012,7 @@ public class SimulationFrame extends JInternalFrame {
             .addGroup(jXPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Planting", jXPanel7);
@@ -1295,6 +1319,8 @@ public class SimulationFrame extends JInternalFrame {
         lbIncorporationDepthUnit.setText("cm");
         lbIncorporationDepthUnit.setEnabled(false);
 
+        jXRadioGroup14.setLayout(new javax.swing.BoxLayout(jXRadioGroup14, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout jXPanel21Layout = new javax.swing.GroupLayout(jXPanel21);
         jXPanel21.setLayout(jXPanel21Layout);
         jXPanel21Layout.setHorizontalGroup(
@@ -1354,7 +1380,7 @@ public class SimulationFrame extends JInternalFrame {
             .addGroup(jXPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         jXPanel10Layout.setVerticalGroup(
             jXPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1387,6 +1413,8 @@ public class SimulationFrame extends JInternalFrame {
         txtHPCNP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         txtHPCNR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jXRadioGroup15.setLayout(new javax.swing.BoxLayout(jXRadioGroup15, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout jXPanel22Layout = new javax.swing.GroupLayout(jXPanel22);
         jXPanel22.setLayout(jXPanel22Layout);
@@ -1450,7 +1478,7 @@ public class SimulationFrame extends JInternalFrame {
             .addGroup(jXPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         jXPanel11Layout.setVerticalGroup(
             jXPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1573,6 +1601,8 @@ public class SimulationFrame extends JInternalFrame {
 
         jXLabel41.setText("Verbose");
 
+        jXRadioGroup18.setLayout(new javax.swing.BoxLayout(jXRadioGroup18, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout jXPanel17Layout = new javax.swing.GroupLayout(jXPanel17);
         jXPanel17.setLayout(jXPanel17Layout);
         jXPanel17Layout.setHorizontalGroup(
@@ -1678,6 +1708,10 @@ public class SimulationFrame extends JInternalFrame {
 
         jXLabel42.setText("Format");
 
+        jXRadioGroup16.setLayout(new javax.swing.BoxLayout(jXRadioGroup16, javax.swing.BoxLayout.LINE_AXIS));
+
+        jXRadioGroup17.setLayout(new javax.swing.BoxLayout(jXRadioGroup17, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout jXPanel16Layout = new javax.swing.GroupLayout(jXPanel16);
         jXPanel16.setLayout(jXPanel16Layout);
         jXPanel16Layout.setHorizontalGroup(
@@ -1688,12 +1722,9 @@ public class SimulationFrame extends JInternalFrame {
                     .addGroup(jXPanel16Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jXPanel16Layout.createSequentialGroup()
-                                .addComponent(jXLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jXPanel16Layout.createSequentialGroup()
-                                .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jXLabel31, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(jXPanel16Layout.createSequentialGroup()
                         .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jXPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1753,7 +1784,7 @@ public class SimulationFrame extends JInternalFrame {
                     .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
@@ -1763,7 +1794,7 @@ public class SimulationFrame extends JInternalFrame {
             .addGroup(jXPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jXPanel6Layout.setVerticalGroup(
             jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1775,21 +1806,36 @@ public class SimulationFrame extends JInternalFrame {
 
         jTabbedPane2.addTab("Output", jXPanel6);
 
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        lblDescription.setText("Description");
+        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -2507,6 +2553,8 @@ public class SimulationFrame extends JInternalFrame {
     private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit;
     private org.jdesktop.swingx.JXLabel lbThreshold;
     private org.jdesktop.swingx.JXLabel lbThresholdUnit;
+    private org.jdesktop.swingx.JXLabel lblDescription;
+    private org.jdesktop.swingx.JXLabel lblLevel;
     private org.jdesktop.swingx.JXPanel panelDate;
     private org.jdesktop.swingx.JXPanel panelSoilTemperature;
     private org.jdesktop.swingx.JXPanel panelSoilWater;

@@ -23,12 +23,13 @@ import java.awt.event.WindowFocusListener;
 import javax.swing.JInternalFrame;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class TreatmentFrame extends JInternalFrame {
+public class TreatmentFrame extends IXInternalFrame {
 
     public JInternalFrame NewFrame(){
         return new TreatmentFrame();

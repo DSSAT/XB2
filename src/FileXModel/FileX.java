@@ -21,6 +21,15 @@ public class FileX {
     public static SimulationList simulationList;
     public static TreatmentList treaments;
     private static boolean opened = false;
+    private static String fileName;
+    
+    public static String GetAbsoluteFileName(){
+        return fileName;
+    }
+    
+    public static void SetAbsoluteFileName(String fileName){
+        FileX.fileName = fileName;
+    }
 
     public static boolean GetStatus() {
         return opened;
@@ -43,6 +52,7 @@ public class FileX {
         simulationList = new SimulationList();
         treaments = new TreatmentList();
 
+        fileName = null;
         opened = true;
     }
 
@@ -63,6 +73,7 @@ public class FileX {
         simulationList = null;
         treaments = null;
 
+        fileName = null;
         opened = false;
     }
 }

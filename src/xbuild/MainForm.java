@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
+import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XInternalFrame;
 
 /**
@@ -246,9 +247,9 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jMenuSaveAsFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/16/filesaveas.png"))); // NOI18N
         jMenuSaveAsFile.setText("Save File As..");
         jMenuSaveAsFile.setEnabled(false);
-        jMenuSaveAsFile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuSaveAsFileMouseClicked(evt);
+        jMenuSaveAsFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSaveAsFileActionPerformed(evt);
             }
         });
         jMenuFile.add(jMenuSaveAsFile);
@@ -264,7 +265,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
 
         jMenuBar1.add(jMenuFile);
 
-        jMenuRefresh.setText("Refresh");
+        jMenuRefresh.setText("Reload");
         jMenuRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuRefreshMouseClicked(evt);
@@ -312,12 +313,12 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
         );
 
         pack();
@@ -345,7 +346,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 nodeName = node.getParent().toString();
             }
 
-            JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
+            IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
             ShowFrame(frame);
         }
         else{
@@ -359,10 +360,6 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         //frame.addMyEventListener();
         
 }//GEN-LAST:event_jXTree1ValueChanged
-
-    private void jMenuSaveAsFileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSaveAsFileMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuSaveAsFileMouseClicked
 
     private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
         dispose();
@@ -438,7 +435,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
     private void saveFile(){
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
-        File f = new File(root.getUserObject().toString());
+        //File f = new File(root.getUserObject().toString());
 
         String target = null;
         try {
@@ -460,27 +457,44 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         } catch (Exception e) {
             target = new Setup().GetDSSATPath();
         }
-
-        JFileChooser fc = new JFileChooser(target);
-        fc.setSelectedFile(f);
-
-        fc.setName(root.getUserObject().toString());
-        int returnVal = fc.showSaveDialog(this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            if(file.exists()) {
-                if(JOptionPane.showConfirmDialog(null, "Do you want to save this file?", "File already existing", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    FileXService.SaveFile(file);
-                }
-                else {
-                    return;
-                }
-            }
+        
+        if(FileX.GetAbsoluteFileName() == null || FileX.GetAbsoluteFileName().isEmpty()){
+            File file = new File(target + "\\" + root.getUserObject().toString());
             FileXService.SaveFile(file);
         }
+        else{
+            File file = new File(FileX.GetAbsoluteFileName());
+            FileXService.SaveFile(file);
+        }
+
+//        JFileChooser fc = new JFileChooser(target);
+//        fc.setSelectedFile(f);
+//
+//        fc.setName(root.getUserObject().toString());
+//        int returnVal = fc.showSaveDialog(this);
+//
+//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+//            File file = fc.getSelectedFile();
+//            if(file.exists()) {
+//                if(JOptionPane.showConfirmDialog(null, "Do you want to save this file?", "File already existing", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                    FileXService.SaveFile(file);
+//                }
+//                else {
+//                    return;
+//                }
+//            }
+//            FileXService.SaveFile(file);
+//        }
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
+        
+        int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(confirmSave == 2) // Cancel
+            return;
+        else if(confirmSave == 0) //Yes
+            saveFile();        
+        
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
         DefaultMutableTreeNode simsChild = null;
         for(int i = 0 ; i < root.getChildCount();i++){
@@ -540,6 +554,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             AddTreeMenu("Management", "Organic Amendments");
             AddTreeMenu("Management", "Tillage");
             AddTreeMenu("Management", "Harvest");
+            AddTreeMenu("Management", "Chemical Applications");
             AddTreeMenu(root, "Simulation Controls");
             
             jXTree1.collapseAll();
@@ -621,7 +636,10 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                     modelList.AddNew(nodeName);
                 }
                 DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-                newNode.setUserObject(nodeName);
+                
+                String newName = "Level " + (modelList.GetLevel(nodeName) + 1) + ": " + nodeName;
+                
+                newNode.setUserObject(newName);
                 node.add(newNode);
 
                 DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
@@ -633,7 +651,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
                 jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
                                 
                 String parentNode = node.getParent().toString();
-                JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());                
+                IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());                
                 
                 ShowFrame(frame);
             }
@@ -662,7 +680,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
         
         ManagementList modelList = GetManagementList(parentNode.toString());
-        String newName = modelList.GetCopyName(node.toString());
+        String newName = modelList.GetCopyName(node.toString().split(":")[1].trim());
         
         String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
         if(r.length() > 0) {
@@ -675,7 +693,8 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             modelList.AddNew(modelClone);
             
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-            newNode.setUserObject(r);
+            String newCopyName = "Level " + (modelList.GetLevel(r) + 1) + ": " + r;
+            newNode.setUserObject(newCopyName);
             parentNode.add(newNode);
             
             DefaultTreeModel model = (DefaultTreeModel)jXTree1.getModel();
@@ -686,7 +705,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             if(rows.length > 0)
                 jXTree1.setSelectionRow(rows[0] + FileX.simulationList.GetSize());
             
-            JInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
+            IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
             ShowFrame(frame);
         }
     }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
@@ -697,7 +716,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
         
         ManagementList modelList = GetManagementList(parentNode.toString());
-        String oldName = node.toString();
+        String oldName = node.toString().split(":")[1].trim();
         
         String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", oldName);
         if((null == oldName ? r != null : !oldName.equals(r)) && 0 <= r.length()) {
@@ -707,13 +726,22 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
             }
             
             modelList.Rename(oldName, r);
-            node.setUserObject(r);
+            String newName = "Level " + (modelList.GetLevel(r) + 1) + ": " + r;
+            node.setUserObject(newName);
             
             DefaultTreeModel model = (DefaultTreeModel)jXTree1.getModel();
             model.reload(parentNode);
             jXTree1.expandAll();
+            
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            currentFrame.updatePanelName(newName);
+            
         }
     }//GEN-LAST:event_jPopupMenuSimItemRenameActionPerformed
+
+    private void jMenuSaveAsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveAsFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSaveAsFileActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
@@ -751,7 +779,7 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         jXTree1.expandAll();
     }
 
-    private void ShowFrame(JInternalFrame frame) {
+    private void ShowFrame(IXInternalFrame frame) {
 
         if(frame != null){
             setRootPaneCheckingEnabled(false);
@@ -901,10 +929,10 @@ public class MainForm extends javax.swing.JFrame implements MyEventListener {
         for (IModelXBase item : list.GetAll()) {
             try{
             DefaultMutableTreeNode leaf = new DefaultMutableTreeNode();
-            if (item.GetName().isEmpty()) {
-                item.SetName("Level " + level);
-            }
-            leaf.setUserObject(item.GetName());
+//            if (item.GetName().isEmpty()) {
+//                item.SetName("Level " + level);
+//            }
+            leaf.setUserObject("Level " + level + ": " + item.GetName());
             level++;
             parentNode.add(leaf);
             }

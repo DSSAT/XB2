@@ -29,20 +29,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JInternalFrame;
+import xbuild.Components.IXInternalFrame;
 
 /**
  *
  * @author Jazzy
  */
-public class GeneralInfoFrame extends JInternalFrame implements KeyListener {
+public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
 
     /** Creates new form GeneralInfoFrame */
     private Crop crop;
     private MyEventListener l;
     private Boolean bUpdate = false;
     
-    public JInternalFrame NewFrame(){
+    public IXInternalFrame NewFrame(){
         return new GeneralInfoFrame();
     } 
 
