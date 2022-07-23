@@ -119,6 +119,19 @@ public class Utils {
         }
         return val;
     }
+    
+    public static Float ParseFloat(Object value) {
+        Float val = null;
+
+        try {
+            if(value == null)
+                return 0.0f;
+            val = Float.parseFloat(value.toString());
+        } catch (NumberFormatException numberFormatException) {
+
+        }
+        return val;
+    }
 
     public static String GetString(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field);

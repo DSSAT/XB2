@@ -1,28 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * GeneralInfoFrame.java
- *
- * Created on Mar 11, 2010, 11:48:00 AM
- */
-
 package xbuild;
 
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import DSSATModel.Setup;
 import DSSATModel.Crop;
+import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
-import ListDialog.CropListDialog;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JSpinner;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,17 +18,15 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.XColumn;
 
 /**
  *
  * @author Jazzy
  */
-public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
+public class GeneralInfoFrame extends IXInternalFrame {
 
-    /** Creates new form GeneralInfoFrame */
-    private Crop crop;
     private MyEventListener l;
-    private Boolean bUpdate = false;
     
     public IXInternalFrame NewFrame(){
         return new GeneralInfoFrame();
@@ -51,39 +37,42 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy", Locale.US);
         String date = sdf.format(new Date());
-        txtYear.setValue(Integer.parseInt(date));
+        
+        if(FileX.general.Year == null){
+            FileX.general.Year = date;
+        }
 
-        crop = new Crop();
+        if(FileX.general.crop == null)
+           FileX.general.crop = new Crop();
 
+        
         txtYear.setEditor(new JSpinner.NumberEditor(txtYear,"####"));
         txtInstituteCode.setDocument(new LimitDocument(2));
         txtSiteCode.setDocument(new LimitDocument(2));
 
-        LoadGeneralInfo();
+        cbFileType.setInit(FileX.general, "FileType", FileX.general.FileType.toString());
+        txtInstituteCode.Init(FileX.general, "InstituteCode", FileX.general.InstituteCode);
+        txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
+        txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
+        txtExperimentNumber.Init(FileX.general, "ExperimentNumber", Utils.ParseInteger(FileX.general.ExperimentNumber));
+        cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");        
 
-        txtInstituteCode.addKeyListener(this);
-        txtSiteCode.addKeyListener(this);
-
-        txtAddress.addKeyListener(this);
-        txtCropName.addKeyListener(this);
-        txtExperimentName.addKeyListener(this);
-        txtExperimentNumber.addKeyListener(this);
-        txtHAREA.addKeyListener(this);
-        txtHARM.addKeyListener(this);
-        txtHLEN.addKeyListener(this);
-        txtHRNO.addKeyListener(this);
-        txtPAREA.addKeyListener(this);
-        txtPLAY.addKeyListener(this);
-        txtPLDR.addKeyListener(this);
-        txtPLEN.addKeyListener(this);
-        txtPLSP.addKeyListener(this);
-        txtPRNO.addKeyListener(this);
-        txtPeople.addKeyListener(this);
-        txtSite.addKeyListener(this);
-        txtYear.addKeyListener(this);
-
+        txtExperimentName.Init(FileX.general, "ExperimentName", FileX.general.ExperimentName);
+        txtPeople.Init(FileX.general, "People", FileX.general.People);
+        txtAddress.Init(FileX.general, "Adress", FileX.general.Adress);
+        txtSite.Init(FileX.general, "Site", FileX.general.Site);
         
-        bUpdate = true;
+        txtPAREA.Init(FileX.general, "PAREA", FileX.general.PAREA);
+        txtPRNO.Init(FileX.general, "PRNO", FileX.general.PRNO);
+        txtPLEN.Init(FileX.general, "PLEN", FileX.general.PLEN);
+        txtPLDR.Init(FileX.general, "PLDR", FileX.general.PLDR);
+        txtPLSP.Init(FileX.general, "PLSP", FileX.general.PLSP);
+        txtPLAY.Init(FileX.general, "PLAY", FileX.general.PLAY);
+        
+        txtHAREA.Init(FileX.general, "HAREA", FileX.general.HAREA);
+        txtHRNO.Init(FileX.general, "HRNO", FileX.general.HRNO);
+        txtHLEN.Init(FileX.general, "HLEN", FileX.general.HLEN);
+        txtHARM.Init(FileX.general, "HARM", FileX.general.HARM);
         
         setCropImage();
         if(FileX.general.FileType == ExperimentType.Experimental)
@@ -105,39 +94,38 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
-        cbFileType = new javax.swing.JComboBox();
-        txtYear = new javax.swing.JSpinner();
+        cbFileType = new xbuild.Components.XComboBox();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
-        txtExperimentNumber = new javax.swing.JSpinner();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
-        bnSelectCrop = new javax.swing.JButton();
-        txtInstituteCode = new javax.swing.JTextField();
-        txtSiteCode = new javax.swing.JTextField();
-        txtCropName = new javax.swing.JTextField();
+        txtInstituteCode = new xbuild.Components.XTextField();
+        txtSiteCode = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        cbCrop = new xbuild.Components.XDropdownTableComboBox();
+        txtYear = new xbuild.Components.XSpinner();
+        txtExperimentNumber = new xbuild.Components.XSpinner();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
-        txtExperimentName = new javax.swing.JTextField();
+        txtExperimentName = new xbuild.Components.XTextField();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         jXLabel9 = new org.jdesktop.swingx.JXLabel();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
-        txtPeople = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        txtSite = new javax.swing.JTextField();
+        txtPeople = new xbuild.Components.XTextField();
+        txtAddress = new xbuild.Components.XTextField();
+        txtSite = new xbuild.Components.XTextField();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
-        txtPAREA = new javax.swing.JFormattedTextField();
-        txtPRNO = new javax.swing.JFormattedTextField();
-        txtPLEN = new javax.swing.JFormattedTextField();
-        txtPLDR = new javax.swing.JFormattedTextField();
-        txtPLSP = new javax.swing.JFormattedTextField();
-        txtPLAY = new javax.swing.JFormattedTextField();
+        txtPAREA = new xbuild.Components.XFormattedTextField();
+        txtPRNO = new xbuild.Components.XFormattedTextField();
+        txtPLEN = new xbuild.Components.XFormattedTextField();
+        txtPLDR = new xbuild.Components.XFormattedTextField();
+        txtPLSP = new xbuild.Components.XFormattedTextField();
+        txtPLAY = new xbuild.Components.XFormattedTextField();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
         jXLabel12 = new org.jdesktop.swingx.JXLabel();
         jXLabel13 = new org.jdesktop.swingx.JXLabel();
@@ -149,10 +137,10 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
         jXLabel19 = new org.jdesktop.swingx.JXLabel();
         jXLabel20 = new org.jdesktop.swingx.JXLabel();
         jXPanel7 = new org.jdesktop.swingx.JXPanel();
-        txtHRNO = new javax.swing.JFormattedTextField();
-        txtHAREA = new javax.swing.JFormattedTextField();
-        txtHLEN = new javax.swing.JFormattedTextField();
-        txtHARM = new javax.swing.JFormattedTextField();
+        txtHRNO = new xbuild.Components.XFormattedTextField();
+        txtHAREA = new xbuild.Components.XFormattedTextField();
+        txtHLEN = new xbuild.Components.XFormattedTextField();
+        txtHARM = new xbuild.Components.XFormattedTextField();
         jXLabel22 = new org.jdesktop.swingx.JXLabel();
         jXLabel23 = new org.jdesktop.swingx.JXLabel();
         jXLabel24 = new org.jdesktop.swingx.JXLabel();
@@ -180,45 +168,28 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                 cbFileTypeItemStateChanged(evt);
             }
         });
-        cbFileType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFileTypeActionPerformed(evt);
-            }
-        });
-
-        txtYear.setModel(new javax.swing.SpinnerNumberModel(2010, 1900, null, 1));
-        txtYear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtYear.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                txtYearStateChanged(evt);
-            }
-        });
 
         jXLabel4.setText("Year");
         jXLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-
-        txtExperimentNumber.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
-        txtExperimentNumber.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                txtExperimentNumberStateChanged(evt);
-            }
-        });
 
         jXLabel6.setText("Crop");
 
         jXLabel5.setText("Experiment Number");
         jXLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        bnSelectCrop.setLabel("...");
-        bnSelectCrop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectCropActionPerformed(evt);
+        txtInstituteCode.setColumns(2);
+        txtInstituteCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtInstituteCodeFocusLost(evt);
             }
         });
 
-        txtInstituteCode.setColumns(2);
-
         txtSiteCode.setColumns(2);
+        txtSiteCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSiteCodeFocusLost(evt);
+            }
+        });
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -236,6 +207,24 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
 
         jLabel5.setForeground(new java.awt.Color(255, 0, 51));
         jLabel5.setText("*");
+
+        cbCrop.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCropItemStateChanged(evt);
+            }
+        });
+
+        txtYear.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                txtYearStateChanged(evt);
+            }
+        });
+
+        txtExperimentNumber.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                txtExperimentNumberStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
@@ -268,16 +257,16 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtSiteCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtInstituteCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtExperimentNumber, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)))
+                                .addComponent(txtExperimentNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                .addComponent(txtYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtSiteCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtInstituteCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtCropName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bnSelectCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addComponent(cbCrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,23 +289,22 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtExperimentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
+                            .addComponent(jLabel2)
+                            .addComponent(txtExperimentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(bnSelectCrop)
-                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7))
         );
 
@@ -346,8 +334,8 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(txtSite, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
-                        .addComponent(txtPeople, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtExperimentName, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(txtPeople, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtExperimentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jXPanel2Layout.setVerticalGroup(
@@ -466,7 +454,7 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                 .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPLAY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Harvest Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -550,8 +538,8 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel3Layout.createSequentialGroup()
-                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -566,7 +554,7 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,8 +564,8 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
                 .addGap(1, 1, 1)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -585,24 +573,27 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
 
     private void cbFileTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFileTypeItemStateChanged
         // TODO add your handling code here:
-        if(cbFileType.getSelectedItem().toString().equals("Experimental")) {
-            txtCropName.setEnabled(true);
-            bnSelectCrop.setEnabled(true);
-        } else if(cbFileType.getSelectedItem().toString().equals("Sequential")) {
-            txtCropName.setEnabled(false);
-            bnSelectCrop.setEnabled(false);
-            txtCropName.setText("");
-            crop = null;
-        } else if(cbFileType.getSelectedItem().toString().equals("Seasonal")) {
-            txtCropName.setEnabled(false);
-            bnSelectCrop.setEnabled(false);
-            txtCropName.setText("");
-            crop = null;
-        } else if(cbFileType.getSelectedItem().toString().equals("Spatial")) {
-            txtCropName.setEnabled(false);
-            bnSelectCrop.setEnabled(false);
-            txtCropName.setText("");
-            crop = null;
+        switch (cbFileType.getSelectedItem().toString()) {
+            case "Experimental":
+                cbCrop.setEnabled(true);
+                break;
+            case "Sequential":
+                cbCrop.setEnabled(false);
+                cbCrop.setSelectedIndex(-1);
+                FileX.general.crop = new Crop();
+                break;
+            case "Seasonal":
+                cbCrop.setEnabled(false);
+                cbCrop.setSelectedIndex(-1);
+                FileX.general.crop = new Crop();
+                break;
+            case "Spatial":
+                cbCrop.setEnabled(false);
+                cbCrop.setSelectedIndex(-1);
+                FileX.general.crop = new Crop();
+                break;
+            default:
+                break;
         }
         
         if(FileX.general.FileType == ExperimentType.Experimental)
@@ -615,44 +606,28 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
 
     private void txtYearStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtYearStateChanged
         actionPerformed(new ActionEvent(this, 0, "Update"));
-        //UpdateGeneral();
-}//GEN-LAST:event_txtYearStateChanged
+    }//GEN-LAST:event_txtYearStateChanged
+
+    private void cbCropItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCropItemStateChanged
+        actionPerformed(new ActionEvent(this, 0, "Update"));
+    }//GEN-LAST:event_cbCropItemStateChanged
 
     private void txtExperimentNumberStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtExperimentNumberStateChanged
         actionPerformed(new ActionEvent(this, 0, "Update"));
-        //UpdateGeneral();
-}//GEN-LAST:event_txtExperimentNumberStateChanged
+    }//GEN-LAST:event_txtExperimentNumberStateChanged
 
-    private void bnSelectCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectCropActionPerformed
-        if(!bnSelectCrop.isEnabled()) return;
+    private void txtInstituteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInstituteCodeFocusLost
+        actionPerformed(new ActionEvent(this, 0, "Update"));
+    }//GEN-LAST:event_txtInstituteCodeFocusLost
 
-        final CropListDialog dialog = new CropListDialog(null, true, crop);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Crop cropTmp = dialog.GetSelected();
-                if(cropTmp != null){
-                    txtCropName.setText(cropTmp.CropName);
-                    crop = cropTmp;
-                    FileX.general.crop = cropTmp;
-                    actionPerformed(new ActionEvent(GeneralInfoFrame.this, 0, "Update"));
-                    setCropImage();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnSelectCropActionPerformed
-
-    private void cbFileTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFileTypeActionPerformed
-        UpdateGeneral();
-    }//GEN-LAST:event_cbFileTypeActionPerformed
+    private void txtSiteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSiteCodeFocusLost
+        actionPerformed(new ActionEvent(this, 0, "Update"));
+    }//GEN-LAST:event_txtSiteCodeFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnSelectCrop;
-    private javax.swing.JComboBox cbFileType;
+    private xbuild.Components.XDropdownTableComboBox cbCrop;
+    private xbuild.Components.XComboBox cbFileType;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -690,25 +665,24 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
     private org.jdesktop.swingx.JXPanel jXPanel3;
     private org.jdesktop.swingx.JXPanel jXPanel6;
     private org.jdesktop.swingx.JXPanel jXPanel7;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCropName;
-    private javax.swing.JTextField txtExperimentName;
-    private javax.swing.JSpinner txtExperimentNumber;
-    private javax.swing.JFormattedTextField txtHAREA;
-    private javax.swing.JFormattedTextField txtHARM;
-    private javax.swing.JFormattedTextField txtHLEN;
-    private javax.swing.JFormattedTextField txtHRNO;
-    private javax.swing.JTextField txtInstituteCode;
-    private javax.swing.JFormattedTextField txtPAREA;
-    private javax.swing.JFormattedTextField txtPLAY;
-    private javax.swing.JFormattedTextField txtPLDR;
-    private javax.swing.JFormattedTextField txtPLEN;
-    private javax.swing.JFormattedTextField txtPLSP;
-    private javax.swing.JFormattedTextField txtPRNO;
-    private javax.swing.JTextField txtPeople;
-    private javax.swing.JTextField txtSite;
-    private javax.swing.JTextField txtSiteCode;
-    private javax.swing.JSpinner txtYear;
+    private xbuild.Components.XTextField txtAddress;
+    private xbuild.Components.XTextField txtExperimentName;
+    private xbuild.Components.XSpinner txtExperimentNumber;
+    private xbuild.Components.XFormattedTextField txtHAREA;
+    private xbuild.Components.XFormattedTextField txtHARM;
+    private xbuild.Components.XFormattedTextField txtHLEN;
+    private xbuild.Components.XFormattedTextField txtHRNO;
+    private xbuild.Components.XTextField txtInstituteCode;
+    private xbuild.Components.XFormattedTextField txtPAREA;
+    private xbuild.Components.XFormattedTextField txtPLAY;
+    private xbuild.Components.XFormattedTextField txtPLDR;
+    private xbuild.Components.XFormattedTextField txtPLEN;
+    private xbuild.Components.XFormattedTextField txtPLSP;
+    private xbuild.Components.XFormattedTextField txtPRNO;
+    private xbuild.Components.XTextField txtPeople;
+    private xbuild.Components.XTextField txtSite;
+    private xbuild.Components.XTextField txtSiteCode;
+    private xbuild.Components.XSpinner txtYear;
     // End of variables declaration//GEN-END:variables
 
     public void actionPerformed(ActionEvent e) {
@@ -716,23 +690,6 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
             l.myAction(new MyEvent(this, SetDocumentName()));
         }
         catch(Exception ex) {}
-
-        UpdateGeneral();
-    }
-
-    public void keyTyped(KeyEvent e) {
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-        UpdateGeneral();
-    }
-
-    public void keyPressed(KeyEvent e) {
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-        UpdateGeneral();
-    }
-
-    public void keyReleased(KeyEvent e) {
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-        UpdateGeneral();
     }
 
     protected String SetDocumentName() {
@@ -742,7 +699,7 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
             doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
             if(cbFileType.getSelectedItem().toString().equals("Experimental"))
             {
-                doc += "." + crop.CropCode + "X";
+                doc += "." + FileX.general.crop.CropCode + "X";
             }
             else if(cbFileType.getSelectedItem().toString().equals("Sequential"))
             {
@@ -764,240 +721,6 @@ public class GeneralInfoFrame extends IXInternalFrame implements KeyListener {
     public void addMyEventListener(MyEventListener l) {
         if(this.l == null)
             this.l = l;
-    }
-
-    private void UpdateGeneral() {
-        if(!bUpdate) return;
-        try
-        {
-            FileX.general.FileType = ExperimentType.valueOf(cbFileType.getSelectedItem().toString());
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.ExperimentName = txtExperimentName.getText();
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.InstituteCode = txtInstituteCode.getText();
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.SiteCode = txtSiteCode.getText();
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.Year = txtYear.getValue().toString();
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.ExperimentNumber = txtExperimentNumber.getValue().toString();
-        }
-        catch(Exception ex) {}
-        try
-        {
-            FileX.general.crop = crop;
-        }
-        catch(Exception ex) {}
-
-        if (!txtPeople.getText().isEmpty()) {
-            FileX.general.People = txtPeople.getText();
-        } else {
-            FileX.general.People = null;
-        }
-
-        if (!txtSite.getText().isEmpty()) {
-            FileX.general.Site = txtSite.getText();
-        } else {
-            FileX.general.Site = null;
-        }
-
-        if (!txtAddress.getText().isEmpty()) {
-            FileX.general.Adress = txtAddress.getText();
-        } else {
-            FileX.general.Adress = null;
-        }
-
-        try
-        {
-            FileX.general.PAREA = Float.parseFloat(txtPAREA.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.PAREA = null;
-        }
-        try
-        {
-            FileX.general.PRNO = Integer.parseInt(txtPRNO.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.PRNO = null;
-        }
-        try
-        {
-            FileX.general.PLEN = Float.parseFloat(txtPLEN.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.PLEN = null;
-        }
-        try
-        {
-            FileX.general.PLDR = Integer.parseInt(txtPLDR.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.PLDR = null;
-        }
-        try
-        {
-            FileX.general.PLSP = Float.parseFloat(txtPLSP.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.PLSP = null;
-        }
-
-        if (!txtPLAY.getText().isEmpty()) {
-            FileX.general.PLAY = txtPLAY.getText();
-        } else {
-            FileX.general.PLAY = null;
-        }
-
-        try
-        {
-            FileX.general.HAREA = Float.parseFloat(txtHAREA.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.HAREA = null;
-        }
-        try
-        {
-            FileX.general.HRNO = Integer.parseInt(txtHRNO.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.HRNO = null;
-        }
-        try
-        {
-            FileX.general.HLEN = Float.parseFloat(txtHLEN.getText());
-        }
-        catch(Exception ex) {
-            FileX.general.HLEN = null;
-        }
-
-        if (!txtHARM.getText().isEmpty()) {
-            FileX.general.HARM = txtHARM.getText();
-        } else {
-            FileX.general.HARM = null;
-        }
-    }
-
-    private void LoadGeneralInfo() {
-        // Load General Information
-        try
-        {
-            if(!FileX.general.FileType.equals(""))
-                cbFileType.setSelectedItem(FileX.general.FileType);
-        }
-        catch(Exception ex) {
-        }
-        try
-        {
-            txtExperimentName.setText(FileX.general.ExperimentName);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtInstituteCode.setText(FileX.general.InstituteCode);
-         }
-        catch(Exception ex) {}
-        try
-        {
-            txtSiteCode.setText(FileX.general.SiteCode);
-         }
-        catch(Exception ex) {}
-        try
-        {
-            txtExperimentNumber.setValue(Integer.parseInt(FileX.general.ExperimentNumber));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtYear.setValue(Integer.parseInt(FileX.general.Year));
-        }
-        catch(Exception ex) {}
-        try
-        {
-                crop = FileX.general.crop;
-                txtCropName.setText(crop.CropName);
-        }
-        catch(Exception ex){}
-        try
-        {
-            txtPeople.setText(FileX.general.People);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtSite.setText(FileX.general.Site);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtAddress.setText(FileX.general.Adress);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPAREA.setText(Utils.FloatToString(FileX.general.PAREA));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPRNO.setText(FileX.general.PRNO.toString());
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPLEN.setText(Utils.FloatToString(FileX.general.PLEN));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPLDR.setText(FileX.general.PLDR.toString());
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPLSP.setText(Utils.FloatToString(FileX.general.PLSP));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtPLAY.setText(FileX.general.PLAY);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtHAREA.setText(Utils.FloatToString(FileX.general.HAREA));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtHRNO.setText(FileX.general.HRNO.toString());
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtHLEN.setText(Utils.FloatToString(FileX.general.HLEN));
-        }
-        catch(Exception ex) {}
-        try
-        {
-            txtHARM.setText(FileX.general.HARM);
-        }
-        catch(Exception ex) {}
     }
     
     private void setCropImage(){

@@ -14,4 +14,9 @@ public class Soil {
     public String Unknow1;
     public String Unknow2;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

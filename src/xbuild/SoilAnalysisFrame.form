@@ -64,7 +64,7 @@
               <Component id="jXPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel2" min="-2" pref="359" max="-2" attributes="0"/>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,15 +75,13 @@
         <Property name="text" type="java.lang.String" value="Analysis Date"/>
       </Properties>
     </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="dpAnalysisDate">
+    <Component class="xbuild.Components.XDatePicker" name="dpAnalysisDate">
       <Properties>
         <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dpAnalysisDateFocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpAnalysisDateActionPerformed"/>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpAnalysisDatePropertyChange"/>
       </Events>
     </Component>
@@ -103,30 +101,30 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jXLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtSMKE" min="-2" pref="429" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jXLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtSMPX" min="-2" pref="429" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtSMHB" min="-2" pref="429" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cbSMHB" min="-2" pref="457" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jXLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                  <Component id="cbSMKE" min="-2" pref="457" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbSMPX" min="-2" pref="457" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="bnSelectpH" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="bnSelectPhosphorus" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="bnSelectPotassium" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="142" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -135,34 +133,25 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtSMHB" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectpH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbSMHB" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtSMPX" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectPhosphorus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbSMPX" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtSMKE" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectPotassium" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbSMKE" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtSMHB">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSMPX">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSMKE">
-        </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="pH"/>
@@ -178,29 +167,11 @@
             <Property name="text" type="java.lang.String" value="Potassium"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectpH">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectpHActionPerformed"/>
-          </Events>
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSMHB">
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectPhosphorus">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectPhosphorusActionPerformed"/>
-          </Events>
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSMPX">
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectPotassium">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectPotassiumActionPerformed"/>
-          </Events>
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSMKE">
         </Component>
       </SubComponents>
     </Container>

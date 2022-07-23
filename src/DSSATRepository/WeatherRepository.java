@@ -35,7 +35,8 @@ public class WeatherRepository extends DSSATRepositoryBase {
         for (File file : fList) {
             FileReader fileRead = null;
             try {
-                String Code = file.getName().substring(0, 4);
+                String name = file.getName().substring(0, file.getName().indexOf("."));
+                String code = file.getName().substring(0, 4);
                 
                 fileRead = new FileReader(file);
                 BufferedReader wReader = new BufferedReader(fileRead);
@@ -45,7 +46,8 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 while ((strWRead = wReader.readLine()) != null) {
                     if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("$WEATHER")) {
                         String WSTAName = strWRead.substring(strWRead.indexOf(":") + 1, strWRead.length()).trim();
-                        weatherList.add(Code + ":" + WSTAName);
+                        weatherList.add(code + ":" + WSTAName);
+                        weatherList.add(name + ":" + WSTAName);
                         break;
                     }
                 }

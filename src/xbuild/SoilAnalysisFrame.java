@@ -1,40 +1,31 @@
 package xbuild;
 
-import DSSATModel.SoilAnalysisMethodPh;
 import DSSATModel.SoilAnalysisMethodPhList;
-import DSSATModel.SoilAnalysisMethodPhosphorus;
 import DSSATModel.SoilAnalysisMethodPhosphorusList;
-import DSSATModel.SoilAnalysisMethodPotassium;
 import DSSATModel.SoilAnalysisMethodPotassiumList;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
-import ListDialog.PHListDialog;
-import ListDialog.PhosphorusListDialog;
-import ListDialog.PotassiumListDialog;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.XColumn;
 
 /**
  *
  * @author Jazzy
  */
-public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
+public class SoilAnalysisFrame extends IXInternalFrame {
 
     private SoilAnalysis soilAnalysis;
-    private String SMHB;
-    private String SMPX;
-    private String SMKE;
     
     private int selectedRowIndex = -1;
     /**
      * Creates new form SoilAnalysisFrame
+     * @param nodeName
      */
     public SoilAnalysisFrame(String nodeName) {
         initComponents();
@@ -47,14 +38,19 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
                 break;
             }
         }
-
-        //this.soilAnalysis = soilAnalysis;
-
-        LoadSoilAnalysis();
         
-        txtSMHB.addKeyListener(this);
-        txtSMPX.addKeyListener(this);
-        txtSMKE.addKeyListener(this);
+        dpAnalysisDate.Init(soilAnalysis, "SADAT", soilAnalysis.SADAT);
+
+        
+        cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
+        cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
+        cbSMPX.setInit(soilAnalysis, "SMPX", soilAnalysis.SMPX, SoilAnalysisMethodPhosphorusList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
+        
+        for(int i = 0;i < soilAnalysis.GetSize();i++)
+        {
+            DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
+            model.addRow(SetRow(soilAnalysis.GetLayer(i)));
+        }
         
         lblLevel.setText("Level " + level.toString());
         lblDescription.setText(getDescription(nodeName));
@@ -87,17 +83,14 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
     private void initComponents() {
 
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        dpAnalysisDate = new org.jdesktop.swingx.JXDatePicker();
+        dpAnalysisDate = new xbuild.Components.XDatePicker();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
-        txtSMHB = new javax.swing.JTextField();
-        txtSMPX = new javax.swing.JTextField();
-        txtSMKE = new javax.swing.JTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
-        bnSelectpH = new javax.swing.JButton();
-        bnSelectPhosphorus = new javax.swing.JButton();
-        bnSelectPotassium = new javax.swing.JButton();
+        cbSMHB = new xbuild.Components.XDropdownTableComboBox();
+        cbSMPX = new xbuild.Components.XDropdownTableComboBox();
+        cbSMKE = new xbuild.Components.XDropdownTableComboBox();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         bnAddLayer = new javax.swing.JButton();
         bnDeleteLayer = new javax.swing.JButton();
@@ -111,16 +104,6 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
         jXLabel1.setText("Analysis Date");
 
         dpAnalysisDate.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
-        dpAnalysisDate.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                dpAnalysisDateFocusLost(evt);
-            }
-        });
-        dpAnalysisDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpAnalysisDateActionPerformed(evt);
-            }
-        });
         dpAnalysisDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpAnalysisDatePropertyChange(evt);
@@ -135,72 +118,46 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
 
         jXLabel4.setText("Potassium");
 
-        bnSelectpH.setText("...");
-        bnSelectpH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectpHActionPerformed(evt);
-            }
-        });
-
-        bnSelectPhosphorus.setText("...");
-        bnSelectPhosphorus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectPhosphorusActionPerformed(evt);
-            }
-        });
-
-        bnSelectPotassium.setText("...");
-        bnSelectPotassium.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectPotassiumActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSMKE, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSMPX, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jXPanel1Layout.createSequentialGroup()
                         .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSMHB, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bnSelectpH, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPhosphorus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPotassium, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbSMHB, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jXPanel1Layout.createSequentialGroup()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cbSMKE, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cbSMPX, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSMHB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectpH))
+                    .addComponent(cbSMHB, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSMPX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPhosphorus))
+                    .addComponent(cbSMPX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSMKE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPotassium))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(cbSMKE, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil Analysis Layers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -315,19 +272,11 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dpAnalysisDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dpAnalysisDateFocusLost
-        Update();
-    }//GEN-LAST:event_dpAnalysisDateFocusLost
-
-    private void dpAnalysisDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpAnalysisDateActionPerformed
-        Update();
-    }//GEN-LAST:event_dpAnalysisDateActionPerformed
 
     private void dpAnalysisDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpAnalysisDatePropertyChange
         try {
@@ -336,49 +285,6 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
             soilAnalysis.SADAT = null;
         }
     }//GEN-LAST:event_dpAnalysisDatePropertyChange
-
-    private void bnSelectpHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectpHActionPerformed
-        final PHListDialog dialog = new PHListDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                SoilAnalysisMethodPh ph = dialog.GetSelected();
-                SMHB = ph.Code;
-                txtSMHB.setText(ph.Description);
-                Update();
-            }
-        });
-    }//GEN-LAST:event_bnSelectpHActionPerformed
-
-    private void bnSelectPhosphorusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectPhosphorusActionPerformed
-        final PhosphorusListDialog dialog = new PhosphorusListDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                SoilAnalysisMethodPhosphorus phosphorus = dialog.GetSelected();
-                SMPX = phosphorus.Code;
-                txtSMPX.setText(phosphorus.Description);
-                Update();
-            }
-        });
-    }//GEN-LAST:event_bnSelectPhosphorusActionPerformed
-
-    private void bnSelectPotassiumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectPotassiumActionPerformed
-        final PotassiumListDialog dialog = new PotassiumListDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                SoilAnalysisMethodPotassium potassium = dialog.GetSelected();
-                SMKE = potassium.Code;
-                txtSMKE.setText(potassium.Description);
-                Update();
-            }
-        });
-    }//GEN-LAST:event_bnSelectPotassiumActionPerformed
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
         SoilAnalysisLayer soil = null;
@@ -449,72 +355,6 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
         }
     }//GEN-LAST:event_jXTable2MouseClicked
 
-    private void Update() {
-        try {
-            soilAnalysis.SADAT = dpAnalysisDate.getDate();
-        } catch (Exception e) {
-            soilAnalysis.SADAT = null;
-        }
-        if (!txtSMHB.getText().equals("")) {
-            soilAnalysis.SMHB = SMHB;
-        } else {
-            soilAnalysis.SMHB = null;
-        }
-        if (!txtSMPX.getText().equals("")) {
-            soilAnalysis.SMPX = SMPX;
-        } else {
-            soilAnalysis.SMPX = null;
-        }
-        if (!txtSMKE.getText().equals("")) {
-            soilAnalysis.SMKE = SMKE;
-        } else {
-            soilAnalysis.SMKE = null;
-        }
-    }
-
-    private void LoadSoilAnalysis() {
-        try {
-            dpAnalysisDate.setDate(soilAnalysis.SADAT);
-        } catch (Exception e) {
-        }
-        try {
-            SoilAnalysisMethodPh pH = SoilAnalysisMethodPhList.GetAt(soilAnalysis.SMHB);
-            txtSMHB.setText(pH.Description);
-            SMHB = pH.Code;
-        } catch (Exception e) {
-        }
-        try {
-            SoilAnalysisMethodPotassium potass = SoilAnalysisMethodPotassiumList.GetAt(soilAnalysis.SMKE);
-            txtSMKE.setText(potass.Description);
-            SMKE = potass.Code;
-        } catch (Exception e) {
-        }
-        try {
-            SoilAnalysisMethodPhosphorus phos = SoilAnalysisMethodPhosphorusList.GetAt(soilAnalysis.SMPX);
-            txtSMPX.setText(phos.Description);
-            SMPX = phos.Code;
-        } catch (Exception e) {
-        }
-
-        for(int i = 0;i < soilAnalysis.GetSize();i++)
-        {
-            DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
-            model.addRow(SetRow(soilAnalysis.GetLayer(i)));
-        }
-    }
-
-    public void keyTyped(KeyEvent e) {
-        Update();
-    }
-
-    public void keyPressed(KeyEvent e) {
-        Update();
-    }
-
-    public void keyReleased(KeyEvent e) {
-        Update();
-    }
-
     private Object[] SetRow(SoilAnalysisLayer soilLayer) {
 
         Object[] vector = new Object[]{
@@ -535,10 +375,10 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
-    private javax.swing.JButton bnSelectPhosphorus;
-    private javax.swing.JButton bnSelectPotassium;
-    private javax.swing.JButton bnSelectpH;
-    private org.jdesktop.swingx.JXDatePicker dpAnalysisDate;
+    private xbuild.Components.XDropdownTableComboBox cbSMHB;
+    private xbuild.Components.XDropdownTableComboBox cbSMKE;
+    private xbuild.Components.XDropdownTableComboBox cbSMPX;
+    private xbuild.Components.XDatePicker dpAnalysisDate;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
@@ -549,8 +389,5 @@ public class SoilAnalysisFrame extends IXInternalFrame implements KeyListener {
     private org.jdesktop.swingx.JXTable jXTable2;
     private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
-    private javax.swing.JTextField txtSMHB;
-    private javax.swing.JTextField txtSMKE;
-    private javax.swing.JTextField txtSMPX;
     // End of variables declaration//GEN-END:variables
 }

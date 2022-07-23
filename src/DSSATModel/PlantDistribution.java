@@ -12,4 +12,9 @@ package DSSATModel;
 public class PlantDistribution {
     public String Code;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

@@ -11,53 +11,35 @@
 
 package xbuild;
 
-import FileXModel.FieldDetail;
-import DSSATModel.Drainage;
 import DSSATModel.DrainageList;
-import DSSATModel.FieldHistory;
 import DSSATModel.FieldHistoryList;
+import FileXModel.FieldDetail;
 import DSSATModel.Soil;
 import DSSATModel.SoilList;
-import DSSATModel.SoilTexture;
 import DSSATModel.SoilTextureList;
 import DSSATModel.WeatherStation;
 import DSSATModel.WeatherStationList;
-import ListDialog.DrainageDialog;
-import ListDialog.FieldHistoryDialog;
-import ListDialog.SoilListDialog;
-import ListDialog.SoilTextureDialog;
-import ListDialog.WeatherStationDialog;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.XColumn;
 
 /**
  *
  * @author Jazzy
  */
-public class FieldFrame extends IXInternalFrame implements KeyListener {
+public class FieldFrame extends IXInternalFrame {
 
-    /** Creates new form FieldPanel */
-
-    private String ID_SOIL;
-    private String FLDT;
-    private String SLTX;
-    private String FLHST;
-    private String WSTA;
-
-    private FieldDetail field;
-   
-
+    /** Creates new form FieldPanel
+     * @param nodeName */
     public FieldFrame(String nodeName) {
         FieldDetail field = null;
         Integer level = 0;
         for (IModelXBase f : FileX.fieldList.GetAll()) {
             level++;
-            //if (((FieldDetail)f).FLNAME.equalsIgnoreCase(nodeName)) {
             if(getLevel(nodeName) == level){
                 field = (FieldDetail)f;
                 break;
@@ -65,38 +47,44 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         }
         if(field == null)
             field = new FieldDetail(nodeName);
-        
+
         initComponents();
 
         txtID_FIELD.setDocument(new LimitDocument(8));
 
-        this.field = field;
-
-        txtID_FIELD.addKeyListener(this);
-        txtWSTA.addKeyListener(this);
-        txtFLSA.addKeyListener(this);
-        txtFLOB.addKeyListener(this);
-        txtFLDT.addKeyListener(this);
-        txtFLDD.addKeyListener(this);
-        txtFLDS.addKeyListener(this);
-        txtFLST.addKeyListener(this);
-        txtSLTX.addKeyListener(this);
-        txtSLDP.addKeyListener(this);
-        txtID_SOIL.addKeyListener(this);
-        txtXCRD.addKeyListener(this);
-        txtYCRD.addKeyListener(this);
-        txtELEV.addKeyListener(this);
-        txtAREA.addKeyListener(this);
-        txtSLEN.addKeyListener(this);
-        txtFLWR.addKeyListener(this);
-        txtSLAS.addKeyListener(this);
-        txtFLHST.addKeyListener(this);
-        txtFHDUR.addKeyListener(this);
+        cbWSTA.setInit(null, "WSTA", field.WSTA, WeatherStationList.GetAll(), new XColumn[] { new  XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100)}, "Code");        
+        cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
         
-        LoadField();
+        cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 400), new XColumn("Code", "Code", 100)}, "Code");        
+        cbSoilCode.setInit(field, "ID_SOIL", field.ID_SOIL, loadSoilCode(field.ID_SOIL));
         
+        cbSLTX.setInit(field, "SLTX", field.SLTX, SoilTextureList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        cbFLDT.setInit(field, "FLDT", field.FLDT, DrainageList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+                
         lblLevel.setText("Level " + level.toString());
         lblDescription.setText(getDescription(nodeName));
+        
+        txtID_FIELD.Init(field, "ID_FIELD", field.ID_FIELD);
+        
+        txtSLDP.Init(field, "SLDP", field.SLDP);
+        txtFLST.Init(field, "FLST", field.FLST);
+        
+        txtFLDD.Init(field, "FLDD", field.FLDD);
+        txtFLDS.Init(field, "FLDS", field.FLDS);
+        
+        txtXCRD.Init(field, "XCRD", field.XCRD);
+        txtYCRD.Init(field, "YCRD", field.YCRD);
+        txtELEV.Init(field, "ELEV", field.ELEV);
+
+        txtAREA.Init(field, "AREA", field.AREA);
+        txtFLWR.Init(field, "FLWR", field.FLWR);
+        txtSLEN.Init(field, "SLEN", field.SLEN);
+        txtFLOB.Init(field, "FLOB", field.FLOB);
+        txtFLSA.Init(field, "FLSA", field.FLSA);
+        txtSLAS.Init(field, "SLAS", field.SLAS);
+        txtFHDUR.Init(field, "FHDUR", field.FHDUR);
+        
+        cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 300), new XColumn("Code", "Code", 100)}, "Code");
     }
    
     /**
@@ -134,19 +122,17 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         jXLabel12 = new org.jdesktop.swingx.JXLabel();
         jXLabel13 = new org.jdesktop.swingx.JXLabel();
         jXLabel14 = new org.jdesktop.swingx.JXLabel();
-        txtXCRD = new javax.swing.JFormattedTextField();
-        txtYCRD = new javax.swing.JFormattedTextField();
-        txtELEV = new javax.swing.JFormattedTextField();
+        txtXCRD = new xbuild.Components.XFormattedTextField();
+        txtYCRD = new xbuild.Components.XFormattedTextField();
+        txtELEV = new xbuild.Components.XFormattedTextField();
         jXPanel7 = new org.jdesktop.swingx.JXPanel();
-        bnFLHST = new javax.swing.JButton();
-        txtFLHST = new javax.swing.JTextField();
-        txtAREA = new javax.swing.JFormattedTextField();
-        txtFLWR = new javax.swing.JFormattedTextField();
-        txtFLSA = new javax.swing.JFormattedTextField();
-        txtSLAS = new javax.swing.JFormattedTextField();
-        txtFHDUR = new javax.swing.JFormattedTextField();
-        txtSLEN = new javax.swing.JFormattedTextField();
-        txtFLOB = new javax.swing.JFormattedTextField();
+        txtAREA = new xbuild.Components.XFormattedTextField();
+        txtFLWR = new xbuild.Components.XFormattedTextField();
+        txtFLSA = new xbuild.Components.XFormattedTextField();
+        txtSLAS = new xbuild.Components.XFormattedTextField();
+        txtFHDUR = new xbuild.Components.XFormattedTextField();
+        txtSLEN = new xbuild.Components.XFormattedTextField();
+        txtFLOB = new xbuild.Components.XFormattedTextField();
         jXLabel15 = new org.jdesktop.swingx.JXLabel();
         jXLabel16 = new org.jdesktop.swingx.JXLabel();
         jXLabel28 = new org.jdesktop.swingx.JXLabel();
@@ -160,37 +146,36 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         jXLabel24 = new org.jdesktop.swingx.JXLabel();
         jXLabel27 = new org.jdesktop.swingx.JXLabel();
         jXLabel29 = new org.jdesktop.swingx.JXLabel();
+        cbFLHST = new xbuild.Components.XDropdownTableComboBox();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jXPanel5 = new org.jdesktop.swingx.JXPanel();
-        txtFLDT = new javax.swing.JTextField();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
-        bnFLDT = new javax.swing.JButton();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         jXLabel9 = new org.jdesktop.swingx.JXLabel();
-        txtFLDS = new javax.swing.JFormattedTextField();
-        txtFLDD = new javax.swing.JFormattedTextField();
-        txtID_FIELD = new javax.swing.JTextField();
+        txtFLDS = new xbuild.Components.XFormattedTextField();
+        txtFLDD = new xbuild.Components.XFormattedTextField();
+        cbFLDT = new xbuild.Components.XDropdownTableComboBox();
+        txtID_FIELD = new xbuild.Components.XTextField();
         jXLabel25 = new org.jdesktop.swingx.JXLabel();
         jXPanel8 = new org.jdesktop.swingx.JXPanel();
         jXLabel26 = new org.jdesktop.swingx.JXLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtWSTA = new javax.swing.JTextField();
-        bnWSTA = new javax.swing.JButton();
+        cbWSTA = new xbuild.Components.XDropdownTableComboBox();
+        cbWSTACode = new xbuild.Components.XComboBox();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtID_SOIL = new javax.swing.JTextField();
-        bnID_SOIL = new javax.swing.JButton();
-        txtSLTX = new javax.swing.JTextField();
-        bnSLTX = new javax.swing.JButton();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
-        txtSLDP = new javax.swing.JFormattedTextField();
+        txtSLDP = new xbuild.Components.XFormattedTextField();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
-        txtFLST = new javax.swing.JFormattedTextField();
+        txtFLST = new xbuild.Components.XFormattedTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        cbSoil = new xbuild.Components.XDropdownTableComboBox();
+        cbSoilCode = new xbuild.Components.XComboBox();
+        cbSLTX = new xbuild.Components.XDropdownTableComboBox();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         lblDescription = new org.jdesktop.swingx.JXLabel();
 
@@ -268,13 +253,6 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jXPanel7.setPreferredSize(new java.awt.Dimension(605, 200));
 
-        bnFLHST.setText("...");
-        bnFLHST.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnFLHSTActionPerformed(evt);
-            }
-        });
-
         txtAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         txtFLWR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
@@ -333,13 +311,9 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jXPanel7Layout.createSequentialGroup()
-                        .addComponent(txtFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jXPanel7Layout.createSequentialGroup()
                         .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAREA)
-                            .addComponent(txtFLWR)
+                            .addComponent(txtAREA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFLWR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSLEN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +331,8 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                     .addGroup(jXPanel7Layout.createSequentialGroup()
                         .addComponent(txtFLSA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jXLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jXLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbFLHST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jXPanel7Layout.setVerticalGroup(
@@ -396,12 +371,10 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(txtFHDUR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bnFLHST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jXLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFLHST, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
@@ -433,13 +406,6 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
 
         jXLabel10.setText("Drainage Type");
 
-        bnFLDT.setText("...");
-        bnFLDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnFLDTActionPerformed(evt);
-            }
-        });
-
         jXLabel6.setText("Drain Depth");
 
         jXLabel7.setText("cm");
@@ -462,39 +428,35 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel5Layout.createSequentialGroup()
                         .addComponent(txtFLDD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168)
+                        .addGap(62, 62, 62)
                         .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtFLDT, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bnFLDT, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(cbFLDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jXPanel5Layout.setVerticalGroup(
             jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel5Layout.createSequentialGroup()
                 .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFLDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnFLDT)
-                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFLDT, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFLDD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLDD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -508,10 +470,10 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         jLabel6.setForeground(new java.awt.Color(255, 0, 51));
         jLabel6.setText("*");
 
-        bnWSTA.setText("...");
-        bnWSTA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnWSTAActionPerformed(evt);
+        cbWSTA.setEditable(true);
+        cbWSTA.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbWSTAItemStateChanged(evt);
             }
         });
 
@@ -525,9 +487,9 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtWSTA)
+                .addComponent(cbWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bnWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbWSTACode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jXPanel8Layout.setVerticalGroup(
@@ -535,10 +497,10 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnWSTA)
                     .addComponent(jXLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(cbWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbWSTACode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -548,20 +510,6 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
         jLabel4.setText("*");
-
-        bnID_SOIL.setText("...");
-        bnID_SOIL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnID_SOILActionPerformed(evt);
-            }
-        });
-
-        bnSLTX.setText("...");
-        bnSLTX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSLTXActionPerformed(evt);
-            }
-        });
 
         jXLabel3.setText("Depth");
 
@@ -574,6 +522,12 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         txtFLST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXLabel2.setText("Surface Texture");
+
+        cbSoil.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSoilItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
         jXPanel3.setLayout(jXPanel3Layout);
@@ -593,16 +547,16 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                         .addComponent(txtSLDP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtSLTX)
-                    .addComponent(txtID_SOIL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bnID_SOIL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSLTX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(jXPanel3Layout.createSequentialGroup()
+                        .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbSoilCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbSLTX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jXPanel3Layout.setVerticalGroup(
@@ -612,15 +566,13 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtID_SOIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnID_SOIL))
+                    .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSoilCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSLTX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bnSLTX))
-                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSLTX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSLDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -637,20 +589,17 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jXPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jXPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jXPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jXPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(6, 6, 6)
+                        .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,9 +611,9 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                 .addComponent(jXPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(130, 130, 130))
         );
 
         lblLevel.setText("Level");
@@ -678,16 +627,16 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 18, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,315 +646,77 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bnID_SOILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnID_SOILActionPerformed
-        final SoilListDialog dialog = new SoilListDialog(null, true, SoilList.GetAt(ID_SOIL));
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Soil soil = dialog.GetSelected();
-                if(soil != null) {
-                    txtID_SOIL.setText(soil.Description);
-                    ID_SOIL = soil.Code;
-                    Update();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnID_SOILActionPerformed
-
-    private void bnFLHSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnFLHSTActionPerformed
-        final FieldHistoryDialog dialog = new FieldHistoryDialog(null, true, FieldHistoryList.GetAt(FLHST));
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                FieldHistory field = dialog.GetSelected();
-                if(field != null) {
-                    txtFLHST.setText(field.Description);
-                    FLHST = field.Code;
-                    Update();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnFLHSTActionPerformed
-
-    private void bnSLTXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSLTXActionPerformed
-        final SoilTextureDialog dialog = new SoilTextureDialog(null, true, SoilTextureList.GetAt(SLTX));
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                SoilTexture soil = dialog.GetSelected();
-                if(soil != null) {
-                    txtSLTX.setText(soil.Description);
-                    SLTX = soil.Code;
-                    Update();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnSLTXActionPerformed
-
-    private void bnFLDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnFLDTActionPerformed
-        final DrainageDialog dialog = new DrainageDialog(null, true, DrainageList.GetAt(FLDT));
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Drainage drain = dialog.GetSelected();
-                if(drain != null) {
-                    txtFLDT.setText(drain.Description);
-                    FLDT = drain.Code;
-                    Update();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnFLDTActionPerformed
 
     private void popupMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupMenu1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_popupMenu1ActionPerformed
 
-    private void bnWSTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnWSTAActionPerformed
-        final WeatherStationDialog dialog = new WeatherStationDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                WeatherStation wsta = dialog.GetSelected();
-                if(wsta != null){
-                    txtWSTA.setText(wsta.StationName);
-                    WSTA = wsta.Code;
-                }
-                Update();
+    private void cbWSTAItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbWSTAItemStateChanged
+        try {
+            if (cbWSTA.getSelectedIndex() >= 0) {
+                WeatherStation w = ((WeatherStation) cbWSTA.getSelectedItem());
+                cbWSTACode.setModel(loadWSTACode(w.Code), w.Code);
             }
-        });
-    }//GEN-LAST:event_bnWSTAActionPerformed
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_cbWSTAItemStateChanged
 
-    private void Update() {
-        field.ID_FIELD = txtID_FIELD.getText();
-        if (!txtWSTA.getText().equals("")) {
-            field.WSTA = WSTA;
-        } else {
-            field.WSTA = "";
-        }
+    private void cbSoilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSoilItemStateChanged
         try {
-            field.FLSA = Float.parseFloat(txtFLSA.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLSA = null;
-            System.out.println(numberFormatException.getMessage());
+            if (cbSoil.getSelectedIndex() >= 0) {
+                Soil s = ((Soil) cbSoil.getSelectedItem());
+                cbSoilCode.setModel(loadSoilCode(s.Code), s.Code);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
-        try {
-            field.FLOB = Float.parseFloat(txtFLOB.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLOB = null;
-            System.out.println(numberFormatException.getMessage());
+    }//GEN-LAST:event_cbSoilItemStateChanged
+
+    private List<String>loadWSTACode(String wCode){
+        ArrayList<String> items = new ArrayList<>();        
+        
+        WeatherStation wstaSelected = WeatherStationList.GetAt(wCode);
+        if (wstaSelected != null) {
+            for (WeatherStation wsta : WeatherStationList.GetAll()) {
+                if (wstaSelected.StationName.equals(wsta.StationName)) {
+                    items.add(wsta.Code);
+                }
+            }
         }
-        if (!txtFLDT.getText().equals("")) {
-            field.FLDT = FLDT;
-        } else {
-            field.FLDT = "";
-        }
-        try {
-            field.FLDD = Float.parseFloat(txtFLDD.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLDD = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.FLDS = Float.parseFloat(txtFLDS.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLDS = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.FLST = Float.parseFloat(txtFLST.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLST = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        if (!txtSLTX.getText().equals("")) {
-            field.SLTX = SLTX;
-        } else {
-            field.SLTX = "";
-        }
-        try {
-            field.SLDP = Float.parseFloat(txtSLDP.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.SLDP = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        if (!txtID_SOIL.getText().equals("")) {
-            field.ID_SOIL = ID_SOIL;
-        } else {
-            field.ID_SOIL = "";
-        }
-        try {
-            field.XCRD = Float.parseFloat(txtXCRD.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.XCRD = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.YCRD = Float.parseFloat(txtYCRD.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.YCRD = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.ELEV = Float.parseFloat(txtELEV.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.ELEV = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.AREA = Float.parseFloat(txtAREA.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.AREA = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.SLEN = Float.parseFloat(txtSLEN.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.SLEN = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.FLWR = Float.parseFloat(txtFLWR.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FLWR = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        try {
-            field.SLAS = Float.parseFloat(txtSLAS.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.SLAS = null;
-            System.out.println(numberFormatException.getMessage());
-        }
-        if (!txtFLHST.getText().equals("")) {
-            field.FLHST = FLHST;
-        } else {
-            field.FLHST = "";
-        }
-        try {
-            field.FHDUR = Float.parseFloat(txtFHDUR.getText());
-        } catch (NumberFormatException numberFormatException) {
-            field.FHDUR = null;
-            System.out.println(numberFormatException.getMessage());
-        }
+        
+        return items;
     }
     
-    private void LoadField() {
-        txtID_FIELD.setText(field.ID_FIELD);
-        try {
-            WeatherStation wsta = WeatherStationList.GetAt(field.WSTA);
-            txtWSTA.setText(wsta.StationName);
-            WSTA = wsta.Code;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    private List<String>loadSoilCode(String sCode){
+        ArrayList<String> items = new ArrayList<>();        
+        
+        Soil soilSelected = SoilList.GetAt(sCode);
+        if (soilSelected != null) {
+            for (Soil s : SoilList.GetAll()) {
+                if (soilSelected.Description.equals(s.Description)) {
+                    items.add(s.Code);
+                }
+            }
         }
-        try {
-            txtFLSA.setText(field.FLSA.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtFLOB.setText(field.FLOB.toString());
-        } catch (Exception e) {
-        }
-        try {
-            Drainage drain = DrainageList.GetAt(field.FLDT);
-            txtFLDT.setText(drain.Description);
-            FLDT = drain.Code;
-        } catch (Exception e) {
-        }
-        try {
-            txtFLDD.setText(field.FLDD.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtFLDS.setText(field.FLDS.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtFLST.setText(field.FLST.toString());
-        } catch (Exception e) {
-        }
-        try {
-            SoilTexture soil = SoilTextureList.GetAt(field.SLTX);
-            txtSLTX.setText(soil.Description);
-            SLTX = soil.Code;
-        } catch (Exception e) {
-        }
-        try {
-            txtSLDP.setText(field.SLDP.toString());
-        } catch (Exception e) {
-        }
-        try {
-            Soil soil = SoilList.GetAt(field.ID_SOIL);
-            txtID_SOIL.setText(soil.Description);
-            ID_SOIL = soil.Code;
-        } catch (Exception e) {
-        }
-        try {
-            txtXCRD.setText(field.XCRD.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtYCRD.setText(field.YCRD.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtELEV.setText(field.ELEV.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtAREA.setText(field.AREA.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtSLEN.setText(field.SLEN.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtFLWR.setText(field.FLWR.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtSLAS.setText(field.SLAS.toString());
-        } catch (Exception e) {
-        }
-        try {
-            FieldHistory fHist = FieldHistoryList.GetAt(field.FLHST);
-            txtFLHST.setText(fHist.Description);
-            FLHST = fHist.Code;
-        } catch (Exception e) {
-        }
-        try {
-            txtFHDUR.setText(field.FHDUR.toString());
-        } catch (Exception e) {
-        }
+        
+        return items;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnFLDT;
-    private javax.swing.JButton bnFLHST;
-    private javax.swing.JButton bnID_SOIL;
-    private javax.swing.JButton bnSLTX;
-    private javax.swing.JButton bnWSTA;
+    private xbuild.Components.XDropdownTableComboBox cbFLDT;
+    private xbuild.Components.XDropdownTableComboBox cbFLHST;
+    private xbuild.Components.XDropdownTableComboBox cbSLTX;
+    private xbuild.Components.XDropdownTableComboBox cbSoil;
+    private xbuild.Components.XComboBox cbSoilCode;
+    private xbuild.Components.XDropdownTableComboBox cbWSTA;
+    private xbuild.Components.XComboBox cbWSTACode;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private org.jdesktop.swingx.JXLabel jXLabel1;
@@ -1048,37 +759,20 @@ public class FieldFrame extends IXInternalFrame implements KeyListener {
     private org.jdesktop.swingx.JXLabel lblLevel;
     private java.awt.MenuItem menuItem1;
     private java.awt.PopupMenu popupMenu1;
-    private javax.swing.JFormattedTextField txtAREA;
-    private javax.swing.JFormattedTextField txtELEV;
-    private javax.swing.JFormattedTextField txtFHDUR;
-    private javax.swing.JFormattedTextField txtFLDD;
-    private javax.swing.JFormattedTextField txtFLDS;
-    private javax.swing.JTextField txtFLDT;
-    private javax.swing.JTextField txtFLHST;
-    private javax.swing.JFormattedTextField txtFLOB;
-    private javax.swing.JFormattedTextField txtFLSA;
-    private javax.swing.JFormattedTextField txtFLST;
-    private javax.swing.JFormattedTextField txtFLWR;
-    private javax.swing.JTextField txtID_FIELD;
-    private javax.swing.JTextField txtID_SOIL;
-    private javax.swing.JFormattedTextField txtSLAS;
-    private javax.swing.JFormattedTextField txtSLDP;
-    private javax.swing.JFormattedTextField txtSLEN;
-    private javax.swing.JTextField txtSLTX;
-    private javax.swing.JTextField txtWSTA;
-    private javax.swing.JFormattedTextField txtXCRD;
-    private javax.swing.JFormattedTextField txtYCRD;
+    private xbuild.Components.XFormattedTextField txtAREA;
+    private xbuild.Components.XFormattedTextField txtELEV;
+    private xbuild.Components.XFormattedTextField txtFHDUR;
+    private xbuild.Components.XFormattedTextField txtFLDD;
+    private xbuild.Components.XFormattedTextField txtFLDS;
+    private xbuild.Components.XFormattedTextField txtFLOB;
+    private xbuild.Components.XFormattedTextField txtFLSA;
+    private xbuild.Components.XFormattedTextField txtFLST;
+    private xbuild.Components.XFormattedTextField txtFLWR;
+    private xbuild.Components.XTextField txtID_FIELD;
+    private xbuild.Components.XFormattedTextField txtSLAS;
+    private xbuild.Components.XFormattedTextField txtSLDP;
+    private xbuild.Components.XFormattedTextField txtSLEN;
+    private xbuild.Components.XFormattedTextField txtXCRD;
+    private xbuild.Components.XFormattedTextField txtYCRD;
     // End of variables declaration//GEN-END:variables
-
-    public void keyTyped(KeyEvent e) {
-        Update();
-    }
-
-    public void keyPressed(KeyEvent e) {
-        Update();
-    }
-
-    public void keyReleased(KeyEvent e) {
-        Update();
-    }
 }

@@ -47,18 +47,18 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jXPanel2" min="-2" pref="924" max="-2" attributes="1"/>
-                  <Component id="jXPanel1" alignment="0" min="-2" pref="600" max="-2" attributes="1"/>
-              </Group>
-              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jXPanel2" min="-2" pref="924" max="-2" attributes="1"/>
+                  <Component id="jXPanel1" min="-2" pref="572" max="-2" attributes="1"/>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,10 +71,10 @@
                   <Component id="lblDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jXPanel1" min="-2" pref="246" max="-2" attributes="0"/>
+              <Component id="jXPanel1" min="-2" pref="345" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel2" min="-2" pref="271" max="-2" attributes="0"/>
-              <EmptySpace pref="90" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -202,21 +202,21 @@
                 <Property name="text" type="java.lang.String" value="m"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtXCRD">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtXCRD">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtYCRD">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtYCRD">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtELEV">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtELEV">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
@@ -257,11 +257,6 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtFLHST" min="-2" pref="279" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bnFLHST" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtAREA" max="32767" attributes="0"/>
                                   <Component id="txtFLWR" max="32767" attributes="0"/>
@@ -289,6 +284,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXLabel22" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="cbFLHST" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="48" max="32767" attributes="0"/>
                   </Group>
@@ -337,72 +333,59 @@
                           <Component id="jXLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bnFLHST" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtFLHST" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jXLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbFLHST" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="bnFLHST">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnFLHSTActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtFLHST">
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtAREA">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtAREA">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLWR">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLWR">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLSA">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLSA">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtSLAS">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtSLAS">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFHDUR">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFHDUR">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtSLEN">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtSLEN">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLOB">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLOB">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
@@ -474,6 +457,8 @@
                 <Property name="text" type="java.lang.String" value="Slope aspect"/>
               </Properties>
             </Component>
+            <Component class="xbuild.Components.XDropdownTableComboBox" name="cbFLHST">
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -496,24 +481,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jXPanel5" pref="638" max="32767" attributes="1"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jXPanel8" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jXPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jXLabel25" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Component id="txtID_FIELD" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jXPanel8" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jXPanel3" alignment="1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Component id="jXLabel25" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="txtID_FIELD" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jXPanel5" pref="512" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -528,9 +508,9 @@
                   <Component id="jXPanel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jXPanel5" min="-2" pref="76" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jXPanel5" min="-2" pref="76" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -560,24 +540,22 @@
                           <Component id="jXLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="txtFLDD" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="jXLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Component id="jXLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtFLDS" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jXLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtFLDT" pref="486" max="32767" attributes="0"/>
+                          <Component id="cbFLDT" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bnFLDT" min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="jXLabel9" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -585,22 +563,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtFLDT" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bnFLDT" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jXLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbFLDT" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtFLDD" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="jXLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtFLDS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFLDD" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFLDS" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -608,20 +581,10 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="txtFLDT">
-            </Component>
             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Drainage Type"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="bnFLDT">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnFLDTActionPerformed"/>
-              </Events>
             </Component>
             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel6">
               <Properties>
@@ -643,23 +606,25 @@
                 <Property name="text" type="java.lang.String" value="m"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLDS">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLDS">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLDD">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLDD">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="xbuild.Components.XDropdownTableComboBox" name="cbFLDT">
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="txtID_FIELD">
+        <Component class="xbuild.Components.XTextField" name="txtID_FIELD">
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel25">
           <Properties>
@@ -687,9 +652,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtWSTA" max="32767" attributes="0"/>
+                      <Component id="cbWSTA" min="-2" pref="297" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnWSTA" min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="cbWSTACode" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -699,10 +664,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bnWSTA" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jXLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtWSTA" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbWSTA" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbWSTACode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -723,15 +688,20 @@
                 <Property name="text" type="java.lang.String" value="*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtWSTA">
-            </Component>
-            <Component class="javax.swing.JButton" name="bnWSTA">
+            <Component class="xbuild.Components.XDropdownTableComboBox" name="cbWSTA">
               <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
+                <Property name="editable" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnWSTAActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbWSTAItemStateChanged"/>
               </Events>
+            </Component>
+            <Component class="xbuild.Components.XComboBox" name="cbWSTACode">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -764,18 +734,18 @@
                               <Component id="txtSLDP" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jXLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="53" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jXLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtFLST" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtSLTX" alignment="0" max="32767" attributes="1"/>
-                          <Component id="txtID_SOIL" alignment="0" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bnID_SOIL" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="bnSLTX" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="cbSoil" min="-2" pref="264" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbSoilCode" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="cbSLTX" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -788,18 +758,15 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtID_SOIL" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bnID_SOIL" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbSoil" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="cbSoilCode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtSLTX" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bnSLTX" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jXLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbSLTX" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtSLDP" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -830,32 +797,12 @@
                 <Property name="text" type="java.lang.String" value="*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtID_SOIL">
-            </Component>
-            <Component class="javax.swing.JButton" name="bnID_SOIL">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnID_SOILActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSLTX">
-            </Component>
-            <Component class="javax.swing.JButton" name="bnSLTX">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSLTXActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Depth"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtSLDP">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtSLDP">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
@@ -872,7 +819,7 @@
                 <Property name="text" type="java.lang.String" value="Surface Stones"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtFLST">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtFLST">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
@@ -883,6 +830,15 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Surface Texture"/>
               </Properties>
+            </Component>
+            <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSoil">
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbSoilItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="xbuild.Components.XComboBox" name="cbSoilCode">
+            </Component>
+            <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSLTX">
             </Component>
           </SubComponents>
         </Container>

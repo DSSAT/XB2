@@ -12,4 +12,9 @@ package DSSATModel;
 public class Crop {
     public String CropCode;
     public String CropName;
+    
+    @Override
+    public String toString(){
+        return CropName;
+    } 
 }

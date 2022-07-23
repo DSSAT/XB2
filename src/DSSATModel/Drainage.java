@@ -13,4 +13,9 @@ public class Drainage {
 
     public String Code;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

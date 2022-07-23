@@ -7,9 +7,10 @@ package xbuild.Components;
 
 /**
  *
- * @author PCMIWS04
+ * @author Jazz
  */
 public enum FieldType {
     String,
-    Float
+    Float,
+    Integer
 }

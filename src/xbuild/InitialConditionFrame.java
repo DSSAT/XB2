@@ -1,32 +1,25 @@
 package xbuild;
 
-import DSSATModel.Crop;
 import DSSATModel.CropList;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
-import ListDialog.CropListDialog;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.Vector;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.XColumn;
 
 /**
  *
  * @author Jazzy
  */
-public class InitialConditionFrame extends IXInternalFrame implements KeyListener {
+public class InitialConditionFrame extends IXInternalFrame {
 
     private InitialCondition init;
-    private String PCR;
     private int selectedRowIndex = -1;
     /**
      * Creates new form InitialConditionFrame
@@ -46,33 +39,27 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
 
         this.init = init;
 
-        dpICDAT.addKeyListener(this);
-        tbProfile.addKeyListener(this);
-        txtICND.addKeyListener(this);
-        txtICREN.addKeyListener(this);
-        txtICREP.addKeyListener(this);
-        txtICRES.addKeyListener(this);
-        txtICRID.addKeyListener(this);
-        txtICRIP.addKeyListener(this);
-        txtICRT.addKeyListener(this);
-        txtICWD.addKeyListener(this);
-        txtPCR.addKeyListener(this);
+        dpICDAT.Init(init, "ICDAT", init.ICDAT);
 
-        LoadInitial();
-
-        snICRN.addChangeListener(new ChangeListener() {
-
-            public void stateChanged(ChangeEvent e) {
-                Update();
-            }
-        });
-        snICRE.addChangeListener(new ChangeListener() {
-
-            public void stateChanged(ChangeEvent e) {
-                Update();
-            }
-        });
+        txtICND.Init(init, "ICND", init.ICND);
+        txtICREN.Init(init, "ICREN", init.ICREN);
+        txtICREP.Init(init, "ICREP", init.ICREP);
+        txtICRES.Init(init, "ICRES", init.ICRES);
+        txtICRID.Init(init, "ICRID", init.ICRID);
+        txtICRIP.Init(init, "ICRIP", init.ICRIP);
+        txtICRT.Init(init, "ICRT", init.ICRT);
+        txtICWD.Init(init, "ICWD", init.ICWD);
+        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");
         
+        snICRE.Init(init, "ICRE", init.ICRE);
+        snICRN.Init(init, "ICRN", init.ICRN);
+
+        for(int i = 0;i < init.GetSize();i++)
+        {
+            DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+            tbModel.addRow(SetRow(init.GetApp(i)));
+        }
+
         lblLevel.setText("Level " + level.toString());
         lblDescription.setText(getDescription(nodeName));
     }
@@ -107,40 +94,39 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
-        txtPCR = new javax.swing.JTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
-        bnPCR = new javax.swing.JButton();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
-        txtICRT = new javax.swing.JFormattedTextField();
-        txtICND = new javax.swing.JFormattedTextField();
+        txtICRT = new xbuild.Components.XFormattedTextField();
+        txtICND = new xbuild.Components.XFormattedTextField();
+        cbPCR = new xbuild.Components.XDropdownTableComboBox();
         jXPanel5 = new org.jdesktop.swingx.JXPanel();
         jXLabel9 = new org.jdesktop.swingx.JXLabel();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
         jXLabel12 = new org.jdesktop.swingx.JXLabel();
-        txtICWD = new javax.swing.JFormattedTextField();
-        txtICRES = new javax.swing.JFormattedTextField();
+        txtICWD = new xbuild.Components.XFormattedTextField();
+        txtICRES = new xbuild.Components.XFormattedTextField();
         jXPanel7 = new org.jdesktop.swingx.JXPanel();
         jXLabel13 = new org.jdesktop.swingx.JXLabel();
         jXLabel14 = new org.jdesktop.swingx.JXLabel();
         jXLabel15 = new org.jdesktop.swingx.JXLabel();
         jXLabel16 = new org.jdesktop.swingx.JXLabel();
-        txtICREN = new javax.swing.JFormattedTextField();
-        txtICREP = new javax.swing.JFormattedTextField();
+        txtICREN = new xbuild.Components.XFormattedTextField();
+        txtICREP = new xbuild.Components.XFormattedTextField();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
         jXLabel17 = new org.jdesktop.swingx.JXLabel();
         jXLabel18 = new org.jdesktop.swingx.JXLabel();
         jXLabel19 = new org.jdesktop.swingx.JXLabel();
-        txtICRIP = new javax.swing.JFormattedTextField();
-        txtICRID = new javax.swing.JFormattedTextField();
+        txtICRIP = new xbuild.Components.XFormattedTextField();
+        txtICRID = new xbuild.Components.XFormattedTextField();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        dpICDAT = new org.jdesktop.swingx.JXDatePicker();
+        dpICDAT = new xbuild.Components.XDatePicker();
         jXPanel4 = new org.jdesktop.swingx.JXPanel();
-        snICRN = new javax.swing.JSpinner();
-        snICRE = new javax.swing.JSpinner();
+        snICRN = new xbuild.Components.XSpinner();
+        snICRE = new xbuild.Components.XSpinner();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
@@ -158,13 +144,6 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
         jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Previous Crop", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jXLabel2.setText("Previous Crop");
-
-        bnPCR.setText("...");
-        bnPCR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPCRActionPerformed(evt);
-            }
-        });
 
         jXLabel3.setText("Root Weight");
 
@@ -190,7 +169,6 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
                     .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jXPanel3Layout.createSequentialGroup()
                             .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,30 +177,26 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
                         .addGroup(jXPanel3Layout.createSequentialGroup()
                             .addComponent(txtICRT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bnPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel3Layout.createSequentialGroup()
-                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bnPCR)
-                    .addGroup(jXPanel3Layout.createSequentialGroup()
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPCR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtICRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICRT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -370,17 +344,8 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
         jXLabel1.setText("Measurement Date");
 
         dpICDAT.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
-        dpICDAT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpICDATActionPerformed(evt);
-            }
-        });
 
         jXPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rhizobia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-
-        snICRN.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(1.0f), Float.valueOf(0.01f)));
-
-        snICRE.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(1.0f), Float.valueOf(0.01f)));
 
         jXLabel7.setText("Number");
 
@@ -579,28 +544,6 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bnPCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPCRActionPerformed
-        final CropListDialog dialog = new CropListDialog(null, true, CropList.GetAt(PCR));
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Crop crop = dialog.GetSelected();
-                if(crop != null) {
-                    txtPCR.setText(crop.CropName);
-                    PCR = crop.CropCode;
-                    Update();
-                }
-                dialog.SetNull();
-            }
-        });
-    }//GEN-LAST:event_bnPCRActionPerformed
-
-    private void dpICDATActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpICDATActionPerformed
-        Update();
-    }//GEN-LAST:event_dpICDATActionPerformed
-
     private void tbProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProfileMouseClicked
         if(evt.getClickCount() == 2)
         {
@@ -675,8 +618,8 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
-    private javax.swing.JButton bnPCR;
-    private org.jdesktop.swingx.JXDatePicker dpICDAT;
+    private xbuild.Components.XDropdownTableComboBox cbPCR;
+    private xbuild.Components.XDatePicker dpICDAT;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -709,151 +652,18 @@ public class InitialConditionFrame extends IXInternalFrame implements KeyListene
     private org.jdesktop.swingx.JXPanel jXPanel7;
     private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
-    private javax.swing.JSpinner snICRE;
-    private javax.swing.JSpinner snICRN;
+    private xbuild.Components.XSpinner snICRE;
+    private xbuild.Components.XSpinner snICRN;
     private org.jdesktop.swingx.JXTable tbProfile;
-    private javax.swing.JFormattedTextField txtICND;
-    private javax.swing.JFormattedTextField txtICREN;
-    private javax.swing.JFormattedTextField txtICREP;
-    private javax.swing.JFormattedTextField txtICRES;
-    private javax.swing.JFormattedTextField txtICRID;
-    private javax.swing.JFormattedTextField txtICRIP;
-    private javax.swing.JFormattedTextField txtICRT;
-    private javax.swing.JFormattedTextField txtICWD;
-    private javax.swing.JTextField txtPCR;
+    private xbuild.Components.XFormattedTextField txtICND;
+    private xbuild.Components.XFormattedTextField txtICREN;
+    private xbuild.Components.XFormattedTextField txtICREP;
+    private xbuild.Components.XFormattedTextField txtICRES;
+    private xbuild.Components.XFormattedTextField txtICRID;
+    private xbuild.Components.XFormattedTextField txtICRIP;
+    private xbuild.Components.XFormattedTextField txtICRT;
+    private xbuild.Components.XFormattedTextField txtICWD;
     // End of variables declaration//GEN-END:variables
-
-    private void LoadInitial() {
-        try {
-            Crop crop = CropList.GetAt(init.PCR);
-            PCR = crop.CropCode;
-            txtPCR.setText(crop.CropName);
-        } catch (Exception e) { }
-        try {
-            dpICDAT.setDate(init.ICDAT);
-        } catch (Exception e) { }
-        try {
-            txtICRT.setText(init.ICRT.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICND.setText(init.ICND.toString());
-        } catch (Exception e) {
-        }
-        try {
-            snICRN.setValue(init.ICRN);
-        } catch (Exception e) {
-        }
-        try {
-            snICRE.setValue(init.ICRE);
-        } catch (Exception e) {
-        }
-        try {
-            txtICWD.setText(init.ICWD.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICRES.setText(init.ICRES.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICREN.setText(init.ICREN.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICREP.setText(init.ICREP.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICRIP.setText(init.ICRIP.toString());
-        } catch (Exception e) {
-        }
-        try {
-            txtICRID.setText(init.ICRID.toString());
-        } catch (Exception e) {
-        }
-
-        for(int i = 0;i < init.GetSize();i++)
-        {
-            DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
-            tbModel.addRow(SetRow(init.GetApp(i)));
-        }
-    }
-
-    private void Update() {
-        if (!txtPCR.getText().equals("")) {
-            init.PCR = PCR;
-        } else {
-            init.PCR = null;
-        }
-        try {
-            init.ICDAT = dpICDAT.getDate();
-        } catch (Exception e) {
-            init.ICDAT = null;
-        }
-        try {
-            init.ICRT = Float.parseFloat(txtICRT.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICRT = null;
-        }
-        try {
-            init.ICND = Float.parseFloat(txtICND.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICND = null;
-        }
-        try {
-            init.ICRN = (Float) snICRN.getValue();
-        } catch (Exception e) {
-            init.ICRN = null;
-        }
-        try {
-            init.ICRE = (Float) snICRE.getValue();
-        } catch (Exception e) {
-            init.ICRE = null;
-        }
-        try {
-            init.ICWD = Float.parseFloat(txtICWD.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICWD = null;
-        }
-        try {
-            init.ICRES = Float.parseFloat(txtICRES.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICRES = null;
-        }
-        try {
-            init.ICREN = Float.parseFloat(txtICREN.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICREN = null;
-        }
-        try {
-            init.ICREP = Float.parseFloat(txtICREP.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICREP = null;
-        }
-        try {
-            init.ICRIP = Float.parseFloat(txtICRIP.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICRIP = null;
-        }
-        try {
-            init.ICRID = Float.parseFloat(txtICRID.getText());
-        } catch (NumberFormatException numberFormatException) {
-            init.ICRID = null;
-        }
-    }
-
-    public void keyTyped(KeyEvent e) {
-        Update();
-    }
-
-    public void keyPressed(KeyEvent e) {
-        Update();
-    }
-
-    public void keyReleased(KeyEvent e) {
-        Update();
-    }
     
     private Object[] SetRow(InitialConditionApplication initApp) {
         DecimalFormat df = new DecimalFormat(".000");

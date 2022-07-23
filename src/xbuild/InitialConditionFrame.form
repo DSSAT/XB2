@@ -139,8 +139,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPCR" alignment="0" min="-2" pref="403" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="1">
                                       <Component id="txtICND" min="-2" pref="100" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -152,36 +151,30 @@
                                       <Component id="jXLabel6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="cbPCR" min="-2" pref="459" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="bnPCR" min="-2" pref="27" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="bnPCR" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtPCR" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtICRT" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtICND" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbPCR" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtICRT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtICND" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -189,20 +182,10 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="txtPCR">
-                </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Previous Crop"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="bnPCR">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="..."/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnPCRActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel3">
                   <Properties>
@@ -224,19 +207,21 @@
                     <Property name="text" type="java.lang.String" value="kg/ha"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICRT">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICRT">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICND">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICND">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="xbuild.Components.XDropdownTableComboBox" name="cbPCR">
                 </Component>
               </SubComponents>
             </Container>
@@ -313,14 +298,14 @@
                     <Property name="text" type="java.lang.String" value="kg/ha"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICWD">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICWD">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.0" subtype="-1" type="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICRES">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICRES">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -403,14 +388,14 @@
                     <Property name="text" type="java.lang.String" value="%"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICREN">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICREN">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICREP">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICREP">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -486,14 +471,14 @@
                     <Property name="text" type="java.lang.String" value="%"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICRIP">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICRIP">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JFormattedTextField" name="txtICRID">
+                <Component class="xbuild.Components.XFormattedTextField" name="txtICRID">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -507,15 +492,12 @@
                 <Property name="text" type="java.lang.String" value="Measurement Date"/>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="dpICDAT">
+            <Component class="xbuild.Components.XDatePicker" name="dpICDAT">
               <Properties>
                 <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpICDATActionPerformed"/>
-              </Events>
             </Component>
             <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel4">
               <Properties>
@@ -568,19 +550,9 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JSpinner" name="snICRN">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Float" stepSize="0.01" type="number"/>
-                    </Property>
-                  </Properties>
+                <Component class="xbuild.Components.XSpinner" name="snICRN">
                 </Component>
-                <Component class="javax.swing.JSpinner" name="snICRE">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Float" stepSize="0.01" type="number"/>
-                    </Property>
-                  </Properties>
+                <Component class="xbuild.Components.XSpinner" name="snICRE">
                 </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel7">
                   <Properties>

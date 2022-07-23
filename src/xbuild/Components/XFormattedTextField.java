@@ -29,6 +29,11 @@ public class XFormattedTextField extends JFormattedTextField {
         setValue(model, fieldName, value);
         fieldType = FieldType.Float;
     }
+    
+    public void Init(Object model, String fieldName, Integer value) {
+        setValue(model, fieldName, value);
+        fieldType = FieldType.Integer;
+    }
 
     private void setValue(Object model, String fieldName, Object value) {
         this.model = model;
@@ -44,6 +49,7 @@ public class XFormattedTextField extends JFormattedTextField {
      
      private void setFocusLost(){
         this.addFocusListener(new java.awt.event.FocusAdapter(){
+            @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 performFocusLost(evt);
             }
@@ -58,7 +64,18 @@ public class XFormattedTextField extends JFormattedTextField {
                     this.value = val;
                     break;
                 case Float:
-                    this.value = Float.parseFloat(val);
+                    try {
+                        this.value = Float.parseFloat(val);
+                    } catch (Exception ex) {
+                        this.value = null;
+                    }
+                    break;
+                case Integer:
+                    try {
+                        this.value = Integer.parseInt(val);
+                    } catch (Exception ex) {
+                        this.value = null;
+                    }
                     break;
             }
         } else {

@@ -46,8 +46,6 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         tcm.getColumn(1).setPreferredWidth(screenWidth - 200);
         
         AddDataToTable();
-        
-        
     }
 
     /** This method is called from within the constructor to
@@ -63,6 +61,9 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         jXTable1 = new org.jdesktop.swingx.JXTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setModalityType(null);
+        setResizable(false);
 
         jXTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,6 +147,20 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         {
             tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
         });
+    }
+    
+    public void Filtering(String filter){
+        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
+        while(tbModel.getRowCount() > 0)
+            tbModel.removeRow(0);        
+        
+        WeatherStationList.GetAll().forEach(wsta ->
+        {
+            if(wsta.Code.toLowerCase().contains(filter.toLowerCase()) || wsta.StationName.toLowerCase().contains(filter.toLowerCase()))
+                tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
+        });
+        
+        jXTable1.setModel(tbModel);
     }
 }
 

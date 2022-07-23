@@ -36,7 +36,7 @@
                   <Component id="jXPanel2" alignment="0" max="32767" attributes="1"/>
                   <Component id="jXPanel1" alignment="0" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,8 +48,8 @@
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="jXPanel2" min="-2" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jXPanel3" min="-2" pref="330" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -102,20 +102,21 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbFileType" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtExperimentNumber" alignment="0" pref="77" max="32767" attributes="0"/>
+                                  <Component id="txtYear" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtSiteCode" alignment="0" max="32767" attributes="1"/>
                                   <Component id="txtInstituteCode" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtExperimentNumber" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtYear" alignment="0" pref="77" max="32767" attributes="1"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="imagePanel" min="-2" pref="113" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtCropName" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="cbCrop" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="bnSelectCrop" min="-2" pref="23" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -144,15 +145,15 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtExperimentNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtExperimentNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -162,10 +163,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCropName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectCrop" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCrop" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               </Group>
@@ -197,7 +197,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbFileType">
+        <Component class="xbuild.Components.XComboBox" name="cbFileType">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -210,20 +210,6 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbFileTypeItemStateChanged"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFileTypeActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="txtYear">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="2010" minimum="1900" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtYearStateChanged"/>
           </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">
@@ -233,16 +219,6 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="txtExperimentNumber">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1" maximum="99" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtExperimentNumberStateChanged"/>
-          </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel6">
           <Properties>
@@ -257,25 +233,21 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectCrop">
+        <Component class="xbuild.Components.XTextField" name="txtInstituteCode">
           <Properties>
-            <Property name="label" type="java.lang.String" value="..."/>
+            <Property name="columns" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectCropActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtInstituteCodeFocusLost"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtInstituteCode">
+        <Component class="xbuild.Components.XTextField" name="txtSiteCode">
           <Properties>
             <Property name="columns" type="int" value="2"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSiteCode">
-          <Properties>
-            <Property name="columns" type="int" value="2"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtCropName">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSiteCodeFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="imagePanel">
           <Properties>
@@ -323,6 +295,21 @@
             </Property>
             <Property name="text" type="java.lang.String" value="*"/>
           </Properties>
+        </Component>
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCrop">
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbCropItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="xbuild.Components.XSpinner" name="txtYear">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtYearStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="xbuild.Components.XSpinner" name="txtExperimentNumber">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtExperimentNumberStateChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -394,7 +381,7 @@
             <Property name="text" type="java.lang.String" value="Experiment Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtExperimentName">
+        <Component class="xbuild.Components.XTextField" name="txtExperimentName">
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel8">
           <Properties>
@@ -411,11 +398,11 @@
             <Property name="text" type="java.lang.String" value="Site"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPeople">
+        <Component class="xbuild.Components.XTextField" name="txtPeople">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtAddress">
+        <Component class="xbuild.Components.XTextField" name="txtAddress">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtSite">
+        <Component class="xbuild.Components.XTextField" name="txtSite">
         </Component>
       </SubComponents>
     </Container>
@@ -446,8 +433,8 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jXPanel6" min="-2" pref="170" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Component id="jXPanel6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jXPanel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -539,48 +526,48 @@
                           <Component id="txtPLAY" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jXLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JFormattedTextField" name="txtPAREA">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPAREA">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtPRNO">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPRNO">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtPLEN">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPLEN">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtPLDR">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPLDR">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtPLSP">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPLSP">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtPLAY">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtPLAY">
             </Component>
             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel11">
               <Properties>
@@ -705,28 +692,28 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JFormattedTextField" name="txtHRNO">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtHRNO">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtHAREA">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtHAREA">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtHLEN">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtHLEN">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtHARM">
+            <Component class="xbuild.Components.XFormattedTextField" name="txtHARM">
             </Component>
             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel22">
               <Properties>

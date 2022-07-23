@@ -55,7 +55,7 @@
               <Component id="jXPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,17 +89,7 @@
                       <Component id="jXLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtPLDS" min="-2" pref="368" max="-2" attributes="1"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="bnSelectPlantingDistribution" min="-2" pref="20" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtPLME" min="-2" pref="368" max="-2" attributes="1"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="bnSelectPlantingMethod" min="-2" pref="20" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="dpPDATE" alignment="0" max="32767" attributes="1"/>
                           <Component id="dpEDATE" alignment="0" min="-2" pref="177" max="-2" attributes="1"/>
@@ -128,6 +118,8 @@
                               <Component id="jXLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="cbPLME" alignment="0" pref="394" max="32767" attributes="0"/>
+                      <Component id="cbPLDS" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -147,15 +139,13 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPLME" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectPlantingMethod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbPLME" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPLDS" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bnSelectPlantingDistribution" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jXLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbPLDS" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -263,57 +253,33 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt;plants m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPLDS">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtPLME">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="dpEDATE">
+        <Component class="xbuild.Components.XDatePicker" name="dpEDATE">
           <Properties>
             <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpEDATEActionPerformed"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpEDATEPropertyChange"/>
-          </Events>
         </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="dpPDATE">
+        <Component class="xbuild.Components.XDatePicker" name="dpPDATE">
           <Properties>
             <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dpPDATEActionPerformed"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpPDATEPropertyChange"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectPlantingMethod">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectPlantingMethodActionPerformed"/>
-          </Events>
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPPOP">
         </Component>
-        <Component class="javax.swing.JButton" name="bnSelectPlantingDistribution">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectPlantingDistributionActionPerformed"/>
-          </Events>
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPPOE">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPPOP">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPLRS">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPPOE">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPLRD">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPLRS">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPLDP">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPLRD">
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbPLME">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPLDP">
+        <Component class="xbuild.Components.XDropdownTableComboBox" name="cbPLDS">
         </Component>
       </SubComponents>
     </Container>
@@ -412,15 +378,15 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JFormattedTextField" name="txtPLWT">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPLWT">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPENV">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPENV">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPAGE">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPAGE">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPLPH">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtPLPH">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtSPRL">
+        <Component class="xbuild.Components.XFormattedTextField" name="txtSPRL">
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">
           <Properties>

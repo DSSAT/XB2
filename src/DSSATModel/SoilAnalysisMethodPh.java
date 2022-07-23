@@ -12,5 +12,10 @@ package DSSATModel;
 public class SoilAnalysisMethodPh {
     public String Code;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }
 

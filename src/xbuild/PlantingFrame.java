@@ -9,18 +9,17 @@ import FileXModel.IModelXBase;
 import FileXModel.Planting;
 import ListDialog.PlantDistributionDialog;
 import ListDialog.PlantingMethodDialog;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.XColumn;
 
 /**
  *
  * @author Jazzy
  */
-public class PlantingFrame extends IXInternalFrame implements KeyListener {
+public class PlantingFrame extends IXInternalFrame {
 
     /**
      * Creates new form PlantingFrame
@@ -38,21 +37,23 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
                 break;
             }
         }
-
-        txtPAGE.addKeyListener(this);
-        txtPENV.addKeyListener(this);
-        txtPLDP.addKeyListener(this);
-        txtPLDS.addKeyListener(this);
-        txtPLME.addKeyListener(this);
-        txtPLPH.addKeyListener(this);
-        txtPLRD.addKeyListener(this);
-        txtPLRS.addKeyListener(this);
-        txtPLWT.addKeyListener(this);
-        txtPPOE.addKeyListener(this);
-        txtPPOP.addKeyListener(this);
-        txtSPRL.addKeyListener(this);
-
-        LoadPlanting();
+        
+        dpPDATE.Init(planting, "PDATE", planting.PDATE);
+        dpEDATE.Init(planting, "EDATE", planting.EDATE);
+        
+        
+        txtPAGE.Init(planting, "PAGE", planting.PAGE);
+        txtPENV.Init(planting, "PENV", planting.PENV);
+        txtPLDP.Init(planting, "PLDP", planting.PLDP);
+        cbPLDS.setInit(planting, "PLDS", planting.PLDS, PlantDistributionList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        cbPLME.setInit(planting, "PLME", planting.PLME, PlantingMethodList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        txtPLPH.Init(planting, "PLPH", planting.PLPH);
+        txtPLRD.Init(planting, "PLRD", planting.PLRD);
+        txtPLRS.Init(planting, "PLRS", planting.PLRS);
+        txtPLWT.Init(planting, "PLWT", planting.PLWT);
+        txtPPOE.Init(planting, "PPOE", planting.PPOE);
+        txtPPOP.Init(planting, "PPOP", planting.PPOP);
+        txtSPRL.Init(planting, "SPRL", planting.SPRL);        
         
         lblLevel.setText("Level " + level.toString());
         lblDescription.setText(getDescription(nodeName));
@@ -99,23 +100,21 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
         jXLabel14 = new org.jdesktop.swingx.JXLabel();
         jXLabel13 = new org.jdesktop.swingx.JXLabel();
-        txtPLDS = new javax.swing.JTextField();
-        txtPLME = new javax.swing.JTextField();
-        dpEDATE = new org.jdesktop.swingx.JXDatePicker();
-        dpPDATE = new org.jdesktop.swingx.JXDatePicker();
-        bnSelectPlantingMethod = new javax.swing.JButton();
-        bnSelectPlantingDistribution = new javax.swing.JButton();
-        txtPPOP = new javax.swing.JFormattedTextField();
-        txtPPOE = new javax.swing.JFormattedTextField();
-        txtPLRS = new javax.swing.JFormattedTextField();
-        txtPLRD = new javax.swing.JFormattedTextField();
-        txtPLDP = new javax.swing.JFormattedTextField();
+        dpEDATE = new xbuild.Components.XDatePicker();
+        dpPDATE = new xbuild.Components.XDatePicker();
+        txtPPOP = new xbuild.Components.XFormattedTextField();
+        txtPPOE = new xbuild.Components.XFormattedTextField();
+        txtPLRS = new xbuild.Components.XFormattedTextField();
+        txtPLRD = new xbuild.Components.XFormattedTextField();
+        txtPLDP = new xbuild.Components.XFormattedTextField();
+        cbPLME = new xbuild.Components.XDropdownTableComboBox();
+        cbPLDS = new xbuild.Components.XDropdownTableComboBox();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
-        txtPLWT = new javax.swing.JFormattedTextField();
-        txtPENV = new javax.swing.JFormattedTextField();
-        txtPAGE = new javax.swing.JFormattedTextField();
-        txtPLPH = new javax.swing.JFormattedTextField();
-        txtSPRL = new javax.swing.JFormattedTextField();
+        txtPLWT = new xbuild.Components.XFormattedTextField();
+        txtPENV = new xbuild.Components.XFormattedTextField();
+        txtPAGE = new xbuild.Components.XFormattedTextField();
+        txtPLPH = new xbuild.Components.XFormattedTextField();
+        txtSPRL = new xbuild.Components.XFormattedTextField();
         jXLabel15 = new org.jdesktop.swingx.JXLabel();
         jXLabel16 = new org.jdesktop.swingx.JXLabel();
         jXLabel17 = new org.jdesktop.swingx.JXLabel();
@@ -162,42 +161,8 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
         jXLabel13.setText("<html>plants m<sup>2</sup></html>");
 
         dpEDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
-        dpEDATE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpEDATEActionPerformed(evt);
-            }
-        });
-        dpEDATE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dpEDATEPropertyChange(evt);
-            }
-        });
 
         dpPDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
-        dpPDATE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpPDATEActionPerformed(evt);
-            }
-        });
-        dpPDATE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dpPDATEPropertyChange(evt);
-            }
-        });
-
-        bnSelectPlantingMethod.setText("...");
-        bnSelectPlantingMethod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectPlantingMethodActionPerformed(evt);
-            }
-        });
-
-        bnSelectPlantingDistribution.setText("...");
-        bnSelectPlantingDistribution.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectPlantingDistributionActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
@@ -216,15 +181,7 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel2Layout.createSequentialGroup()
-                        .addComponent(txtPLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnSelectPlantingDistribution, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel2Layout.createSequentialGroup()
-                        .addComponent(txtPLME, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnSelectPlantingMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(dpPDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dpEDATE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,7 +202,9 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
                         .addGap(10, 10, 10)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jXLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbPLME, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                    .addComponent(cbPLDS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jXPanel2Layout.setVerticalGroup(
@@ -260,14 +219,12 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPLME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPlantingMethod))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPLDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPLME, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectPlantingDistribution))
+                    .addComponent(cbPLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,286 +376,17 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dpEDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpEDATEActionPerformed
-        UpdatePlanting();
-    }//GEN-LAST:event_dpEDATEActionPerformed
-
-    private void dpEDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpEDATEPropertyChange
-        try
-        {
-            planting.EDATE = dpEDATE.getDate();
-        }
-        catch(Exception ex) {
-            planting.EDATE = null;
-            dpEDATE.setDate(null);
-        }
-    }//GEN-LAST:event_dpEDATEPropertyChange
-
-    private void dpPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpPDATEActionPerformed
-        UpdatePlanting();
-    }//GEN-LAST:event_dpPDATEActionPerformed
-
-    private void dpPDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpPDATEPropertyChange
-        try
-        {
-            planting.PDATE = dpPDATE.getDate();
-        }
-        catch(Exception ex) {
-            planting.PDATE = null;
-            dpPDATE.setDate(null);
-        }
-    }//GEN-LAST:event_dpPDATEPropertyChange
-
-    private void bnSelectPlantingMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectPlantingMethodActionPerformed
-        final PlantingMethodDialog dialog = new PlantingMethodDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                PlantingMethod plantingMethod = dialog.GetSelected();
-                txtPLME.setText(plantingMethod.Description);
-                planting.PLME = plantingMethod.Code;
-            }
-        });
-    }//GEN-LAST:event_bnSelectPlantingMethodActionPerformed
-
-    private void bnSelectPlantingDistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectPlantingDistributionActionPerformed
-        final PlantDistributionDialog dialog = new PlantDistributionDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                PlantDistribution plant = dialog.GetSelected();
-                txtPLDS.setText(plant.Description);
-                planting.PLDS = plant.Code;
-            }
-        });
-    }//GEN-LAST:event_bnSelectPlantingDistributionActionPerformed
-
-    private void LoadPlanting() {
-        try
-        {
-            dpPDATE.setDate(planting.PDATE);
-        }
-        catch(Exception ex) {}
-        try
-        {
-            dpEDATE.setDate(planting.EDATE);
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPAGE.setText(planting.PAGE.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPENV.setText(planting.PENV.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLDP.setText(planting.PLDP.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLDS.setText(PlantDistributionList.GetAt(planting.PLDS).Description);
-
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLME.setText(PlantingMethodList.GetAt(planting.PLME).Description);
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLPH.setText(planting.PLPH.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLRD.setText(planting.PLRD.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLRS.setText(planting.PLRS.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPLWT.setText(planting.PLWT.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPPOE.setText(planting.PPOE.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtPPOP.setText(planting.PPOP.toString());
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            txtSPRL.setText(planting.SPRL.toString());
-        }
-        catch(Exception ex) {}
-    }
-
-    private void UpdatePlanting() {
-        try
-        {
-            planting.PDATE = dpPDATE.getDate();
-        }
-        catch(Exception ex) {
-            planting.PDATE = null;
-        }
-        try
-        {
-            planting.EDATE = dpEDATE.getDate();
-        }
-        catch(Exception ex) {
-            planting.EDATE = null;
-        }
-        try
-        {
-            planting.PAGE = Float.parseFloat(txtPAGE.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PAGE = -99F;
-        }
-        try
-        {
-            planting.PENV = Float.parseFloat(txtPENV.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PENV = -99F;
-        }
-        try
-        {
-            planting.PLDP = Float.parseFloat(txtPLDP.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PLDP = -99F;
-        }
-
-        /*
-        try
-        {
-            if(txtPLME.getText().equals("")) PLME = "";
-            planting.PLME = PLME;
-        }
-        catch(Exception ex) {}
-
-        try
-        {
-            if(txtPLDS.getText().equals("")) PLDS = "";
-            planting.PLDS = PLDS;
-        }
-        catch(Exception ex) {}
-         *
-         */
-
-        try
-        {
-            planting.PLPH = Float.parseFloat(txtPLPH.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PLPH = -99F;
-        }
-        try
-        {
-            planting.PLRD = Float.parseFloat(txtPLRD.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PLRD = -99F;
-        }
-        try
-        {
-            planting.PLRS = Float.parseFloat(txtPLRS.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PLRS = -99F;
-        }
-        try
-        {
-            planting.PLWT = Float.parseFloat(txtPLWT.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PLWT = -99F;
-        }
-        try
-        {
-            planting.PPOE = Float.parseFloat(txtPPOE.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PPOE = -99F;
-        }
-        try
-        {
-            planting.PPOP = Float.parseFloat(txtPPOP.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.PPOP = -99F;
-        }
-        try
-        {
-            planting.SPRL = Float.parseFloat(txtSPRL.getText());
-        }
-        catch(Exception ex)
-        {
-            //planting.SPRL = -99F;
-        }
-    }
-
-    public void keyTyped(KeyEvent e) {
-        UpdatePlanting();
-    }
-
-    public void keyPressed(KeyEvent e) {
-        UpdatePlanting();
-    }
-
-    public void keyReleased(KeyEvent e) {
-        UpdatePlanting();
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnSelectPlantingDistribution;
-    private javax.swing.JButton bnSelectPlantingMethod;
-    private org.jdesktop.swingx.JXDatePicker dpEDATE;
-    private org.jdesktop.swingx.JXDatePicker dpPDATE;
+    private xbuild.Components.XDropdownTableComboBox cbPLDS;
+    private xbuild.Components.XDropdownTableComboBox cbPLME;
+    private xbuild.Components.XDatePicker dpEDATE;
+    private xbuild.Components.XDatePicker dpPDATE;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel10;
     private org.jdesktop.swingx.JXLabel jXLabel11;
@@ -727,17 +415,15 @@ public class PlantingFrame extends IXInternalFrame implements KeyListener {
     private org.jdesktop.swingx.JXPanel jXPanel3;
     private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
-    private javax.swing.JFormattedTextField txtPAGE;
-    private javax.swing.JFormattedTextField txtPENV;
-    private javax.swing.JFormattedTextField txtPLDP;
-    private javax.swing.JTextField txtPLDS;
-    private javax.swing.JTextField txtPLME;
-    private javax.swing.JFormattedTextField txtPLPH;
-    private javax.swing.JFormattedTextField txtPLRD;
-    private javax.swing.JFormattedTextField txtPLRS;
-    private javax.swing.JFormattedTextField txtPLWT;
-    private javax.swing.JFormattedTextField txtPPOE;
-    private javax.swing.JFormattedTextField txtPPOP;
-    private javax.swing.JFormattedTextField txtSPRL;
+    private xbuild.Components.XFormattedTextField txtPAGE;
+    private xbuild.Components.XFormattedTextField txtPENV;
+    private xbuild.Components.XFormattedTextField txtPLDP;
+    private xbuild.Components.XFormattedTextField txtPLPH;
+    private xbuild.Components.XFormattedTextField txtPLRD;
+    private xbuild.Components.XFormattedTextField txtPLRS;
+    private xbuild.Components.XFormattedTextField txtPLWT;
+    private xbuild.Components.XFormattedTextField txtPPOE;
+    private xbuild.Components.XFormattedTextField txtPPOP;
+    private xbuild.Components.XFormattedTextField txtSPRL;
     // End of variables declaration//GEN-END:variables
 }
