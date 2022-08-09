@@ -1,5 +1,6 @@
 package FileXService;
 
+import DSSATModel.Setup;
 import FileXModel.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +33,8 @@ public class FileXService {
         HarvestService.Read(fileName);
         FileX.simulationList = SimulationControlService.Read(fileName.getAbsolutePath());
         FileX.SetAbsoluteFileName(fileName.getAbsolutePath());
+        
+        new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
     }
     
     public static void SaveFile(File file) {
@@ -61,6 +64,8 @@ public class FileXService {
         
         try {
             writer.close();
+            
+            new Setup().SetDefaultPath(file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(FileX.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package xbuild;
+package xbuild.Events;
 
 import java.util.*;
 
@@ -11,12 +11,17 @@ import java.util.*;
  *
  * @author Jazzy
  */
-public class MyEvent extends EventObject {
+public class XEvent extends EventObject {
     String n;
-    MyEvent(Object o, String n)
+    public XEvent(Object o, String n)
     {
         super(o);
         this.n = n;
+    }
+    
+    XEvent(Object o)
+    {
+        super(o);
     }
 
     public String getN()

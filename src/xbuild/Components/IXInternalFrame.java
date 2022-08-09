@@ -1,13 +1,19 @@
 package xbuild.Components;
 
 import javax.swing.JInternalFrame;
+import xbuild.Events.XEventListener;
 
 /**
  *
  * @author Jazz
  */
 public abstract class IXInternalFrame extends JInternalFrame {
+    protected XEventListener l;
     public void updatePanelName(String name){
+        
+    }
+    
+    public void updatePanelList(){
         
     }
     
@@ -23,4 +29,9 @@ public abstract class IXInternalFrame extends JInternalFrame {
         
         return level1[1].trim();
     }
+    
+    public void addMyEventListener(XEventListener l) {
+        if(this.l == null)
+            this.l = l;
+    } 
 }

@@ -5,6 +5,7 @@
  */
 package xbuild.Components;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
@@ -32,6 +33,8 @@ public class UpdateComponent {
                 else if(field.getType() == Integer.class){
                     field.set(model, Utils.ParseInteger(value));
                 }
+                else if(field.getType() == ExperimentType.class)
+                    field.set(model, ExperimentType.valueOf(value.toString()));
                 else 
                     field.set(model, value);
             } catch (IllegalArgumentException | IllegalAccessException ex) {

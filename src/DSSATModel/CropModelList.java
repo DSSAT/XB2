@@ -49,9 +49,9 @@ public class CropModelList {
         return cropModel;
     }
     
-    public static List<BaseModel> GetAll()
+    public static List<CropModel> GetAll()
     {
-        List<BaseModel> cropModelList = new ArrayList<>();
+        List<CropModel> cropModelList = new ArrayList<>();
         Object[] objects = cropModels.values().toArray();
         for (Object object : objects) {
             cropModelList.add((CropModel) object);

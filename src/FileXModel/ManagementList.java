@@ -34,6 +34,11 @@ public abstract class ManagementList {
         }
     }
     
+    public void RemoveAt(int level)
+    {
+        modelList.remove(level);
+    }
+    
     public IModelXBase GetAt(String name)
     {
         name = ExtractDescription(name);

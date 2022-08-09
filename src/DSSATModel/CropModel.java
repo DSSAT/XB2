@@ -11,4 +11,9 @@ package DSSATModel;
  */
 public class CropModel extends BaseModel {
     public String ModelCode;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

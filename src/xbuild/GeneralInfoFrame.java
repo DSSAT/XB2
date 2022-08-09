@@ -1,5 +1,6 @@
 package xbuild;
 
+import xbuild.Events.XEvent;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import DSSATModel.Setup;
@@ -7,6 +8,7 @@ import DSSATModel.Crop;
 import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
+import java.awt.EventQueue;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,8 +27,6 @@ import xbuild.Components.XColumn;
  * @author Jazzy
  */
 public class GeneralInfoFrame extends IXInternalFrame {
-
-    private MyEventListener l;
     
     public IXInternalFrame NewFrame(){
         return new GeneralInfoFrame();
@@ -44,7 +44,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         if(FileX.general.crop == null)
            FileX.general.crop = new Crop();
-
+        
+        if(FileX.general.ExperimentNumber == null || FileX.general.ExperimentNumber.isEmpty())
+            FileX.general.ExperimentNumber = "1";
         
         txtYear.setEditor(new JSpinner.NumberEditor(txtYear,"####"));
         txtInstituteCode.setDocument(new LimitDocument(2));
@@ -163,9 +165,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jXLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         cbFileType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Experimental", "Sequential", "Seasonal", "Spatial" }));
-        cbFileType.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbFileTypeItemStateChanged(evt);
+        cbFileType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFileTypeActionPerformed(evt);
             }
         });
 
@@ -208,9 +210,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 0, 51));
         jLabel5.setText("*");
 
-        cbCrop.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbCropItemStateChanged(evt);
+        cbCrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCropActionPerformed(evt);
             }
         });
 
@@ -565,14 +567,32 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbFileTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFileTypeItemStateChanged
-        // TODO add your handling code here:
+    private void txtExperimentNumberStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtExperimentNumberStateChanged
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+    }//GEN-LAST:event_txtExperimentNumberStateChanged
+
+    private void txtInstituteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInstituteCodeFocusLost
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+    }//GEN-LAST:event_txtInstituteCodeFocusLost
+
+    private void txtSiteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSiteCodeFocusLost
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+    }//GEN-LAST:event_txtSiteCodeFocusLost
+
+    private void cbCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCropActionPerformed
+        if(cbCrop.getSelectedItem() != null && cbCrop.getSelectedItem().getClass() == Crop.class){
+            //FileX.general.crop = (Crop)cbCrop.getSelectedItem();
+            EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+        }
+    }//GEN-LAST:event_cbCropActionPerformed
+
+    private void cbFileTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFileTypeActionPerformed
         switch (cbFileType.getSelectedItem().toString()) {
             case "Experimental":
                 cbCrop.setEnabled(true);
@@ -602,27 +622,11 @@ public class GeneralInfoFrame extends IXInternalFrame {
             jLabel5.setVisible(false);
         
         actionPerformed(new ActionEvent(this, 0, "Update"));
-}//GEN-LAST:event_cbFileTypeItemStateChanged
+    }//GEN-LAST:event_cbFileTypeActionPerformed
 
     private void txtYearStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtYearStateChanged
-        actionPerformed(new ActionEvent(this, 0, "Update"));
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
     }//GEN-LAST:event_txtYearStateChanged
-
-    private void cbCropItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCropItemStateChanged
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-    }//GEN-LAST:event_cbCropItemStateChanged
-
-    private void txtExperimentNumberStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtExperimentNumberStateChanged
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-    }//GEN-LAST:event_txtExperimentNumberStateChanged
-
-    private void txtInstituteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInstituteCodeFocusLost
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-    }//GEN-LAST:event_txtInstituteCodeFocusLost
-
-    private void txtSiteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSiteCodeFocusLost
-        actionPerformed(new ActionEvent(this, 0, "Update"));
-    }//GEN-LAST:event_txtSiteCodeFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -687,7 +691,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
     public void actionPerformed(ActionEvent e) {
         try{
-            l.myAction(new MyEvent(this, SetDocumentName()));
+            XEvent my = new XEvent(this, SetDocumentName());
+            l.myAction(my);
         }
         catch(Exception ex) {}
     }
@@ -716,11 +721,6 @@ public class GeneralInfoFrame extends IXInternalFrame {
         }
         catch(Exception ex) {}
         return doc;
-    }
-
-    public void addMyEventListener(MyEventListener l) {
-        if(this.l == null)
-            this.l = l;
     }
     
     private void setCropImage(){

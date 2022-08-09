@@ -14,6 +14,7 @@ import java.io.*;
 public class Setup {
     private static String DSSATPath;
     private static String DSSATVersion;
+    private static String DefaultPath;
 
     public String GetDSSATPath()
     {
@@ -22,6 +23,19 @@ public class Setup {
             GetFile();
         }
         return DSSATPath;
+    }
+    
+    public String GetDefaultPath(){
+        if(DSSATPath == null){
+            GetFile();
+        }
+        
+        return DefaultPath == null || DefaultPath.isBlank() ? DSSATPath : DefaultPath;
+    }
+    
+    public void SetDefaultPath(String path){
+        DefaultPath = path;
+        SaveFile(DSSATPath, DSSATVersion);
     }
     
     public String GetDSSATVersion()
@@ -50,8 +64,19 @@ public class Setup {
                 while ((buffer = br.readLine()) != null) {
                     String tmp[] = buffer.split("=");
                     try{
-                        if(tmp[0].trim().equals("DSSAT")) DSSATPath = tmp[1].trim();
-                        if(tmp[0].trim().equals("VERSION")) DSSATVersion = tmp[1].trim();
+                        switch (tmp[0].trim()) {
+                            case "DSSAT":
+                                DSSATPath = tmp[1].trim();
+                                break;
+                            case "VERSION":
+                                DSSATVersion = tmp[1].trim();
+                                break;
+                            case "LATEST":
+                                DefaultPath = tmp[1].trim();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     catch(Exception ex1){
                         System.out.println(ex1.getMessage());
@@ -85,6 +110,7 @@ public class Setup {
         PrintWriter pw = new PrintWriter(writer);
         pw.println("DSSAT=" + path);
         pw.println("VERSION=" + version);
+        pw.println("LATEST=" + DefaultPath);
 
         DSSATPath = path;
         DSSATVersion = version;

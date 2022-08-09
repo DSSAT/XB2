@@ -105,11 +105,17 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         setSelectedIndex(-1);
         
         int index = -1;
+        setSelectedIndex(index);
         for (E dataModel : list) {
             index++;
-            if(getFieldValue(dataModel, this.codeField) == null ? this.value == null : getFieldValue(dataModel, this.codeField).equals(this.value)){
-                setSelectedIndex(index);
-                break;
+            try{
+                if(getFieldValue(dataModel, this.codeField) == null ? this.value == null : getFieldValue(dataModel, this.codeField).equals(this.value)){
+                    setSelectedIndex(index);
+                    break;
+                }
+            }
+            catch(Exception ex){
+                
             }
         }
         
@@ -117,8 +123,13 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             this.addActionListener((java.awt.event.ActionEvent evt) -> {
                 E selectItem = (E) getSelectedItem();
 
-                String val = getFieldValue(selectItem, codeField);
-                UpdateComponent.updateModel(model, fieldName, val);
+                try{
+                    String val = getFieldValue(selectItem, codeField);
+                    UpdateComponent.updateModel(model, fieldName, val);
+                }
+                catch(Exception ex){
+                    
+                }
             });
         }
         
@@ -128,10 +139,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
     private DefaultTableModel getDataModel() {
         DefaultTableModel dropDownModel = new DefaultTableModel(null, getColumnNames()) {
-            @Override
-            public Class<?> getColumnClass(int column) {
-                return String.class;
-            }
+            
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -159,19 +167,26 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         List<String> modelValues = new ArrayList<>();
 
         for (XColumn c : columns) {
-            modelValues.add(getFieldValue(model, c.getFieldName()));
+            try{
+                modelValues.add(getFieldValue(model, c.getFieldName()));
+            }
+            catch(Exception ex){
+                
+            }
         }
 
         return modelValues.toArray();
     }
 
-    private String getFieldValue(E model, String fieldName) {
-        if (model != null) {
+    private String getFieldValue(E model, String fieldName) throws Exception {
+        if (model != null && model.getClass() != String.class) {
             Field field = null;
             try {
-                field = model.getClass().getDeclaredField(fieldName);
-            } catch (NoSuchFieldException | SecurityException ex) {
+                field = model.getClass().getField(fieldName);
+            } catch (NoSuchFieldException | SecurityException ex) {                
                 Logger.getLogger(UpdateComponent.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
+                
             }
 
             try {
@@ -182,7 +197,9 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 }
             } catch (IllegalArgumentException | IllegalAccessException ex) {
                 Logger.getLogger(XDropdownTableComboBox.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
             }
+        } else {
         }
 
         return "";

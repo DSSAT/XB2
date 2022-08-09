@@ -49,7 +49,7 @@
               <Component id="jXPanel2" min="-2" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,7 +209,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbFileTypeItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFileTypeActionPerformed"/>
           </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">
@@ -298,7 +298,7 @@
         </Component>
         <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCrop">
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbCropItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCropActionPerformed"/>
           </Events>
         </Component>
         <Component class="xbuild.Components.XSpinner" name="txtYear">

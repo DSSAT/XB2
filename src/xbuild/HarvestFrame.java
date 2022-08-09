@@ -4,6 +4,7 @@ import DSSATModel.CropList;
 import DSSATModel.GrowthStageList;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSizeList;
+import FileXModel.Cultivar;
 import FileXModel.FileX;
 import FileXModel.Harvest;
 import FileXModel.HarvestApplication;
@@ -45,14 +46,14 @@ public class HarvestFrame extends IXInternalFrame {
         DefaultComboBoxModel cropSelectedList = new DefaultComboBoxModel();
         if(FileX.general.crop == null){
             FileX.cultivars.GetAll().forEach(cul -> {
-                String cropName = CropList.GetAt(cul.CR).CropName;
+                String cropName = CropList.GetAt(((Cultivar)cul).CR).CropName;
                 int index = cropSelectedList.getIndexOf(cropName);
                 if(index < 0)
                     cropSelectedList.addElement(cropName);
             });
             
             if(CropList.GetAtName(harvestApp.HNAME) == null){
-                harvestApp.HNAME = CropList.GetAt(FileX.cultivars.GetAt(0).CR).CropName;
+                harvestApp.HNAME = CropList.GetAt(((Cultivar)FileX.cultivars.GetAt(0)).CR).CropName;
             }
         }
         else{

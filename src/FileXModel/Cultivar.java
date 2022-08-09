@@ -13,6 +13,13 @@ public class Cultivar implements IModelXBase {
     public String CR;
     public String INGENO;
     public String CNAME;
+    
+    public Cultivar(){
+    }
+    
+    public Cultivar(String name){
+        CNAME = name;
+    }
 
     @Override
     public String GetName() {

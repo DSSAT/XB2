@@ -92,8 +92,8 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="18" rowCount="0">
-                <Column editable="true" title="Level" type="java.lang.Object"/>
-                <Column editable="true" title="&lt;html&gt;Rot.&lt;br&gt;Number&lt;/html&gt;" type="java.lang.Object"/>
+                <Column editable="true" title="Level" type="java.lang.Integer"/>
+                <Column editable="true" title="&lt;html&gt;Rot.&lt;br&gt;Number&lt;/html&gt;" type="java.lang.String"/>
                 <Column editable="true" title="&lt;html&gt;Rot.&lt;br&gt;Option&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="&lt;html&gt;Crop&lt;br&gt;Comp.&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="Description" type="java.lang.Object"/>

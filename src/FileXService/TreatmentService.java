@@ -78,7 +78,7 @@ public class TreatmentService {
             pw.println("*TREATMENTS                        -------------FACTOR LEVELS------------");
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treaments.GetSize(); i++) {
-                Treatment treat = treaments.GetAt(i);
+                Treatment treat = (Treatment) treaments.GetAt(i);
                 pw.print(Utils.PadLeft(treat.N, 2, ' '));
                 
                 if(FileX.general.FileType != ExperimentType.Sequential)

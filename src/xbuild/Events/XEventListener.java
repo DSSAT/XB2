@@ -1,0 +1,17 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package xbuild.Events;
+
+/**
+ *
+ * @author Jazzy
+ */
+public interface XEventListener {
+    public abstract void myAction (XEvent e);
+    public abstract void myAction (AddLevelEvent e);
+    public abstract void myAction (RemoveLevelEvent e);
+    public abstract void myAction (UpdateLevelEvent e);
+}

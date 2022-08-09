@@ -11,6 +11,8 @@
 
 package xbuild;
 
+import xbuild.Events.RemoveLevelEvent;
+import xbuild.Events.AddLevelEvent;
 import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.CropList;
@@ -143,20 +145,27 @@ public class CultivarsFrame extends IXInternalFrame {
                     model.addRow(SetRow(c));
 
                     FileX.cultivars.AddNew(c);
+                    
+                    l.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
                 }
                 dialog.SetNull();
             }
         });
     }//GEN-LAST:event_bnAddLayerActionPerformed
 
+    
     private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
         int nRow = jXTable1.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         model.removeRow(nRow);
-        for(int i = nRow;i < jXTable1.getRowCount();i++)
-            model.setValueAt(i+1, nRow, 0);
+        for(int i = 0;i < jXTable1.getRowCount();i++)
+            model.setValueAt(i+1, i, 0);
 
+        String name = FileX.cultivars.GetAt(nRow).GetName();
+        
         FileX.cultivars.RemoveAt(nRow);
+        
+        l.myAction(new RemoveLevelEvent(this, "Cultivars", "Level " + (nRow+1) + ": " + name));
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private Vector SetRow(Cultivar cul) {
@@ -179,8 +188,7 @@ public class CultivarsFrame extends IXInternalFrame {
         for(int i = 0;i < FileX.cultivars.GetSize();i++)
         {
             DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            model.addRow(SetRow(FileX.cultivars.GetAt(i)));
+            model.addRow(SetRow((Cultivar) FileX.cultivars.GetAt(i)));
         }
     }
-
 }

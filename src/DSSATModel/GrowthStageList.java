@@ -58,7 +58,7 @@ public class GrowthStageList {
         
         growthStage.forEach(growth -> {
             cultivars.GetAll().forEach(cul -> {
-                if(growth.crop.CropCode.equalsIgnoreCase(cul.CR)){
+                if(growth.crop.CropCode.equalsIgnoreCase(((FileXModel.Cultivar)cul).CR)){
                     gList.add(growth);
                 }
             });

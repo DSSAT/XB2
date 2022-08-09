@@ -11,36 +11,28 @@ import java.util.ArrayList;
  *
  * @author Jazzy
  */
-public class TreatmentList {
+public class TreatmentList extends ManagementList {
     protected ArrayList<Treatment> treatments = new ArrayList<>();
 
-    public void AddNew(Treatment treat)
-    {
-        treatments.add(treat);
+
+    @Override
+    public void AddNew(String name) {
+        modelList.add(new Treatment(name));
     }
 
-    public void RemoveAt(int level)
-    {
-        treatments.remove(level);
-    }
-
-    public void SetAt(int level, Treatment treat)
-    {
-        treatments.set(level, treat);
-    }
-
-    public ArrayList<Treatment> GetAll()
-    {
-        return treatments;
-    }
-
-    public Treatment GetAt(int level)
-    {
-        return treatments.get(level);
-    }
-
-    public int GetSize()
-    {
-        return treatments.size();
+    @Override
+    public IModelXBase Clone(String sourceName, String newName) {
+        Treatment source = (Treatment) GetAt(sourceName);
+        Treatment newSource = null;
+        
+        try{            
+            newSource = source.Clone();
+            newSource.TNAME = newName;
+        }
+        catch(Exception ex){
+            
+        }
+        
+        return newSource;
     }
 }

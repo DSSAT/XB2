@@ -129,7 +129,7 @@ public class CultivarDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.cultivars.GetSize();i++)
         {
-            Cultivar cul = FileX.cultivars.GetAt(i);
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAt(i);
             Object object[] = new Object[3];
             object[0] = i + 1;
             try {
