@@ -1,6 +1,8 @@
 package FileXService;
 
 import DSSATModel.Setup;
+import DSSATModel.WeatherStation;
+import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
 import FileXModel.*;
 import java.io.File;
@@ -47,6 +49,16 @@ public class FileXService {
                 case "W":
                     FileX.wstaType = WstaType.WTG;
                     break;
+            }
+            
+            for(IModelXBase x : FileX.fieldList.GetAll()){
+                FieldDetail f = (FieldDetail)x;
+                WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
+                if(w == null){
+                    WeatherStation w1 = WeatherStationList.GetAt(f.WSTA.substring(0, 4), FileX.wstaType);
+                    if(w1 != null)
+                        f.WSTA = w1.Code;
+                }
             }
         }
         

@@ -26,18 +26,21 @@ public class TreatmentService {
             boolean bTreatment = false;
             
             while ((strRead = br.readLine()) != null) {
-                if (strRead.trim().startsWith("*TREATMENTS")) {
+                if(strRead.trim().isEmpty()){
+                    continue;
+                }
+                else if (strRead.trim().startsWith("*TREATMENTS")) {
                     bTreatment = true;
 
                 } else if (bTreatment && !bTreatmentHeader && strRead.trim().startsWith("@")) {
                     treatmentHeader = strRead.trim();
                     bTreatmentHeader = true;
-                } else if (bTreatment && bTreatmentHeader) {
-                    if (strRead.trim().isEmpty()) {
-                        bTreatment = false;
-                        bTreatmentHeader = false;
-                        continue;
-                    }
+                } 
+                else if(bTreatment && bTreatmentHeader && strRead.trim().startsWith("*")){
+                    bTreatment = false;
+                    bTreatmentHeader = false;
+                }
+                else if (bTreatment && bTreatmentHeader) {
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     
                     Treatment treatment = new Treatment();
