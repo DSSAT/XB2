@@ -5,6 +5,7 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -22,13 +24,14 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
     protected Irrigation irrig;
     private int selectedRowIndex = -1;
+    private Integer level;
     /**
      * Creates new form IrrigationFrame
      */
     public IrrigationFrame(String nodeName) {
         initComponents();
         
-        Integer level = 0;
+        level = 0;
         for(IModelXBase ir : FileX.irrigations.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
@@ -42,7 +45,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         LoadIrrigationApp();
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(irrig, "IRNAME", irrig.IRNAME);
     }
     
     /**
@@ -51,15 +54,22 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.irrigations.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));
+                txtDescription.setText(getDescription(name));
                 break;
             }
-        }        
+        }
+        
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -84,7 +94,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         jXTable1 = new org.jdesktop.swingx.JXTable();
         txtYear = new javax.swing.JTextField();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -154,8 +164,11 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,11 +177,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -188,8 +196,12 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bnAddLayer)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(bnAddLayer))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(bnDeleteLayer)))
                 .addContainerGap())
@@ -200,7 +212,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +233,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                             .addComponent(bnAddLayer))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -306,6 +318,12 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         }
     }//GEN-LAST:event_jXTable1MouseClicked
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? irrig.IRNAME != null : !txtDescription.getText().equals(irrig.IRNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Irrigation", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
     public void keyTyped(KeyEvent e) {
         Update();
     }
@@ -381,10 +399,10 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;
     private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JRadioButton rdDaysAfterPlanting;
     private javax.swing.JRadioButton rdReportedDates;
+    private xbuild.Components.XTextField txtDescription;
     private javax.swing.JFormattedTextField txtEFIR;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables

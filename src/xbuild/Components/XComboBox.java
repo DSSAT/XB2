@@ -127,7 +127,12 @@ public class XComboBox extends JComboBox {
 
     public void performFocusLost(java.awt.event.ActionEvent evt) {
         int index = this.getSelectedIndex();
-        this.value = items.get(index).item;
-        UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        if(index >= 0){
+                this.value = items.get(index).item;
+            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        }
+        else{
+            UpdateComponent.updateModel(this.model, this.fieldName, "");
+        }
     }
 }

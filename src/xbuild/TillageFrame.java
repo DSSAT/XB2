@@ -5,12 +5,14 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Tillage;
 import FileXModel.TillageApplication;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -20,13 +22,14 @@ public class TillageFrame extends IXInternalFrame {
 
     protected Tillage tillage;
     private int selectedRowIndex = -1;
+    private Integer level;
     /**
      * Creates new form TillageFrame
      */
     public TillageFrame(String nodeName) {
         initComponents();
         
-        Integer level = 0;
+        level = 0;
         for(IModelXBase til : FileX.tillageList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){   
@@ -37,7 +40,7 @@ public class TillageFrame extends IXInternalFrame {
         LoadTillage();
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(tillage, "TNAME", tillage.TNAME);
     }
     
     /**
@@ -46,15 +49,22 @@ public class TillageFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.tillageList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));
+                txtDescription.setText(getDescription(name));
                 break;
             }
-        }        
+        }
+        
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -73,7 +83,7 @@ public class TillageFrame extends IXInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -128,8 +138,11 @@ public class TillageFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +151,11 @@ public class TillageFrame extends IXInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,16 +163,10 @@ public class TillageFrame extends IXInternalFrame {
                         .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bnAddLayer)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bnDeleteLayer))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +174,7 @@ public class TillageFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +185,7 @@ public class TillageFrame extends IXInternalFrame {
                     .addComponent(bnDeleteLayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,6 +260,12 @@ public class TillageFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_jXTable1MouseClicked
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? tillage.TNAME != null : !txtDescription.getText().equals(tillage.TNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Tillage", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
     private Vector SetRow(TillageApplication tilApp) {
 
         Vector vector = new Vector();
@@ -296,8 +314,8 @@ public class TillageFrame extends IXInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private xbuild.Components.XTextField txtDescription;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

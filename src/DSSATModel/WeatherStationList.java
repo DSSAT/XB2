@@ -34,6 +34,18 @@ public class WeatherStationList {
         return weather;
     }
     
+    public static WeatherStation GetAt(String Code, WstaType type)
+    {
+        WeatherStation weather = null;
+        for(WeatherStation w : wStation) {
+           if(w.Code.equalsIgnoreCase(Code) && w.Type == type){
+               weather = w;
+               break;
+           } 
+        }
+        return weather;
+    }
+    
     public static void Clear(){
         wStation.clear();
     }
@@ -50,12 +62,14 @@ public class WeatherStationList {
         return weather;
     }
     
-    public static List<WeatherStation> GetAll()
+    public static List<WeatherStation> GetAll(WstaType type)
     {
         List<WeatherStation> weatherList = new ArrayList<>();
         
         for(Object object : wStation.toArray()){
-            weatherList.add((WeatherStation) object);
+            WeatherStation wsta = (WeatherStation) object;
+            if(wsta.Type == type)
+                weatherList.add(wsta);
         }
         
         Collections.sort(weatherList, (WeatherStation w1, WeatherStation w2) -> w1.StationName.compareTo(w2.StationName));

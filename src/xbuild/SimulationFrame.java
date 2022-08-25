@@ -18,6 +18,7 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.Locale;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 import xbuild.Components.XColumn;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -35,6 +37,7 @@ public class SimulationFrame extends IXInternalFrame {
     private Simulation sim;
 
     private Boolean bUpdate = false;
+    private Integer level;
 
     /**
      * Creates new form SimulationFrame
@@ -44,7 +47,7 @@ public class SimulationFrame extends IXInternalFrame {
      */
     
     public SimulationFrame (String nodeName){
-        Integer level = 0;
+        level = 0;
         for (IModelXBase s : FileX.simulationList.GetAll()) {
             level++;
             if(getLevel(nodeName) == level){
@@ -60,7 +63,7 @@ public class SimulationFrame extends IXInternalFrame {
         bUpdate = true;
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(sim, "SNAME", sim.SNAME);
     }
     
     /**
@@ -69,16 +72,22 @@ public class SimulationFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.simulationList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));                
+                txtDescription.setText(getDescription(name));                
                 break;
             }
         }
         
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -315,7 +324,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup17 = new org.jdesktop.swingx.JXRadioGroup();
         snFROPT = new xbuild.Components.XSpinner();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -1799,8 +1808,11 @@ public class SimulationFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1813,7 +1825,7 @@ public class SimulationFrame extends IXInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1822,7 +1834,7 @@ public class SimulationFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1884,7 +1896,7 @@ public class SimulationFrame extends IXInternalFrame {
             }
         });
 
-        groupWeather.Init(sim, "WTHER", sim.WTHER, SimulationMethodWeather.GetAll(), RadioButtonAlignment.Horizontal, jXRadioGroup2);
+        groupWeather.Init(sim, "WTHER", sim.WTHER, SimulationMethodWeather.GetAll(FileX.wstaType), RadioButtonAlignment.Horizontal, jXRadioGroup2);
         groupInitSoil.Init(sim, "INCON", sim.INCON, SimulationMethodInitial.GetAll(), RadioButtonAlignment.Horizontal, jXRadioGroup3);
         groupEvap.Init(sim, "EVAPO", sim.EVAPO, SimulationMethodEvap.GetAll(), RadioButtonAlignment.Horizontal, jXRadioGroup4);
         groupInfiltration.Init(sim, "INFIL", sim.INFIL, SimulationMethodInfil.GetAll(), RadioButtonAlignment.Horizontal, jXRadioGroup5);
@@ -2378,6 +2390,12 @@ public class SimulationFrame extends IXInternalFrame {
         });
     }//GEN-LAST:event_bnNCODEActionPerformed
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? sim.SNAME != null : !txtDescription.getText().equals(sim.SNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Simulation Controls", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnIMETH;
     private javax.swing.JButton bnNCODE;
@@ -2536,7 +2554,6 @@ public class SimulationFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit;
     private org.jdesktop.swingx.JXLabel lbThreshold;
     private org.jdesktop.swingx.JXLabel lbThresholdUnit;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private org.jdesktop.swingx.JXPanel panelDate;
     private org.jdesktop.swingx.JXPanel panelSoilTemperature;
@@ -2580,6 +2597,7 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XSpinner snFROPT;
     private xbuild.Components.XSpinner snNREPS;
     private xbuild.Components.XSpinner snNYERS;
+    private xbuild.Components.XTextField txtDescription;
     private xbuild.Components.XFormattedTextField txtHFRST;
     private xbuild.Components.XFormattedTextField txtHPCNP;
     private xbuild.Components.XFormattedTextField txtHPCNR;

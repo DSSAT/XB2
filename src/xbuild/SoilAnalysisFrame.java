@@ -7,12 +7,14 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -21,7 +23,7 @@ import xbuild.Components.XColumn;
 public class SoilAnalysisFrame extends IXInternalFrame {
 
     private SoilAnalysis soilAnalysis;
-    
+    private Integer level;
     private int selectedRowIndex = -1;
     /**
      * Creates new form SoilAnalysisFrame
@@ -30,7 +32,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     public SoilAnalysisFrame(String nodeName) {
         initComponents();
         
-        Integer level = 0;
+        level = 0;
         for(IModelXBase s: FileX.soilAnalysis.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
@@ -53,7 +55,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         }
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(soilAnalysis, "SANAME", soilAnalysis.SANAME);
     }
     
     /**
@@ -62,15 +64,22 @@ public class SoilAnalysisFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.soilAnalysis.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));                
+                txtDescription.setText(getDescription(name));                
                 break;
             }
-        }        
+        }
+        
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -97,7 +106,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable2 = new org.jdesktop.swingx.JXTable();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -234,8 +243,11 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,13 +261,13 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                         .addContainerGap()
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(226, 226, 226)
                         .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +275,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +284,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,6 +367,12 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_jXTable2MouseClicked
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? soilAnalysis.SANAME != null : !txtDescription.getText().equals(soilAnalysis.SANAME)){
+            l.myAction(new UpdateLevelEvent(this, "Soil Analysis", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
     private Object[] SetRow(SoilAnalysisLayer soilLayer) {
 
         Object[] vector = new Object[]{
@@ -387,7 +405,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXTable jXTable2;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }

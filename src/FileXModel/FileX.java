@@ -1,5 +1,7 @@
 package FileXModel;
 
+import DSSATModel.WstaType;
+
 /**
  *
  * @author Jazzy
@@ -20,6 +22,8 @@ public class FileX {
     public static ChemicalList chemicalList;
     public static SimulationList simulationList;
     public static TreatmentList treaments;
+    public static WstaType wstaType;
+    
     private static boolean opened = false;
     private static String fileName;
     

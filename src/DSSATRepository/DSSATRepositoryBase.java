@@ -13,6 +13,17 @@ public abstract class DSSATRepositoryBase {
         this.rootPath = rootPath;
     }
     public ArrayList<String> Parse() throws Exception {
-        return new ArrayList<String>();
+        return new ArrayList<>();
+    }
+    
+    /**
+     *
+     * @param subFolder
+     * @param extension
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<String> Parse(String subFolder, String extension) throws Exception {
+        return new ArrayList<>();
     }
 }

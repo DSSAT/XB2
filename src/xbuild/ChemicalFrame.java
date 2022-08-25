@@ -6,12 +6,14 @@ import FileXModel.Chemical;
 import FileXModel.ChemicalApplication;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -21,6 +23,7 @@ public class ChemicalFrame extends IXInternalFrame {
 
     protected Chemical chem;
     private int selectedRowIndex = -1;
+    private Integer level;
     /**
      * Creates new form ChemicalFrame
      * @param nodeName
@@ -28,7 +31,7 @@ public class ChemicalFrame extends IXInternalFrame {
     public ChemicalFrame(String nodeName) {
         initComponents();
         
-        Integer level = 0;
+        level = 0;
         for(IModelXBase ch : FileX.chemicalList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
@@ -40,7 +43,7 @@ public class ChemicalFrame extends IXInternalFrame {
         LoadChemical();
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(chem, "CHNAME", chem.CHNAME);
     }
     
     /**
@@ -49,15 +52,22 @@ public class ChemicalFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
         Integer level = 0;
         for (IModelXBase f : FileX.chemicalList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));
+                txtDescription.setText(getDescription(name));
                 break;
             }
-        }        
+        }
+        
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -76,7 +86,7 @@ public class ChemicalFrame extends IXInternalFrame {
         jXTable1 = new org.jdesktop.swingx.JXTable();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -131,8 +141,11 @@ public class ChemicalFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,20 +157,21 @@ public class ChemicalFrame extends IXInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
                                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE))
-                            .addComponent(bnAddApplication))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bnAddApplication)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnDeleteApplication))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(bnDeleteApplication)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,7 +180,7 @@ public class ChemicalFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +191,7 @@ public class ChemicalFrame extends IXInternalFrame {
                     .addComponent(bnDeleteApplication))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,6 +266,12 @@ public class ChemicalFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_jXTable1MouseClicked
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? chem.CHNAME != null : !txtDescription.getText().equals(chem.CHNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Chemical Applications", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
     private void LoadChemical() {
         txtYear.setText(FileX.general.Year);
 
@@ -320,8 +340,8 @@ public class ChemicalFrame extends IXInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private xbuild.Components.XTextField txtDescription;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

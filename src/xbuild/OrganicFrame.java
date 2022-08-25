@@ -6,6 +6,7 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Organic;
 import FileXModel.OrganicApplication;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -13,6 +14,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -22,13 +24,14 @@ public class OrganicFrame extends IXInternalFrame {
 
     protected Organic organic;
     private int selectedRowIndex = -1;
+    private Integer level;
     /**
      * Creates new form OrganicFrame
      */
     public OrganicFrame(String nodeName) {
         initComponents();
         
-        Integer level = 0;
+        level = 0;
         for(IModelXBase org : FileX.organicList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
@@ -40,7 +43,7 @@ public class OrganicFrame extends IXInternalFrame {
         LoadOrganic();
         
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(organic, "RENAME", organic.RENAME);
     }
     
     /**
@@ -49,15 +52,22 @@ public class OrganicFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.organicList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));
+                txtDescription.setText(getDescription(name));
                 break;
             }
-        }        
+        }
+        
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -79,7 +89,7 @@ public class OrganicFrame extends IXInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -139,8 +149,11 @@ public class OrganicFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,8 +163,8 @@ public class OrganicFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(656, Short.MAX_VALUE))
+                .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(134, 134, 134))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -178,8 +191,7 @@ public class OrganicFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -197,7 +209,7 @@ public class OrganicFrame extends IXInternalFrame {
                             .addComponent(bnAddLayer))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +299,12 @@ public class OrganicFrame extends IXInternalFrame {
             }
         }
     }//GEN-LAST:event_jXTable1MouseClicked
+
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? organic.RENAME != null : !txtDescription.getText().equals(organic.RENAME)){
+            l.myAction(new UpdateLevelEvent(this, "Organic Amendments", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
 
     private Vector SetRow(OrganicApplication organicApp) {
 
@@ -384,10 +402,10 @@ public class OrganicFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JRadioButton rdDaysAfterPlanting;
     private javax.swing.JRadioButton rdReportedDates;
+    private xbuild.Components.XTextField txtDescription;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

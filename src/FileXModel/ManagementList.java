@@ -67,6 +67,54 @@ public abstract class ManagementList {
         return level;
     }
     
+    public Boolean MoveUp(int level){
+        if(level > 0 && GetSize() > 1){
+//            ArrayList<IModelXBase> list = new ArrayList<>();
+//            for (int i = 0; i < level - 1; i++) {
+//                list.add(modelList.get(i));
+//            }
+//            list.add(modelList.get(level));
+//            list.add(modelList.get(level - 1));
+//
+//            for (int i = level + 1; i < GetSize(); i++) {
+//                list.add(modelList.get(i));
+//            }
+//            
+//            modelList = list;
+
+            IModelXBase tmp = modelList.get(level);
+            IModelXBase tmp2 = modelList.get(level - 1);
+            modelList.set(level, tmp2);
+            modelList.set(level - 1, tmp);
+            return true;
+        }
+        return false;
+    }
+    
+    public Boolean MoveDown(int level){
+        if(level < GetSize() - 1 && GetSize() > 1){
+//            ArrayList<IModelXBase> list = new ArrayList<>();
+//            for (int i = 0; i < level - 1; i++) {
+//                list.add(modelList.get(i));
+//            }
+//            list.add(modelList.get(level));
+//            list.add(modelList.get(level - 1));
+//
+//            for (int i = level + 1; i < GetSize(); i++) {
+//                list.add(modelList.get(i));
+//            }
+//            
+//            modelList = list;
+
+            IModelXBase tmp = modelList.get(level);
+            IModelXBase tmp2 = modelList.get(level + 1);
+            modelList.set(level, tmp2);
+            modelList.set(level + 1, tmp);
+            return true;
+        }
+        return false;
+    }
+    
     public String GetCopyName(String name){
         int max = 0;
         for(IModelXBase model : GetAll()){

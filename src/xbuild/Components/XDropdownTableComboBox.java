@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -75,6 +77,9 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
     public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField) {
         //this.model = model;
         //this.fieldName = fieldName;
+        DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
+        cbModel.removeAllElements();
+        
         this.value = value;
         this.codeField = codeField;
         
@@ -91,7 +96,8 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         DefaultTableModel dropDownModel = getDataModel();
 
         table.setModel(dropDownModel);
-
+        table.setAutoCreateRowSorter(true);
+        
         for (int c = 0; c < table.getColumnCount(); c++) {
             table.getColumnModel().getColumn(c).setPreferredWidth(columns[c].getWidth());
         }
@@ -100,9 +106,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
         setEditable(true);
 
-        AutoCompleteDecorator.decorate(this);
-        
-        setSelectedIndex(-1);
+        AutoCompleteDecorator.decorate(this);       
         
         int index = -1;
         setSelectedIndex(index);
@@ -132,7 +136,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 }
             });
         }
-        
+              
         for(ItemListener li : listens)
             this.addItemListener(li);
     }

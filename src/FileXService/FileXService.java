@@ -1,6 +1,7 @@
 package FileXService;
 
 import DSSATModel.Setup;
+import DSSATModel.WstaType;
 import FileXModel.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -33,6 +34,21 @@ public class FileXService {
         HarvestService.Read(fileName);
         FileX.simulationList = SimulationControlService.Read(fileName.getAbsolutePath());
         FileX.SetAbsoluteFileName(fileName.getAbsolutePath());
+        
+        if(FileX.simulationList != null && FileX.simulationList.GetSize() > 0){
+            Simulation s = (Simulation)FileX.simulationList.GetAt(0);
+            switch (s.WTHER) {
+                case "M":
+                    FileX.wstaType = WstaType.WTH;
+                    break;
+                case "S":
+                    FileX.wstaType = WstaType.CLI;
+                    break;
+                case "W":
+                    FileX.wstaType = WstaType.WTG;
+                    break;
+            }
+        }
         
         new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
     }

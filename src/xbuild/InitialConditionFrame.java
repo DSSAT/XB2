@@ -5,6 +5,7 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -21,14 +23,16 @@ public class InitialConditionFrame extends IXInternalFrame {
 
     private InitialCondition init;
     private int selectedRowIndex = -1;
+    private Integer level;
     /**
      * Creates new form InitialConditionFrame
+     * @param nodeName
      */
     public InitialConditionFrame(String nodeName) {
         initComponents();
         
-        InitialCondition init = null;
-        Integer level = 0;
+        init = null;
+        level = 0;
         for(IModelXBase intTemp : FileX.initialList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
@@ -36,8 +40,6 @@ public class InitialConditionFrame extends IXInternalFrame {
                 break;
             }            
         }
-
-        this.init = init;
 
         dpICDAT.Init(init, "ICDAT", init.ICDAT);
 
@@ -61,7 +63,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         }
 
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
+        txtDescription.Init(init, "ICNAME", init.ICNAME);
     }
     
     /**
@@ -70,16 +72,22 @@ public class InitialConditionFrame extends IXInternalFrame {
      */
     @Override
     public void updatePanelName(String name){
-        Integer level = 0;
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.initialList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));
+                txtDescription.setText(getDescription(name));
                 break;
             }
         }
         
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
     /**
@@ -137,7 +145,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         bnDeleteLayer = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -512,8 +520,11 @@ public class InitialConditionFrame extends IXInternalFrame {
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -526,7 +537,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -535,10 +546,10 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
@@ -614,6 +625,12 @@ public class InitialConditionFrame extends IXInternalFrame {
         init.RemoveAt(nRow);
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Initial Conditions", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
@@ -650,11 +667,11 @@ public class InitialConditionFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel5;
     private org.jdesktop.swingx.JXPanel jXPanel6;
     private org.jdesktop.swingx.JXPanel jXPanel7;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private xbuild.Components.XSpinner snICRE;
     private xbuild.Components.XSpinner snICRN;
     private org.jdesktop.swingx.JXTable tbProfile;
+    private xbuild.Components.XTextField txtDescription;
     private xbuild.Components.XFormattedTextField txtICND;
     private xbuild.Components.XFormattedTextField txtICREN;
     private xbuild.Components.XFormattedTextField txtICREP;

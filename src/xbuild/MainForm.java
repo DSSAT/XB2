@@ -17,6 +17,7 @@ import FileXModel.FileX;
 import DSSATModel.DssatProfile;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
+import FileXModel.HarvestList;
 import FileXModel.ManagementList;
 import FileXModel.IModelXBase;
 import java.awt.*;
@@ -149,6 +150,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuSimItemCopy = new javax.swing.JMenuItem();
         jPopupMenuSimItemRename = new javax.swing.JMenuItem();
         jPopupMenuSimItemRemove = new javax.swing.JMenuItem();
+        jPopupMenuSimItemMoveUp = new javax.swing.JMenuItem();
+        jPopupMenuSimItemMoveDown = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTree1 = new org.jdesktop.swingx.JXTree();
@@ -203,6 +206,24 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
         jPopupMenuItem.add(jPopupMenuSimItemRemove);
+
+        jPopupMenuSimItemMoveUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Up.png"))); // NOI18N
+        jPopupMenuSimItemMoveUp.setText("Move Up");
+        jPopupMenuSimItemMoveUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPopupMenuSimItemMoveUpActionPerformed(evt);
+            }
+        });
+        jPopupMenuItem.add(jPopupMenuSimItemMoveUp);
+
+        jPopupMenuSimItemMoveDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Down.png"))); // NOI18N
+        jPopupMenuSimItemMoveDown.setText("Move Down");
+        jPopupMenuSimItemMoveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPopupMenuSimItemMoveDownActionPerformed(evt);
+            }
+        });
+        jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -777,6 +798,50 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSaveAsFileActionPerformed
 
+    private void jPopupMenuSimItemMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemMoveUpActionPerformed
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
+        
+        ManagementList modelList = GetManagementList(parentNode.toString());
+        int level = modelList.GetLevel(node.toString().split(":")[1].trim());
+        
+        if(modelList.MoveUp(level)){
+            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+            node.setUserObject(newName);
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            currentFrame.updatePanelName(newName);
+            
+            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level - 1);
+            String newUpName = "Level " + level + ": " + modelList.GetAt(level - 1).GetName();
+            nodeUp.setUserObject(newUpName);
+            
+            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+            model.reload(parentNode);
+        }
+    }//GEN-LAST:event_jPopupMenuSimItemMoveUpActionPerformed
+
+    private void jPopupMenuSimItemMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemMoveDownActionPerformed
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
+        
+        ManagementList modelList = GetManagementList(parentNode.toString());
+        int level = modelList.GetLevel(node.toString().split(":")[1].trim());
+        
+        if(modelList.MoveDown(level)){
+            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+            node.setUserObject(newName);
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            currentFrame.updatePanelName(newName);
+            
+            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level + 1);
+            String newUpName = "Level " + (level + 2) + ": " + modelList.GetAt(level + 1).GetName();
+            nodeUp.setUserObject(newUpName);
+            
+            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+            model.reload(parentNode);
+        }
+    }//GEN-LAST:event_jPopupMenuSimItemMoveDownActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
@@ -796,6 +861,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private javax.swing.JPopupMenu jPopupMenuAdd;
     private javax.swing.JPopupMenu jPopupMenuItem;
     private javax.swing.JMenuItem jPopupMenuSimItemCopy;
+    private javax.swing.JMenuItem jPopupMenuSimItemMoveDown;
+    private javax.swing.JMenuItem jPopupMenuSimItemMoveUp;
     private javax.swing.JMenuItem jPopupMenuSimItemRemove;
     private javax.swing.JMenuItem jPopupMenuSimItemRename;
     private javax.swing.JScrollPane jScrollPane1;
@@ -925,7 +992,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
 
         return null;
-    }
+    }   
 
     private void ResetTree() {
         jXTree1.removeAll();

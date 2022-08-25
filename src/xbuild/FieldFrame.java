@@ -3,12 +3,11 @@
  * and open the template in the editor.
  */
 
-/*
+ /*
  * FieldPanel.java
  *
  * Created on Mar 14, 2010, 2:35:42 PM
  */
-
 package xbuild;
 
 import DSSATModel.DrainageList;
@@ -19,13 +18,17 @@ import DSSATModel.SoilList;
 import DSSATModel.SoilTextureList;
 import DSSATModel.WeatherStation;
 import DSSATModel.WeatherStationList;
+import DSSATModel.WstaType;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
+import java.awt.EventQueue;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.List;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -33,45 +36,52 @@ import xbuild.Components.XColumn;
  */
 public class FieldFrame extends IXInternalFrame {
 
-    /** Creates new form FieldPanel
-     * @param nodeName */
+    private FieldDetail field;
+    private Integer level;
+
+    /**
+     * Creates new form FieldPanel
+     *
+     * @param nodeName
+     */
     public FieldFrame(String nodeName) {
-        FieldDetail field = null;
-        Integer level = 0;
+        field = null;
+        level = 0;
         for (IModelXBase f : FileX.fieldList.GetAll()) {
             level++;
-            if(getLevel(nodeName) == level){
-                field = (FieldDetail)f;
+            if (getLevel(nodeName) == level) {
+                field = (FieldDetail) f;
                 break;
             }
         }
-        if(field == null)
+        if (field == null) {
             field = new FieldDetail(nodeName);
+        }
 
         initComponents();
 
         txtID_FIELD.setDocument(new LimitDocument(8));
 
-        cbWSTA.setInit(null, "WSTA", field.WSTA, WeatherStationList.GetAll(), new XColumn[] { new  XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100)}, "Code");        
-        cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
-        
-        cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 400), new XColumn("Code", "Code", 100)}, "Code");        
+        cbWSTA.setInit(null, "WSTA", field.WSTA, WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+        //cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+
+        cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 400), new XColumn("Code", "Code", 100)}, "Code");
         cbSoilCode.setInit(field, "ID_SOIL", field.ID_SOIL, loadSoilCode(field.ID_SOIL));
-        
-        cbSLTX.setInit(field, "SLTX", field.SLTX, SoilTextureList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
-        cbFLDT.setInit(field, "FLDT", field.FLDT, DrainageList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
-                
+
+        cbSLTX.setInit(field, "SLTX", field.SLTX, SoilTextureList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        cbFLDT.setInit(field, "FLDT", field.FLDT, DrainageList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+
         lblLevel.setText("Level " + level.toString());
-        lblDescription.setText(getDescription(nodeName));
-        
+        txtDescription.Init(field, "FLNAME", field.FLNAME);
+
         txtID_FIELD.Init(field, "ID_FIELD", field.ID_FIELD);
-        
+
         txtSLDP.Init(field, "SLDP", field.SLDP);
         txtFLST.Init(field, "FLST", field.FLST);
-        
+
         txtFLDD.Init(field, "FLDD", field.FLDD);
         txtFLDS.Init(field, "FLDS", field.FLDS);
-        
+
         txtXCRD.Init(field, "XCRD", field.XCRD);
         txtYCRD.Init(field, "YCRD", field.YCRD);
         txtELEV.Init(field, "ELEV", field.ELEV);
@@ -83,32 +93,54 @@ public class FieldFrame extends IXInternalFrame {
         txtFLSA.Init(field, "FLSA", field.FLSA);
         txtSLAS.Init(field, "SLAS", field.SLAS);
         txtFHDUR.Init(field, "FHDUR", field.FHDUR);
+
+        cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 300), new XColumn("Code", "Code", 100)}, "Code");
+
+        switch (FileX.wstaType) {
+            case WTH:
+                rdWth.setSelected(true);
+                break;
+            case WTG:
+                rdGen.setSelected(true);
+                break;
+            case CLI:
+                rdClimate.setSelected(true);
+                break;
+        }
         
-        cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 300), new XColumn("Code", "Code", 100)}, "Code");
+        EventQueue.invokeLater(() -> {            
+            cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+        });
     }
-   
+
     /**
      *
      * @param name
      */
     @Override
-    public void updatePanelName(String name){
-        Integer level = 0;
+    public void updatePanelName(String name) {
+        FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
+        for(FocusListener li : listens)
+            txtDescription.removeFocusListener(li);
+        
+        level = 0;
         for (IModelXBase f : FileX.fieldList.GetAll()) {
             level++;
-            if(getLevel(name) == level){                
+            if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
-                lblDescription.setText(getDescription(name));                
+                txtDescription.setText(getDescription(name));
                 break;
             }
         }
-        
+
+        for(FocusListener li : listens)
+            this.addFocusListener(li);
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -116,6 +148,7 @@ public class FieldFrame extends IXInternalFrame {
 
         popupMenu1 = new java.awt.PopupMenu();
         menuItem1 = new java.awt.MenuItem();
+        wstaTypeGroup = new javax.swing.ButtonGroup();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
@@ -164,6 +197,9 @@ public class FieldFrame extends IXInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         cbWSTA = new xbuild.Components.XDropdownTableComboBox();
         cbWSTACode = new xbuild.Components.XComboBox();
+        rdWth = new javax.swing.JRadioButton();
+        rdGen = new javax.swing.JRadioButton();
+        rdClimate = new javax.swing.JRadioButton();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -177,7 +213,7 @@ public class FieldFrame extends IXInternalFrame {
         cbSoilCode = new xbuild.Components.XComboBox();
         cbSLTX = new xbuild.Components.XDropdownTableComboBox();
         lblLevel = new org.jdesktop.swingx.JXLabel();
-        lblDescription = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
 
         popupMenu1.setLabel("popupMenu1");
         popupMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -470,10 +506,33 @@ public class FieldFrame extends IXInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 0, 51));
         jLabel6.setText("*");
 
-        cbWSTA.setEditable(true);
         cbWSTA.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbWSTAItemStateChanged(evt);
+            }
+        });
+
+        wstaTypeGroup.add(rdWth);
+        rdWth.setLabel("WTH");
+        rdWth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdWthActionPerformed(evt);
+            }
+        });
+
+        wstaTypeGroup.add(rdGen);
+        rdGen.setLabel("Gen");
+        rdGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdWthActionPerformed(evt);
+            }
+        });
+
+        wstaTypeGroup.add(rdClimate);
+        rdClimate.setLabel("Climate");
+        rdClimate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdWthActionPerformed(evt);
             }
         });
 
@@ -481,21 +540,35 @@ public class FieldFrame extends IXInternalFrame {
         jXPanel8.setLayout(jXPanel8Layout);
         jXPanel8Layout.setHorizontalGroup(
             jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel8Layout.createSequentialGroup()
+            .addGroup(jXPanel8Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jXLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbWSTACode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel8Layout.createSequentialGroup()
+                        .addComponent(rdWth)
+                        .addGap(45, 45, 45)
+                        .addComponent(rdGen)
+                        .addGap(33, 33, 33)
+                        .addComponent(rdClimate)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jXPanel8Layout.createSequentialGroup()
+                        .addComponent(cbWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbWSTACode, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jXPanel8Layout.setVerticalGroup(
             jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdWth)
+                    .addComponent(rdGen)
+                    .addComponent(rdClimate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
@@ -613,30 +686,33 @@ public class FieldFrame extends IXInternalFrame {
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
+                .addGap(28, 28, 28))
         );
 
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        lblDescription.setText("Description");
-        lblDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 22, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,12 +720,12 @@ public class FieldFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -679,24 +755,49 @@ public class FieldFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_cbSoilItemStateChanged
 
-    private List<String>loadWSTACode(String wCode){
-        ArrayList<String> items = new ArrayList<>();        
-        
-        WeatherStation wstaSelected = WeatherStationList.GetAt(wCode);
-        if (wstaSelected != null) {
-            for (WeatherStation wsta : WeatherStationList.GetAll()) {
+    private void rdWthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdWthActionPerformed
+       
+            cbWSTA.setSelectedIndex(-1);
+            cbWSTACode.setSelectedIndex(-1);
+
+            if (rdWth.isSelected()) {
+                FileX.wstaType = WstaType.WTH;
+            } else if (rdGen.isSelected()) {
+                FileX.wstaType = WstaType.WTG;
+            } else if (rdClimate.isSelected()) {
+                FileX.wstaType = WstaType.CLI;
+            }
+            
+            cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+            cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
+    }//GEN-LAST:event_rdWthActionPerformed
+
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if(txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)){
+            l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
+
+    private List<String> loadWSTACode(String wCode) {
+        ArrayList<String> items = new ArrayList<>();
+
+        WeatherStation wstaSelected = WeatherStationList.GetAt(wCode, FileX.wstaType);
+
+
+        if (wstaSelected != null && FileX.wstaType != null) {
+            for (WeatherStation wsta : WeatherStationList.GetAll(FileX.wstaType)) {
                 if (wstaSelected.StationName.equals(wsta.StationName)) {
                     items.add(wsta.Code);
                 }
             }
         }
-        
+
         return items;
     }
-    
-    private List<String>loadSoilCode(String sCode){
-        ArrayList<String> items = new ArrayList<>();        
-        
+
+    private List<String> loadSoilCode(String sCode) {
+        ArrayList<String> items = new ArrayList<>();
+
         Soil soilSelected = SoilList.GetAt(sCode);
         if (soilSelected != null) {
             for (Soil s : SoilList.GetAll()) {
@@ -705,7 +806,7 @@ public class FieldFrame extends IXInternalFrame {
                 }
             }
         }
-        
+
         return items;
     }
 
@@ -755,11 +856,14 @@ public class FieldFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel6;
     private org.jdesktop.swingx.JXPanel jXPanel7;
     private org.jdesktop.swingx.JXPanel jXPanel8;
-    private org.jdesktop.swingx.JXLabel lblDescription;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private java.awt.MenuItem menuItem1;
     private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JRadioButton rdClimate;
+    private javax.swing.JRadioButton rdGen;
+    private javax.swing.JRadioButton rdWth;
     private xbuild.Components.XFormattedTextField txtAREA;
+    private xbuild.Components.XTextField txtDescription;
     private xbuild.Components.XFormattedTextField txtELEV;
     private xbuild.Components.XFormattedTextField txtFHDUR;
     private xbuild.Components.XFormattedTextField txtFLDD;
@@ -774,5 +878,6 @@ public class FieldFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtSLEN;
     private xbuild.Components.XFormattedTextField txtXCRD;
     private xbuild.Components.XFormattedTextField txtYCRD;
+    private javax.swing.ButtonGroup wstaTypeGroup;
     // End of variables declaration//GEN-END:variables
 }

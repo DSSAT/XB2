@@ -13,24 +13,24 @@ import java.util.ArrayList;
  */
 public class SimulationMethodWeather {
 
-    private static ArrayList<String[]> sim = new ArrayList<>();
+    private static ArrayList<String[]> sims = new ArrayList<>();
 
     public static void Clear() {
-        sim.clear();
+        sims.clear();
     }
 
     public static void AddNew(String Code, String Description){
-        sim.add(new String[] {Code, Description});
+        sims.add(new String[] {Code, Description});
     }
 
     public static int GetSize()
     {
-        return sim.size();
+        return sims.size();
     }
 
     public static String[] GetAt(String Code) {
 
-        for (String[] s : sim) {
+        for (String[] s : sims) {
             if (s[0].equalsIgnoreCase(Code)) {
                 return s;
             }
@@ -40,11 +40,25 @@ public class SimulationMethodWeather {
 
     public static String[] GetAt(int n)
     {
-        return sim.get(n);
+        return sims.get(n);
     }
 
-    public static ArrayList<String[]> GetAll()
+    public static ArrayList<String[]> GetAll(WstaType wstaType)
     {
-        return sim;
+        ArrayList<String[]> simList = new ArrayList<>();
+        switch(wstaType){
+            case WTH:
+                simList.add(GetAt("M"));
+                break;
+            case WTG:
+                simList.add(GetAt("G"));
+                break;
+            case CLI:
+                simList.add(GetAt("W"));
+                simList.add(GetAt("S"));
+                break;
+        }
+        
+        return simList;
     }
 }

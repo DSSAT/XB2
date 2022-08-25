@@ -1,5 +1,7 @@
 package FileXService;
 
+import DSSATModel.WeatherStation;
+import DSSATModel.WeatherStationList;
 import Extensions.Utils;
 import FileXModel.FieldDetail;
 import static FileXModel.FileX.fieldList;

@@ -12,6 +12,9 @@ package DSSATModel;
 public class WeatherStation {
     public String Code;
     public String StationName;
+    public WstaType Type;
+    public int Begin;
+    public int Number;
     
     @Override
     public String toString(){

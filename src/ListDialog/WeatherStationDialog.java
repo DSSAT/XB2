@@ -143,10 +143,10 @@ public class WeatherStationDialog extends javax.swing.JDialog {
     private void AddDataToTable() {
         DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
 
-        WeatherStationList.GetAll().forEach(wsta ->
-        {
-            tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
-        });
+//        WeatherStationList.GetAll().forEach(wsta ->
+//        {
+//            tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
+//        });
     }
     
     public void Filtering(String filter){
@@ -154,11 +154,11 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         while(tbModel.getRowCount() > 0)
             tbModel.removeRow(0);        
         
-        WeatherStationList.GetAll().forEach(wsta ->
-        {
-            if(wsta.Code.toLowerCase().contains(filter.toLowerCase()) || wsta.StationName.toLowerCase().contains(filter.toLowerCase()))
-                tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
-        });
+//        WeatherStationList.GetAll().forEach(wsta ->
+//        {
+//            if(wsta.Code.toLowerCase().contains(filter.toLowerCase()) || wsta.StationName.toLowerCase().contains(filter.toLowerCase()))
+//                tbModel.addRow(new Object[] {wsta.Code, wsta.StationName});
+//        });
         
         jXTable1.setModel(tbModel);
     }

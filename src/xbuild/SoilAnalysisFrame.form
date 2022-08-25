@@ -34,7 +34,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDescription" min="-2" pref="533" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
@@ -43,7 +43,7 @@
                       <Component id="dpAnalysisDate" min="-2" pref="184" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="148" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +53,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLevel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDescription" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -64,7 +64,7 @@
               <Component id="jXPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel2" min="-2" pref="359" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -282,13 +282,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="org.jdesktop.swingx.JXLabel" name="lblDescription">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Description"/>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
-        </Property>
-      </Properties>
+    <Component class="xbuild.Components.XTextField" name="txtDescription">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDescriptionFocusLost"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
