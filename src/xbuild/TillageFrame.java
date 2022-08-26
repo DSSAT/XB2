@@ -206,7 +206,7 @@ public class TillageFrame extends IXInternalFrame {
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
         TillageApplication til = null;
-        if (selectedRowIndex > 0 && selectedRowIndex < tillage.GetSize()) {
+        if (selectedRowIndex >= 0 && selectedRowIndex < tillage.GetSize()) {
             TillageApplication tmp = tillage.GetApp(selectedRowIndex);
             til = tmp.Clone();
         } else {
@@ -223,9 +223,16 @@ public class TillageFrame extends IXInternalFrame {
                 if(tilApp != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
 
-                    model.addRow(SetRow(tilApp));
-
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
+                    
                     tillage.AddApp(tilApp);
+                    
+                    for (int i = 0; i < tillage.GetSize(); i++) {                        
+                        model.addRow(SetRow(tillage.GetApp(i)));
+                    }
+
+                    
                 }
                 tilDialog.SetNull();
             }

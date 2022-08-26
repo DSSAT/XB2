@@ -274,10 +274,14 @@ public class EnvironmentalFrame extends IXInternalFrame {
                 EnvironmentApplication envApp = appDialog.GetData();
                 if(envApp != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
-
-                    model.addRow(SetRow(envApp));
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
 
                     environment.AddApp(envApp);
+                    
+                    for (int i = 0; i < environment.GetSize(); i++) {                        
+                        model.addRow(SetRow(environment.GetApp(i)));
+                    }
                 }
                 appDialog.SetNull();
             }

@@ -241,10 +241,10 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                                 .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(bnDeleteLayer)
-                                    .addComponent(bnAddLayer)))))
+                                    .addComponent(bnAddLayer))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -269,10 +269,14 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                 IrrigationApplication irrigApp = appDialog.GetData();
                 if(irrigApp != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-
-                    model.addRow(SetRow(irrigApp));
-
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
+                    
                     irrig.AddApp(irrigApp);
+                    
+                    for (int i = 0; i < irrig.GetSize(); i++) {                        
+                        model.addRow(SetRow(irrig.GetApp(i)));
+                    }
                 }
                 appDialog.SetNull();
             }

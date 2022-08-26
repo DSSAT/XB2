@@ -25,6 +25,10 @@ public class OrganicApplication implements Cloneable {
     public Integer RDEP;
     public String RMET;
     
+    public Date getOrder(){
+        return RDATE;
+    }
+    
     public OrganicApplication Clone(){
         try {
             return (OrganicApplication) this.clone();

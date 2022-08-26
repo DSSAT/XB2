@@ -742,10 +742,6 @@ public class InitialConditionFrame extends IXInternalFrame {
             public void windowClosed(WindowEvent e) {
                 InitialConditionApplication initApp = dialog.GetData();
                 if(initApp != null){
-                    //DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
-
-                    //model.addRow(SetRow(initApp));
-                    tbProfile.removeAll();
                     init.AddApp(initApp);
                     
                     DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();

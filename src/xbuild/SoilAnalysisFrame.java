@@ -335,9 +335,14 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                 if(soilLayer != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
 
-                    model.addRow(SetRow(soilLayer));
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
 
                     soilAnalysis.AddLayer(soilLayer);
+                    
+                    for (int i = 0; i < soilAnalysis.GetSize(); i++) {                        
+                        model.addRow(SetRow(soilAnalysis.GetLayer(i)));
+                    }
                 }
                 dialog.SetNull();
             }

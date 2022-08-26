@@ -33,6 +33,10 @@ public class EnvironmentApplication implements Cloneable {
     public Float EWIND;
     public EnvironmentFactor EWIND_Fact;
     
+    public Date getOrder(){
+        return ODATE;
+    }
+    
     public EnvironmentApplication Clone(){
         try {
             return (EnvironmentApplication) this.clone();

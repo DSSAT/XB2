@@ -210,7 +210,7 @@ public class ChemicalFrame extends IXInternalFrame {
 
     private void bnAddApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddApplicationActionPerformed
         ChemicalApplication chemApp = null;
-        if (selectedRowIndex > 0 && selectedRowIndex < chem.GetSize()) {
+        if (selectedRowIndex >= 0 && selectedRowIndex < chem.GetSize()) {
             ChemicalApplication tmp = chem.GetApp(selectedRowIndex);
             chemApp = tmp.Clone();
         } else {
@@ -227,9 +227,14 @@ public class ChemicalFrame extends IXInternalFrame {
                 if(chemApp != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
 
-                    model.addRow(SetRow(chemApp));
-
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
+                    
                     chem.AddApp(chemApp);
+                    
+                    for (int i = 0; i < chem.GetSize(); i++) {                        
+                        model.addRow(SetRow(chem.GetApp(i)));
+                    }                    
                 }
                 chemDialog.SetNull();
             }

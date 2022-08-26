@@ -18,6 +18,10 @@ public class TillageApplication implements Cloneable {
     public String TIMPL;
     public Integer TDEP;
     
+    public Date getOrder(){
+        return TDATE;
+    }
+    
     public TillageApplication Clone(){
         try {
             return (TillageApplication) this.clone();

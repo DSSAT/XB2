@@ -22,6 +22,10 @@ public class HarvestApplication implements Cloneable {
     public Float HPC;
     public Float HBPC;
     
+    public Date getOrder(){
+        return HDATE;
+    }
+    
     public HarvestApplication Clone(){
         try {
             return (HarvestApplication) this.clone();

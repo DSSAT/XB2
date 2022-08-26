@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 /**
@@ -29,6 +31,7 @@ public class Fertilizer implements Cloneable, IModelXBase {
     public void AddApp(FertilizerApplication fer)
     {
         ferApps.add(fer);
+        Collections.sort(ferApps, Comparator.comparing(FertilizerApplication::getOrder));
     }
 
     public void RemoveAt(int level)

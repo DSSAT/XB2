@@ -26,53 +26,56 @@ public class OrganicFrame extends IXInternalFrame {
     protected Organic organic;
     private int selectedRowIndex = -1;
     private Integer level;
+
     /**
      * Creates new form OrganicFrame
      */
     public OrganicFrame(String nodeName) {
         initComponents();
-        
+
         level = 0;
-        for(IModelXBase org : FileX.organicList.GetAll()){
+        for (IModelXBase org : FileX.organicList.GetAll()) {
             level++;
-            if(getLevel(nodeName) == level){
-                this.organic = (Organic)org;
+            if (getLevel(nodeName) == level) {
+                this.organic = (Organic) org;
                 break;
             }
         }
-        
+
         LoadOrganic();
-        
+
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(organic, "RENAME", organic.RENAME);
-        
-        EventQueue.invokeLater(() -> {            
+
+        EventQueue.invokeLater(() -> {
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\Residue2.jpg");
         });
     }
-    
+
     /**
      *
      * @param name
      */
     @Override
-    public void updatePanelName(String name){
+    public void updatePanelName(String name) {
         FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             txtDescription.removeFocusListener(li);
-        
+        }
+
         level = 0;
         for (IModelXBase f : FileX.organicList.GetAll()) {
             level++;
-            if(getLevel(name) == level){                
+            if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
                 txtDescription.setText(getDescription(name));
                 break;
             }
         }
-        
-        for(FocusListener li : listens)
+
+        for (FocusListener li : listens) {
             this.addFocusListener(li);
+        }
     }
 
     /**
@@ -227,24 +230,21 @@ public class OrganicFrame extends IXInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdDaysAfterPlantingStateChanged
-        if(rdDaysAfterPlanting.isSelected())
-        {
+        if (rdDaysAfterPlanting.isSelected()) {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("Day");
-        }
-        else
-        {
+        } else {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("Date");
         }
-        DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
-        for(int i = 0;i < model.getRowCount();i++)
-        model.setValueAt("", i, 0);
+        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+            model.setValueAt("", i, 0);
     }//GEN-LAST:event_rdDaysAfterPlantingStateChanged
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
         OrganicApplication org = null;
-        if (selectedRowIndex > 0 && selectedRowIndex < organic.GetSize()) {
+        if (selectedRowIndex >= 0 && selectedRowIndex < organic.GetSize()) {
             OrganicApplication tmp = organic.GetApp(selectedRowIndex);
             org = tmp.Clone();
         } else {
@@ -258,12 +258,17 @@ public class OrganicFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 OrganicApplication organicApp = organicDialog.GetData();
-                if(organicApp != null){
+                if (organicApp != null) {
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-
-                    model.addRow(SetRow(organicApp));
-
+                    while (model.getRowCount() > 0) {
+                        model.removeRow(0);
+                    }
+                    
                     organic.AddApp(organicApp);
+                    
+                    for (int i = 0; i < organic.GetSize(); i++) {                        
+                        model.addRow(SetRow(organic.GetApp(i)));
+                    }
                 }
                 organicDialog.SetNull();
             }
@@ -279,8 +284,7 @@ public class OrganicFrame extends IXInternalFrame {
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        if(evt.getClickCount() == 2)
-        {
+        if (evt.getClickCount() == 2) {
             final OrganicDialog organicDialog = new OrganicDialog(null, true, rdDaysAfterPlanting.isSelected(), organic.GetApp(jXTable1.getSelectedRow()));
             organicDialog.show();
 
@@ -288,23 +292,22 @@ public class OrganicFrame extends IXInternalFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     OrganicApplication organicApp = organicDialog.GetData();
-                    if(organicApp != null){
+                    if (organicApp != null) {
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
                         Vector vector = SetRow(organicApp);
-                        for(int n = 0;n < vector.size();n++)
-                        model.setValueAt(vector.get(n), jXTable1.getSelectedRow(), n);
+                        for (int n = 0; n < vector.size(); n++) {
+                            model.setValueAt(vector.get(n), jXTable1.getSelectedRow(), n);
+                        }
                     }
                     organicDialog.SetNull();
                 }
             });
-        }
-        else {
+        } else {
             int nRow = jXTable1.getSelectedRow();
 
-            if(nRow != selectedRowIndex){
+            if (nRow != selectedRowIndex) {
                 selectedRowIndex = nRow;
-            }
-            else{
+            } else {
                 selectedRowIndex = -1;
                 jXTable1.clearSelection();
             }
@@ -312,7 +315,7 @@ public class OrganicFrame extends IXInternalFrame {
     }//GEN-LAST:event_jXTable1MouseClicked
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if(txtDescription.getText() == null ? organic.RENAME != null : !txtDescription.getText().equals(organic.RENAME)){
+        if (txtDescription.getText() == null ? organic.RENAME != null : !txtDescription.getText().equals(organic.RENAME)) {
             l.myAction(new UpdateLevelEvent(this, "Organic Amendments", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
@@ -320,76 +323,57 @@ public class OrganicFrame extends IXInternalFrame {
     private Vector SetRow(OrganicApplication organicApp) {
 
         Vector vector = new Vector();
-        try
-        {
+        try {
             Locale l = new Locale("en", "US");
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
             vector.addElement(df.format(organicApp.RDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             vector.add(organicApp.RDAY);
             rdDaysAfterPlanting.setSelected(true);
             rdReportedDates.setSelected(false);
         }
 
-        try
-        {
+        try {
             vector.add(ResiduesList.GetAt(organicApp.RCOD).Description);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RAMT);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RESN);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RESP);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RESK);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RINP);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(organicApp.RDEP);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
-        try
-        {
+        try {
             vector.add(FertilizerMethodList.GetAt(organicApp.RMET).Description);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             vector.add("");
         }
 
@@ -400,8 +384,7 @@ public class OrganicFrame extends IXInternalFrame {
         txtYear.setText(FileX.general.Year);
 
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-        for(int i = 0;i < organic.GetSize();i++)
-        {
+        for (int i = 0; i < organic.GetSize(); i++) {
             model.addRow(SetRow(organic.GetApp(i)));
         }
     }

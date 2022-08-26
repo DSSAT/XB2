@@ -23,6 +23,10 @@ public class SoilAnalysisLayer implements Cloneable {
     public Float SAKE;
     public Float SASC;
     
+    public Float getOrder(){
+        return SABL;
+    }
+    
     public SoilAnalysisLayer Clone(){
         try {
             return (SoilAnalysisLayer) this.clone();

@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -31,6 +33,7 @@ public class SoilAnalysis implements Cloneable, IModelXBase {
      public void AddLayer(SoilAnalysisLayer sLayer)
     {
         soilLayer.add(sLayer);
+        Collections.sort(soilLayer, Comparator.comparing(SoilAnalysisLayer::getOrder));
     }
 
     public void RemoveLayer(int level)

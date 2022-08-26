@@ -54,7 +54,7 @@ public class FileXService {
             for(IModelXBase x : FileX.fieldList.GetAll()){
                 FieldDetail f = (FieldDetail)x;
                 WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
-                if(w == null){
+                if(w == null && !f.WSTA.equals("-99")){
                     WeatherStation w1 = WeatherStationList.GetAt(f.WSTA.substring(0, 4), FileX.wstaType);
                     if(w1 != null)
                         f.WSTA = w1.Code;

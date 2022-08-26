@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -28,6 +30,7 @@ public class Tillage implements Cloneable, IModelXBase {
     public void AddApp(TillageApplication till)
     {
         tillAps.add(till);
+        Collections.sort(tillAps, Comparator.comparing(TillageApplication::getOrder));
     }
 
     public void RemoveAt(int level)

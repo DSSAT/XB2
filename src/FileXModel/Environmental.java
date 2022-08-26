@@ -27,6 +27,7 @@ public class Environmental implements Cloneable, IModelXBase {
     public void AddApp(EnvironmentApplication env)
     {
         envApps.add(env);
+        Collections.sort(envApps, Comparator.comparing(EnvironmentApplication::getOrder));
     }
 
     public void RemoveAt(int level)

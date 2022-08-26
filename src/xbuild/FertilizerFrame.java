@@ -254,7 +254,7 @@ public class FertilizerFrame extends IXInternalFrame {
 
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
         FertilizerApplication fer = null;
-        if (selectedRowIndex > 0 && selectedRowIndex < fertil.GetSize()) {
+        if (selectedRowIndex >= 0 && selectedRowIndex < fertil.GetSize()) {
             FertilizerApplication tmp = fertil.GetApp(selectedRowIndex);
             fer = tmp.Clone();
         } else {
@@ -270,10 +270,14 @@ public class FertilizerFrame extends IXInternalFrame {
                 FertilizerApplication ferApp = ferDialog.GetData();
                 if(ferApp != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-
-                    model.addRow(SetRow(ferApp));
-
+                    while(model.getRowCount() > 0)
+                        model.removeRow(0);
+                    
                     fertil.AddApp(ferApp);
+                    
+                    for (int i = 0; i < fertil.GetSize(); i++) {                        
+                        model.addRow(SetRow(fertil.GetApp(i)));
+                    }
                 }
                 ferDialog.SetNull();
             }

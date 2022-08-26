@@ -26,6 +26,10 @@ public class FertilizerApplication implements Cloneable {
     public Integer FAMO;
     public String FOCD;
     
+    public Date getOrder(){
+        return FDATE;
+    }
+    
     public FertilizerApplication Clone(){
         try {
             return (FertilizerApplication) this.clone();

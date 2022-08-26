@@ -1108,6 +1108,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         newNode.setUserObject(newName);
         targetNode.add(newNode);
 
+        jXTree1.expandAll();
+        
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
     }

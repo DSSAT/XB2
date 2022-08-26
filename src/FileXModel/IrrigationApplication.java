@@ -19,6 +19,10 @@ public class IrrigationApplication implements Cloneable {
     public String IROP;
     public Float IRVAL;
     
+    public Date getOrder(){
+        return IDATE;
+    }
+    
     public IrrigationApplication Clone(){
         try {
             return (IrrigationApplication) this.clone();

@@ -21,6 +21,10 @@ public class ChemicalApplication implements Cloneable {
     public Integer CHDEP;
     public String CHT;
     
+    public Date getOrder(){
+        return CDATE;
+    }
+    
     public ChemicalApplication Clone(){
         try {
             return (ChemicalApplication) this.clone();

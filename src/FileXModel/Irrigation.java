@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -35,6 +37,7 @@ public class Irrigation implements Cloneable, IModelXBase {
     public void AddApp(IrrigationApplication irrig)
     {
         irrigApps.add(irrig);
+        Collections.sort(irrigApps, Comparator.comparing(IrrigationApplication::getOrder));
     }
 
     public void RemoveAt(int level)

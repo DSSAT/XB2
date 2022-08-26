@@ -286,7 +286,7 @@ public class HarvestFrame extends IXInternalFrame {
 
     private void bnAddAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddAppActionPerformed
         HarvestApplication harvApp = null;
-        if (selectedRowIndex > 0 && selectedRowIndex < harvestApp.GetSize()) {
+        if (selectedRowIndex >= 0 && selectedRowIndex < harvestApp.GetSize()) {
             HarvestApplication tmp = harvestApp.GetApp(selectedRowIndex);
             harvApp = tmp.Clone();
         } else {
@@ -398,17 +398,21 @@ public class HarvestFrame extends IXInternalFrame {
                     }
                 }
             }
-        }
-        
+        }        
     }
     
     private void SetHarvest(HarvestApplication harvestApp){
         if (harvestApp != null) {
             DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
 
-            model.addRow(SetRow(harvestApp));
+            while(model.getRowCount() > 0)
+                model.removeRow(0);
 
             this.harvestApp.AddApp(harvestApp);
+
+            for (int i = 0; i < this.harvestApp.GetSize(); i++) {
+                model.addRow(SetRow(this.harvestApp.GetApp(i)));
+            }            
         }
     }
     

@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -28,6 +30,7 @@ public class Chemical implements Cloneable, IModelXBase {
     public void AddApp(ChemicalApplication chem)
     {
         chems.add(chem);
+        Collections.sort(chems, Comparator.comparing(ChemicalApplication::getOrder));
     }
 
     public void RemoveAt(int level)
