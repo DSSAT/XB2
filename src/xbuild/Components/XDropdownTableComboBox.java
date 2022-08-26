@@ -11,17 +11,23 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
+import javax.swing.event.RowSorterEvent;
+import javax.swing.event.RowSorterListener;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
@@ -40,7 +46,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
     //private String fieldName;
     private String value;
     private String codeField;
-    
+
     protected transient HighlightListener highlighter = new HighlightListener();
     protected JTable table = new JTable() {
         @Override
@@ -69,8 +75,8 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
     };
     protected List<E> list;
     protected XColumn[] columns;
-    
-    public XDropdownTableComboBox(){
+
+    public XDropdownTableComboBox() {
         super();
     }
 
@@ -79,71 +85,127 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         //this.fieldName = fieldName;
         DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
         cbModel.removeAllElements();
-        
+
         this.value = value;
         this.codeField = codeField;
-        
+
         this.list = list;
         this.columns = columns;
-        
 
         ItemListener[] listens = this.getItemListeners();
-        
-        for(ItemListener li : listens)
+
+        for (ItemListener li : listens) {
             this.removeItemListener(li);
-        
-        
+        }
+
         DefaultTableModel dropDownModel = getDataModel();
 
         table.setModel(dropDownModel);
         table.setAutoCreateRowSorter(true);
-        
+
+        table.getRowSorter().addRowSorterListener(new RowSorterListener() {
+            @Override
+            public void sorterChanged(RowSorterEvent e) {
+                List<? extends SortKey> rowSorter = table.getRowSorter().getSortKeys();
+                if (rowSorter != null) {
+
+                    if (rowSorter.get(0).getSortOrder() == SortOrder.ASCENDING) {
+                        orderByAscending(rowSorter.get(0).getColumn());
+                    } else {
+                        orderByDescending(rowSorter.get(0).getColumn());
+                    }
+                }
+            }
+        });
+
         for (int c = 0; c < table.getColumnCount(); c++) {
             table.getColumnModel().getColumn(c).setPreferredWidth(columns[c].getWidth());
         }
-        
+
         list.forEach(this::addItem);
 
         setEditable(true);
 
-        AutoCompleteDecorator.decorate(this);       
-        
+        AutoCompleteDecorator.decorate(this);
+
         int index = -1;
         setSelectedIndex(index);
         for (E dataModel : list) {
             index++;
-            try{
-                if(getFieldValue(dataModel, this.codeField) == null ? this.value == null : getFieldValue(dataModel, this.codeField).equals(this.value)){
+            try {
+                if (getFieldValue(dataModel, this.codeField) == null ? this.value == null : getFieldValue(dataModel, this.codeField).equals(this.value)) {
                     setSelectedIndex(index);
                     break;
                 }
-            }
-            catch(Exception ex){
-                
+            } catch (Exception ex) {
+
             }
         }
-        
+
         if (model != null) {
             this.addActionListener((java.awt.event.ActionEvent evt) -> {
                 E selectItem = (E) getSelectedItem();
 
-                try{
+                try {
                     String val = getFieldValue(selectItem, codeField);
                     UpdateComponent.updateModel(model, fieldName, val);
-                }
-                catch(Exception ex){
-                    
+                } catch (Exception ex) {
+
                 }
             });
         }
-              
-        for(ItemListener li : listens)
+
+        for (ItemListener li : listens) {
             this.addItemListener(li);
+        }
+    }
+
+    private void orderByAscending(int colIndex) {
+        XColumn col = columns[colIndex];
+        String fieldName = col.getFieldName();
+
+        DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
+        cbModel.removeAllElements();
+
+        Collator collator = Collator.getInstance(Locale.US);
+        collator.setStrength(Collator.PRIMARY);
+        Collections.sort(this.list, (E o1, E o2) -> {
+            try {
+                String oo1 = this.getFieldValue(o1, fieldName);
+                String oo2 = this.getFieldValue(o2, fieldName);
+                return oo1.compareToIgnoreCase(oo2);
+            } catch (Exception e) {
+            }
+            
+            return 0;
+        });
+
+        list.forEach(this::addItem);
+    }
+
+    private void orderByDescending(int colIndex) {
+        XColumn col = columns[colIndex];
+        String fieldName = col.getFieldName();
+        
+        DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
+        cbModel.removeAllElements();
+
+        Collections.sort(this.list, Collections.reverseOrder((E o1, E o2) -> {
+            try {
+                String oo1 = this.getFieldValue(o1, fieldName);
+                String oo2 = this.getFieldValue(o2, fieldName);
+                return oo1.compareToIgnoreCase(oo2);
+            } catch (Exception e) {
+            }
+            
+            return 0;
+        }));
+
+        list.forEach(this::addItem);
     }
 
     private DefaultTableModel getDataModel() {
         DefaultTableModel dropDownModel = new DefaultTableModel(null, getColumnNames()) {
-            
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -171,11 +233,10 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         List<String> modelValues = new ArrayList<>();
 
         for (XColumn c : columns) {
-            try{
+            try {
                 modelValues.add(getFieldValue(model, c.getFieldName()));
-            }
-            catch(Exception ex){
-                
+            } catch (Exception ex) {
+
             }
         }
 
@@ -187,10 +248,10 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             Field field = null;
             try {
                 field = model.getClass().getField(fieldName);
-            } catch (NoSuchFieldException | SecurityException ex) {                
+            } catch (NoSuchFieldException | SecurityException ex) {
                 Logger.getLogger(UpdateComponent.class.getName()).log(Level.SEVERE, null, ex);
                 throw ex;
-                
+
             }
 
             try {
@@ -222,6 +283,14 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         });
     }
 
+    @Override
+    public E getSelectedItem() {
+        if (this.getSelectedIndex() > -1) {
+            return (E) list.get(this.getSelectedIndex());
+        }
+        return null;
+    }
+
     public List<Object> getSelectedRow() {
         return (List<Object>) list.get(getSelectedIndex());
     }
@@ -237,10 +306,10 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             this.table = table;
 
             int allWidth = 0;
-            for(int i = 0; i< table.getColumnModel().getColumnCount();i++){
+            for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
                 allWidth += table.getColumnModel().getColumn(i).getPreferredWidth();
             }
-            
+
             width = allWidth > combo.getWidth() ? allWidth : combo.getWidth();
 
             ListSelectionModel sm = table.getSelectionModel();
