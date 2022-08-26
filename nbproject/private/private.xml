@@ -15,15 +15,20 @@
         <group>
             <file>file:/D:/Jazz/XB2/src/xbuild/PlantingFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/SoilAnalysisFrame.java</file>
+            <file>file:/D:/Jazz/XB2/src/DSSATModel/WeatherStationList.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/EnvironmentalFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/FileXModel/ManagementList.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/FertilizerFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/FieldFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/SimulationFrame.java</file>
+            <file>file:/D:/Jazz/XB2/src/FileXService/GeneralService.java</file>
+            <file>file:/D:/Jazz/XB2/src/FileXService/FieldService.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/ChemicalFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/HarvestFrame.java</file>
+            <file>file:/D:/Jazz/XB2/src/FileXService/FileXService.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/MainForm.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/IrrigationFrame.java</file>
+            <file>file:/D:/Jazz/XB2/src/FileXService/TreatmentService.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/InitialConditionFrame.java</file>
             <file>file:/D:/Jazz/XB2/src/FileXModel/HarvestList.java</file>
             <file>file:/D:/Jazz/XB2/src/xbuild/OrganicFrame.java</file>
