@@ -167,8 +167,6 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
         cbModel.removeAllElements();
 
-        Collator collator = Collator.getInstance(Locale.US);
-        collator.setStrength(Collator.PRIMARY);
         Collections.sort(this.list, (E o1, E o2) -> {
             try {
                 String oo1 = this.getFieldValue(o1, fieldName);

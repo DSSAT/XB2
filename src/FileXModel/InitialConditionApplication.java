@@ -18,6 +18,10 @@ public class InitialConditionApplication implements Cloneable {
     public Float SNH4;
     public Float SNO3;
     
+    public Float getOrder(){
+        return ICBL;
+    }
+    
     public InitialConditionApplication Clone(){
         try {
             return (InitialConditionApplication) this.clone();

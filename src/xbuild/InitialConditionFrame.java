@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -741,11 +742,19 @@ public class InitialConditionFrame extends IXInternalFrame {
             public void windowClosed(WindowEvent e) {
                 InitialConditionApplication initApp = dialog.GetData();
                 if(initApp != null){
-                    DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
+                    //DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
 
-                    model.addRow(SetRow(initApp));
-
+                    //model.addRow(SetRow(initApp));
+                    tbProfile.removeAll();
                     init.AddApp(initApp);
+                    
+                    DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+                    while(tbModel.getRowCount() > 0)
+                        tbModel.removeRow(0);
+                    
+                    for (int i = 0; i < init.GetSize(); i++) {                        
+                        tbModel.addRow(SetRow(init.GetApp(i)));
+                    }
                 }
                 dialog.SetNull();
             }
@@ -838,9 +847,12 @@ public class InitialConditionFrame extends IXInternalFrame {
     // End of variables declaration//GEN-END:variables
     
     private Object[] SetRow(InitialConditionApplication initApp) {
-        DecimalFormat df = new DecimalFormat(".000");
+        DecimalFormat df = new DecimalFormat("0.000");
         String val = df.format(initApp.SH2O);
-        Object[] vector = new Object[]{initApp.ICBL, val, initApp.SNH4, initApp.SNO3};
+        
+        DecimalFormat df1 = new DecimalFormat("0.0");
+        
+        Object[] vector = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
 
         return vector;
     }

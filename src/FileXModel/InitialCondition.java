@@ -6,6 +6,8 @@
 package FileXModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -50,6 +52,8 @@ public class InitialCondition implements Cloneable, IModelXBase {
     public void AddApp(InitialConditionApplication initApp)
     {
         InitApps.add(initApp);
+        
+        Collections.sort(InitApps, Comparator.comparing(InitialConditionApplication::getOrder));
     }
 
     public void RemoveAt(int level)
