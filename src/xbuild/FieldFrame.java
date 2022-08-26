@@ -96,20 +96,26 @@ public class FieldFrame extends IXInternalFrame {
 
         cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 300), new XColumn("Code", "Code", 100)}, "Code");
 
-        switch (FileX.wstaType) {
-            case WTH:
-                rdWth.setSelected(true);
-                break;
-            case WTG:
-                rdGen.setSelected(true);
-                break;
-            case CLI:
-                rdClimate.setSelected(true);
-                break;
+        if (FileX.wstaType != null) {
+            switch (FileX.wstaType) {
+                case WTH:
+                    rdWth.setSelected(true);
+                    break;
+                case WTG:
+                    rdGen.setSelected(true);
+                    break;
+                case CLI:
+                    rdClimate.setSelected(true);
+                    break;
+            }
+
+            EventQueue.invokeLater(() -> {
+                cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+            });
+
         }
-        
-        EventQueue.invokeLater(() -> {            
-            cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+
+        EventQueue.invokeLater(() -> {
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\field2.jpg");
         });
     }
@@ -121,9 +127,10 @@ public class FieldFrame extends IXInternalFrame {
     @Override
     public void updatePanelName(String name) {
         FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             txtDescription.removeFocusListener(li);
-        
+        }
+
         level = 0;
         for (IModelXBase f : FileX.fieldList.GetAll()) {
             level++;
@@ -134,8 +141,9 @@ public class FieldFrame extends IXInternalFrame {
             }
         }
 
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             this.addFocusListener(li);
+        }
     }
 
     /**
@@ -774,24 +782,23 @@ public class FieldFrame extends IXInternalFrame {
     }//GEN-LAST:event_cbSoilItemStateChanged
 
     private void rdWthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdWthActionPerformed
-       
-            cbWSTA.setSelectedIndex(-1);
-            cbWSTACode.setSelectedIndex(-1);
 
-            if (rdWth.isSelected()) {
-                FileX.wstaType = WstaType.WTH;
-            } else if (rdGen.isSelected()) {
-                FileX.wstaType = WstaType.WTG;
-            } else if (rdClimate.isSelected()) {
-                FileX.wstaType = WstaType.CLI;
-            }
-            
-            cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
-            cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
+        cbWSTA.setSelectedIndex(-1);
+
+        if (rdWth.isSelected()) {
+            FileX.wstaType = WstaType.WTH;
+        } else if (rdGen.isSelected()) {
+            FileX.wstaType = WstaType.WTG;
+        } else if (rdClimate.isSelected()) {
+            FileX.wstaType = WstaType.CLI;
+        }
+
+        cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+        cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
     }//GEN-LAST:event_rdWthActionPerformed
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if(txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)){
+        if (txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)) {
             l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
@@ -804,7 +811,6 @@ public class FieldFrame extends IXInternalFrame {
         ArrayList<String> items = new ArrayList<>();
 
         WeatherStation wstaSelected = WeatherStationList.GetAt(wCode, FileX.wstaType);
-
 
         if (wstaSelected != null && FileX.wstaType != null) {
             for (WeatherStation wsta : WeatherStationList.GetAll(FileX.wstaType)) {
