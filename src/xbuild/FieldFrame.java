@@ -110,6 +110,7 @@ public class FieldFrame extends IXInternalFrame {
         
         EventQueue.invokeLater(() -> {            
             cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\field2.jpg");
         });
     }
 
@@ -214,6 +215,7 @@ public class FieldFrame extends IXInternalFrame {
         cbSLTX = new xbuild.Components.XDropdownTableComboBox();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
+        imagePanel = new javax.swing.JLabel();
 
         popupMenu1.setLabel("popupMenu1");
         popupMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -512,6 +514,12 @@ public class FieldFrame extends IXInternalFrame {
             }
         });
 
+        cbWSTACode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbWSTACodeActionPerformed(evt);
+            }
+        });
+
         wstaTypeGroup.add(rdWth);
         rdWth.setLabel("WTH");
         rdWth.addActionListener(new java.awt.event.ActionListener() {
@@ -698,6 +706,8 @@ public class FieldFrame extends IXInternalFrame {
             }
         });
 
+        imagePanel.setBackground(new java.awt.Color(153, 153, 153));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -705,13 +715,16 @@ public class FieldFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -721,8 +734,13 @@ public class FieldFrame extends IXInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -778,6 +796,10 @@ public class FieldFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
+    private void cbWSTACodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWSTACodeActionPerformed
+        field.WSTA = cbWSTACode.getSelectedItem().toString();
+    }//GEN-LAST:event_cbWSTACodeActionPerformed
+
     private List<String> loadWSTACode(String wCode) {
         ArrayList<String> items = new ArrayList<>();
 
@@ -818,6 +840,7 @@ public class FieldFrame extends IXInternalFrame {
     private xbuild.Components.XComboBox cbSoilCode;
     private xbuild.Components.XDropdownTableComboBox cbWSTA;
     private xbuild.Components.XComboBox cbWSTACode;
+    private javax.swing.JLabel imagePanel;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private org.jdesktop.swingx.JXLabel jXLabel1;

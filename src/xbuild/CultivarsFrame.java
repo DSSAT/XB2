@@ -17,6 +17,7 @@ import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.CropList;
 import ListDialog.CultivarListDialog;
+import java.awt.EventQueue;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,10 @@ public class CultivarsFrame extends IXInternalFrame {
         initComponents();
 
         LoadCultivar();
+        
+        EventQueue.invokeLater(() -> {            
+            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\" + FileX.general.crop.CropCode + "2.jpg");
+        });
     }
 
     /** This method is called from within the constructor to
@@ -48,6 +53,7 @@ public class CultivarsFrame extends IXInternalFrame {
         bnAddLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
+        imagePanel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -92,10 +98,14 @@ public class CultivarsFrame extends IXInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jXTable1);
-        jXTable1.getColumnModel().getColumn(0).setMinWidth(50);
-        jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jXTable1.getColumnModel().getColumn(1).setPreferredWidth(350);
-        jXTable1.getColumnModel().getColumn(2).setPreferredWidth(350);
+        if (jXTable1.getColumnModel().getColumnCount() > 0) {
+            jXTable1.getColumnModel().getColumn(0).setMinWidth(50);
+            jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jXTable1.getColumnModel().getColumn(1).setPreferredWidth(350);
+            jXTable1.getColumnModel().getColumn(2).setPreferredWidth(350);
+        }
+
+        imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,22 +114,29 @@ public class CultivarsFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bnAddLayer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bnDeleteLayer)))
+                        .addComponent(bnDeleteLayer))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnDeleteLayer)
-                    .addComponent(bnAddLayer))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bnDeleteLayer)
+                            .addComponent(bnAddLayer))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -180,6 +197,7 @@ public class CultivarsFrame extends IXInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables

@@ -68,20 +68,22 @@ public class XComboBox extends JComboBox {
 
         this.setModel(new javax.swing.DefaultComboBoxModel(modelItems.toArray()));
 
-        if (value == null || "".equals(value)) {
-            this.value = !this.items.isEmpty() ? this.items.get(0).index : "";
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
-        } else {
-            for (int i = 0; i < this.items.size(); i++) {
-                if (this.items.get(i).index.equals(value)) {
-                    index = i;                    
-                    EventQueue.invokeLater(() -> this.setSelectedIndex(index));
-                    break;
+        if(model != null){
+            if (value == null || "".equals(value)) {
+                this.value = !this.items.isEmpty() ? this.items.get(0).index : "";
+                UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            } else {
+                for (int i = 0; i < this.items.size(); i++) {
+                    if (this.items.get(i).index.equals(value) || this.items.get(i).item.equals(value)) {
+                        index = i;
+                        EventQueue.invokeLater(() -> this.setSelectedIndex(index));
+                        break;
+                    }
                 }
             }
-        }
 
-        setAction();
+            setAction();
+        }
     }
     
     public void setInit(Object model, String fieldName, String value){
