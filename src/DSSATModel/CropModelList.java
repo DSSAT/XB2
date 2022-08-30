@@ -36,6 +36,23 @@ public class CropModelList {
 
         return cropModel;
     }
+    
+    public static CropModel GetByCrop(String CropCode)
+    {
+        CropModel cropModel = null;
+        try {
+            Object[] objects = cropModels.values().toArray();
+            for (Object object : objects) {
+                if(((CropModel) object).Code.endsWith(CropCode)) {
+                    cropModel = (CropModel) object;
+                    break;
+                }                    
+            }
+        } catch (Exception ex) {
+        }
+
+        return cropModel;
+    }
 
     public static CropModel GetAt(int n)
     {

@@ -10,6 +10,8 @@
  */
 package xbuild;
 
+import DSSATModel.CropModel;
+import DSSATModel.CropModelList;
 import xbuild.Events.RemoveLevelEvent;
 import xbuild.Events.XEvent;
 import xbuild.Events.AddLevelEvent;
@@ -19,6 +21,7 @@ import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
 import FileXModel.ManagementList;
 import FileXModel.IModelXBase;
+import FileXModel.Simulation;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -669,8 +672,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     }
                 }
                 if ("Simulation Controls".equals(node.toString())) {
-                    IModelXBase sim = SimulationControlDefaults.Get(FileX.general.FileType);
+                    Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
                     sim.SetName(nodeName);
+                    CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
+                    if(cm != null)
+                        sim.SMODEL = cm.ModelCode;
                     modelList.AddNew(sim);
                 } else {
                     modelList.AddNew(nodeName);
