@@ -7,6 +7,7 @@ import DSSATModel.Setup;
 import DSSATModel.Crop;
 import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
+import DSSATModel.WstaType;
 import Extensions.Utils;
 import java.awt.EventQueue;
 import java.awt.event.*;
@@ -53,6 +54,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
         txtSiteCode.setDocument(new LimitDocument(2));
 
         cbFileType.setInit(FileX.general, "FileType", FileX.general.FileType.toString());
+        if(FileX.general.FileType == ExperimentType.Experimental)
+            FileX.wstaType = WstaType.WTH;
+        
         txtInstituteCode.Init(FileX.general, "InstituteCode", FileX.general.InstituteCode);
         txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
         txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
@@ -596,6 +600,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         switch (cbFileType.getSelectedItem().toString()) {
             case "Experimental":
                 cbCrop.setEnabled(true);
+                FileX.wstaType = WstaType.WTH;        
                 break;
             case "Sequential":
                 cbCrop.setEnabled(false);

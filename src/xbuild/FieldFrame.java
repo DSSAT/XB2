@@ -11,6 +11,7 @@
 package xbuild;
 
 import DSSATModel.DrainageList;
+import DSSATModel.ExperimentType;
 import DSSATModel.FieldHistoryList;
 import FileXModel.FieldDetail;
 import DSSATModel.Soil;
@@ -113,6 +114,11 @@ public class FieldFrame extends IXInternalFrame {
                 cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
             });
 
+        }
+        
+        if(FileX.general.FileType == ExperimentType.Experimental) {
+            rdGen.setVisible(false);
+            rdClimate.setVisible(false);
         }
 
         EventQueue.invokeLater(() -> {

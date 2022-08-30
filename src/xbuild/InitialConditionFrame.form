@@ -48,8 +48,8 @@
                   <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane2" min="-2" pref="589" max="-2" attributes="0"/>
-              <EmptySpace pref="92" max="32767" attributes="0"/>
+              <Component id="jTabbedPane2" min="-2" pref="419" max="-2" attributes="0"/>
+              <EmptySpace pref="262" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,27 +71,34 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jXPanel5" alignment="0" max="32767" attributes="1"/>
-                          <Component id="jXPanel7" alignment="0" max="32767" attributes="1"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                                       <Component id="jXLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="dpICDAT" min="-2" pref="184" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jXPanel4" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jXPanel6" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jXPanel3" alignment="0" min="-2" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jXPanel7" max="32767" attributes="1"/>
+                                  <Component id="jXPanel4" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jXPanel5" max="32767" attributes="1"/>
+                                  <Component id="jXPanel6" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="imagePanel" min="-2" pref="244" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -109,21 +116,23 @@
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jXPanel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jXPanel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jXPanel5" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="jXPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jXPanel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jXPanel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jXPanel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXPanel6" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -251,37 +260,40 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jXLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel10" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel9" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtICWD" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txtICRES" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtICWD" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jXLabel11" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtICRES" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jXLabel12" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jXLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jXLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jXLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtICWD" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jXLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel10" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="jXLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtICRES" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -291,11 +303,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel9">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Water Table Depth"/>
-                  </Properties>
-                </Component>
                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel10">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crop Residue"/>
@@ -325,6 +332,11 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Water Table Depth"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel7">
@@ -342,7 +354,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jXLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel14" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -431,8 +443,8 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jXLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel19" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -446,7 +458,7 @@
                               </Group>
                               <Component id="txtICRIP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -530,7 +542,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jXLabel8" min="-2" max="-2" attributes="0"/>
@@ -550,7 +562,6 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="snICRN" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -560,7 +571,7 @@
                               <Component id="snICRE" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -664,7 +675,7 @@
                           <Component id="jScrollPane2" min="-2" pref="395" max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
