@@ -155,21 +155,29 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jXLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jXLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jXLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jXLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtRSEED" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jXRadioGroup1" alignment="0" min="-2" max="-2" attributes="1"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                      <Component id="dpSDATE" min="-2" pref="176" max="-2" attributes="1"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="jXLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jXLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jXLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jXLabel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbCrop" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtRSEED" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="jXRadioGroup1" alignment="0" min="-2" max="-2" attributes="1"/>
+                                          <Component id="dpSDATE" min="-2" pref="176" max="-2" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -188,6 +196,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="dpSDATE" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -223,6 +232,9 @@
                   <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dpSDATEPropertyChange"/>
+              </Events>
             </Component>
             <Container class="org.jdesktop.swingx.JXRadioGroup" name="jXRadioGroup1">
 
@@ -326,6 +338,14 @@
             <Component class="xbuild.Components.XFormattedTextField" name="txtRSEED">
             </Component>
             <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCrop">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="*"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

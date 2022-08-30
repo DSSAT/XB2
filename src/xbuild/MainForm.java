@@ -17,7 +17,6 @@ import FileXModel.FileX;
 import DSSATModel.DssatProfile;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
-import FileXModel.HarvestList;
 import FileXModel.ManagementList;
 import FileXModel.IModelXBase;
 import java.awt.*;
@@ -43,13 +42,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
+import xbuild.Events.ValidationEvent;
 import xbuild.Events.XEventListener;
 
 /**
@@ -872,47 +870,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private org.jdesktop.swingx.JXTree jXTree1;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     *
-     * @param e
-     */
-    @Override
-    public void myAction(XEvent e) {
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-
-        EventQueue.invokeLater(()
-                -> {
-            root.setUserObject(e.getN());
-
-            jXTree1.repaint();
-
-            TreeSelectionListener[] ls = jXTree1.getListeners(TreeSelectionListener.class);
-            MouseAdapter[] ms = jXTree1.getListeners(MouseAdapter.class);
-
-            for (TreeSelectionListener l : ls) {
-                jXTree1.removeTreeSelectionListener(l);
-            }
-
-            for (MouseAdapter m : ms) {
-                jXTree1.removeMouseListener(m);
-            }
-
-            TreePath path = jXTree1.getSelectionPath();
-            jXTree1.collapseAll();
-            jXTree1.expandAll();
-
-            jXTree1.setSelectionPath(path);
-
-            for (TreeSelectionListener l : ls) {
-                jXTree1.addTreeSelectionListener(l);
-            }
-
-            for (MouseAdapter m : ms) {
-                jXTree1.addMouseListener(m);
-            }
-        }
-        );
-    }
 
     private void ShowFrame(IXInternalFrame frame) {
 
@@ -1081,6 +1038,48 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         }
     }
+    
+    /**
+     *
+     * @param e
+     */
+    @Override
+    public void myAction(XEvent e) {
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+
+        EventQueue.invokeLater(()
+                -> {
+            root.setUserObject(e.getN());
+
+            jXTree1.repaint();
+
+            TreeSelectionListener[] ls = jXTree1.getListeners(TreeSelectionListener.class);
+            MouseAdapter[] ms = jXTree1.getListeners(MouseAdapter.class);
+
+            for (TreeSelectionListener l : ls) {
+                jXTree1.removeTreeSelectionListener(l);
+            }
+
+            for (MouseAdapter m : ms) {
+                jXTree1.removeMouseListener(m);
+            }
+
+            TreePath path = jXTree1.getSelectionPath();
+            jXTree1.collapseAll();
+            jXTree1.expandAll();
+
+            jXTree1.setSelectionPath(path);
+
+            for (TreeSelectionListener l : ls) {
+                jXTree1.addTreeSelectionListener(l);
+            }
+
+            for (MouseAdapter m : ms) {
+                jXTree1.addMouseListener(m);
+            }
+        }
+        );
+    }
 
     @Override
     public void myAction(AddLevelEvent e) {
@@ -1184,6 +1183,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
+    }
+
+    @Override
+    public void myAction(ValidationEvent e) {
+        jXTree1.repaint();
     }
 }
 

@@ -27,6 +27,7 @@ import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
+import xbuild.Events.ValidationEvent;
 
 /**
  *
@@ -151,6 +152,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         txtRSEED = new xbuild.Components.XFormattedTextField();
         cbCrop = new xbuild.Components.XDropdownTableComboBox();
+        jLabel1 = new javax.swing.JLabel();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jXPanel13 = new org.jdesktop.swingx.JXPanel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
@@ -330,6 +332,11 @@ public class SimulationFrame extends IXInternalFrame {
         setPreferredSize(new java.awt.Dimension(767, 677));
 
         dpSDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpSDATE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dpSDATEPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jXRadioGroup1Layout = new javax.swing.GroupLayout(jXRadioGroup1);
         jXRadioGroup1.setLayout(jXRadioGroup1Layout);
@@ -385,6 +392,9 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXLabel6.setText("Crop Model");
 
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("*");
+
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
         jXPanel2Layout.setHorizontalGroup(
@@ -393,19 +403,24 @@ public class SimulationFrame extends IXInternalFrame {
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRSEED, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXRadioGroup1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jXPanel2Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(dpSDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbCrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)))
+                        .addGap(27, 27, 27)
+                        .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbCrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jXPanel2Layout.createSequentialGroup()
+                                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRSEED, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jXRadioGroup1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dpSDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jXPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -417,7 +432,8 @@ public class SimulationFrame extends IXInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpSDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -2396,6 +2412,14 @@ public class SimulationFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
+    private void dpSDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpSDATEPropertyChange
+        try {
+            l.myAction(new ValidationEvent(this));
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_dpSDATEPropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnIMETH;
     private javax.swing.JButton bnNCODE;
@@ -2441,6 +2465,7 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XButtonGroup groupTillage;
     private xbuild.Components.XButtonGroup groupWater;
     private xbuild.Components.XButtonGroup groupWeather;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private org.jdesktop.swingx.JXLabel jXLabel1;

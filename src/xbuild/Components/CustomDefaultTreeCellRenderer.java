@@ -1,14 +1,16 @@
 package xbuild.Components;
 
-import DSSATModel.ExperimentType;
-import Extensions.Utils;
-import FileXModel.FieldDetail;
-import FileXModel.FileX;
+import Extensions.Icons;
 import FileXService.FileXValidationService;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.font.TextAttribute;
+import java.net.URL;
 import java.util.Collections;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -27,20 +29,10 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
 
         if (node.getParent() != null && !nodeName.equals("General Information")) {
             enabled = FileXValidationService.IsGeneralValid();
-//            if(FileX.general != null && (Utils.IsEmpty(FileX.general.SiteCode) || Utils.IsEmpty(FileX.general.InstituteCode) || Utils.IsEmpty(FileX.general.Year))){
-//                enabled = false;
-//            }
-//            if (FileX.general != null && FileX.general.FileType == ExperimentType.Experimental && (FileX.general.crop == null || Utils.IsEmpty(FileX.general.crop.CropCode))) {
-//                enabled = false;
-//            }
         }
 
         if (nodeName.equals("Treatment")) {
             enabled = FileXValidationService.IsMinimumRequired();
-//            enabled = FileX.fieldList != null && FileX.fieldList.GetSize() > 0 && !Utils.IsEmpty(((FieldDetail)FileX.fieldList.GetAt(0)).WSTA) && !Utils.IsEmpty(((FieldDetail)FileX.fieldList.GetAt(0)).ID_SOIL)
-//                    && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
-//                    && FileX.plantings != null && FileX.plantings.GetSize() > 0
-//                    && FileX.simulationList != null && FileX.simulationList.GetSize() > 0;
         }
 
         Component treeCellRendererComponent = super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
@@ -51,17 +43,7 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
                     Collections.singletonMap(
                             TextAttribute.WEIGHT, TextAttribute.WEIGHT_ULTRABOLD));
 
-            treeCellRendererComponent.setFont(font);
-
-//            JLabel label = new JLabel();
-//
-//            ImageIcon icon;
-//            icon = new ImageIcon(getClass().getResource("/icons/requirednode.png"));
-//            label.setIcon(icon);
-//            label.setText(nodeName);
-//            label.setFont(font);
-//            label.setEnabled(enabled);
-//            return label;        
+            treeCellRendererComponent.setFont(font);       
         } else {
             Font font = treeCellRendererComponent.getFont();
             font = font.deriveFont(
@@ -70,7 +52,26 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
 
             treeCellRendererComponent.setFont(font);
         }
-        treeCellRendererComponent.setEnabled(enabled);
+        setEnabled(enabled);
+        
+        if (Icons.hasIcon(nodeName) && getIcon().getIconWidth() != 24) {
+            setIcon(Icons.getIcon(nodeName));
+        }
+        
+        String nodeParentName = node.getParent() != null ? node.getParent().toString() : "";
+        
+        if((nodeName.equals("General Information") && !FileXValidationService.IsGeneralValid())
+                || (nodeName.equals("Fields") && !FileXValidationService.IsFieldsValid())
+                || (nodeName.equals("Cultivars") && !FileXValidationService.IsCultivarsValid())
+                || (nodeName.equals("Planting") && !FileXValidationService.IsPlantingsValid())
+                || (nodeName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlsValid()))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(node.isLeaf() && nodeParentName.equals("Fields") && !FileXValidationService.IsFieldValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(node.isLeaf() && nodeParentName.equals("Planting") && !FileXValidationService.IsPlantingValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(node.isLeaf() && nodeParentName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));        
 
         return treeCellRendererComponent;
     }
