@@ -627,29 +627,29 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
-            jXTree1.setSelectionRow(row);
+        int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+        jXTree1.setSelectionRow(row);
 
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-            if (node == null) {
-                return;
-            }
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        if (node == null) {
+            return;
+        }
 
-            if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
+        if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
+            if (SwingUtilities.isRightMouseButton(evt) || node.getChildCount() == 0) {
                 jPopupMenuAdd.show(evt.getComponent(), evt.getX(), evt.getY());
-            } else if (node.getParent() != null && mainMenuList.keySet().contains(node.getParent().toString())) {
-                jPopupMenuSimItemCopy.setEnabled(true);
-                jPopupMenuSimItemRename.setEnabled(true);
-                if ("Cultivars".equals(node.getParent().toString())) {
-                    jPopupMenuSimItemCopy.setEnabled(false);
-                    jPopupMenuSimItemRename.setEnabled(false);
-                }
-
-                EventQueue.invokeLater(() -> {
-                    jPopupMenuItem.show(evt.getComponent(), evt.getX(), evt.getY());
-                });
             }
+        } else if (SwingUtilities.isRightMouseButton(evt) && node.getParent() != null && mainMenuList.keySet().contains(node.getParent().toString())) {
+            jPopupMenuSimItemCopy.setEnabled(true);
+            jPopupMenuSimItemRename.setEnabled(true);
+            if ("Cultivars".equals(node.getParent().toString())) {
+                jPopupMenuSimItemCopy.setEnabled(false);
+                jPopupMenuSimItemRename.setEnabled(false);
+            }
+
+            EventQueue.invokeLater(() -> {
+                jPopupMenuItem.show(evt.getComponent(), evt.getX(), evt.getY());
+            });
         }
     }//GEN-LAST:event_jXTree1MouseReleased
 
