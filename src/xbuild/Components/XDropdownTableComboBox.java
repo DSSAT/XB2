@@ -8,17 +8,18 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -27,12 +28,16 @@ import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter.SortKey;
 import javax.swing.SortOrder;
 import javax.swing.event.RowSorterEvent;
-import javax.swing.event.RowSorterListener;
+import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.plaf.metal.MetalComboBoxEditor;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -60,6 +65,8 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             } else {
                 c.setBackground(Color.WHITE);
             }
+            
+            
             return c;
         }
 
@@ -103,21 +110,19 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         table.setModel(dropDownModel);
         table.setAutoCreateRowSorter(true);
 
-        table.getRowSorter().addRowSorterListener(new RowSorterListener() {
-            @Override
-            public void sorterChanged(RowSorterEvent e) {
-                List<? extends SortKey> rowSorter = table.getRowSorter().getSortKeys();
-                if (rowSorter != null) {
+        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) table.getRowSorter();
+        sorter.addRowSorterListener((RowSorterEvent e) -> {
+            List<? extends SortKey> rowSorter = table.getRowSorter().getSortKeys();
+            if (rowSorter != null && !rowSorter.isEmpty()) {
 
-                    if (rowSorter.get(0).getSortOrder() == SortOrder.ASCENDING) {
-                        orderByAscending(rowSorter.get(0).getColumn());
-                    } else {
-                        orderByDescending(rowSorter.get(0).getColumn());
-                    }
+                if (rowSorter.get(0).getSortOrder() == SortOrder.ASCENDING) {
+                    orderByAscending(rowSorter.get(0).getColumn());
+                } else {
+                    orderByDescending(rowSorter.get(0).getColumn());
                 }
             }
         });
-
+        
         for (int c = 0; c < table.getColumnCount(); c++) {
             table.getColumnModel().getColumn(c).setPreferredWidth(columns[c].getWidth());
         }
@@ -154,9 +159,46 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 }
             });
         }
+        
+        this.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent event) {
+//                JTextComponent jx = (JTextComponent) ((JComboBox) ((Component) event.getSource()).getParent()).getEditor().getEditorComponent();
+//                try {
+//                    String text = jx.getText(0, jx.getSelectionStart());
+//                    setRowFocused(text);
+//                } catch (BadLocationException ex) {
+//                    Logger.getLogger(XDropdownTableComboBox.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(XDropdownTableComboBox.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                
+            }
+        });
 
         for (ItemListener li : listens) {
             this.addItemListener(li);
+        }
+    }
+    
+    private void setRowFocused(String text) throws Exception{
+        if (columns.length > 1) {
+            int index = getSelectedIndex();
+            
+            if (index == -1) {
+                String fieldName = columns[1].getFieldName();
+                int i = 0;
+                for (E m : this.list) {
+                    System.out.println(this.getFieldValue(m, fieldName).toLowerCase());
+                    if(this.getFieldValue(m, fieldName).toLowerCase().startsWith(text.toLowerCase())){
+                        setSelectedIndex(i);
+                        System.out.println(i);
+                        return;
+                    }
+                    i++;
+                }
+            }
         }
     }
 
@@ -174,7 +216,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 return oo1.compareToIgnoreCase(oo2);
             } catch (Exception e) {
             }
-            
+
             return 0;
         });
 
@@ -184,7 +226,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
     private void orderByDescending(int colIndex) {
         XColumn col = columns[colIndex];
         String fieldName = col.getFieldName();
-        
+
         DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
         cbModel.removeAllElements();
 
@@ -195,7 +237,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 return oo1.compareToIgnoreCase(oo2);
             } catch (Exception e) {
             }
-            
+
             return 0;
         }));
 

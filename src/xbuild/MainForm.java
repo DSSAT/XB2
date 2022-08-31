@@ -10,6 +10,8 @@
  */
 package xbuild;
 
+import DSSATModel.CropModel;
+import DSSATModel.CropModelList;
 import xbuild.Events.RemoveLevelEvent;
 import xbuild.Events.XEvent;
 import xbuild.Events.AddLevelEvent;
@@ -17,9 +19,9 @@ import FileXModel.FileX;
 import DSSATModel.DssatProfile;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
-import FileXModel.HarvestList;
 import FileXModel.ManagementList;
 import FileXModel.IModelXBase;
+import FileXModel.Simulation;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -43,13 +45,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
+import xbuild.Events.ValidationEvent;
 import xbuild.Events.XEventListener;
 
 /**
@@ -629,29 +630,29 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
-            jXTree1.setSelectionRow(row);
+        int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+        jXTree1.setSelectionRow(row);
 
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-            if (node == null) {
-                return;
-            }
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        if (node == null) {
+            return;
+        }
 
-            if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
+        if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
+            if (SwingUtilities.isRightMouseButton(evt) || node.getChildCount() == 0) {
                 jPopupMenuAdd.show(evt.getComponent(), evt.getX(), evt.getY());
-            } else if (node.getParent() != null && mainMenuList.keySet().contains(node.getParent().toString())) {
-                jPopupMenuSimItemCopy.setEnabled(true);
-                jPopupMenuSimItemRename.setEnabled(true);
-                if ("Cultivars".equals(node.getParent().toString())) {
-                    jPopupMenuSimItemCopy.setEnabled(false);
-                    jPopupMenuSimItemRename.setEnabled(false);
-                }
-
-                EventQueue.invokeLater(() -> {
-                    jPopupMenuItem.show(evt.getComponent(), evt.getX(), evt.getY());
-                });
             }
+        } else if (SwingUtilities.isRightMouseButton(evt) && node.getParent() != null && mainMenuList.keySet().contains(node.getParent().toString())) {
+            jPopupMenuSimItemCopy.setEnabled(true);
+            jPopupMenuSimItemRename.setEnabled(true);
+            if ("Cultivars".equals(node.getParent().toString())) {
+                jPopupMenuSimItemCopy.setEnabled(false);
+                jPopupMenuSimItemRename.setEnabled(false);
+            }
+
+            EventQueue.invokeLater(() -> {
+                jPopupMenuItem.show(evt.getComponent(), evt.getX(), evt.getY());
+            });
         }
     }//GEN-LAST:event_jXTree1MouseReleased
 
@@ -671,8 +672,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     }
                 }
                 if ("Simulation Controls".equals(node.toString())) {
-                    IModelXBase sim = SimulationControlDefaults.Get(FileX.general.FileType);
+                    Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
                     sim.SetName(nodeName);
+                    CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
+                    if(cm != null)
+                        sim.SMODEL = cm.ModelCode;
                     modelList.AddNew(sim);
                 } else {
                     modelList.AddNew(nodeName);
@@ -872,47 +876,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private org.jdesktop.swingx.JXTree jXTree1;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     *
-     * @param e
-     */
-    @Override
-    public void myAction(XEvent e) {
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-
-        EventQueue.invokeLater(()
-                -> {
-            root.setUserObject(e.getN());
-
-            jXTree1.repaint();
-
-            TreeSelectionListener[] ls = jXTree1.getListeners(TreeSelectionListener.class);
-            MouseAdapter[] ms = jXTree1.getListeners(MouseAdapter.class);
-
-            for (TreeSelectionListener l : ls) {
-                jXTree1.removeTreeSelectionListener(l);
-            }
-
-            for (MouseAdapter m : ms) {
-                jXTree1.removeMouseListener(m);
-            }
-
-            TreePath path = jXTree1.getSelectionPath();
-            jXTree1.collapseAll();
-            jXTree1.expandAll();
-
-            jXTree1.setSelectionPath(path);
-
-            for (TreeSelectionListener l : ls) {
-                jXTree1.addTreeSelectionListener(l);
-            }
-
-            for (MouseAdapter m : ms) {
-                jXTree1.addMouseListener(m);
-            }
-        }
-        );
-    }
 
     private void ShowFrame(IXInternalFrame frame) {
 
@@ -1081,6 +1044,48 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         }
     }
+    
+    /**
+     *
+     * @param e
+     */
+    @Override
+    public void myAction(XEvent e) {
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+
+        EventQueue.invokeLater(()
+                -> {
+            root.setUserObject(e.getN());
+
+            jXTree1.repaint();
+
+            TreeSelectionListener[] ls = jXTree1.getListeners(TreeSelectionListener.class);
+            MouseAdapter[] ms = jXTree1.getListeners(MouseAdapter.class);
+
+            for (TreeSelectionListener l : ls) {
+                jXTree1.removeTreeSelectionListener(l);
+            }
+
+            for (MouseAdapter m : ms) {
+                jXTree1.removeMouseListener(m);
+            }
+
+            TreePath path = jXTree1.getSelectionPath();
+            jXTree1.collapseAll();
+            jXTree1.expandAll();
+
+            jXTree1.setSelectionPath(path);
+
+            for (TreeSelectionListener l : ls) {
+                jXTree1.addTreeSelectionListener(l);
+            }
+
+            for (MouseAdapter m : ms) {
+                jXTree1.addMouseListener(m);
+            }
+        }
+        );
+    }
 
     @Override
     public void myAction(AddLevelEvent e) {
@@ -1184,6 +1189,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
+    }
+
+    @Override
+    public void myAction(ValidationEvent e) {
+        jXTree1.repaint();
     }
 }
 

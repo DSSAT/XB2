@@ -12,6 +12,7 @@
 package xbuild;
 
 import DSSATServices.*;
+import Extensions.Icons;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -100,6 +101,8 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
                 taskOutput.append("!Simulation Default loading error: " + ex.getMessage() + " \n");
                 isValid = false;
             }
+            
+            Icons.Init(getClass());
 
             return null;
         }

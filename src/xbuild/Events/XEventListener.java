@@ -14,4 +14,5 @@ public interface XEventListener {
     public abstract void myAction (AddLevelEvent e);
     public abstract void myAction (RemoveLevelEvent e);
     public abstract void myAction (UpdateLevelEvent e);
+    public abstract void myAction (ValidationEvent e);
 }

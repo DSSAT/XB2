@@ -11,6 +11,7 @@
 package xbuild;
 
 import DSSATModel.DrainageList;
+import DSSATModel.ExperimentType;
 import DSSATModel.FieldHistoryList;
 import FileXModel.FieldDetail;
 import DSSATModel.Soil;
@@ -29,6 +30,7 @@ import java.util.List;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
+import xbuild.Events.ValidationEvent;
 
 /**
  *
@@ -113,6 +115,11 @@ public class FieldFrame extends IXInternalFrame {
                 cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
             });
 
+        }
+        
+        if(FileX.general.FileType == ExperimentType.Experimental) {
+            rdGen.setVisible(false);
+            rdClimate.setVisible(false);
         }
 
         EventQueue.invokeLater(() -> {
@@ -764,6 +771,8 @@ public class FieldFrame extends IXInternalFrame {
             if (cbWSTA.getSelectedIndex() >= 0) {
                 WeatherStation w = ((WeatherStation) cbWSTA.getSelectedItem());
                 cbWSTACode.setModel(loadWSTACode(w.Code), w.Code);
+                
+                l.myAction(new ValidationEvent(this));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -775,6 +784,7 @@ public class FieldFrame extends IXInternalFrame {
             if (cbSoil.getSelectedIndex() >= 0) {
                 Soil s = ((Soil) cbSoil.getSelectedItem());
                 cbSoilCode.setModel(loadSoilCode(s.Code), s.Code);
+                l.myAction(new ValidationEvent(this));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
