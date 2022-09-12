@@ -19,6 +19,7 @@ import DSSATModel.CropList;
 import ListDialog.CultivarListDialog;
 import java.awt.EventQueue;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
@@ -49,30 +50,12 @@ public class CultivarsFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bnDeleteLayer = new javax.swing.JButton();
-        bnAddLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         imagePanel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
-
-        bnDeleteLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Minus.png"))); // NOI18N
-        bnDeleteLayer.setText("Delete");
-        bnDeleteLayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDeleteLayerActionPerformed(evt);
-            }
-        });
-
-        bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
-        bnAddLayer.setText("Add");
-        bnAddLayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnAddLayerActionPerformed(evt);
-            }
-        });
 
         jXTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,12 +96,7 @@ public class CultivarsFrame extends IXInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnAddLayer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bnDeleteLayer))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -130,61 +108,44 @@ public class CultivarsFrame extends IXInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bnDeleteLayer)
-                            .addComponent(bnAddLayer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(445, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
+    
+    public void AddNewCultivar(){
         final CultivarListDialog dialog = new CultivarListDialog(null, true);
         dialog.show();
 
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                DSSATModel.Cultivar cul = dialog.GetData();
-                if(cul != null){
+                ArrayList<DSSATModel.Cultivar> culs = dialog.GetData();
+                if(culs != null){
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-
-                    Cultivar c = new Cultivar();
-                    c.CR = cul.CropCode;
-                    c.INGENO = cul.CulCode;
-                    c.CNAME = cul.CulName;
-
-                    model.addRow(SetRow(c));
-
-                    FileX.cultivars.AddNew(c);
                     
-                    l.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
+                    culs.forEach(cul -> {
+                        Cultivar c = new Cultivar();
+                        c.CR = cul.CropCode;
+                        c.INGENO = cul.CulCode;
+                        c.CNAME = cul.CulName;
+
+                        model.addRow(SetRow(c));
+
+                        FileX.cultivars.AddNew(c);
+
+                        l.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
+                    });
                 }
                 dialog.SetNull();
             }
         });
-    }//GEN-LAST:event_bnAddLayerActionPerformed
-
+    }
     
-    private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
-        int nRow = jXTable1.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-        model.removeRow(nRow);
-        for(int i = 0;i < jXTable1.getRowCount();i++)
-            model.setValueAt(i+1, i, 0);
-
-        String name = FileX.cultivars.GetAt(nRow).GetName();
-        
-        FileX.cultivars.RemoveAt(nRow);
-        
-        l.myAction(new RemoveLevelEvent(this, "Cultivars", "Level " + (nRow+1) + ": " + name));
-    }//GEN-LAST:event_bnDeleteLayerActionPerformed
-
+    
     private Vector SetRow(Cultivar cul) {
 
         Vector vector = new Vector();
@@ -195,8 +156,6 @@ public class CultivarsFrame extends IXInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnAddLayer;
-    private javax.swing.JButton bnDeleteLayer;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable jXTable1;

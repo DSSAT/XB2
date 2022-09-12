@@ -17,6 +17,7 @@ import DSSATModel.CultivarList;
 import DSSATModel.ExperimentType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -33,7 +34,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
 
     /** Creates new form CultivarListDialog */
 
-    private Cultivar cultivar;
+    private ArrayList<Cultivar> cultivars;
 
     public CultivarListDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -60,6 +61,8 @@ public class CultivarListDialog extends javax.swing.JDialog {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
+        bnOK = new javax.swing.JButton();
+        bnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,15 +96,41 @@ public class CultivarListDialog extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jXTable1);
 
+        bnOK.setText("OK");
+        bnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnOKActionPerformed(evt);
+            }
+        });
+
+        bnCancel.setText("Cancel");
+        bnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bnOK)
+                .addGap(26, 26, 26)
+                .addComponent(bnCancel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnOK)
+                    .addComponent(bnCancel))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,7 +138,8 @@ public class CultivarListDialog extends javax.swing.JDialog {
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2) {
-            cultivar = new Cultivar();
+            cultivars = new ArrayList<>();
+            Cultivar cultivar = new Cultivar();
 
             TableModel tbModel = jXTable1.getModel();
             int viewRow = jXTable1.getSelectedRow();
@@ -120,30 +150,67 @@ public class CultivarListDialog extends javax.swing.JDialog {
                 row = jXTable1.convertRowIndexToModel(viewRow);
             }
             
-            ListSelectionModel sel = jXTable1.getSelectionModel();
+            //ListSelectionModel sel = jXTable1.getSelectionModel();
 
             cultivar.CropCode = (String) tbModel.getValueAt(row, 0);
             cultivar.CropName = (String) tbModel.getValueAt(row, 1);
             cultivar.CulCode = (String) tbModel.getValueAt(row, 2);
             cultivar.CulName = (String) tbModel.getValueAt(row, 3);
+            
+            cultivars.add(cultivar);
 
             dispose();
         }
     }//GEN-LAST:event_jXTable1MouseClicked
 
+    private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
+        cultivars = new ArrayList<>();
+        
+        for(int viewRow : jXTable1.getSelectedRows()){
+            Cultivar cultivar = new Cultivar();
+
+            TableModel tbModel = jXTable1.getModel();
+            //int viewRow = jXTable1.getSelectedRows()
+            int row = -1;
+            if (viewRow < 0) {
+                row = viewRow;
+            } else {
+                row = jXTable1.convertRowIndexToModel(viewRow);
+            }
+            
+            //ListSelectionModel sel = jXTable1.getSelectionModel();
+
+            cultivar.CropCode = (String) tbModel.getValueAt(row, 0);
+            cultivar.CropName = (String) tbModel.getValueAt(row, 1);
+            cultivar.CulCode = (String) tbModel.getValueAt(row, 2);
+            cultivar.CulName = (String) tbModel.getValueAt(row, 3);
+            
+            cultivars.add(cultivar);
+        }
+        
+        dispose();
+    }//GEN-LAST:event_bnOKActionPerformed
+
+    private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
+        SetNull();
+        dispose();
+    }//GEN-LAST:event_bnCancelActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnCancel;
+    private javax.swing.JButton bnOK;
     private javax.swing.JScrollPane jScrollPane2;
     private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables
 
-    public Cultivar GetData() {
-        return cultivar;
+    public ArrayList<Cultivar> GetData() {
+        return cultivars;
     }
 
     public void SetNull()
     {
-        cultivar = null;
+        cultivars = null;
     }
 
     private void AddDataToTable() {
@@ -159,10 +226,6 @@ public class CultivarListDialog extends javax.swing.JDialog {
             });
         }
         else{
-            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
-            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
-            //jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
-
             CultivarList.GetAll().forEach(cul -> {
                 tbModel.addRow(new Object[]{cul.CropCode, cul.CropName, cul.CulCode, cul.CulName});
             });

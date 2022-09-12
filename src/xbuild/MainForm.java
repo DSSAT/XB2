@@ -91,7 +91,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             add("Initial Conditions");
             add("Soil Analysis");
             add("Environmental Modifications");
-            //add("Cultivars");
             add("Planting");
             add("Irrigation");
             add("Fertilizer");
@@ -107,7 +106,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         {
             add("General Information");
             add("Notes");
-            add("Cultivars");
             add("Treatment");
         }
     };
@@ -661,7 +659,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         ManagementList modelList = (ManagementList) GetManagementList(node.toString());
 
-        if (modelList != null) {
+        if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
             if (nodeName.length() > 0) {
@@ -700,6 +698,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
                 ShowFrame(frame);
             }
+        }
+        else if(modelList != null && "Cultivars".equals(node.toString())){
+            CultivarsFrame currentFrame = (CultivarsFrame) desktopPane.getSelectedFrame();
+            currentFrame.AddNewCultivar();
         }
     }//GEN-LAST:event_jMenuItemSimAddActionPerformed
 
