@@ -2,68 +2,73 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DSSATModel;
 
 import java.io.*;
+import java.nio.file.Paths;
 
 /**
  *
  * @author Jazzy
  */
 public class Setup {
+
     private static String DSSATPath;
     private static String DSSATVersion;
     private static String DefaultPath;
 
-    public String GetDSSATPath()
-    {
-        if(DSSATPath == null)
-        {
+    public String GetDSSATPath() {
+        if (DSSATPath == null) {
+            String defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
+            for(int i = 47;i <= 49;i++){
+               File file = new File(defaultDssatPath + "\\DSSATPRO.v" + i);
+                if (file.exists()) {
+                    SaveFile(defaultDssatPath, "v" + i);
+                    return defaultDssatPath;
+                }
+            }
+            
             GetFile();
         }
         return DSSATPath;
     }
-    
-    public String GetDefaultPath(){
-        if(DSSATPath == null){
+
+    public String GetDefaultPath() {
+        if (DSSATPath == null) {
             GetFile();
         }
-        
+
         return DefaultPath == null || DefaultPath.isBlank() ? DSSATPath : DefaultPath;
     }
-    
-    public void SetDefaultPath(String path){
+
+    public void SetDefaultPath(String path) {
         DefaultPath = path;
         SaveFile(DSSATPath, DSSATVersion);
     }
-    
-    public String GetDSSATVersion()
-    {
-        if(DSSATVersion == null)
-        {
+
+    public String GetDSSATVersion() {
+        if (DSSATVersion == null) {
             GetFile();
         }
         return DSSATVersion;
     }
 
-    protected void GetFile()
-    {
+    protected void GetFile() {
         String xBuildCfg = "XBuild.fle";
         File file = new File(xBuildCfg);
-        if(file.exists())
-        {
+        if (file.exists()) {
             FileReader fileRead = null;
             try {
                 fileRead = new FileReader(xBuildCfg);
-            } catch (FileNotFoundException ex) { }
+            } catch (FileNotFoundException ex) {
+            }
 
             BufferedReader br = new BufferedReader(fileRead);
             String buffer;
             try {
                 while ((buffer = br.readLine()) != null) {
                     String tmp[] = buffer.split("=");
-                    try{
+                    try {
                         switch (tmp[0].trim()) {
                             case "DSSAT":
                                 DSSATPath = tmp[1].trim();
@@ -77,8 +82,7 @@ public class Setup {
                             default:
                                 break;
                         }
-                    }
-                    catch(Exception ex1){
+                    } catch (Exception ex1) {
                         System.out.println(ex1.getMessage());
                     }
                 }
@@ -98,8 +102,7 @@ public class Setup {
         }
     }
 
-    public void SaveFile(String path, String version)
-    {
+    public void SaveFile(String path, String version) {
         String xBuildCfg = "XBuild.fle";
         FileWriter writer = null;
         try {
