@@ -24,7 +24,7 @@ public class FileX {
     public static TreatmentList treaments;
     public static WstaType wstaType;
     
-    private static boolean opened = false;
+    public static boolean isFileOpenned;
     private static String fileName;
     
     public static String GetAbsoluteFileName(){
@@ -33,10 +33,6 @@ public class FileX {
     
     public static void SetAbsoluteFileName(String fileName){
         FileX.fileName = fileName;
-    }
-
-    public static boolean GetStatus() {
-        return opened;
     }
 
     public static void NewFileX() {
@@ -57,7 +53,6 @@ public class FileX {
         treaments = new TreatmentList();
 
         fileName = null;
-        opened = true;
     }
 
     public static void CloseFile() {
@@ -78,6 +73,6 @@ public class FileX {
         treaments = null;
 
         fileName = null;
-        opened = false;
+        isFileOpenned = false;
     }
 }

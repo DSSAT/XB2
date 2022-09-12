@@ -85,6 +85,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
             jLabel5.setVisible(true);
         else
             jLabel5.setVisible(false);
+        
+        cbFileType.setEnabled(!FileX.isFileOpenned);
     }
 
     /** This method is called from within the constructor to
