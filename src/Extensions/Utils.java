@@ -139,6 +139,8 @@ public class Utils {
         
         if(start >= 0) {
             int stop = start + fieldLength;
+            if(stop > value.length())
+                stop = value.length();
 
             String tmp = value.substring(start,stop).trim();
             if(tmp.isEmpty())

@@ -90,8 +90,10 @@ public class SimulationControlService {
                     sim.START = Utils.GetString(simGeneralHeader, tmp, "START", 5);
                     sim.SDATE = Utils.GetDate(simGeneralHeader, tmp, "SDATE", 5);
                     sim.RSEED = Utils.GetFloat(simGeneralHeader, tmp, "RSEED", 5);
-                    sim.SNAME = Utils.GetString(simGeneralHeader, tmp, "SNAME", 25);
-                    sim.SMODEL = Utils.GetString(simGeneralHeader, tmp, "SMODEL", 5);
+                    sim.SNAME = Utils.GetString(simGeneralHeader, tmp, "SNAME", simGeneralHeader.contains("SMODEL") ? 25 : 30);
+                    
+                    if(simGeneralHeader.contains("SMODEL"))
+                        sim.SMODEL = Utils.GetString(simGeneralHeader, tmp, "SMODEL", 5);
 
                     if(level > simulationList.GetSize()) {
                         simulationList.AddNew(sim);
