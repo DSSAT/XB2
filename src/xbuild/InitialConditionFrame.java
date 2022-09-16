@@ -58,7 +58,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         txtICRIP.Init(init, "ICRIP", init.ICRIP);
         txtICRT.Init(init, "ICRT", init.ICRT);
         txtICWD.Init(init, "ICWD", init.ICWD);
-        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");
+        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");
         
         snICRE.Init(init, "ICRE", init.ICRE);
         snICRN.Init(init, "ICRN", init.ICRN);

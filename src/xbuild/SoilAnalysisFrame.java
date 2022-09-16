@@ -45,9 +45,9 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         dpAnalysisDate.Init(soilAnalysis, "SADAT", soilAnalysis.SADAT);
 
         
-        cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
-        cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
-        cbSMPX.setInit(soilAnalysis, "SMPX", soilAnalysis.SMPX, SoilAnalysisMethodPhosphorusList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
+        cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
+        cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
+        cbSMPX.setInit(soilAnalysis, "SMPX", soilAnalysis.SMPX, SoilAnalysisMethodPhosphorusList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
         
         for(int i = 0;i < soilAnalysis.GetSize();i++)
         {

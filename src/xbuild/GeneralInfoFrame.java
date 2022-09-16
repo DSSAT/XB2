@@ -61,7 +61,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
         txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
         txtExperimentNumber.Init(FileX.general, "ExperimentNumber", Utils.ParseInteger(FileX.general.ExperimentNumber));
-        cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");        
+        cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");        
 
         txtExperimentName.Init(FileX.general, "ExperimentName", FileX.general.ExperimentName);
         txtPeople.Init(FileX.general, "People", FileX.general.People);

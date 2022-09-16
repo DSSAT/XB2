@@ -46,8 +46,8 @@ public class PlantingFrame extends IXInternalFrame {
         txtPAGE.Init(planting, "PAGE", planting.PAGE);
         txtPENV.Init(planting, "PENV", planting.PENV);
         txtPLDP.Init(planting, "PLDP", planting.PLDP);
-        cbPLDS.setInit(planting, "PLDS", planting.PLDS, PlantDistributionList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
-        cbPLME.setInit(planting, "PLME", planting.PLME, PlantingMethodList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        cbPLDS.setInit(planting, "PLDS", planting.PLDS, PlantDistributionList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
+        cbPLME.setInit(planting, "PLME", planting.PLME, PlantingMethodList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
         txtPLPH.Init(planting, "PLPH", planting.PLPH);
         txtPLRD.Init(planting, "PLRD", planting.PLRD);
         txtPLRS.Init(planting, "PLRS", planting.PLRS);
