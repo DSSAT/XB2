@@ -3,6 +3,8 @@ package xbuild;
 import DSSATModel.CropList;
 import DSSATModel.Soil;
 import DSSATModel.SoilList;
+import DSSATModel.SoilProfile;
+import Extensions.Utils;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
@@ -92,6 +94,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\InCond2.jpg");
+            bnRecalculate.setEnabled(false);
         });
     }
     
@@ -180,7 +183,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtWater = new javax.swing.JFormattedTextField();
         txtNitrogen = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        bnRecalculate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbSoil = new xbuild.Components.XComboBox();
         lblLevel = new org.jdesktop.swingx.JXLabel();
@@ -559,10 +562,25 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3.setText("<html>Nitrogen<br/>(kg/ha)</html>");
 
         txtWater.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtWater.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtWaterKeyReleased(evt);
+            }
+        });
 
         txtNitrogen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtNitrogen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNitrogenKeyReleased(evt);
+            }
+        });
 
-        jButton1.setText("Recalculate");
+        bnRecalculate.setText("Recalculate");
+        bnRecalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnRecalculateActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
         jLabel4.setText("<html>Note: initial condition data will be overwritten<br/>when you select recalculate</html>");
@@ -587,7 +605,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jButton1)))
+                        .addComponent(bnRecalculate)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -602,7 +620,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                     .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNitrogen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(bnRecalculate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -790,16 +808,31 @@ public class InitialConditionFrame extends IXInternalFrame {
         dpProfileDate.setDate(date);
     }//GEN-LAST:event_dpICDATPropertyChange
 
+    private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
+        CalculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()), cbSoil.getSelectedIndex());
+    }//GEN-LAST:event_bnRecalculateActionPerformed
+
+    private void txtWaterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaterKeyReleased
+        setRecalculateButtonEnabled();
+    }//GEN-LAST:event_txtWaterKeyReleased
+
+    private void txtNitrogenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitrogenKeyReleased
+        setRecalculateButtonEnabled();
+    }//GEN-LAST:event_txtNitrogenKeyReleased
+
+    private void setRecalculateButtonEnabled(){
+        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.JButton bnRecalculate;
     private xbuild.Components.XDropdownTableComboBox cbPCR;
     private xbuild.Components.XComboBox cbSoil;
     private xbuild.Components.XDatePicker dpICDAT;
     private xbuild.Components.XDatePicker dpProfileDate;
     private javax.swing.JLabel imagePanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -860,5 +893,55 @@ public class InitialConditionFrame extends IXInternalFrame {
         Object[] vector = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
 
         return vector;
+    }
+
+    private void CalculateInitialCondition(Float water, Float nitrogen, int selectedIndex) {
+        FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(selectedIndex);
+        Soil soil = SoilList.GetAt(field.ID_SOIL);
+        
+        boolean isdataMissing = false;
+        
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> Water_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+       
+        int size = soil.GetSoilProfiles().size() - 1;
+        
+        for(SoilProfile profile : soil.GetSoilProfiles()){
+            Depth_Calculated.add(profile.SLB);            
+            Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+            BulkDensity.add(profile.SBDM);
+            if(profile.SBDM == null){
+                isdataMissing = false;
+            }
+        }
+        
+        Float BD_Average = 1.2f;
+        if(!isdataMissing){
+            BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
+            for(int i = 1; i< Depth_Calculated.size();i++){
+                BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
+            }
+        }
+        
+        Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0)
+            tbModel.removeRow(0);
+            
+        for(int i = 0;i <= size;i++)
+        {
+            InitialConditionApplication initApp = new InitialConditionApplication();
+            
+            initApp.ICBL = Depth_Calculated.get(i);
+            initApp.SH2O = Water_Calculated.get(i);
+            initApp.SNH4 = INH4_Calculated;
+            initApp.SNO3 = INO3_Calculated;
+            
+            tbModel.addRow(SetRow(initApp));
+        }
     }
 }
