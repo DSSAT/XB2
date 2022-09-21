@@ -20,7 +20,7 @@ public class GeneralService {
 
             general.InstituteCode = xFile.substring(0, 2);
             general.SiteCode = xFile.substring(2, 4);
-            general.Year = (Integer.parseInt(xFile.substring(4, 6)) > 80) ? "19" + xFile.substring(4, 6) : "20" + xFile.substring(4, 6);
+            general.Year = (Integer.parseInt(xFile.substring(4, 6)) > 60) ? "19" + xFile.substring(4, 6) : "20" + xFile.substring(4, 6);
             general.ExperimentNumber = xFile.substring(6, 8);
 
             if (xFile.endsWith("SQX")) {

@@ -47,6 +47,7 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 boolean is2 = false;
                 boolean is4 = false;
                 boolean isCli = false;
+                boolean isR = false;
 
                 while ((strWRead = wReader.readLine()) != null) {
                     if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("**WEATHER") || strWRead.startsWith("$WEATHER") || strWRead.startsWith("*CLIMATE")) {
@@ -58,6 +59,8 @@ public class WeatherRepository extends DSSATRepositoryBase {
                         is4 = true;
                     } else if (strWRead.startsWith("@START")) {
                         isCli = true;
+                    } else if(strWRead.startsWith("@YRDAY")){
+                        isR = true;
                     } else if (is2) {
                         wsta += ":" + strWRead.substring(0, 2) + ":" + number;
                         weatherList.add(wsta);
@@ -69,6 +72,12 @@ public class WeatherRepository extends DSSATRepositoryBase {
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
                         wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number;
+                        weatherList.add(wsta);
+                        break;
+                    }
+                    else if(isR){
+                        number = fullName.substring(6, 8).trim();
+                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number;
                         weatherList.add(wsta);
                         break;
                     }

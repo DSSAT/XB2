@@ -50,6 +50,11 @@ public class TreatmentFrame extends IXInternalFrame  {
     public void updatePanelList(){
         LoadTreament();
     }
+    
+    @Override
+    public void updatePanelName(String name){
+        LoadTreament();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

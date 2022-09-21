@@ -812,17 +812,20 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int level = modelList.GetLevel(node.toString().split(":")[1].trim());
         
         if(modelList.MoveUp(level)){
-            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
-            node.setUserObject(newName);
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            currentFrame.updatePanelName(newName);
             
-            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level - 1);
-            String newUpName = "Level " + level + ": " + modelList.GetAt(level - 1).GetName();
-            nodeUp.setUserObject(newUpName);
-            
-            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-            model.reload(parentNode);
+            EventQueue.invokeLater(() -> {
+                String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+                node.setUserObject(newName);
+                IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                currentFrame.updatePanelName(newName);
+
+                DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level - 1);
+                String newUpName = "Level " + level + ": " + modelList.GetAt(level - 1).GetName();
+                nodeUp.setUserObject(newUpName);
+
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(parentNode);
+            });
         }
     }//GEN-LAST:event_jPopupMenuSimItemMoveUpActionPerformed
 
@@ -834,17 +837,19 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int level = modelList.GetLevel(node.toString().split(":")[1].trim());
         
         if(modelList.MoveDown(level)){
-            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
-            node.setUserObject(newName);
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            currentFrame.updatePanelName(newName);
-            
-            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level + 1);
-            String newUpName = "Level " + (level + 2) + ": " + modelList.GetAt(level + 1).GetName();
-            nodeUp.setUserObject(newUpName);
-            
-            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-            model.reload(parentNode);
+            EventQueue.invokeLater(() -> {
+                String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+                node.setUserObject(newName);
+                IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                currentFrame.updatePanelName(newName);
+
+                DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level + 1);
+                String newUpName = "Level " + (level + 2) + ": " + modelList.GetAt(level + 1).GetName();
+                nodeUp.setUserObject(newUpName);
+
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(parentNode);
+            });
         }
     }//GEN-LAST:event_jPopupMenuSimItemMoveDownActionPerformed
 

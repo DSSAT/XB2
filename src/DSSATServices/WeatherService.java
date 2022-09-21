@@ -55,8 +55,6 @@ public class WeatherService extends DSSATServiceBase {
                             wstaExist.Begin = Math.min(wsta.Begin, wstaExist.Begin);
                             wstaExist.Number = Math.max(wstaExist.Begin + wstaExist.Number - wstaExist.Begin, wsta.Begin + wsta.Number - wstaExist.Begin);
                         }
-                    } else {
-                        isValid = false;
                     }
                 }
             }
