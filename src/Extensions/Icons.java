@@ -16,7 +16,7 @@ public class Icons {
 
     private static HashMap<String, Icon> icons = new HashMap<>();
     private static final ArrayList<String> menus = new ArrayList<>( Arrays.asList("General Information", "Notes", "Environment", "Fields", "Initial Conditions", "Soil Analysis", "Environmental Modifications",
-        "Management", "Cultivars", "Planting", "Irrigation", "Fertilizer", "Organic Amendments", "Tillage", "Harvest", "Simulation Controls", "Treatment"));   
+        "Management", "Cultivars", "Planting", "Irrigation", "Fertilizer", "Organic Amendments", "Tillage", "Harvest", "Chemical Applications", "Simulation Controls", "Treatment"));   
 
     public static void Init(Class<?> c) {
         for (String menu : menus) {

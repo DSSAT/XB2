@@ -1,14 +1,12 @@
 package DSSATRepository;
 
+import Extensions.Variables;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,10 +23,8 @@ public class FieldHistoryRepository extends DSSATRepositoryBase {
     @Override
     public ArrayList<String> Parse() {
         ArrayList<String> fieldHistoryList = new ArrayList<String>() {};
-        
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US);
 
-        System.out.println("Start Read File Detail.cde : " + df.format(new Date()));
+        System.out.println("Start Read File Detail.cde : " + Variables.getDateFormatWithTime().format(new Date()));
 
         try {
             FileReader file = new FileReader(rootPath + "\\DETAIL.CDE");

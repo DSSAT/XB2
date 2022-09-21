@@ -43,6 +43,8 @@
                       <Component id="jXLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dpAnalysisDate" min="-2" pref="184" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jXPanel1" alignment="0" min="-2" max="-2" attributes="1"/>
               </Group>
@@ -66,6 +68,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="dpAnalysisDate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jXPanel1" min="-2" max="-2" attributes="0"/>
@@ -88,7 +91,7 @@
     <Component class="xbuild.Components.XDatePicker" name="dpAnalysisDate">
       <Properties>
         <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
+          <Connection code="Variables.getDateFormat()" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -306,6 +309,13 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Variables.getDateFormatString()" type="code"/>
         </Property>
       </Properties>
     </Component>

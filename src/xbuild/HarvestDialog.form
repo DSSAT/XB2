@@ -140,7 +140,7 @@
     <Component class="org.jdesktop.swingx.JXDatePicker" name="dpHDATE">
       <Properties>
         <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
+          <Connection code="Variables.getDateFormat()" type="code"/>
         </Property>
       </Properties>
       <Events>

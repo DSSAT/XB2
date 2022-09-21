@@ -2,6 +2,7 @@ package xbuild;
 
 import DSSATModel.FertilizerMaterialList;
 import DSSATModel.FertilizerMethodList;
+import Extensions.Variables;
 import FileXModel.Fertilizer;
 import FileXModel.FertilizerApplication;
 import FileXModel.FileX;
@@ -346,9 +347,7 @@ public class FertilizerFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(ferApp.FDATE));
+            vector.addElement(Variables.getDateFormat().format(ferApp.FDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
@@ -359,17 +358,6 @@ public class FertilizerFrame extends IXInternalFrame {
             rdDaysAfterPlanting.setSelected(true);
             rdReportedDates.setSelected(false);
         }
-        /*
-        if(rdDaysAfterPlanting.isSelected())
-            vector.add(ferApp.FDAY);
-        else
-        {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(ferApp.FDATE));
-        }
-         *
-         */
 
         try
         {

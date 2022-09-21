@@ -1,14 +1,12 @@
 package DSSATRepository;
 
+import Extensions.Variables;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xbuild.LoadingDataFrame;
@@ -29,11 +27,9 @@ public class DSSATProfileRepository {
     public ArrayList<String> Parse() throws Exception{
         ArrayList<String> dssatList = new ArrayList<String>() {};
         
-        // Set File to Read
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US);
-                
+        // Set File to Read                
         FileReader file = null;
-        System.out.println("Start Read File DSSATPRO." + version + " : " + df.format(new Date()));
+        System.out.println("Start Read File DSSATPRO." + version + " : " + Variables.getDateFormatWithTime().format(new Date()));
             
         // <editor-fold defaultstate="collapsed" desc="DSSATPRO.vxx">
         try {

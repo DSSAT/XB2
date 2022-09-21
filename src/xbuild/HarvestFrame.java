@@ -4,6 +4,7 @@ import DSSATModel.CropList;
 import DSSATModel.GrowthStageList;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSizeList;
+import Extensions.Variables;
 import FileXModel.Cultivar;
 import FileXModel.FileX;
 import FileXModel.Harvest;
@@ -12,9 +13,7 @@ import FileXModel.IModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -421,9 +420,7 @@ public class HarvestFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(harvestApp.HDATE));
+            vector.addElement(Variables.getDateFormat().format(harvestApp.HDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);

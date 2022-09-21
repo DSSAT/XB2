@@ -1,15 +1,13 @@
 package DSSATRepository;
 
+import Extensions.Variables;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import xbuild.ExtendFilter;
 
 /**
@@ -23,9 +21,8 @@ public class SoilRepository extends DSSATRepositoryBase {
     }
     
     @Override
-    public ArrayList<String> Parse() throws IOException {        
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US);
-        System.out.println("Start Read Soil.LST : " + df.format(new Date()));
+    public ArrayList<String> Parse() throws IOException {
+        System.out.println("Start Read Soil.LST : " + Variables.getDateFormatWithTime().format(new Date()));
 
         ArrayList<String> soilList = new ArrayList<>();
         try {

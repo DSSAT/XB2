@@ -2,6 +2,7 @@ package xbuild;
 
 import DSSATModel.FertilizerMethodList;
 import DSSATModel.ResiduesList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Organic;
@@ -9,8 +10,6 @@ import FileXModel.OrganicApplication;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -87,6 +86,7 @@ public class OrganicFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        groupManagement = new javax.swing.ButtonGroup();
         txtYear = new javax.swing.JTextField();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
@@ -106,6 +106,7 @@ public class OrganicFrame extends IXInternalFrame {
 
         jXLabel2.setText("Management");
 
+        groupManagement.add(rdDaysAfterPlanting);
         rdDaysAfterPlanting.setSelected(true);
         rdDaysAfterPlanting.setText("Days After Planting");
         rdDaysAfterPlanting.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -114,6 +115,7 @@ public class OrganicFrame extends IXInternalFrame {
             }
         });
 
+        groupManagement.add(rdReportedDates);
         rdReportedDates.setText("On Reported Dates");
 
         bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
@@ -258,7 +260,7 @@ public class OrganicFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 OrganicApplication organicApp = organicDialog.GetData();
-                if (organicApp != null) {
+                if (organicApp != null && (organicApp.RDATE != null || organicApp.RDAY != null)) {
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
                     while (model.getRowCount() > 0) {
                         model.removeRow(0);
@@ -324,9 +326,7 @@ public class OrganicFrame extends IXInternalFrame {
 
         Vector vector = new Vector();
         try {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(organicApp.RDATE));
+            vector.addElement(Variables.getDateFormat().format(organicApp.RDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
@@ -392,6 +392,7 @@ public class OrganicFrame extends IXInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.ButtonGroup groupManagement;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;

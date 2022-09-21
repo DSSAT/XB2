@@ -5,6 +5,7 @@ import DSSATModel.Soil;
 import DSSATModel.SoilList;
 import DSSATModel.SoilProfile;
 import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
@@ -14,11 +15,9 @@ import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
@@ -170,6 +169,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         imagePanel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel20 = new org.jdesktop.swingx.JXLabel();
         bnAddLayer = new javax.swing.JButton();
@@ -186,6 +186,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         bnRecalculate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbSoil = new xbuild.Components.XComboBox();
+        jLabel5 = new javax.swing.JLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
 
@@ -405,7 +406,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel1.setText("Measurement Date");
 
-        dpICDAT.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpICDAT.setFormats(Variables.getDateFormat());
         dpICDAT.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpICDATPropertyChange(evt);
@@ -450,6 +451,8 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel6.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
@@ -463,7 +466,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                                 .addGap(147, 147, 147)
                                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6))
                             .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
@@ -483,7 +488,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
@@ -548,7 +554,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jLabel1.setText("Measurement Date");
 
-        dpProfileDate.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpProfileDate.setFormats(Variables.getDateFormat());
         dpProfileDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpProfileDatePropertyChange(evt);
@@ -626,6 +632,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel5.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
         jXPanel2Layout.setHorizontalGroup(
@@ -639,7 +647,10 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jXPanel2Layout.createSequentialGroup()
+                                .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5))
                             .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -666,7 +677,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -837,6 +849,8 @@ public class InitialConditionFrame extends IXInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;

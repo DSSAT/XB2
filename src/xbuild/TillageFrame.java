@@ -1,6 +1,7 @@
 package xbuild;
 
 import DSSATModel.TillageImplementList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Tillage;
@@ -8,8 +9,6 @@ import FileXModel.TillageApplication;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
@@ -291,9 +290,7 @@ public class TillageFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(tilApp.TDATE));
+            vector.addElement(Variables.getDateFormat().format(tilApp.TDATE));
         }
         catch(Exception ex)
         {

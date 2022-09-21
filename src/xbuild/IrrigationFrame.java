@@ -1,6 +1,7 @@
 package xbuild;
 
 import DSSATModel.IrrigationMethodList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Irrigation;
@@ -10,8 +11,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
@@ -387,9 +386,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(irrigApp.IDATE));
+            vector.addElement(Variables.getDateFormat().format(irrigApp.IDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);

@@ -1,6 +1,7 @@
 package xbuild;
 
 import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
 import FileXModel.FileX;
@@ -302,15 +303,12 @@ public class EnvironmentalFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
-    private Object[] SetRow(EnvironmentApplication envApp) {        
-        Locale l = new Locale("en", "US");
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-        
+    private Object[] SetRow(EnvironmentApplication envApp) {               
         ArrayList<Object> vector = new ArrayList<>();
         
         //DateFormat df = DateFormat.getDateInstance(DateFormat., l);
         try {
-            vector.add(df.format(envApp.ODATE));
+            vector.add(Variables.getDateFormat().format(envApp.ODATE));
         } catch (Exception e) {
             vector.add("");
         }

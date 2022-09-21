@@ -19,14 +19,13 @@ import DSSATModel.HarvestComponent;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSize;
 import DSSATModel.HarvestSizeList;
+import Extensions.Variables;
 import ListDialog.GStageDialog;
 import ListDialog.HarvestComponentDialog;
 import ListDialog.HarvestSizeDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  *
@@ -105,7 +104,7 @@ public class HarvestDialog extends javax.swing.JDialog {
 
         lbDate.setText("Date");
 
-        dpHDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpHDATE.setFormats(Variables.getDateFormat());
         dpHDATE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dpHDATEActionPerformed(evt);

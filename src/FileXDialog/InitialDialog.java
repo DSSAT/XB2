@@ -11,6 +11,7 @@
 
 package FileXDialog;
 
+import Extensions.Variables;
 import FileXModel.InitialCondition;
 import FileXModel.FileX;
 import java.text.DateFormat;
@@ -139,8 +140,7 @@ public class InitialDialog extends javax.swing.JDialog {
             }
 
             try {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                object[2] = df.format(init.ICDAT);
+                object[2] = Variables.getDateFormat().format(init.ICDAT);
             } catch (Exception e) {
                 object[2] = "";
             }

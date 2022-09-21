@@ -2,6 +2,7 @@ package xbuild;
 
 import DSSATModel.ChemicalMaterialList;
 import DSSATModel.FertilizerMethodList;
+import Extensions.Variables;
 import FileXModel.Chemical;
 import FileXModel.ChemicalApplication;
 import FileXModel.FileX;
@@ -304,8 +305,7 @@ public class ChemicalFrame extends IXInternalFrame {
         try
         {
             Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(chemApp.CDATE));
+            vector.addElement(Variables.getDateFormat().format(chemApp.CDATE));
         }
         catch(Exception ex)
         {

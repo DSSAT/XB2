@@ -14,6 +14,7 @@ package FileXDialog;
 import FileXModel.SoilAnalysis;
 import FileXModel.FileX;
 import DSSATModel.CropList;
+import Extensions.Variables;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -141,8 +142,7 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
             }
 
             try {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                object[2] = df.format(soil.SADAT);
+                object[2] = Variables.getDateFormat().format(soil.SADAT);
             } catch (Exception e) {
                 object[2] = "";
             }
