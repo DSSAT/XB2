@@ -37,7 +37,7 @@ public class Irrigation implements Cloneable, IModelXBase {
     public void AddApp(IrrigationApplication irrig)
     {
         irrigApps.add(irrig);
-        Collections.sort(irrigApps, Comparator.comparing(IrrigationApplication::getOrder));
+        Collections.sort(irrigApps, irrig.IDATE != null ? Comparator.comparing(IrrigationApplication::getOrder) : Comparator.comparing(IrrigationApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

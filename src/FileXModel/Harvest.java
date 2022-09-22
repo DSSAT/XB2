@@ -32,7 +32,7 @@ public class Harvest implements Cloneable, IModelXBase {
     public void AddApp(HarvestApplication harvestApp)
     {
         harvestApps.add(harvestApp);
-        Collections.sort(harvestApps, Comparator.comparing(HarvestApplication::getOrder));
+        Collections.sort(harvestApps, harvestApp.HDATE != null ? Comparator.comparing(HarvestApplication::getOrder) : Comparator.comparing(HarvestApplication::getOrder));
     }
 
     public void RemoveAt(int level)

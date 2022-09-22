@@ -31,7 +31,7 @@ public class Fertilizer implements Cloneable, IModelXBase {
     public void AddApp(FertilizerApplication fer)
     {
         ferApps.add(fer);
-        Collections.sort(ferApps, Comparator.comparing(FertilizerApplication::getOrder));
+        Collections.sort(ferApps, fer.FDATE != null ? Comparator.comparing(FertilizerApplication::getOrder) : Comparator.comparing(FertilizerApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

@@ -30,6 +30,10 @@ public class FertilizerApplication implements Cloneable {
         return FDATE;
     }
     
+    public Integer getOrderDay(){
+        return FDAY;
+    }
+    
     public FertilizerApplication Clone(){
         try {
             return (FertilizerApplication) this.clone();
