@@ -182,7 +182,6 @@ public class GeneralService {
 
         // <editor-fold defaultstate="collapsed" desc="PLOT">
 
-        if (general.PAREA != null || general.PRNO != null || general.PLEN != null || general.PLDR != null || general.PLSP != null || general.PLAY != null || general.HAREA != null || general.HRNO != null || general.HLEN != null || general.HARM != null) {
             pw.println("@ PAREA  PRNO  PLEN  PLDR  PLSP  PLAY HAREA  HRNO  HLEN  HARM.........");
             pw.print(Utils.PadLeft(general.PAREA, 7, ' '));
 
@@ -195,7 +194,6 @@ public class GeneralService {
             pw.print(Utils.PadLeft(general.HRNO, 6, ' '));
             pw.print(Utils.PadLeft(general.HLEN, 6, ' '));
             pw.print(Utils.PadLeft(general.HARM, 15, ' '));
-        }
         // </editor-fold>
         // </editor-fold>
     }

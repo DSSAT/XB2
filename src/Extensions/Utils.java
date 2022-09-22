@@ -227,6 +227,9 @@ public class Utils {
         for (int i = value.length(); i < count; i++) {
             value += character;
         }
+        
+        if(value.length() > count)
+            value = value.substring(0, count);
 
         return value;
     }
