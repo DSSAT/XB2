@@ -158,7 +158,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
             cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
         }
         else{
-            cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200), new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+            cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 150), new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
         }
     
         EventQueue.invokeLater(() -> {
