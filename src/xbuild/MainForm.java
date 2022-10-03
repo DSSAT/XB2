@@ -543,7 +543,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.setVisible(false);
 
         FileX.CloseFile();
-        this.setTitle("");
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
@@ -558,7 +557,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             ResetTree();
 
             File file = fc.getSelectedFile();
-            this.setTitle(file.getName());
 
             FileXService.OpenFileX(file);
 
