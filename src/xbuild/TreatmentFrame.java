@@ -166,7 +166,7 @@ public class TreatmentFrame extends IXInternalFrame  {
 
         p.y += (row + 1) * jXTable1.getRowHeight();
 
-        int addCol = "Sequential".equals(FileX.general.FileType) ? 3 : 0;
+        int addCol = FileX.general.FileType == ExperimentType.Sequential ? 3 : 0;
 
         if(col == 2 + addCol) ShowCultivar(col, row, p);
         else if(col == 3 + addCol) ShowField(col, row, p);
