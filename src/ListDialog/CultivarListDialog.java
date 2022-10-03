@@ -169,7 +169,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
     private void cbCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCropActionPerformed
         Crop crop = (Crop) cbCrop.getSelectedItem();
         if(crop != null){
-            cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAt(crop), new XColumn[]{ new XColumn("CulName", "Cultivar Name", 200)}, "CropCode", 430);
+            cbCultivar.setInit(null, "INGENO", "", CultivarList.GetAt(crop), new XColumn[]{ new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
         }
     }//GEN-LAST:event_cbCropActionPerformed
 
@@ -197,7 +197,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
             cbCrop.setVisible(false);
             jLabel1.setVisible(false);
             jLabel2.setVisible(false);
-            cbCultivar.setInit(null, "CulCode", cul != null ? cul.CR : "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+            cbCultivar.setInit(null, "INGENO", cul != null ? cul.INGENO : "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
             this.setPreferredSize(new Dimension(this.getPreferredSize().width, 590));
             
             EventQueue.invokeLater(() -> {
