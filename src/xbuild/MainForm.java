@@ -161,7 +161,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jMenuCloseFile = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuSaveFile = new javax.swing.JMenuItem();
-        jMenuSaveAsFile = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuExit = new javax.swing.JMenuItem();
         jMenuRefresh = new javax.swing.JMenu();
@@ -280,16 +279,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
         jMenuFile.add(jMenuSaveFile);
-
-        jMenuSaveAsFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/16/filesaveas.png"))); // NOI18N
-        jMenuSaveAsFile.setText("Save File As..");
-        jMenuSaveAsFile.setEnabled(false);
-        jMenuSaveAsFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSaveAsFileActionPerformed(evt);
-            }
-        });
-        jMenuFile.add(jMenuSaveAsFile);
         jMenuFile.add(jSeparator2);
 
         jMenuExit.setText("Exit");
@@ -817,10 +806,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
     }//GEN-LAST:event_jPopupMenuSimItemRenameActionPerformed
 
-    private void jMenuSaveAsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveAsFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuSaveAsFileActionPerformed
-
     private void jPopupMenuSimItemMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemMoveUpActionPerformed
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
@@ -884,7 +869,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private javax.swing.JMenuItem jMenuNewFile;
     private javax.swing.JMenuItem jMenuOpenFile;
     private javax.swing.JMenu jMenuRefresh;
-    private javax.swing.JMenuItem jMenuSaveAsFile;
     private javax.swing.JMenuItem jMenuSaveFile;
     private javax.swing.JPopupMenu jPopupMenuAdd;
     private javax.swing.JPopupMenu jPopupMenuItem;

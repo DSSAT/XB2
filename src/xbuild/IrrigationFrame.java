@@ -11,8 +11,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -47,9 +49,66 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(irrig, "IRNAME", irrig.IRNAME);
         
+        rdDaysAfterPlanting.addChangeListener(new javax.swing.event.ChangeListener() {
+            @Override
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rdDaysAfterPlantingStateChanged(evt);
+            }
+        });
+        
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\irrigation2.jpg");
+            rdDaysAfterPlantingStateChanged(null);
         });
+    }
+    
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
+        if(rdDaysAfterPlanting.isSelected())
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("Days After Planting");
+            if(irrig.GetApps() != null){
+                irrig.GetApps().forEach(h -> {
+                    h.IDATE = null;
+                });
+            }
+            
+            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                try {
+                    int val = Integer.parseInt(valueAt.toString());
+                    model.setValueAt(0, i, 0);
+                } catch (NumberFormatException ex) {
+                    model.setValueAt(0, i, 0);
+                }
+            }
+        }
+        else
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if(irrig.GetApps() != null){
+                irrig.GetApps().forEach(harvest -> {
+                    harvest.IDAY = null;
+                });
+            }
+            
+            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                if(valueAt != null){
+                    try {
+                        long val = Date.parse(valueAt.toString());
+                        if (val == 0) {
+                            model.setValueAt(0, i, 0);
+                        }
+                    } catch (Exception ex) {
+                        model.setValueAt(0, i, 0);
+                    }
+                }
+            }
+        }        
     }
     
     /**
@@ -295,7 +354,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         {
             int nRow = jXTable1.getSelectedRow();
             IrrigationApplication ir = null;
-            if(nRow > 0){
+            if(nRow >= 0){
                 IrrigationApplication tmp = irrig.GetApp(nRow);
                 ir = tmp.Clone();
             }
