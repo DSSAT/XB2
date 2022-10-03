@@ -49,6 +49,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         txtIDATE.setVisible(bDay);
         lbDate.setVisible(!bDay);
         dpIDATE.setVisible(!bDay);
+        jLabel1.setVisible(!bDay);
 
         txtIDATE.addKeyListener(this);
         dpIDATE.addKeyListener(this);

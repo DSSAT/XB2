@@ -225,6 +225,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(" XB2 v0.1.0.0.");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -635,6 +636,22 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (node == null) {
             return;
         }
+        
+        boolean enabled = true;
+        String nodeName = node.toString();
+
+        if (node.getParent() != null && !nodeName.equals("General Information")) {
+            enabled = FileXValidationService.IsGeneralValid();
+        }
+
+        if (nodeName.equals("Treatment")) {
+            enabled = FileXValidationService.IsMinimumRequired();
+        }
+        
+        if(!enabled){
+            return;
+        }
+        
 
         if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
             if (SwingUtilities.isRightMouseButton(evt) || node.getChildCount() == 0) {

@@ -358,9 +358,11 @@ public class HarvestFrame extends IXInternalFrame {
         {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("Day");
-            harvestApp.GetAll().forEach(h -> {
-                h.HDATE = null;
-            });
+            if(harvestApp.GetAll() != null){
+                harvestApp.GetAll().forEach(h -> {
+                    h.HDATE = null;
+                });
+            }
             
             DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -377,9 +379,11 @@ public class HarvestFrame extends IXInternalFrame {
         {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("Date");
-            harvestApp.GetAll().forEach(harvest -> {
-                harvest.HDAY = null;
-            });
+            if(harvestApp.GetAll() != null){
+                harvestApp.GetAll().forEach(harvest -> {
+                    harvest.HDAY = null;
+                });
+            }
             
             DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -388,12 +392,10 @@ public class HarvestFrame extends IXInternalFrame {
                     try {
                         long val = Date.parse(valueAt.toString());
                         if (val == 0) {
-                            model.setValueAt(i, 0, 0);
-                        } else {
-                            model.setValueAt(i, 0, 0);
+                            model.setValueAt(0, i, 0);
                         }
                     } catch (Exception ex) {
-                        model.setValueAt(i, 0, 0);
+                        model.setValueAt(0, i, 0);
                     }
                 }
             }

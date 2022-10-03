@@ -709,7 +709,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         try
         {
             doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
-            if(cbFileType.getSelectedItem().toString().equals("Experimental"))
+            if(cbFileType.getSelectedItem().toString().equals("Experimental") && !FileX.general.crop.CropCode.isEmpty())
             {
                 doc += "." + FileX.general.crop.CropCode + "X";
             }

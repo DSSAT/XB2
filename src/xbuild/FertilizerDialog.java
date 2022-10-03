@@ -55,6 +55,7 @@ public class FertilizerDialog extends javax.swing.JDialog {
         txtFDATE.setVisible(bDay);
         lbDate.setVisible(!bDay);
         dpFDATE.setVisible(!bDay);
+        jLabel1.setVisible(!bDay);
 
         LoadFerApp();
     }
