@@ -59,6 +59,9 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\irrigation2.jpg");
             rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned);
         });
     }
     

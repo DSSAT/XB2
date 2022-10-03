@@ -55,6 +55,9 @@ public class FertilizerFrame extends IXInternalFrame {
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\Fert2.jpg");
             rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned);
         });
     }
     
