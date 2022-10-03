@@ -17,6 +17,7 @@ import xbuild.Events.XEvent;
 import xbuild.Events.AddLevelEvent;
 import FileXModel.FileX;
 import DSSATModel.DssatProfile;
+import DSSATModel.ExperimentType;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
 import FileXModel.ManagementList;
@@ -462,13 +463,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         //File f = new File(root.getUserObject().toString());
         String target = null;
         try {
-            if (FileX.general.crop != null) {
+            if (FileX.general.crop != null && FileX.general.crop.CropCode != null && !FileX.general.crop.CropCode.isEmpty()) {
                 target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
-            } else if ("Seasonal".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Seasonal) {
                 target = DssatProfile.GetAt("ASD");
-            } else if ("Sequential".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Sequential) {
                 target = DssatProfile.GetAt("AQD");
-            } else if ("Spatial".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Spatial) {
                 target = DssatProfile.GetAt("APD");
             } else {
                 target = new Setup().GetDSSATPath();
