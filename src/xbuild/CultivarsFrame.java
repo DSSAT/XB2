@@ -11,7 +11,6 @@
 
 package xbuild;
 
-import xbuild.Events.RemoveLevelEvent;
 import xbuild.Events.AddLevelEvent;
 import FileXModel.Cultivar;
 import FileXModel.FileX;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.UpdateLevelEvent;
 
 /**
  *
@@ -80,6 +80,11 @@ public class CultivarsFrame extends IXInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jXTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jXTable1);
         if (jXTable1.getColumnModel().getColumnCount() > 0) {
             jXTable1.getColumnModel().getColumn(0).setMinWidth(50);
@@ -115,9 +120,47 @@ public class CultivarsFrame extends IXInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
+        if(evt.getClickCount() == 2)
+        {
+            int nRow = jXTable1.getSelectedRow();
+            Cultivar culEdit = (Cultivar)FileX.cultivars.GetAt(nRow);
+            
+            final CultivarListDialog dialog = new CultivarListDialog(null, culEdit, true);
+            dialog.show();
+            
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    ArrayList<DSSATModel.Cultivar> culs = dialog.GetData();
+                    if (culs != null) {
+                        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+
+                        DSSATModel.Cultivar cul = culs.get(0);
+                        
+                        //culs.forEach(cul -> {
+                            
+                            //if(culEdit.INGENO.equals(cul.CulCode)){
+                                model.setValueAt(cul.CropName, nRow, 1);
+                                model.setValueAt(cul.CulName, nRow, 2);
+                                
+                                culEdit.CR = cul.CropCode;
+                                culEdit.INGENO = cul.CulCode;
+                                culEdit.CNAME = cul.CulName;
+                                
+                                l.myAction(new UpdateLevelEvent(this, "Cultivars", "Level " + (nRow + 1) + ": " + culEdit.GetName(), nRow));
+                        //    }
+                        //});
+                    }
+                    dialog.SetNull();
+                }
+            });
+        }
+    }//GEN-LAST:event_jXTable1MouseClicked
+
     
     public void AddNewCultivar(){
-        final CultivarListDialog dialog = new CultivarListDialog(null, true);
+        final CultivarListDialog dialog = new CultivarListDialog(null, null, true);
         dialog.show();
 
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
