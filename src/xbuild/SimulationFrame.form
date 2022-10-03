@@ -1689,8 +1689,8 @@
                 <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel9">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Fertilization">
-                        <Property name="tabTitle" type="java.lang.String" value="Fertilization"/>
+                      <JTabbedPaneConstraints tabName="Fertilizer">
+                        <Property name="tabTitle" type="java.lang.String" value="Fertilizer"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
