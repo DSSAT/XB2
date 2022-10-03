@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.ComboBoxEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -28,16 +27,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter.SortKey;
 import javax.swing.SortOrder;
 import javax.swing.event.RowSorterEvent;
-import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
-import javax.swing.plaf.metal.MetalComboBoxEditor;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.JTextComponent;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -182,6 +177,11 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         }
     }
     
+    public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, int height){
+        setInit(model, fieldName, value, list, columns, codeField);
+        table.setPreferredSize(new Dimension(table.getPreferredSize().width, height));
+    }
+    
     private void setRowFocused(String text) throws Exception{
         if (columns.length > 1) {
             int index = getSelectedIndex();
@@ -190,7 +190,6 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 String fieldName = columns[1].getFieldName();
                 int i = 0;
                 for (E m : this.list) {
-                    System.out.println(this.getFieldValue(m, fieldName).toLowerCase());
                     if(this.getFieldValue(m, fieldName).toLowerCase().startsWith(text.toLowerCase())){
                         setSelectedIndex(i);
                         System.out.println(i);

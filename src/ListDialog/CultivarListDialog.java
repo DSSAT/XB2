@@ -14,17 +14,12 @@ package ListDialog;
 import FileXModel.FileX;
 import DSSATModel.Cultivar;
 import DSSATModel.CultivarList;
-import DSSATModel.ExperimentType;
+import Extensions.Utils;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
-import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
-import org.jdesktop.swingx.treetable.TreeTableModel;
+import xbuild.Components.XColumn;
 
 /**
  *
@@ -46,7 +41,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
         int screenWidth = screenSize.width;
         Dimension winSize = getSize();
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
-
+        
         AddDataToTable();
     }
 
@@ -59,42 +54,11 @@ public class CultivarListDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
         bnOK = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
+        cbCultivar = new xbuild.Components.XDropdownTableComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Crop Code", "Crop Name", "Cultivar Code", "Cultivar Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jXTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jXTable1);
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -110,83 +74,51 @@ public class CultivarListDialog extends javax.swing.JDialog {
             }
         });
 
+        cbCultivar.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cbCultivarPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bnOK)
-                .addGap(26, 26, 26)
-                .addComponent(bnCancel)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 219, Short.MAX_VALUE)
+                        .addComponent(bnOK)
+                        .addGap(26, 26, 26)
+                        .addComponent(bnCancel))
+                    .addComponent(cbCultivar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(cbCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 531, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnOK)
                     .addComponent(bnCancel))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        if(evt.getClickCount() == 2) {
-            cultivars = new ArrayList<>();
-            Cultivar cultivar = new Cultivar();
-
-            TableModel tbModel = jXTable1.getModel();
-            int viewRow = jXTable1.getSelectedRow();
-            int row = -1;
-            if (viewRow < 0) {
-                row = viewRow;
-            } else {
-                row = jXTable1.convertRowIndexToModel(viewRow);
-            }
-            
-            //ListSelectionModel sel = jXTable1.getSelectionModel();
-
-            cultivar.CropCode = (String) tbModel.getValueAt(row, 0);
-            cultivar.CropName = (String) tbModel.getValueAt(row, 1);
-            cultivar.CulCode = (String) tbModel.getValueAt(row, 2);
-            cultivar.CulName = (String) tbModel.getValueAt(row, 3);
-            
-            cultivars.add(cultivar);
-
-            dispose();
-        }
-    }//GEN-LAST:event_jXTable1MouseClicked
-
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         cultivars = new ArrayList<>();
         
-        for(int viewRow : jXTable1.getSelectedRows()){
-            Cultivar cultivar = new Cultivar();
-
-            TableModel tbModel = jXTable1.getModel();
-            //int viewRow = jXTable1.getSelectedRows()
-            int row = -1;
-            if (viewRow < 0) {
-                row = viewRow;
-            } else {
-                row = jXTable1.convertRowIndexToModel(viewRow);
-            }
-            
-            //ListSelectionModel sel = jXTable1.getSelectionModel();
-
-            cultivar.CropCode = (String) tbModel.getValueAt(row, 0);
-            cultivar.CropName = (String) tbModel.getValueAt(row, 1);
-            cultivar.CulCode = (String) tbModel.getValueAt(row, 2);
-            cultivar.CulName = (String) tbModel.getValueAt(row, 3);
-            
-            cultivars.add(cultivar);
-        }
+        Cultivar c = (Cultivar)cbCultivar.getSelectedItem();
+        cultivars.add(c);
         
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
@@ -196,12 +128,19 @@ public class CultivarListDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
 
+    private void cbCultivarPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCultivarPopupMenuWillBecomeInvisible
+        EventQueue.invokeLater(() -> {            
+            Utils.setTimeout(() -> {
+                cbCultivar.showPopup();
+            }, 1);
+        });
+    }//GEN-LAST:event_cbCultivarPopupMenuWillBecomeInvisible
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;
     private javax.swing.JButton bnOK;
-    private javax.swing.JScrollPane jScrollPane2;
-    private org.jdesktop.swingx.JXTable jXTable1;
+    private xbuild.Components.XDropdownTableComboBox cbCultivar;
     // End of variables declaration//GEN-END:variables
 
     public ArrayList<Cultivar> GetData() {
@@ -214,146 +153,13 @@ public class CultivarListDialog extends javax.swing.JDialog {
     }
 
     private void AddDataToTable() {
-        DefaultTableModel tbModel = (DefaultTableModel) jXTable1.getModel();
-
-        if (FileX.general.FileType != null && FileX.general.FileType == ExperimentType.Experimental)  {
-            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
-            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
-            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(0));
-
-            CultivarList.GetAt(FileX.general.crop).forEach(cul -> {
-                tbModel.addRow(new Object[]{cul.CropCode, cul.CropName, cul.CulCode, cul.CulName});
-            });
-        }
-        else{
-            CultivarList.GetAll().forEach(cul -> {
-                tbModel.addRow(new Object[]{cul.CropCode, cul.CropName, cul.CulCode, cul.CulName});
-            });
-        }
+        cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+    
+        EventQueue.invokeLater(() -> {
+            Utils.setTimeout(() -> {
+                cbCultivar.showPopup();
+            }, 50);
+        });
         
     }
-
-    private static class MyTreeTableModel extends AbstractTreeTableModel  {
-
-        public MyTreeTableModel(Object root) {
-            super(root);
-        }
-
-    /**
-     * Error in AbstractTreeTableModel !!!
-     * Without overriding this method you can't expand the tree!
-     */
-        @Override
-        public Class getColumnClass(int column) {
-          switch (column)
-          {
-          case 0:
-            return TreeTableModel.class;
-          default:
-            return Object.class;
-          }
-        }
-
-        public Object getChild(Object parent, int index) {
-          assert parent instanceof MutableTreeNode;
-          MutableTreeNode treenode = (MutableTreeNode) parent;
-          return treenode.getChildAt(index);
-        }
-
-        public int getChildCount(Object parent) {
-          assert parent instanceof MutableTreeNode;
-          MutableTreeNode treenode = (MutableTreeNode) parent;
-          return treenode.getChildCount();
-        }
-
-        public int getColumnCount() {
-          return FileX.general.FileType == ExperimentType.Experimental ? 1 : 2;
-        }
-
-            @Override
-        public String getColumnName(int column) {
-            if (FileX.general.FileType == ExperimentType.Experimental) {
-                switch (column) {
-                    case 0:
-                        return "Cultivar";
-
-                    default:
-                        return null;
-                }
-            } else {
-                switch (column) {
-                    case 0:
-                        return "Crop";
-                    case 1:
-                        return "Cultivar";
-
-                    default:
-                        return null;
-                }
-            }
-        }
-
-        public Object getValueAt(Object node, int column) {
-            assert node instanceof DefaultMutableTreeNode;
-            DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) node;
-            //Person person = (Person) treenode.getUserObject();
-            Cultivar cul = (Cultivar) treenode.getUserObject();
-            if (FileX.general.FileType == ExperimentType.Experimental) {
-                switch (column) {
-                    case 0:
-                        return cul.CulName;
-
-                    default:
-                        return null;
-                }
-            } else {
-                switch (column) {
-                    case 0:
-                        return cul.CulCode;
-                    case 1:
-                        return cul.CulName;
-                    default:
-                        return null;
-                }
-            }
-
-        }
-
-            public int getIndexOfChild(Object parent, Object child) {
-                return 0;
-            }
-      }
-
-    private static DefaultMutableTreeNode getExampleFamily() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new Cultivar());
-        if(FileX.general.FileType != null && FileX.general.FileType == ExperimentType.Experimental 
-                && FileX.general.crop != null && !FileX.general.crop.CropCode.equalsIgnoreCase("")){
-            for (Cultivar cul : CultivarList.GetAt(FileX.general.crop)) {
-                Cultivar c = new Cultivar();
-                c.CropCode = cul.CropCode;
-                c.CulCode = cul.CulCode;
-                c.CulName = cul.CulName;
-                DefaultMutableTreeNode child = new DefaultMutableTreeNode(c);
-                root.add(child);
-            }
-        }
-        else{
-            DefaultMutableTreeNode child1 = null;
-            String cropCode = ""; 
-            for (Cultivar cul : CultivarList.GetAll()) {
-                if (!cul.CropCode.equals(cropCode)) {
-                    Cultivar c = new Cultivar();
-                    c.CropCode = cul.CropCode;
-                    c.CulCode = cul.CropCode;
-                    c.CulName = cul.CropName;
-                    child1 = new DefaultMutableTreeNode(c);
-                    root.add(child1);
-                    cropCode = cul.CropCode;
-                }
-                child1.add(new DefaultMutableTreeNode(cul));
-            }
-        }
-        return root;
-      }
-
 }

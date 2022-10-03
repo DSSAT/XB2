@@ -17,6 +17,11 @@ public class Cultivar extends Crop {
     {
 
     }
+    
+    @Override
+    public String toString(){
+        return CulName;
+    }
 
     public Cultivar(Crop crop) {
         CropCode = crop.CropCode;
