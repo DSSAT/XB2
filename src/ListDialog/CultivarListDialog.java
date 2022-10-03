@@ -14,6 +14,7 @@ package ListDialog;
 import FileXModel.FileX;
 import DSSATModel.Cultivar;
 import DSSATModel.CultivarList;
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -153,7 +154,12 @@ public class CultivarListDialog extends javax.swing.JDialog {
     }
 
     private void AddDataToTable() {
-        cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+        if(FileX.general.FileType == ExperimentType.Experimental){
+            cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+        }
+        else{
+            cbCultivar.setInit(null, "CulCode", "", CultivarList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200), new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+        }
     
         EventQueue.invokeLater(() -> {
             Utils.setTimeout(() -> {
