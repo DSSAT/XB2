@@ -42,7 +42,6 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  */
 public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
-    //private Object model;
     //private String fieldName;
     private String value;
     private String codeField;
@@ -82,7 +81,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         super();
     }
 
-    public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField) {
+    public void setInit(E model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField) {
         //this.model = model;
         //this.fieldName = fieldName;
         DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
@@ -148,7 +147,10 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
                 try {
                     String val = getFieldValue(selectItem, codeField);
-                    UpdateComponent.updateModel(model, fieldName, val);
+                    
+                    if(val != null && !val.isEmpty() && !val.isBlank()){
+                        UpdateComponent.updateModel(model, fieldName, val);
+                    }
                 } catch (Exception ex) {
 
                 }
@@ -177,7 +179,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         }
     }
     
-    public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, int height){
+    public void setInit(E model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, int height){
         setInit(model, fieldName, value, list, columns, codeField);
         table.setPreferredSize(new Dimension(table.getPreferredSize().width, height));
     }

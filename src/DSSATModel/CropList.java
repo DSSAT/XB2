@@ -7,7 +7,6 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,11 +14,11 @@ import java.util.List;
  * @author Jazzy
  */
 public class CropList {
-    protected static HashMap crops = new HashMap();
+    protected static ArrayList<Crop> crops = new ArrayList<>();
 
     public static void AddNew(Crop crop)
     {
-        crops.put(crop.CropCode, crop);
+        crops.add(crop);
     }
     
     public static void Clear()
@@ -31,7 +30,18 @@ public class CropList {
     {
         Crop crop = null;
         try{
-            crop = (Crop) crops.get(Code);
+            Object[] object = crops.toArray();
+            for(int i = 0;i < object.length;i++)
+            {
+                if(((Crop)object[i]).CropCode.equals(Code))
+                {
+                    Crop tmp = ((Crop) object[i]);
+                    crop = new Crop();
+                    crop.CropCode = tmp.CropCode;
+                    crop.CropName = tmp.CropName;
+                    break;
+                }
+            }
         }
         catch(Exception ex) {}
 
@@ -42,7 +52,7 @@ public class CropList {
     {
         Crop crop = null;
         try{
-            Object[] object = crops.values().toArray();
+            Object[] object = crops.toArray();
             crop = (Crop) object[n];
         }
         catch(Exception ex) {}
@@ -58,7 +68,7 @@ public class CropList {
     public static List<Crop> GetAll(){
         List<Crop> cropList = new ArrayList<>();
 
-        Object[] objects = crops.values().toArray();
+        Object[] objects = crops.toArray();
 
         for (Object object : objects) {
             cropList.add((Crop) object);
@@ -72,7 +82,7 @@ public class CropList {
     public static Crop GetAtName(String CropName) {
         Crop crop = null;
         try{
-            Object[] object = crops.values().toArray();
+            Object[] object = crops.toArray();
             for(int i = 0;i < object.length;i++)
             {
                 if(((Crop)object[i]).CropName.equals(CropName))
