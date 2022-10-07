@@ -15,10 +15,10 @@
     <description>Create XBuild2 Java app for DSSAT</description>
 
     <!-- Version -->
-    <property name="version" value="v1.0.0.0" />
+    <property name="version" value="v0.2.0.0" />
 
     <target name="-post-jar" depends="compile" description="package, output to JAR">
-        <property name="store.jar.name" value="XBuild2" />
+        <property name="store.jar.name" value="XB2" />
 
         <!-- Java sources -->
         <property name="src.dir" location="src" />
