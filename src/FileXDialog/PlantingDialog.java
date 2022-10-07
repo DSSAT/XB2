@@ -13,10 +13,7 @@ package FileXDialog;
 
 import FileXModel.Planting;
 import FileXModel.FileX;
-import DSSATModel.CropList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import Extensions.Variables;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -140,8 +137,7 @@ public class PlantingDialog extends javax.swing.JDialog {
             }
 
             try {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                object[2] = df.format(plant.PDATE);
+                object[2] = Variables.getDateFormat().format(plant.PDATE);
             } catch (Exception e) {
                 object[2] = "";
             }

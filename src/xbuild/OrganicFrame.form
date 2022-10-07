@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="groupManagement">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -27,36 +31,25 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txtDescription" min="-2" pref="655" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="818" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="txtYear" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" min="-2" pref="818" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -76,23 +69,27 @@
                           <Component id="lblLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jXLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="rdReportedDates" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdDaysAfterPlanting" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="rdDaysAfterPlanting" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="rdReportedDates" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="473" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="568" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
@@ -101,32 +98,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtYear">
-    </Component>
-    <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Year"/>
-      </Properties>
-    </Component>
-    <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Management"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rdDaysAfterPlanting">
-      <Properties>
-        <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Days After Planting"/>
-      </Properties>
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="rdDaysAfterPlantingStateChanged"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rdReportedDates">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="On Reported Dates"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="bnAddLayer">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -199,6 +170,28 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="99" type="rgb"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Management"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rdDaysAfterPlanting">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="groupManagement"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Days After Planting"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rdReportedDates">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="groupManagement"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="On Reported Dates"/>
       </Properties>
     </Component>
   </SubComponents>

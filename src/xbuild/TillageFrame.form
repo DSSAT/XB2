@@ -42,12 +42,6 @@
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="822" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jXLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtYear" min="-2" pref="77" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="imagePanel" min="-2" pref="244" max="-2" attributes="0"/>
@@ -68,15 +62,10 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="545" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -86,13 +75,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Year"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtYear">
-    </Component>
     <Component class="javax.swing.JButton" name="bnAddLayer">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

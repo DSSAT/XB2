@@ -1,19 +1,14 @@
 package DSSATRepository;
 
+import Extensions.Variables;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import xbuild.ExtendFilter;
-import xbuild.LoadingDataFrame;
 
 /**
  *
@@ -26,9 +21,8 @@ public class SoilRepository extends DSSATRepositoryBase {
     }
     
     @Override
-    public ArrayList<String> Parse() throws IOException {        
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US);
-        System.out.println("Start Read Soil.LST : " + df.format(new Date()));
+    public ArrayList<String> Parse() throws IOException {
+        System.out.println("Start Read Soil.LST : " + Variables.getDateFormatWithTime().format(new Date()));
 
         ArrayList<String> soilList = new ArrayList<>();
         try {
@@ -40,18 +34,30 @@ public class SoilRepository extends DSSATRepositoryBase {
                 BufferedReader sReader = new BufferedReader(fileRead);
 
                 String strRead = "";
-                
+                Boolean isProfile = false;
                 while ((strRead = sReader.readLine()) != null) {
-                    if(strRead.startsWith("*") && !strRead.toLowerCase().startsWith("*soils")){
-                        try{
+                    if(!strRead.isBlank() && strRead.startsWith("*") && !strRead.toLowerCase().startsWith("*soils") && strRead.length() > 36){
                         String soilCode = strRead.substring(1, 11).trim();
                         String soilDescription = strRead.length() <= 36 ? soilCode : strRead.substring(37, strRead.length()).trim();
                         soilList.add(soilCode + ":" + soilDescription);
-                        }
-                        catch(Exception error){
-                            
-                        }
+                        isProfile = false;
                     }
+                    else if(strRead.startsWith("@  SLB") && !isProfile){
+                        isProfile = true;
+                    }
+                    else if(strRead.startsWith("@  SLB") && isProfile){
+                        isProfile = false;
+                    }
+                    else if(!strRead.isBlank() && !strRead.startsWith("!") && strRead.length() >= 100 && isProfile){
+                        int index = soilList.size() - 1;
+                        String tmp = soilList.get(index);
+                        tmp += "|" + strRead;
+                        soilList.set(index, tmp);
+                    }
+                    else if(strRead.isBlank()){
+                        isProfile = false;
+                    }
+                        
                 }
                 
                 fileRead.close();

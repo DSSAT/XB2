@@ -32,7 +32,8 @@ public class Organic implements Cloneable, IModelXBase {
     public void AddApp(OrganicApplication organic)
     {
         organicApps.add(organic);
-        Collections.sort(organicApps, Comparator.comparing(OrganicApplication::getOrder));
+        
+        Collections.sort(organicApps, organic.RDATE != null ? Comparator.comparing(OrganicApplication::getOrder) : Comparator.comparing(OrganicApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

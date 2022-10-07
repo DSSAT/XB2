@@ -1,6 +1,7 @@
 package xbuild;
 
 import DSSATModel.TillageImplementList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Tillage;
@@ -8,8 +9,6 @@ import FileXModel.TillageApplication;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
@@ -81,8 +80,6 @@ public class TillageFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        txtYear = new javax.swing.JTextField();
         bnAddLayer = new javax.swing.JButton();
         bnDeleteLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,8 +89,6 @@ public class TillageFrame extends IXInternalFrame {
         imagePanel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jXLabel1.setText("Year");
 
         bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
         bnAddLayer.setText("Add Application");
@@ -168,12 +163,7 @@ public class TillageFrame extends IXInternalFrame {
                             .addComponent(bnAddLayer)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(bnDeleteLayer))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 10, Short.MAX_VALUE))
@@ -190,13 +180,9 @@ public class TillageFrame extends IXInternalFrame {
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bnAddLayer)
                             .addComponent(bnDeleteLayer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -291,9 +277,7 @@ public class TillageFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(tilApp.TDATE));
+            vector.addElement(Variables.getDateFormat().format(tilApp.TDATE));
         }
         catch(Exception ex)
         {
@@ -319,7 +303,6 @@ public class TillageFrame extends IXInternalFrame {
     }
 
     private void LoadTillage() {
-        txtYear.setText(FileX.general.Year);
 
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < tillage.GetSize();i++)
@@ -333,10 +316,8 @@ public class TillageFrame extends IXInternalFrame {
     private javax.swing.JButton bnDeleteLayer;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private xbuild.Components.XTextField txtDescription;
-    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

@@ -61,7 +61,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
         txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
         txtExperimentNumber.Init(FileX.general, "ExperimentNumber", Utils.ParseInteger(FileX.general.ExperimentNumber));
-        cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");        
+        cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");        
 
         txtExperimentName.Init(FileX.general, "ExperimentName", FileX.general.ExperimentName);
         txtPeople.Init(FileX.general, "People", FileX.general.People);
@@ -85,6 +85,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
             jLabel5.setVisible(true);
         else
             jLabel5.setVisible(false);
+        
+        cbFileType.setEnabled(!FileX.isFileOpenned);
     }
 
     /** This method is called from within the constructor to
@@ -707,7 +709,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         try
         {
             doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
-            if(cbFileType.getSelectedItem().toString().equals("Experimental"))
+            if(cbFileType.getSelectedItem().toString().equals("Experimental") && !FileX.general.crop.CropCode.isEmpty())
             {
                 doc += "." + FileX.general.crop.CropCode + "X";
             }

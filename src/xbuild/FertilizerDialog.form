@@ -80,7 +80,11 @@
                           <Component id="txtFACD" alignment="0" pref="319" max="32767" attributes="1"/>
                           <Component id="txtFDATE" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="txtFMCD" alignment="0" pref="319" max="32767" attributes="1"/>
-                          <Component id="dpFDATE" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="dpFDATE" min="-2" pref="117" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -106,6 +110,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dpFDATE" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -184,7 +189,7 @@
     <Component class="org.jdesktop.swingx.JXDatePicker" name="dpFDATE">
       <Properties>
         <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, new Locale(&quot;en&quot;,&quot;US&quot;))" type="code"/>
+          <Connection code="Variables.getDateFormat()" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -352,6 +357,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSelectApplicationActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Variables.getDateFormatString()" type="code"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

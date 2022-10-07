@@ -13,13 +13,12 @@ package xbuild;
 
 import DSSATModel.TillageImplement;
 import DSSATModel.TillageImplementList;
+import Extensions.Variables;
 import FileXModel.TillageApplication;
 import ListDialog.TillageImplementDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  *
@@ -67,10 +66,11 @@ public class TillageDialog extends javax.swing.JDialog {
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        dpTDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpTDATE.setFormats(Variables.getDateFormat());
 
         txtTDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
@@ -101,6 +101,8 @@ public class TillageDialog extends javax.swing.JDialog {
 
         jXLabel3.setText("Tillage Depth");
 
+        jLabel1.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,7 +123,10 @@ public class TillageDialog extends javax.swing.JDialog {
                         .addComponent(txtTIMPL, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnSelectTIMPL, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dpTDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dpTDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1))
                     .addComponent(txtTDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -131,7 +136,8 @@ public class TillageDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpTDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTIMPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,6 +237,7 @@ public class TillageDialog extends javax.swing.JDialog {
     private javax.swing.JButton bnOK;
     private javax.swing.JButton bnSelectTIMPL;
     private org.jdesktop.swingx.JXDatePicker dpTDATE;
+    private javax.swing.JLabel jLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;

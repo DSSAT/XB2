@@ -63,6 +63,7 @@ public class FileXService {
         }
         
         new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
+        FileX.isFileOpenned = true;
     }
     
     public static void SaveFile(File file) {
@@ -97,5 +98,6 @@ public class FileXService {
         } catch (IOException ex) {
             Logger.getLogger(FileX.class.getName()).log(Level.SEVERE, null, ex);
         }
+        FileX.isFileOpenned = false;
     }
 }

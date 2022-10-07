@@ -4,7 +4,7 @@ import DSSATModel.CropList;
 import DSSATModel.GrowthStageList;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSizeList;
-import FileXModel.Cultivar;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.Harvest;
 import FileXModel.HarvestApplication;
@@ -12,11 +12,8 @@ import FileXModel.IModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
@@ -46,31 +43,11 @@ public class HarvestFrame extends IXInternalFrame {
                 break;
             }
         }
-        
-        DefaultComboBoxModel cropSelectedList = new DefaultComboBoxModel();
-        if(FileX.general.crop == null){
-            FileX.cultivars.GetAll().forEach(cul -> {
-                String cropName = CropList.GetAt(((Cultivar)cul).CR).CropName;
-                int index = cropSelectedList.getIndexOf(cropName);
-                if(index < 0)
-                    cropSelectedList.addElement(cropName);
-            });
-            
-            if(CropList.GetAtName(harvestApp.HNAME) == null){
-                harvestApp.HNAME = CropList.GetAt(((Cultivar)FileX.cultivars.GetAt(0)).CR).CropName;
-            }
-        }
-        else{
-            cropSelectedList.addElement(FileX.general.crop.CropName);
-//            if(!harvestApp.HNAME.equals(FileX.general.crop.CropName))
-//                harvestApp.HNAME = FileX.general.crop.CropName;
-        }
-        
-        cbCrop.setModel(cropSelectedList);
 
         LoadHarvestApp();
         
         rdDaysAfterPlanting.addChangeListener(new javax.swing.event.ChangeListener() {
+            @Override
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 rdDaysAfterPlantingStateChanged(evt);
             }
@@ -81,6 +58,10 @@ public class HarvestFrame extends IXInternalFrame {
         
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\harvest2.jpg");
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned);
         });
     }
     
@@ -118,10 +99,6 @@ public class HarvestFrame extends IXInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        txtYear = new javax.swing.JFormattedTextField();
-        jXLabel3 = new org.jdesktop.swingx.JXLabel();
-        cbCrop = new javax.swing.JComboBox<>();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         rdDaysAfterPlanting = new javax.swing.JRadioButton();
         rdReportedDates = new javax.swing.JRadioButton();
@@ -134,19 +111,6 @@ public class HarvestFrame extends IXInternalFrame {
         imagePanel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jXLabel1.setText("Year");
-
-        txtYear.setEditable(false);
-
-        jXLabel3.setText("Crop");
-
-        cbCrop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crop", "Res" }));
-        cbCrop.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbCropItemStateChanged(evt);
-            }
-        });
 
         jXLabel2.setText("Management");
 
@@ -212,77 +176,56 @@ public class HarvestFrame extends IXInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8)
-                            .addComponent(rdDaysAfterPlanting)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rdReportedDates)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bnAddApp)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(bnDeleteApp))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(rdDaysAfterPlanting)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdReportedDates)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bnAddApp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnDeleteApp)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bnDeleteApp)
-                        .addComponent(bnAddApp))
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdReportedDates)
-                        .addComponent(rdDaysAfterPlanting)))
+                        .addComponent(rdDaysAfterPlanting))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnDeleteApp)
+                        .addComponent(bnAddApp)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 432, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbCropItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCropItemStateChanged
-        this.harvestApp.HNAME = cbCrop.getSelectedItem().toString();
-    }//GEN-LAST:event_cbCropItemStateChanged
 
     private void bnAddAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddAppActionPerformed
         HarvestApplication harvApp = null;
@@ -300,7 +243,9 @@ public class HarvestFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 HarvestApplication harvestApp = harvestDialog.GetData();
-                SetHarvest(harvestApp);
+                if(harvestApp != null){
+                    SetHarvest(harvestApp);
+                }
                 harvestDialog.SetNull();
             }
         });
@@ -358,29 +303,33 @@ public class HarvestFrame extends IXInternalFrame {
         if(rdDaysAfterPlanting.isSelected())
         {
             TableColumn col = jXTable1.getColumn(0);
-            col.setHeaderValue("Day");
-            harvestApp.GetAll().forEach(h -> {
-                h.HDATE = null;
-            });
+            col.setHeaderValue("Days After Planting");
+            if(harvestApp.GetAll() != null){
+                harvestApp.GetAll().forEach(h -> {
+                    h.HDATE = null;
+                });
+            }
             
             DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
             for (int i = 0; i < model.getRowCount(); i++) {
                 Object valueAt = model.getValueAt(i, 0);
                 try {
                     int val = Integer.parseInt(valueAt.toString());
-                    model.setValueAt(i, 0, val);
+                    model.setValueAt(0, i, 0);
                 } catch (NumberFormatException ex) {
-                    model.setValueAt(i, 0, 0);
+                    model.setValueAt(0, i, 0);
                 }
             }
         }
         else
         {
             TableColumn col = jXTable1.getColumn(0);
-            col.setHeaderValue("Date");
-            harvestApp.GetAll().forEach(harvest -> {
-                harvest.HDAY = null;
-            });
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if(harvestApp.GetAll() != null){
+                harvestApp.GetAll().forEach(harvest -> {
+                    harvest.HDAY = null;
+                });
+            }
             
             DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -389,12 +338,10 @@ public class HarvestFrame extends IXInternalFrame {
                     try {
                         long val = Date.parse(valueAt.toString());
                         if (val == 0) {
-                            model.setValueAt(i, 0, 0);
-                        } else {
-                            model.setValueAt(i, 0, 0);
+                            model.setValueAt(0, i, 0);
                         }
                     } catch (Exception ex) {
-                        model.setValueAt(i, 0, 0);
+                        model.setValueAt(0, i, 0);
                     }
                 }
             }
@@ -421,9 +368,7 @@ public class HarvestFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(harvestApp.HDATE));
+            vector.addElement(Variables.getDateFormat().format(harvestApp.HDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
@@ -484,16 +429,6 @@ public class HarvestFrame extends IXInternalFrame {
     }
 
     private void LoadHarvestApp() {
-        txtYear.setText(FileX.general.Year);
-        if(FileX.general != null && FileX.general.crop != null){
-            cbCrop.setSelectedItem(FileX.general.crop.CropName);
-            cbCrop.setEditable(false);
-        }
-        else{
-            cbCrop.setSelectedItem(harvestApp.HNAME);
-            cbCrop.setEditable(cbCrop.getModel().getSize() > 1);
-        }
-
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         
         for(int i = 0;i< harvestApp.GetSize();i++){
@@ -505,17 +440,13 @@ public class HarvestFrame extends IXInternalFrame {
     private javax.swing.JButton bnAddApp;
     private javax.swing.JButton bnDeleteApp;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbCrop;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
-    private org.jdesktop.swingx.JXLabel jXLabel3;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JRadioButton rdDaysAfterPlanting;
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
-    private javax.swing.JFormattedTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

@@ -82,7 +82,7 @@ public class TreatmentService {
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treaments.GetSize(); i++) {
                 Treatment treat = (Treatment) treaments.GetAt(i);
-                pw.print(Utils.PadLeft(treat.N, 2, ' '));
+                pw.print(Utils.PadLeft(i + 1, 2, ' '));
                 
                 if(FileX.general.FileType != ExperimentType.Sequential)
                     pw.print(" 1 0 0");

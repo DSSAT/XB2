@@ -17,6 +17,7 @@ import xbuild.Events.XEvent;
 import xbuild.Events.AddLevelEvent;
 import FileXModel.FileX;
 import DSSATModel.DssatProfile;
+import DSSATModel.ExperimentType;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
 import FileXModel.ManagementList;
@@ -91,7 +92,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             add("Initial Conditions");
             add("Soil Analysis");
             add("Environmental Modifications");
-            //add("Cultivars");
             add("Planting");
             add("Irrigation");
             add("Fertilizer");
@@ -107,7 +107,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         {
             add("General Information");
             add("Notes");
-            add("Cultivars");
             add("Treatment");
         }
     };
@@ -163,7 +162,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jMenuCloseFile = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuSaveFile = new javax.swing.JMenuItem();
-        jMenuSaveAsFile = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuExit = new javax.swing.JMenuItem();
         jMenuRefresh = new javax.swing.JMenu();
@@ -227,6 +225,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(" XB2 v0.1.0.0.");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -281,16 +280,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
         jMenuFile.add(jMenuSaveFile);
-
-        jMenuSaveAsFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/16/filesaveas.png"))); // NOI18N
-        jMenuSaveAsFile.setText("Save File As..");
-        jMenuSaveAsFile.setEnabled(false);
-        jMenuSaveAsFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSaveAsFileActionPerformed(evt);
-            }
-        });
-        jMenuFile.add(jMenuSaveAsFile);
         jMenuFile.add(jSeparator2);
 
         jMenuExit.setText("Exit");
@@ -474,13 +463,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         //File f = new File(root.getUserObject().toString());
         String target = null;
         try {
-            if (FileX.general.crop != null) {
+            if (FileX.general.crop != null && FileX.general.crop.CropCode != null && !FileX.general.crop.CropCode.isEmpty()) {
                 target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
-            } else if ("Seasonal".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Seasonal) {
                 target = DssatProfile.GetAt("ASD");
-            } else if ("Sequential".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Sequential) {
                 target = DssatProfile.GetAt("AQD");
-            } else if ("Spatial".equals(FileX.general.FileType)) {
+            } else if (FileX.general.FileType == ExperimentType.Spatial) {
                 target = DssatProfile.GetAt("APD");
             } else {
                 target = new Setup().GetDSSATPath();
@@ -555,7 +544,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.setVisible(false);
 
         FileX.CloseFile();
-        this.setTitle("");
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
@@ -570,7 +558,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             ResetTree();
 
             File file = fc.getSelectedFile();
-            this.setTitle(file.getName());
 
             FileXService.OpenFileX(file);
 
@@ -637,6 +624,22 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (node == null) {
             return;
         }
+        
+        boolean enabled = true;
+        String nodeName = node.toString();
+
+        if (node.getParent() != null && !nodeName.equals("General Information")) {
+            enabled = FileXValidationService.IsGeneralValid();
+        }
+
+        if (nodeName.equals("Treatment")) {
+            enabled = FileXValidationService.IsMinimumRequired();
+        }
+        
+        if(!enabled){
+            return;
+        }
+        
 
         if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
             if (SwingUtilities.isRightMouseButton(evt) || node.getChildCount() == 0) {
@@ -661,7 +664,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         ManagementList modelList = (ManagementList) GetManagementList(node.toString());
 
-        if (modelList != null) {
+        if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
             if (nodeName.length() > 0) {
@@ -700,6 +703,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
                 ShowFrame(frame);
             }
+        }
+        else if(modelList != null && "Cultivars".equals(node.toString())){
+            CultivarsFrame currentFrame = (CultivarsFrame) desktopPane.getSelectedFrame();
+            currentFrame.AddNewCultivar();
         }
     }//GEN-LAST:event_jMenuItemSimAddActionPerformed
 
@@ -798,10 +805,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
     }//GEN-LAST:event_jPopupMenuSimItemRenameActionPerformed
 
-    private void jMenuSaveAsFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveAsFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuSaveAsFileActionPerformed
-
     private void jPopupMenuSimItemMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemMoveUpActionPerformed
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
@@ -810,17 +813,20 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int level = modelList.GetLevel(node.toString().split(":")[1].trim());
         
         if(modelList.MoveUp(level)){
-            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
-            node.setUserObject(newName);
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            currentFrame.updatePanelName(newName);
             
-            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level - 1);
-            String newUpName = "Level " + level + ": " + modelList.GetAt(level - 1).GetName();
-            nodeUp.setUserObject(newUpName);
-            
-            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-            model.reload(parentNode);
+            EventQueue.invokeLater(() -> {
+                String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+                node.setUserObject(newName);
+                IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                currentFrame.updatePanelName(newName);
+
+                DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level - 1);
+                String newUpName = "Level " + level + ": " + modelList.GetAt(level - 1).GetName();
+                nodeUp.setUserObject(newUpName);
+
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(parentNode);
+            });
         }
     }//GEN-LAST:event_jPopupMenuSimItemMoveUpActionPerformed
 
@@ -832,17 +838,19 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int level = modelList.GetLevel(node.toString().split(":")[1].trim());
         
         if(modelList.MoveDown(level)){
-            String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
-            node.setUserObject(newName);
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            currentFrame.updatePanelName(newName);
-            
-            DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level + 1);
-            String newUpName = "Level " + (level + 2) + ": " + modelList.GetAt(level + 1).GetName();
-            nodeUp.setUserObject(newUpName);
-            
-            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-            model.reload(parentNode);
+            EventQueue.invokeLater(() -> {
+                String newName = "Level " + (level + 1) + ": " + modelList.GetAt(level).GetName();
+                node.setUserObject(newName);
+                IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                currentFrame.updatePanelName(newName);
+
+                DefaultMutableTreeNode nodeUp = (DefaultMutableTreeNode) parentNode.getChildAt(level + 1);
+                String newUpName = "Level " + (level + 2) + ": " + modelList.GetAt(level + 1).GetName();
+                nodeUp.setUserObject(newUpName);
+
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(parentNode);
+            });
         }
     }//GEN-LAST:event_jPopupMenuSimItemMoveDownActionPerformed
 
@@ -860,7 +868,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private javax.swing.JMenuItem jMenuNewFile;
     private javax.swing.JMenuItem jMenuOpenFile;
     private javax.swing.JMenu jMenuRefresh;
-    private javax.swing.JMenuItem jMenuSaveAsFile;
     private javax.swing.JMenuItem jMenuSaveFile;
     private javax.swing.JPopupMenu jPopupMenuAdd;
     private javax.swing.JPopupMenu jPopupMenuItem;

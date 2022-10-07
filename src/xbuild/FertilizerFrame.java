@@ -2,6 +2,7 @@ package xbuild;
 
 import DSSATModel.FertilizerMaterialList;
 import DSSATModel.FertilizerMethodList;
+import Extensions.Variables;
 import FileXModel.Fertilizer;
 import FileXModel.FertilizerApplication;
 import FileXModel.FileX;
@@ -9,8 +10,7 @@ import FileXModel.IModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -46,8 +46,18 @@ public class FertilizerFrame extends IXInternalFrame {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(fertil, "FERNAME", fertil.FERNAME);
         
+        rdDaysAfterPlanting.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rdDaysAfterPlantingStateChanged(evt);
+            }
+        });
+        
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\Fert2.jpg");
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned);
         });
     }
     
@@ -85,8 +95,6 @@ public class FertilizerFrame extends IXInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        txtYear = new javax.swing.JTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         rdDaysAfterPlanting = new javax.swing.JRadioButton();
         rdReportedDates = new javax.swing.JRadioButton();
@@ -100,20 +108,11 @@ public class FertilizerFrame extends IXInternalFrame {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jXLabel1.setText("Year");
-
-        txtYear.setEditable(false);
-
         jXLabel2.setText("Management");
 
         buttonGroup1.add(rdDaysAfterPlanting);
         rdDaysAfterPlanting.setSelected(true);
         rdDaysAfterPlanting.setText("Days After Planting");
-        rdDaysAfterPlanting.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdDaysAfterPlantingItemStateChanged(evt);
-            }
-        });
 
         buttonGroup1.add(rdReportedDates);
         rdReportedDates.setText("On Reported Dates");
@@ -174,33 +173,25 @@ public class FertilizerFrame extends IXInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(bnAddLayer)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(bnDeleteLayer))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(bnAddLayer)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bnDeleteLayer))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(rdDaysAfterPlanting)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(rdReportedDates))
-                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -217,10 +208,6 @@ public class FertilizerFrame extends IXInternalFrame {
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rdDaysAfterPlanting)
                             .addComponent(rdReportedDates)
                             .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,22 +223,53 @@ public class FertilizerFrame extends IXInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdDaysAfterPlantingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdDaysAfterPlantingItemStateChanged
-        if(rdDaysAfterPlanting.isSelected())
-        {
+    
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt){
+        if (rdDaysAfterPlanting.isSelected()) {
             TableColumn col = jXTable1.getColumn(0);
-            col.setHeaderValue("Day");
-        }
-        else
-        {
-            TableColumn col = jXTable1.getColumn(0);
-            col.setHeaderValue("Date");
-        }
-        DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
-        for(int i = 0;i < model.getRowCount();i++)
-        model.setValueAt("", i, 0);
-    }//GEN-LAST:event_rdDaysAfterPlantingItemStateChanged
+            col.setHeaderValue("Days After Planting");
+            if (fertil.GetApps() != null) {
+                fertil.GetApps().forEach(h -> {
+                    h.FDATE = null;
+                });
+            }
 
+            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                try {
+                    int val = Integer.parseInt(valueAt.toString());
+                    model.setValueAt(0, i, 0);
+                } catch (NumberFormatException ex) {
+                    model.setValueAt(0, i, 0);
+                }
+            }
+        } else {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if (fertil.GetApps() != null) {
+                fertil.GetApps().forEach(harvest -> {
+                    harvest.FDAY = null;
+                });
+            }
+
+            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                if (valueAt != null) {
+                    try {
+                        long val = Date.parse(valueAt.toString());
+                        if (val == 0) {
+                            model.setValueAt(0, i, 0);
+                        }
+                    } catch (Exception ex) {
+                        model.setValueAt(0, i, 0);
+                    }
+                }
+            }
+        }
+    }
+    
     private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
         FertilizerApplication fer = null;
         if (selectedRowIndex >= 0 && selectedRowIndex < fertil.GetSize()) {
@@ -332,8 +350,6 @@ public class FertilizerFrame extends IXInternalFrame {
     }//GEN-LAST:event_txtDescriptionFocusLost
 
     private void LoadFertilizer() {
-        txtYear.setText(FileX.general.Year);
-
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < fertil.GetSize();i++)
         {
@@ -346,9 +362,7 @@ public class FertilizerFrame extends IXInternalFrame {
         Vector vector = new Vector();
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(ferApp.FDATE));
+            vector.addElement(Variables.getDateFormat().format(ferApp.FDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
@@ -359,17 +373,6 @@ public class FertilizerFrame extends IXInternalFrame {
             rdDaysAfterPlanting.setSelected(true);
             rdReportedDates.setSelected(false);
         }
-        /*
-        if(rdDaysAfterPlanting.isSelected())
-            vector.add(ferApp.FDAY);
-        else
-        {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(ferApp.FDATE));
-        }
-         *
-         */
 
         try
         {
@@ -444,13 +447,11 @@ public class FertilizerFrame extends IXInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private javax.swing.JRadioButton rdDaysAfterPlanting;
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
-    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

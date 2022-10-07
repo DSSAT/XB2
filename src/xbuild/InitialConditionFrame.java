@@ -3,6 +3,9 @@ package xbuild;
 import DSSATModel.CropList;
 import DSSATModel.Soil;
 import DSSATModel.SoilList;
+import DSSATModel.SoilProfile;
+import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
@@ -12,11 +15,9 @@ import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
@@ -58,7 +59,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         txtICRIP.Init(init, "ICRIP", init.ICRIP);
         txtICRT.Init(init, "ICRT", init.ICRT);
         txtICWD.Init(init, "ICWD", init.ICWD);
-        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200), new XColumn("CropCode", "Crop Code", 50)}, "CropCode");
+        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");
         
         snICRE.Init(init, "ICRE", init.ICRE);
         snICRN.Init(init, "ICRN", init.ICRN);
@@ -92,6 +93,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\InCond2.jpg");
+            bnRecalculate.setEnabled(false);
         });
     }
     
@@ -167,6 +169,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         imagePanel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel20 = new org.jdesktop.swingx.JXLabel();
         bnAddLayer = new javax.swing.JButton();
@@ -180,9 +183,10 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtWater = new javax.swing.JFormattedTextField();
         txtNitrogen = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        bnRecalculate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbSoil = new xbuild.Components.XComboBox();
+        jLabel5 = new javax.swing.JLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
 
@@ -402,7 +406,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel1.setText("Measurement Date");
 
-        dpICDAT.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpICDAT.setFormats(Variables.getDateFormat());
         dpICDAT.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpICDATPropertyChange(evt);
@@ -447,6 +451,8 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel6.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
@@ -460,7 +466,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                                 .addGap(147, 147, 147)
                                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6))
                             .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
@@ -480,7 +488,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
@@ -545,7 +554,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jLabel1.setText("Measurement Date");
 
-        dpProfileDate.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpProfileDate.setFormats(Variables.getDateFormat());
         dpProfileDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpProfileDatePropertyChange(evt);
@@ -559,10 +568,25 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3.setText("<html>Nitrogen<br/>(kg/ha)</html>");
 
         txtWater.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtWater.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtWaterKeyReleased(evt);
+            }
+        });
 
         txtNitrogen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtNitrogen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNitrogenKeyReleased(evt);
+            }
+        });
 
-        jButton1.setText("Recalculate");
+        bnRecalculate.setText("Recalculate");
+        bnRecalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnRecalculateActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
         jLabel4.setText("<html>Note: initial condition data will be overwritten<br/>when you select recalculate</html>");
@@ -587,7 +611,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jButton1)))
+                        .addComponent(bnRecalculate)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -602,11 +626,13 @@ public class InitialConditionFrame extends IXInternalFrame {
                     .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNitrogen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(bnRecalculate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel5.setText(Variables.getDateFormatString());
 
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
@@ -621,7 +647,10 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jXPanel2Layout.createSequentialGroup()
+                                .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5))
                             .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -648,7 +677,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpProfileDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -790,20 +820,37 @@ public class InitialConditionFrame extends IXInternalFrame {
         dpProfileDate.setDate(date);
     }//GEN-LAST:event_dpICDATPropertyChange
 
+    private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
+        CalculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()), cbSoil.getSelectedIndex());
+    }//GEN-LAST:event_bnRecalculateActionPerformed
+
+    private void txtWaterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaterKeyReleased
+        setRecalculateButtonEnabled();
+    }//GEN-LAST:event_txtWaterKeyReleased
+
+    private void txtNitrogenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitrogenKeyReleased
+        setRecalculateButtonEnabled();
+    }//GEN-LAST:event_txtNitrogenKeyReleased
+
+    private void setRecalculateButtonEnabled(){
+        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.JButton bnRecalculate;
     private xbuild.Components.XDropdownTableComboBox cbPCR;
     private xbuild.Components.XComboBox cbSoil;
     private xbuild.Components.XDatePicker dpICDAT;
     private xbuild.Components.XDatePicker dpProfileDate;
     private javax.swing.JLabel imagePanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -860,5 +907,55 @@ public class InitialConditionFrame extends IXInternalFrame {
         Object[] vector = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
 
         return vector;
+    }
+
+    private void CalculateInitialCondition(Float water, Float nitrogen, int selectedIndex) {
+        FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(selectedIndex);
+        Soil soil = SoilList.GetAt(field.ID_SOIL);
+        
+        boolean isdataMissing = false;
+        
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> Water_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+       
+        int size = soil.GetSoilProfiles().size() - 1;
+        
+        for(SoilProfile profile : soil.GetSoilProfiles()){
+            Depth_Calculated.add(profile.SLB);            
+            Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+            BulkDensity.add(profile.SBDM);
+            if(profile.SBDM == null){
+                isdataMissing = false;
+            }
+        }
+        
+        Float BD_Average = 1.2f;
+        if(!isdataMissing){
+            BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
+            for(int i = 1; i< Depth_Calculated.size();i++){
+                BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
+            }
+        }
+        
+        Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0)
+            tbModel.removeRow(0);
+            
+        for(int i = 0;i <= size;i++)
+        {
+            InitialConditionApplication initApp = new InitialConditionApplication();
+            
+            initApp.ICBL = Depth_Calculated.get(i);
+            initApp.SH2O = Water_Calculated.get(i);
+            initApp.SNH4 = INH4_Calculated;
+            initApp.SNO3 = INO3_Calculated;
+            
+            tbModel.addRow(SetRow(initApp));
+        }
     }
 }

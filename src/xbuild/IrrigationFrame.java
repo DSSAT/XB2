@@ -1,6 +1,7 @@
 package xbuild;
 
 import DSSATModel.IrrigationMethodList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Irrigation;
@@ -10,10 +11,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -48,9 +49,69 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(irrig, "IRNAME", irrig.IRNAME);
         
+        rdDaysAfterPlanting.addChangeListener(new javax.swing.event.ChangeListener() {
+            @Override
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rdDaysAfterPlantingStateChanged(evt);
+            }
+        });
+        
         EventQueue.invokeLater(() -> {            
             setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\irrigation2.jpg");
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned);
         });
+    }
+    
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
+        if(rdDaysAfterPlanting.isSelected())
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("Days After Planting");
+            if(irrig.GetApps() != null){
+                irrig.GetApps().forEach(h -> {
+                    h.IDATE = null;
+                });
+            }
+            
+            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                try {
+                    int val = Integer.parseInt(valueAt.toString());
+                    model.setValueAt(0, i, 0);
+                } catch (NumberFormatException ex) {
+                    model.setValueAt(0, i, 0);
+                }
+            }
+        }
+        else
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if(irrig.GetApps() != null){
+                irrig.GetApps().forEach(harvest -> {
+                    harvest.IDAY = null;
+                });
+            }
+            
+            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object valueAt = model.getValueAt(i, 0);
+                if(valueAt != null){
+                    try {
+                        long val = Date.parse(valueAt.toString());
+                        if (val == 0) {
+                            model.setValueAt(0, i, 0);
+                        }
+                    } catch (Exception ex) {
+                        model.setValueAt(0, i, 0);
+                    }
+                }
+            }
+        }        
     }
     
     /**
@@ -88,7 +149,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         imagePanel = new javax.swing.JLabel();
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         rdDaysAfterPlanting = new javax.swing.JRadioButton();
         rdReportedDates = new javax.swing.JRadioButton();
@@ -98,15 +158,12 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         bnDeleteLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
-        txtYear = new javax.swing.JTextField();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
-
-        jXLabel1.setText("Year");
 
         jXLabel2.setText("Management");
 
@@ -167,8 +224,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         });
         jScrollPane1.setViewportView(jXTable1);
 
-        txtYear.setEditable(false);
-
         lblLevel.setText("Level");
         lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -184,12 +239,16 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
@@ -198,22 +257,15 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                                         .addComponent(rdDaysAfterPlanting)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rdReportedDates))
-                                    .addComponent(txtEFIR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtEFIR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(83, 83, 83))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(bnAddLayer)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(bnDeleteLayer))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(bnDeleteLayer)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,10 +277,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                             .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -296,7 +344,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         {
             int nRow = jXTable1.getSelectedRow();
             IrrigationApplication ir = null;
-            if(nRow > 0){
+            if(nRow >= 0){
                 IrrigationApplication tmp = irrig.GetApp(nRow);
                 ir = tmp.Clone();
             }
@@ -364,7 +412,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     }
 
     private void LoadIrrigationApp() {
-        txtYear.setText(FileX.general.Year);
         try
         {
             txtEFIR.setText(irrig.EFIR.toString());
@@ -387,9 +434,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         
         try
         {
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-            vector.addElement(df.format(irrigApp.IDATE));
+            vector.addElement(Variables.getDateFormat().format(irrigApp.IDATE));
 
             rdDaysAfterPlanting.setSelected(false);
             rdReportedDates.setSelected(true);
@@ -412,7 +457,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;
     private org.jdesktop.swingx.JXTable jXTable1;
@@ -421,6 +465,5 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     private javax.swing.JFormattedTextField txtEFIR;
-    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

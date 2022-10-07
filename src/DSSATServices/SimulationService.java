@@ -35,7 +35,7 @@ public class SimulationService extends DSSATServiceBase {
                 cModel.Code = tmp.substring(8, 11).trim();
                 try
                 {
-                    cModel.Description = tmp.substring(14, tmp.length() - 1).trim();
+                    cModel.Description = tmp.substring(14, tmp.length()).trim();
                 }
                 catch(Exception ex)
                 {

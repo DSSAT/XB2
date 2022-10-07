@@ -11,6 +11,7 @@ import java.util.Locale;
  * @author Jazzy
  */
 public class Utils {
+
     public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
@@ -21,21 +22,18 @@ public class Utils {
             }
         }).start();
     }
-    
+
     public static Float GetFloat(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field) + field.length() - fieldLength - 1;
         Float val = null;
 
-        if(start >= 0) {
-            int stop = start + fieldLength + 1;
+        if (start >= 0) {
+            int stop = Math.min(start + fieldLength + 1, value.length());
 
-            String tmp = value.substring(start,stop).trim();
+            String tmp = value.substring(start, stop).trim();
 
-            if(!tmp.equals("-99")){
-                try {
-                    val = Float.parseFloat(tmp);
-                } catch (NumberFormatException numberFormatException) {
-                }
+            if (!tmp.isBlank() && !tmp.equals("-99")) {
+                val = Float.parseFloat(tmp);
             }
         }
         return val;
@@ -45,12 +43,12 @@ public class Utils {
         int start = Header.indexOf(field) + field.length() - fieldLength - 1;
         Date val = null;
 
-        if(start >= 0) {
+        if (start >= 0) {
             int stop = start + fieldLength + 1;
 
-            String tmp = value.substring(start,stop).trim();
+            String tmp = value.substring(start, stop).trim();
 
-            if(!tmp.equals("-99")){
+            if (!tmp.equals("-99")) {
                 try {
                     Integer year = Integer.parseInt(tmp.substring(0, 2));
                     if (year >= 60) {
@@ -66,9 +64,8 @@ public class Utils {
                     int dayCount = 0;
                     int nDay = 0;
                     int nMonth = 0;
-                    for(int i = 0;i < 12;i++) {
-                        if(day <= (dayCount + month[i]))
-                        {
+                    for (int i = 0; i < 12; i++) {
+                        if (day <= (dayCount + month[i])) {
                             nDay = day - dayCount;
                             nMonth = i;
                             break;
@@ -87,45 +84,40 @@ public class Utils {
         }
         return val;
     }
-    
+
     public static Integer GetInteger(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field.startsWith("@") ? field : " " + field) + field.length() - fieldLength;
         Integer val = null;
-        
-        if(start >= 0) {
+
+        if (start >= 0) {
             int stop = start + fieldLength + 1;
 
-            String tmp = value.substring(start,stop).trim();
+            String tmp = value.substring(start, stop).trim();
 
-            if(!tmp.equals("-99")){
-                try {
-                    val = Integer.parseInt(tmp);
-                } catch (NumberFormatException numberFormatException) {
-                }
+            if (!tmp.isBlank() && !tmp.equals("-99")) {
+                val = Integer.parseInt(tmp);
             }
         }
         return val;
     }
-    
+
     public static Integer ParseInteger(Object value) {
         Integer val = null;
-
-        try {
-            if(value == null)
-                return 0;
-            val = Integer.parseInt(value.toString());
-        } catch (NumberFormatException numberFormatException) {
-
+        if (value == null) {
+            return 0;
         }
+        val = Integer.parseInt(value.toString());
+
         return val;
     }
-    
+
     public static Float ParseFloat(Object value) {
         Float val = null;
 
         try {
-            if(value == null)
+            if (value == null) {
                 return 0.0f;
+            }
             val = Float.parseFloat(value.toString());
         } catch (NumberFormatException numberFormatException) {
 
@@ -136,88 +128,113 @@ public class Utils {
     public static String GetString(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field);
         String val = null;
-        
-        if(start >= 0) {
-            int stop = start + fieldLength;
 
-            String tmp = value.substring(start,stop).trim();
-            if(tmp.isEmpty())
+        if (start >= 0) {
+            int stop = start + fieldLength;
+            if (stop > value.length()) {
+                stop = value.length();
+            }
+
+            String tmp = value.substring(start, stop).trim();
+            if (tmp.isEmpty()) {
                 val = "-99";
-            else
+            } else {
                 val = tmp;
+            }
 
             //if(!tmp.equals("-99")) val = tmp;
         }
         return val;
     }
-    
-    public static String FloatToString(Float value)
-    {
+
+    public static String FloatToString(Float value) {
         DecimalFormat df = new DecimalFormat("##.##");
         String val = df.format(value);
 
-        if(val.length() > 3)
-        {
-            if(val.substring(val.length() - 2).equals("00"))
-                val = val.substring(0, val.length()-2);
+        if (val.length() > 3) {
+            if (val.substring(val.length() - 2).equals("00")) {
+                val = val.substring(0, val.length() - 2);
+            }
         }
         return val;
     }
 
-    public static String PadLeft(String value, int count, char character)
-    {
-        if(value == null) value = "-99";
-        if(value.isEmpty()) value = "-99";
-        
-        if(value.endsWith(".0")) value = value.replace(".0", "");
-        if(value.endsWith(".00")) value = value.replace(".00", "");
-        
-        for(int i = value.length();i < count;i++)
+    public static String PadLeft(String value, int count, char character) {
+        if (value == null) {
+            value = "-99";
+        }
+        if (value.isEmpty()) {
+            value = "-99";
+        }
+
+        if (value.endsWith(".0")) {
+            value = value.replace(".0", "");
+        }
+        if (value.endsWith(".00")) {
+            value = value.replace(".00", "");
+        }
+
+        for (int i = value.length(); i < count; i++) {
             value = character + value;
+        }
 
         return value;
     }
 
-    public static String PadLeft(Integer value, int count, char character)
-    {
-        if(value == null) value = -99;
-        return PadLeft(value.toString(), count, character);
-    }  
-
-    public static String PadLeft(Float value, int count, char character)
-    {
-        if(value == null) value = -99F;
+    public static String PadLeft(Integer value, int count, char character) {
+        if (value == null) {
+            value = -99;
+        }
         return PadLeft(value.toString(), count, character);
     }
 
-    public static String PadRight(Integer value, int count, char character)
-    {
-        if(value == null) value = -99;
+    public static String PadLeft(Float value, int count, char character) {
+        if (value == null) {
+            value = -99F;
+        }
         return PadLeft(value.toString(), count, character);
     }
 
-    public static String PadRight(Float value, int count, char character)
-    {
-        if(value == null) value = -99F;
+    public static String PadRight(Integer value, int count, char character) {
+        if (value == null) {
+            value = -99;
+        }
         return PadLeft(value.toString(), count, character);
     }
 
-    public static String PadRight(String value, int count, char character)
-    {
-        if(value == null) value = "-99";
-        if(value.isEmpty()) value = "-99";
+    public static String PadRight(Float value, int count, char character) {
+        if (value == null) {
+            value = -99F;
+        }
+        return PadLeft(value.toString(), count, character);
+    }
 
-        if(value.endsWith(".0")) value = value.replace(".0", "");
-        if(value.endsWith(".00")) value = value.replace(".00", "");
+    public static String PadRight(String value, int count, char character) {
+        if (value == null) {
+            value = "-99";
+        }
+        if (value.isEmpty()) {
+            value = "-99";
+        }
 
-        for(int i = value.length();i < count;i++)
+        if (value.endsWith(".0")) {
+            value = value.replace(".0", "");
+        }
+        if (value.endsWith(".00")) {
+            value = value.replace(".00", "");
+        }
+
+        for (int i = value.length(); i < count; i++) {
             value += character;
+        }
+        
+        if(value.length() > count)
+            value = value.substring(0, count);
 
         return value;
     }
 
-    public static String JulianDate(Date date)
-    {
+    public static String JulianDate(Date date) {
         String d = "";
 
         try {
@@ -234,8 +251,8 @@ public class Utils {
 
         return d;
     }
-    
-    public static boolean IsEmpty(String text){
+
+    public static boolean IsEmpty(String text) {
         return text == null || text.isEmpty();
     }
 }

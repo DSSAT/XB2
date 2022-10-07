@@ -3,6 +3,7 @@ package xbuild;
 import DSSATModel.SoilAnalysisMethodPhList;
 import DSSATModel.SoilAnalysisMethodPhosphorusList;
 import DSSATModel.SoilAnalysisMethodPotassiumList;
+import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.SoilAnalysis;
@@ -10,8 +11,6 @@ import FileXModel.SoilAnalysisLayer;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
@@ -45,9 +44,9 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         dpAnalysisDate.Init(soilAnalysis, "SADAT", soilAnalysis.SADAT);
 
         
-        cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
-        cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
-        cbSMPX.setInit(soilAnalysis, "SMPX", soilAnalysis.SMPX, SoilAnalysisMethodPhosphorusList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200), new XColumn("Code", "Code", 100)}, "Code");
+        cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
+        cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
+        cbSMPX.setInit(soilAnalysis, "SMPX", soilAnalysis.SMPX, SoilAnalysisMethodPhosphorusList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
         
         for(int i = 0;i < soilAnalysis.GetSize();i++)
         {
@@ -113,12 +112,13 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jXLabel1.setText("Analysis Date");
 
-        dpAnalysisDate.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpAnalysisDate.setFormats(Variables.getDateFormat());
         dpAnalysisDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpAnalysisDatePropertyChange(evt);
@@ -260,6 +260,8 @@ public class SoilAnalysisFrame extends IXInternalFrame {
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel1.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,7 +280,9 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                         .addGap(226, 226, 226)
                         .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1))
                     .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +300,8 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -421,6 +426,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     private xbuild.Components.XDropdownTableComboBox cbSMPX;
     private xbuild.Components.XDatePicker dpAnalysisDate;
     private javax.swing.JLabel imagePanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;

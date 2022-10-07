@@ -1,6 +1,7 @@
 package xbuild;
 
 import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
 import FileXModel.FileX;
@@ -9,9 +10,7 @@ import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
@@ -39,8 +38,6 @@ public class EnvironmentalFrame extends IXInternalFrame {
                 break;
             }
         }
-
-        txtYear.setText(FileX.general.Year);
 
         LoadEnvApp();
         
@@ -85,8 +82,6 @@ public class EnvironmentalFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
-        txtYear = new javax.swing.JTextField();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable2 = new org.jdesktop.swingx.JXTable();
@@ -97,8 +92,6 @@ public class EnvironmentalFrame extends IXInternalFrame {
         imagePanel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jXLabel1.setText("Year : ");
 
         jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Environmental Modification Applications", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -160,7 +153,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
                     .addComponent(bnDeleteLayer)
                     .addComponent(bnAddLayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
         );
 
         lblLevel.setText("Level");
@@ -179,20 +172,13 @@ public class EnvironmentalFrame extends IXInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -202,19 +188,14 @@ public class EnvironmentalFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jXPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -302,15 +283,12 @@ public class EnvironmentalFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
-    private Object[] SetRow(EnvironmentApplication envApp) {        
-        Locale l = new Locale("en", "US");
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-        
+    private Object[] SetRow(EnvironmentApplication envApp) {               
         ArrayList<Object> vector = new ArrayList<>();
         
         //DateFormat df = DateFormat.getDateInstance(DateFormat., l);
         try {
-            vector.add(df.format(envApp.ODATE));
+            vector.add(Variables.getDateFormat().format(envApp.ODATE));
         } catch (Exception e) {
             vector.add("");
         }
@@ -393,11 +371,9 @@ public class EnvironmentalFrame extends IXInternalFrame {
     private javax.swing.JButton bnDeleteLayer;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXTable jXTable2;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private xbuild.Components.XTextField txtDescription;
-    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

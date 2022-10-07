@@ -19,14 +19,13 @@ import DSSATModel.HarvestComponent;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSize;
 import DSSATModel.HarvestSizeList;
+import Extensions.Variables;
 import ListDialog.GStageDialog;
 import ListDialog.HarvestComponentDialog;
 import ListDialog.HarvestSizeDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  *
@@ -64,6 +63,7 @@ public class HarvestDialog extends javax.swing.JDialog {
         txtHDATE.setVisible(bDay);
         lbDate.setVisible(!bDay);
         dpHDATE.setVisible(!bDay);
+        jLabel1.setVisible(!bDay);
 
         LoadHarvestApp();
     }
@@ -98,6 +98,7 @@ public class HarvestDialog extends javax.swing.JDialog {
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,7 +106,7 @@ public class HarvestDialog extends javax.swing.JDialog {
 
         lbDate.setText("Date");
 
-        dpHDATE.setFormats(new SimpleDateFormat("dd/MM/yyyy", new Locale("en","US")));
+        dpHDATE.setFormats(Variables.getDateFormat());
         dpHDATE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dpHDATEActionPerformed(evt);
@@ -165,6 +166,8 @@ public class HarvestDialog extends javax.swing.JDialog {
 
         jXLabel7.setText("%");
 
+        jLabel1.setText(Variables.getDateFormatString());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +209,10 @@ public class HarvestDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -219,7 +225,8 @@ public class HarvestDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,6 +322,7 @@ public class HarvestDialog extends javax.swing.JDialog {
     private javax.swing.JButton bnHSTG;
     private javax.swing.JButton bnOK;
     private org.jdesktop.swingx.JXDatePicker dpHDATE;
+    private javax.swing.JLabel jLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;

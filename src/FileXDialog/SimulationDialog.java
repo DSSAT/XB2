@@ -11,6 +11,7 @@
 
 package FileXDialog;
 
+import Extensions.Variables;
 import FileXModel.Simulation;
 import FileXModel.FileX;
 import java.text.DateFormat;
@@ -139,8 +140,7 @@ public class SimulationDialog extends javax.swing.JDialog {
             }
 
             try {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                object[2] = df.format(sim.SDATE);
+                object[2] = Variables.getDateFormat().format(sim.SDATE);
             } catch (Exception e) {
                 object[2] = "";
             }

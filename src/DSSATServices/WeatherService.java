@@ -11,31 +11,31 @@ import java.util.ArrayList;
  * @author Jazzy
  */
 public class WeatherService extends DSSATServiceBase {
+
     private final WeatherRepository weatherRepository;
-    private final String[] wstaTypes = new String[] {"", "/Gen", "/Climate"};
-    private final WstaType[] wstaExtensions = new WstaType[] { WstaType.WTH, WstaType.WTG, WstaType.CLI};
-    
-    
+    private final String[] wstaTypes = new String[]{"", "/Gen", "/Climate"};
+    private final WstaType[] wstaExtensions = new WstaType[]{WstaType.WTH, WstaType.WTG, WstaType.CLI};
+
     public WeatherService(String rootPath) {
         super(rootPath);
-        
+
         this.weatherRepository = new WeatherRepository(rootPath);
     }
-    
+
     @Override
-    public void Parse() throws Exception{
+    public void Parse() throws Exception {
         boolean isValid = true;
-        
+
         try {
             WeatherStationList.Clear();
-            for(int i = 0;i < 3;i++){
+            for (int i = 0; i < 3; i++) {
                 WstaType type = wstaExtensions[i];
                 ArrayList<String> weatherList = this.weatherRepository.Parse(wstaTypes[i], type.toString());
-                
-                weatherList.forEach(w -> {
+
+                for (String w : weatherList) {
                     WeatherStation wsta = new WeatherStation();
                     String tmp[] = w.split(":");
-                    try {
+                    if (tmp.length == 4) {
                         wsta.Code = tmp[0];
                         wsta.StationName = tmp[1];
                         wsta.Begin = Integer.parseInt(tmp[2]);
@@ -55,21 +55,18 @@ public class WeatherService extends DSSATServiceBase {
                             wstaExist.Begin = Math.min(wsta.Begin, wstaExist.Begin);
                             wstaExist.Number = Math.max(wstaExist.Begin + wstaExist.Number - wstaExist.Begin, wsta.Begin + wsta.Number - wstaExist.Begin);
                         }
-                    } catch (Exception ex) {
-                        System.out.print(ex.getMessage());
                     }
-                });
+                }
             }
+        } catch (Exception ex) {
+            isValid = false;
         }
-        catch(Exception ex){
-           isValid = false; 
-        }
-        
-        if(!isValid){
+
+        if (!isValid) {
             throw new Exception("Weather parse failed");
         }
     }
-    
+
     @Override
     public String getName() {
         return "Weather";

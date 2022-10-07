@@ -26,6 +26,10 @@ public class HarvestApplication implements Cloneable {
         return HDATE;
     }
     
+    public Integer getOrderDay(){
+        return HDAY;
+    }
+    
     public HarvestApplication Clone(){
         try {
             return (HarvestApplication) this.clone();

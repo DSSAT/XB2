@@ -29,6 +29,10 @@ public class OrganicApplication implements Cloneable {
         return RDATE;
     }
     
+    public int getOrderDay(){
+        return RDAY;
+    }
+    
     public OrganicApplication Clone(){
         try {
             return (OrganicApplication) this.clone();

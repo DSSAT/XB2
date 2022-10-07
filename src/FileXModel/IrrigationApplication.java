@@ -23,6 +23,10 @@ public class IrrigationApplication implements Cloneable {
         return IDATE;
     }
     
+    public Integer getOrderDay() {
+        return IDAY;
+    }
+    
     public IrrigationApplication Clone(){
         try {
             return (IrrigationApplication) this.clone();

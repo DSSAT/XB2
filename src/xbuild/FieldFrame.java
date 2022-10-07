@@ -67,11 +67,11 @@ public class FieldFrame extends IXInternalFrame {
         cbWSTA.setInit(null, "WSTA", field.WSTA, WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
         //cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
 
-        cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 400), new XColumn("Code", "Code", 100)}, "Code");
+        cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 400)}, "Code");
         cbSoilCode.setInit(field, "ID_SOIL", field.ID_SOIL, loadSoilCode(field.ID_SOIL));
 
-        cbSLTX.setInit(field, "SLTX", field.SLTX, SoilTextureList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
-        cbFLDT.setInit(field, "FLDT", field.FLDT, DrainageList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250), new XColumn("Code", "Code", 100)}, "Code");
+        cbSLTX.setInit(field, "SLTX", field.SLTX, SoilTextureList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250)}, "Code");
+        cbFLDT.setInit(field, "FLDT", field.FLDT, DrainageList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 250)}, "Code");
 
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(field, "FLNAME", field.FLNAME);
@@ -96,7 +96,7 @@ public class FieldFrame extends IXInternalFrame {
         txtSLAS.Init(field, "SLAS", field.SLAS);
         txtFHDUR.Init(field, "FHDUR", field.FHDUR);
 
-        cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 300), new XColumn("Code", "Code", 100)}, "Code");
+        cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 300)}, "Code");
 
         if (FileX.wstaType != null) {
             switch (FileX.wstaType) {
