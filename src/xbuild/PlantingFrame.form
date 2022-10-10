@@ -361,9 +361,6 @@
           </Events>
         </Component>
         <Component class="xbuild.Components.XDropdownTableComboBox" name="cbPLME">
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbPLMEItemStateChanged1"/>
-          </Events>
         </Component>
         <Component class="xbuild.Components.XDropdownTableComboBox" name="cbPLDS">
           <Events>
