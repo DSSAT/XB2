@@ -58,7 +58,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
             SimulationStart.Clear();
             SimulationOptionWater.Clear();
             SimulationOptionSymbiosis.Clear();
-            SimulationOptionCO2.Clear();
+            SimulationOptionCO2List.Clear();
             SimulationMethodWeather.Clear();
             SimulationMethodInitial.Clear();
             SimulationMethodEvap.Clear();
@@ -453,9 +453,9 @@ public class SimulationRepository extends DSSATRepositoryBase {
             SimulationOptionWater.AddNew("Y", "Yes");
             SimulationOptionWater.AddNew("N", "No");
 
-            SimulationOptionCO2.AddNew("W", "Read from weather file");
-            SimulationOptionCO2.AddNew("M", "Actual CO2; Mauna Loa, Hawaii (Keeling curve)");
-            SimulationOptionCO2.AddNew("D", "Use default value (380 vpm)");
+            SimulationOptionCO2List.AddNew("D", "Use default value (380 vpm)");
+            SimulationOptionCO2List.AddNew("M", "Actual CO2; Mauna Loa, Hawaii (Keeling curve)");
+            SimulationOptionCO2List.AddNew("W", "Read from weather file");
             
             br.close();
             file.close();
