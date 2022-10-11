@@ -144,7 +144,7 @@ public class GeneralService {
         // <editor-fold defaultstate="collapsed" desc="GENERAL">
         pw.println("*EXP.DETAILS: " + general.InstituteCode + general.SiteCode + general.Year.substring(2,4) + general.ExperimentNumber + 
                 (general.crop != null ? general.crop.CropCode : "")
-                + " " + general.ExperimentName);
+                + " " + (general.ExperimentName != null && !general.ExperimentName.isEmpty() ? general.ExperimentName : ""));
         pw.println();
         pw.println("*GENERAL");
 
