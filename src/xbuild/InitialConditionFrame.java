@@ -940,7 +940,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     
     private Object[] SetRow(InitialConditionApplication initApp) {
         DecimalFormat df = new DecimalFormat("0.000");
-        String val = df.format(initApp.SH2O);
+        String val = initApp.SH2O != null ? df.format(initApp.SH2O) : "";
         
         DecimalFormat df1 = new DecimalFormat("0.0");
         
