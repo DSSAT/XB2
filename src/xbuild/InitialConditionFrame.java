@@ -21,6 +21,8 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.MenuDirection;
+import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 
 /**
@@ -189,6 +191,8 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
+        bnPrevious = new javax.swing.JButton();
+        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -701,30 +705,52 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
         });
 
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
+            }
+        });
+
+        bnNext.setText("NEXT");
+        bnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(784, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext))
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnPrevious)
+                    .addComponent(bnNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         pack();
@@ -832,6 +858,18 @@ public class InitialConditionFrame extends IXInternalFrame {
         setRecalculateButtonEnabled();
     }//GEN-LAST:event_txtNitrogenKeyReleased
 
+    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Initial Conditions", MenuDirection.PREVIOUS));
+        });
+    }//GEN-LAST:event_bnPreviousActionPerformed
+
+    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Initial Conditions", MenuDirection.NEXT));
+        });
+    }//GEN-LAST:event_bnNextActionPerformed
+
     private void setRecalculateButtonEnabled(){
         bnRecalculate.setEnabled(!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty());
     }
@@ -839,6 +877,8 @@ public class InitialConditionFrame extends IXInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private javax.swing.JButton bnRecalculate;
     private xbuild.Components.XDropdownTableComboBox cbPCR;
     private xbuild.Components.XComboBox cbSoil;

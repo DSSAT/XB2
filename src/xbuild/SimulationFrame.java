@@ -17,14 +17,18 @@ import DSSATModel.SimulationStart;
 import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
+import FileXService.FileXValidationService;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
+import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 import xbuild.Components.XColumn;
+import xbuild.Events.MenuDirection;
+import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
 
@@ -64,6 +68,8 @@ public class SimulationFrame extends IXInternalFrame {
         
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(sim, "SNAME", sim.SNAME);
+        
+        bnNext.setEnabled(FileXValidationService.IsMinimumRequired());
     }
     
     /**
@@ -330,6 +336,8 @@ public class SimulationFrame extends IXInternalFrame {
         snFROPT = new xbuild.Components.XSpinner();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
+        bnPrevious = new javax.swing.JButton();
+        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -1324,8 +1332,6 @@ public class SimulationFrame extends IXInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jXPanel20.getAccessibleContext().setAccessibleName("Fertilizer");
-
         jTabbedPane3.addTab("Fertilizer", jXPanel9);
 
         jXPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Organic Amendments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -1857,6 +1863,20 @@ public class SimulationFrame extends IXInternalFrame {
             }
         });
 
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
+            }
+        });
+
+        bnNext.setText("NEXT");
+        bnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1864,17 +1884,25 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnPrevious)
+                    .addComponent(bnNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2443,14 +2471,32 @@ public class SimulationFrame extends IXInternalFrame {
     private void dpSDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpSDATEPropertyChange
         try {
             l.myAction(new ValidationEvent(this));
+            
+            EventQueue.invokeLater(() -> {
+                bnNext.setEnabled(FileXValidationService.IsMinimumRequired());
+            });
         } catch (Exception ex) {
 
         }
     }//GEN-LAST:event_dpSDATEPropertyChange
 
+    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Simulation Controls", MenuDirection.PREVIOUS));
+        });
+    }//GEN-LAST:event_bnPreviousActionPerformed
+
+    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Simulation Controls", MenuDirection.NEXT));
+        });
+    }//GEN-LAST:event_bnNextActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnIMETH;
     private javax.swing.JButton bnNCODE;
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private xbuild.Components.XDropdownTableComboBox cbCO2;
     private xbuild.Components.XDropdownTableComboBox cbCrop;
     private xbuild.Components.XDatePicker dpHLAST;

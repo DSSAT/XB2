@@ -20,6 +20,7 @@ import FileXModel.Treatment;
 import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
 import FileXDialog.FieldDialog;
+import java.awt.EventQueue;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -29,6 +30,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.MenuDirection;
+import xbuild.Events.NewFrameEvent;
 
 /**
  *
@@ -69,6 +72,8 @@ public class TreatmentFrame extends IXInternalFrame  {
         bnDeleteLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
+        bnPrevious = new javax.swing.JButton();
+        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -123,15 +128,29 @@ public class TreatmentFrame extends IXInternalFrame  {
             jXTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
         }
 
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
+            }
+        });
+
+        bnNext.setText("NEXT");
+        bnNext.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                         .addComponent(bnAddLayer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnDeleteLayer)))
@@ -141,11 +160,15 @@ public class TreatmentFrame extends IXInternalFrame  {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnAddLayer)
-                    .addComponent(bnDeleteLayer))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnAddLayer)
+                        .addComponent(bnDeleteLayer))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnPrevious)
+                        .addComponent(bnNext)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -215,10 +238,18 @@ public class TreatmentFrame extends IXInternalFrame  {
         l.myAction(new RemoveLevelEvent(this, "Treatment", "Level " + (row+1) + ": " + name));
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
+    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Treatment", MenuDirection.PREVIOUS));
+        });
+    }//GEN-LAST:event_bnPreviousActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables

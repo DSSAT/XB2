@@ -11,6 +11,8 @@ import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.MenuDirection;
+import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
 
@@ -148,6 +150,8 @@ public class PlantingFrame extends IXInternalFrame {
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
+        bnNext = new javax.swing.JButton();
+        bnPrevious = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -484,6 +488,20 @@ public class PlantingFrame extends IXInternalFrame {
 
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
+        bnNext.setText("NEXT");
+        bnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnNextActionPerformed(evt);
+            }
+        });
+
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -495,17 +513,25 @@ public class PlantingFrame extends IXInternalFrame {
                         .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnPrevious)
+                    .addComponent(bnNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -516,7 +542,7 @@ public class PlantingFrame extends IXInternalFrame {
                     .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         pack();
@@ -549,7 +575,21 @@ public class PlantingFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_dpPDATEPropertyChange
 
+    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Planting", MenuDirection.PREVIOUS));
+        });
+    }//GEN-LAST:event_bnPreviousActionPerformed
+
+    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "Planting", MenuDirection.NEXT));
+        });
+    }//GEN-LAST:event_bnNextActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private xbuild.Components.XDropdownTableComboBox cbPLDS;
     private xbuild.Components.XDropdownTableComboBox cbPLME;
     private xbuild.Components.XDatePicker dpEDATE;
