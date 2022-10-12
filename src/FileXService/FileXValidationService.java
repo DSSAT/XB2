@@ -19,7 +19,10 @@ public class FileXValidationService {
         if (node == null || !node.contains(":")) {
             return node;
         }
-        return node.split(":")[1].trim();
+        
+        String[] names = node.split(":");
+        
+        return names.length > 1 ? node.split(":")[1].trim() : "";
     }
 
     public static boolean IsGeneralValid() {

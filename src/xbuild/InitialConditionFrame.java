@@ -944,7 +944,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         
         DecimalFormat df1 = new DecimalFormat("0.0");
         
-        Object[] vector = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
+        Object[] vector = new Object[]{initApp.ICBL, val, initApp.SNH4 != null ? df1.format(initApp.SNH4) : df1.format(0), initApp.SNO3 != null ? df1.format(initApp.SNO3) : df1.format(0)};
 
         return vector;
     }
