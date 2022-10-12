@@ -1176,10 +1176,18 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (!frameName.equals("General Information")) {
             ManagementList modelList = (ManagementList) GetManagementList(frameName);
             if (modelList.GetSize() > 0) {
+                jXTree1.expandRow(select);
+                
                 jXTree1.setSelectionRow(select + 1);
-                showFrame();
+                jXTree1.scrollRowToVisible(select + 1);
+                
+                EventQueue.invokeLater(() -> {
+                    showFrame();
+                });                
             } else if (menuRequired.indexOf(frameName) > 0) {
+                jXTree1.expandRow(select);
                 jXTree1.setSelectionRow(select);
+                jXTree1.scrollRowToVisible(select);
                 addLevel();
             } else {
                 int mIndex = menuAll.indexOf(frameName);
@@ -1195,8 +1203,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 showTargetFrame(frameName, select, nodeList, direction);
             }
         } else {
+            jXTree1.expandRow(select);
             jXTree1.setSelectionRow(select);
-            showFrame();
+            jXTree1.scrollRowToVisible(select);
+            
+            EventQueue.invokeLater(() -> {
+                showFrame();
+            });
         }
     }
 
