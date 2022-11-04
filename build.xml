@@ -12,10 +12,10 @@
     <!-- Netbeans build -->
     <import file="nbproject/build-impl.xml"/>
 
-    <description>Create XBuild2 Java app for DSSAT</description>
+    <description>Create XB2 Java app for DSSAT</description>
 
     <!-- Version -->
-    <property name="version" value="v0.2.0.0" />
+    <property name="version" value="v0.3.0.0" />
 
     <target name="-post-jar" depends="compile" description="package, output to JAR">
         <property name="store.jar.name" value="XB2" />
