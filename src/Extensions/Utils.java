@@ -129,7 +129,7 @@ public class Utils {
         int start = Header.indexOf(field);
         String val = null;
 
-        if (start >= 0) {
+        if (start >= 0 && start <= value.length()) {
             int stop = start + fieldLength;
             if (stop > value.length()) {
                 stop = value.length();

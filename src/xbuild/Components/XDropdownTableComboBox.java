@@ -42,7 +42,6 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  */
 public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
-    //private Object model;
     //private String fieldName;
     private String value;
     private String codeField;
@@ -60,8 +59,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             } else {
                 c.setBackground(Color.WHITE);
             }
-            
-            
+
             return c;
         }
 
@@ -82,7 +80,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         super();
     }
 
-    public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField) {
+    public void setInit(E model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField) {
         //this.model = model;
         //this.fieldName = fieldName;
         DefaultComboBoxModel<E> cbModel = (DefaultComboBoxModel<E>) this.getModel();
@@ -117,7 +115,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 }
             }
         });
-        
+
         for (int c = 0; c < table.getColumnCount(); c++) {
             table.getColumnModel().getColumn(c).setPreferredWidth(columns[c].getWidth());
         }
@@ -148,13 +146,16 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 
                 try {
                     String val = getFieldValue(selectItem, codeField);
-                    UpdateComponent.updateModel(model, fieldName, val);
+
+                    if (val != null && !val.isEmpty() && !val.isBlank()) {
+                        UpdateComponent.updateModel(model, fieldName, val);
+                    }
                 } catch (Exception ex) {
 
                 }
             });
         }
-        
+
         this.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
 
             @Override
@@ -168,7 +169,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
 //                } catch (Exception ex) {
 //                    Logger.getLogger(XDropdownTableComboBox.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-                
+
             }
         });
 
@@ -176,21 +177,29 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             this.addItemListener(li);
         }
     }
-    
-    public void setInit(Object model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, int height){
+
+    public void setInit(E model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, int height) {
         setInit(model, fieldName, value, list, columns, codeField);
         table.setPreferredSize(new Dimension(table.getPreferredSize().width, height));
     }
-    
-    private void setRowFocused(String text) throws Exception{
+
+    public void setInit(E model, String fieldName, String value, List<E> list, XColumn[] columns, String codeField, boolean showHeader) {
+        setInit(model, fieldName, value, list, columns, codeField);
+        if (!showHeader) {
+            table.getTableHeader().setPreferredSize(new Dimension(0, 0));
+            table.getTableHeader().setVisible(false);
+        }
+    }
+
+    private void setRowFocused(String text) throws Exception {
         if (columns.length > 1) {
             int index = getSelectedIndex();
-            
+
             if (index == -1) {
                 String fieldName = columns[1].getFieldName();
                 int i = 0;
                 for (E m : this.list) {
-                    if(this.getFieldValue(m, fieldName).toLowerCase().startsWith(text.toLowerCase())){
+                    if (this.getFieldValue(m, fieldName).toLowerCase().startsWith(text.toLowerCase())) {
                         setSelectedIndex(i);
                         System.out.println(i);
                         return;

@@ -19,7 +19,10 @@ public class FileXValidationService {
         if (node == null || !node.contains(":")) {
             return node;
         }
-        return node.split(":")[1].trim();
+        
+        String[] names = node.split(":");
+        
+        return names.length > 1 ? node.split(":")[1].trim() : "";
     }
 
     public static boolean IsGeneralValid() {
@@ -37,12 +40,10 @@ public class FileXValidationService {
     public static boolean IsMinimumRequired() {
         boolean isValid = IsGeneralValid();
 
-        isValid = FileX.fieldList != null && FileX.fieldList.GetSize() > 0
-                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAt(0)).WSTA)
-                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAt(0)).ID_SOIL)
+        isValid = FileX.fieldList != null && FileX.fieldList.GetSize() > 0 && IsFieldValid(FileX.fieldList.GetAt(0).GetName())
                 && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
-                && FileX.plantings != null && FileX.plantings.GetSize() > 0
-                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0;
+                && FileX.plantings != null && FileX.plantings.GetSize() > 0 && IsPlantingValid(FileX.plantings.GetAt(0).GetName())
+                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0 && IsSimulationControlValid(FileX.simulationList.GetAt(0).GetName());
 
         return isValid;
     }

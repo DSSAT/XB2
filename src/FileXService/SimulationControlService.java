@@ -83,14 +83,12 @@ public class SimulationControlService {
                         sim = (Simulation)simulationList.GetAt(level - 1);
                     }
 
-                    tmp = Utils.PadRight(tmp, simGeneralHeader.length(), ' ');
-
                     sim.NYERS = Utils.GetInteger(simGeneralHeader, tmp, "NYERS", 5);
                     sim.NREPS = Utils.GetInteger(simGeneralHeader, tmp, "NREPS", 5);
                     sim.START = Utils.GetString(simGeneralHeader, tmp, "START", 5);
                     sim.SDATE = Utils.GetDate(simGeneralHeader, tmp, "SDATE", 5);
                     sim.RSEED = Utils.GetFloat(simGeneralHeader, tmp, "RSEED", 5);
-                    sim.SNAME = Utils.GetString(simGeneralHeader, tmp, "SNAME", simGeneralHeader.contains("SMODEL") ? 25 : 30);
+                    sim.SNAME = Utils.GetString(simGeneralHeader, tmp, "SNAME", simGeneralHeader.contains("SMODEL") ? 25 : 99);
                     
                     if(simGeneralHeader.contains("SMODEL"))
                         sim.SMODEL = Utils.GetString(simGeneralHeader, tmp, "SMODEL", 5);
