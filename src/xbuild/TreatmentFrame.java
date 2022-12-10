@@ -658,7 +658,7 @@ public class TreatmentFrame extends IXInternalFrame  {
         {
             Treatment treatment = (Treatment) FileX.treaments.GetAt(i);
             Object row[] = new Object[18];
-            row[0] = i+1;
+            row[0] = treatment.N;//i+1;
             try {
                 row[1] = treatment.R;
             } catch (Exception e) {
