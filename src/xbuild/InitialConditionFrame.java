@@ -531,7 +531,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm3 cm-3</p></html>", "<html><p align='center'>Ammonium (NH4)<br>g[N] Mg-1 [soil]</p></html>", "<html><p align='center'>Nitrate (NO3)<br>g[N] Mg-1 [soil]</p></html>"
+                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm<sup>3</sup> cm-3</p></html>", "<html><p align='center'>Ammonium (NH<sub>4</sub>)<br>g[N] Mg-1 [soil]</p></html>", "<html><p align='center'>Nitrate (NO<sub>3</sub>)<br>g[N] Mg-1 [soil]</p></html>"
             }
         ) {
             Class[] types = new Class [] {
@@ -689,9 +689,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Profile", jXPanel2);
@@ -733,8 +733,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();

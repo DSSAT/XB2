@@ -52,8 +52,8 @@
                   <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane2" min="-2" pref="408" max="-2" attributes="0"/>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <Component id="jTabbedPane2" pref="478" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -702,10 +702,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="395" max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="286" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -750,9 +750,9 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Depth&lt;br&gt;base of layer&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Volumetric Water&lt;br&gt;cm3 cm-3&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Ammonium (NH4)&lt;br&gt;g[N] Mg-1 [soil]&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Nitrate (NO3)&lt;br&gt;g[N] Mg-1 [soil]&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Volumetric Water&lt;br&gt;cm&lt;sup&gt;3&lt;/sup&gt; cm-3&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Ammonium (NH&lt;sub&gt;4&lt;/sub&gt;)&lt;br&gt;g[N] Mg-1 [soil]&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                        <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Nitrate (NO&lt;sub&gt;3&lt;/sub&gt;)&lt;br&gt;g[N] Mg-1 [soil]&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
