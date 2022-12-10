@@ -106,6 +106,7 @@ public class OrganicDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtRDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         dpRDATE.setFormats(Variables.getDateFormat());
         dpRDATE.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +116,7 @@ public class OrganicDialog extends javax.swing.JDialog {
         });
 
         txtRAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnSelectRCOD.setText("...");
         bnSelectRCOD.addActionListener(new java.awt.event.ActionListener() {
@@ -124,14 +126,19 @@ public class OrganicDialog extends javax.swing.JDialog {
         });
 
         txtRESN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRESP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRESK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRINP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRINP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnSelectRMET.setText("...");
         bnSelectRMET.addActionListener(new java.awt.event.ActionListener() {

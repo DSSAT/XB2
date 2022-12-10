@@ -73,6 +73,7 @@ public class TillageDialog extends javax.swing.JDialog {
         dpTDATE.setFormats(Variables.getDateFormat());
 
         txtTDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtTDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnSelectTIMPL.setText("...");
         bnSelectTIMPL.addActionListener(new java.awt.event.ActionListener() {

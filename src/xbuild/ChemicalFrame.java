@@ -128,7 +128,7 @@ public class ChemicalFrame extends IXInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false

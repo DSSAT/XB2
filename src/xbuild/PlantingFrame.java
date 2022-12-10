@@ -197,24 +197,30 @@ public class PlantingFrame extends IXInternalFrame {
             }
         });
 
+        txtPPOP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPPOP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
             }
         });
 
+        txtPPOE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPLRS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLRS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
             }
         });
 
+        txtPLRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLRD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
             }
         });
 
+        txtPLDP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLDP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -306,8 +312,7 @@ public class PlantingFrame extends IXInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jXLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43))
+                            .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jXPanel2Layout.createSequentialGroup()
                             .addComponent(txtPLRS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,6 +402,16 @@ public class PlantingFrame extends IXInternalFrame {
         );
 
         jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Transplant"));
+
+        txtPLWT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPENV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPAGE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPLPH.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtSPRL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel15.setText("Planting Material Dry Weight");
 

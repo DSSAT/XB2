@@ -146,9 +146,16 @@ public class HarvestFrame extends IXInternalFrame {
                 "Day", "Stage", "Component", "Size Group", "<html><p align='center'>Grain Harvest<br>%</p></html>", "<html><p align='center'>Byproduct Takeoff<br>%</p></html>"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

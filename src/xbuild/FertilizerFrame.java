@@ -152,9 +152,16 @@ public class FertilizerFrame extends IXInternalFrame {
                 "Day", "<html><p align='center'>Fertilizer<br>Material</p></html>", "<html><p align='center'>Fertilizer<br>Applications</p></html>", "<html><p align='center'>Depth<br>cm</p></html>", "<html><p align='center'>N<br>kg ha-1</p></html>", "<html><p align='center'>P<br>kg ha-1</p></html>", "<html><p align='center'>K<br>kg ha-1</p></html>", "<html><p align='center'>Ca<br>kg ha-1</p></html>", "<html><p align='center'>Other<br>elements<br>kg ha-1</p></html>", "<html> <table width='100%'><tr><td align='center'> Other<br>Element<br>Code</td></tr></table> </html>"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

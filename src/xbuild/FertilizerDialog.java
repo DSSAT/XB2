@@ -119,16 +119,22 @@ public class FertilizerDialog extends javax.swing.JDialog {
         txtFDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         txtFDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtFAMN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtFAMP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtFAMK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtFAMC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtFAMO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Fertilizer Material");
 

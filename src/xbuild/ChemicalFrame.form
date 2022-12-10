@@ -155,8 +155,8 @@
                     <Column editable="false" title="Chemical Material" type="java.lang.Object"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Application&lt;br&gt;Amount&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="Chemical Applicatin Method" type="java.lang.Object"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Chemical Application&lt;br&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Chemical&lt;br&gt;Targets&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Chemical Application&lt;br&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Chemical&lt;br&gt;Targets&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

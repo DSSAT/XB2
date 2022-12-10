@@ -157,9 +157,16 @@ public class OrganicFrame extends IXInternalFrame {
                 "Day", "<html><p align='center'>Residue<br>Material</p></html>", "<html><p align='center'>Amount<br>kg/ha</p></html>", "<html><p align='center'>Nitrogen<br>Concentration<br>%</p></html>", "<html><p align='center'>Phophorus<br>Concentration<br>%</p></html>", "<html><p align='center'>Potass.<br>Concentration<br>%</p></html>", "<html><p align='center'>Incorporation<br>%</p></html>", "<html><p align='center'>Incorporatin<br>Depth<br>cm</p></html>", "<html><p align='center'>Method of<br>Incorporatin<br>Code</p></html>"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

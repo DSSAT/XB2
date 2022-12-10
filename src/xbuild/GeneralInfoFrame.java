@@ -3,25 +3,17 @@ package xbuild;
 import xbuild.Events.XEvent;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
-import DSSATModel.Setup;
 import DSSATModel.Crop;
 import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
 import DSSATModel.WstaType;
 import Extensions.Utils;
 import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JSpinner;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
 
@@ -379,15 +371,22 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         jXPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Plot Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        txtPAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtPRNO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPRNO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        txtPLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtPLDR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLDR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        txtPLSP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLSP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+
+        txtPLAY.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel11.setText("Gross Plot Area per rep");
 
@@ -475,11 +474,16 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Harvest Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        txtHRNO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHRNO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        txtHAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtHLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+
+        txtHARM.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel22.setText("Harvest Area");
 
@@ -581,7 +585,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();

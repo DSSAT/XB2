@@ -396,6 +396,9 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXLabel6.setText("Crop Model");
 
+        txtRSEED.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRSEED.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("*");
 
@@ -906,6 +909,10 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXLabel23.setText("<html>C<sup>๐</sup></html>");
 
+        txtPSTMX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPSTMN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         javax.swing.GroupLayout panelSoilTemperatureLayout = new javax.swing.GroupLayout(panelSoilTemperature);
         panelSoilTemperature.setLayout(panelSoilTemperatureLayout);
         panelSoilTemperatureLayout.setHorizontalGroup(
@@ -941,6 +948,12 @@ public class SimulationFrame extends IXInternalFrame {
         );
 
         panelSoilWater.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil Water", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        txtPH2OL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPH2OU.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtPH2OD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel21.setText("Lower");
 
@@ -1063,6 +1076,18 @@ public class SimulationFrame extends IXInternalFrame {
         jTabbedPane3.addTab("Planting", jXPanel7);
 
         jXPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Irrigation and Water Management", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        txtIMDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtITHRL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtITHRU.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtIROFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtIRAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtIREFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnIMETH.setText("...");
         bnIMETH.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -1214,6 +1239,8 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fertilization", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        txtNAOFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         bnNCODE.setText("...");
         bnNCODE.setPreferredSize(new java.awt.Dimension(20, 20));
         bnNCODE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1243,10 +1270,13 @@ public class SimulationFrame extends IXInternalFrame {
 
         lbMaterial.setText("Material");
 
+        txtNMDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNMDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtNMTHR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNMTHR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtNAMNT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNAMNT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXRadioGroup13.setLayout(new javax.swing.BoxLayout(jXRadioGroup13, javax.swing.BoxLayout.LINE_AXIS));
@@ -1340,10 +1370,13 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Organic Amendments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        txtRIPCN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRIPCN.setEnabled(false);
 
+        txtRTIME.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRTIME.setEnabled(false);
 
+        txtRIDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRIDEP.setEnabled(false);
 
         lbIncorporationPercentage.setText("Incorporation Percentage");
@@ -1453,10 +1486,13 @@ public class SimulationFrame extends IXInternalFrame {
 
         lbResidueHarvestedUnit.setText("%");
 
+        txtHFRST.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHFRST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtHPCNP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHPCNP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtHPCNR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHPCNR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXRadioGroup15.setLayout(new javax.swing.BoxLayout(jXRadioGroup15, javax.swing.BoxLayout.LINE_AXIS));
@@ -1547,7 +1583,7 @@ public class SimulationFrame extends IXInternalFrame {
             jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
+                .addComponent(jTabbedPane3)
                 .addContainerGap())
         );
         jXPanel5Layout.setVerticalGroup(
@@ -1879,7 +1915,7 @@ public class SimulationFrame extends IXInternalFrame {
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

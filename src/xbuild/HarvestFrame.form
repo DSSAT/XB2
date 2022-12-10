@@ -173,8 +173,8 @@
                     <Column editable="false" title="Stage" type="java.lang.Object"/>
                     <Column editable="false" title="Component" type="java.lang.Object"/>
                     <Column editable="false" title="Size Group" type="java.lang.Object"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Grain Harvest&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Byproduct Takeoff&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Grain Harvest&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Byproduct Takeoff&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                   </Table>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

@@ -257,10 +257,13 @@ public class FieldFrame extends IXInternalFrame {
 
         jXLabel14.setText("m");
 
+        txtXCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtXCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtYCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtYCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtELEV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtELEV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
@@ -304,18 +307,25 @@ public class FieldFrame extends IXInternalFrame {
         jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jXPanel7.setPreferredSize(new java.awt.Dimension(605, 200));
 
+        txtAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtFLWR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLWR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtFLSA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLSA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtSLAS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLAS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtFHDUR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFHDUR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtSLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtFLOB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLOB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXLabel15.setText("<html>m<sup>2</sup></html>");
@@ -465,8 +475,10 @@ public class FieldFrame extends IXInternalFrame {
 
         jXLabel9.setText("m");
 
+        txtFLDS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtFLDD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jXPanel5Layout = new javax.swing.GroupLayout(jXPanel5);
@@ -734,7 +746,7 @@ public class FieldFrame extends IXInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,7 +756,7 @@ public class FieldFrame extends IXInternalFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(99, 99, 99)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -757,7 +769,7 @@ public class FieldFrame extends IXInternalFrame {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

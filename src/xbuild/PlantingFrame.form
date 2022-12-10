@@ -126,7 +126,6 @@
                               <Component id="jXLabel11" min="-2" max="-2" attributes="0"/>
                               <Component id="jXLabel12" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -333,23 +332,38 @@
           </Events>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPPOP">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
           </Events>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPPOE">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLRS">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
           </Events>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLRD">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
           </Events>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLDP">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
           </Events>
@@ -539,14 +553,29 @@
       </Layout>
       <SubComponents>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLWT">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPENV">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPAGE">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLPH">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtSPRL">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">
           <Properties>

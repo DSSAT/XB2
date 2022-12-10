@@ -97,6 +97,7 @@ public class ChemicalDialog extends javax.swing.JDialog {
         });
 
         txtCHAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtCHAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnCHME.setText("...");
         bnCHME.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +107,7 @@ public class ChemicalDialog extends javax.swing.JDialog {
         });
 
         txtCHDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtCHDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {

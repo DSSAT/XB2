@@ -113,9 +113,13 @@ public class HarvestDialog extends javax.swing.JDialog {
             }
         });
 
+        txtHDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         txtHPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtHBPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHBPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {

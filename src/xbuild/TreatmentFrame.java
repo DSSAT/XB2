@@ -20,13 +20,16 @@ import FileXModel.Treatment;
 import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
 import FileXDialog.FieldDialog;
+import java.awt.EventQueue;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 
@@ -43,6 +46,26 @@ public class TreatmentFrame extends IXInternalFrame  {
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
         initComponents();
+        
+        EventQueue.invokeLater(() -> {
+            int targetCol = 1;
+            if (FileX.general.FileType == ExperimentType.Sequential) {
+                targetCol = 4;
+            }
+                
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+            jXTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+            for (int i = 1; i < jXTable1.getColumnModel().getColumnCount(); i++) {
+                
+                if (i != targetCol) {
+                    DefaultTableCellRenderer rightRenderer1 = new DefaultTableCellRenderer();
+                    rightRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+                    jXTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer1);
+                }
+            }
+        });
+        
         LoadTreament();        
     }
     

@@ -11,7 +11,6 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
-import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
@@ -201,8 +200,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel5.setText("kg/ha");
 
+        txtICRT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtICND.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICND.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Residue", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -215,8 +216,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel16.setText("%");
 
+        txtICREN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICREN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtICREP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICREP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jXPanel7Layout = new javax.swing.GroupLayout(jXPanel7);
@@ -261,8 +264,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel19.setText("%");
 
+        txtICRIP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRIP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtICRID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
@@ -358,8 +363,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel12.setText("kg/ha");
 
+        txtICWD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICWD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtICRES.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRES.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXLabel9.setText("Water Table Depth");
@@ -706,7 +713,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(784, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -720,7 +727,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();

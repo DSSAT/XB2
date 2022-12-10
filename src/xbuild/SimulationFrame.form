@@ -115,7 +115,7 @@
                       <Component id="txtDescription" min="-2" pref="685" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="179" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -351,6 +351,12 @@
               </Properties>
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtRSEED">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCrop">
             </Component>
@@ -1054,7 +1060,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane3" pref="905" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane3" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1326,8 +1332,14 @@
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtPSTMX">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="4"/>
+                              </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtPSTMN">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="4"/>
+                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1397,10 +1409,19 @@
                           </Layout>
                           <SubComponents>
                             <Component class="xbuild.Components.XTextField" name="txtPH2OL">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="4"/>
+                              </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtPH2OU">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="4"/>
+                              </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtPH2OD">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="4"/>
+                              </Properties>
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel21">
                               <Properties>
@@ -1610,16 +1631,34 @@
                       </Layout>
                       <SubComponents>
                         <Component class="xbuild.Components.XTextField" name="txtIMDEP">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtITHRL">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtITHRU">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtIROFF">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtIRAMT">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtIREFF">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XSelectTextField" name="txtIMETH">
                         </Component>
@@ -1831,6 +1870,9 @@
                       </Layout>
                       <SubComponents>
                         <Component class="xbuild.Components.XTextField" name="txtNAOFF">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                          </Properties>
                         </Component>
                         <Component class="xbuild.Components.XSelectTextField" name="txtNCODE">
                         </Component>
@@ -1888,6 +1930,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtNMDEP">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
@@ -1895,6 +1938,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtNMTHR">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
@@ -1902,6 +1946,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtNAMNT">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
@@ -2024,16 +2069,19 @@
                       <SubComponents>
                         <Component class="xbuild.Components.XTextField" name="txtRIPCN">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtRTIME">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="xbuild.Components.XTextField" name="txtRIDEP">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
@@ -2235,6 +2283,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtHFRST">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
@@ -2242,6 +2291,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtHPCNP">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
@@ -2249,6 +2299,7 @@
                         </Component>
                         <Component class="xbuild.Components.XFormattedTextField" name="txtHPCNR">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format format="#0.00" subtype="-1" type="0"/>
                             </Property>
