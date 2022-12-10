@@ -68,12 +68,16 @@ public class InitialDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtICBL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICBL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSH2O.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSH2O.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSNH4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSNH4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSNO3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSNO3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Depth, Base of Layer");
 
