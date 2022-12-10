@@ -90,11 +90,8 @@ public class InitialConditionFrame extends IXInternalFrame {
         cbSoil.setInit(null, "", "", soils);
         if(!soils.isEmpty())
             cbSoil.setSelectedIndex(0);
-        
-        EventQueue.invokeLater(() -> {            
-            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\InCond2.jpg");
-            bnRecalculate.setEnabled(false);
-        });
+
+        setImage(imagePanel, "InCond2.jpg");
     }
     
     /**
@@ -470,15 +467,14 @@ public class InitialConditionFrame extends IXInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6))
                             .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 18, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
-                        .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,7 +708,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(784, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -743,9 +739,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                     if(initApp != null){
                         DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
 
-                        Object[] vector = SetRow(initApp);
-                        for(int n = 0;n < vector.length;n++)
-                            model.setValueAt(vector[n], tbProfile.getSelectedRow(), n);
+                        Object[] row = SetRow(initApp);
+                        for (int n = 0; n < row.length; n++)
+                            model.setValueAt(row[n], tbProfile.getSelectedRow(), n);
                     }
                     dialog.SetNull();
                 }
@@ -904,9 +900,9 @@ public class InitialConditionFrame extends IXInternalFrame {
         
         DecimalFormat df1 = new DecimalFormat("0.0");
         
-        Object[] vector = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
+        Object[] row = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
 
-        return vector;
+        return row;
     }
 
     private void CalculateInitialCondition(Float water, Float nitrogen, int selectedIndex) {

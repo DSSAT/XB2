@@ -1,6 +1,10 @@
 package xbuild.Components;
 
 import DSSATModel.Setup;
+import FileXModel.FileX;
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -48,14 +52,20 @@ public abstract class IXInternalFrame extends JInternalFrame {
     }
 
     protected void setImage(JLabel imagePanel, String imageFile) {
-        File playerimage = new File(imageFile);
-        if (playerimage.exists()) {
-            try {
-                ImageIcon pimage = new ImageIcon(ImageIO.read(playerimage));
-                imagePanel.setIcon(pimage);
-            } catch (IOException ex) {
-                Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
+        EventQueue.invokeLater(() -> {
+            File playerimage = new File(setup.GetDSSATPath() + "\\Tools\\XBuild\\" + imageFile);
+
+            if (playerimage.exists()) {
+                BufferedImage img;
+                try {
+                    img = ImageIO.read(playerimage);
+                    Image scaledImage = img.getScaledInstance(imagePanel.getWidth(), imagePanel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon imageIcon = new ImageIcon(scaledImage);
+                    imagePanel.setIcon(imageIcon);
+                } catch (IOException ex) {
+                    Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
+        });
     }
 }

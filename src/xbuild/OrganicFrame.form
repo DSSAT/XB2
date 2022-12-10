@@ -30,31 +30,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jXPanel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txtDescription" min="-2" pref="655" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="818" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="imagePanel" min="-2" pref="244" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="1239" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,96 +48,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblLevel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jXLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="rdReportedDates" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdDaysAfterPlanting" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="568" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jXPanel1" min="-2" pref="669" max="-2" attributes="0"/>
+              <EmptySpace pref="219" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="bnAddLayer">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/Plus.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Add Layer"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnAddLayerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnDeleteLayer">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/Minus.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Delete Layer"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnDeleteLayerActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="org.jdesktop.swingx.JXTable" name="jXTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="0">
-                <Column editable="false" title="Day" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Residue&lt;br&gt;Material&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Amount&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Nitrogen&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Phophorus&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Potass.&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporation&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporatin&lt;br&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Method of&lt;br&gt;Incorporatin&lt;br&gt;Code&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-              </Table>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jXTable1MouseClicked"/>
-          </Events>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="org.jdesktop.swingx.JXLabel" name="lblLevel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Level"/>
@@ -165,34 +73,156 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDescriptionFocusLost"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="imagePanel">
+    <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="99" type="rgb"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder/>
+          </Border>
         </Property>
       </Properties>
-    </Component>
-    <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Management"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rdDaysAfterPlanting">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="groupManagement"/>
-        </Property>
-        <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Days After Planting"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="rdReportedDates">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="groupManagement"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="On Reported Dates"/>
-      </Properties>
-    </Component>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="818" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jXLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="rdReportedDates" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdDaysAfterPlanting" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="568" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="imagePanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Management"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rdDaysAfterPlanting">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupManagement"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="Days After Planting"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rdReportedDates">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="groupManagement"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="On Reported Dates"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="bnAddLayer">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/Plus.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Add Layer"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnAddLayerActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bnDeleteLayer">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/Minus.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Delete Layer"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnDeleteLayerActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="org.jdesktop.swingx.JXTable" name="jXTable1">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="9" rowCount="0">
+                    <Column editable="false" title="Day" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Residue&lt;br&gt;Material&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Amount&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Nitrogen&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Phophorus&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Potass.&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporation&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporatin&lt;br&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Method of&lt;br&gt;Incorporatin&lt;br&gt;Code&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jXTable1MouseClicked"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
