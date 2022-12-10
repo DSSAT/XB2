@@ -25,7 +25,10 @@ public class FileXValidationService {
     public static boolean IsGeneralValid() {
         boolean isValid = true;
 
-        if (FileX.general != null && (Utils.IsEmpty(FileX.general.SiteCode) || Utils.IsEmpty(FileX.general.InstituteCode) || Utils.IsEmpty(FileX.general.Year))) {
+        if (FileX.general != null && 
+                (Utils.IsEmpty(FileX.general.SiteCode) || FileX.general.SiteCode.length() != 2
+                || Utils.IsEmpty(FileX.general.InstituteCode) || FileX.general.InstituteCode.length() != 2
+                || Utils.IsEmpty(FileX.general.Year))) {
             isValid = false;
         }
         if (FileX.general != null && FileX.general.FileType == ExperimentType.Experimental && (FileX.general.crop == null || Utils.IsEmpty(FileX.general.crop.CropCode))) {
