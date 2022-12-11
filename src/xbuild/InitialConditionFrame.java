@@ -31,21 +31,23 @@ public class InitialConditionFrame extends IXInternalFrame {
     private InitialCondition init;
     private int selectedRowIndex = -1;
     private Integer level;
+
     /**
      * Creates new form InitialConditionFrame
+     *
      * @param nodeName
      */
     public InitialConditionFrame(String nodeName) {
         initComponents();
-        
+
         init = null;
         level = 0;
-        for(IModelXBase intTemp : FileX.initialList.GetAll()){
+        for (IModelXBase intTemp : FileX.initialList.GetAll()) {
             level++;
-            if(getLevel(nodeName) == level){
-                init = (InitialCondition)intTemp;
+            if (getLevel(nodeName) == level) {
+                init = (InitialCondition) intTemp;
                 break;
-            }            
+            }
         }
 
         dpICDAT.Init(init, "ICDAT", init.ICDAT);
@@ -58,25 +60,24 @@ public class InitialConditionFrame extends IXInternalFrame {
         txtICRIP.Init(init, "ICRIP", init.ICRIP);
         txtICRT.Init(init, "ICRT", init.ICRT);
         txtICWD.Init(init, "ICWD", init.ICWD);
-        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");
-        
+        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200)}, "CropCode");
+
         snICRE.Init(init, "ICRE", init.ICRE);
         snICRN.Init(init, "ICRN", init.ICRN);
 
-        for(int i = 0;i < init.GetSize();i++)
-        {
+        for (int i = 0; i < init.GetSize(); i++) {
             DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
             tbModel.addRow(SetRow(init.GetApp(i)));
         }
 
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(init, "ICNAME", init.ICNAME);
-        
+
         dpProfileDate.Init(init, "ICDAT", init.ICDAT);
-        
+
         ArrayList<String> soils = new ArrayList<>();
-        for(IModelXBase x : FileX.fieldList.GetAll()){
-            FieldDetail f = (FieldDetail)x;
+        for (IModelXBase x : FileX.fieldList.GetAll()) {
+            FieldDetail f = (FieldDetail) x;
             Soil soil = SoilList.GetAt(f.ID_SOIL);
             if (soil != null) {
                 String s = soil.Description + " (" + soil.Code + ")";
@@ -85,36 +86,40 @@ public class InitialConditionFrame extends IXInternalFrame {
                 }
             }
         }
-        Collections.sort(soils);        
+        Collections.sort(soils);
         cbSoil.setInit(null, "", "", soils);
-        if(!soils.isEmpty())
+        if (!soils.isEmpty()) {
             cbSoil.setSelectedIndex(0);
+        }
 
         setImage(imagePanel, "InCond2.jpg");
+        setRecalculateButtonEnabled();
     }
-    
+
     /**
      *
      * @param name
      */
     @Override
-    public void updatePanelName(String name){
+    public void updatePanelName(String name) {
         FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             txtDescription.removeFocusListener(li);
-        
+        }
+
         level = 0;
         for (IModelXBase f : FileX.initialList.GetAll()) {
             level++;
-            if(getLevel(name) == level){                
+            if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
                 txtDescription.setText(getDescription(name));
                 break;
             }
         }
-        
-        for(FocusListener li : listens)
+
+        for (FocusListener li : listens) {
             this.addFocusListener(li);
+        }
     }
 
     /**
@@ -739,8 +744,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProfileMouseClicked
-        if(evt.getClickCount() == 2)
-        {
+        if (evt.getClickCount() == 2) {
             final InitialDialog dialog = new InitialDialog(null, true, init.GetApp(tbProfile.getSelectedRow()));
             dialog.show();
 
@@ -748,24 +752,23 @@ public class InitialConditionFrame extends IXInternalFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     InitialConditionApplication initApp = dialog.GetData();
-                    if(initApp != null){
+                    if (initApp != null) {
                         DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
 
                         Object[] row = SetRow(initApp);
-                        for (int n = 0; n < row.length; n++)
+                        for (int n = 0; n < row.length; n++) {
                             model.setValueAt(row[n], tbProfile.getSelectedRow(), n);
+                        }
                     }
                     dialog.SetNull();
                 }
             });
-        }
-        else{
+        } else {
             int nRow = tbProfile.getSelectedRow();
 
-            if(nRow != selectedRowIndex){
+            if (nRow != selectedRowIndex) {
                 selectedRowIndex = nRow;
-            }
-            else{
+            } else {
                 selectedRowIndex = -1;
                 tbProfile.clearSelection();
             }
@@ -788,14 +791,15 @@ public class InitialConditionFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 InitialConditionApplication initApp = dialog.GetData();
-                if(initApp != null){
+                if (initApp != null) {
                     init.AddApp(initApp);
-                    
+
                     DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
-                    while(tbModel.getRowCount() > 0)
+                    while (tbModel.getRowCount() > 0) {
                         tbModel.removeRow(0);
-                    
-                    for (int i = 0; i < init.GetSize(); i++) {                        
+                    }
+
+                    for (int i = 0; i < init.GetSize(); i++) {
                         tbModel.addRow(SetRow(init.GetApp(i)));
                     }
                 }
@@ -813,7 +817,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if(txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)){
+        if (txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)) {
             l.myAction(new UpdateLevelEvent(this, "Initial Conditions", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
@@ -829,7 +833,13 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_dpICDATPropertyChange
 
     private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
-        CalculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()), cbSoil.getSelectedIndex());
+        if (!txtWater.getText().isEmpty() && txtNitrogen.getText().isEmpty()) {
+            calculateWater(Utils.ParseFloat(txtWater.getValue()));
+        } else if (txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+            calculateNitrogen(Utils.ParseFloat(txtNitrogen.getValue()));
+        } else if (!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+            calculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()));
+        }
     }//GEN-LAST:event_bnRecalculateActionPerformed
 
     private void txtWaterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaterKeyReleased
@@ -840,8 +850,8 @@ public class InitialConditionFrame extends IXInternalFrame {
         setRecalculateButtonEnabled();
     }//GEN-LAST:event_txtNitrogenKeyReleased
 
-    private void setRecalculateButtonEnabled(){
-        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty());
+    private void setRecalculateButtonEnabled() {
+        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() || !txtNitrogen.getText().isEmpty());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -906,65 +916,176 @@ public class InitialConditionFrame extends IXInternalFrame {
     private javax.swing.JFormattedTextField txtNitrogen;
     private javax.swing.JFormattedTextField txtWater;
     // End of variables declaration//GEN-END:variables
-    
+
     private Object[] SetRow(InitialConditionApplication initApp) {
         DecimalFormat df = new DecimalFormat("0.000");
         String val = df.format(initApp.SH2O);
-        
+
         DecimalFormat df1 = new DecimalFormat("0.00");
-        
+
         Object[] row = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
 
         return row;
     }
 
-    private void CalculateInitialCondition(Float water, Float nitrogen, int selectedIndex) {
-        FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(selectedIndex);
-        Soil soil = SoilList.GetAt(field.ID_SOIL);
-        
-        boolean isdataMissing = false;
-        
-        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+    private void calculateWater(Float water) {
+        Soil soil = getSelectedSoil();
+
         ArrayList<Float> Water_Calculated = new ArrayList<>();
-        ArrayList<Float> BulkDensity = new ArrayList<>();
-       
+
         int size = soil.GetSoilProfiles().size() - 1;
-        
-        for(SoilProfile profile : soil.GetSoilProfiles()){
-            Depth_Calculated.add(profile.SLB);            
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
             Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+        }
+
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0) {
+            tbModel.removeRow(0);
+        }
+
+        for (int i = 0; i <= init.GetSize(); i++) {
+
+            InitialConditionApplication initApp = new InitialConditionApplication();
+            InitialConditionApplication app = init.GetApp(i);
+
+            initApp.ICBL = app.ICBL;
+            initApp.SH2O = i <= size ? Water_Calculated.get(i) : app.SH2O;
+            initApp.SNH4 = app.SNH4;
+            initApp.SNO3 = app.SNO3;
+
+            if (i <= size) {
+                app.ICBL = initApp.ICBL;
+                app.SH2O = initApp.SH2O;
+                app.SNH4 = initApp.SNH4;
+                app.SNO3 = initApp.SNO3;
+            }
+
+            tbModel.addRow(SetRow(initApp));
+        }
+    }
+
+    private void calculateNitrogen(Float nitrogen) {
+        Soil soil = getSelectedSoil();
+
+        boolean isdataMissing = false;
+
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+
+        int size = soil.GetSoilProfiles().size() - 1;
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
+            Depth_Calculated.add(profile.SLB);
             BulkDensity.add(profile.SBDM);
-            if(profile.SBDM == null){
-                isdataMissing = false;
+            if (profile.SBDM == null) {
+                isdataMissing = true;
             }
         }
-        
+
         Float BD_Average = 1.2f;
-        if(!isdataMissing){
+        if (!isdataMissing) {
             BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
-            for(int i = 1; i< Depth_Calculated.size();i++){
+            for (int i = 1; i < Depth_Calculated.size(); i++) {
                 BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
             }
         }
-        
+
         Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
         Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
-        
+
         tbProfile.removeAll();
         DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
-        while (tbModel.getRowCount() > 0)
+        while (tbModel.getRowCount() > 0) {
             tbModel.removeRow(0);
-            
-        for(int i = 0;i <= size;i++)
-        {
+        }
+
+        for (int i = 0; i <= init.GetSize(); i++) {
             InitialConditionApplication initApp = new InitialConditionApplication();
-            
+            InitialConditionApplication app = init.GetApp(i);
+
+            initApp.ICBL = app.ICBL;
+            initApp.SH2O = app.SH2O;
+            initApp.SNH4 = i <= size ? INH4_Calculated : app.SNH4;
+            initApp.SNO3 = i <= size ? INO3_Calculated : app.SNO3;
+
+            tbModel.addRow(SetRow(initApp));
+
+            if (i <= size) {
+                app.SH2O = initApp.SH2O;
+                app.SNH4 = initApp.SNH4;
+                app.SNO3 = initApp.SNO3;
+            }
+        }
+    }
+
+    private void calculateInitialCondition(Float water, Float nitrogen) {
+        Soil soil = getSelectedSoil();
+        boolean isdataMissing = false;
+
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> Water_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+
+        int size = soil.GetSoilProfiles().size() - 1;
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
+            Depth_Calculated.add(profile.SLB);
+            Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+            BulkDensity.add(profile.SBDM);
+            if (profile.SBDM == null) {
+                isdataMissing = true;
+            }
+        }
+
+        Float BD_Average = 1.2f;
+        if (!isdataMissing) {
+            BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
+            for (int i = 1; i < Depth_Calculated.size(); i++) {
+                BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
+            }
+        }
+
+        Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0) {
+            tbModel.removeRow(0);
+            init.RemoveAt(0);
+        }
+
+        for (int i = 0; i <= size; i++) {
+            InitialConditionApplication initApp = new InitialConditionApplication();
+
             initApp.ICBL = Depth_Calculated.get(i);
             initApp.SH2O = Water_Calculated.get(i);
             initApp.SNH4 = INH4_Calculated;
             initApp.SNO3 = INO3_Calculated;
-            
+
             tbModel.addRow(SetRow(initApp));
+            init.AddApp(initApp);
         }
+    }
+    
+    private Soil getSelectedSoil(){
+        Soil soil = null;// = SoilList.GetAt(field.ID_SOIL);
+        
+        String selectedSoil = cbSoil.getSelectedItem().toString();
+        for (IModelXBase x : FileX.fieldList.GetAll()) {
+            FieldDetail f = (FieldDetail) x;
+            Soil s = SoilList.GetAt(f.ID_SOIL);
+            if (s != null) {
+                String so = s.Description + " (" + s.Code + ")";
+                if (so.equalsIgnoreCase(selectedSoil) ) {
+                    soil = s;
+                    break;
+                }
+            }
+        }
+        
+        return soil;
     }
 }
