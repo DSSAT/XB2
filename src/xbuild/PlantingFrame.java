@@ -59,10 +59,6 @@ public class PlantingFrame extends IXInternalFrame {
         txtDescription.Init(planting, "PLNAME", planting.PLNAME);
         
         setImage(imagePanel, "Plant2.jpg");
-        
-        EventQueue.invokeLater(() -> {
-            setPLMEEnabled(planting.PLME);
-        });
     }
     
     /**
@@ -562,9 +558,6 @@ public class PlantingFrame extends IXInternalFrame {
 
     private void cbPLMEItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPLMEItemStateChanged1
         cbPLMEItemStateChanged(evt);
-
-        PlantingMethod pm = (PlantingMethod)cbPLME.getSelectedItem();
-        setPLMEEnabled(pm != null ? pm.Code : "");
     }//GEN-LAST:event_cbPLMEItemStateChanged1
 
     private void txtPLDPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPLDPKeyReleased
@@ -639,23 +632,4 @@ public class PlantingFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtPPOP;
     private xbuild.Components.XFormattedTextField txtSPRL;
     // End of variables declaration//GEN-END:variables
-
-    private void setPLMEEnabled(String pmCode) {
-        if("T".equals(pmCode)) {
-            jXPanel3.setEnabled(true);
-            txtPLWT.setEnabled(true);
-            txtPAGE.setEnabled(true);
-            txtPENV.setEnabled(true);
-            txtPLPH.setEnabled(true);
-            txtSPRL.setEnabled(true);
-        }
-        else{
-            jXPanel3.setEnabled(false);
-            txtPLWT.setEnabled(false);
-            txtPAGE.setEnabled(false);
-            txtPENV.setEnabled(false);
-            txtPLPH.setEnabled(false);
-            txtSPRL.setEnabled(false);
-        }
-    }
 }
