@@ -59,7 +59,22 @@ public abstract class IXInternalFrame extends JInternalFrame {
                 BufferedImage img;
                 try {
                     img = ImageIO.read(playerimage);
-                    Image scaledImage = img.getScaledInstance(imagePanel.getWidth(), imagePanel.getHeight(), Image.SCALE_SMOOTH);
+                    
+                    int imgWidth = img.getWidth();
+                    int imgHeight = img.getHeight();
+                    int panelWidth = imagePanel.getWidth();
+                    int panelHeight = imagePanel.getHeight();
+                    
+                    if(imgWidth != imgHeight){
+                        if(imgWidth > imgHeight){
+                            panelHeight = (int)((float)imgHeight * ((float)panelWidth / (float)imgWidth));
+                        }
+                        else{
+                            panelWidth = (int)((float)imgWidth * ((float)panelHeight / (float)imgHeight));
+                        }
+                    }                    
+                    
+                    Image scaledImage = img.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
                     imagePanel.setIcon(imageIcon);
                 } catch (IOException ex) {
