@@ -134,8 +134,8 @@ public class InitialConditionService {
                         pw.print(Utils.PadLeft(level, 2, ' '));
                         pw.print(" " + Utils.PadLeft(initApp.ICBL, 5, ' '));
                         pw.print(" " + Utils.PadLeft(df3.format(initApp.SH2O), 5, ' '));
-                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNH4), 5, ' '));
-                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNO3), 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNH4), 5, ' ', true));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNO3), 5, ' ', true));
                         pw.println();
                     }
                 }
