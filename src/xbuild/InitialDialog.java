@@ -91,9 +91,9 @@ public class InitialDialog extends javax.swing.JDialog {
 
         jXLabel6.setText("<html>cm<sup>3</sup></html>");
 
-        jXLabel7.setText("Mg-1 [soil]");
+        jXLabel7.setText("<html>Mg<sup>-1</sup> [soil]</html>");
 
-        jXLabel8.setText("Mg-1 [soil]");
+        jXLabel8.setText("<html>Mg<sup>-1</sup> [soil]</html>");
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
