@@ -167,12 +167,12 @@ public class Utils {
             value = "-99";
         }
 
-        if (value.endsWith(".0")) {
-            value = value.replace(".0", "");
-        }
-        if (value.endsWith(".00")) {
-            value = value.replace(".00", "");
-        }
+//        if (value.endsWith(".0")) {
+//            value = value.replace(".0", "");
+//        }
+//        if (value.endsWith(".00")) {
+//            value = value.replace(".00", "");
+//        }
 
         for (int i = value.length(); i < count; i++) {
             value = character + value;

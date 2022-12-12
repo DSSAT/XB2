@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -94,6 +95,9 @@ public class InitialConditionService {
     
     public static void Extract(PrintWriter pw){
         // <editor-fold defaultstate="collapsed" desc="Initial Condition">
+        DecimalFormat df2 = new DecimalFormat("0.00");
+        DecimalFormat df3 = new DecimalFormat("0.000");
+        
         if (initialList.GetSize() > 0) {
             pw.println();
             pw.println();
@@ -129,9 +133,9 @@ public class InitialConditionService {
                         InitialConditionApplication initApp = init.GetApp(n);
                         pw.print(Utils.PadLeft(level, 2, ' '));
                         pw.print(" " + Utils.PadLeft(initApp.ICBL, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SH2O, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SNH4, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SNO3, 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df3.format(initApp.SH2O), 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNH4), 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNO3), 5, ' '));
                         pw.println();
                     }
                 }
