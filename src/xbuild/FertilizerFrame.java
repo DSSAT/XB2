@@ -55,8 +55,8 @@ public class FertilizerFrame extends IXInternalFrame {
         EventQueue.invokeLater(() -> {            
             rdDaysAfterPlantingStateChanged(null);
             
-            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
-            rdReportedDates.setEnabled(!FileX.isFileOpenned);
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || fertil.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || fertil.GetSize() == 0);
         });
     }
     

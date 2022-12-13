@@ -1,13 +1,11 @@
 package xbuild;
 
 import DSSATModel.PlantDistributionList;
-import DSSATModel.PlantingMethod;
 import DSSATModel.PlantingMethodList;
 import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Planting;
-import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;

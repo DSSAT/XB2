@@ -58,8 +58,8 @@ public class HarvestFrame extends IXInternalFrame {
         EventQueue.invokeLater(() -> {
             rdDaysAfterPlantingStateChanged(null);
             
-            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
-            rdReportedDates.setEnabled(!FileX.isFileOpenned);
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || harvestApp.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || harvestApp.GetSize() == 0);
         });
     }
     

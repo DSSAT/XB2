@@ -58,8 +58,8 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         EventQueue.invokeLater(() -> {
             rdDaysAfterPlantingStateChanged(null);
             
-            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned);
-            rdReportedDates.setEnabled(!FileX.isFileOpenned);
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
         });
     }
     
