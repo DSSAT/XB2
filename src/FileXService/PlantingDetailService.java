@@ -68,7 +68,6 @@ public class PlantingDetailService {
         // <editor-fold defaultstate="collapsed" desc="Planting">
         if (plantings.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*PLANTING DETAILS");
             pw.println("@P PDATE EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL                        PLNAME");
             for (int i = 0; i < plantings.GetSize(); i++) {

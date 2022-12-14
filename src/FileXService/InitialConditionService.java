@@ -100,7 +100,6 @@ public class InitialConditionService {
         
         if (initialList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*INITIAL CONDITIONS");
             for (int i = 0; i < initialList.GetSize(); i++) {
                 Integer level = i + 1;

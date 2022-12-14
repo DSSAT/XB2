@@ -347,7 +347,6 @@ public class SimulationControlService {
         // <editor-fold defaultstate="collapsed" desc="Simulation Options">
         if (FileX.simulationList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*SIMULATION CONTROLS");
             for (int i = 0; i < FileX.simulationList.GetSize(); i++) {
                 Simulation sim = (Simulation)FileX.simulationList.GetAt(i);

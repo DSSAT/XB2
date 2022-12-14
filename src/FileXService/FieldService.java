@@ -96,7 +96,6 @@ public class FieldService {
         // <editor-fold defaultstate="collapsed" desc="Fields">
         if (fieldList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*FIELDS");
             pw.println("@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME");
             for (int i = 0; i < fieldList.GetSize(); i++) {

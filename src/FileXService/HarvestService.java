@@ -77,7 +77,6 @@ public class HarvestService {
         // <editor-fold defaultstate="collapsed" desc="Harvest">
         if (harvestList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*HARVEST DETAILS");
             pw.println("@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME");
             for (int i = 0; i < harvestList.GetSize(); i++) {

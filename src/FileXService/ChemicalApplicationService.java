@@ -73,7 +73,6 @@ public class ChemicalApplicationService {
         // <editor-fold defaultstate="collapsed" desc="Chemicals">
         if (chemicalList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*CHEMICAL APPLICATIONS");
             pw.println("@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME");
             for (int i = 0; i < chemicalList.GetSize(); i++) {

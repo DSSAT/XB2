@@ -70,7 +70,6 @@ public class TillageService {
         // <editor-fold defaultstate="collapsed" desc="Tillage">
         if (tillageList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*TILLAGE AND ROTATIONS");
             pw.println("@T TDATE TIMPL  TDEP TNAME");
             for (int i = 0; i < tillageList.GetSize(); i++) {

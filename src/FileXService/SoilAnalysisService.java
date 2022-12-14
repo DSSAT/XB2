@@ -93,7 +93,6 @@ public class SoilAnalysisService {
         // <editor-fold defaultstate="collapsed" desc="Soil Analysis">
         if (soilAnalysis.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*SOIL ANALYSIS");
             for (int i = 0; i < soilAnalysis.GetSize(); i++) {
                 Integer level = i + 1;

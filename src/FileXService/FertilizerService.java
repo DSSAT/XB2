@@ -84,7 +84,6 @@ public class FertilizerService {
         // <editor-fold defaultstate="collapsed" desc="Fertilizer">
         if (fertilizerList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*FERTILIZERS (INORGANIC)");
             pw.println("@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME");
             for (int i = 0; i < fertilizerList.GetSize(); i++) {

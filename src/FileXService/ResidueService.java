@@ -81,7 +81,6 @@ public class ResidueService {
         // <editor-fold defaultstate="collapsed" desc="Organic Amendment">
         if (organicList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*RESIDUES AND ORGANIC FERTILIZER");
             pw.println("@R RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET RENAME");
             for (int i = 0; i < organicList.GetSize(); i++) {

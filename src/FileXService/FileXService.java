@@ -67,11 +67,12 @@ public class FileXService {
     }
     
     public static void SaveFile(File file) {
-        FileWriter writer = null;
+        FileWriter writer;
         try {
             writer = new FileWriter(file);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return;
         }
         PrintWriter pw = new PrintWriter(writer);
 

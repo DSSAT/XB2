@@ -85,7 +85,6 @@ public class EnvironmentService {
         // <editor-fold defaultstate="collapsed" desc="Environmental">
         if (environmentals.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*ENVIRONMENT MODIFICATIONS");
             pw.println("@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME");
 

@@ -88,7 +88,6 @@ public class IrrigationService {
         // <editor-fold defaultstate="collapsed" desc="Irrigation">
         if (irrigations.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*IRRIGATION AND WATER MANAGEMENT");
 
             for (int i = 0; i < irrigations.GetSize(); i++) {

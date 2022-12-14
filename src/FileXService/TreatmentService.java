@@ -77,7 +77,6 @@ public class TreatmentService {
         // <editor-fold defaultstate="collapsed" desc="Treatment">
         if (treaments.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*TREATMENTS                        -------------FACTOR LEVELS------------");
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treaments.GetSize(); i++) {
