@@ -10,7 +10,6 @@ import FileXModel.OrganicApplication;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
@@ -323,6 +322,7 @@ public class OrganicFrame extends IXInternalFrame {
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if (evt.getClickCount() == 2) {
+            int nRow = jXTable1.getSelectedRow();
             final OrganicDialog organicDialog = new OrganicDialog(null, true, rdDaysAfterPlanting.isSelected(), organic.GetApp(jXTable1.getSelectedRow()));
             organicDialog.show();
 
@@ -332,6 +332,7 @@ public class OrganicFrame extends IXInternalFrame {
                     OrganicApplication organicApp = organicDialog.GetData();
                     if (organicApp != null) {
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+                        organic.SetAt(nRow, organicApp);
                         Object[] row = SetRow(organicApp);
                         for (int n = 0; n < row.length; n++) {
                             model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
@@ -427,6 +428,11 @@ public class OrganicFrame extends IXInternalFrame {
     private void LoadOrganic() {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for (int i = 0; i < organic.GetSize(); i++) {
+            if(organic.GetApp(i).RDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
             model.addRow(SetRow(organic.GetApp(i)));
         }
     }

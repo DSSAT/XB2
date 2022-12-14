@@ -10,7 +10,6 @@ import FileXModel.IModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
@@ -346,6 +345,7 @@ public class FertilizerFrame extends IXInternalFrame {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2)
         {
+            int nRow = jXTable1.getSelectedRow();
             final FertilizerDialog ferDialog = new FertilizerDialog(null, true, rdDaysAfterPlanting.isSelected(), fertil.GetApp(jXTable1.getSelectedRow()));
             ferDialog.show();
 
@@ -355,6 +355,7 @@ public class FertilizerFrame extends IXInternalFrame {
                     FertilizerApplication ferApp = ferDialog.GetData();
                     if(ferApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+                        fertil.SetAt(nRow, ferApp);
                         Object[] row = SetRow(ferApp);
                         for (int n = 0; n < row.length; n++)
                             model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
@@ -386,6 +387,12 @@ public class FertilizerFrame extends IXInternalFrame {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < fertil.GetSize();i++)
         {
+            if(fertil.GetApp(i).FDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
+            
             model.addRow(SetRow(fertil.GetApp(i)));
         }
     }

@@ -11,7 +11,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
@@ -387,6 +386,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                     IrrigationApplication irrigApp = appDialog.GetData();
                     if(irrigApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+                        irrig.SetAt(nRow, irrigApp);
                         Object[] row = SetRow(irrigApp);
                         for (int n = 0; n < row.length; n++)
                             model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
@@ -453,8 +453,12 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < irrig.GetSize();i++)
         {
-            Object[] a = SetRow(irrig.GetApp(i));
-            model.addRow(a);
+            if(irrig.GetApp(i).IDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
+            model.addRow(SetRow(irrig.GetApp(i)));
         }
     }
     

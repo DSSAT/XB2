@@ -12,7 +12,6 @@ import FileXModel.IModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
@@ -293,6 +292,7 @@ public class HarvestFrame extends IXInternalFrame {
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2)
         {
+            int nRow = jXTable1.getSelectedRow();
             final HarvestDialog harvestDialog = new HarvestDialog(null, true, rdDaysAfterPlanting.isSelected(), harvestApp.GetApp(jXTable1.getSelectedRow()));
             harvestDialog.show();
 
@@ -303,6 +303,7 @@ public class HarvestFrame extends IXInternalFrame {
                     HarvestApplication harApp = harvestDialog.GetData();
                     if(harApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+                        harvestApp.SetAt(nRow, harApp);
                         Object[] row = SetRow(harApp);
                         for (int n = 0; n < row.length; n++)
                             model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
@@ -442,6 +443,11 @@ public class HarvestFrame extends IXInternalFrame {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         
         for(int i = 0;i< harvestApp.GetSize();i++){
+            if(harvestApp.GetApp(i).HDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
             model.addRow(SetRow(harvestApp.GetApp(i)));
         }
     }
