@@ -19,6 +19,7 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
+import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -2154,7 +2155,7 @@ public class SimulationFrame extends IXInternalFrame {
     }
     
     private void irrigStateChanged(){
-        if("A".equals(sim.IRRIG)){
+            if ("A".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
             lbManagementUnit.setEnabled(true);
@@ -2175,30 +2176,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbMethod.setEnabled(true);
             txtIMETH.enable(true);
             bnIMETH.setEnabled(true);
-        }
-        else if("D".equals(sim.IRRIG)){
-            lbManagementDepth.setEnabled(false);
-            txtIMDEP.enable(false);
-            lbManagementUnit.setEnabled(false);
-            lbThreshold.setEnabled(false);
-            txtITHRL.enable(false);
-            lbThresholdUnit.setEnabled(false);
-            lbEndPoint.setEnabled(false);
-            txtITHRU.enable(false);
-            lbEndPointUnit.setEnabled(false);
-            lbEndApplication.setEnabled(false);
-            txtIROFF.enable(false);
-            lbEndApplicationUnit.setEnabled(false);
-            lbAmount.setEnabled(false);
-            txtIRAMT.enable(false);
-            lbAmountUnit.setEnabled(false);
-            lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
-            lbMethod.setEnabled(false);
-            txtIMETH.enable(false);
-            bnIMETH.setEnabled(false);
-        }
-        else if("F".equals(sim.IRRIG)){
+        } else if ("D".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
             lbManagementUnit.setEnabled(true);
@@ -2219,8 +2197,30 @@ public class SimulationFrame extends IXInternalFrame {
             lbMethod.setEnabled(true);
             txtIMETH.enable(true);
             bnIMETH.setEnabled(true);
-        }
-        else if("N".equals(sim.IRRIG)){
+        } else if ("F".equals(sim.IRRIG)) {
+
+            lbManagementDepth.setEnabled(true);
+            txtIMDEP.enable(true);
+            lbManagementUnit.setEnabled(true);
+            lbThreshold.setEnabled(true);
+            txtITHRL.enable(true);
+            lbThresholdUnit.setEnabled(true);
+            lbEndPoint.setEnabled(true);
+            txtITHRU.enable(true);
+            lbEndPointUnit.setEnabled(true);
+            lbEndApplication.setEnabled(true);
+            txtIROFF.enable(true);
+            lbEndApplicationUnit.setEnabled(true);
+            lbAmount.setEnabled(true);
+            txtIRAMT.enable(true);
+            lbAmountUnit.setEnabled(true);
+            lbEfficiencyFraction.setEnabled(true);
+            txtIREFF.enable(true);
+            lbMethod.setEnabled(true);
+            txtIMETH.enable(true);
+            bnIMETH.setEnabled(true);
+
+        } else if ("N".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(false);
             txtIMDEP.enable(false);
             lbManagementUnit.setEnabled(false);
@@ -2241,30 +2241,28 @@ public class SimulationFrame extends IXInternalFrame {
             lbMethod.setEnabled(false);
             txtIMETH.enable(false);
             bnIMETH.setEnabled(false);
-        }
-        else if("R".equals(sim.IRRIG)){
-            lbManagementDepth.setEnabled(false);
-            txtIMDEP.enable(false);
-            lbManagementUnit.setEnabled(false);
-            lbThreshold.setEnabled(false);
-            txtITHRL.enable(false);
-            lbThresholdUnit.setEnabled(false);
-            lbEndPoint.setEnabled(false);
-            txtITHRU.enable(false);
-            lbEndPointUnit.setEnabled(false);
-            lbEndApplication.setEnabled(false);
+        } else if ("R".equals(sim.IRRIG)) {
+            lbManagementDepth.setEnabled(true);
+            txtIMDEP.enable(true);
+            lbManagementUnit.setEnabled(true);
+            lbThreshold.setEnabled(true);
+            txtITHRL.enable(true);
+            lbThresholdUnit.setEnabled(true);
+            lbEndPoint.setEnabled(true);
+            txtITHRU.enable(true);
+            lbEndPointUnit.setEnabled(true);
+            lbEndApplication.setEnabled(true);
             txtIROFF.enable(false);
-            lbEndApplicationUnit.setEnabled(false);
-            lbAmount.setEnabled(false);
-            txtIRAMT.enable(false);
-            lbAmountUnit.setEnabled(false);
+            lbEndApplicationUnit.setEnabled(true);
+            lbAmount.setEnabled(true);
+            txtIRAMT.enable(true);
+            lbAmountUnit.setEnabled(true);
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
-            lbMethod.setEnabled(false);
-            txtIMETH.enable(false);
-            bnIMETH.setEnabled(false);
-        }
-        else{
+            lbMethod.setEnabled(true);
+            txtIMETH.enable(true);
+            bnIMETH.setEnabled(true);
+        } else {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
             lbManagementUnit.setEnabled(true);
