@@ -135,7 +135,7 @@ public class OrganicFrame extends IXInternalFrame {
         rdReportedDates.setText("On Reported Dates");
 
         bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
-        bnAddLayer.setText("Add Layer");
+        bnAddLayer.setText("Add Application");
         bnAddLayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnAddLayerActionPerformed(evt);
@@ -143,7 +143,7 @@ public class OrganicFrame extends IXInternalFrame {
         });
 
         bnDeleteLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Minus.png"))); // NOI18N
-        bnDeleteLayer.setText("Delete Layer");
+        bnDeleteLayer.setText("Delete Application");
         bnDeleteLayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDeleteLayerActionPerformed(evt);
@@ -269,17 +269,6 @@ public class OrganicFrame extends IXInternalFrame {
                     h.RDATE = null;
                 });
             }
-
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                try {
-                    int val = Integer.parseInt(valueAt.toString());
-                    model.setValueAt(0, i, 0);
-                } catch (NumberFormatException ex) {
-                    model.setValueAt(0, i, 0);
-                }
-            }
         } else {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
@@ -287,21 +276,6 @@ public class OrganicFrame extends IXInternalFrame {
                 organic.GetApps().forEach(harvest -> {
                     harvest.RDAY = null;
                 });
-            }
-
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                if (valueAt != null) {
-                    try {
-                        long val = Date.parse(valueAt.toString());
-                        if (val == 0) {
-                            model.setValueAt(0, i, 0);
-                        }
-                    } catch (Exception ex) {
-                        model.setValueAt(0, i, 0);
-                    }
-                }
             }
         }
     }     

@@ -267,16 +267,16 @@ public class FertilizerFrame extends IXInternalFrame {
                 });
             }
 
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                try {
-                    int val = Integer.parseInt(valueAt.toString());
-                    model.setValueAt(0, i, 0);
-                } catch (NumberFormatException ex) {
-                    model.setValueAt(0, i, 0);
-                }
-            }
+//            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+//            for (int i = 0; i < model.getRowCount(); i++) {
+//                Object valueAt = model.getValueAt(i, 0);
+//                try {
+//                    int val = Integer.parseInt(valueAt.toString());
+//                    model.setValueAt(0, i, 0);
+//                } catch (NumberFormatException ex) {
+//                    model.setValueAt(0, i, 0);
+//                }
+//            }
         } else {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
@@ -286,20 +286,20 @@ public class FertilizerFrame extends IXInternalFrame {
                 });
             }
 
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                if (valueAt != null) {
-                    try {
-                        long val = Date.parse(valueAt.toString());
-                        if (val == 0) {
-                            model.setValueAt(0, i, 0);
-                        }
-                    } catch (Exception ex) {
-                        model.setValueAt(0, i, 0);
-                    }
-                }
-            }
+//            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+//            for (int i = 0; i < model.getRowCount(); i++) {
+//                Object valueAt = model.getValueAt(i, 0);
+//                if (valueAt != null) {
+//                    try {
+//                        long val = Date.parse(valueAt.toString());
+//                        if (val == 0) {
+//                            model.setValueAt(0, i, 0);
+//                        }
+//                    } catch (Exception ex) {
+//                        model.setValueAt(0, i, 0);
+//                    }
+//                }
+//            }
         }
     }
     

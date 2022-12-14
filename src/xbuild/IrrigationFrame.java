@@ -74,16 +74,16 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                 });
             }
             
-            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                try {
-                    int val = Integer.parseInt(valueAt.toString());
-                    model.setValueAt(0, i, 0);
-                } catch (NumberFormatException ex) {
-                    model.setValueAt(0, i, 0);
-                }
-            }
+//            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+//            for (int i = 0; i < model.getRowCount(); i++) {
+//                Object valueAt = model.getValueAt(i, 0);
+//                try {
+//                    int val = Integer.parseInt(valueAt.toString());
+//                    model.setValueAt(0, i, 0);
+//                } catch (NumberFormatException ex) {
+//                    model.setValueAt(0, i, 0);
+//                }
+//            }
         }
         else
         {
@@ -95,20 +95,20 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                 });
             }
             
-            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object valueAt = model.getValueAt(i, 0);
-                if(valueAt != null){
-                    try {
-                        long val = Date.parse(valueAt.toString());
-                        if (val == 0) {
-                            model.setValueAt(0, i, 0);
-                        }
-                    } catch (Exception ex) {
-                        model.setValueAt(0, i, 0);
-                    }
-                }
-            }
+//            DefaultTableModel model = (DefaultTableModel)jXTable1.getModel();
+//            for (int i = 0; i < model.getRowCount(); i++) {
+//                Object valueAt = model.getValueAt(i, 0);
+//                if(valueAt != null){
+//                    try {
+//                        long val = Date.parse(valueAt.toString());
+//                        if (val == 0) {
+//                            model.setValueAt(0, i, 0);
+//                        }
+//                    } catch (Exception ex) {
+//                        model.setValueAt(0, i, 0);
+//                    }
+//                }
+//            }
         }        
     }
     
@@ -175,7 +175,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
-        bnAddLayer.setText("Add Layer");
+        bnAddLayer.setText("Add Application");
         bnAddLayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnAddLayerActionPerformed(evt);
@@ -183,7 +183,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         });
 
         bnDeleteLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Minus.png"))); // NOI18N
-        bnDeleteLayer.setText("Delete Layer");
+        bnDeleteLayer.setText("Delete Application");
         bnDeleteLayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDeleteLayerActionPerformed(evt);
@@ -453,27 +453,20 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < irrig.GetSize();i++)
         {
-            model.addRow(SetRow(irrig.GetApp(i)));
+            Object[] a = SetRow(irrig.GetApp(i));
+            model.addRow(a);
         }
     }
     
     private Object[] SetRow(IrrigationApplication irrigApp) {        
-        try
-        {
-            rdDaysAfterPlanting.setSelected(false);
-            rdReportedDates.setSelected(true);
-            
-            return new Object[] {
+        try {
+            return new Object[]{
                 Variables.getDateFormat().format(irrigApp.IDATE),
                 irrigApp.IRVAL,
                 IrrigationMethodList.GetAt(irrigApp.IROP).Description
             };
-        }
-        catch(Exception ex)
-        {
-            rdDaysAfterPlanting.setSelected(true);
-            rdReportedDates.setSelected(false);
-            return new Object[] {
+        } catch (Exception ex) {
+            return new Object[]{
                 irrigApp.IDAY,
                 irrigApp.IRVAL,
                 IrrigationMethodList.GetAt(irrigApp.IROP).Description

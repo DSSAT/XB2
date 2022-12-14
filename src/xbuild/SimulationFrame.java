@@ -19,7 +19,6 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import ListDialog.FertilizerMaterialDialog;
 import ListDialog.IrrigationMethodDialog;
-import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
