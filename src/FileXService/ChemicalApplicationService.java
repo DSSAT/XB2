@@ -18,7 +18,7 @@ public class ChemicalApplicationService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
 
             String chemicalHeader = "";
             boolean bChemicalHeader = false;
@@ -40,7 +40,7 @@ public class ChemicalApplicationService {
                         continue;
                     }
                     //@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME
-                    Chemical chem = null;
+                    Chemical chem;
                     ChemicalApplication chemApp = new ChemicalApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -49,8 +49,11 @@ public class ChemicalApplicationService {
                     } else {
                         chem = (Chemical)chemicalList.GetAt(level - 1);
                     }
-
-                    chemApp.CDATE = Utils.GetDate(chemicalHeader, tmp, "CDATE", 5);
+                    try {
+                        chemApp.CDATE = Utils.GetDate(chemicalHeader, tmp, "CDATE", 5);
+                    } catch (Exception ex) {
+                        chemApp.CDAY = Utils.GetInteger(chemicalHeader, tmp, "CDATE", 5);
+                    }
                     chemApp.CHCOD = Utils.GetString(chemicalHeader, tmp, "CHCOD", 5);
                     chemApp.CHAMT = Utils.GetFloat(chemicalHeader, tmp, "CHAMT", 5);
                     chemApp.CHME = Utils.GetString(chemicalHeader, tmp, " CHME", 5);
@@ -84,7 +87,10 @@ public class ChemicalApplicationService {
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {
-                        pw.print(" " + Utils.PadRight(Utils.JulianDate(chemApp.CDATE), 5, ' '));
+                        if(chemApp.CDATE != null)
+                            pw.print(" " + Utils.PadRight(Utils.JulianDate(chemApp.CDATE), 5, ' '));
+                        else
+                            pw.print(" " + Utils.PadLeft(chemApp.CDAY, 5, ' '));
                     } catch (Exception e) {
                         pw.print(" " + Utils.PadLeft("-99", 5, ' '));
                     }

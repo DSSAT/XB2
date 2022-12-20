@@ -30,7 +30,7 @@ public class Tillage implements Cloneable, IModelXBase {
     public void AddApp(TillageApplication till)
     {
         tillAps.add(till);
-        Collections.sort(tillAps, Comparator.comparing(TillageApplication::getOrder));
+        Collections.sort(tillAps, till.TDATE != null ? Comparator.comparing(TillageApplication::getOrder) : Comparator.comparing(TillageApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

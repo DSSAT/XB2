@@ -287,6 +287,13 @@ public class HarvestFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         harvestApp.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || harvestApp.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || harvestApp.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteAppActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked

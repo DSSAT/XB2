@@ -35,6 +35,7 @@ public class OrganicDialog extends javax.swing.JDialog {
     protected OrganicApplication organicApp;
     protected String RCOD;
     protected String RMET;
+    private boolean isOK;
 
     public OrganicDialog(java.awt.Frame parent, boolean modal, boolean bDay, OrganicApplication organicApp) {
         super(parent, modal);
@@ -60,6 +61,7 @@ public class OrganicDialog extends javax.swing.JDialog {
         lbDateFormat.setVisible((!bDay));
 
         LoadOrganicApp();
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -104,6 +106,11 @@ public class OrganicDialog extends javax.swing.JDialog {
         lbDateFormat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         txtRDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtRDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -359,13 +366,19 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        organicApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;

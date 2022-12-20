@@ -6,9 +6,11 @@ import FileXModel.FileX;
 import FileXModel.IModelXBase;
 import FileXModel.Tillage;
 import FileXModel.TillageApplication;
+import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -41,7 +43,41 @@ public class TillageFrame extends IXInternalFrame {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(tillage, "TNAME", tillage.TNAME);
         
+        rdDaysAfterPlanting.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+            rdDaysAfterPlantingStateChanged(evt);
+        });
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || tillage.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || tillage.GetSize() == 0);
+        });
+        
         setImage(imagePanel, "Tillage2.jpg");
+    }
+    
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
+        if(rdDaysAfterPlanting.isSelected())
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("Days After Planting");
+            if(tillage.GetApps() != null){
+                tillage.GetApps().forEach(h -> {
+                    h.TDATE = null;
+                });
+            }
+        }
+        else
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if(tillage.GetApps() != null){
+                tillage.GetApps().forEach(harvest -> {
+                    harvest.TDAY = null;
+                });
+            }
+        }        
     }
     
     /**
@@ -77,6 +113,7 @@ public class TillageFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
@@ -85,6 +122,9 @@ public class TillageFrame extends IXInternalFrame {
         imagePanel = new javax.swing.JLabel();
         bnAddLayer = new javax.swing.JButton();
         bnDeleteLayer = new javax.swing.JButton();
+        jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        rdDaysAfterPlanting = new javax.swing.JRadioButton();
+        rdReportedDates = new javax.swing.JRadioButton();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -148,35 +188,64 @@ public class TillageFrame extends IXInternalFrame {
             }
         });
 
+        jXLabel2.setText("Management");
+
+        buttonGroup1.add(rdDaysAfterPlanting);
+        rdDaysAfterPlanting.setSelected(true);
+        rdDaysAfterPlanting.setText("Days After Planting");
+
+        buttonGroup1.add(rdReportedDates);
+        rdReportedDates.setText("On Reported Dates");
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addComponent(bnAddLayer)
+                        .addContainerGap()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addComponent(bnAddLayer)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bnDeleteLayer))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnDeleteLayer))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdDaysAfterPlanting)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdReportedDates)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jXPanel1Layout.createSequentialGroup()
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bnAddLayer)
-                            .addComponent(bnDeleteLayer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdDaysAfterPlanting)
+                                        .addComponent(rdReportedDates))))
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bnAddLayer)
+                                    .addComponent(bnDeleteLayer))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         lblLevel1.setText("Tillage");
@@ -207,8 +276,8 @@ public class TillageFrame extends IXInternalFrame {
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,7 +292,7 @@ public class TillageFrame extends IXInternalFrame {
             til = new TillageApplication();
         }
 
-        final TillageDialog tilDialog = new TillageDialog(null, true, til);
+        final TillageDialog tilDialog = new TillageDialog(null, true, rdDaysAfterPlanting.isSelected(), til);
         tilDialog.show();
 
         tilDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -255,12 +324,19 @@ public class TillageFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         tillage.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || tillage.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || tillage.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2)
         {
-            final TillageDialog tilDialog = new TillageDialog(null, true, tillage.GetApp(jXTable1.getSelectedRow()));
+            final TillageDialog tilDialog = new TillageDialog(null, true, rdDaysAfterPlanting.isSelected(), tillage.GetApp(jXTable1.getSelectedRow()));
             tilDialog.show();
 
             tilDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -271,7 +347,7 @@ public class TillageFrame extends IXInternalFrame {
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
                         Object[] row = SetRow(tilApp);
                         for(int n = 0;n < row.length;n++)
-                        model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
+                            model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
                     }
                     tilDialog.SetNull();
                 }
@@ -306,7 +382,7 @@ public class TillageFrame extends IXInternalFrame {
         }
         catch(Exception ex)
         {
-            day = "";
+            day = tilApp.TDAY.toString();
         }
 
         try
@@ -332,6 +408,11 @@ public class TillageFrame extends IXInternalFrame {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < tillage.GetSize();i++)
         {
+            if(tillage.GetApp(i).TDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
             model.addRow(SetRow(tillage.GetApp(i)));
         }
     }
@@ -339,12 +420,16 @@ public class TillageFrame extends IXInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel;
     private org.jdesktop.swingx.JXLabel lblLevel1;
+    private javax.swing.JRadioButton rdDaysAfterPlanting;
+    private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }

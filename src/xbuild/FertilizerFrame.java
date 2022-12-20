@@ -340,6 +340,13 @@ public class FertilizerFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         fertil.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || fertil.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || fertil.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked

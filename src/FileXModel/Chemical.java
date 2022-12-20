@@ -30,7 +30,7 @@ public class Chemical implements Cloneable, IModelXBase {
     public void AddApp(ChemicalApplication chem)
     {
         chems.add(chem);
-        Collections.sort(chems, Comparator.comparing(ChemicalApplication::getOrder));
+        Collections.sort(chems, chem.CDATE != null ? Comparator.comparing(ChemicalApplication::getOrder) : Comparator.comparing(ChemicalApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

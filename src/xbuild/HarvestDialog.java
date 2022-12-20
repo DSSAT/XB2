@@ -40,6 +40,7 @@ public class HarvestDialog extends javax.swing.JDialog {
     protected String HSTG;
     protected String HCOM;
     protected String HSIZE;
+    private boolean isOK;
 
     public HarvestDialog(java.awt.Frame parent, boolean modal, boolean bDay, HarvestApplication harvestApp) {
         super(parent, modal);
@@ -66,6 +67,8 @@ public class HarvestDialog extends javax.swing.JDialog {
         jLabel1.setVisible(!bDay);
 
         LoadHarvestApp();
+        
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -101,6 +104,11 @@ public class HarvestDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lbDay.setText("Day");
 
@@ -311,13 +319,19 @@ public class HarvestDialog extends javax.swing.JDialog {
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        harvestApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;

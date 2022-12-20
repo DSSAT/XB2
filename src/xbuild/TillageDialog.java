@@ -30,8 +30,10 @@ public class TillageDialog extends javax.swing.JDialog {
 
     protected TillageApplication tilApp;
     protected String TIMPL;
+    protected boolean bDay;
+    private boolean isOK;
 
-    public TillageDialog(java.awt.Frame parent, boolean modal, TillageApplication tilApp) {
+    public TillageDialog(java.awt.Frame parent, boolean modal, boolean bDay, TillageApplication tilApp) {
         super(parent, modal);
         initComponents();
 
@@ -44,8 +46,17 @@ public class TillageDialog extends javax.swing.JDialog {
 
         this.tilApp = tilApp;
         this.TIMPL = tilApp.TIMPL;
+        
+        this.bDay = bDay;
+        
+        lbDay.setVisible(bDay);
+        txtTDAY.setVisible(bDay);
+        lbDate.setVisible(!bDay);
+        dpTDATE.setVisible(!bDay);
+        jLabel1.setVisible(!bDay);
 
         LoadApp();
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -63,12 +74,19 @@ public class TillageDialog extends javax.swing.JDialog {
         bnSelectTIMPL = new javax.swing.JButton();
         bnOK = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
+        lbDate = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtTDAY = new xbuild.Components.XFormattedTextField();
+        lbDay = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         dpTDATE.setFormats(Variables.getDateFormat());
 
@@ -96,13 +114,15 @@ public class TillageDialog extends javax.swing.JDialog {
             }
         });
 
-        jXLabel1.setText("Date");
+        lbDate.setText("Date");
 
         jXLabel2.setText("Tillage Implement");
 
         jXLabel3.setText("Tillage Depth");
 
         jLabel1.setText(Variables.getDateFormatString());
+
+        lbDay.setText("Day");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,9 +131,10 @@ public class TillageDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDay))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -128,7 +149,8 @@ public class TillageDialog extends javax.swing.JDialog {
                         .addComponent(dpTDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1))
-                    .addComponent(txtTDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTDAY, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -136,14 +158,18 @@ public class TillageDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTDAY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpTDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTIMPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectTIMPL)
-                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnSelectTIMPL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTDEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,23 +199,45 @@ public class TillageDialog extends javax.swing.JDialog {
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        tilApp = null;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
+
     private void Update() {
-        try
+        if(bDay)
         {
-        tilApp.TDATE = dpTDATE.getDate();
-        }
-        catch(Exception ex)
-        {
+            try
+            {
+                tilApp.TDAY = Integer.parseInt(txtTDAY.getText());
+            }
+            catch(Exception ex)
+            {
+                tilApp.TDAY = null;
+            }
             tilApp.TDATE = null;
         }
+        else
+        {
+            try
+            {
+                tilApp.TDATE = dpTDATE.getDate();
+            }
+            catch(Exception ex)
+            {
+                tilApp.TDATE = null;
+            }
+            tilApp.TDAY = null;
+        }
+        
         if(txtTIMPL.getText().equals("")) tilApp.TIMPL = "";
         else tilApp.TIMPL = TIMPL;
         try
@@ -204,13 +252,29 @@ public class TillageDialog extends javax.swing.JDialog {
     }
 
     private void LoadApp() {
-        try
+        if(bDay)
         {
-            dpTDATE.setDate(tilApp.TDATE);
-        }
-        catch(Exception ex)
-        {
+            try
+            {
+                txtTDAY.setText(tilApp.TDAY.toString());
+            }
+            catch(Exception ex)
+            {
+                txtTDAY.setText("");
+            }
             dpTDATE.setDate(null);
+        }
+        else
+        {
+            try
+            {
+                dpTDATE.setDate(tilApp.TDATE);
+            }
+            catch(Exception ex)
+            {
+                dpTDATE.setDate(null);
+            }
+            txtTDAY.setText("");
         }
 
         try
@@ -239,9 +303,11 @@ public class TillageDialog extends javax.swing.JDialog {
     private javax.swing.JButton bnSelectTIMPL;
     private org.jdesktop.swingx.JXDatePicker dpTDATE;
     private javax.swing.JLabel jLabel1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;
+    private org.jdesktop.swingx.JXLabel lbDate;
+    private javax.swing.JLabel lbDay;
+    private xbuild.Components.XFormattedTextField txtTDAY;
     private javax.swing.JFormattedTextField txtTDEP;
     private javax.swing.JTextField txtTIMPL;
     // End of variables declaration//GEN-END:variables

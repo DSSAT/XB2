@@ -30,6 +30,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
     /** Creates new form IrrigationDialog */
     protected IrrigationApplication irrigApp;
     protected boolean bDay;
+    private boolean isOK;
 
     public IrrigationDialog(java.awt.Frame parent, boolean modal, boolean bDay, IrrigationApplication irrigApp) {
         super(parent, modal);
@@ -57,6 +58,8 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         txtIRVAL.addKeyListener(this);
 
         Load();
+        
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -84,6 +87,11 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lbDay.setText("Day");
 
@@ -221,13 +229,19 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCacelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCacelActionPerformed
-        irrigApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCacelActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCacel;

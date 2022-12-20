@@ -362,6 +362,13 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         model.removeRow(nRow);
 
         irrig.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked

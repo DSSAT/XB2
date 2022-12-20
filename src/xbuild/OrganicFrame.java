@@ -318,6 +318,13 @@ public class OrganicFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         organic.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || organic.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || organic.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
