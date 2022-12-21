@@ -34,7 +34,7 @@
                       <Component id="bnOK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="bnCancel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -48,9 +48,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtCHCOD" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtCHT" alignment="0" max="32767" attributes="1"/>
-                          <Component id="txtCHME" alignment="1" max="32767" attributes="1"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -72,15 +70,12 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="cbCHCOD" alignment="1" max="32767" attributes="0"/>
+                          <Component id="cbCHME" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="bnCHME" min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="bnCHCOD" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,8 +96,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCHCOD" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnCHCOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbCHCOD" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -112,9 +106,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtCHME" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnCHME" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbCHME" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -145,16 +138,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCHCOD">
-    </Component>
-    <Component class="javax.swing.JButton" name="bnCHCOD">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnCHCODActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtCHAMT">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
@@ -162,16 +145,6 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtCHME">
-    </Component>
-    <Component class="javax.swing.JButton" name="bnCHME">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnCHMEActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtCHDEP">
       <Properties>
@@ -252,6 +225,10 @@
       </Properties>
     </Component>
     <Component class="xbuild.Components.XFormattedTextField" name="txtCDAY">
+    </Component>
+    <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCHCOD">
+    </Component>
+    <Component class="xbuild.Components.XDropdownTableComboBox" name="cbCHME">
     </Component>
   </SubComponents>
 </Form>

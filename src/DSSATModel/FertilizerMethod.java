@@ -12,4 +12,9 @@ package DSSATModel;
 public class FertilizerMethod {
     public String Code;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

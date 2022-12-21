@@ -13,7 +13,6 @@ import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JSpinner;
-import javax.swing.SwingConstants;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
 

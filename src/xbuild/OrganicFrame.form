@@ -212,7 +212,7 @@
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Potass.&lt;br&gt;Concentration&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporation&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Incorporatin&lt;br&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Method of&lt;br&gt;Incorporatin&lt;br&gt;Code&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Method of&lt;br&gt;Incorporatin&lt;br&gt;Code&lt;/p&gt;&lt;/html&gt;" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

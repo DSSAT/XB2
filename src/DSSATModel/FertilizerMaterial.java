@@ -10,4 +10,8 @@ package DSSATModel;
  * @author Jazzy
  */
 public class FertilizerMaterial extends BaseModel {
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

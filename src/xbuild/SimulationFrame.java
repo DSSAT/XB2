@@ -17,10 +17,7 @@ import DSSATModel.SimulationStart;
 import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.IModelXBase;
-import ListDialog.FertilizerMaterialDialog;
-import ListDialog.IrrigationMethodDialog;
 import java.awt.event.FocusListener;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
@@ -63,6 +60,19 @@ public class SimulationFrame extends IXInternalFrame {
         
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(sim, "SNAME", sim.SNAME);
+        
+        cbIMETH.setInit(sim, "IMETH", sim.IMETH, IrrigationMethodList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        cbNCODE.setInit(sim, "NCODE", sim.NCODE, FertilizerMaterialList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
         setImage(imagePanel, "sim2.jpg");
     }
     
@@ -230,8 +240,6 @@ public class SimulationFrame extends IXInternalFrame {
         txtIROFF = new xbuild.Components.XTextField();
         txtIRAMT = new xbuild.Components.XTextField();
         txtIREFF = new xbuild.Components.XTextField();
-        txtIMETH = new xbuild.Components.XSelectTextField();
-        bnIMETH = new javax.swing.JButton();
         lbManagementDepth = new org.jdesktop.swingx.JXLabel();
         lbThreshold = new org.jdesktop.swingx.JXLabel();
         lbEndPoint = new org.jdesktop.swingx.JXLabel();
@@ -245,11 +253,10 @@ public class SimulationFrame extends IXInternalFrame {
         lbAmountUnit = new org.jdesktop.swingx.JXLabel();
         lbMethod = new org.jdesktop.swingx.JXLabel();
         jXRadioGroup12 = new org.jdesktop.swingx.JXRadioGroup();
+        cbIMETH = new xbuild.Components.XDropdownTableComboBox();
         jXPanel9 = new org.jdesktop.swingx.JXPanel();
         jXPanel20 = new org.jdesktop.swingx.JXPanel();
         txtNAOFF = new xbuild.Components.XTextField();
-        txtNCODE = new xbuild.Components.XSelectTextField();
-        bnNCODE = new javax.swing.JButton();
         lbNitrogenDepth = new org.jdesktop.swingx.JXLabel();
         lbNitrogenDepthUnit = new org.jdesktop.swingx.JXLabel();
         lbNitrogenThreshold = new org.jdesktop.swingx.JXLabel();
@@ -262,6 +269,7 @@ public class SimulationFrame extends IXInternalFrame {
         txtNMTHR = new xbuild.Components.XFormattedTextField();
         txtNAMNT = new xbuild.Components.XFormattedTextField();
         jXRadioGroup13 = new org.jdesktop.swingx.JXRadioGroup();
+        cbNCODE = new xbuild.Components.XDropdownTableComboBox();
         jXPanel10 = new org.jdesktop.swingx.JXPanel();
         jXPanel21 = new org.jdesktop.swingx.JXPanel();
         txtRIPCN = new xbuild.Components.XTextField();
@@ -1090,19 +1098,6 @@ public class SimulationFrame extends IXInternalFrame {
 
         txtIREFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        bnIMETH.setText("...");
-        bnIMETH.setPreferredSize(new java.awt.Dimension(20, 20));
-        bnIMETH.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bnIMETHMouseClicked(evt);
-            }
-        });
-        bnIMETH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnIMETHActionPerformed(evt);
-            }
-        });
-
         lbManagementDepth.setText("Management Depth");
 
         lbThreshold.setText("Threshold");
@@ -1147,35 +1142,35 @@ public class SimulationFrame extends IXInternalFrame {
                             .addComponent(lbMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jXPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIREFF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtIRAMT, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbAmountUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtIROFF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbEndApplicationUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtITHRU, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbEndPointUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtITHRL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbThresholdUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtIMDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbManagementUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel19Layout.createSequentialGroup()
-                                .addComponent(txtIMETH, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bnIMETH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jXPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIREFF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jXPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtIRAMT, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbAmountUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jXPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtIROFF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbEndApplicationUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jXPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtITHRU, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbEndPointUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jXPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtITHRL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbThresholdUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jXPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtIMDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbManagementUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 219, Short.MAX_VALUE))
+                            .addComponent(cbIMETH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jXPanel19Layout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addComponent(jXRadioGroup12, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jXPanel19Layout.setVerticalGroup(
             jXPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1213,9 +1208,8 @@ public class SimulationFrame extends IXInternalFrame {
                     .addComponent(lbEfficiencyFraction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIMETH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnIMETH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbIMETH, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1226,7 +1220,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jXPanel8Layout.setVerticalGroup(
             jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1241,19 +1235,6 @@ public class SimulationFrame extends IXInternalFrame {
         jXPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fertilization", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         txtNAOFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        bnNCODE.setText("...");
-        bnNCODE.setPreferredSize(new java.awt.Dimension(20, 20));
-        bnNCODE.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bnNCODEMouseClicked(evt);
-            }
-        });
-        bnNCODE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNCODEActionPerformed(evt);
-            }
-        });
 
         lbNitrogenDepth.setText("Depth");
 
@@ -1297,26 +1278,24 @@ public class SimulationFrame extends IXInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel20Layout.createSequentialGroup()
-                        .addComponent(txtNAOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(lbEndOfApplicationUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel20Layout.createSequentialGroup()
-                        .addComponent(txtNMDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbNitrogenDepthUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel20Layout.createSequentialGroup()
-                        .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNAMNT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNMTHR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbNitrogenThresholdUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jXPanel20Layout.createSequentialGroup()
-                        .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jXRadioGroup13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNCODE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNCODE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jXPanel20Layout.createSequentialGroup()
+                                .addComponent(txtNAOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(lbEndOfApplicationUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jXPanel20Layout.createSequentialGroup()
+                                .addComponent(txtNMDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbNitrogenDepthUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jXPanel20Layout.createSequentialGroup()
+                                .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNAMNT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNMTHR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbNitrogenThresholdUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXRadioGroup13, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(cbNCODE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jXPanel20Layout.setVerticalGroup(
             jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1344,9 +1323,8 @@ public class SimulationFrame extends IXInternalFrame {
                     .addComponent(txtNAOFF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNCODE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnNCODE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbNCODE, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -1357,7 +1335,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         jXPanel9Layout.setVerticalGroup(
             jXPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1920,7 +1898,7 @@ public class SimulationFrame extends IXInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1933,7 +1911,7 @@ public class SimulationFrame extends IXInternalFrame {
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -2173,8 +2151,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
             lbMethod.setEnabled(true);
-            txtIMETH.enable(true);
-            bnIMETH.setEnabled(true);
+            cbIMETH.enable(true);
         } else if ("D".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
@@ -2194,8 +2171,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
             lbMethod.setEnabled(true);
-            txtIMETH.enable(true);
-            bnIMETH.setEnabled(true);
+            cbIMETH.enable(true);
         } else if ("F".equals(sim.IRRIG)) {
 
             lbManagementDepth.setEnabled(true);
@@ -2216,8 +2192,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
             lbMethod.setEnabled(true);
-            txtIMETH.enable(true);
-            bnIMETH.setEnabled(true);
+            cbIMETH.enable(true);
 
         } else if ("N".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(false);
@@ -2238,8 +2213,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(false);
             txtIREFF.enable(false);
             lbMethod.setEnabled(false);
-            txtIMETH.enable(false);
-            bnIMETH.setEnabled(false);
+            cbIMETH.enable(false);
         } else if ("R".equals(sim.IRRIG)) {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
@@ -2259,8 +2233,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
             lbMethod.setEnabled(true);
-            txtIMETH.enable(true);
-            bnIMETH.setEnabled(true);
+            cbIMETH.enable(true);
         } else {
             lbManagementDepth.setEnabled(true);
             txtIMDEP.enable(true);
@@ -2280,8 +2253,7 @@ public class SimulationFrame extends IXInternalFrame {
             lbEfficiencyFraction.setEnabled(true);
             txtIREFF.enable(true);
             lbMethod.setEnabled(true);
-            txtIMETH.enable(true);
-            bnIMETH.setEnabled(true);
+            cbIMETH.enable(true);
         }
     }
     
@@ -2299,8 +2271,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtNAOFF.enable(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            txtNCODE.enable(false);
-            bnNCODE.setEnabled(false);
+            cbNCODE.enable(false);
         }
         else if("F".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(true);
@@ -2315,8 +2286,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtNAOFF.enable(true);
             lbEndOfApplicationUnit.setEnabled(true);
             lbMaterial.setEnabled(true);
-            txtNCODE.enable(true);
-            bnNCODE.setEnabled(true);
+            cbNCODE.enable(true);
         }
         else if("N".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(false);
@@ -2331,8 +2301,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtNAOFF.enable(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            txtNCODE.enable(false);
-            bnNCODE.setEnabled(false);
+            cbNCODE.enable(false);
         }
         else if("R".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(false);
@@ -2347,8 +2316,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtNAOFF.enable(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            txtNCODE.enable(false);
-            bnNCODE.setEnabled(false);
+            cbNCODE.enable(false);
         }
         else {
             lbNitrogenDepth.setEnabled(true);
@@ -2363,8 +2331,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtNAOFF.enable(true);
             lbEndOfApplicationUnit.setEnabled(true);
             lbMaterial.setEnabled(true);
-            txtNCODE.enable(true);
-            bnNCODE.setEnabled(true);
+            cbNCODE.enable(true);
         }
     }
     
@@ -2429,59 +2396,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtHPCNR.enable(true);
             lbResidueHarvestedUnit.setEnabled(true);
         }
-    }
-
-    private void bnIMETHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bnIMETHMouseClicked
-        final IrrigationMethodDialog dialog = new IrrigationMethodDialog(null, true);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                IrrigationMethod method = dialog.GetSelected();
-                txtIMETH.setText(method.Code);
-            }
-        });
-    }//GEN-LAST:event_bnIMETHMouseClicked
-
-    private void bnIMETHActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        final IrrigationMethodDialog dialog = new IrrigationMethodDialog(null, true);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                IrrigationMethod method = dialog.GetSelected();
-                txtIMETH.setText(method.Code);
-            }
-        });
-    }                                           
-
-    private void bnNCODEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bnNCODEMouseClicked
-        final FertilizerMaterialDialog dialog = new FertilizerMaterialDialog(null, true);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                FertilizerMaterial fertil = dialog.GetSelected();
-                txtNCODE.setText(fertil.Code);
-            }
-        });
-    }//GEN-LAST:event_bnNCODEMouseClicked
-
-    private void bnNCODEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNCODEActionPerformed
-        final FertilizerMaterialDialog dialog = new FertilizerMaterialDialog(null, true);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                FertilizerMaterial fertil = dialog.GetSelected();
-                txtNCODE.setText(fertil.Code);
-            }
-        });
-    }//GEN-LAST:event_bnNCODEActionPerformed
+    }                                         
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? sim.SNAME != null : !txtDescription.getText().equals(sim.SNAME)){
@@ -2498,10 +2413,10 @@ public class SimulationFrame extends IXInternalFrame {
     }//GEN-LAST:event_dpSDATEPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnIMETH;
-    private javax.swing.JButton bnNCODE;
     private javax.swing.JComboBox cbCO2;
     private xbuild.Components.XDropdownTableComboBox cbCrop;
+    private xbuild.Components.XDropdownTableComboBox cbIMETH;
+    private xbuild.Components.XDropdownTableComboBox cbNCODE;
     private xbuild.Components.XDatePicker dpHLAST;
     private xbuild.Components.XDatePicker dpPFRST;
     private xbuild.Components.XDatePicker dpPLAST;
@@ -2710,7 +2625,6 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtHPCNP;
     private xbuild.Components.XFormattedTextField txtHPCNR;
     private xbuild.Components.XTextField txtIMDEP;
-    private xbuild.Components.XSelectTextField txtIMETH;
     private xbuild.Components.XTextField txtIRAMT;
     private xbuild.Components.XTextField txtIREFF;
     private xbuild.Components.XTextField txtIROFF;
@@ -2718,7 +2632,6 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XTextField txtITHRU;
     private xbuild.Components.XFormattedTextField txtNAMNT;
     private xbuild.Components.XTextField txtNAOFF;
-    private xbuild.Components.XSelectTextField txtNCODE;
     private xbuild.Components.XFormattedTextField txtNMDEP;
     private xbuild.Components.XFormattedTextField txtNMTHR;
     private xbuild.Components.XTextField txtPH2OD;
