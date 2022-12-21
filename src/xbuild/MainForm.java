@@ -42,6 +42,8 @@ import org.jdesktop.swingx.JXFrame;
 import FileXService.FileXService;
 import FileXService.FileXValidationService;
 import java.awt.event.MouseAdapter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
@@ -461,7 +463,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
         //File f = new File(root.getUserObject().toString());
-        String target = null;
+        String target;
         try {
             if (FileX.general.crop != null && FileX.general.crop.CropCode != null && !FileX.general.crop.CropCode.isEmpty()) {
                 target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
@@ -482,7 +484,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             File file = new File(target + "\\" + root.getUserObject().toString());
             FileXService.SaveFile(file);
         } else {
-            File file = new File(FileX.GetAbsoluteFileName());
+            Path path = Paths.get(FileX.GetAbsoluteFileName());
+            String parent = path.getParent().toString();
+            File file = new File(parent + "\\" + root.getUserObject().toString());
             FileXService.SaveFile(file);
         }
 
