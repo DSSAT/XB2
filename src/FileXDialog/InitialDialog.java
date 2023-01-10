@@ -116,7 +116,8 @@ public class InitialDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        InitialCondition init = (InitialCondition) FileX.initialList.GetAtIndex(level);
+        return init.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -129,9 +130,9 @@ public class InitialDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.initialList.GetSize();i++)
         {
-            InitialCondition init = (InitialCondition) FileX.initialList.GetAt(i);
+            InitialCondition init = (InitialCondition) FileX.initialList.GetAtIndex(i);
             Object object[] = new Object[3];
-            object[0] = i + 1;
+            object[0] = init.GetLevel();
             try{
             object[1] = init.ICNAME;
             }

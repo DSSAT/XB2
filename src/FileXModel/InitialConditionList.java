@@ -12,14 +12,15 @@ package FileXModel;
 public class InitialConditionList extends ManagementList {
     
     @Override
-    public void AddNew(String name)
-    {
-        modelList.add(new InitialCondition(name));
+    public ModelXBase AddNew(String name) {
+        InitialCondition model = new InitialCondition(name);
+        modelList.add(model);
+        return model;
     }
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        InitialCondition source = (InitialCondition) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        InitialCondition source = (InitialCondition) modelList.get(sourceIndex);
         InitialCondition newSource = null;
         
         try{

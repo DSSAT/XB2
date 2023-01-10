@@ -9,7 +9,7 @@ package FileXModel;
  *
  * @author Jazzy
  */
-public class Treatment implements Cloneable, IModelXBase {
+public class Treatment extends ModelXBase implements Cloneable {
     public Integer N;
     
     public String R;
@@ -54,5 +54,16 @@ public class Treatment implements Cloneable, IModelXBase {
     @Override
     public void SetName(String name) {
         TNAME = name;
+    }
+    
+    @Override
+    public Integer GetLevel(){
+        return N;
+    }
+    
+    @Override
+    public void SetLevel(int level){
+        N = level;
+        super.SetLevel(level);
     }
 }

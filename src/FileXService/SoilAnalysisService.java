@@ -48,6 +48,8 @@ public class SoilAnalysisService {
                     }
                     //@A SADAT  SMHB  SMPX  SMKE  SANAME
                     SoilAnalysis soil = new SoilAnalysis();
+                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                    soil.SetLevel(level);
                     soil.SADAT = Utils.GetDate(soilHeader1, tmp, "SADAT", 5);
                     soil.SMHB = Utils.GetString(soilHeader1, tmp, " SMHB", 5);
                     soil.SMPX = Utils.GetString(soilHeader1, tmp, " SMPX", 5);
@@ -65,7 +67,7 @@ public class SoilAnalysisService {
                     //@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
                         SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAt(level);
                         SoilAnalysisLayer soilLayer = new SoilAnalysisLayer();
 
@@ -95,8 +97,8 @@ public class SoilAnalysisService {
             pw.println();
             pw.println("*SOIL ANALYSIS");
             for (int i = 0; i < soilAnalysis.GetSize(); i++) {
-                Integer level = i + 1;
-                SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAt(i);
+                SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAtIndex(i);
+                Integer level = soil.GetLevel();
 
                 pw.println("@A SADAT  SMHB  SMPX  SMKE  SANAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));

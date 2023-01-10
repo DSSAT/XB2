@@ -6,7 +6,7 @@ import Extensions.Variables;
 import FileXModel.Fertilizer;
 import FileXModel.FertilizerApplication;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
@@ -32,7 +32,7 @@ public class FertilizerFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase fer : FileX.fertilizerList.GetAll()){
+        for(ModelXBase fer : FileX.fertilizerList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.fertil = (Fertilizer)fer;
@@ -70,7 +70,7 @@ public class FertilizerFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.fertilizerList.GetAll()) {
+        for (ModelXBase f : FileX.fertilizerList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

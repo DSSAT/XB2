@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class SoilAnalysis implements Cloneable, IModelXBase {
+public class SoilAnalysis extends ModelXBase implements Cloneable {
      protected ArrayList<SoilAnalysisLayer>  soilLayer = new ArrayList<>();
      public Date SADAT;
      public String SMHB;;

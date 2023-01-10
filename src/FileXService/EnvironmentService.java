@@ -45,10 +45,13 @@ public class EnvironmentService {
                     EnvironmentApplication envApp = new EnvironmentApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if(level > environmentals.GetSize()) {
+                    boolean isAdd = false;
+                    if(!environmentals.IsLevelExists(level)) {
                         env = new Environmental();
+                        env.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        env = (Environmental)environmentals.GetAt(level - 1);
+                        env = (Environmental)environmentals.GetAt(level);
                     }
 
                     envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
@@ -71,7 +74,7 @@ public class EnvironmentService {
                     env.ENVNAME = Utils.GetString(environmentHeader, tmp, "ENVNAME", tmp.length() - environmentHeader.indexOf("ENVNAME"));
                     env.AddApp(envApp);
 
-                    if(level > environmentals.GetSize()) {
+                    if(isAdd) {
                         environmentals.AddNew(env);
                     }
                 }
@@ -89,11 +92,11 @@ public class EnvironmentService {
             pw.println("@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME");
 
             for (int i = 0; i < environmentals.GetSize(); i++) {
-                Environmental env = (Environmental) environmentals.GetAt(i);
+                Environmental env = (Environmental) environmentals.GetAtIndex(i);
                 for (int n = 0; n < env.GetSize(); n++) {
                     EnvironmentApplication envApp = env.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = env.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {

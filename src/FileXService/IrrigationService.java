@@ -48,6 +48,8 @@ public class IrrigationService {
                     }
                     //@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME
                     Irrigation irrig = new Irrigation();
+                    Integer level = Integer.parseInt(strRead.substring(0, 2).trim());
+                    irrig.SetLevel(level);
                     irrig.EFIR = Utils.GetFloat(irrigHeader1, tmp, "  EFIR", 5);
 
                     irrig.IRNAME = Utils.GetString(irrigHeader1, tmp, "IRNAME", tmp.length() - irrigHeader1.indexOf("IRNAME"));
@@ -61,7 +63,7 @@ public class IrrigationService {
                     }
                     //@I IDATE  IROP IRVAL
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
                         Irrigation irrig = (Irrigation)irrigations.GetAt(level);
                         IrrigationApplication irrigApp = new IrrigationApplication();
                         try{
@@ -91,8 +93,8 @@ public class IrrigationService {
             pw.println("*IRRIGATION AND WATER MANAGEMENT");
 
             for (int i = 0; i < irrigations.GetSize(); i++) {
-                Integer level = i + 1;
-                Irrigation irrig = (Irrigation)irrigations.GetAt(i);
+                Irrigation irrig = (Irrigation)irrigations.GetAtIndex(i);
+                Integer level = irrig.GetLevel();
 
                 pw.println("@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));

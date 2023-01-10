@@ -8,7 +8,7 @@ import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.Harvest;
 import FileXModel.HarvestApplication;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
@@ -35,7 +35,7 @@ public class HarvestFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase harv : FileX.harvestList.GetAll()){
+        for(ModelXBase harv : FileX.harvestList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.harvestApp = (Harvest)harv;
@@ -73,7 +73,7 @@ public class HarvestFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.harvestList.GetAll()) {
+        for (ModelXBase f : FileX.harvestList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

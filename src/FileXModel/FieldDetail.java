@@ -11,7 +11,7 @@ import DSSATModel.WstaType;
  *
  * @author Jazzy
  */
-public class FieldDetail implements Cloneable, IModelXBase {
+public class FieldDetail extends ModelXBase implements Cloneable {
     public String FLNAME;
     
     public FieldDetail(){

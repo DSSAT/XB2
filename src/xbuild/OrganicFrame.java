@@ -4,7 +4,7 @@ import DSSATModel.FertilizerMethodList;
 import DSSATModel.ResiduesList;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.Organic;
 import FileXModel.OrganicApplication;
 import java.awt.EventQueue;
@@ -33,7 +33,7 @@ public class OrganicFrame extends IXInternalFrame {
         initComponents();
 
         level = 0;
-        for (IModelXBase org : FileX.organicList.GetAll()) {
+        for (ModelXBase org : FileX.organicList.GetAll()) {
             level++;
             if (getLevel(nodeName) == level) {
                 this.organic = (Organic) org;
@@ -72,7 +72,7 @@ public class OrganicFrame extends IXInternalFrame {
         }
 
         level = 0;
-        for (IModelXBase f : FileX.organicList.GetAll()) {
+        for (ModelXBase f : FileX.organicList.GetAll()) {
             level++;
             if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());

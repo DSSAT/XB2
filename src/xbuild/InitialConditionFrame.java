@@ -8,7 +8,7 @@ import Extensions.Utils;
 import Extensions.Variables;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
 import java.awt.event.FocusListener;
@@ -42,7 +42,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         init = null;
         level = 0;
-        for (IModelXBase intTemp : FileX.initialList.GetAll()) {
+        for (ModelXBase intTemp : FileX.initialList.GetAll()) {
             level++;
             if (getLevel(nodeName) == level) {
                 init = (InitialCondition) intTemp;
@@ -76,7 +76,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         dpProfileDate.Init(init, "ICDAT", init.ICDAT);
 
         ArrayList<String> soils = new ArrayList<>();
-        for (IModelXBase x : FileX.fieldList.GetAll()) {
+        for (ModelXBase x : FileX.fieldList.GetAll()) {
             FieldDetail f = (FieldDetail) x;
             Soil soil = SoilList.GetAt(f.ID_SOIL);
             if (soil != null) {
@@ -108,7 +108,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         }
 
         level = 0;
-        for (IModelXBase f : FileX.initialList.GetAll()) {
+        for (ModelXBase f : FileX.initialList.GetAll()) {
             level++;
             if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
@@ -1074,7 +1074,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         Soil soil = null;// = SoilList.GetAt(field.ID_SOIL);
         
         String selectedSoil = cbSoil.getSelectedItem().toString();
-        for (IModelXBase x : FileX.fieldList.GetAll()) {
+        for (ModelXBase x : FileX.fieldList.GetAll()) {
             FieldDetail f = (FieldDetail) x;
             Soil s = SoilList.GetAt(f.ID_SOIL);
             if (s != null) {

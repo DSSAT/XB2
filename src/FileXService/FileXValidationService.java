@@ -5,7 +5,7 @@ import Extensions.Utils;
 import FileXModel.Cultivar;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.Planting;
 import FileXModel.Simulation;
 
@@ -41,8 +41,8 @@ public class FileXValidationService {
         boolean isValid = IsGeneralValid();
 
         isValid = FileX.fieldList != null && FileX.fieldList.GetSize() > 0
-                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAt(0)).WSTA)
-                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAt(0)).ID_SOIL)
+                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).WSTA)
+                && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).ID_SOIL)
                 && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
                 && FileX.plantings != null && FileX.plantings.GetSize() > 0
                 && FileX.simulationList != null && FileX.simulationList.GetSize() > 0;
@@ -56,7 +56,7 @@ public class FileXValidationService {
         if (FileX.fieldList == null || FileX.fieldList.GetSize() == 0) {
             isValid = false;
         } else {
-            for (IModelXBase field : FileX.fieldList.GetAll()) {
+            for (ModelXBase field : FileX.fieldList.GetAll()) {
                 FieldDetail f = (FieldDetail) field;
                 if (f.WSTA == null || f.WSTA.isEmpty()) {
                     isValid = false;
@@ -71,7 +71,7 @@ public class FileXValidationService {
     public static boolean IsFieldValid(String node) {
         boolean isValid = true;
 
-        for (IModelXBase field : FileX.fieldList.GetAll()) {
+        for (ModelXBase field : FileX.fieldList.GetAll()) {
             FieldDetail f = (FieldDetail) field;
             if (f.FLNAME == null ? getNodeName(node) == null : f.FLNAME.equals(getNodeName(node))) {
                 if (f.WSTA == null || f.WSTA.isEmpty()) {
@@ -91,7 +91,7 @@ public class FileXValidationService {
         if (FileX.cultivars == null || FileX.cultivars.GetSize() == 0) {
             isValid = false;
         } else {
-            for (IModelXBase cul : FileX.cultivars.GetAll()) {
+            for (ModelXBase cul : FileX.cultivars.GetAll()) {
                 Cultivar c = (Cultivar) cul;
                 if (c.CR == null || c.CR.isEmpty()) {
                     isValid = false;
@@ -107,7 +107,7 @@ public class FileXValidationService {
         if (FileX.plantings == null || FileX.plantings.GetSize() == 0) {
             isValid = false;
         } else {
-            for (IModelXBase planting : FileX.plantings.GetAll()) {
+            for (ModelXBase planting : FileX.plantings.GetAll()) {
                 Planting p = (Planting) planting;
                 if (p.PDATE == null) {
                     isValid = false;
@@ -133,7 +133,7 @@ public class FileXValidationService {
     public static boolean IsPlantingValid(String node) {
         boolean isValid = true;
 
-        for (IModelXBase planting : FileX.plantings.GetAll()) {
+        for (ModelXBase planting : FileX.plantings.GetAll()) {
             Planting p = (Planting) planting;
             if (p.PLNAME.equals(getNodeName(node))) {
                 if (p.PDATE == null) {
@@ -161,7 +161,7 @@ public class FileXValidationService {
         if (FileX.simulationList == null || FileX.simulationList.GetSize() == 0) {
             isValid = false;
         } else {
-            for (IModelXBase simulation : FileX.simulationList.GetAll()) {
+            for (ModelXBase simulation : FileX.simulationList.GetAll()) {
                 Simulation s = (Simulation) simulation;
                 if (s.SDATE == null) {
                     isValid = false;
@@ -174,7 +174,7 @@ public class FileXValidationService {
     public static boolean IsSimulationControlValid(String node) {
         boolean isValid = true;
 
-        for (IModelXBase simulation : FileX.simulationList.GetAll()) {
+        for (ModelXBase simulation : FileX.simulationList.GetAll()) {
             Simulation s = (Simulation) simulation;
             if (s.SNAME.equals(getNodeName(node))) {
                 if (s.SDATE == null) {

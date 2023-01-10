@@ -5,7 +5,7 @@ import Extensions.Variables;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.FocusListener;
@@ -31,7 +31,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase env : FileX.environmentals.GetAll()){
+        for(ModelXBase env : FileX.environmentals.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.environment = (Environmental)env;
@@ -58,7 +58,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.environmentals.GetAll()) {
+        for (ModelXBase f : FileX.environmentals.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

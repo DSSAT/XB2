@@ -4,7 +4,7 @@ import DSSATModel.PlantDistributionList;
 import DSSATModel.PlantingMethodList;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.Planting;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
@@ -28,7 +28,7 @@ public class PlantingFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase p : FileX.plantings.GetAll()){
+        for(ModelXBase p : FileX.plantings.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.planting = (Planting)p;
@@ -70,7 +70,7 @@ public class PlantingFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.plantings.GetAll()) {
+        for (ModelXBase f : FileX.plantings.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

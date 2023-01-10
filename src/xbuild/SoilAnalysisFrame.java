@@ -5,7 +5,7 @@ import DSSATModel.SoilAnalysisMethodPhosphorusList;
 import DSSATModel.SoilAnalysisMethodPotassiumList;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
 import java.awt.event.FocusListener;
@@ -32,7 +32,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase s: FileX.soilAnalysis.GetAll()){
+        for(ModelXBase s: FileX.soilAnalysis.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.soilAnalysis = (SoilAnalysis) s;
@@ -71,7 +71,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.soilAnalysis.GetAll()) {
+        for (ModelXBase f : FileX.soilAnalysis.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

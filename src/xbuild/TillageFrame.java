@@ -3,7 +3,7 @@ package xbuild;
 import DSSATModel.TillageImplementList;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.Tillage;
 import FileXModel.TillageApplication;
 import java.awt.EventQueue;
@@ -30,10 +30,12 @@ public class TillageFrame extends IXInternalFrame {
     public TillageFrame(String nodeName) {
         initComponents();
         
-        level = 0;
-        for(IModelXBase til : FileX.tillageList.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){   
+        for(ModelXBase til : FileX.tillageList.GetAll()){
+            int nodeLevel = getLevel(nodeName);
+            String nodeDesc = getDescription(nodeName);
+            
+            if(til.GetLevel() == nodeLevel && til.GetName().equals(nodeDesc)){   
+                level = nodeLevel;
                 this.tillage = (Tillage)til;
             }
         }
@@ -91,7 +93,7 @@ public class TillageFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.tillageList.GetAll()) {
+        for (ModelXBase f : FileX.tillageList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

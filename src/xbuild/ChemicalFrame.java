@@ -6,7 +6,7 @@ import Extensions.Variables;
 import FileXModel.Chemical;
 import FileXModel.ChemicalApplication;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
@@ -32,7 +32,7 @@ public class ChemicalFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase ch : FileX.chemicalList.GetAll()){
+        for(ModelXBase ch : FileX.chemicalList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.chem = (Chemical)ch;
@@ -93,7 +93,7 @@ public class ChemicalFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         Integer level = 0;
-        for (IModelXBase f : FileX.chemicalList.GetAll()) {
+        for (ModelXBase f : FileX.chemicalList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

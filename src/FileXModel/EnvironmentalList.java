@@ -12,13 +12,15 @@ package FileXModel;
 public class EnvironmentalList extends ManagementList {
     
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Environmental(name));
+    public ModelXBase AddNew(String name) {
+        Environmental model = new Environmental(name);
+        modelList.add(model);
+        return model;
     }
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Environmental source = (Environmental) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Environmental source = (Environmental) modelList.get(sourceIndex);
         Environmental newSource = null;
         
         try {            

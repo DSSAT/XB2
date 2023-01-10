@@ -7,16 +7,16 @@ import java.util.ArrayList;
  * @author Jazzy
  */
 public abstract class ManagementList {
-    protected ArrayList<IModelXBase> modelList = new ArrayList<>();
+    protected ArrayList<ModelXBase> modelList = new ArrayList<>();
     
-    public abstract void AddNew(String name);
-    public abstract IModelXBase Clone(String sourceName, String newName);
+    public abstract ModelXBase AddNew(String name);
+    public abstract ModelXBase Clone(int sourceIndex, String newName);
     
-    public void AddNew(IModelXBase model){
+    public void AddNew(ModelXBase model){
         modelList.add(model);
     }
     
-    public ArrayList<IModelXBase> GetAll(){
+    public ArrayList<ModelXBase> GetAll(){
         return modelList;
     }
     
@@ -26,7 +26,7 @@ public abstract class ManagementList {
     
     public void RemoveAt(String name)
     {
-        for(IModelXBase model : GetAll()){
+        for(ModelXBase model : GetAll()){
             if(model.GetName().equals(name)){
                 modelList.remove(model);
                 break;
@@ -39,10 +39,10 @@ public abstract class ManagementList {
         modelList.remove(level);
     }
     
-    public IModelXBase GetAt(String name)
+    public ModelXBase GetAt(String name)
     {
         name = ExtractDescription(name);
-        for(IModelXBase model : GetAll()){
+        for(ModelXBase model : GetAll()){
             if(model.GetName().equals(name)){
                 return model;
             }
@@ -50,40 +50,59 @@ public abstract class ManagementList {
         return null;
     }
     
-    public IModelXBase GetAt(int level)
+    public int GetIndex(int level){
+        int index = 0;
+        for(ModelXBase model : GetAll()){
+            if(model.GetLevel() == level){
+                return index;
+            }
+            index++;
+        }
+        
+        return -1;
+    }
+    
+    public ModelXBase GetAtIndex(int index){
+        return modelList.get(index);
+    }
+    
+    public ModelXBase GetAt(int level)
     {
-        return modelList.get(level);
+        for(ModelXBase model : GetAll()){
+            if(model.GetLevel() == level){
+                return model;
+            }
+        }
+        return null;
     }
     
     public int GetLevel(String name)
     {
-        int level = -1;
-        for(IModelXBase model : GetAll()){
-            level++;
+        for(ModelXBase model : GetAll()){
             if(model.GetName().equals(name)){
-                break;
+                return model.GetLevel();
             }
         }
-        return level;
+        return 0;
+    }
+    
+    public boolean IsLevelExists(int level){
+        for(ModelXBase model : GetAll()){
+            if(model.GetLevel() == level){
+                return true;
+            }
+        }
+        return false;
     }
     
     public Boolean MoveUp(int level){
         if(level > 0 && GetSize() > 1){
-//            ArrayList<IModelXBase> list = new ArrayList<>();
-//            for (int i = 0; i < level - 1; i++) {
-//                list.add(modelList.get(i));
-//            }
-//            list.add(modelList.get(level));
-//            list.add(modelList.get(level - 1));
-//
-//            for (int i = level + 1; i < GetSize(); i++) {
-//                list.add(modelList.get(i));
-//            }
-//            
-//            modelList = list;
-
-            IModelXBase tmp = modelList.get(level);
-            IModelXBase tmp2 = modelList.get(level - 1);
+            ModelXBase tmp = modelList.get(level);
+            ModelXBase tmp2 = modelList.get(level - 1);
+            int levelTmp1 = tmp.GetLevel();
+            int levelTmp2 = tmp2.GetLevel();
+            tmp.SetLevel(levelTmp2);
+            tmp2.SetLevel(levelTmp1);
             modelList.set(level, tmp2);
             modelList.set(level - 1, tmp);
             return true;
@@ -93,21 +112,13 @@ public abstract class ManagementList {
     
     public Boolean MoveDown(int level){
         if(level < GetSize() - 1 && GetSize() > 1){
-//            ArrayList<IModelXBase> list = new ArrayList<>();
-//            for (int i = 0; i < level - 1; i++) {
-//                list.add(modelList.get(i));
-//            }
-//            list.add(modelList.get(level));
-//            list.add(modelList.get(level - 1));
-//
-//            for (int i = level + 1; i < GetSize(); i++) {
-//                list.add(modelList.get(i));
-//            }
-//            
-//            modelList = list;
 
-            IModelXBase tmp = modelList.get(level);
-            IModelXBase tmp2 = modelList.get(level + 1);
+            ModelXBase tmp = modelList.get(level);
+            ModelXBase tmp2 = modelList.get(level + 1);
+            int levelTmp1 = tmp.GetLevel();
+            int levelTmp2 = tmp2.GetLevel();
+            tmp.SetLevel(levelTmp2);
+            tmp2.SetLevel(levelTmp1);
             modelList.set(level, tmp2);
             modelList.set(level + 1, tmp);
             return true;
@@ -117,7 +128,7 @@ public abstract class ManagementList {
     
     public String GetCopyName(String name){
         int max = 0;
-        for(IModelXBase model : GetAll()){
+        for(ModelXBase model : GetAll()){
             if(model.GetName().startsWith(name)){
                 max++;
             }
@@ -127,7 +138,7 @@ public abstract class ManagementList {
     }
     
     public void Rename(String oldName, String newName){
-        for(IModelXBase model : GetAll()){
+        for(ModelXBase model : GetAll()){
             if(model.GetName().equals(oldName)){
                 model.SetName(newName);
                 break;

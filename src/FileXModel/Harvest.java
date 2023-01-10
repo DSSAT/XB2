@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Jazzy
  */
-public class Harvest implements Cloneable, IModelXBase {
+public class Harvest extends ModelXBase implements Cloneable {
 
     protected ArrayList<HarvestApplication>  harvestApps = new ArrayList<>();
     public String HNAME;

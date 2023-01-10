@@ -1,7 +1,5 @@
 package FileXService;
 
-import DSSATModel.WeatherStation;
-import DSSATModel.WeatherStationList;
 import Extensions.Utils;
 import FileXModel.FieldDetail;
 import static FileXModel.FileX.fieldList;
@@ -47,6 +45,8 @@ public class FieldService {
                     }
                     //@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME
                     FieldDetail field = new FieldDetail();
+                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    field.SetLevel(level);
                     field.ID_FIELD = Utils.GetString(fieldHeader1, tmp, "ID_FIELD", 8);
                     field.WSTA = Utils.GetString(fieldHeader1, tmp, "WSTA", 8);
                     field.FLSA = Utils.GetFloat(fieldHeader1, tmp, "FLSA", 5);
@@ -71,7 +71,7 @@ public class FieldService {
                     //@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
 
                         field.XCRD = Utils.GetFloat(fieldHeader2, tmp, "XCRD", 15);
@@ -99,8 +99,8 @@ public class FieldService {
             pw.println("*FIELDS");
             pw.println("@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME");
             for (int i = 0; i < fieldList.GetSize(); i++) {
-                Integer level = i + 1;
-                FieldDetail field = (FieldDetail)fieldList.GetAt(i);
+                FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
+                Integer level = field.GetLevel();
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadRight(field.ID_FIELD, 8, ' '));
                 pw.print(" " + Utils.PadRight(field.WSTA, 8, ' '));
@@ -124,7 +124,7 @@ public class FieldService {
             pw.println("@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR");
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 Integer level = i + 1;
-                FieldDetail field = (FieldDetail)fieldList.GetAt(i);
+                FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadLeft(field.XCRD, 15, ' '));
                 pw.print(" " + Utils.PadLeft(field.YCRD, 15, ' '));

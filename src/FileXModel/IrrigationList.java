@@ -12,13 +12,14 @@ package FileXModel;
 public class IrrigationList extends ManagementList {
     
     @Override
-    public void AddNew(String name)
-    {
-        modelList.add(new Irrigation(name));
+    public ModelXBase AddNew(String name) {
+        Irrigation model = new Irrigation(name);
+        modelList.add(model);
+        return model;
     }
     
-    public IModelXBase Clone(String sourceName, String newName){
-        Irrigation source = (Irrigation) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Irrigation source = (Irrigation) modelList.get(sourceIndex);
         Irrigation newSource = null;
         
         try{

@@ -44,7 +44,8 @@ public class TreatmentService {
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     
                     Treatment treatment = new Treatment();
-                    treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
+                    //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
+                    treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
                     if (FileX.general.FileType == ExperimentType.Sequential) {
                         treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
                         treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
@@ -80,8 +81,8 @@ public class TreatmentService {
             pw.println("*TREATMENTS                        -------------FACTOR LEVELS------------");
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treaments.GetSize(); i++) {
-                Treatment treat = (Treatment) treaments.GetAt(i);
-                pw.print(Utils.PadLeft(treat.N, 2, ' '));
+                Treatment treat = (Treatment) treaments.GetAtIndex(i);
+                pw.print(Utils.PadLeft(treat.GetLevel(), 2, ' '));
                 
                 if(FileX.general.FileType != ExperimentType.Sequential)
                     pw.print(" 1 0 0");

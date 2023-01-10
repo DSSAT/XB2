@@ -5,8 +5,6 @@
 
 package FileXModel;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Jazzy
@@ -14,13 +12,15 @@ import java.util.ArrayList;
 public class FertilizerList extends ManagementList {
     
     @Override
-    public void AddNew(String name){
-        modelList.add(new Fertilizer(name));
+    public ModelXBase AddNew(String name) {
+        Fertilizer model = new Fertilizer(name);
+        modelList.add(model);
+        return model;
     }
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Fertilizer source = (Fertilizer) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Fertilizer source = (Fertilizer) modelList.get(sourceIndex);
         Fertilizer newSource = null;
         
         try{            

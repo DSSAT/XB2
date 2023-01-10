@@ -16,7 +16,7 @@ import DSSATModel.*;
 import DSSATModel.SimulationStart;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import xbuild.Components.IXInternalFrame;
@@ -44,7 +44,7 @@ public class SimulationFrame extends IXInternalFrame {
     
     public SimulationFrame (String nodeName){
         level = 0;
-        for (IModelXBase s : FileX.simulationList.GetAll()) {
+        for (ModelXBase s : FileX.simulationList.GetAll()) {
             level++;
             if(getLevel(nodeName) == level){
                 sim = (Simulation)s;
@@ -87,7 +87,7 @@ public class SimulationFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.simulationList.GetAll()) {
+        for (ModelXBase f : FileX.simulationList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

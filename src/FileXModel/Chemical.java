@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Jazzy
  */
-public class Chemical implements Cloneable, IModelXBase {
+public class Chemical extends ModelXBase implements Cloneable {
 
     protected ArrayList<ChemicalApplication>  chems = new ArrayList<>();
     public String CHNAME;

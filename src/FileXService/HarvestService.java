@@ -44,10 +44,13 @@ public class HarvestService {
                     HarvestApplication harvestApp = new HarvestApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if(level > harvestList.GetSize()) {
+                    boolean isAdd = false;
+                    if(!harvestList.IsLevelExists(level)) {
                         harvest = new Harvest();
+                        harvest.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        harvest = (Harvest)harvestList.GetAt(level - 1);
+                        harvest = (Harvest)harvestList.GetAt(level);
                     }
 
                     try {
@@ -63,7 +66,7 @@ public class HarvestService {
                     harvest.HNAME = Utils.GetString(harvestHeader, tmp, "HNAME", tmp.length() - harvestHeader.indexOf("HNAME"));
                     harvest.AddApp(harvestApp);
 
-                    if(level > harvestList.GetSize()) {
+                    if(isAdd) {
                         harvestList.AddNew(harvest);
                     }
                 }
@@ -80,11 +83,11 @@ public class HarvestService {
             pw.println("*HARVEST DETAILS");
             pw.println("@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME");
             for (int i = 0; i < harvestList.GetSize(); i++) {
-                Harvest harvest = (Harvest)harvestList.GetAt(i);
+                Harvest harvest = (Harvest)harvestList.GetAtIndex(i);
                 for (int n = 0; n < harvest.GetSize(); n++) {
                     HarvestApplication harvestApp = harvest.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = harvest.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(harvestApp.HDATE != null)

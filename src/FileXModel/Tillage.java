@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Jazzy
  */
-public class Tillage implements Cloneable, IModelXBase {
+public class Tillage extends ModelXBase implements Cloneable {
 
     protected ArrayList<TillageApplication>  tillAps = new ArrayList<>();
     public String TNAME;

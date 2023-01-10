@@ -44,10 +44,13 @@ public class ChemicalApplicationService {
                     ChemicalApplication chemApp = new ChemicalApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if (level > chemicalList.GetSize()) {
+                    boolean isAdd = false;
+                    if (!chemicalList.IsLevelExists(level)) {
                         chem = new Chemical();
+                        chem.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        chem = (Chemical)chemicalList.GetAt(level - 1);
+                        chem = (Chemical)chemicalList.GetAt(level);
                     }
                     try {
                         chemApp.CDATE = Utils.GetDate(chemicalHeader, tmp, "CDATE", 5);
@@ -62,7 +65,7 @@ public class ChemicalApplicationService {
                     chem.CHNAME = Utils.GetString(chemicalHeader, tmp, "CHNAME", tmp.length() - chemicalHeader.indexOf("CHNAME"));
                     chem.AddApp(chemApp);
 
-                    if (level > chemicalList.GetSize()) {
+                    if (isAdd) {
                         chemicalList.AddNew(chem);
                     }
                 }
@@ -79,11 +82,11 @@ public class ChemicalApplicationService {
             pw.println("*CHEMICAL APPLICATIONS");
             pw.println("@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME");
             for (int i = 0; i < chemicalList.GetSize(); i++) {
-                Chemical chem = (Chemical)chemicalList.GetAt(i);
+                Chemical chem = (Chemical)chemicalList.GetAtIndex(i);
                 for (int n = 0; n < chem.GetSize(); n++) {
                     ChemicalApplication chemApp = chem.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = chem.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {

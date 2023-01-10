@@ -44,10 +44,13 @@ public class ResidueService {
                     OrganicApplication organicApp = new OrganicApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if(level > organicList.GetSize()) {
+                    boolean isAdd = false;
+                    if(!organicList.IsLevelExists(level)) {
                         organic = new Organic();
+                        organic.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        organic = (Organic)organicList.GetAt(level - 1);
+                        organic = (Organic)organicList.GetAt(level);
                     }
 
                     try {
@@ -67,7 +70,7 @@ public class ResidueService {
                     organic.RENAME = Utils.GetString(organicHeader, tmp, "RENAME", tmp.length() - organicHeader.indexOf("RENAME"));
                     organic.AddApp(organicApp);
 
-                    if(level > organicList.GetSize()) {
+                    if(isAdd) {
                         organicList.AddNew(organic);
                     }
                 }
@@ -84,11 +87,11 @@ public class ResidueService {
             pw.println("*RESIDUES AND ORGANIC FERTILIZER");
             pw.println("@R RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET RENAME");
             for (int i = 0; i < organicList.GetSize(); i++) {
-                Organic organ = (Organic)organicList.GetAt(i);
+                Organic organ = (Organic)organicList.GetAtIndex(i);
                 for (int n = 0; n < organ.GetSize(); n++) {
                     OrganicApplication organApp = organ.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = organ.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(organApp.RDATE != null)

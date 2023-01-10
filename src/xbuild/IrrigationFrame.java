@@ -3,7 +3,7 @@ package xbuild;
 import DSSATModel.IrrigationMethodList;
 import Extensions.Variables;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
 import java.awt.EventQueue;
@@ -33,7 +33,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         initComponents();
         
         level = 0;
-        for(IModelXBase ir : FileX.irrigations.GetAll()){
+        for(ModelXBase ir : FileX.irrigations.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.irrig = (Irrigation)ir;
@@ -122,7 +122,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.irrigations.GetAll()) {
+        for (ModelXBase f : FileX.irrigations.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());

@@ -14,13 +14,14 @@ import java.util.ArrayList;
 public class OrganicList extends ManagementList {
     
     @Override
-    public void AddNew(String name)
-    {
-        modelList.add(new Organic(name));
+    public ModelXBase AddNew(String name) {
+        Organic model = new Organic(name);
+        modelList.add(model);
+        return model;
     }
     
-    public IModelXBase Clone(String sourceName, String newName){
-        Organic source = (Organic)GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Organic source = (Organic) modelList.get(sourceIndex);
         Organic newSource = null;
         
         try {

@@ -40,7 +40,9 @@ public class PlantingDetailService {
                     }
                     //@P PDATE EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL                        PLNAME
                     Planting planting = new Planting();
+                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
+                    planting.SetLevel(level);
                     planting.PDATE = Utils.GetDate(plantingHeader, tmp, "PDATE", 5);
                     planting.EDATE = Utils.GetDate(plantingHeader, tmp, "EDATE", 5);
                     planting.PPOP = Utils.GetFloat(plantingHeader, tmp, "PPOP", 5);
@@ -71,8 +73,8 @@ public class PlantingDetailService {
             pw.println("*PLANTING DETAILS");
             pw.println("@P PDATE EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL                        PLNAME");
             for (int i = 0; i < plantings.GetSize(); i++) {
-                Integer level = i + 1;
-                Planting plants = (Planting)plantings.GetAt(i);
+                Planting plants = (Planting)plantings.GetAtIndex(i);
+                Integer level = plants.GetLevel();
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.PDATE), 5, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.EDATE), 5, ' '));

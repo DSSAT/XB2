@@ -22,7 +22,7 @@ import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class FieldFrame extends IXInternalFrame {
     public FieldFrame(String nodeName) {
         field = null;
         level = 0;
-        for (IModelXBase f : FileX.fieldList.GetAll()) {
+        for (ModelXBase f : FileX.fieldList.GetAll()) {
             level++;
             if (getLevel(nodeName) == level) {
                 field = (FieldDetail) f;
@@ -137,7 +137,7 @@ public class FieldFrame extends IXInternalFrame {
         }
 
         level = 0;
-        for (IModelXBase f : FileX.fieldList.GetAll()) {
+        for (ModelXBase f : FileX.fieldList.GetAll()) {
             level++;
             if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());

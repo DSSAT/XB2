@@ -45,10 +45,13 @@ public class TillageService {
                     TillageApplication tillageApp = new TillageApplication();
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if(level > tillageList.GetSize()) {
+                    boolean isAdd = false;
+                    if(!tillageList.IsLevelExists(level)) {
                         tillage = new Tillage();
+                        tillage.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        tillage = (Tillage)tillageList.GetAt(level - 1);
+                        tillage = (Tillage)tillageList.GetAt(level);
                     }
 
                     try {
@@ -62,7 +65,7 @@ public class TillageService {
                     tillage.TNAME = Utils.GetString(tillageHeader, tmp, "TNAME", tmp.length() - tillageHeader.indexOf("TNAME"));
                     tillage.AddApp(tillageApp);
 
-                    if(level > tillageList.GetSize()) {
+                    if(isAdd) {
                         tillageList.AddNew(tillage);
                     }
                 }
@@ -79,11 +82,11 @@ public class TillageService {
             pw.println("*TILLAGE AND ROTATIONS");
             pw.println("@T TDATE TIMPL  TDEP TNAME");
             for (int i = 0; i < tillageList.GetSize(); i++) {
-                Tillage tillage = (Tillage)tillageList.GetAt(i);
+                Tillage tillage = (Tillage)tillageList.GetAtIndex(i);
                 for (int n = 0; n < tillage.GetSize(); n++) {
                     TillageApplication tilApp = tillage.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = tillage.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {

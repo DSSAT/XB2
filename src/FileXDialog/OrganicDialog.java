@@ -113,7 +113,8 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Organic organic = (Organic) FileX.organicList.GetAtIndex(level - 1);
+        return organic.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -126,9 +127,9 @@ public class OrganicDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.organicList.GetSize();i++)
         {
-            Organic organic = (Organic) FileX.organicList.GetAt(i);
+            Organic organic = (Organic) FileX.organicList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = organic.GetLevel();
             try {
                 object[1] = organic.RENAME;
             } catch (Exception e) {
