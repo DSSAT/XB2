@@ -144,8 +144,6 @@ public class CultivarsFrame extends IXInternalFrame {
 
                         DSSATModel.Cultivar cul = culs.get(0);
 
-                        //culs.forEach(cul -> {
-                        //if(culEdit.INGENO.equals(cul.CulCode)){
                         model.setValueAt(cul.CropName, nRow, 1);
                         model.setValueAt(cul.CulName, nRow, 2);
 
@@ -154,8 +152,6 @@ public class CultivarsFrame extends IXInternalFrame {
                         culEdit.CNAME = cul.CulName;
 
                         l.myAction(new UpdateLevelEvent(this, "Cultivars", "Level " + (nRow + 1) + ": " + culEdit.GetName(), nRow));
-                        //    }
-                        //});
                     }
                     dialog.SetNull();
                 }
@@ -179,6 +175,7 @@ public class CultivarsFrame extends IXInternalFrame {
                         c.CR = cul.CropCode;
                         c.INGENO = cul.CulCode;
                         c.CNAME = cul.CulName;
+                        c.SetLevel(jXTable1.getRowCount() + 1);
 
                         model.addRow(SetRow(c));
 
@@ -209,7 +206,7 @@ public class CultivarsFrame extends IXInternalFrame {
     private void LoadCultivar() {
         for (int i = 0; i < FileX.cultivars.GetSize(); i++) {
             DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            model.addRow(SetRow((Cultivar) FileX.cultivars.GetAt(i)));
+            model.addRow(SetRow((Cultivar) FileX.cultivars.GetAtIndex(i)));
         }
     }
 }
