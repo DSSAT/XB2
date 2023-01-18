@@ -33,10 +33,13 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         
         level = 0;
         for(ModelXBase s: FileX.soilAnalysis.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.soilAnalysis = (SoilAnalysis) s;
-                break;
+            
+            int nodeLevel = getLevel(nodeName);
+            String nodeDesc = getDescription(nodeName);
+            
+            if(s.GetLevel() == nodeLevel && s.GetName().equals(nodeDesc)){   
+                level = nodeLevel;
+                this.soilAnalysis = (SoilAnalysis)s;
             }
         }
         
