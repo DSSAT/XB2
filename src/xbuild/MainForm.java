@@ -23,6 +23,7 @@ import DSSATModel.SimulationControlDefaults;
 import Extensions.Utils;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
+import FileXModel.Planting;
 import FileXModel.Simulation;
 import FileXModel.Treatment;
 import java.awt.*;
@@ -682,6 +683,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
                     if (cm != null) {
                         sim.SMODEL = cm.ModelCode;
+                    }
+                    if(FileX.plantings.GetSize() > 0 && FileX.plantings.GetSize() <= level){
+                        Planting pl = (Planting) FileX.plantings.GetAt(level);
+                        sim.SDATE = pl.PDATE;
                     }
                     modelList.AddNew(sim);
                     sim.SetLevel(level);
