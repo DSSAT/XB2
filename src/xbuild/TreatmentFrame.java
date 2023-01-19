@@ -230,10 +230,19 @@ public class TreatmentFrame extends IXInternalFrame  {
                 Integer r = Utils.ParseInteger(((Treatment)FileX.treaments.GetAtIndex(FileX.treaments.GetSize() - 1)).R) + 1;
                 treatment.R = r.toString();
             }
-        } else {
+        }
+        else {
             treatment = new Treatment();
             treatment.SetLevel(FileX.general.FileType == ExperimentType.Sequential ? 1 : FileX.treaments.GetSize() + 1);
         }
+        
+        if(FileX.treaments.GetSize() == 0){
+            treatment.CU = FileX.cultivars.GetAtIndex(0).GetLevel();
+            treatment.FL = FileX.fieldList.GetAtIndex(0).GetLevel();
+            treatment.MP = FileX.plantings.GetAtIndex(0).GetLevel();
+            treatment.SM = FileX.simulationList.GetAtIndex(0).GetLevel();
+        }
+        
 
         FileX.treaments.AddNew(treatment);
         LoadTreament();
