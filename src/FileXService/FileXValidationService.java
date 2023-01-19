@@ -184,4 +184,8 @@ public class FileXValidationService {
         }
         return isValid;
     }
+    
+    public static boolean IsTreatmentValid(String node) {
+        return FileX.treaments.GetSize() > 0;
+    }
 }
