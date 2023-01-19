@@ -481,16 +481,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         } catch (Exception e) {
             target = new Setup().GetDSSATPath();
         }
-
-        if (FileX.GetAbsoluteFileName() == null || FileX.GetAbsoluteFileName().isEmpty()) {
-            File file = new File(target + "\\" + root.getUserObject().toString());
-            FileXService.SaveFile(file);
-        } else {
-            Path path = Paths.get(FileX.GetAbsoluteFileName());
-            String parent = path.getParent().toString();
-            File file = new File(parent + "\\" + root.getUserObject().toString());
-            FileXService.SaveFile(file);
-        }
+        
+        File file = new File(target + "\\" + root.getUserObject().toString());
+        FileXService.SaveFile(file);
 
 //        JFileChooser fc = new JFileChooser(target);
 //        fc.setSelectedFile(f);
