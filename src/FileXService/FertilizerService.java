@@ -43,14 +43,16 @@ public class FertilizerService {
                     Fertilizer fertil = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
-                    if(level > fertilizerList.GetSize()) {
+                    boolean isAdd = false;
+                    if(!fertilizerList.IsLevelExists(level)) {
                         fertil = new Fertilizer();
+                        fertil.SetLevel(level);
+                        isAdd = true;
                     } else {
-                        fertil = (Fertilizer)fertilizerList.GetAt(level - 1);
+                        fertil = (Fertilizer)fertilizerList.GetAt(level);
                     }
 
                     FertilizerApplication fertilApp = new FertilizerApplication();
-
 
                     try {
                         fertilApp.FDATE = Utils.GetDate(fertilizerHeader, tmp, "FDATE", 5);
@@ -70,7 +72,7 @@ public class FertilizerService {
                     fertil.FERNAME = Utils.GetString(fertilizerHeader, tmp, "FERNAME", tmp.length() - fertilizerHeader.indexOf("FERNAME"));
                     fertil.AddApp(fertilApp);
 
-                    if(level > fertilizerList.GetSize()) {
+                    if(isAdd) {
                         fertilizerList.AddNew(fertil);
                     }
                 }
@@ -84,15 +86,14 @@ public class FertilizerService {
         // <editor-fold defaultstate="collapsed" desc="Fertilizer">
         if (fertilizerList.GetSize() > 0) {
             pw.println();
-            pw.println();
             pw.println("*FERTILIZERS (INORGANIC)");
             pw.println("@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME");
             for (int i = 0; i < fertilizerList.GetSize(); i++) {
-                Fertilizer fertil = (Fertilizer)fertilizerList.GetAt(i);
+                Fertilizer fertil = (Fertilizer)fertilizerList.GetAtIndex(i);
                 for (int n = 0; n < fertil.GetSize(); n++) {
                     FertilizerApplication ferApp = fertil.GetApp(n);
 
-                    Integer level = i + 1;
+                    Integer level = fertil.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(ferApp.FDATE != null)

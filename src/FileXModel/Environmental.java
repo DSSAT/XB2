@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Jazzy
  */
-public class Environmental implements Cloneable, IModelXBase {
+public class Environmental extends ModelXBase implements Cloneable {
     protected ArrayList<EnvironmentApplication>  envApps = new ArrayList<>();
     public String ENVNAME;
 

@@ -12,4 +12,9 @@ package DSSATModel;
 public class HarvestSize {
     public String Code;
     public String Description;
+    
+    @Override
+    public String toString(){
+        return Description;
+    }
 }

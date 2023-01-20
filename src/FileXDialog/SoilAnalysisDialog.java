@@ -13,11 +13,7 @@ package FileXDialog;
 
 import FileXModel.SoilAnalysis;
 import FileXModel.FileX;
-import DSSATModel.CropList;
 import Extensions.Variables;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -118,7 +114,8 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAtIndex(level - 1);
+        return soil.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -131,9 +128,9 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.soilAnalysis.GetSize();i++)
         {
-            SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAt(i);
+            SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAtIndex(i);
             Object object[] = new Object[3];
-            object[0] = i + 1;
+            object[0] = soil.GetLevel();
             try{
             object[1] = soil.SANAME;
             }

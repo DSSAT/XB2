@@ -190,16 +190,22 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         dpDate.setFormats(Variables.getDateFormat());
 
         txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtMaxTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtMinTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtMinTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtPrecipitation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtPrecipitation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtCo2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtCo2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtHumidity.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHumidity.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtWind.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtWind.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Daylength");
 
@@ -260,6 +266,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         jXLabel17.setText("km/hours");
 
         txtRadiation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtRadiation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel1.setText(Variables.getDateFormatString());
 

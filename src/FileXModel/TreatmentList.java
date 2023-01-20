@@ -14,15 +14,16 @@ import java.util.ArrayList;
 public class TreatmentList extends ManagementList {
     protected ArrayList<Treatment> treatments = new ArrayList<>();
 
-
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Treatment(name));
+    public ModelXBase AddNew(String name) {
+        Treatment model = new Treatment(name);
+        modelList.add(model);
+        return model;
     }
 
     @Override
-    public IModelXBase Clone(String sourceName, String newName) {
-        Treatment source = (Treatment) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Treatment source = (Treatment) modelList.get(sourceIndex);
         Treatment newSource = null;
         
         try{            

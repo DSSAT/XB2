@@ -112,7 +112,8 @@ public class IrrigationDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Irrigation irrig = (Irrigation) FileX.irrigations.GetAtIndex(level - 1);
+        return irrig.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +126,9 @@ public class IrrigationDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.irrigations.GetSize();i++)
         {
-            Irrigation irrig = (Irrigation) FileX.irrigations.GetAt(i);
+            Irrigation irrig = (Irrigation) FileX.irrigations.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = irrig.GetLevel();
             try {
                 object[1] = irrig.IRNAME;
             } catch (Exception e) {

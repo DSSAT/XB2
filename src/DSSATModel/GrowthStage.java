@@ -14,4 +14,9 @@ public class GrowthStage {
     public String Name;
     public String Description;
     public Crop crop;
+    
+    @Override
+    public String toString(){
+        return Description;
+    } 
 }

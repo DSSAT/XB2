@@ -30,12 +30,14 @@ public class CultivarList extends ManagementList {
 //    }
 
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Cultivar(name));
+    public ModelXBase AddNew(String name) {
+        Cultivar model = new Cultivar(name);
+        modelList.add(model);
+        return model;
     }
 
     @Override
-    public IModelXBase Clone(String sourceName, String newName) {
+    public ModelXBase Clone(int sourceIndex, String newName) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

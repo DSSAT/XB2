@@ -112,7 +112,8 @@ public class FieldDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        FieldDetail field = (FieldDetail)FileX.fieldList.GetAtIndex(level - 1);
+        return field.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +126,9 @@ public class FieldDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.fieldList.GetSize();i++)
         {
-            FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(i);
+            FieldDetail field = (FieldDetail)FileX.fieldList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = field.GetLevel();
             try {
                 object[1] = field.FLNAME;
             } catch (Exception e) {

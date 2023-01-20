@@ -112,7 +112,8 @@ public class TillageDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Tillage til = (Tillage)FileX.tillageList.GetAtIndex(level - 1);
+        return til.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +126,9 @@ public class TillageDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.tillageList.GetSize();i++)
         {
-            Tillage til = (Tillage) FileX.tillageList.GetAt(i);
+            Tillage til = (Tillage) FileX.tillageList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = til.GetLevel();
             try {
                 object[1] = til.TNAME;
             } catch (Exception e) {

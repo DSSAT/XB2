@@ -113,7 +113,8 @@ public class PlantingDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Planting plant = (Planting) FileX.plantings.GetAtIndex(level - 1);
+        return plant.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -126,9 +127,9 @@ public class PlantingDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.plantings.GetSize();i++)
         {
-            Planting plant = (Planting) FileX.plantings.GetAt(i);
+            Planting plant = (Planting) FileX.plantings.GetAtIndex(i);
             Object object[] = new Object[3];
-            object[0] = i + 1;
+            object[0] = plant.GetLevel();
             try{
                 object[1] = plant.PLNAME;
             }

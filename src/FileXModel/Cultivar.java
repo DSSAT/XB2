@@ -9,7 +9,7 @@ package FileXModel;
  *
  * @author Jazzy
  */
-public class Cultivar implements IModelXBase {
+public class Cultivar extends ModelXBase {
     public String CR;
     public String INGENO;
     public String CNAME;

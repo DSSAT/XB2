@@ -13,19 +13,13 @@ package xbuild;
 
 import FileXModel.HarvestApplication;
 import FileXModel.FileX;
-import DSSATModel.GrowthStage;
 import DSSATModel.GrowthStageList;
-import DSSATModel.HarvestComponent;
 import DSSATModel.HarvestComponentList;
-import DSSATModel.HarvestSize;
 import DSSATModel.HarvestSizeList;
 import Extensions.Variables;
-import ListDialog.GStageDialog;
-import ListDialog.HarvestComponentDialog;
-import ListDialog.HarvestSizeDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import xbuild.Components.XColumn;
 
 /**
  *
@@ -40,6 +34,7 @@ public class HarvestDialog extends javax.swing.JDialog {
     protected String HSTG;
     protected String HCOM;
     protected String HSIZE;
+    private boolean isOK;
 
     public HarvestDialog(java.awt.Frame parent, boolean modal, boolean bDay, HarvestApplication harvestApp) {
         super(parent, modal);
@@ -65,7 +60,26 @@ public class HarvestDialog extends javax.swing.JDialog {
         dpHDATE.setVisible(!bDay);
         jLabel1.setVisible(!bDay);
 
+        cbHSTG.setInit(harvestApp, "HSTG", harvestApp.HSTG, GrowthStageList.GetAt(FileX.general.crop), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        cbHCOM.setInit(harvestApp, "HCOM", harvestApp.HCOM, HarvestComponentList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        cbHSIZE.setInit(harvestApp, "HSIZE", harvestApp.HSIZE, HarvestSizeList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
         LoadHarvestApp();
+        
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -81,16 +95,10 @@ public class HarvestDialog extends javax.swing.JDialog {
         lbDate = new org.jdesktop.swingx.JXLabel();
         dpHDATE = new org.jdesktop.swingx.JXDatePicker();
         txtHDATE = new javax.swing.JFormattedTextField();
-        txtHSTG = new javax.swing.JTextField();
-        txtHCOM = new javax.swing.JTextField();
-        txtHSIZE = new javax.swing.JTextField();
         txtHPC = new javax.swing.JFormattedTextField();
         txtHBPC = new javax.swing.JFormattedTextField();
         bnOK = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
-        bnHSTG = new javax.swing.JButton();
-        bnHCOM = new javax.swing.JButton();
-        bnHSIZE = new javax.swing.JButton();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
@@ -99,8 +107,16 @@ public class HarvestDialog extends javax.swing.JDialog {
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jLabel1 = new javax.swing.JLabel();
+        cbHSTG = new xbuild.Components.XDropdownTableComboBox();
+        cbHCOM = new xbuild.Components.XDropdownTableComboBox();
+        cbHSIZE = new xbuild.Components.XDropdownTableComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lbDay.setText("Day");
 
@@ -113,9 +129,13 @@ public class HarvestDialog extends javax.swing.JDialog {
             }
         });
 
+        txtHDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         txtHPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtHBPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHBPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -128,27 +148,6 @@ public class HarvestDialog extends javax.swing.JDialog {
         bnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCancelActionPerformed(evt);
-            }
-        });
-
-        bnHSTG.setText("...");
-        bnHSTG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnHSTGActionPerformed(evt);
-            }
-        });
-
-        bnHCOM.setText("...");
-        bnHCOM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnHCOMActionPerformed(evt);
-            }
-        });
-
-        bnHSIZE.setText("...");
-        bnHSIZE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnHSIZEActionPerformed(evt);
             }
         });
 
@@ -184,36 +183,30 @@ public class HarvestDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbHSTG, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnOK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bnCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHBPC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHPC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHSIZE, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnHSIZE, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnHCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bnOK)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bnCancel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtHBPC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtHPC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dpHDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 226, Short.MAX_VALUE))
+                    .addComponent(cbHCOM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbHSIZE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,19 +222,16 @@ public class HarvestDialog extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnHSTG)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbHSTG, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHCOM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnHCOM)
-                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbHCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHSIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnHSIZE)
-                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbHSIZE, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,61 +256,28 @@ public class HarvestDialog extends javax.swing.JDialog {
         Update();
 }//GEN-LAST:event_dpHDATEActionPerformed
 
-    private void bnHSTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnHSTGActionPerformed
-        final GStageDialog dialog = new GStageDialog(null, true, FileX.general.crop);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                GrowthStage gStage = dialog.GetSelected();
-                txtHSTG.setText(gStage.Description);
-                HSTG = gStage.Code;
-            }
-        });
-    }//GEN-LAST:event_bnHSTGActionPerformed
-
-    private void bnHCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnHCOMActionPerformed
-        final HarvestComponentDialog dialog = new HarvestComponentDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                HarvestComponent harvestComp = dialog.GetSelected();
-                txtHCOM.setText(harvestComp.Description);
-                HCOM = harvestComp.Code;
-            }
-        });
-    }//GEN-LAST:event_bnHCOMActionPerformed
-
-    private void bnHSIZEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnHSIZEActionPerformed
-        final HarvestSizeDialog dialog = new HarvestSizeDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                HarvestSize harvestSize = dialog.GetSelected();
-                txtHSIZE.setText(harvestSize.Description);
-                HSIZE = harvestSize.Code;
-            }
-        });
-    }//GEN-LAST:event_bnHSIZEActionPerformed
-
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        harvestApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;
-    private javax.swing.JButton bnHCOM;
-    private javax.swing.JButton bnHSIZE;
-    private javax.swing.JButton bnHSTG;
     private javax.swing.JButton bnOK;
+    private xbuild.Components.XDropdownTableComboBox cbHCOM;
+    private xbuild.Components.XDropdownTableComboBox cbHSIZE;
+    private xbuild.Components.XDropdownTableComboBox cbHSTG;
     private org.jdesktop.swingx.JXDatePicker dpHDATE;
     private javax.swing.JLabel jLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
@@ -333,11 +290,8 @@ public class HarvestDialog extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXLabel lbDate;
     private org.jdesktop.swingx.JXLabel lbDay;
     private javax.swing.JFormattedTextField txtHBPC;
-    private javax.swing.JTextField txtHCOM;
     private javax.swing.JFormattedTextField txtHDATE;
     private javax.swing.JFormattedTextField txtHPC;
-    private javax.swing.JTextField txtHSIZE;
-    private javax.swing.JTextField txtHSTG;
     // End of variables declaration//GEN-END:variables
 
     private void Update() {
@@ -363,13 +317,6 @@ public class HarvestDialog extends javax.swing.JDialog {
                 harvestApp.HDATE = null;
             }
         }
-
-        if(txtHSTG.getText().equals("")) harvestApp.HSTG = "";
-        else harvestApp.HSTG = HSTG;
-        if(txtHCOM.getText().equals("")) harvestApp.HCOM = "";
-        else harvestApp.HCOM = HCOM;
-        if(txtHSIZE.getText().equals("")) harvestApp.HSIZE = "";
-        else harvestApp.HSIZE = HSIZE;
 
         try
         {
@@ -411,36 +358,6 @@ public class HarvestDialog extends javax.swing.JDialog {
             {
                 dpHDATE.setDate(null);
             }
-        }
-
-        try
-        {
-            txtHSTG.setText(GrowthStageList.GetAt(harvestApp.HSTG, FileX.general.crop).Description);
-            HSTG = harvestApp.HSTG;
-        }
-        catch(Exception ex)
-        {
-            txtHSTG.setText("");
-        }
-
-        try
-        {
-            txtHCOM.setText(HarvestComponentList.GetAt(harvestApp.HCOM).Description);
-            HCOM = harvestApp.HCOM;
-        }
-        catch(Exception ex)
-        {
-            txtHCOM.setText("");
-        }
-
-        try
-        {
-            txtHSIZE.setText(HarvestSizeList.GetAt(harvestApp.HSIZE).Description);
-            HSIZE = harvestApp.HSIZE;
-        }
-        catch(Exception ex)
-        {
-            txtHSIZE.setText("");
         }
 
         try

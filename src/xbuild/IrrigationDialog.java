@@ -12,14 +12,12 @@
 package xbuild;
 
 import FileXModel.IrrigationApplication;
-import DSSATModel.IrrigationMethod;
 import DSSATModel.IrrigationMethodList;
 import Extensions.Variables;
-import ListDialog.IrrigationMethodDialog;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
+import xbuild.Components.XColumn;
 
 /**
  *
@@ -30,6 +28,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
     /** Creates new form IrrigationDialog */
     protected IrrigationApplication irrigApp;
     protected boolean bDay;
+    private boolean isOK;
 
     public IrrigationDialog(java.awt.Frame parent, boolean modal, boolean bDay, IrrigationApplication irrigApp) {
         super(parent, modal);
@@ -53,10 +52,18 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
 
         txtIDATE.addKeyListener(this);
         dpIDATE.addKeyListener(this);
-        txtIROP.addKeyListener(this);
         txtIRVAL.addKeyListener(this);
 
+        cbIROP.setInit(irrigApp, "IROP", irrigApp.IROP, IrrigationMethodList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        
         Load();
+        
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -74,16 +81,20 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         lbDate = new org.jdesktop.swingx.JXLabel();
         dpIDATE = new org.jdesktop.swingx.JXDatePicker();
         txtIRVAL = new javax.swing.JFormattedTextField();
-        txtIROP = new javax.swing.JTextField();
-        bnSelectOperation = new javax.swing.JButton();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
         jXLabel6 = new org.jdesktop.swingx.JXLabel();
         bnOK = new javax.swing.JButton();
         bnCacel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cbIROP = new xbuild.Components.XDropdownTableComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lbDay.setText("Day");
 
@@ -99,13 +110,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         });
 
         txtIRVAL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        bnSelectOperation.setText("..");
-        bnSelectOperation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectOperationActionPerformed(evt);
-            }
-        });
+        txtIRVAL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel4.setText("Amount of Water");
 
@@ -142,27 +147,28 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                     .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnOK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bnCacel))
+                    .addComponent(cbIROP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(dpIDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bnOK)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1))
+                                .addComponent(bnCacel))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtIRVAL, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtIROP, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bnSelectOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(dpIDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtIRVAL, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(182, 182, 182)
+                                .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,13 +191,12 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtIRVAL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtIROP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bnSelectOperation))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbIROP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnOK)
                     .addComponent(bnCacel))
@@ -201,38 +206,30 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bnSelectOperationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectOperationActionPerformed
-        final IrrigationMethodDialog dialog = new IrrigationMethodDialog(null, true);
-        dialog.show();
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                IrrigationMethod irrigMethod = dialog.GetSelected();
-                irrigApp.IROP = irrigMethod.Code;
-                txtIROP.setText(irrigMethod.Description);
-            }
-        });
-    }//GEN-LAST:event_bnSelectOperationActionPerformed
-
     private void dpIDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpIDATEActionPerformed
         Update();
     }//GEN-LAST:event_dpIDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCacelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCacelActionPerformed
-        irrigApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCacelActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCacel;
     private javax.swing.JButton bnOK;
-    private javax.swing.JButton bnSelectOperation;
+    private xbuild.Components.XDropdownTableComboBox cbIROP;
     private org.jdesktop.swingx.JXDatePicker dpIDATE;
     private javax.swing.JLabel jLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
@@ -242,7 +239,6 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
     private org.jdesktop.swingx.JXLabel lbDate;
     private org.jdesktop.swingx.JXLabel lbDay;
     private javax.swing.JFormattedTextField txtIDATE;
-    private javax.swing.JTextField txtIROP;
     private javax.swing.JFormattedTextField txtIRVAL;
     // End of variables declaration//GEN-END:variables
 
@@ -330,14 +326,6 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         catch(Exception ex)
         {
             txtIRVAL.setText("");
-        }
-        try
-        {
-            txtIROP.setText(IrrigationMethodList.GetAt(irrigApp.IROP).Description);
-        }
-        catch(Exception ex)
-        {
-            txtIROP.setText("");
         }
     }
 

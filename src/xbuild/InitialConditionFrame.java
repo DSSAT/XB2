@@ -8,10 +8,9 @@ import Extensions.Utils;
 import Extensions.Variables;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
-import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
@@ -21,8 +20,6 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 
 /**
@@ -34,21 +31,23 @@ public class InitialConditionFrame extends IXInternalFrame {
     private InitialCondition init;
     private int selectedRowIndex = -1;
     private Integer level;
+
     /**
      * Creates new form InitialConditionFrame
+     *
      * @param nodeName
      */
     public InitialConditionFrame(String nodeName) {
         initComponents();
-        
+
         init = null;
         level = 0;
-        for(IModelXBase intTemp : FileX.initialList.GetAll()){
+        for (ModelXBase intTemp : FileX.initialList.GetAll()) {
             level++;
-            if(getLevel(nodeName) == level){
-                init = (InitialCondition)intTemp;
+            if (getLevel(nodeName) == level) {
+                init = (InitialCondition) intTemp;
                 break;
-            }            
+            }
         }
 
         dpICDAT.Init(init, "ICDAT", init.ICDAT);
@@ -61,25 +60,24 @@ public class InitialConditionFrame extends IXInternalFrame {
         txtICRIP.Init(init, "ICRIP", init.ICRIP);
         txtICRT.Init(init, "ICRT", init.ICRT);
         txtICWD.Init(init, "ICWD", init.ICWD);
-        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[] { new  XColumn("CropName", "Crop Name", 200)}, "CropCode");
-        
+        cbPCR.setInit(init, "PCR", init.PCR, CropList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200)}, "CropCode");
+
         snICRE.Init(init, "ICRE", init.ICRE);
         snICRN.Init(init, "ICRN", init.ICRN);
 
-        for(int i = 0;i < init.GetSize();i++)
-        {
+        for (int i = 0; i < init.GetSize(); i++) {
             DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
             tbModel.addRow(SetRow(init.GetApp(i)));
         }
 
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(init, "ICNAME", init.ICNAME);
-        
+
         dpProfileDate.Init(init, "ICDAT", init.ICDAT);
-        
+
         ArrayList<String> soils = new ArrayList<>();
-        for(IModelXBase x : FileX.fieldList.GetAll()){
-            FieldDetail f = (FieldDetail)x;
+        for (ModelXBase x : FileX.fieldList.GetAll()) {
+            FieldDetail f = (FieldDetail) x;
             Soil soil = SoilList.GetAt(f.ID_SOIL);
             if (soil != null) {
                 String s = soil.Description + " (" + soil.Code + ")";
@@ -88,39 +86,40 @@ public class InitialConditionFrame extends IXInternalFrame {
                 }
             }
         }
-        Collections.sort(soils);        
+        Collections.sort(soils);
         cbSoil.setInit(null, "", "", soils);
-        if(!soils.isEmpty())
+        if (!soils.isEmpty()) {
             cbSoil.setSelectedIndex(0);
-        
-        EventQueue.invokeLater(() -> {            
-            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\InCond2.jpg");
-            bnRecalculate.setEnabled(false);
-        });
+        }
+
+        setImage(imagePanel, "InCond2.jpg");
+        setRecalculateButtonEnabled();
     }
-    
+
     /**
      *
      * @param name
      */
     @Override
-    public void updatePanelName(String name){
+    public void updatePanelName(String name) {
         FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             txtDescription.removeFocusListener(li);
-        
+        }
+
         level = 0;
-        for (IModelXBase f : FileX.initialList.GetAll()) {
+        for (ModelXBase f : FileX.initialList.GetAll()) {
             level++;
-            if(getLevel(name) == level){                
+            if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
                 txtDescription.setText(getDescription(name));
                 break;
             }
         }
-        
-        for(FocusListener li : listens)
+
+        for (FocusListener li : listens) {
             this.addFocusListener(li);
+        }
     }
 
     /**
@@ -143,19 +142,6 @@ public class InitialConditionFrame extends IXInternalFrame {
         txtICRT = new xbuild.Components.XFormattedTextField();
         txtICND = new xbuild.Components.XFormattedTextField();
         cbPCR = new xbuild.Components.XDropdownTableComboBox();
-        jXPanel7 = new org.jdesktop.swingx.JXPanel();
-        jXLabel13 = new org.jdesktop.swingx.JXLabel();
-        jXLabel14 = new org.jdesktop.swingx.JXLabel();
-        jXLabel15 = new org.jdesktop.swingx.JXLabel();
-        jXLabel16 = new org.jdesktop.swingx.JXLabel();
-        txtICREN = new xbuild.Components.XFormattedTextField();
-        txtICREP = new xbuild.Components.XFormattedTextField();
-        jXPanel6 = new org.jdesktop.swingx.JXPanel();
-        jXLabel17 = new org.jdesktop.swingx.JXLabel();
-        jXLabel18 = new org.jdesktop.swingx.JXLabel();
-        jXLabel19 = new org.jdesktop.swingx.JXLabel();
-        txtICRIP = new xbuild.Components.XFormattedTextField();
-        txtICRID = new xbuild.Components.XFormattedTextField();
         jXPanel5 = new org.jdesktop.swingx.JXPanel();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
@@ -172,6 +158,19 @@ public class InitialConditionFrame extends IXInternalFrame {
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         imagePanel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jXPanel7 = new org.jdesktop.swingx.JXPanel();
+        jXLabel13 = new org.jdesktop.swingx.JXLabel();
+        jXLabel14 = new org.jdesktop.swingx.JXLabel();
+        jXLabel15 = new org.jdesktop.swingx.JXLabel();
+        jXLabel16 = new org.jdesktop.swingx.JXLabel();
+        txtICREN = new xbuild.Components.XFormattedTextField();
+        txtICREP = new xbuild.Components.XFormattedTextField();
+        jXPanel6 = new org.jdesktop.swingx.JXPanel();
+        jXLabel17 = new org.jdesktop.swingx.JXLabel();
+        jXLabel18 = new org.jdesktop.swingx.JXLabel();
+        jXLabel19 = new org.jdesktop.swingx.JXLabel();
+        txtICRIP = new xbuild.Components.XFormattedTextField();
+        txtICRID = new xbuild.Components.XFormattedTextField();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel20 = new org.jdesktop.swingx.JXLabel();
         bnAddLayer = new javax.swing.JButton();
@@ -191,8 +190,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
-        bnPrevious = new javax.swing.JButton();
-        bnNext = new javax.swing.JButton();
+        lblLevel1 = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -208,101 +206,11 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel5.setText("kg/ha");
 
+        txtICRT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
+        txtICND.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICND.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Residue", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-
-        jXLabel13.setText("N");
-
-        jXLabel14.setText("P");
-
-        jXLabel15.setText("%");
-
-        jXLabel16.setText("%");
-
-        txtICREN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        txtICREP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        javax.swing.GroupLayout jXPanel7Layout = new javax.swing.GroupLayout(jXPanel7);
-        jXPanel7.setLayout(jXPanel7Layout);
-        jXPanel7Layout.setHorizontalGroup(
-            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel7Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtICREN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICREP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-        jXPanel7Layout.setVerticalGroup(
-            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel7Layout.createSequentialGroup()
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICREN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICREP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        jXPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Incorporation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-
-        jXLabel17.setText("Depth");
-
-        jXLabel18.setText("cm");
-
-        jXLabel19.setText("%");
-
-        txtICRIP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        txtICRID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
-        jXPanel6.setLayout(jXPanel6Layout);
-        jXPanel6Layout.setHorizontalGroup(
-            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel6Layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
-                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel6Layout.createSequentialGroup()
-                        .addComponent(txtICRID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtICRIP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
-        );
-        jXPanel6Layout.setVerticalGroup(
-            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel6Layout.createSequentialGroup()
-                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICRIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICRID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
         jXPanel3.setLayout(jXPanel3Layout);
@@ -310,29 +218,23 @@ public class InitialConditionFrame extends IXInternalFrame {
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel3Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel3Layout.createSequentialGroup()
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jXPanel3Layout.createSequentialGroup()
-                                    .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jXPanel3Layout.createSequentialGroup()
-                                    .addComponent(txtICRT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(cbPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jXPanel3Layout.createSequentialGroup()
-                        .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jXPanel3Layout.createSequentialGroup()
+                            .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jXPanel3Layout.createSequentialGroup()
+                            .addComponent(txtICRT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbPCR, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,10 +252,6 @@ public class InitialConditionFrame extends IXInternalFrame {
                     .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtICND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -365,8 +263,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXLabel12.setText("kg/ha");
 
+        txtICWD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICWD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
 
+        txtICRES.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRES.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jXLabel9.setText("Water Table Depth");
@@ -390,7 +290,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addComponent(txtICRES, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jXLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jXPanel5Layout.setVerticalGroup(
             jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +338,7 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(snICRN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jXPanel4Layout.setVerticalGroup(
             jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,53 +357,156 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jLabel6.setText(Variables.getDateFormatString());
 
+        jXPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Residue", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        jXLabel13.setText("N");
+
+        jXLabel14.setText("P");
+
+        jXLabel15.setText("%");
+
+        jXLabel16.setText("%");
+
+        txtICREN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtICREN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtICREP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtICREP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        javax.swing.GroupLayout jXPanel7Layout = new javax.swing.GroupLayout(jXPanel7);
+        jXPanel7.setLayout(jXPanel7Layout);
+        jXPanel7Layout.setHorizontalGroup(
+            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel7Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtICREN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICREP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jXPanel7Layout.setVerticalGroup(
+            jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel7Layout.createSequentialGroup()
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICREN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICREP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jXPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Incorporation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        jXLabel17.setText("Depth");
+
+        jXLabel18.setText("cm");
+
+        jXLabel19.setText("%");
+
+        txtICRIP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtICRIP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtICRID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtICRID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
+        jXPanel6.setLayout(jXPanel6Layout);
+        jXPanel6Layout.setHorizontalGroup(
+            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel6Layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel6Layout.createSequentialGroup()
+                        .addComponent(txtICRID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtICRIP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
+        );
+        jXPanel6Layout.setVerticalGroup(
+            jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel6Layout.createSequentialGroup()
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICRIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICRID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(45, 45, 45)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jXPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jXPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jXPanel1Layout.createSequentialGroup()
-                                .addGap(147, 147, 147)
-                                .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6))
-                            .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addGap(18, 18, 18)
+                                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(159, 159, 159))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(153, 153, 153))
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(250, 250, 250))))
         );
 
         jTabbedPane2.addTab("Residue", jXPanel1);
@@ -531,7 +534,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm3 cm-3</p></html>", "<html><p align='center'>Ammonium (NH4)<br>g[N] Mg-1 [soil]</p></html>", "<html><p align='center'>Nitrate (NO3)<br>g[N] Mg-1 [soil]</p></html>"
+                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm<sup>3</sup> cm<sup>-3</sup></p></html>", "<html><p align='center'>Ammonium (NH<sub>4</sub>)<br>g[N] Mg<sup>-1</sup> [soil]</p></html>", "<html><p align='center'>Nitrate (NO<sub>3</sub>)<br>g[N] Mg<sup>-1</sup> [soil]</p></html>"
             }
         ) {
             Class[] types = new Class [] {
@@ -689,9 +692,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                             .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Profile", jXPanel2);
@@ -705,19 +708,8 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
         });
 
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
-
-        bnNext.setText("NEXT");
-        bnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNextActionPerformed(evt);
-            }
-        });
+        lblLevel1.setText("Initial Conditions");
+        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -727,38 +719,32 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnPrevious)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext))
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(607, Short.MAX_VALUE))
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnPrevious)
-                    .addComponent(bnNext))
+                .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProfileMouseClicked
-        if(evt.getClickCount() == 2)
-        {
+        if (evt.getClickCount() == 2) {
             final InitialDialog dialog = new InitialDialog(null, true, init.GetApp(tbProfile.getSelectedRow()));
             dialog.show();
 
@@ -766,24 +752,23 @@ public class InitialConditionFrame extends IXInternalFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     InitialConditionApplication initApp = dialog.GetData();
-                    if(initApp != null){
+                    if (initApp != null) {
                         DefaultTableModel model = (DefaultTableModel) tbProfile.getModel();
 
-                        Object[] vector = SetRow(initApp);
-                        for(int n = 0;n < vector.length;n++)
-                            model.setValueAt(vector[n], tbProfile.getSelectedRow(), n);
+                        Object[] row = SetRow(initApp);
+                        for (int n = 0; n < row.length; n++) {
+                            model.setValueAt(row[n], tbProfile.getSelectedRow(), n);
+                        }
                     }
                     dialog.SetNull();
                 }
             });
-        }
-        else{
+        } else {
             int nRow = tbProfile.getSelectedRow();
 
-            if(nRow != selectedRowIndex){
+            if (nRow != selectedRowIndex) {
                 selectedRowIndex = nRow;
-            }
-            else{
+            } else {
                 selectedRowIndex = -1;
                 tbProfile.clearSelection();
             }
@@ -806,14 +791,15 @@ public class InitialConditionFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 InitialConditionApplication initApp = dialog.GetData();
-                if(initApp != null){
+                if (initApp != null) {
                     init.AddApp(initApp);
-                    
+
                     DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
-                    while(tbModel.getRowCount() > 0)
+                    while (tbModel.getRowCount() > 0) {
                         tbModel.removeRow(0);
-                    
-                    for (int i = 0; i < init.GetSize(); i++) {                        
+                    }
+
+                    for (int i = 0; i < init.GetSize(); i++) {
                         tbModel.addRow(SetRow(init.GetApp(i)));
                     }
                 }
@@ -831,7 +817,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if(txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)){
+        if (txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)) {
             l.myAction(new UpdateLevelEvent(this, "Initial Conditions", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
@@ -847,7 +833,13 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_dpICDATPropertyChange
 
     private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
-        CalculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()), cbSoil.getSelectedIndex());
+        if (!txtWater.getText().isEmpty() && txtNitrogen.getText().isEmpty()) {
+            calculateWater(Utils.ParseFloat(txtWater.getValue()));
+        } else if (txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+            calculateNitrogen(Utils.ParseFloat(txtNitrogen.getValue()));
+        } else if (!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+            calculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()));
+        }
     }//GEN-LAST:event_bnRecalculateActionPerformed
 
     private void txtWaterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaterKeyReleased
@@ -858,27 +850,13 @@ public class InitialConditionFrame extends IXInternalFrame {
         setRecalculateButtonEnabled();
     }//GEN-LAST:event_txtNitrogenKeyReleased
 
-    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Initial Conditions", MenuDirection.PREVIOUS));
-        });
-    }//GEN-LAST:event_bnPreviousActionPerformed
-
-    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Initial Conditions", MenuDirection.NEXT));
-        });
-    }//GEN-LAST:event_bnNextActionPerformed
-
-    private void setRecalculateButtonEnabled(){
-        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty());
+    private void setRecalculateButtonEnabled() {
+        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() || !txtNitrogen.getText().isEmpty());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
-    private javax.swing.JButton bnNext;
-    private javax.swing.JButton bnPrevious;
     private javax.swing.JButton bnRecalculate;
     private xbuild.Components.XDropdownTableComboBox cbPCR;
     private xbuild.Components.XComboBox cbSoil;
@@ -922,6 +900,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel6;
     private org.jdesktop.swingx.JXPanel jXPanel7;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private org.jdesktop.swingx.JXLabel lblLevel1;
     private xbuild.Components.XSpinner snICRE;
     private xbuild.Components.XSpinner snICRN;
     private org.jdesktop.swingx.JXTable tbProfile;
@@ -937,65 +916,176 @@ public class InitialConditionFrame extends IXInternalFrame {
     private javax.swing.JFormattedTextField txtNitrogen;
     private javax.swing.JFormattedTextField txtWater;
     // End of variables declaration//GEN-END:variables
-    
+
     private Object[] SetRow(InitialConditionApplication initApp) {
         DecimalFormat df = new DecimalFormat("0.000");
-        String val = initApp.SH2O != null ? df.format(initApp.SH2O) : "";
-        
-        DecimalFormat df1 = new DecimalFormat("0.0");
-        
-        Object[] vector = new Object[]{initApp.ICBL, val, initApp.SNH4 != null ? df1.format(initApp.SNH4) : df1.format(0), initApp.SNO3 != null ? df1.format(initApp.SNO3) : df1.format(0)};
+        String val = df.format(initApp.SH2O);
 
-        return vector;
+        DecimalFormat df1 = new DecimalFormat("0.00");
+
+        Object[] row = new Object[]{initApp.ICBL, val, df1.format(initApp.SNH4), df1.format(initApp.SNO3)};
+
+        return row;
     }
 
-    private void CalculateInitialCondition(Float water, Float nitrogen, int selectedIndex) {
-        FieldDetail field = (FieldDetail)FileX.fieldList.GetAt(selectedIndex);
-        Soil soil = SoilList.GetAt(field.ID_SOIL);
-        
-        boolean isdataMissing = false;
-        
-        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+    private void calculateWater(Float water) {
+        Soil soil = getSelectedSoil();
+
         ArrayList<Float> Water_Calculated = new ArrayList<>();
-        ArrayList<Float> BulkDensity = new ArrayList<>();
-       
+
         int size = soil.GetSoilProfiles().size() - 1;
-        
-        for(SoilProfile profile : soil.GetSoilProfiles()){
-            Depth_Calculated.add(profile.SLB);            
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
             Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+        }
+
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0) {
+            tbModel.removeRow(0);
+        }
+
+        for (int i = 0; i <= init.GetSize(); i++) {
+
+            InitialConditionApplication initApp = new InitialConditionApplication();
+            InitialConditionApplication app = init.GetApp(i);
+
+            initApp.ICBL = app.ICBL;
+            initApp.SH2O = i <= size ? Water_Calculated.get(i) : app.SH2O;
+            initApp.SNH4 = app.SNH4;
+            initApp.SNO3 = app.SNO3;
+
+            if (i <= size) {
+                app.ICBL = initApp.ICBL;
+                app.SH2O = initApp.SH2O;
+                app.SNH4 = initApp.SNH4;
+                app.SNO3 = initApp.SNO3;
+            }
+
+            tbModel.addRow(SetRow(initApp));
+        }
+    }
+
+    private void calculateNitrogen(Float nitrogen) {
+        Soil soil = getSelectedSoil();
+
+        boolean isdataMissing = false;
+
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+
+        int size = soil.GetSoilProfiles().size() - 1;
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
+            Depth_Calculated.add(profile.SLB);
             BulkDensity.add(profile.SBDM);
-            if(profile.SBDM == null){
-                isdataMissing = false;
+            if (profile.SBDM == null) {
+                isdataMissing = true;
             }
         }
-        
+
         Float BD_Average = 1.2f;
-        if(!isdataMissing){
+        if (!isdataMissing) {
             BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
-            for(int i = 1; i< Depth_Calculated.size();i++){
+            for (int i = 1; i < Depth_Calculated.size(); i++) {
                 BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
             }
         }
-        
+
         Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
         Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
-        
+
         tbProfile.removeAll();
         DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
-        while (tbModel.getRowCount() > 0)
+        while (tbModel.getRowCount() > 0) {
             tbModel.removeRow(0);
-            
-        for(int i = 0;i <= size;i++)
-        {
+        }
+
+        for (int i = 0; i <= init.GetSize(); i++) {
             InitialConditionApplication initApp = new InitialConditionApplication();
-            
+            InitialConditionApplication app = init.GetApp(i);
+
+            initApp.ICBL = app.ICBL;
+            initApp.SH2O = app.SH2O;
+            initApp.SNH4 = i <= size ? INH4_Calculated : app.SNH4;
+            initApp.SNO3 = i <= size ? INO3_Calculated : app.SNO3;
+
+            tbModel.addRow(SetRow(initApp));
+
+            if (i <= size) {
+                app.SH2O = initApp.SH2O;
+                app.SNH4 = initApp.SNH4;
+                app.SNO3 = initApp.SNO3;
+            }
+        }
+    }
+
+    private void calculateInitialCondition(Float water, Float nitrogen) {
+        Soil soil = getSelectedSoil();
+        boolean isdataMissing = false;
+
+        ArrayList<Float> Depth_Calculated = new ArrayList<>();
+        ArrayList<Float> Water_Calculated = new ArrayList<>();
+        ArrayList<Float> BulkDensity = new ArrayList<>();
+
+        int size = soil.GetSoilProfiles().size() - 1;
+
+        for (SoilProfile profile : soil.GetSoilProfiles()) {
+            Depth_Calculated.add(profile.SLB);
+            Water_Calculated.add(profile.SLLL + (water / 100.0f) * (profile.SDUL - profile.SLLL));
+            BulkDensity.add(profile.SBDM);
+            if (profile.SBDM == null) {
+                isdataMissing = true;
+            }
+        }
+
+        Float BD_Average = 1.2f;
+        if (!isdataMissing) {
+            BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
+            for (int i = 1; i < Depth_Calculated.size(); i++) {
+                BD_Average += BulkDensity.get(i) * (Depth_Calculated.get(i) - (Depth_Calculated.get(i - 1))) / Depth_Calculated.get(size);
+            }
+        }
+
+        Float INO3_Calculated = (0.9f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+        Float INH4_Calculated = (0.1f * nitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+
+        tbProfile.removeAll();
+        DefaultTableModel tbModel = (DefaultTableModel) tbProfile.getModel();
+        while (tbModel.getRowCount() > 0) {
+            tbModel.removeRow(0);
+            init.RemoveAt(0);
+        }
+
+        for (int i = 0; i <= size; i++) {
+            InitialConditionApplication initApp = new InitialConditionApplication();
+
             initApp.ICBL = Depth_Calculated.get(i);
             initApp.SH2O = Water_Calculated.get(i);
             initApp.SNH4 = INH4_Calculated;
             initApp.SNO3 = INO3_Calculated;
-            
+
             tbModel.addRow(SetRow(initApp));
+            init.AddApp(initApp);
         }
+    }
+    
+    private Soil getSelectedSoil(){
+        Soil soil = null;// = SoilList.GetAt(field.ID_SOIL);
+        
+        String selectedSoil = cbSoil.getSelectedItem().toString();
+        for (ModelXBase x : FileX.fieldList.GetAll()) {
+            FieldDetail f = (FieldDetail) x;
+            Soil s = SoilList.GetAt(f.ID_SOIL);
+            if (s != null) {
+                String so = s.Description + " (" + s.Code + ")";
+                if (so.equalsIgnoreCase(selectedSoil) ) {
+                    soil = s;
+                    break;
+                }
+            }
+        }
+        
+        return soil;
     }
 }

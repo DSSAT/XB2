@@ -15,11 +15,16 @@ import java.util.logging.Logger;
  */
 public class TillageApplication implements Cloneable {
     public Date TDATE;
+    public Integer TDAY;
     public String TIMPL;
     public Integer TDEP;
     
     public Date getOrder(){
         return TDATE;
+    }
+    
+    public Integer getOrderDay(){
+        return TDAY;
     }
     
     public TillageApplication Clone(){

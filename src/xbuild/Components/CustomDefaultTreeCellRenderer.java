@@ -67,6 +67,8 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         else if(node.isLeaf() && nodeParentName.equals("Planting") && !FileXValidationService.IsPlantingValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
         else if(node.isLeaf() && nodeParentName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(nodeName.equals("Treatment") && !FileXValidationService.IsTreatmentValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));        
 
         return treeCellRendererComponent;

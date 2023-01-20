@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Jazzy
  */
-public class Irrigation implements Cloneable, IModelXBase {
+public class Irrigation extends ModelXBase implements Cloneable {
 
     protected ArrayList<IrrigationApplication>  irrigApps = new ArrayList<>();
     public Float EFIR;

@@ -8,13 +8,12 @@ package FileXModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Vector;
 
 /**
  *
  * @author Jazzy
  */
-public class Fertilizer implements Cloneable, IModelXBase {
+public class Fertilizer extends ModelXBase implements Cloneable {
 
     protected ArrayList<FertilizerApplication>  ferApps = new ArrayList<>();
     public String FERNAME;
