@@ -47,8 +47,8 @@ public class FileXValidationService {
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).WSTA)
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).ID_SOIL)
                 && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
-                && FileX.plantings != null && FileX.plantings.GetSize() > 0 && IsPlantingValid(FileX.plantings.GetAt(0).GetName())
-                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0 && IsSimulationControlValid(FileX.simulationList.GetAt(0).GetName());
+                && FileX.plantings != null && FileX.plantings.GetSize() > 0 && IsPlantingValid(FileX.plantings.GetAtIndex(0).GetName())
+                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0 && IsSimulationControlValid(FileX.simulationList.GetAtIndex(0).GetName());
 
         return isValid;
     }
@@ -189,6 +189,6 @@ public class FileXValidationService {
     }
     
     public static boolean IsTreatmentValid(String node) {
-        return FileX.treaments.GetSize() > 0;
+        return FileX.treaments != null && FileX.treaments.GetSize() > 0;
     }
 }

@@ -8,6 +8,7 @@ import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
 import DSSATModel.WstaType;
 import Extensions.Utils;
+import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,8 @@ import java.util.*;
 import javax.swing.JSpinner;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
+import xbuild.Events.MenuDirection;
+import xbuild.Events.NewFrameEvent;
 
 /**
  *
@@ -150,6 +153,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jXLabel25 = new org.jdesktop.swingx.JXLabel();
         jXLabel26 = new org.jdesktop.swingx.JXLabel();
         jXLabel27 = new org.jdesktop.swingx.JXLabel();
+        bnPrevious = new javax.swing.JButton();
+        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -576,49 +581,67 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 .addContainerGap())
         );
 
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.setEnabled(false);
+
+        bnNext.setText("NEXT");
+        bnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnNextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnPrevious)
+                    .addComponent(bnNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtExperimentNumberStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtExperimentNumberStateChanged
-        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+        updateTree();
     }//GEN-LAST:event_txtExperimentNumberStateChanged
 
     private void txtInstituteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInstituteCodeFocusLost
-        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+        updateTree();
     }//GEN-LAST:event_txtInstituteCodeFocusLost
 
     private void txtSiteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSiteCodeFocusLost
-        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+        updateTree();
     }//GEN-LAST:event_txtSiteCodeFocusLost
 
     private void cbCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCropActionPerformed
         if(cbCrop.getSelectedItem() != null && cbCrop.getSelectedItem().getClass() == Crop.class){
-            //FileX.general.crop = (Crop)cbCrop.getSelectedItem();
-            EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+            updateTree();
         }
     }//GEN-LAST:event_cbCropActionPerformed
 
@@ -659,8 +682,16 @@ public class GeneralInfoFrame extends IXInternalFrame {
         EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
     }//GEN-LAST:event_txtYearStateChanged
 
+    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
+        EventQueue.invokeLater(() -> {
+            l.myAction(new NewFrameEvent(this, "General Information", MenuDirection.NEXT));
+        });
+    }//GEN-LAST:event_bnNextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private xbuild.Components.XDropdownTableComboBox cbCrop;
     private xbuild.Components.XComboBox cbFileType;
     private javax.swing.JLabel imagePanel;
@@ -760,5 +791,12 @@ public class GeneralInfoFrame extends IXInternalFrame {
         if (FileX.general.crop != null && !"".equals(FileX.general.crop.CropCode)) {
             setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
         }
+    }
+    
+    private void updateTree() {
+        EventQueue.invokeLater(() -> {
+            actionPerformed(new ActionEvent(this, 0, "Update"));
+            bnNext.setEnabled(FileXValidationService.IsGeneralValid());
+        });
     }
 }

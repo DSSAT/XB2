@@ -45,8 +45,6 @@ import org.jdesktop.swingx.JXFrame;
 import FileXService.FileXService;
 import FileXService.FileXValidationService;
 import java.awt.event.MouseAdapter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.SwingUtilities;
@@ -1244,7 +1242,125 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     @Override
     public void myAction(NewFrameEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+        ArrayList<String> nodeList = new ArrayList<>();
+        getCellIndex(rootNode, nodeList);
+
+        String frameName;
+        int select;
+
+        int mIndex = menuAll.indexOf(e.getCurrentFrameName());
+        if (e.getDirection() == MenuDirection.PREVIOUS) {
+            mIndex--;
+        } else if (e.getDirection() == MenuDirection.NEXT) {
+            mIndex++;
+        }
+
+        frameName = menuAll.get(mIndex);
+        select = nodeList.indexOf(frameName);
+
+        showTargetFrame(frameName, select, nodeList, e.getDirection());
+    }
+    
+    private void showTargetFrame(String frameName, int select, ArrayList<String> nodeList, MenuDirection direction) {
+        if (!frameName.equals("General Information")) {
+            ManagementList modelList = (ManagementList) GetManagementList(frameName);
+            if (modelList.GetSize() > 0) {
+                jXTree1.expandRow(select);
+                
+                jXTree1.setSelectionRow(select + 1);
+                jXTree1.scrollRowToVisible(select + 1);
+                
+                EventQueue.invokeLater(() -> {
+                    showFrame();
+                });                
+            } else if (menuRequired.indexOf(frameName) > 0) {
+                jXTree1.expandRow(select);
+                jXTree1.setSelectionRow(select);
+                jXTree1.scrollRowToVisible(select);
+                addLevel();
+            } else {
+                int mIndex = menuAll.indexOf(frameName);
+
+                if (direction == MenuDirection.PREVIOUS) {
+                    mIndex--;
+                } else if (direction == MenuDirection.NEXT) {
+                    mIndex++;
+                }
+
+                frameName = menuAll.get(mIndex);
+                select = nodeList.indexOf(frameName);
+                showTargetFrame(frameName, select, nodeList, direction);
+            }
+        } else {
+            jXTree1.expandRow(select);
+            jXTree1.setSelectionRow(select);
+            jXTree1.scrollRowToVisible(select);
+            
+            EventQueue.invokeLater(() -> {
+                showFrame();
+            });
+        }
+    }
+
+    private void getCellIndex(TreeNode node, ArrayList<String> selects) {
+        selects.add(node.toString());
+
+        if (node.getChildCount() > 0) {
+            for (int i = 0; i < node.getChildCount(); i++) {
+                getCellIndex(node.getChildAt(i), selects);
+            }
+        }
+    }
+    
+    private void addLevel(){
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        ManagementList modelList = (ManagementList) GetManagementList(node.toString());
+
+        if (modelList != null && !"Cultivars".equals(node.toString())) {
+            String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
+            String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
+            if (nodeName.length() > 0) {
+                for (ModelXBase m : modelList.GetAll()) {
+                    if (m.GetName().equalsIgnoreCase(nodeName)) {
+                        JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
+                        return;
+                    }
+                }
+                if ("Simulation Controls".equals(node.toString())) {
+                    Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
+                    sim.SetName(nodeName);
+                    CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
+                    if (cm != null) {
+                        sim.SMODEL = cm.ModelCode;
+                    }
+                    modelList.AddNew(sim);
+                } else {
+                    modelList.AddNew(nodeName);
+                }
+                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+
+                String newName = "Level " + (modelList.GetLevel(nodeName) + 1) + ": " + nodeName;
+
+                newNode.setUserObject(newName);
+                node.add(newNode);
+
+                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                model.reload(node);
+
+                jXTree1.expandAll();
+                int[] rows = jXTree1.getSelectionRows();
+
+                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
+
+                IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
+
+                ShowFrame(frame);
+            }
+        } else if (modelList != null && "Cultivars".equals(node.toString())) {
+            CultivarsFrame currentFrame = (CultivarsFrame) desktopPane.getSelectedFrame();
+            currentFrame.AddNewCultivar();
+        }
     }
     
     private void showFrame(){
