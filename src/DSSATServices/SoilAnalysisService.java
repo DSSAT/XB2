@@ -75,6 +75,6 @@ public class SoilAnalysisService extends DSSATServiceBase {
     
     @Override
     public String getName() {
-        return "Soil Analisys";
+        return "Soil Analysis";
     }
 }
