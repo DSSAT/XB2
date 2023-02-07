@@ -12,19 +12,13 @@
 package xbuild;
 
 
-import DSSATModel.ChemicalMaterial;
 import DSSATModel.ChemicalMaterialList;
-import DSSATModel.FertilizerMethod;
 import DSSATModel.FertilizerMethodList;
 import Extensions.Variables;
 import FileXModel.ChemicalApplication;
-import ListDialog.ChemicalMaterialDialog;
-import ListDialog.FertilizerMethodDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import xbuild.Components.XColumn;
 
 /**
  *
@@ -37,8 +31,10 @@ public class ChemicalDialog extends javax.swing.JDialog {
     protected ChemicalApplication chemApp;
     protected String CHCOD;
     protected String CHME;
+    protected boolean bDay;
+    private boolean isOK;
 
-    public ChemicalDialog(java.awt.Frame parent, boolean modal, ChemicalApplication chemApp) {
+    public ChemicalDialog(java.awt.Frame parent, boolean modal, boolean bDay, ChemicalApplication chemApp) {
         super(parent, modal);
         initComponents();
 
@@ -52,8 +48,30 @@ public class ChemicalDialog extends javax.swing.JDialog {
         this.chemApp = chemApp;
         this.CHCOD = chemApp.CHCOD;
         this.CHME = chemApp.CHME;
+        
+        this.bDay = bDay;
+        
+        lbDay.setVisible(bDay);
+        txtCDAY.setVisible(bDay);
+        lbDate.setVisible(!bDay);
+        dpCDATE.setVisible(!bDay);
+        jLabel1.setVisible(!bDay);
+        
+        cbCHCOD.setInit(chemApp, "CHCOD", chemApp.CHCOD, ChemicalMaterialList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        cbCHME.setInit(chemApp, "CHME", chemApp.CHME, FertilizerMethodList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
 
         LoadChemApp();
+        
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -66,16 +84,12 @@ public class ChemicalDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         dpCDATE = new org.jdesktop.swingx.JXDatePicker();
-        txtCHCOD = new javax.swing.JTextField();
-        bnCHCOD = new javax.swing.JButton();
         txtCHAMT = new javax.swing.JFormattedTextField();
-        txtCHME = new javax.swing.JTextField();
-        bnCHME = new javax.swing.JButton();
         txtCHDEP = new javax.swing.JFormattedTextField();
         txtCHT = new javax.swing.JTextField();
         bnOK = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
-        jXLabel1 = new org.jdesktop.swingx.JXLabel();
+        lbDate = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
@@ -84,28 +98,25 @@ public class ChemicalDialog extends javax.swing.JDialog {
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         jXLabel8 = new org.jdesktop.swingx.JXLabel();
         jLabel1 = new javax.swing.JLabel();
+        lbDay = new javax.swing.JLabel();
+        txtCDAY = new xbuild.Components.XFormattedTextField();
+        cbCHCOD = new xbuild.Components.XDropdownTableComboBox();
+        cbCHME = new xbuild.Components.XDropdownTableComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         dpCDATE.setFormats(Variables.getDateFormat());
 
-        bnCHCOD.setText("...");
-        bnCHCOD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnCHCODActionPerformed(evt);
-            }
-        });
-
         txtCHAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        bnCHME.setText("...");
-        bnCHME.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnCHMEActionPerformed(evt);
-            }
-        });
+        txtCHAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtCHDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtCHDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +132,7 @@ public class ChemicalDialog extends javax.swing.JDialog {
             }
         });
 
-        jXLabel1.setText("Date");
+        lbDate.setText("Date");
 
         jXLabel2.setText("Chemical Material");
 
@@ -139,64 +150,69 @@ public class ChemicalDialog extends javax.swing.JDialog {
 
         jLabel1.setText(Variables.getDateFormatString());
 
+        lbDay.setText("Day");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtCHCOD, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnCHCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCHT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                            .addComponent(txtCHME, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnCHME, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(bnOK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bnCancel)
+                        .addGap(234, 234, 234))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDay))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCHT)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(bnOK)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bnCancel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCHDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCHAMT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dpCDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(dpCDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtCHAMT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtCHDEP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jXLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCDAY, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cbCHCOD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbCHME, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dpCDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lbDay)
+                    .addComponent(txtCDAY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCHCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpCDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnCHCOD))
+                    .addComponent(cbCHCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCHAMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,9 +220,8 @@ public class ChemicalDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCHME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnCHME))
+                    .addComponent(cbCHME, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCHDEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,50 +241,29 @@ public class ChemicalDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bnCHCODActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCHCODActionPerformed
-        final ChemicalMaterialDialog chemDialog = new ChemicalMaterialDialog(null, true);
-        chemDialog.show();
-        chemDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                ChemicalMaterial chem = chemDialog.GetSelected();
-                txtCHCOD.setText(chem.Description);
-                CHCOD = chem.Code;
-            }
-        });
-    }//GEN-LAST:event_bnCHCODActionPerformed
-
-    private void bnCHMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCHMEActionPerformed
-        final FertilizerMethodDialog fertilDialog = new FertilizerMethodDialog(null, true);
-        fertilDialog.show();
-        fertilDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                FertilizerMethod fer = fertilDialog.GetSelected();
-                txtCHME.setText(fer.Description);
-                CHME = fer.Code;
-            }
-        });
-    }//GEN-LAST:event_bnCHMEActionPerformed
-
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        chemApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnCHCOD;
-    private javax.swing.JButton bnCHME;
     private javax.swing.JButton bnCancel;
     private javax.swing.JButton bnOK;
+    private xbuild.Components.XDropdownTableComboBox cbCHCOD;
+    private xbuild.Components.XDropdownTableComboBox cbCHME;
     private org.jdesktop.swingx.JXDatePicker dpCDATE;
     private javax.swing.JLabel jLabel1;
-    private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
     private org.jdesktop.swingx.JXLabel jXLabel3;
     private org.jdesktop.swingx.JXLabel jXLabel4;
@@ -277,10 +271,11 @@ public class ChemicalDialog extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXLabel jXLabel6;
     private org.jdesktop.swingx.JXLabel jXLabel7;
     private org.jdesktop.swingx.JXLabel jXLabel8;
+    private org.jdesktop.swingx.JXLabel lbDate;
+    private javax.swing.JLabel lbDay;
+    private xbuild.Components.XFormattedTextField txtCDAY;
     private javax.swing.JFormattedTextField txtCHAMT;
-    private javax.swing.JTextField txtCHCOD;
     private javax.swing.JFormattedTextField txtCHDEP;
-    private javax.swing.JTextField txtCHME;
     private javax.swing.JTextField txtCHT;
     // End of variables declaration//GEN-END:variables
 
@@ -293,17 +288,30 @@ public class ChemicalDialog extends javax.swing.JDialog {
     }
 
     private void Update() {
-        try
+        if(bDay)
         {
-            chemApp.CDATE = dpCDATE.getDate();
-        }
-        catch(Exception ex)
-        {
+            try
+            {
+                chemApp.CDAY = Integer.parseInt(txtCDAY.getText());
+            }
+            catch(Exception ex)
+            {
+                chemApp.CDAY = null;
+            }
             chemApp.CDATE = null;
         }
-
-        if(txtCHCOD.getText().equals("")) chemApp.CHCOD = "";
-        else  chemApp.CHCOD = CHCOD;
+        else
+        {
+            try
+            {
+                chemApp.CDATE = dpCDATE.getDate();
+            }
+            catch(Exception ex)
+            {
+                chemApp.CDATE = null;
+            }
+            chemApp.CDAY = null;
+        }
 
         try
         {
@@ -313,9 +321,6 @@ public class ChemicalDialog extends javax.swing.JDialog {
         {
             chemApp.CHAMT = null;
         }
-
-        if(txtCHME.getText().equals("")) chemApp.CHME = "";
-        else  chemApp.CHME = CHME;
 
         try
         {
@@ -328,29 +333,37 @@ public class ChemicalDialog extends javax.swing.JDialog {
     }
 
     private void LoadChemApp() {
-        try
+        if(bDay)
         {
-            dpCDATE.setDate(chemApp.CDATE);
+            try
+            {
+                txtCDAY.setText(chemApp.CDAY.toString());
+            }
+            catch(Exception ex)
+            {
+                txtCDAY.setText("");
+            }
+            dpCDATE.setDate(null);
         }
-        catch(Exception ex) {}
+        else
+        {
+            try
+            {
+                dpCDATE.setDate(chemApp.CDATE);
+            }
+            catch(Exception ex)
+            {
+                dpCDATE.setDate(null);
+            }
+            txtCDAY.setText("");
+        }
 
-        try
-        {
-            txtCHCOD.setText(ChemicalMaterialList.GetAt(chemApp.CHCOD).Description);
-            CHCOD = chemApp.CHCOD;
-        }
-        catch(Exception ex) { }
         try
         {
             txtCHAMT.setText(chemApp.CHAMT.toString());
         }
         catch(Exception ex) { }
-        try
-        {
-            txtCHME.setText(FertilizerMethodList.GetAt(chemApp.CHME).Description);
-            CHME = chemApp.CHME;
-        }
-        catch(Exception ex) { }
+        
         try
         {
             txtCHDEP.setText(chemApp.CHDEP.toString());

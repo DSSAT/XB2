@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -48,6 +49,8 @@ public class InitialConditionService {
                     }
                     //@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICREP ICRID ICNAME
                     InitialCondition init = new InitialCondition();
+                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    init.SetLevel(level);
                     init.PCR = Utils.GetString(initHeader1, tmp, "  PCR", 5);
                     init.ICDAT = Utils.GetDate(initHeader1, tmp, "ICDAT", 5);
                     init.ICRT = Utils.GetFloat(initHeader1, tmp, "ICRT", 5);
@@ -73,7 +76,7 @@ public class InitialConditionService {
                     //@C  ICBL  SH2O  SNH4  SNO3
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
                         InitialCondition init = (InitialCondition)initialList.GetAt(level);
                         InitialConditionApplication initApp = new InitialConditionApplication();
 
@@ -94,13 +97,15 @@ public class InitialConditionService {
     
     public static void Extract(PrintWriter pw){
         // <editor-fold defaultstate="collapsed" desc="Initial Condition">
+        DecimalFormat df2 = new DecimalFormat("0.00");
+        DecimalFormat df3 = new DecimalFormat("0.000");
+        
         if (initialList.GetSize() > 0) {
-            pw.println();
             pw.println();
             pw.println("*INITIAL CONDITIONS");
             for (int i = 0; i < initialList.GetSize(); i++) {
-                Integer level = i + 1;
-                InitialCondition init = (InitialCondition)initialList.GetAt(i);
+                InitialCondition init = (InitialCondition)initialList.GetAtIndex(i);
+                Integer level = init.GetLevel();
 
                 pw.println("@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICRIP ICRID ICNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -129,9 +134,9 @@ public class InitialConditionService {
                         InitialConditionApplication initApp = init.GetApp(n);
                         pw.print(Utils.PadLeft(level, 2, ' '));
                         pw.print(" " + Utils.PadLeft(initApp.ICBL, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SH2O, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SNH4, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.SNO3, 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df3.format(initApp.SH2O), 5, ' '));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNH4), 5, ' ', true));
+                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNO3), 5, ' ', true));
                         pw.println();
                     }
                 }

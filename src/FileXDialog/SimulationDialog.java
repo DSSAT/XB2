@@ -116,7 +116,8 @@ public class SimulationDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Simulation sim = (Simulation)FileX.simulationList.GetAtIndex(level - 1);
+        return sim.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -129,9 +130,9 @@ public class SimulationDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.simulationList.GetSize();i++)
         {
-            Simulation sim = (Simulation)FileX.simulationList.GetAt(i);
+            Simulation sim = (Simulation)FileX.simulationList.GetAtIndex(i);
             Object object[] = new Object[3];
-            object[0] = i + 1;
+            object[0] = sim.GetLevel();
             try{
                 object[1] = sim.SNAME;
             }

@@ -112,7 +112,8 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Fertilizer fertil = (Fertilizer)FileX.fertilizerList.GetAtIndex(level - 1);
+        return fertil.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +126,9 @@ public class FertilizerDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.fertilizerList.GetSize();i++)
         {
-            Fertilizer fertil = (Fertilizer)FileX.fertilizerList.GetAt(i);
+            Fertilizer fertil = (Fertilizer)FileX.fertilizerList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = fertil.GetLevel();
             try {
                 object[1] = fertil.FERNAME;
             } catch (Exception e) {

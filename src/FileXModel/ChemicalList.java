@@ -12,8 +12,8 @@ package FileXModel;
 public class ChemicalList extends ManagementList {
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Chemical source = (Chemical) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Chemical source = (Chemical) modelList.get(sourceIndex);
         Chemical newSource = null;
         
         try{            
@@ -33,7 +33,9 @@ public class ChemicalList extends ManagementList {
     }
 
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Chemical(name));
+    public ModelXBase AddNew(String name) {
+        Chemical model = new Chemical(name);
+        modelList.add(model);
+        return model;
     }
 }

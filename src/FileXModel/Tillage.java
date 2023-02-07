@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Jazzy
  */
-public class Tillage implements Cloneable, IModelXBase {
+public class Tillage extends ModelXBase implements Cloneable {
 
     protected ArrayList<TillageApplication>  tillAps = new ArrayList<>();
     public String TNAME;
@@ -30,7 +30,7 @@ public class Tillage implements Cloneable, IModelXBase {
     public void AddApp(TillageApplication till)
     {
         tillAps.add(till);
-        Collections.sort(tillAps, Comparator.comparing(TillageApplication::getOrder));
+        Collections.sort(tillAps, till.TDATE != null ? Comparator.comparing(TillageApplication::getOrder) : Comparator.comparing(TillageApplication::getOrderDay));
     }
 
     public void RemoveAt(int level)

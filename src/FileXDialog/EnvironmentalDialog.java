@@ -112,7 +112,8 @@ public class EnvironmentalDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Environmental env = (Environmental)FileX.environmentals.GetAtIndex(level - 1);
+        return env.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,9 +126,9 @@ public class EnvironmentalDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.environmentals.GetSize();i++)
         {
-            Environmental env = (Environmental)FileX.environmentals.GetAt(i);
+            Environmental env = (Environmental)FileX.environmentals.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = env.GetLevel();
             try {
                 object[1] = env.ENVNAME;
             } catch (Exception e) {

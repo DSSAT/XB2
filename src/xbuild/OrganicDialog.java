@@ -11,17 +11,13 @@
 
 package xbuild;
 
-import DSSATModel.FertilizerMethod;
 import DSSATModel.FertilizerMethodList;
-import DSSATModel.Residues;
 import DSSATModel.ResiduesList;
 import Extensions.Variables;
 import FileXModel.OrganicApplication;
-import ListDialog.FertilizerMethodDialog;
-import ListDialog.ResiduesDialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import xbuild.Components.XColumn;
 
 /**
  *
@@ -35,6 +31,7 @@ public class OrganicDialog extends javax.swing.JDialog {
     protected OrganicApplication organicApp;
     protected String RCOD;
     protected String RMET;
+    private boolean isOK;
 
     public OrganicDialog(java.awt.Frame parent, boolean modal, boolean bDay, OrganicApplication organicApp) {
         super(parent, modal);
@@ -58,8 +55,21 @@ public class OrganicDialog extends javax.swing.JDialog {
         lbDate.setVisible(!bDay);
         dpRDATE.setVisible(!bDay);
         lbDateFormat.setVisible((!bDay));
+        
+        cbRCOD.setInit(organicApp, "RCOD", organicApp.RCOD, ResiduesList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
+        
+        cbRMET.setInit(organicApp, "RMET", organicApp.RMET, FertilizerMethodList.GetAll(), 
+                new XColumn[] { 
+                    new  XColumn("Code", "Code", 100),
+                    new  XColumn("Description", "Description", 200)
+                }, "Code");
 
         LoadOrganicApp();
+        isOK = false;
     }
 
     /** This method is called from within the constructor to
@@ -74,15 +84,11 @@ public class OrganicDialog extends javax.swing.JDialog {
         txtRDATE = new javax.swing.JFormattedTextField();
         dpRDATE = new org.jdesktop.swingx.JXDatePicker();
         txtRAMT = new javax.swing.JFormattedTextField();
-        txtRCOD = new javax.swing.JTextField();
-        bnSelectRCOD = new javax.swing.JButton();
         txtRESN = new javax.swing.JFormattedTextField();
         txtRESP = new javax.swing.JFormattedTextField();
         txtRESK = new javax.swing.JFormattedTextField();
         txtRINP = new javax.swing.JFormattedTextField();
         txtRDEP = new javax.swing.JFormattedTextField();
-        txtRMET = new javax.swing.JTextField();
-        bnSelectRMET = new javax.swing.JButton();
         lbDay = new org.jdesktop.swingx.JXLabel();
         lbDate = new org.jdesktop.swingx.JXLabel();
         jXLabel3 = new org.jdesktop.swingx.JXLabel();
@@ -102,10 +108,18 @@ public class OrganicDialog extends javax.swing.JDialog {
         bnOK = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
         lbDateFormat = new javax.swing.JLabel();
+        cbRCOD = new xbuild.Components.XDropdownTableComboBox();
+        cbRMET = new xbuild.Components.XDropdownTableComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         txtRDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         dpRDATE.setFormats(Variables.getDateFormat());
         dpRDATE.addActionListener(new java.awt.event.ActionListener() {
@@ -115,30 +129,22 @@ public class OrganicDialog extends javax.swing.JDialog {
         });
 
         txtRAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        bnSelectRCOD.setText("...");
-        bnSelectRCOD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectRCODActionPerformed(evt);
-            }
-        });
+        txtRAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRESN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRESP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRESK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRESK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRINP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRINP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtRDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        bnSelectRMET.setText("...");
-        bnSelectRMET.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnSelectRMETActionPerformed(evt);
-            }
-        });
+        txtRDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         lbDay.setText("Day");
 
@@ -207,19 +213,13 @@ public class OrganicDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtRDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRCOD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbRMET, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtRCOD, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bnSelectRCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtRMET, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bnSelectRMET, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtRDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(dpRDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,8 +252,8 @@ public class OrganicDialog extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(bnOK)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(bnCancel)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(bnCancel)))))
+                        .addGap(0, 145, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,9 +270,8 @@ public class OrganicDialog extends javax.swing.JDialog {
                     .addComponent(lbDateFormat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectRCOD)
-                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRAMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,9 +306,8 @@ public class OrganicDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRMET, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnSelectRMET)
-                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRMET, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnOK)
@@ -324,47 +322,27 @@ public class OrganicDialog extends javax.swing.JDialog {
         Update();
     }//GEN-LAST:event_dpRDATEActionPerformed
 
-    private void bnSelectRCODActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectRCODActionPerformed
-        final ResiduesDialog dialog = new ResiduesDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Residues residue = dialog.GetSelected();
-                txtRCOD.setText(residue.Description);
-                RCOD = residue.Code;
-            }
-        });
-    }//GEN-LAST:event_bnSelectRCODActionPerformed
-
-    private void bnSelectRMETActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSelectRMETActionPerformed
-        final FertilizerMethodDialog dialog = new FertilizerMethodDialog(null, true);
-        dialog.show();
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                FertilizerMethod fertil = dialog.GetSelected();
-                txtRMET.setText(fertil.Description);
-                RMET = fertil.Code;
-            }
-        });
-    }//GEN-LAST:event_bnSelectRMETActionPerformed
-
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed
         Update();
+        isOK = true;
         dispose();
     }//GEN-LAST:event_bnOKActionPerformed
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-        organicApp = null;
+        isOK = false;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(!isOK)
+            SetNull();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;
     private javax.swing.JButton bnOK;
-    private javax.swing.JButton bnSelectRCOD;
-    private javax.swing.JButton bnSelectRMET;
+    private xbuild.Components.XDropdownTableComboBox cbRCOD;
+    private xbuild.Components.XDropdownTableComboBox cbRMET;
     private org.jdesktop.swingx.JXDatePicker dpRDATE;
     private org.jdesktop.swingx.JXLabel jXLabel10;
     private org.jdesktop.swingx.JXLabel jXLabel11;
@@ -384,14 +362,12 @@ public class OrganicDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lbDateFormat;
     private org.jdesktop.swingx.JXLabel lbDay;
     private javax.swing.JFormattedTextField txtRAMT;
-    private javax.swing.JTextField txtRCOD;
     private javax.swing.JFormattedTextField txtRDATE;
     private javax.swing.JFormattedTextField txtRDEP;
     private javax.swing.JFormattedTextField txtRESK;
     private javax.swing.JFormattedTextField txtRESN;
     private javax.swing.JFormattedTextField txtRESP;
     private javax.swing.JFormattedTextField txtRINP;
-    private javax.swing.JTextField txtRMET;
     // End of variables declaration//GEN-END:variables
 
 
@@ -418,11 +394,6 @@ public class OrganicDialog extends javax.swing.JDialog {
                 organicApp.RDATE = null;
             }
         }
-
-        if(txtRCOD.getText().equals("")) organicApp.RCOD = "";
-        else organicApp.RCOD = RCOD;
-        if(txtRMET.getText().equals("")) organicApp.RMET = "";
-        else organicApp.RMET = RMET;
 
         try
         {
@@ -505,15 +476,6 @@ public class OrganicDialog extends javax.swing.JDialog {
 
         try
         {
-            txtRCOD.setText(ResiduesList.GetAt(organicApp.RCOD).Description);
-        }
-        catch(Exception ex)
-        {
-            txtRCOD.setText("");
-        }
-
-        try
-        {
             txtRAMT.setText(organicApp.RAMT.toString());
         }
         catch(Exception ex)
@@ -564,15 +526,6 @@ public class OrganicDialog extends javax.swing.JDialog {
         catch(Exception ex)
         {
             txtRDEP.setText("");
-        }
-
-        try
-        {
-            txtRMET.setText(FertilizerMethodList.GetAt(organicApp.RMET).Description);
-        }
-        catch(Exception ex)
-        {
-            txtRMET.setText("");
         }
     }
 

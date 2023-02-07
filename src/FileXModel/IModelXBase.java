@@ -2,9 +2,10 @@ package FileXModel;
 
 /**
  *
- * @author PCMIWS16
+ * @author Jazz
  */
 public interface IModelXBase {
+
     public String GetName();
     public void SetName(String name);
 }

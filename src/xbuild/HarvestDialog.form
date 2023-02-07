@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -36,44 +39,37 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="bnOK" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="bnCancel" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbHSTG" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="bnOK" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="bnCancel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtHBPC" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jXLabel7" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtHPC" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jXLabel6" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtHDATE" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="dpHDATE" min="-2" pref="117" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="226" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtHBPC" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jXLabel7" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtHPC" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jXLabel6" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtHSIZE" min="-2" pref="305" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnHSIZE" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtHCOM" min="-2" pref="305" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnHCOM" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtHSTG" min="-2" pref="305" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnHSTG" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="txtHDATE" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="dpHDATE" min="-2" pref="117" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="cbHCOM" alignment="1" max="32767" attributes="0"/>
+                  <Component id="cbHSIZE" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,21 +89,18 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHSTG" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnHSTG" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbHSTG" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHCOM" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnHCOM" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbHCOM" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHSIZE" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnHSIZE" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jXLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbHSIZE" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -153,18 +146,16 @@
       </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHDATE">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtHSTG">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtHCOM">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtHSIZE">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHPC">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format format="#0.0" subtype="-1" type="0"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHBPC">
@@ -172,6 +163,7 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format format="#0.0" subtype="-1" type="0"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bnOK">
@@ -188,30 +180,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnCancelActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnHSTG">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnHSTGActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnHCOM">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnHCOMActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnHSIZE">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnHSIZEActionPerformed"/>
       </Events>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
@@ -255,6 +223,12 @@
           <Connection code="Variables.getDateFormatString()" type="code"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="xbuild.Components.XDropdownTableComboBox" name="cbHSTG">
+    </Component>
+    <Component class="xbuild.Components.XDropdownTableComboBox" name="cbHCOM">
+    </Component>
+    <Component class="xbuild.Components.XDropdownTableComboBox" name="cbHSIZE">
     </Component>
   </SubComponents>
 </Form>

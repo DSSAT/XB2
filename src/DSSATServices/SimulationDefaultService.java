@@ -39,7 +39,7 @@ public class SimulationDefaultService {
                 
                 SimulationList sims = SimulationControlService.Read(fileName);
                 if(sims != null && sims.GetSize() > 0)
-                    SimulationControlDefaults.Update(exp, (Simulation)sims.GetAt(0));
+                    SimulationControlDefaults.Update(exp, (Simulation)sims.GetAtIndex(0));
             }
         } catch (Exception ex) {
             throw new Exception("Simulation Default parse failed");

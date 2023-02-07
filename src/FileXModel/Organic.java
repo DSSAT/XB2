@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Jazzy
  */
-public class Organic implements Cloneable, IModelXBase {
+public class Organic extends ModelXBase implements Cloneable {
 
     protected ArrayList<OrganicApplication>  organicApps = new ArrayList<>();
     public Float EFIR;

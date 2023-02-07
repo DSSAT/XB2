@@ -99,7 +99,6 @@ public class CultivarList {
 
     public static List<Cultivar> GetAt(Crop crop)
     {
-        //Vector v = new Vector();
         List<Cultivar> culs = new ArrayList<>();
         for(int i = 0;i < cultivars.size();i++)
         {
@@ -116,7 +115,6 @@ public class CultivarList {
     {
         Cultivar cul = null;
         try{
-            //Object[] object = wStation.values().toArray();
             cul = (Cultivar) cultivars.get(i);
         }
         catch(Exception ex) {}

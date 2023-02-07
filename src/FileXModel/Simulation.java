@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class Simulation implements Cloneable, IModelXBase {
+public class Simulation extends ModelXBase implements Cloneable {
     public String SNAME;
 
     public Simulation(String SNAME)

@@ -6,14 +6,12 @@ import Extensions.Variables;
 import FileXModel.Chemical;
 import FileXModel.ChemicalApplication;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.MenuDirection;
 import xbuild.Events.NewFrameEvent;
@@ -36,7 +34,7 @@ public class ChemicalFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase ch : FileX.chemicalList.GetAll()){
+        for(ModelXBase ch : FileX.chemicalList.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.chem = (Chemical)ch;
@@ -49,9 +47,41 @@ public class ChemicalFrame extends IXInternalFrame {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(chem, "CHNAME", chem.CHNAME);
         
-        EventQueue.invokeLater(() -> {            
-            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\irrigation2.jpg");
+        rdDaysAfterPlanting.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+            rdDaysAfterPlantingStateChanged(evt);
         });
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
+        });
+        
+        setImage(imagePanel, "irrigation2.jpg");
+    }
+    
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
+        if(rdDaysAfterPlanting.isSelected())
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("Days After Planting");
+            if(chem.GetApps() != null){
+                chem.GetApps().forEach(h -> {
+                    h.CDATE = null;
+                });
+            }
+        }
+        else
+        {
+            TableColumn col = jXTable1.getColumn(0);
+            col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
+            if(chem.GetApps() != null){
+                chem.GetApps().forEach(harvest -> {
+                    harvest.CDAY = null;
+                });
+            }
+        }        
     }
     
     /**
@@ -65,7 +95,7 @@ public class ChemicalFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         Integer level = 0;
-        for (IModelXBase f : FileX.chemicalList.GetAll()) {
+        for (ModelXBase f : FileX.chemicalList.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
@@ -87,17 +117,34 @@ public class ChemicalFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
+        jXPanel1 = new org.jdesktop.swingx.JXPanel();
         bnAddApplication = new javax.swing.JButton();
         bnDeleteApplication = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
-        lblLevel = new org.jdesktop.swingx.JXLabel();
-        txtDescription = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
+        jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        rdDaysAfterPlanting = new javax.swing.JRadioButton();
+        rdReportedDates = new javax.swing.JRadioButton();
+        lblLevel1 = new org.jdesktop.swingx.JXLabel();
         bnPrevious = new javax.swing.JButton();
         bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
+
+        jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         bnAddApplication.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
         bnAddApplication.setText("Add Application");
@@ -124,7 +171,7 @@ public class ChemicalFrame extends IXInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -145,16 +192,65 @@ public class ChemicalFrame extends IXInternalFrame {
         });
         jScrollPane1.setViewportView(jXTable1);
 
-        lblLevel.setText("Level");
-        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-
-        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDescriptionFocusLost(evt);
-            }
-        });
-
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
+
+        jXLabel2.setText("Management");
+
+        buttonGroup1.add(rdDaysAfterPlanting);
+        rdDaysAfterPlanting.setSelected(true);
+        rdDaysAfterPlanting.setText("Days After Planting");
+
+        buttonGroup1.add(rdReportedDates);
+        rdReportedDates.setText("On Reported Dates");
+
+        javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
+        jXPanel1.setLayout(jXPanel1Layout);
+        jXPanel1Layout.setHorizontalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel1Layout.createSequentialGroup()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jXPanel1Layout.createSequentialGroup()
+                                .addComponent(bnAddApplication)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bnDeleteApplication))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdDaysAfterPlanting)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdReportedDates)))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jXPanel1Layout.setVerticalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdDaysAfterPlanting)
+                        .addComponent(rdReportedDates)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bnAddApplication)
+                            .addComponent(bnDeleteApplication))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        lblLevel1.setText("Chemical Applications");
+        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         bnPrevious.setText("PREVIOUS");
         bnPrevious.addActionListener(new java.awt.event.ActionListener() {
@@ -178,23 +274,16 @@ public class ChemicalFrame extends IXInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(bnAddApplication)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bnDeleteApplication)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(bnPrevious)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(bnNext))
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,19 +293,14 @@ public class ChemicalFrame extends IXInternalFrame {
                     .addComponent(bnPrevious)
                     .addComponent(bnNext))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bnAddApplication)
-                            .addComponent(bnDeleteApplication))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,7 +315,7 @@ public class ChemicalFrame extends IXInternalFrame {
             chemApp = new ChemicalApplication();
         }
 
-        final ChemicalDialog chemDialog = new ChemicalDialog(null, true, chemApp);
+        final ChemicalDialog chemDialog = new ChemicalDialog(null, true, rdDaysAfterPlanting.isSelected(), chemApp);
         chemDialog.show();
 
         chemDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -261,12 +345,19 @@ public class ChemicalFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         chem.RemoveAt(nRow);
+        
+        EventQueue.invokeLater(() -> {
+            rdDaysAfterPlantingStateChanged(null);
+            
+            rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
+            rdReportedDates.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
+        });
     }//GEN-LAST:event_bnDeleteApplicationActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if(evt.getClickCount() == 2)
         {
-            final ChemicalDialog chemDialog = new ChemicalDialog(null, true, chem.GetApp(jXTable1.getSelectedRow()));
+            final ChemicalDialog chemDialog = new ChemicalDialog(null, true, rdDaysAfterPlanting.isSelected(), chem.GetApp(jXTable1.getSelectedRow()));
             chemDialog.show();
 
             chemDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -275,9 +366,9 @@ public class ChemicalFrame extends IXInternalFrame {
                     ChemicalApplication chemApp = chemDialog.GetData();
                     if(chemApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-                        Vector vector = SetRow(chemApp);
-                        for(int n = 0;n < vector.size();n++)
-                        model.setValueAt(vector.get(n), jXTable1.getSelectedRow(), n);
+                        Object[] row = SetRow(chemApp);
+                        for (int n = 0; n < row.length; n++)
+                            model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
                     }
                     chemDialog.SetNull();
                 }
@@ -319,59 +410,67 @@ public class ChemicalFrame extends IXInternalFrame {
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
         for(int i = 0;i < chem.GetSize();i++)
         {
+            if(chem.GetApp(i).CDATE != null){
+                rdReportedDates.setSelected(true);
+            }else{
+                rdDaysAfterPlanting.setSelected(true);
+            }
             model.addRow(SetRow(chem.GetApp(i)));
         }
     }
 
-    private Vector SetRow(ChemicalApplication chemApp) {
-
-        Vector vector = new Vector();
+    private Object[] SetRow(ChemicalApplication chemApp) {
+        Object day;
+        Object CHCOD;
+        Object CHAMT;
+        Object CHME;
+        Object CHDEP;
+        Object CHT;
         try
         {
-            Locale l = new Locale("en", "US");
-            vector.addElement(Variables.getDateFormat().format(chemApp.CDATE));
+            day = Variables.getDateFormat().format(chemApp.CDATE);
         }
         catch(Exception ex)
         {
-            vector.add("");
+            day = chemApp.CDAY.toString();
         }
 
         try
         {
-            vector.add(ChemicalMaterialList.GetAt(chemApp.CHCOD).Description);
+            CHCOD = ChemicalMaterialList.GetAt(chemApp.CHCOD).Description;
         }
         catch(Exception ex) {
-            vector.add("");
+            CHCOD = "";
         }
         try
         {
-            vector.add(chemApp.CHAMT);
+            CHAMT = chemApp.CHAMT;
         }
         catch(Exception ex) {
-            vector.add("");
+            CHAMT = "";
         }
         try
         {
-            vector.add(FertilizerMethodList.GetAt(chemApp.CHME).Description);
+            CHME = FertilizerMethodList.GetAt(chemApp.CHME).Description;
         }
         catch(Exception ex) {
-            vector.add("");
+            CHME = "";
         }
         try
         {
-            vector.add(chemApp.CHDEP);
+            CHDEP = chemApp.CHDEP;
         }
         catch(Exception ex) {
-            vector.add("");
+            CHDEP = "";
         }
         try
         {
-            vector.add(chemApp.CHT);
+            CHT = chemApp.CHT;
         }
         catch(Exception ex) {
-            vector.add("");
+            CHT = "";
         }
-        return vector;
+        return new Object[]{day, CHCOD, CHAMT, CHME, CHDEP, CHT};
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -379,10 +478,16 @@ public class ChemicalFrame extends IXInternalFrame {
     private javax.swing.JButton bnDeleteApplication;
     private javax.swing.JButton bnNext;
     private javax.swing.JButton bnPrevious;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.jdesktop.swingx.JXLabel jXLabel2;
+    private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private org.jdesktop.swingx.JXLabel lblLevel1;
+    private javax.swing.JRadioButton rdDaysAfterPlanting;
+    private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }

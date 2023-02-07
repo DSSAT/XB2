@@ -5,8 +5,6 @@
 
 package FileXModel;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Jazzy
@@ -14,14 +12,15 @@ import java.util.ArrayList;
 public class TillageList extends ManagementList {
 
     @Override
-    public void AddNew(String name)
-    {
-        modelList.add(new Tillage(name));
+    public ModelXBase AddNew(String name) {
+        Tillage model = new Tillage(name);
+        modelList.add(model);
+        return model;
     }
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Tillage source = (Tillage)GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Tillage source = (Tillage) modelList.get(sourceIndex);
         Tillage newSource = null;
         
         try{            

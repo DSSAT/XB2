@@ -38,7 +38,7 @@ public class FileXService {
         FileX.SetAbsoluteFileName(fileName.getAbsolutePath());
         
         if(FileX.simulationList != null && FileX.simulationList.GetSize() > 0){
-            Simulation s = (Simulation)FileX.simulationList.GetAt(0);
+            Simulation s = (Simulation)FileX.simulationList.GetAtIndex(0);
             switch (s.WTHER) {
                 case "M":
                     FileX.wstaType = WstaType.WTH;
@@ -51,7 +51,7 @@ public class FileXService {
                     break;
             }
             
-            for(IModelXBase x : FileX.fieldList.GetAll()){
+            for(ModelXBase x : FileX.fieldList.GetAll()){
                 FieldDetail f = (FieldDetail)x;
                 WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
                 if(w == null && !f.WSTA.equals("-99")){
@@ -67,11 +67,12 @@ public class FileXService {
     }
     
     public static void SaveFile(File file) {
-        FileWriter writer = null;
+        FileWriter writer;
         try {
             writer = new FileWriter(file);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return;
         }
         PrintWriter pw = new PrintWriter(writer);
 

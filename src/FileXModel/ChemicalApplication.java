@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  */
 public class ChemicalApplication implements Cloneable {
     public Date CDATE;
+    public Integer CDAY;
     public String CHCOD;
     public Float CHAMT;
     public String CHME;
@@ -23,6 +24,10 @@ public class ChemicalApplication implements Cloneable {
     
     public Date getOrder(){
         return CDATE;
+    }
+    
+    public Integer getOrderDay(){
+        return CDAY;
     }
     
     public ChemicalApplication Clone(){
