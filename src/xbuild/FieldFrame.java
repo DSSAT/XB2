@@ -66,8 +66,8 @@ public class FieldFrame extends IXInternalFrame {
 
         txtID_FIELD.setDocument(new LimitDocument(8));
 
-        cbWSTA.setInit(null, "WSTA", field.WSTA, WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
-        //cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+        cbWSTA.setInit(null, "WSTA", field.WSTA.substring(0, 4), WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+        cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
 
         cbSoil.setInit(null, "ID_SOIL", field.ID_SOIL, SoilList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 400)}, "Code");
         cbSoilCode.setInit(field, "ID_SOIL", field.ID_SOIL, loadSoilCode(field.ID_SOIL));
@@ -858,12 +858,14 @@ public class FieldFrame extends IXInternalFrame {
     private List<String> loadWSTACode(String wCode) {
         ArrayList<String> items = new ArrayList<>();
 
-        WeatherStation wstaSelected = WeatherStationList.GetAt(wCode, FileX.wstaType);
+        WeatherStation wstaSelected = WeatherStationList.GetAt(wCode.substring(0, 4), FileX.wstaType);
 
         if (wstaSelected != null && FileX.wstaType != null) {
             for (WeatherStation wsta : WeatherStationList.GetAll(FileX.wstaType)) {
                 if (wstaSelected.StationName.equals(wsta.StationName)) {
-                    items.add(wsta.Code);
+                    for(String fullCode : wsta.FullCode){
+                        items.add(fullCode);
+                    }
                 }
             }
         }

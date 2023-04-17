@@ -36,8 +36,10 @@ public class WeatherRepository extends DSSATRepositoryBase {
             String fullName = file.getName();
             String code = fullName.substring(0, 4);
             String number = "";
+            String fullCode = "";
             if (fullName.length() > 4) {
                 number = file.getName().substring(6, 8);
+                fullCode = file.getName().substring(0, 8);
             }
 
             try ( FileReader fileRead = new FileReader(file);  BufferedReader wReader = new BufferedReader(fileRead)) {
@@ -62,22 +64,22 @@ public class WeatherRepository extends DSSATRepositoryBase {
                     } else if(strWRead.startsWith("@YRDAY")){
                         isR = true;
                     } else if (is2) {
-                        wsta += ":" + strWRead.substring(0, 2) + ":" + number;
+                        wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode;
                         weatherList.add(wsta);
                         break;
                     } else if (is4) {
-                        wsta += ":" + strWRead.substring(0, 4) + ":" + number;
+                        wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode;
                         weatherList.add(wsta);
                         break;
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
-                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number;
+                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode;
                         weatherList.add(wsta);
                         break;
                     }
                     else if(isR){
                         number = fullName.substring(6, 8).trim();
-                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number;
+                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode;
                         weatherList.add(wsta);
                         break;
                     }

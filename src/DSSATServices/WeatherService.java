@@ -35,7 +35,7 @@ public class WeatherService extends DSSATServiceBase {
                 for (String w : weatherList) {
                     WeatherStation wsta = new WeatherStation();
                     String tmp[] = w.split(":");
-                    if (tmp.length == 4) {
+                    if (tmp.length == 5) {
                         wsta.Code = tmp[0];
                         wsta.StationName = tmp[1];
                         wsta.Begin = Integer.parseInt(tmp[2]);
@@ -50,8 +50,11 @@ public class WeatherService extends DSSATServiceBase {
 
                         WeatherStation wstaExist = WeatherStationList.GetAt(wsta.Code, type);
                         if (wstaExist == null) {
+                            wsta.FullCode.add(wsta.Code);
+                            wsta.FullCode.add(tmp[4]);
                             WeatherStationList.AddNew(wsta);
                         } else {
+                            wstaExist.FullCode.add(tmp[4]);
                             wstaExist.Begin = Math.min(wsta.Begin, wstaExist.Begin);
                             wstaExist.Number = Math.max(wstaExist.Begin + wstaExist.Number - wstaExist.Begin, wsta.Begin + wsta.Number - wstaExist.Begin);
                         }

@@ -51,15 +51,16 @@ public class FileXService {
                     break;
             }
             
-            for(IModelXBase x : FileX.fieldList.GetAll()){
-                FieldDetail f = (FieldDetail)x;
-                WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
-                if(w == null && !f.WSTA.equals("-99")){
-                    WeatherStation w1 = WeatherStationList.GetAt(f.WSTA.substring(0, 4), FileX.wstaType);
-                    if(w1 != null)
-                        f.WSTA = w1.Code;
-                }
-            }
+//            for(ModelXBase x : FileX.fieldList.GetAll()){
+//                FieldDetail f = (FieldDetail)x;
+//                WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
+//                if(w == null && !f.WSTA.equals("-99")){
+//                    WeatherStation w1 = WeatherStationList.GetAt(f.WSTA.substring(0, 4), FileX.wstaType);
+//                    if(w1 != null){
+//                        f.WSTA = w1.Code;
+//                    }
+//                }
+//            }
         }
         
         new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
