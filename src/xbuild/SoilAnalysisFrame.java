@@ -203,7 +203,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align='center'>Depth<br> base of layer<br> cm</p></html>", "<html><p align='center'>Bulk density<br>moist<br>g cm<sup>3</sup></p></html>", "<html><p align='center'>Organic carbon<br>%</p></html>", "<html><p align='center'>Total nitrogen<br>%</p></html>", "<html><p align='center'>pH<br>in<br>Water</p></html>", "<html><p align='center'>pH<br>in<br>Buffer</p></html>", "<html><p align='center'>Phosphorus<br>extractable<br>mg kg-1 </p></html>", "<html><p align='center'>Potassium<br>exchangeable<br>cmol</p></html>", "<html><p align='center'>Stable<br>Organic<br>Carbon %</p></html>"
+                "<html><p align='center'>Depth<br> base of layer<br> cm</p></html>", "<html><p align='center'>Bulk density<br>moist<br>g/cm<sup>3</sup></p></html>", "<html><p align='center'>Organic carbon<br>%</p></html>", "<html><p align='center'>Total nitrogen<br>%</p></html>", "<html><p align='center'>pH<br>in<br>Water</p></html>", "<html><p align='center'>pH<br>in<br>Buffer</p></html>", "<html><p align='center'>Phosphorus<br>extractable<br>mg/kg </p></html>", "<html><p align='center'>Potassium<br>exchangeable<br>cmol</p></html>", "<html><p align='center'>Stable<br>Organic<br>Carbon %</p></html>"
             }
         ) {
             Class[] types = new Class [] {
@@ -291,7 +291,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))

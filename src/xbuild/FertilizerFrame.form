@@ -36,27 +36,24 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="882" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="txtDescription" min="-2" pref="738" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jXLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdDaysAfterPlanting" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="rdReportedDates" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="txtDescription" min="-2" pref="738" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -170,10 +167,10 @@
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Fertilizer&lt;br&gt;Material&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Fertilizer&lt;br&gt;Applications&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Depth&lt;br&gt;cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;N&lt;br&gt;kg ha-1&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;N&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;P&lt;br&gt;kg ha-1&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;K&lt;br&gt;kg ha-1&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Ca&lt;br&gt;kg ha-1&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;K&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Ca&lt;br&gt;kg/ha&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Other&lt;br&gt;elements&lt;br&gt;kg ha-1&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt; &lt;table width=&apos;100%&apos;&gt;&lt;tr&gt;&lt;td align=&apos;center&apos;&gt; Other&lt;br&gt;Element&lt;br&gt;Code&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;/html&gt;" type="java.lang.Object"/>
               </Table>
