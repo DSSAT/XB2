@@ -261,7 +261,7 @@
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="cm-3"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;cm&lt;sup&gt;3&lt;/sup&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel12">
@@ -271,12 +271,12 @@
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="mg kg-1"/>
+        <Property name="text" type="java.lang.String" value="mg/kg"/>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="cmol kg-1"/>
+        <Property name="text" type="java.lang.String" value="cmol/kg"/>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">

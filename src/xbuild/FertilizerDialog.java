@@ -148,17 +148,17 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
         jXLabel9.setText("Other Element Code");
 
-        jXLabel10.setText("kg ha-1");
+        jXLabel10.setText("kg/ha");
 
         jXLabel11.setText("cm");
 
-        jXLabel12.setText("kg ha-1");
+        jXLabel12.setText("kg/ha");
 
-        jXLabel13.setText("kg ha-1");
+        jXLabel13.setText("kg/ha");
 
-        jXLabel14.setText("kg ha-1");
+        jXLabel14.setText("kg/ha");
 
-        jXLabel15.setText("kg ha-1");
+        jXLabel15.setText("kg/ha");
 
         bnCancel.setText("Cancel");
         bnCancel.addActionListener(new java.awt.event.ActionListener() {

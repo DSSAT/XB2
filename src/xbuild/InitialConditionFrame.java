@@ -531,7 +531,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm3 cm-3</p></html>", "<html><p align='center'>Ammonium (NH4)<br>g[N] Mg-1 [soil]</p></html>", "<html><p align='center'>Nitrate (NO3)<br>g[N] Mg-1 [soil]</p></html>"
+                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm3/cm3</p></html>", "<html><p align='center'>Ammonium (NH4)<br>g[N]/Mg [soil]</p></html>", "<html><p align='center'>Nitrate (NO3)<br>g[N]/Mg [soil]</p></html>"
             }
         ) {
             Class[] types = new Class [] {

@@ -33,7 +33,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtDescription" min="-2" pref="533" max="-2" attributes="0"/>
@@ -279,12 +278,12 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="9" rowCount="0">
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Depth&lt;br&gt; base of layer&lt;br&gt; cm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Bulk density&lt;br&gt;moist&lt;br&gt;g cm&lt;sup&gt;3&lt;/sup&gt;&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Bulk density&lt;br&gt;moist&lt;br&gt;g/cm&lt;sup&gt;3&lt;/sup&gt;&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Organic carbon&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Total nitrogen&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;pH&lt;br&gt;in&lt;br&gt;Water&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;pH&lt;br&gt;in&lt;br&gt;Buffer&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
-                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Phosphorus&lt;br&gt;extractable&lt;br&gt;mg kg-1 &lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
+                    <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Phosphorus&lt;br&gt;extractable&lt;br&gt;mg/kg &lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Potassium&lt;br&gt;exchangeable&lt;br&gt;cmol&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                     <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Stable&lt;br&gt;Organic&lt;br&gt;Carbon %&lt;/p&gt;&lt;/html&gt;" type="java.lang.Float"/>
                   </Table>

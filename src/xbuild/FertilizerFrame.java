@@ -142,7 +142,7 @@ public class FertilizerFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "Day", "<html><p align='center'>Fertilizer<br>Material</p></html>", "<html><p align='center'>Fertilizer<br>Applications</p></html>", "<html><p align='center'>Depth<br>cm</p></html>", "<html><p align='center'>N<br>kg ha-1</p></html>", "<html><p align='center'>P<br>kg ha-1</p></html>", "<html><p align='center'>K<br>kg ha-1</p></html>", "<html><p align='center'>Ca<br>kg ha-1</p></html>", "<html><p align='center'>Other<br>elements<br>kg ha-1</p></html>", "<html> <table width='100%'><tr><td align='center'> Other<br>Element<br>Code</td></tr></table> </html>"
+                "Day", "<html><p align='center'>Fertilizer<br>Material</p></html>", "<html><p align='center'>Fertilizer<br>Applications</p></html>", "<html><p align='center'>Depth<br>cm</p></html>", "<html><p align='center'>N<br>kg/ha</p></html>", "<html><p align='center'>P<br>kg ha-1</p></html>", "<html><p align='center'>K<br>kg/ha</p></html>", "<html><p align='center'>Ca<br>kg/ha</p></html>", "<html><p align='center'>Other<br>elements<br>kg ha-1</p></html>", "<html> <table width='100%'><tr><td align='center'> Other<br>Element<br>Code</td></tr></table> </html>"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -195,24 +195,22 @@ public class FertilizerFrame extends IXInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(bnAddLayer)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bnDeleteLayer))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(rdDaysAfterPlanting)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rdReportedDates))
-                                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(bnAddLayer)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bnDeleteLayer))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rdDaysAfterPlanting)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(rdReportedDates))
+                                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
