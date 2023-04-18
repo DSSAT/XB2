@@ -25,8 +25,6 @@ public class SimulationRepository extends DSSATRepositoryBase {
     public ArrayList<String> Parse() {
         ArrayList<String> cropModel = new ArrayList<>();
 
-        System.out.println("Start Read Simulation Code : " + Variables.getDateFormatWithTime().format(new Date()));
-
         try {
             FileReader file = new FileReader(rootPath + "\\Simulation.cde");
 
