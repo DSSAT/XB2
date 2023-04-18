@@ -13,6 +13,7 @@ package xbuild;
 
 import DSSATServices.*;
 import Extensions.Icons;
+import Extensions.Variables;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -46,6 +47,7 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
             //int progress = 0;
             //Initialize progress property.
             setProgress(0);
+            Variables.setLocale(getLocale());
             
             ArrayList<DSSATServiceBase> parseList = new ArrayList<>();
             
@@ -70,7 +72,6 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
             parseList.add(new SoilService(dir));
             parseList.add(new WeatherService(dir));
 
-            
             try{
                 taskOutput.append("Loading DSSAT profile....\n");
                 DSSATProfileService dssatProfileService = new DSSATProfileService(version, dir);

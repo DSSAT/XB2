@@ -29,7 +29,6 @@ public class DSSATProfileRepository {
         
         // Set File to Read                
         FileReader file = null;
-        System.out.println("Start Read File DSSATPRO." + version + " : " + Variables.getDateFormatWithTime().format(new Date()));
             
         // <editor-fold defaultstate="collapsed" desc="DSSATPRO.vxx">
         try {

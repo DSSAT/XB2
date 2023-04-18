@@ -51,13 +51,17 @@ public class Variables {
     }
     
     private static Locale getLocale() {
-        if (locale == null) {
-            locale = System.getProperty("user.language.format") == null
-                    ? Locale.getDefault()
-                    : new Locale(System.getProperty("user.language.format"), System.getProperty("user.country.format"));
-        }
+//        if (locale == null) {
+//            locale = System.getProperty("user.language.format") == null
+//                    ? Locale.getDefault()
+//                    : new Locale(System.getProperty("user.language.format"), System.getProperty("user.country.format"));
+//        }
 
         return locale;
+    }
+    
+    public static void setLocale(Locale locale){
+        Variables.locale = locale;
     }
     
     public static String getDateFormatString(){

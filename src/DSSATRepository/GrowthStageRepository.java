@@ -24,8 +24,6 @@ public class GrowthStageRepository extends DSSATRepositoryBase {
     public ArrayList<String> Parse() {
         ArrayList<String> gStage = new ArrayList<String>() {};
 
-        System.out.println("Start Read Growth Stage : " + Variables.getDateFormatWithTime().format(new Date()));
-
         try {
             FileReader file = new FileReader(rootPath + "\\GRSTAGE.cde");
 

@@ -23,8 +23,6 @@ public class DrainageRepository extends DSSATRepositoryBase {
     @Override
     public ArrayList<String> Parse() {
         ArrayList<String> drainList = new ArrayList<String>() {};
-        
-        System.out.println("Start Read File Detail.cde : " + Variables.getDateFormatWithTime().format(new Date()));
 
         try {
             FileReader file = new FileReader(rootPath + "\\DETAIL.CDE");
