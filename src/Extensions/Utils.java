@@ -32,7 +32,7 @@ public class Utils {
 
             String tmp = value.substring(start, stop).trim();
 
-            if (!tmp.isBlank() && !tmp.equals("-99")) {
+            if (!tmp.isBlank()) {
                 val = Float.parseFloat(tmp);
             }
         }
