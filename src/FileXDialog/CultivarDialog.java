@@ -116,7 +116,8 @@ public class CultivarDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(level - 1);
+        return cul.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -129,9 +130,9 @@ public class CultivarDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.cultivars.GetSize();i++)
         {
-            Cultivar cul = (Cultivar) FileX.cultivars.GetAt(i);
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(i);
             Object object[] = new Object[3];
-            object[0] = i + 1;
+            object[0] = cul.GetLevel();
             try {
                 object[1] = CropList.GetAt(cul.CR).CropName;
             } catch (Exception e) {

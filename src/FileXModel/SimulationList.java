@@ -10,15 +10,15 @@ package FileXModel;
  */
 public class SimulationList extends ManagementList {   
     @Override
-    public void AddNew(String name)
-    {
-        modelList.add(new Simulation(name));
+    public ModelXBase AddNew(String name) {
+        Simulation model = new Simulation(name);
+        modelList.add(model);
+        return model;
     }
-
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Simulation source = (Simulation) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Simulation source = (Simulation) modelList.get(sourceIndex);
         Simulation newSim = null;
         
         try{

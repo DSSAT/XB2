@@ -11,8 +11,8 @@ package FileXModel;
  */
 public class PlantingList extends ManagementList {
    
-    public IModelXBase Clone(String sourceName, String newName){
-        Planting source = (Planting)GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Planting source = (Planting) modelList.get(sourceIndex);
         Planting newSource = null;
         
         try{
@@ -27,7 +27,9 @@ public class PlantingList extends ManagementList {
     }
 
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Planting(name));
+    public ModelXBase AddNew(String name) {
+        Planting model = new Planting(name);
+        modelList.add(model);
+        return model;
     }
 }

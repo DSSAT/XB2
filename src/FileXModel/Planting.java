@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class Planting implements Cloneable, IModelXBase {
+public class Planting extends ModelXBase implements Cloneable {
     public Planting(String PLNAME)
     {
         this.PLNAME = PLNAME;

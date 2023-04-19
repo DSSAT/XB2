@@ -79,22 +79,31 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtSABL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSABL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSADM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSADM.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSAOC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSAOC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSANI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSANI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSAPHW.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSAPHW.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSAPHB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSAPHB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSAKE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSAKE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSAPX.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtSAPX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtSASC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSASC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Depth, Base of Layer");
 

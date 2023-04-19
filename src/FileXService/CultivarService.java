@@ -38,6 +38,8 @@ public class CultivarService {
                     }
                     //@C CR INGENO CNAME
                     Cultivar cul = new Cultivar();
+                    Integer level = Integer.parseInt(strRead.substring(0, 2).trim());
+                    cul.SetLevel(level);
                     cul.CR = Utils.GetString(cultivarHeader, strRead, "CR", 2);
                     cul.INGENO = Utils.GetString(cultivarHeader, strRead, "INGENO", 6);
                     cul.CNAME = Utils.GetString(cultivarHeader, strRead, "CNAME", strRead.length() - 13);
@@ -56,8 +58,8 @@ public class CultivarService {
             pw.println("*CULTIVARS");
             pw.println("@C CR INGENO CNAME");
             for (int i = 0; i < cultivars.GetSize(); i++) {
-                Cultivar cul = (Cultivar) cultivars.GetAt(i);
-                Integer level = i + 1;
+                Cultivar cul = (Cultivar) cultivars.GetAtIndex(i);
+                Integer level = cul.GetLevel();
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadLeft(cul.CR, 2, ' '));
                 pw.print(" " + Utils.PadLeft(cul.INGENO, 6, ' '));

@@ -114,7 +114,8 @@ public class HarvestlDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        Harvest harvest = (Harvest) FileX.harvestList.GetAtIndex(level - 1);
+        return harvest.GetLevel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -127,9 +128,9 @@ public class HarvestlDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.harvestList.GetSize();i++)
         {
-            Harvest harvest = (Harvest) FileX.harvestList.GetAt(i);
+            Harvest harvest = (Harvest) FileX.harvestList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = harvest.GetLevel();
             try {
                 object[1] = harvest.HNAME;
             } catch (Exception e) {

@@ -12,14 +12,15 @@ package FileXModel;
 public class SoilAnalysisList extends ManagementList {   
        
     @Override
-    public void AddNew(String sName)
-    {
-        modelList.add(new SoilAnalysis(sName));
+    public ModelXBase AddNew(String name) {
+        SoilAnalysis model = new SoilAnalysis(name);
+        modelList.add(model);
+        return model;
     }
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        SoilAnalysis source = (SoilAnalysis)GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        SoilAnalysis source = (SoilAnalysis) modelList.get(sourceIndex);
         SoilAnalysis newSource = null;
         
         try{            

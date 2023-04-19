@@ -5,7 +5,7 @@ import Extensions.Variables;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
 import FileXModel.FileX;
-import FileXModel.IModelXBase;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.FocusListener;
@@ -33,7 +33,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
         initComponents();
         
         level = 0;
-        for(IModelXBase env : FileX.environmentals.GetAll()){
+        for(ModelXBase env : FileX.environmentals.GetAll()){
             level++;
             if(getLevel(nodeName) == level){
                 this.environment = (Environmental)env;
@@ -46,9 +46,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(environment, "ENVNAME", environment.ENVNAME);
         
-        EventQueue.invokeLater(() -> {            
-            setImage(imagePanel, setup.GetDSSATPath() + "\\Tools\\XBuild\\Env2.jpg");
-        });
+        setImage(imagePanel, "Env2.jpg");
     }
     
     /**
@@ -62,7 +60,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
             txtDescription.removeFocusListener(li);
         
         level = 0;
-        for (IModelXBase f : FileX.environmentals.GetAll()) {
+        for (ModelXBase f : FileX.environmentals.GetAll()) {
             level++;
             if(getLevel(name) == level){                
                 lblLevel.setText("Level " + level.toString());
@@ -89,11 +87,12 @@ public class EnvironmentalFrame extends IXInternalFrame {
         jXTable2 = new org.jdesktop.swingx.JXTable();
         bnAddLayer = new javax.swing.JButton();
         bnDeleteLayer = new javax.swing.JButton();
+        imagePanel = new javax.swing.JLabel();
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
-        imagePanel = new javax.swing.JLabel();
-        bnPrevious = new javax.swing.JButton();
+        lblLevel1 = new org.jdesktop.swingx.JXLabel();
         bnNext = new javax.swing.JButton();
+        bnPrevious = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -139,16 +138,22 @@ public class EnvironmentalFrame extends IXInternalFrame {
             }
         });
 
+        imagePanel.setBackground(new java.awt.Color(153, 153, 153));
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bnAddLayer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bnDeleteLayer))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addComponent(bnAddLayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnDeleteLayer))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +162,11 @@ public class EnvironmentalFrame extends IXInternalFrame {
                     .addComponent(bnDeleteLayer)
                     .addComponent(bnAddLayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jXPanel1Layout.createSequentialGroup()
+                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lblLevel.setText("Level");
@@ -169,19 +178,20 @@ public class EnvironmentalFrame extends IXInternalFrame {
             }
         });
 
-        imagePanel.setBackground(new java.awt.Color(153, 153, 153));
-
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
+        lblLevel1.setText("Environmental Modifications");
+        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         bnNext.setText("NEXT");
         bnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnNextActionPerformed(evt);
+            }
+        });
+
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
             }
         });
 
@@ -192,20 +202,17 @@ public class EnvironmentalFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bnPrevious)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnNext)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,15 +222,14 @@ public class EnvironmentalFrame extends IXInternalFrame {
                     .addComponent(bnPrevious)
                     .addComponent(bnNext))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,9 +247,9 @@ public class EnvironmentalFrame extends IXInternalFrame {
                     EnvironmentApplication envApp = appDialog.GetData();
                     if(envApp != null){
                         DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
-                        Object[] vector = SetRow(envApp);
-                        for (int n = 0; n < vector.length; n++)
-                            model.setValueAt(vector[n], jXTable2.getSelectedRow(), n);
+                        Object[] row = SetRow(envApp);
+                        for (int n = 0; n < row.length; n++)
+                            model.setValueAt(row[n], jXTable2.getSelectedRow(), n);
                     }
                     appDialog.SetNull();
                 }
@@ -261,7 +267,6 @@ public class EnvironmentalFrame extends IXInternalFrame {
             }
         }
 
-        //jXTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jXTable2.setRowSelectionAllowed(true);
     }//GEN-LAST:event_jXTable2MouseClicked
 
@@ -324,56 +329,55 @@ public class EnvironmentalFrame extends IXInternalFrame {
     }//GEN-LAST:event_bnNextActionPerformed
 
     private Object[] SetRow(EnvironmentApplication envApp) {               
-        ArrayList<Object> vector = new ArrayList<>();
+        ArrayList<Object> row = new ArrayList<>();
         
-        //DateFormat df = DateFormat.getDateInstance(DateFormat., l);
         try {
-            vector.add(Variables.getDateFormat().format(envApp.ODATE));
+            row.add(Variables.getDateFormat().format(envApp.ODATE));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
 
         try {
-            vector.add(SetText(envApp.EDAY.toString(), envApp.EDAY_Fact.Code, jXTable2.getCellRect(1, 1, true)));
+            row.add(SetText(envApp.EDAY.toString(), envApp.EDAY_Fact.Code, jXTable2.getCellRect(1, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.ERAD), envApp.ERAD_Fact.Code, jXTable2.getCellRect(2, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.ERAD), envApp.ERAD_Fact.Code, jXTable2.getCellRect(2, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.EMAX), envApp.EMAX_Fact.Code, jXTable2.getCellRect(3, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.EMAX), envApp.EMAX_Fact.Code, jXTable2.getCellRect(3, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.EMIN), envApp.EMIN_Fact.Code, jXTable2.getCellRect(4, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.EMIN), envApp.EMIN_Fact.Code, jXTable2.getCellRect(4, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.ERAIN), envApp.ERAIN_Fact.Code, jXTable2.getCellRect(5, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.ERAIN), envApp.ERAIN_Fact.Code, jXTable2.getCellRect(5, 1, true)));
         } catch (Exception e) {
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.ECO2), envApp.ECO2_Fact.Code, jXTable2.getCellRect(6, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.ECO2), envApp.ECO2_Fact.Code, jXTable2.getCellRect(6, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.EDEW), envApp.EDEW_Fact.Code, jXTable2.getCellRect(7, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.EDEW), envApp.EDEW_Fact.Code, jXTable2.getCellRect(7, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
         try {
-            vector.add(SetText(Utils.FloatToString(envApp.EWIND), envApp.EWIND_Fact.Code, jXTable2.getCellRect(8, 1, true)));
+            row.add(SetText(Utils.FloatToString(envApp.EWIND), envApp.EWIND_Fact.Code, jXTable2.getCellRect(8, 1, true)));
         } catch (Exception e) {
-            vector.add("");
+            row.add("");
         }
 
-        return vector.toArray();
+        return row.toArray();
     }
     
     private String SetText(String Val, String Fact, Rectangle rec){
@@ -386,22 +390,6 @@ public class EnvironmentalFrame extends IXInternalFrame {
         for(int n = 0;n < environment.GetSize();n++)
         {
             EnvironmentApplication envApp = environment.GetApp(n);
-            /*Vector vector = new Vector();
-            Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", l);
-
-            //DateFormat df = DateFormat.getDateInstance(DateFormat., l);
-            vector.addElement(df.format(envApp.ODATE));
-            vector.add(SetText(envApp.EDAY.toString(), envApp.EDAY_Fact.Code, jXTable2.getCellRect(1, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.ERAD), envApp.ERAD_Fact.Code, jXTable2.getCellRect(2, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.EMAX), envApp.EMAX_Fact.Code, jXTable2.getCellRect(3, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.EMIN), envApp.EMIN_Fact.Code, jXTable2.getCellRect(4, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.ERAIN), envApp.ERAIN_Fact.Code, jXTable2.getCellRect(5, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.ECO2), envApp.ECO2_Fact.Code, jXTable2.getCellRect(6, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.EDEW), envApp.EDEW_Fact.Code, jXTable2.getCellRect(7, 1, true)));
-            vector.add(SetText(Tools.FloatToString(envApp.EWIND), envApp.EWIND_Fact.Code, jXTable2.getCellRect(8, 1, true)));
-             *
-             */
             model.addRow(SetRow(envApp));
         }
     }
@@ -416,6 +404,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXTable jXTable2;
     private org.jdesktop.swingx.JXLabel lblLevel;
+    private org.jdesktop.swingx.JXLabel lblLevel1;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }

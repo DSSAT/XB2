@@ -50,27 +50,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jXPanel2" min="-2" pref="924" max="-2" attributes="1"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+              <Component id="bnPrevious" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="bnNext" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jXPanel2" alignment="0" pref="913" max="32767" attributes="1"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jXPanel1" min="-2" pref="808" max="-2" attributes="1"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="txtDescription" min="-2" pref="438" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jXPanel1" min="-2" pref="572" max="-2" attributes="1"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="bnPrevious" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bnNext" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblLevel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="imagePanel" min="-2" pref="244" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,23 +84,17 @@
                   <Component id="bnNext" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblLevel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jXPanel1" min="-2" pref="369" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jXPanel1" min="-2" pref="369" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel2" min="-2" pref="271" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,7 +122,7 @@
                   <Component id="jXPanel6" min="-2" pref="386" max="-2" attributes="1"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jXPanel7" min="-2" pref="495" max="-2" attributes="1"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -229,6 +224,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtXCRD">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -236,6 +232,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtYCRD">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -243,6 +240,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtELEV">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -370,6 +368,7 @@
           <SubComponents>
             <Component class="xbuild.Components.XFormattedTextField" name="txtAREA">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -377,6 +376,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFLWR">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -384,6 +384,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFLSA">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.0" subtype="-1" type="0"/>
                 </Property>
@@ -391,6 +392,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtSLAS">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -398,6 +400,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFHDUR">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -405,6 +408,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtSLEN">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -412,6 +416,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFLOB">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -518,21 +523,31 @@
                       </Group>
                       <Component id="jXPanel5" pref="512" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jXLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtID_FIELD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jXLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtID_FIELD" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jXPanel8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jXPanel8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jXPanel5" min="-2" pref="76" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -633,6 +648,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFLDS">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -640,6 +656,7 @@
             </Component>
             <Component class="xbuild.Components.XFormattedTextField" name="txtFLDD">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format format="#0.00" subtype="-1" type="0"/>
                 </Property>
@@ -689,7 +706,7 @@
                           <Group type="102" attributes="0">
                               <Component id="cbWSTA" min="-2" pref="297" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbWSTACode" pref="117" max="32767" attributes="0"/>
+                              <Component id="cbWSTACode" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -918,6 +935,13 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="imagePanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="org.jdesktop.swingx.JXLabel" name="lblLevel">
@@ -933,20 +957,13 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDescriptionFocusLost"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="imagePanel">
+    <Component class="org.jdesktop.swingx.JXLabel" name="lblLevel1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="99" type="rgb"/>
+        <Property name="text" type="java.lang.String" value="Fields"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnNext">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="NEXT"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnNextActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bnPrevious">
       <Properties>
@@ -954,6 +971,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnPreviousActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bnNext">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NEXT"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnNextActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

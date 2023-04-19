@@ -12,8 +12,8 @@ package FileXModel;
 public class HarvestList extends ManagementList {
     
     @Override
-    public IModelXBase Clone(String sourceName, String newName){
-        Harvest source = (Harvest) GetAt(sourceName);
+    public ModelXBase Clone(int sourceIndex, String newName){
+        Harvest source = (Harvest) modelList.get(sourceIndex);
         Harvest newSource = null;
         
         try {
@@ -33,7 +33,9 @@ public class HarvestList extends ManagementList {
     }
 
     @Override
-    public void AddNew(String name) {
-        modelList.add(new Harvest(name));
+    public ModelXBase AddNew(String name) {
+        Harvest model = new Harvest(name);
+        modelList.add(model);
+        return model;
     }
 }

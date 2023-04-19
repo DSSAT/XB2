@@ -125,9 +125,9 @@ public class ChemicalDialog extends javax.swing.JDialog {
         tbModel.addRow(new Object[] {0, "NONE"});
         for(int i = 0;i < FileX.chemicalList.GetSize();i++)
         {
-            Chemical chem = (Chemical)FileX.chemicalList.GetAt(i);
+            Chemical chem = (Chemical)FileX.chemicalList.GetAtIndex(i);
             Object object[] = new Object[2];
-            object[0] = i + 1;
+            object[0] = chem.GetLevel();
             try {
                 object[1] = chem.CHNAME;
             } catch (Exception e) {

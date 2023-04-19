@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Jazzy
  */
-public class InitialCondition implements Cloneable, IModelXBase {
+public class InitialCondition extends ModelXBase implements Cloneable {
     public String PCR;
     public Date ICDAT;
     public Float ICRT;

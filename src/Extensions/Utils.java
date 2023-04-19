@@ -180,6 +180,30 @@ public class Utils {
 
         return value;
     }
+    
+    public static String PadLeft(String value, int count, char character, boolean ignoreRemoveDigit) {
+        if (value == null) {
+            value = "-99";
+        }
+        if (value.isEmpty()) {
+            value = "-99";
+        }
+
+        if(!ignoreRemoveDigit){
+            if (value.endsWith(".0")) {
+                value = value.replace(".0", "");
+            }
+            if (value.endsWith(".00")) {
+                value = value.replace(".00", "");
+            }
+        }
+
+        for (int i = value.length(); i < count; i++) {
+            value = character + value;
+        }
+
+        return value;
+    }
 
     public static String PadLeft(Integer value, int count, char character) {
         if (value == null) {
