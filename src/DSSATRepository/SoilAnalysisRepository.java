@@ -24,8 +24,6 @@ public class SoilAnalysisRepository extends DSSATRepositoryBase {
     public ArrayList<String> Parse() {
         ArrayList<String> soilAnalysis = new ArrayList<>();
 
-        System.out.println("Start Read File Detail.cde : " + Variables.getDateFormatWithTime().format(new Date()));
-
         try {
             FileReader file = new FileReader(rootPath + "\\DETAIL.CDE");
 

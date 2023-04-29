@@ -22,7 +22,6 @@ public class SoilRepository extends DSSATRepositoryBase {
     
     @Override
     public ArrayList<String> Parse() throws IOException {
-        System.out.println("Start Read Soil.LST : " + Variables.getDateFormatWithTime().format(new Date()));
 
         ArrayList<String> soilList = new ArrayList<>();
         try {

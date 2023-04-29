@@ -5,6 +5,8 @@
 
 package DSSATModel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jazzy
@@ -15,7 +17,11 @@ public class WeatherStation {
     public WstaType Type;
     public int Begin;
     public int Number;
+    public ArrayList<String> FullCode;
     
+    public WeatherStation(){
+        FullCode = new ArrayList<>();
+    }
     @Override
     public String toString(){
         return StationName;

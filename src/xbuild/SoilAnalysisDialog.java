@@ -125,13 +125,13 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
 
         jXLabel10.setText("cm");
 
-        jXLabel11.setText("cm-3");
+        jXLabel11.setText("<html>cm<sup>3</sup></html>");
 
         jXLabel12.setText("%");
 
-        jXLabel13.setText("mg kg-1");
+        jXLabel13.setText("mg/kg");
 
-        jXLabel14.setText("cmol kg-1");
+        jXLabel14.setText("cmol/kg");
 
         jXLabel15.setText("%");
 
