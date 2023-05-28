@@ -53,7 +53,7 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 while ((strWRead = wReader.readLine()) != null) {
                     if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("**WEATHER") || strWRead.startsWith("$WEATHER") || strWRead.startsWith("*CLIMATE")) {
                         String WSTAName = strWRead.substring(strWRead.indexOf(":") + 1, strWRead.length()).trim();
-                        wsta = code + ":" + (!WSTAName.isEmpty() ? WSTAName : code);
+                        wsta = code + ":" + (!"".equals(WSTAName) ? WSTAName : code);
                     } else if (strWRead.startsWith("@DATE")) {
                         is2 = true;
                     } else if (strWRead.startsWith("@  DATE")) {

@@ -72,9 +72,9 @@ public class SimulationControlService {
                     nSimulation = 10;
                 }
 
-                else if (bSimulation && nSimulation == 1 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                else if (bSimulation && nSimulation == 1 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //NYERS NREPS START SDATE RSEED SNAME.................... SMODEL
                     boolean isAdd = false;
@@ -103,7 +103,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 2 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 2 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -130,7 +130,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 3 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 3 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -161,7 +161,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 4 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 4 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -186,7 +186,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 5 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 5 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -223,7 +223,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 6 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 6 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -260,7 +260,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 7 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 7 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -287,7 +287,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 8 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 8 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -311,7 +311,7 @@ public class SimulationControlService {
                         simulationList.AddNew(sim);
                     }
                 }
-                else if (bSimulation && nSimulation == 9 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 9 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 
@@ -334,7 +334,7 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 10 && !tmp.trim().startsWith("!") && !tmp.trim().isEmpty() && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 10 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
                     Simulation sim = null;
                     Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
 

@@ -18,7 +18,7 @@ public class FertilizerService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String fertilizerHeader = "";
             boolean bFertilizerHeader = false;
@@ -34,14 +34,14 @@ public class FertilizerService {
                     fertilizerHeader = tmp.trim();
                     bFertilizerHeader = true;
                 } else if (bFertilizer && bFertilizerHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bFertilizer = false;
                         bFertilizerHeader = false;
                         continue;
                     }
                     //@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME
-                    Fertilizer fertil = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Fertilizer fertil;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if(!fertilizerList.IsLevelExists(level)) {

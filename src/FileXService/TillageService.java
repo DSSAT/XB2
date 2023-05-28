@@ -35,7 +35,7 @@ public class TillageService {
                     tillageHeader = tmp.trim();
                     bTillageHeader = true;
                 } else if (bTillage && bTillageHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bTillage = false;
                         bTillageHeader = false;
                         continue;
@@ -43,7 +43,7 @@ public class TillageService {
                     //@T TDATE TIMPL  TDEP TNAME
                     Tillage tillage;
                     TillageApplication tillageApp = new TillageApplication();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if(!tillageList.IsLevelExists(level)) {

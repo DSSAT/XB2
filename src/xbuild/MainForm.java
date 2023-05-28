@@ -469,7 +469,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         //File f = new File(root.getUserObject().toString());
         String target;
         try {
-            if (FileX.general.crop != null && FileX.general.crop.CropCode != null && !FileX.general.crop.CropCode.isEmpty()) {
+            if (FileX.general.crop != null && FileX.general.crop.CropCode != null && !"".equals(FileX.general.crop.CropCode)) {
                 target = DssatProfile.GetAt(FileX.general.crop.CropCode + "D");
             } else if (FileX.general.FileType == ExperimentType.Seasonal) {
                 target = DssatProfile.GetAt("ASD");

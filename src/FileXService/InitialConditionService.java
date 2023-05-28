@@ -19,7 +19,7 @@ public class InitialConditionService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String initHeader1 = "";
             String initHeader2 = "";
@@ -41,7 +41,7 @@ public class InitialConditionService {
                 } else if (bInit && bInitHeader1 && bInitHeader2 && tmp.trim().startsWith("@")) {
                     bInitHeader2 = false;
                 }else if (bInit && bInitHeader1 && !bInitHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bInit = false;
                         bInitHeader1 = false;
                         bInitHeader2 = false;
@@ -49,7 +49,7 @@ public class InitialConditionService {
                     }
                     //@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICREP ICRID ICNAME
                     InitialCondition init = new InitialCondition();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                     init.SetLevel(level);
                     init.PCR = Utils.GetString(initHeader1, tmp, "  PCR", 5);
                     init.ICDAT = Utils.GetDate(initHeader1, tmp, "ICDAT", 5);
@@ -67,7 +67,7 @@ public class InitialConditionService {
 
                     initialList.AddNew(init);
                 } else if (bInit && bInitHeader1 && bInitHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bInit = false;
                         bInitHeader1 = false;
                         bInitHeader2 = false;
@@ -76,7 +76,7 @@ public class InitialConditionService {
                     //@C  ICBL  SH2O  SNH4  SNO3
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         InitialCondition init = (InitialCondition)initialList.GetAt(level);
                         InitialConditionApplication initApp = new InitialConditionApplication();
 

@@ -31,14 +31,14 @@ public class CultivarService {
                     cultivarHeader = strRead.trim();
                     bCultivarHeader = true;
                 } else if (bCultivar && bCultivarHeader) {
-                    if (strRead.trim().isEmpty()) {
+                    if ("".equals(strRead.trim())) {
                         bCultivar = false;
                         bCultivarHeader = false;
                         continue;
                     }
                     //@C CR INGENO CNAME
                     Cultivar cul = new Cultivar();
-                    Integer level = Integer.parseInt(strRead.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(strRead.substring(0, 2).trim());
                     cul.SetLevel(level);
                     cul.CR = Utils.GetString(cultivarHeader, strRead, "CR", 2);
                     cul.INGENO = Utils.GetString(cultivarHeader, strRead, "INGENO", 6);

@@ -34,15 +34,15 @@ public class HarvestService {
                     harvestHeader = tmp.trim();
                     bHarvestHeader = true;
                 } else if (bHarvest && bHarvestHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bHarvest = false;
                         bHarvestHeader = false;
                         continue;
                     }
                     //@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME
-                    Harvest harvest = null;
+                    Harvest harvest;
                     HarvestApplication harvestApp = new HarvestApplication();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if(!harvestList.IsLevelExists(level)) {

@@ -22,7 +22,8 @@ public class Setup {
             String defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
             for(int i = 47;i <= 49;i++){
                File file = new File(defaultDssatPath + "\\DSSATPRO.v" + i);
-                if (file.exists()) {
+               File fileConfig = new File("XBuild.fle");
+                if (file.exists() && !fileConfig.exists()) {
                     SaveFile(defaultDssatPath, "v" + i);
                     return defaultDssatPath;
                 }
@@ -38,7 +39,7 @@ public class Setup {
             GetFile();
         }
 
-        return DefaultPath == null || DefaultPath.isBlank() ? DSSATPath : DefaultPath;
+        return DefaultPath == null || "".equals(DefaultPath) ? DSSATPath : DefaultPath;
     }
 
     public void SetDefaultPath(String path) {
@@ -110,15 +111,14 @@ public class Setup {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        PrintWriter pw = new PrintWriter(writer);
-        pw.println("DSSAT=" + path);
-        pw.println("VERSION=" + version);
-        pw.println("LATEST=" + DefaultPath);
-
-        DSSATPath = path;
-        DSSATVersion = version;
-
-        pw.close();
+        try (PrintWriter pw = new PrintWriter(writer)) {
+            pw.println("DSSAT=" + path);
+            pw.println("VERSION=" + version);
+            pw.println("LATEST=" + DefaultPath);
+            
+            DSSATPath = path;
+            DSSATVersion = version;
+        }
         try {
             writer.close();
         } catch (IOException ex) {

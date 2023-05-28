@@ -41,9 +41,8 @@ public class FileXValidationService {
     }
 
     public static boolean IsMinimumRequired() {
-        boolean isValid = IsGeneralValid();
-
-        isValid = FileX.fieldList != null && FileX.fieldList.GetSize() > 0
+        boolean isValid = IsGeneralValid() &&
+                FileX.fieldList != null && FileX.fieldList.GetSize() > 0
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).WSTA)
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).ID_SOIL)
                 && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
@@ -61,9 +60,9 @@ public class FileXValidationService {
         } else {
             for (ModelXBase field : FileX.fieldList.GetAll()) {
                 FieldDetail f = (FieldDetail) field;
-                if (f.WSTA == null || f.WSTA.isEmpty()) {
+                if (f.WSTA == null || "".equals(f.WSTA)) {
                     isValid = false;
-                } else if (f.ID_SOIL == null || f.ID_SOIL.isEmpty()) {
+                } else if (f.ID_SOIL == null || "".equals(f.ID_SOIL)) {
                     isValid = false;
                 }
             }
@@ -77,9 +76,9 @@ public class FileXValidationService {
         for (ModelXBase field : FileX.fieldList.GetAll()) {
             FieldDetail f = (FieldDetail) field;
             if (f.FLNAME == null ? getNodeName(node) == null : f.FLNAME.equals(getNodeName(node))) {
-                if (f.WSTA == null || f.WSTA.isEmpty()) {
+                if (f.WSTA == null || "".equals(f.WSTA)) {
                     isValid = false;
-                } else if (f.ID_SOIL == null || f.ID_SOIL.isEmpty()) {
+                } else if (f.ID_SOIL == null || "".equals(f.ID_SOIL)) {
                     isValid = false;
                 }
             }
@@ -96,7 +95,7 @@ public class FileXValidationService {
         } else {
             for (ModelXBase cul : FileX.cultivars.GetAll()) {
                 Cultivar c = (Cultivar) cul;
-                if (c.CR == null || c.CR.isEmpty()) {
+                if (c.CR == null || "".equals(c.CR)) {
                     isValid = false;
                 }
             }
@@ -114,9 +113,9 @@ public class FileXValidationService {
                 Planting p = (Planting) planting;
                 if (p.PDATE == null) {
                     isValid = false;
-                } else if (p.PLME == null || p.PLME.isEmpty()) {
+                } else if (p.PLME == null || "".equals(p.PLME)) {
                     isValid = false;
-                } else if (p.PLDS == null || p.PLDS.isEmpty()) {
+                } else if (p.PLDS == null || "".equals(p.PLDS)) {
                     isValid = false;
                 } else if (p.PLRS == null) {
                     isValid = false;
@@ -141,9 +140,9 @@ public class FileXValidationService {
             if (p.PLNAME.equals(getNodeName(node))) {
                 if (p.PDATE == null) {
                     isValid = false;
-                } else if (p.PLME == null || p.PLME.isEmpty()) {
+                } else if (p.PLME == null || "".equals(p.PLME)) {
                     isValid = false;
-                } else if (p.PLDS == null || p.PLDS.isEmpty()) {
+                } else if (p.PLDS == null || "".equals(p.PLDS)) {
                     isValid = false;
                 } else if (p.PLRS == null) {
                     isValid = false;

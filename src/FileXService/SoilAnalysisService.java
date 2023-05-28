@@ -18,7 +18,7 @@ public class SoilAnalysisService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String soilHeader1 = "";
             boolean bSoilHeader1 = false;
@@ -40,7 +40,7 @@ public class SoilAnalysisService {
                 } else if (bSoil && bSoilHeader1 && bSoilHeader2 && tmp.trim().startsWith("@")) {
                     bSoilHeader2 = false;
                 }else if (bSoil && bSoilHeader1 && !bSoilHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bSoil = false;
                         bSoilHeader1 = false;
                         bSoilHeader2 = false;
@@ -58,7 +58,7 @@ public class SoilAnalysisService {
 
                     soilAnalysis.AddNew(soil);
                 } else if (bSoil && bSoilHeader1 && bSoilHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bSoil = false;
                         bSoilHeader1 = false;
                         bSoilHeader2 = false;
@@ -67,7 +67,7 @@ public class SoilAnalysisService {
                     //@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         SoilAnalysis soil = (SoilAnalysis)soilAnalysis.GetAt(level);
                         SoilAnalysisLayer soilLayer = new SoilAnalysisLayer();
 

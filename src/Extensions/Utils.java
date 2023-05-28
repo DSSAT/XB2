@@ -32,8 +32,8 @@ public class Utils {
 
             String tmp = value.substring(start, stop).trim();
 
-            if (!tmp.isBlank()) {
-                val = Float.parseFloat(tmp);
+            if (tmp != null && !"".equals(tmp)) {
+                val = Float.valueOf(tmp);
             }
         }
         return val;
@@ -50,7 +50,7 @@ public class Utils {
 
             if (!tmp.equals("-99")) {
                 try {
-                    Integer year = Integer.parseInt(tmp.substring(0, 2));
+                    Integer year = Integer.valueOf(tmp.substring(0, 2));
                     if (year >= 60) {
                         year += 1900;
                     } else {
@@ -94,19 +94,19 @@ public class Utils {
 
             String tmp = value.substring(start, stop).trim();
 
-            if (!tmp.isBlank() && !tmp.equals("-99")) {
-                val = Integer.parseInt(tmp);
+            if (!"".equals(tmp) && !tmp.equals("-99")) {
+                val = Integer.valueOf(tmp);
             }
         }
         return val;
     }
 
     public static Integer ParseInteger(Object value) {
-        Integer val = null;
+        Integer val;
         if (value == null) {
             return 0;
         }
-        val = Integer.parseInt(value.toString());
+        val = Integer.valueOf(value.toString());
 
         return val;
     }
@@ -118,7 +118,7 @@ public class Utils {
             if (value == null) {
                 return 0.0f;
             }
-            val = Float.parseFloat(value.toString());
+            val = Float.valueOf(value.toString());
         } catch (NumberFormatException numberFormatException) {
 
         }
@@ -136,7 +136,7 @@ public class Utils {
             }
 
             String tmp = value.substring(start, stop).trim();
-            if (tmp.isEmpty()) {
+            if (tmp == null || "".equals(tmp.trim())) {
                 val = "-99";
             } else {
                 val = tmp;
@@ -163,7 +163,7 @@ public class Utils {
         if (value == null) {
             value = "-99";
         }
-        if (value.isEmpty()) {
+        if ("".equals(value.trim())) {
             value = "-99";
         }
 
@@ -185,7 +185,7 @@ public class Utils {
         if (value == null) {
             value = "-99";
         }
-        if (value.isEmpty()) {
+        if ("".equals(value.trim())) {
             value = "-99";
         }
 
@@ -237,7 +237,7 @@ public class Utils {
         if (value == null) {
             value = "-99";
         }
-        if (value.isEmpty()) {
+        if ("".equals(value.trim())) {
             value = "-99";
         }
 
@@ -277,6 +277,6 @@ public class Utils {
     }
 
     public static boolean IsEmpty(String text) {
-        return text == null || text.isEmpty();
+        return text == null || "".equals(text.trim());
     }
 }
