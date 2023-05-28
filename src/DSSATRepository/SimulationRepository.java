@@ -83,7 +83,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 if (strRead.trim().startsWith("*Start Simulation")) {
                     bSimStart = true;
                 } else if (bSimStart) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -100,7 +100,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                     else if (strRead.trim().startsWith("*Simulation/Options/Water")) {
                         bSimOptionWater = true;
                     } else if (bSimOptionWater) {
-                        if (!strRead.trim().isEmpty()) {
+                        if (!"".equals(strRead.trim())) {
                             if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                                 String tmp = strRead.trim();
                                 String Code = tmp.substring(0, 8).trim();
@@ -116,7 +116,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Options/Symbiosis")) {
                     bSimOptionSymbiosis = true;
                 } else if (bSimOptionSymbiosis) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -133,7 +133,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                     else if (strRead.trim().startsWith("*Simulation/Options/CO2")) {
                         bSimOptionCO2 = true;
                     } else if (bSimOptionCO2) {
-                        if (!strRead.trim().isEmpty()) {
+                        if (!"".equals(strRead.trim())) {
                             if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                                 String tmp = strRead.trim();
                                 String Code = tmp.substring(0, 8).trim();
@@ -149,7 +149,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Weather")) {
                     bSimMethodWeather = true;
                 } else if (bSimMethodWeather) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -165,7 +165,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Initial Soil Conditions")) {
                     bSimMethodInitial = true;
                 } else if (bSimMethodInitial) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -181,7 +181,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Evapotransportation")) {
                     bSimMethodEvap = true;
                 } else if (bSimMethodEvap) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -197,7 +197,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Infiltration")) {
                     bSimMethodInfil = true;
                 } else if (bSimMethodInfil) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -213,7 +213,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Photosynthesis")) {
                     bSimMethodPhoto = true;
                 } else if (bSimMethodPhoto) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -229,7 +229,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Hydrology")) {
                     bSimMethodHydrology = true;
                 } else if (bSimMethodHydrology) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -245,7 +245,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/SOM")) {
                     bSimMethodSOM = true;
                 } else if (bSimMethodSOM) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -261,7 +261,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Soil Evaporation")) {
                     bSimMethodSoilEvap = true;
                 } else if (bSimMethodSoilEvap) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -277,7 +277,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Methods/Soil Layer Distribution")) {
                     bSimMethodSoilLayer = true;
                 } else if (bSimMethodSoilLayer) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -293,7 +293,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Management/Planting")) {
                     bSimManagePlanting = true;
                 } else if (bSimManagePlanting) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -309,7 +309,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Management/Irrigation")) {
                     bSimManageIrrigation = true;
                 } else if (bSimManageIrrigation) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -325,7 +325,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Management/Fertilization")) {
                     bSimManageFertilizer = true;
                 } else if (bSimManageFertilizer) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -341,7 +341,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Management/Residue")) {
                     bSimManageResidue = true;
                 } else if (bSimManageResidue) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -357,7 +357,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Management/Harvest")) {
                     bSimManageHarvest = true;
                 } else if (bSimManageHarvest) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -373,7 +373,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().equalsIgnoreCase("*Simulation/Outputs")) {
                     bSimOutput = true;
                 } else if (bSimOutput) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -389,7 +389,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Outputs/Options")) {
                     bSimOutputOption = true;
                 } else if (bSimOutputOption) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -405,7 +405,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Outputs/Verbose")) {
                     bSimOutputVerbose = true;
                 } else if (bSimOutputVerbose) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -421,7 +421,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Outputs/Format")) {
                     bSimOutputFormat = true;
                 } else if (bSimOutputFormat) {
-                    if (!strRead.trim().isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String tmp = strRead.trim();
                             String Code = tmp.substring(0, 8).trim();
@@ -437,7 +437,7 @@ public class SimulationRepository extends DSSATRepositoryBase {
                 else if (strRead.trim().startsWith("*Simulation/Crop Models")) {
                     bCropModel = true;
                 } else if (bCropModel) {
-                    if (!strRead.isEmpty()) {
+                    if (!"".equals(strRead.trim())) {
                         if (!strRead.trim().startsWith("@") && !strRead.trim().startsWith("!")) {
                             String s = strRead;
                             cropModel.add(s);

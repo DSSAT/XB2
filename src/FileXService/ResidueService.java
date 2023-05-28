@@ -18,7 +18,7 @@ public class ResidueService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String organicHeader = "";
             boolean bOrganicHeader = false;
@@ -34,15 +34,15 @@ public class ResidueService {
                     organicHeader = tmp.trim();
                     bOrganicHeader = true;
                 } else if (bOrganic && bOrganicHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bOrganic = false;
                         bOrganicHeader = false;
                         continue;
                     }
                     //@R RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET RENAME
-                    Organic organic = null;
+                    Organic organic;
                     OrganicApplication organicApp = new OrganicApplication();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if(!organicList.IsLevelExists(level)) {

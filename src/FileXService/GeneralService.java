@@ -100,10 +100,10 @@ public class GeneralService {
                     bNotes = true;
                 } else if (bNotes) {
                     if (!strRead.trim().equals("-99")) {
-                        if(strRead.trim().startsWith("!") || strRead.trim().startsWith("@") || strRead.trim().startsWith("*") || strRead.trim().isEmpty()) {
+                        if(strRead.trim().startsWith("!") || strRead.trim().startsWith("@") || strRead.trim().startsWith("*") || "".equals(strRead.trim())) {
                             bNotes = false;
                         } else {
-                            general.Notes = (general.Notes == null || general.Notes.isEmpty()) ? strRead.trim() : general.Notes + "\n" + strRead.trim();
+                            general.Notes = (general.Notes == null || "".equals(general.Notes)) ? strRead.trim() : general.Notes + "\n" + strRead.trim();
                             //bNotes = false;
                         }
                     }
@@ -144,12 +144,12 @@ public class GeneralService {
         // <editor-fold defaultstate="collapsed" desc="GENERAL">
         pw.println("*EXP.DETAILS: " + general.InstituteCode + general.SiteCode + general.Year.substring(2,4) + general.ExperimentNumber + 
                 (general.crop != null ? general.crop.CropCode : "")
-                + " " + (general.ExperimentName != null && !general.ExperimentName.isEmpty() ? general.ExperimentName : ""));
+                + " " + (general.ExperimentName != null && !"".equals(general.ExperimentName) ? general.ExperimentName : ""));
         pw.println();
         pw.println("*GENERAL");
 
         pw.println("@PEOPLE");
-        if (general.People != null && !general.People.isEmpty()) {
+        if (general.People != null && !"".equals(general.People)) {
             pw.println(general.People);
 
         } else {
@@ -158,7 +158,7 @@ public class GeneralService {
 
         }
         pw.println("@ADDRESS");
-        if (general.Adress != null && !general.Adress.isEmpty()) {
+        if (general.Adress != null && !"".equals(general.Adress)) {
             pw.println(general.Adress);
 
         } else {
@@ -166,14 +166,14 @@ public class GeneralService {
 
         }
         pw.println("@SITE");
-        if (general.Site != null && !general.Site.isEmpty()) {
+        if (general.Site != null && !"".equals(general.Site)) {
             pw.println(general.Site);
 
         } else {
             pw.println("-99");
         }
 
-        if (general.Notes != null && !general.Notes.isEmpty()) {
+        if (general.Notes != null && !"".equals(general.Notes)) {
             pw.println("@NOTES");
             String[] tmp = general.Notes.split("\n");
             for(int i = 0;i < tmp.length;i++)

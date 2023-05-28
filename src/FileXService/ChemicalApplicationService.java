@@ -34,7 +34,7 @@ public class ChemicalApplicationService {
                     chemicalHeader = tmp.trim();
                     bChemicalHeader = true;
                 } else if (bChemical && bChemicalHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bChemical = false;
                         bChemicalHeader = false;
                         continue;
@@ -42,7 +42,7 @@ public class ChemicalApplicationService {
                     //@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME
                     Chemical chem;
                     ChemicalApplication chemApp = new ChemicalApplication();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if (!chemicalList.IsLevelExists(level)) {

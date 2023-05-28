@@ -37,7 +37,7 @@ public class FieldService {
                     fieldHeader2 = tmp.trim();
                     bFieldHeader2 = true;
                 } else if (bField && bFieldHeader1 && !bFieldHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
                         bFieldHeader2 = false;
@@ -45,7 +45,7 @@ public class FieldService {
                     }
                     //@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME
                     FieldDetail field = new FieldDetail();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                     field.SetLevel(level);
                     field.ID_FIELD = Utils.GetString(fieldHeader1, tmp, "ID_FIELD", 8);
                     field.WSTA = Utils.GetString(fieldHeader1, tmp, "WSTA", 8);
@@ -62,7 +62,7 @@ public class FieldService {
 
                     fieldList.AddNew(field);
                 } else if (bField && bFieldHeader1 && bFieldHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
                         bFieldHeader2 = false;
@@ -71,7 +71,7 @@ public class FieldService {
                     //@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR
 
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
 
                         field.XCRD = Utils.GetFloat(fieldHeader2, tmp, "XCRD", 15);

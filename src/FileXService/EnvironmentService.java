@@ -35,15 +35,15 @@ public class EnvironmentService {
                     environmentHeader = tmp.trim();
                     bEnvironmentHeader = true;
                 } else if (bEnvironment && bEnvironmentHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bEnvironment = false;
                         bEnvironmentHeader = false;
                         continue;
                     }
                     //@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME
-                    Environmental env = null;
+                    Environmental env;
                     EnvironmentApplication envApp = new EnvironmentApplication();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     boolean isAdd = false;
                     if(!environmentals.IsLevelExists(level)) {

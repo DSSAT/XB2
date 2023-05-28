@@ -17,7 +17,7 @@ public class PlantingDetailService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String plantingHeader = "";
             boolean bPlantingHeader = false;
@@ -33,14 +33,14 @@ public class PlantingDetailService {
                     plantingHeader = tmp.trim();
                     bPlantingHeader = true;
                 } else if (bPlanting && bPlantingHeader && !tmp.trim().startsWith("!")) {
-                    if (tmp.trim().isEmpty() || tmp.trim().startsWith("*")) {
+                    if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bPlanting = false;
                         bPlantingHeader = false;
                         continue;
                     }
                     //@P PDATE EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL                        PLNAME
                     Planting planting = new Planting();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     planting.SetLevel(level);
                     planting.PDATE = Utils.GetDate(plantingHeader, tmp, "PDATE", 5);

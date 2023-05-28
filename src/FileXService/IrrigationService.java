@@ -18,7 +18,7 @@ public class IrrigationService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String irrigHeader1 = "";
             String irrigHeader2 = "";
@@ -40,7 +40,7 @@ public class IrrigationService {
                 } else if (bIrrig && bIrrigHeader1 && bIrrigHeader2 && tmp.trim().startsWith("@")) {
                     bIrrigHeader2 = false;
                 }else if (bIrrig && bIrrigHeader1 && !bIrrigHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bIrrig = false;
                         bIrrigHeader1 = false;
                         bIrrigHeader2 = false;
@@ -48,14 +48,14 @@ public class IrrigationService {
                     }
                     //@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME
                     Irrigation irrig = new Irrigation();
-                    Integer level = Integer.parseInt(strRead.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(strRead.substring(0, 2).trim());
                     irrig.SetLevel(level);
                     irrig.EFIR = Utils.GetFloat(irrigHeader1, tmp, "  EFIR", 5);
 
                     irrig.IRNAME = Utils.GetString(irrigHeader1, tmp, "IRNAME", tmp.length() - irrigHeader1.indexOf("IRNAME"));
                     irrigations.AddNew(irrig);
                 } else if (bIrrig && bIrrigHeader1 && bIrrigHeader2) {
-                    if (tmp.trim().isEmpty()) {
+                    if ("".equals(tmp.trim())) {
                         bIrrig = false;
                         bIrrigHeader1 = false;
                         bIrrigHeader2 = false;
@@ -63,7 +63,7 @@ public class IrrigationService {
                     }
                     //@I IDATE  IROP IRVAL
                     try {
-                        Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         Irrigation irrig = (Irrigation)irrigations.GetAt(level);
                         IrrigationApplication irrigApp = new IrrigationApplication();
                         try{

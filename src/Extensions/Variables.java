@@ -24,7 +24,7 @@ public class Variables {
     }
     
     private static String getDatePattern(){
-        if (DATE_FORMAT == null || DATE_FORMAT.isEmpty()) {
+        if (DATE_FORMAT == null || "".equals(DATE_FORMAT.trim())) {
             DateFormat formatter = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, getLocale());            
             
             String pattern = ((SimpleDateFormat) formatter).toPattern();

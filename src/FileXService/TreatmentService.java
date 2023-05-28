@@ -26,7 +26,7 @@ public class TreatmentService {
             boolean bTreatment = false;
             
             while ((strRead = br.readLine()) != null) {
-                if(strRead.trim().isEmpty()){
+                if("".equals(strRead.trim())){
                     continue;
                 }
                 else if (strRead.trim().startsWith("*TREATMENTS")) {
@@ -88,7 +88,7 @@ public class TreatmentService {
                     pw.print(" 1 0 0");
                 else{
                     try {
-                        if (!treat.R.isEmpty()) {
+                        if (!"".equals(treat.R)) {
                             pw.print(' ' + treat.R.substring(0, 1));
                         } else {
                             pw.print(' ' + "0");
@@ -97,7 +97,7 @@ public class TreatmentService {
                         pw.print(' ' + "0");
                     }
                     try {
-                        if (!treat.O.isEmpty()) {
+                        if (!"".equals(treat.O)) {
                             pw.print(' ' + treat.O.substring(0, 1));
                         } else {
                             pw.print(' ' + "0");
@@ -106,7 +106,7 @@ public class TreatmentService {
                         pw.print(' ' + "0");
                     }
                     try {
-                        if (!treat.C.isEmpty()) {
+                        if (!"".equals(treat.C)) {
                             pw.print(' ' + treat.C.substring(0, 1));
                         } else {
                             pw.print(' ' + "0");
@@ -117,7 +117,7 @@ public class TreatmentService {
                 }               
                 
                 try {
-                    if (!treat.TNAME.isEmpty()) {
+                    if (!"".equals(treat.TNAME)) {
                         pw.print(" " + Utils.PadRight(treat.TNAME, 25, ' '));
                     } else {
                         pw.print(" " + Utils.PadRight("", 25, ' '));

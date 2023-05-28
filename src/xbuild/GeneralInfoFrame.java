@@ -42,7 +42,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         if(FileX.general.crop == null)
            FileX.general.crop = new Crop();
         
-        if(FileX.general.ExperimentNumber == null || FileX.general.ExperimentNumber.isEmpty())
+        if(FileX.general.ExperimentNumber == null || "".equals(FileX.general.ExperimentNumber))
             FileX.general.ExperimentNumber = "1";
         
         txtYear.setEditor(new JSpinner.NumberEditor(txtYear,"####"));
@@ -766,7 +766,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         try
         {
             doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
-            if(cbFileType.getSelectedItem().toString().equals("Experimental") && !FileX.general.crop.CropCode.isEmpty())
+            if(cbFileType.getSelectedItem().toString().equals("Experimental") && !"".equals(FileX.general.crop.CropCode))
             {
                 doc += "." + FileX.general.crop.CropCode + "X";
             }

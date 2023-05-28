@@ -1,12 +1,10 @@
 package DSSATRepository;
 
-import Extensions.Variables;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xbuild.LoadingDataFrame;
@@ -39,9 +37,9 @@ public class DSSATProfileRepository {
         
         BufferedReader br = new BufferedReader(file);
         try {
-            String strRead = null;
+            String strRead;
             while (( strRead = br.readLine()) != null) {
-                if (!strRead.isEmpty() && !strRead.startsWith("*") && !strRead.startsWith("!")) {
+                if (!"".equals(strRead) && !strRead.startsWith("*") && !strRead.startsWith("!")) {
                     dssatList.add(strRead);
                 }
             }

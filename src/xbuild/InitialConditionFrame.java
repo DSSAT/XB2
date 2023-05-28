@@ -860,11 +860,11 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_dpICDATPropertyChange
 
     private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
-        if (!txtWater.getText().isEmpty() && txtNitrogen.getText().isEmpty()) {
+        if (!"".equals(txtWater.getText()) && "".equals(txtNitrogen.getText())) {
             calculateWater(Utils.ParseFloat(txtWater.getValue()));
-        } else if (txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+        } else if ("".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
             calculateNitrogen(Utils.ParseFloat(txtNitrogen.getValue()));
-        } else if (!txtWater.getText().isEmpty() && !txtNitrogen.getText().isEmpty()) {
+        } else if (!"".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
             calculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()));
         }
     }//GEN-LAST:event_bnRecalculateActionPerformed
@@ -890,7 +890,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_bnNextActionPerformed
 
     private void setRecalculateButtonEnabled() {
-        bnRecalculate.setEnabled(!txtWater.getText().isEmpty() || !txtNitrogen.getText().isEmpty());
+        bnRecalculate.setEnabled(!"".equals(txtWater.getText()) || !"".equals(txtNitrogen.getText()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
