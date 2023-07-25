@@ -685,7 +685,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     if (cm != null) {
                         sim.SMODEL = cm.ModelCode;
                     }
-                    if(FileX.plantings.GetSize() > 0 && FileX.plantings.GetSize() <= level){
+                    if(FileX.plantings.GetSize() > 0 && level <= FileX.plantings.GetSize()){
                         Planting pl = (Planting) FileX.plantings.GetAt(level);
                         sim.SDATE = pl.PDATE;
                     }
