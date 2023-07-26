@@ -6,7 +6,6 @@
 package xbuild.Components;
 
 import Extensions.Utils;
-import java.awt.event.ItemListener;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeListener;
@@ -111,18 +110,20 @@ public class XSpinner extends JSpinner {
             switch (this.fieldType) {
                 case Float:
                     try {
-                        this.value = Float.parseFloat(val);
-                    } catch (Exception ex) {
+                        this.value = Float.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
                 case Integer:
                     try {
-                        this.value = Integer.parseInt(val);
-                    } catch (Exception ex) {
+                        this.value = Integer.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
             }
             return this.value;
         }

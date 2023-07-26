@@ -61,7 +61,7 @@
               <Component id="jXPanel2" min="-2" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jXPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -122,6 +122,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jXLabel21" min="-2" max="-2" attributes="0"/>
                                       <Component id="jXLabel28" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jXLabel29" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -134,7 +135,7 @@
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cbCrop" min="-2" pref="298" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
@@ -172,6 +173,7 @@
                               <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -346,6 +348,11 @@
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel28">
           <Properties>
             <Property name="text" type="java.lang.String" value="Please enter 2 Characters"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel29">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Please enter 4 Characters"/>
           </Properties>
         </Component>
       </SubComponents>

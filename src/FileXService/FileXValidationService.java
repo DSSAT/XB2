@@ -31,7 +31,7 @@ public class FileXValidationService {
         if (FileX.general != null && 
                 (Utils.IsEmpty(FileX.general.SiteCode) || FileX.general.SiteCode.length() != 2
                 || Utils.IsEmpty(FileX.general.InstituteCode) || FileX.general.InstituteCode.length() != 2
-                || Utils.IsEmpty(FileX.general.Year))) {
+                || Utils.IsEmpty(FileX.general.Year) || FileX.general.Year.length() != 4)) {
             isValid = false;
         }
         if (FileX.general != null && FileX.general.FileType == ExperimentType.Experimental && (FileX.general.crop == null || Utils.IsEmpty(FileX.general.crop.CropCode))) {
