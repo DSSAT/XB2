@@ -112,6 +112,7 @@ public class FieldFrame extends IXInternalFrame {
             }
 
             EventQueue.invokeLater(() -> {
+                cbWSTA.setInit(null, "WSTA", field.WSTA != null && field.WSTA.length() >= 4 ? field.WSTA.substring(0, 4) : "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
                 cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
             });
 
@@ -548,25 +549,25 @@ public class FieldFrame extends IXInternalFrame {
 
         wstaTypeGroup.add(rdWth);
         rdWth.setLabel("WTH");
-        rdWth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
+        rdWth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdWthItemStateChanged(evt);
             }
         });
 
         wstaTypeGroup.add(rdGen);
         rdGen.setLabel("Gen");
-        rdGen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
+        rdGen.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdWthItemStateChanged(evt);
             }
         });
 
         wstaTypeGroup.add(rdClimate);
         rdClimate.setLabel("Climate");
-        rdClimate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
+        rdClimate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdWthItemStateChanged(evt);
             }
         });
 
@@ -778,7 +779,7 @@ public class FieldFrame extends IXInternalFrame {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -811,9 +812,20 @@ public class FieldFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_cbSoilItemStateChanged
 
-    private void rdWthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdWthActionPerformed
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        if (txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)) {
+            l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
+        }
+    }//GEN-LAST:event_txtDescriptionFocusLost
 
+    private void cbWSTACodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWSTACodeActionPerformed
+        field.WSTA = cbWSTACode.getSelectedItem().toString();
+    }//GEN-LAST:event_cbWSTACodeActionPerformed
+
+    private void rdWthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdWthItemStateChanged
+        try{
         cbWSTA.setSelectedIndex(-1);
+        cbWSTACode.setSelectedIndex(-1);
 
         if (rdWth.isSelected()) {
             FileX.wstaType = WstaType.WTH;
@@ -825,17 +837,11 @@ public class FieldFrame extends IXInternalFrame {
 
         cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
         cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
-    }//GEN-LAST:event_rdWthActionPerformed
-
-    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if (txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)) {
-            l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
-    }//GEN-LAST:event_txtDescriptionFocusLost
-
-    private void cbWSTACodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWSTACodeActionPerformed
-        field.WSTA = cbWSTACode.getSelectedItem().toString();
-    }//GEN-LAST:event_cbWSTACodeActionPerformed
+        catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_rdWthItemStateChanged
 
     private List<String> loadWSTACode(String wCode) {
         ArrayList<String> items = new ArrayList<>();
