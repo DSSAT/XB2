@@ -27,13 +27,13 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
             enabled = FileXValidationService.IsGeneralValid();
         }
 
-        if (nodeName.equals("Treatment")) {
+        if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
         }
 
         Component treeCellRendererComponent = super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
-        if (nodeName.equals("General Information") || nodeName.equals("Fields") || nodeName.equals("Cultivars") || nodeName.equals("Planting") || nodeName.equals("Simulation Controls") || nodeName.equals("Treatment")) {
+        if (nodeName.equals("General Information") || nodeName.equals("Fields") || nodeName.equals("Cultivars") || nodeName.equals("Planting") || nodeName.equals("Simulation Controls") || nodeName.equals("Treatments")) {
             Font font = treeCellRendererComponent.getFont();
             font = font.deriveFont(
                     Collections.singletonMap(
@@ -68,7 +68,7 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
         else if(node.isLeaf() && nodeParentName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
-        else if(nodeName.equals("Treatment") && !FileXValidationService.IsTreatmentValid(nodeName))
+        else if(nodeName.equals("Treatments") && !FileXValidationService.IsTreatmentValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));        
 
         return treeCellRendererComponent;

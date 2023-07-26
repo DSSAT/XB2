@@ -88,7 +88,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             put("Harvest", "HarvestFrame");
             put("Chemical Applications", "ChemicalFrame");
             put("Simulation Controls", "SimulationFrame");
-            put("Treatment", "TreatmentFrame");
+            put("Treatments", "TreatmentFrame");
         }
     };
 
@@ -113,7 +113,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         {
             add("General Information");
             add("Notes");
-            add("Treatment");
+            add("Treatments");
         }
     };
     
@@ -124,7 +124,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             add("Cultivars");
             add("Planting");
             add("Simulation Controls");
-            add("Treatment");
+            add("Treatments");
         }
     };
     
@@ -144,7 +144,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             add("Harvest");
             add("Chemical Applications");
             add("Simulation Controls");
-            add("Treatment");
+            add("Treatments");
         }
     };
 
@@ -578,7 +578,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             AddTreeMenu("Management", "Harvest");
             AddTreeMenu("Management", "Chemical Applications");
             AddTreeMenu(root, "Simulation Controls");
-            AddTreeMenu(root, "Treatment");
+            AddTreeMenu(root, "Treatments");
 
             jXTree1.collapseAll();
             jXTree1.expandAll();
@@ -633,7 +633,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             enabled = FileXValidationService.IsGeneralValid();
         }
 
-        if (nodeName.equals("Treatment")) {
+        if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
         }
 
@@ -996,7 +996,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     return FileX.chemicalList;
                 case "Simulation Controls":
                     return FileX.simulationList;
-                case "Treatment":
+                case "Treatments":
                     return FileX.treaments;
                 default:
                     break;
@@ -1044,7 +1044,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Simulation Controls");
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Treatment");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Treatments");
         treeNode1.add(treeNode2);
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
 
@@ -1372,7 +1372,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 isValid = true;
             } else if (!FileXValidationService.IsGeneralValid()) {
                 isValid = false;
-            } else if ("Treatment".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsMinimumRequired()) {
+            } else if ("Treatments".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsMinimumRequired()) {
                 isValid = false;
             }
 

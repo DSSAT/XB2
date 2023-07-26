@@ -152,7 +152,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             jXTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
         }
 
-        lblLevel1.setText("Treatment");
+        lblLevel1.setText("Treatments");
         lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         bnPrevious.setText("PREVIOUS");
@@ -179,7 +179,7 @@ public class TreatmentFrame extends IXInternalFrame  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 796, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
                         .addComponent(bnAddLayer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnDeleteLayer))
@@ -274,7 +274,7 @@ public class TreatmentFrame extends IXInternalFrame  {
         FileX.treaments.AddNew(treatment);
         LoadTreament();
         
-        l.myAction(new AddLevelEvent(this, "Treatment", "Level " + treatment.GetLevel() + ": " + treatment.GetName()));
+        l.myAction(new AddLevelEvent(this, "Treatments", "Level " + treatment.GetLevel() + ": " + treatment.GetName()));
     }//GEN-LAST:event_bnAddLayerActionPerformed
 
     private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
@@ -283,18 +283,18 @@ public class TreatmentFrame extends IXInternalFrame  {
         FileX.treaments.RemoveAt(row);
         LoadTreament();
         
-        l.myAction(new RemoveLevelEvent(this, "Treatment", "Level " + (row+1) + ": " + name));
+        l.myAction(new RemoveLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + name));
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
     private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
         EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Treatment", MenuDirection.PREVIOUS));
+            l.myAction(new NewFrameEvent(this, "Treatments", MenuDirection.PREVIOUS));
         });
     }//GEN-LAST:event_bnPreviousActionPerformed
 
     private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
         EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Treatment", MenuDirection.NEXT));
+            l.myAction(new NewFrameEvent(this, "Treatments", MenuDirection.NEXT));
         });
     }//GEN-LAST:event_bnNextActionPerformed
 
@@ -815,7 +815,7 @@ public class TreatmentFrame extends IXInternalFrame  {
                 ((Treatment)FileX.treaments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
             }
             
-            l.myAction(new UpdateLevelEvent(this, "Treatment", "Level " + (row+1) + ": " + FileX.treaments.GetAtIndex(row).GetName(), row));
+            l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treaments.GetAtIndex(row).GetName(), row));
         });
         
         jXTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
