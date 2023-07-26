@@ -660,64 +660,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jXTree1MouseReleased
     
     private void jMenuItemSimAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimAddActionPerformed
-
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        ManagementList modelList = (ManagementList) GetManagementList(node.toString());
-
-        if (modelList != null && !"Cultivars".equals(node.toString())) {
-            String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
-            String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
-            if (nodeName.length() > 0) {
-                int level = 0;
-                for (ModelXBase m : modelList.GetAll()) {
-                    if (m.GetName().equalsIgnoreCase(nodeName)) {
-                        JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
-                        return;
-                    }
-                    level = m.GetLevel();
-                }
-
-                level++;
-                if ("Simulation Controls".equals(node.toString())) {
-                    Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
-                    sim.SetName(nodeName);
-                    CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
-                    if (cm != null) {
-                        sim.SMODEL = cm.ModelCode;
-                    }
-                    if(FileX.plantings.GetSize() > 0 && level <= FileX.plantings.GetSize()){
-                        Planting pl = (Planting) FileX.plantings.GetAt(level);
-                        sim.SDATE = pl.PDATE;
-                    }
-                    modelList.AddNew(sim);
-                    sim.SetLevel(level);
-                } else {
-                    ModelXBase m = modelList.AddNew(nodeName);
-                    m.SetLevel(level);
-                }
-                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-
-                String newName = "Level " + level + ": " + nodeName;
-
-                newNode.setUserObject(newName);
-                node.add(newNode);
-
-                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-                model.reload(node);
-
-                jXTree1.expandAll();
-                int[] rows = jXTree1.getSelectionRows();
-
-                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
-
-                IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
-
-                ShowFrame(frame);
-            }
-        } else if (modelList != null && "Cultivars".equals(node.toString())) {
-            CultivarsFrame currentFrame = (CultivarsFrame) desktopPane.getSelectedFrame();
-            currentFrame.AddNewCultivar();
-        }
+        addLevel();
     }//GEN-LAST:event_jMenuItemSimAddActionPerformed
 
     private void jPopupMenuSimItemRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemRemoveActionPerformed
@@ -1321,12 +1264,16 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
             if (nodeName.length() > 0) {
+                int level = 0;
                 for (ModelXBase m : modelList.GetAll()) {
                     if (m.GetName().equalsIgnoreCase(nodeName)) {
                         JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
                         return;
                     }
+                    level = m.GetLevel();
                 }
+
+                level++;
                 if ("Simulation Controls".equals(node.toString())) {
                     Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
                     sim.SetName(nodeName);
@@ -1334,13 +1281,19 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     if (cm != null) {
                         sim.SMODEL = cm.ModelCode;
                     }
+                    if(FileX.plantings.GetSize() > 0 && level <= FileX.plantings.GetSize()){
+                        Planting pl = (Planting) FileX.plantings.GetAt(level);
+                        sim.SDATE = pl.PDATE;
+                    }
                     modelList.AddNew(sim);
+                    sim.SetLevel(level);
                 } else {
-                    modelList.AddNew(nodeName);
+                    ModelXBase m = modelList.AddNew(nodeName);
+                    m.SetLevel(level);
                 }
                 DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
-                String newName = "Level " + (modelList.GetLevel(nodeName) + 1) + ": " + nodeName;
+                String newName = "Level " + level + ": " + nodeName;
 
                 newNode.setUserObject(newName);
                 node.add(newNode);
