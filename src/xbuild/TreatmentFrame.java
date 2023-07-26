@@ -50,25 +50,6 @@ public class TreatmentFrame extends IXInternalFrame  {
     public TreatmentFrame() {
         initComponents();
         
-        EventQueue.invokeLater(() -> {
-            int targetCol = 1;
-            if (FileX.general.FileType == ExperimentType.Sequential) {
-                targetCol = 4;
-            }
-                
-            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-            rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-            jXTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
-            for (int i = 1; i < jXTable1.getColumnModel().getColumnCount(); i++) {
-                
-                if (i != targetCol) {
-                    DefaultTableCellRenderer rightRenderer1 = new DefaultTableCellRenderer();
-                    rightRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
-                    jXTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer1);
-                }
-            }
-        });
-        
         LoadTreament();        
     }
     
@@ -700,6 +681,25 @@ public class TreatmentFrame extends IXInternalFrame  {
     }
 
     private void LoadTreament() {
+        EventQueue.invokeLater(() -> {
+            int targetCol = 1;
+            if (FileX.general.FileType == ExperimentType.Sequential) {
+                targetCol = 4;
+            }
+                
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+            jXTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+            for (int i = 1; i < jXTable1.getColumnModel().getColumnCount(); i++) {
+                
+                if (i != targetCol) {
+                    DefaultTableCellRenderer rightRenderer1 = new DefaultTableCellRenderer();
+                    rightRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+                    jXTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer1);
+                }
+            }
+        });
+        
         DefaultTableModel tbModel = new DefaultTableModel();
         
         DefaultTableModel oldModel = (DefaultTableModel)jXTable1.getModel();
