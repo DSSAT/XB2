@@ -14,9 +14,6 @@ package FileXDialog;
 import Extensions.Variables;
 import FileXModel.Simulation;
 import FileXModel.FileX;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -116,8 +113,12 @@ public class SimulationDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Simulation sim = (Simulation)FileX.simulationList.GetAtIndex(level - 1);
-        return sim.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Simulation sim = (Simulation)FileX.simulationList.GetAtIndex(level - 1);
+            returnLevel = sim.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

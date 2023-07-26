@@ -114,8 +114,13 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAtIndex(level - 1);
-        return soil.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAtIndex(level - 1);
+            returnLevel = soil.GetLevel();
+        }
+        
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

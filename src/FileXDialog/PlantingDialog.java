@@ -113,8 +113,12 @@ public class PlantingDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Planting plant = (Planting) FileX.plantings.GetAtIndex(level - 1);
-        return plant.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Planting plant = (Planting) FileX.plantings.GetAtIndex(level - 1);
+            returnLevel = plant.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

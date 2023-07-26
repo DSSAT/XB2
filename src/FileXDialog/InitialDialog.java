@@ -14,9 +14,6 @@ package FileXDialog;
 import Extensions.Variables;
 import FileXModel.InitialCondition;
 import FileXModel.FileX;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -116,8 +113,13 @@ public class InitialDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        InitialCondition init = (InitialCondition) FileX.initialList.GetAtIndex(level);
-        return init.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            InitialCondition init = (InitialCondition) FileX.initialList.GetAtIndex(level);
+            returnLevel = init.GetLevel();
+        }
+        
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -112,8 +112,12 @@ public class EnvironmentalDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Environmental env = (Environmental)FileX.environmentals.GetAtIndex(level - 1);
-        return env.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Environmental env = (Environmental)FileX.environmentals.GetAtIndex(level - 1);
+            returnLevel = env.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

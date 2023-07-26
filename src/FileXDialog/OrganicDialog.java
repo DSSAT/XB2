@@ -113,8 +113,12 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Organic organic = (Organic) FileX.organicList.GetAtIndex(level - 1);
-        return organic.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Organic organic = (Organic) FileX.organicList.GetAtIndex(level - 1);
+            returnLevel = organic.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

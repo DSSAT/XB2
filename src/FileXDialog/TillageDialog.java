@@ -112,8 +112,12 @@ public class TillageDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Tillage til = (Tillage)FileX.tillageList.GetAtIndex(level - 1);
-        return til.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Tillage til = (Tillage)FileX.tillageList.GetAtIndex(level - 1);
+            returnLevel = til.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

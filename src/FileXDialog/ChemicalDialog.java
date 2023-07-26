@@ -112,7 +112,12 @@ public class ChemicalDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        return level;
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Chemical chem = (Chemical)FileX.tillageList.GetAtIndex(level - 1);
+            returnLevel = chem.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

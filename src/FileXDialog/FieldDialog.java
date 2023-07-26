@@ -112,8 +112,13 @@ public class FieldDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        FieldDetail field = (FieldDetail)FileX.fieldList.GetAtIndex(level - 1);
-        return field.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            FieldDetail field = (FieldDetail)FileX.fieldList.GetAtIndex(level - 1);
+            returnLevel = field.GetLevel();
+        }
+        
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

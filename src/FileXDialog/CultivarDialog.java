@@ -116,8 +116,12 @@ public class CultivarDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(level - 1);
-        return cul.GetLevel();
+        int returnLevel = level;
+        if(returnLevel > 0){
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(level - 1);
+            returnLevel = cul.GetLevel();
+        }
+        return returnLevel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
