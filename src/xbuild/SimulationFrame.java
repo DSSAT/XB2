@@ -18,14 +18,11 @@ import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.ModelXBase;
 import FileXService.FileXValidationService;
-import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.RadioButtonAlignment;
 import xbuild.Components.XColumn;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
 
@@ -65,8 +62,6 @@ public class SimulationFrame extends IXInternalFrame {
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(sim, "SNAME", sim.SNAME);
         
-        bnNext.setEnabled(FileXValidationService.IsMinimumRequired());
-        
         cbIMETH.setInit(sim, "IMETH", sim.IMETH, IrrigationMethodList.GetAll(), 
                 new XColumn[] { 
                     new  XColumn("Code", "Code", 100),
@@ -104,6 +99,15 @@ public class SimulationFrame extends IXInternalFrame {
         
         for(FocusListener li : listens)
             this.addFocusListener(li);
+    }
+    
+    @Override
+    public boolean isPrevButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isNextButtonEnabled(){
+        return FileXValidationService.IsMinimumRequired();
     }
 
     /**
@@ -346,8 +350,6 @@ public class SimulationFrame extends IXInternalFrame {
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
-        bnPrevious = new javax.swing.JButton();
-        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -1893,20 +1895,6 @@ public class SimulationFrame extends IXInternalFrame {
         lblLevel1.setText("Simulation Controls");
         lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
-
-        bnNext.setText("NEXT");
-        bnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1919,21 +1907,13 @@ public class SimulationFrame extends IXInternalFrame {
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnPrevious)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext)))
-                .addContainerGap(203, Short.MAX_VALUE))
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnPrevious)
-                    .addComponent(bnNext))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2442,21 +2422,7 @@ public class SimulationFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_dpSDATEPropertyChange
 
-    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Simulation Controls", MenuDirection.PREVIOUS));
-        });
-    }//GEN-LAST:event_bnPreviousActionPerformed
-
-    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Simulation Controls", MenuDirection.NEXT));
-        });
-    }//GEN-LAST:event_bnNextActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnNext;
-    private javax.swing.JButton bnPrevious;
     private javax.swing.JComboBox cbCO2;
     private xbuild.Components.XDropdownTableComboBox cbCrop;
     private xbuild.Components.XDropdownTableComboBox cbIMETH;

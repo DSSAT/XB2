@@ -1,7 +1,6 @@
 package xbuild.Components;
 
 import DSSATModel.Setup;
-import FileXModel.FileX;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -49,6 +48,14 @@ public abstract class IXInternalFrame extends JInternalFrame {
         if (this.l == null) {
             this.l = l;
         }
+    }
+    
+    public boolean isPrevButtonEnabled(){
+        return false;
+    }
+    
+    public boolean isNextButtonEnabled(){
+        return false;
     }
 
     protected void setImage(JLabel imagePanel, String imageFile) {

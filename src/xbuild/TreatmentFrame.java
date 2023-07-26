@@ -62,6 +62,11 @@ public class TreatmentFrame extends IXInternalFrame  {
     public void updatePanelName(String name){
         LoadTreament();
     }
+    
+    @Override
+    public boolean isPrevButtonEnabled(){
+        return true;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -77,8 +82,6 @@ public class TreatmentFrame extends IXInternalFrame  {
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
-        bnPrevious = new javax.swing.JButton();
-        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
@@ -136,21 +139,6 @@ public class TreatmentFrame extends IXInternalFrame  {
         lblLevel1.setText("Treatments");
         lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
-
-        bnNext.setText("NEXT");
-        bnNext.setEnabled(false);
-        bnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,28 +152,20 @@ public class TreatmentFrame extends IXInternalFrame  {
                         .addComponent(bnAddLayer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnDeleteLayer))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnPrevious)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnPrevious)
-                    .addComponent(bnNext))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnAddLayer)
                     .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bnDeleteLayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -267,24 +247,10 @@ public class TreatmentFrame extends IXInternalFrame  {
         l.myAction(new RemoveLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + name));
     }//GEN-LAST:event_bnDeleteLayerActionPerformed
 
-    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Treatments", MenuDirection.PREVIOUS));
-        });
-    }//GEN-LAST:event_bnPreviousActionPerformed
-
-    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Treatments", MenuDirection.NEXT));
-        });
-    }//GEN-LAST:event_bnNextActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
-    private javax.swing.JButton bnNext;
-    private javax.swing.JButton bnPrevious;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel1;

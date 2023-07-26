@@ -147,6 +147,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             add("Treatments");
         }
     };
+    
+    private String currentFrameName = "General Information";
 
     public MainForm() {
 
@@ -192,6 +194,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         desktopPane = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTree1 = new org.jdesktop.swingx.JXTree();
+        bnPrevious = new javax.swing.JButton();
+        bnNext = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuNewFile = new javax.swing.JMenuItem();
@@ -262,7 +266,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("XB2 v0.6.0.0");
+        setTitle(" XB2 v0.1.0.0.");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -277,6 +281,22 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
         jScrollPane1.setViewportView(jXTree1);
+
+        bnPrevious.setText("PREVIOUS");
+        bnPrevious.setEnabled(false);
+        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnPreviousActionPerformed(evt);
+            }
+        });
+
+        bnNext.setText("NEXT");
+        bnNext.setEnabled(false);
+        bnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnNextActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
@@ -375,14 +395,26 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(bnPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bnNext)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addComponent(desktopPane)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnNext)
+                    .addComponent(bnPrevious))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
         );
 
         pack();
@@ -545,6 +577,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.setVisible(false);
 
         FileX.CloseFile();
+        setPrevNextButton();
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
@@ -840,7 +873,35 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
     }//GEN-LAST:event_jPopupMenuSimItemMoveDownActionPerformed
 
+    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
+        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+        ArrayList<String> nodeList = new ArrayList<>();
+        getCellIndex(rootNode, nodeList);
+
+        int mIndex = menuAll.indexOf(currentFrameName) + 1;
+
+        String frameName = menuAll.get(mIndex);
+        int select = nodeList.indexOf(frameName);
+
+        showTargetFrame(frameName, select, nodeList, MenuDirection.NEXT);
+    }//GEN-LAST:event_bnNextActionPerformed
+
+    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
+        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+        ArrayList<String> nodeList = new ArrayList<>();
+        getCellIndex(rootNode, nodeList);
+
+        int mIndex = menuAll.indexOf(currentFrameName) - 1;
+
+        String frameName = menuAll.get(mIndex);
+        int select = nodeList.indexOf(frameName);
+
+        showTargetFrame(frameName, select, nodeList, MenuDirection.PREVIOUS);
+    }//GEN-LAST:event_bnPreviousActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnNext;
+    private javax.swing.JButton bnPrevious;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCloseFile;
@@ -1040,8 +1101,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     public void myAction(XEvent e) {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
-        EventQueue.invokeLater(()
-                -> {
+        EventQueue.invokeLater(() -> {
             root.setUserObject(e.getN());
 
             jXTree1.repaint();
@@ -1070,8 +1130,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             for (MouseAdapter m : ms) {
                 jXTree1.addMouseListener(m);
             }
-        }
-        );
+            
+            setPrevNextButton();
+        });
     }
 
     @Override
@@ -1206,6 +1267,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }
     
     private void showTargetFrame(String frameName, int select, ArrayList<String> nodeList, MenuDirection direction) {
+        currentFrameName = frameName;
         if (!frameName.equals("General Information")) {
             ManagementList modelList = (ManagementList) GetManagementList(frameName);
             if (modelList.GetSize() > 0) {
@@ -1335,6 +1397,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     nodeName = node.getParent().toString();
                 }
 
+                currentFrameName = nodeName;
                 IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
 
                 if (frame != null) {
@@ -1343,6 +1406,22 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 }
             }
         }
+        
+        setPrevNextButton();
+    }
+    
+    private void setPrevNextButton(){
+        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+        
+        if(currentFrame != null){
+            bnPrevious.setEnabled(currentFrame.isPrevButtonEnabled());
+            bnNext.setEnabled(currentFrame.isNextButtonEnabled());
+        }
+        else {
+            bnPrevious.setEnabled(false);
+            bnNext.setEnabled(false);
+        }
+        
     }
 }
 
