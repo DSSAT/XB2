@@ -762,9 +762,6 @@
                 </Property>
                 <Property name="label" type="java.lang.String" value="WTH"/>
               </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdWthItemStateChanged"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdGen">
               <Properties>
@@ -773,9 +770,6 @@
                 </Property>
                 <Property name="label" type="java.lang.String" value="Gen"/>
               </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdWthItemStateChanged"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdClimate">
               <Properties>
@@ -784,9 +778,6 @@
                 </Property>
                 <Property name="label" type="java.lang.String" value="Climate"/>
               </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdWthItemStateChanged"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -114,6 +114,18 @@ public class FieldFrame extends IXInternalFrame {
             EventQueue.invokeLater(() -> {
                 cbWSTA.setInit(null, "WSTA", field.WSTA != null && field.WSTA.length() >= 4 ? field.WSTA.substring(0, 4) : "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
                 cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+                
+                rdWth.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
+                
+                rdGen.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
+                
+                rdClimate.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
             });
 
         }
@@ -549,27 +561,12 @@ public class FieldFrame extends IXInternalFrame {
 
         wstaTypeGroup.add(rdWth);
         rdWth.setLabel("WTH");
-        rdWth.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdWthItemStateChanged(evt);
-            }
-        });
 
         wstaTypeGroup.add(rdGen);
         rdGen.setLabel("Gen");
-        rdGen.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdWthItemStateChanged(evt);
-            }
-        });
 
         wstaTypeGroup.add(rdClimate);
         rdClimate.setLabel("Climate");
-        rdClimate.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rdWthItemStateChanged(evt);
-            }
-        });
 
         javax.swing.GroupLayout jXPanel8Layout = new javax.swing.GroupLayout(jXPanel8);
         jXPanel8.setLayout(jXPanel8Layout);
@@ -822,27 +819,22 @@ public class FieldFrame extends IXInternalFrame {
         field.WSTA = cbWSTACode.getSelectedItem().toString();
     }//GEN-LAST:event_cbWSTACodeActionPerformed
 
-    private void rdWthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdWthItemStateChanged
-        try{
-        cbWSTA.setSelectedIndex(-1);
-        cbWSTACode.setSelectedIndex(-1);
+    private void radioWSTAItemStateChanged(java.awt.event.ItemEvent evt) {                                       
+        try {
+            if (rdWth.isSelected()) {
+                FileX.wstaType = WstaType.WTH;
+            } else if (rdGen.isSelected()) {
+                FileX.wstaType = WstaType.WTG;
+            } else if (rdClimate.isSelected()) {
+                FileX.wstaType = WstaType.CLI;
+            }
 
-        if (rdWth.isSelected()) {
-            FileX.wstaType = WstaType.WTH;
-        } else if (rdGen.isSelected()) {
-            FileX.wstaType = WstaType.WTG;
-        } else if (rdClimate.isSelected()) {
-            FileX.wstaType = WstaType.CLI;
+            cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+            cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
+        } catch (Exception ex) {
         }
-
-        cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
-        cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
-        }
-        catch(Exception ex){
-            
-        }
-    }//GEN-LAST:event_rdWthItemStateChanged
-
+    }
+    
     private List<String> loadWSTACode(String wCode) {
         ArrayList<String> items = new ArrayList<>();
 
