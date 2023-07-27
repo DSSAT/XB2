@@ -638,6 +638,12 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
     private void cbCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCropActionPerformed
         if(cbCrop.getSelectedItem() != null && cbCrop.getSelectedItem().getClass() == Crop.class){
+            Crop crop = (Crop)cbCrop.getSelectedItem();
+            
+            if (crop != null && !"".equals(crop.CropCode)) {
+                setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
+            }
+            
             updateTree();
         }
     }//GEN-LAST:event_cbCropActionPerformed
@@ -759,7 +765,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
             doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(),2,'0');
             if(cbFileType.getSelectedItem().toString().equals("Experimental") && !"".equals(FileX.general.crop.CropCode))
             {
-                doc += "." + FileX.general.crop.CropCode + "X";
+                Crop crop = (Crop)cbCrop.getSelectedItem();
+                
+                doc += "." + (crop == null || crop.CropCode == null ? "" : crop.CropCode) + "X";
             }
             else if(cbFileType.getSelectedItem().toString().equals("Sequential"))
             {
