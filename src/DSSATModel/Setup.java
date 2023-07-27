@@ -35,7 +35,7 @@ public class Setup {
     }
 
     public String GetDefaultPath() {
-        if (DSSATPath == null) {
+        if (GetDSSATPath() == null) {
             GetFile();
         }
 
