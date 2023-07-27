@@ -113,7 +113,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         {
             add("General Information");
             add("Notes");
-            add("Treatments");
         }
     };
     

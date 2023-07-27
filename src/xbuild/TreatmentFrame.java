@@ -25,16 +25,12 @@ import java.awt.EventQueue;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
 
 /**
  *
@@ -77,30 +73,12 @@ public class TreatmentFrame extends IXInternalFrame  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bnAddLayer = new javax.swing.JButton();
-        bnDeleteLayer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(767, 677));
-
-        bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
-        bnAddLayer.setText("Add");
-        bnAddLayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnAddLayerActionPerformed(evt);
-            }
-        });
-
-        bnDeleteLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Minus.png"))); // NOI18N
-        bnDeleteLayer.setText("Delete");
-        bnDeleteLayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDeleteLayerActionPerformed(evt);
-            }
-        });
 
         jXTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,10 +126,7 @@ public class TreatmentFrame extends IXInternalFrame  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
-                        .addComponent(bnAddLayer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnDeleteLayer))
+                        .addGap(0, 656, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -159,12 +134,9 @@ public class TreatmentFrame extends IXInternalFrame  {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnAddLayer)
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnDeleteLayer))
+                .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
 
@@ -202,55 +174,8 @@ public class TreatmentFrame extends IXInternalFrame  {
         else if(col == 14 + addCol) ShowSimulation(col, row, p);
     }//GEN-LAST:event_jXTable1MouseClicked
 
-    private void bnAddLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLayerActionPerformed
-        int row = jXTable1.getSelectedRow();
-        Treatment treatment = null;
-        if (row >= 0) {
-            try {
-                treatment = ((Treatment)FileX.treaments.GetAtIndex(row)).Clone();
-            } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(TreatmentFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(FileX.general.FileType != ExperimentType.Sequential){
-                treatment.SetLevel(FileX.treaments.GetSize() + 1);
-            }
-            else{
-                Integer r = Utils.ParseInteger(((Treatment)FileX.treaments.GetAtIndex(FileX.treaments.GetSize() - 1)).R) + 1;
-                treatment.R = r.toString();
-            }
-        }
-        else {
-            treatment = new Treatment();
-            treatment.SetLevel(FileX.general.FileType == ExperimentType.Sequential ? 1 : FileX.treaments.GetSize() + 1);
-        }
-        
-        if(FileX.treaments.GetSize() == 0){
-            treatment.CU = FileX.cultivars.GetAtIndex(0).GetLevel();
-            treatment.FL = FileX.fieldList.GetAtIndex(0).GetLevel();
-            treatment.MP = FileX.plantings.GetAtIndex(0).GetLevel();
-            treatment.SM = FileX.simulationList.GetAtIndex(0).GetLevel();
-        }
-        
-
-        FileX.treaments.AddNew(treatment);
-        LoadTreament();
-        
-        l.myAction(new AddLevelEvent(this, "Treatments", "Level " + treatment.GetLevel() + ": " + treatment.GetName()));
-    }//GEN-LAST:event_bnAddLayerActionPerformed
-
-    private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
-        int row = jXTable1.getSelectedRow();
-        String name = FileX.treaments.GetAtIndex(row).GetName();
-        FileX.treaments.RemoveAt(row);
-        LoadTreament();
-        
-        l.myAction(new RemoveLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + name));
-    }//GEN-LAST:event_bnDeleteLayerActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnAddLayer;
-    private javax.swing.JButton bnDeleteLayer;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable jXTable1;
     private org.jdesktop.swingx.JXLabel lblLevel1;
@@ -664,6 +589,8 @@ public class TreatmentFrame extends IXInternalFrame  {
                     jXTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer1);
                 }
             }
+            
+            jXTable1.repaint();
         });
         
         DefaultTableModel tbModel = new DefaultTableModel();
