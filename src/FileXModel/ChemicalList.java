@@ -33,9 +33,10 @@ public class ChemicalList extends ManagementList {
     }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Chemical model = new Chemical(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
 }

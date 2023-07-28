@@ -204,7 +204,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).CU = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).CU = level;
                     LoadTreament();
                 }
             }
@@ -234,7 +234,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).FL = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).FL = level;
                     LoadTreament();
                 }
             }
@@ -264,7 +264,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).SA = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).SA = level;
                     LoadTreament();
                 }
             }
@@ -294,7 +294,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).IC = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).IC = level;
                     LoadTreament();
                 }
             }
@@ -324,7 +324,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).SM = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).SM = level;
                     LoadTreament();
                 }
             }
@@ -354,7 +354,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MH = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MH = level;
                     LoadTreament();
                 }
             }
@@ -384,7 +384,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).ME = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).ME = level;
                     LoadTreament();
                 }
             }
@@ -414,7 +414,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MT = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MT = level;
                     LoadTreament();
                 }
             }
@@ -444,7 +444,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MC = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MC = level;
                     LoadTreament();
                 }
             }
@@ -474,7 +474,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MR = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MR = level;
                     LoadTreament();
                 }
             }
@@ -504,7 +504,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MF = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MF = level;
                     LoadTreament();
                 }
             }
@@ -534,7 +534,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MI = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MI = level;
                     LoadTreament();
                 }
             }
@@ -564,7 +564,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             public void windowClosed(WindowEvent e) {
                 Integer level = dialog.GetLevel();
                 if(level != null){
-                    ((Treatment)FileX.treaments.GetAtIndex(row)).MP = level;
+                    ((Treatment)FileX.treatments.GetAtIndex(row)).MP = level;
                     LoadTreament();
                 }
             }
@@ -602,7 +602,7 @@ public class TreatmentFrame extends IXInternalFrame  {
         }
         
         jXTable1.setModel(tbModel);
-        for(ModelXBase model : FileX.treaments.GetAll())
+        for(ModelXBase model : FileX.treatments.GetAll())
         {
             Treatment treatment = (Treatment)model;
             Object row[] = new Object[18];
@@ -700,15 +700,15 @@ public class TreatmentFrame extends IXInternalFrame  {
             int row = e.getFirstRow();
             DefaultTableModel tbModel1 = (DefaultTableModel) jXTable1.getModel();
             
-            ((Treatment)FileX.treaments.GetAtIndex(row)).TNAME = (String) tbModel1.getValueAt(row, 4);
-            ((Treatment)FileX.treaments.GetAtIndex(row)).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).TNAME = (String) tbModel1.getValueAt(row, 4);
+            ((Treatment)FileX.treatments.GetAtIndex(row)).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
             if (FileX.general.FileType == ExperimentType.Sequential) {
-                ((Treatment)FileX.treaments.GetAtIndex(row)).R = (String) tbModel1.getValueAt(row, 1);
-                ((Treatment)FileX.treaments.GetAtIndex(row)).O = (String) tbModel1.getValueAt(row, 2);
-                ((Treatment)FileX.treaments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
+                ((Treatment)FileX.treatments.GetAtIndex(row)).R = (String) tbModel1.getValueAt(row, 1);
+                ((Treatment)FileX.treatments.GetAtIndex(row)).O = (String) tbModel1.getValueAt(row, 2);
+                ((Treatment)FileX.treatments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
             }
             
-            l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treaments.GetAtIndex(row).GetName(), row));
+            l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treatments.GetAtIndex(row).GetName(), row));
         });
         
         jXTable1.getColumnModel().getColumn(0).setPreferredWidth(30);

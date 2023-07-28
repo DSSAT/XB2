@@ -12,9 +12,10 @@ package FileXModel;
 public class EnvironmentalList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Environmental model = new Environmental(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     

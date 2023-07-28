@@ -102,6 +102,7 @@ public class XSpinner extends JSpinner {
     
     @Override
     public Object getValue(){
+        try{
         if(this.textField == null || "".equals(this.textField.getText())){
             return null;
         }
@@ -126,6 +127,10 @@ public class XSpinner extends JSpinner {
 
             }
             return this.value;
+        }
+        }
+        catch(Exception ex){
+            return null;
         }
     }
     

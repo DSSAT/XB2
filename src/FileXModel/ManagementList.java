@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class ManagementList {
     protected ArrayList<ModelXBase> modelList = new ArrayList<>();
     
-    public abstract ModelXBase AddNew(String name);
+    public abstract ModelXBase AddNew(String name, int newLevel, int currentLevel);
     public abstract ModelXBase Clone(int sourceIndex, String newName);
     
     public void AddNew(ModelXBase model){

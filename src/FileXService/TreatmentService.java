@@ -3,12 +3,12 @@ package FileXService;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.FileX;
-import static FileXModel.FileX.treaments;
 import FileXModel.Treatment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import static FileXModel.FileX.treatments;
 
 /**
  *
@@ -66,7 +66,7 @@ public class TreatmentService {
                     treatment.ME = Utils.GetInteger(treatmentHeader, strRead, "ME", 2);
                     treatment.MH = Utils.GetInteger(treatmentHeader, strRead, "MH", 2);
                     treatment.SM = Utils.GetInteger(treatmentHeader, strRead, "SM", 2);
-                    treaments.AddNew(treatment);
+                    treatments.AddNew(treatment);
                 }
             }
         } catch (Exception ex) {
@@ -76,12 +76,12 @@ public class TreatmentService {
     
     public static void Extract(PrintWriter pw){
         // <editor-fold defaultstate="collapsed" desc="Treatment">
-        if (treaments.GetSize() > 0) {
+        if (treatments.GetSize() > 0) {
             pw.println();
             pw.println("*TREATMENTS                        -------------FACTOR LEVELS------------");
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
-            for (int i = 0; i < treaments.GetSize(); i++) {
-                Treatment treat = (Treatment) treaments.GetAtIndex(i);
+            for (int i = 0; i < treatments.GetSize(); i++) {
+                Treatment treat = (Treatment) treatments.GetAtIndex(i);
                 pw.print(Utils.PadLeft(treat.GetLevel(), 2, ' '));
                 
                 if(FileX.general.FileType != ExperimentType.Sequential)

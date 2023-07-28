@@ -21,7 +21,7 @@ public class FileX {
     public static HarvestList harvestList;
     public static ChemicalList chemicalList;
     public static SimulationList simulationList;
-    public static TreatmentList treaments;
+    public static TreatmentList treatments;
     public static WstaType wstaType;
     
     public static boolean isFileOpenned;
@@ -50,7 +50,7 @@ public class FileX {
         harvestList = new HarvestList();
         chemicalList = new ChemicalList();
         simulationList = new SimulationList();
-        treaments = new TreatmentList();
+        treatments = new TreatmentList();
 
         fileName = null;
     }
@@ -70,7 +70,7 @@ public class FileX {
         harvestList = null;
         chemicalList = null;
         simulationList = null;
-        treaments = null;
+        treatments = null;
 
         fileName = null;
         isFileOpenned = false;

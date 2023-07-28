@@ -477,7 +477,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
-        if (FileX.treaments.GetSize() == 0) {
+        if (FileX.treatments.GetSize() == 0) {
             final ConfirmDialog d = new ConfirmDialog(this, true);
             d.show();
 
@@ -1000,7 +1000,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 case "Simulation Controls":
                     return FileX.simulationList;
                 case "Treatments":
-                    return FileX.treaments;
+                    return FileX.treatments;
                 default:
                     break;
             }
@@ -1335,23 +1335,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 }
 
                 level++;
-                if ("Simulation Controls".equals(node.toString())) {
-                    Simulation sim = SimulationControlDefaults.Get(FileX.general.FileType);
-                    sim.SetName(nodeName);
-                    CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
-                    if (cm != null) {
-                        sim.SMODEL = cm.ModelCode;
-                    }
-                    if(FileX.plantings.GetSize() > 0 && level <= FileX.plantings.GetSize()){
-                        Planting pl = (Planting) FileX.plantings.GetAt(level);
-                        sim.SDATE = pl.PDATE;
-                    }
-                    modelList.AddNew(sim);
-                    sim.SetLevel(level);
-                } else {
-                    ModelXBase m = modelList.AddNew(nodeName);
-                    m.SetLevel(level);
-                }
+                
+                modelList.AddNew(nodeName, level, -1);
+                
                 DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
                 String newName = "Level " + level + ": " + nodeName;

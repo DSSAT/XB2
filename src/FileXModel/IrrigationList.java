@@ -12,9 +12,10 @@ package FileXModel;
 public class IrrigationList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Irrigation model = new Irrigation(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     

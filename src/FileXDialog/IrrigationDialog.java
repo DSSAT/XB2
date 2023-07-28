@@ -112,7 +112,7 @@ public class IrrigationDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = level;
+        int returnLevel = 0;
         if(returnLevel > 0){
             Irrigation irrig = (Irrigation) FileX.irrigations.GetAtIndex(level - 1);
             returnLevel = irrig.GetLevel();

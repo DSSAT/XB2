@@ -112,7 +112,7 @@ public class EnvironmentalDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = level;
+        int returnLevel = 0;
         if(returnLevel > 0){
             Environmental env = (Environmental)FileX.environmentals.GetAtIndex(level - 1);
             returnLevel = env.GetLevel();

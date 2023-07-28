@@ -113,11 +113,11 @@ public class InitialDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = level;
+        int returnLevel = 0;
         if(returnLevel > 0){
             InitialCondition init = (InitialCondition) FileX.initialList.GetAtIndex(level - 1);
             returnLevel = init.GetLevel();
-        }
+        }      
         
         return returnLevel;
     }

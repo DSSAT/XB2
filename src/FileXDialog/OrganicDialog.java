@@ -113,7 +113,7 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = level;
+        int returnLevel = 0;
         if(returnLevel > 0){
             Organic organic = (Organic) FileX.organicList.GetAtIndex(level - 1);
             returnLevel = organic.GetLevel();

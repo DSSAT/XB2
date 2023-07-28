@@ -30,9 +30,10 @@ public class CultivarList extends ManagementList {
 //    }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Cultivar model = new Cultivar(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
 

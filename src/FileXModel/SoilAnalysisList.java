@@ -12,9 +12,10 @@ package FileXModel;
 public class SoilAnalysisList extends ManagementList {   
        
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         SoilAnalysis model = new SoilAnalysis(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     

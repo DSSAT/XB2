@@ -14,9 +14,10 @@ import java.util.ArrayList;
 public class OrganicList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Organic model = new Organic(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     

@@ -27,9 +27,10 @@ public class PlantingList extends ManagementList {
     }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Planting model = new Planting(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
 }

@@ -114,7 +114,7 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = level;
+        int returnLevel = 0;
         if(returnLevel > 0){
             SoilAnalysis soil = (SoilAnalysis) FileX.soilAnalysis.GetAtIndex(level - 1);
             returnLevel = soil.GetLevel();
