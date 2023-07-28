@@ -214,7 +214,7 @@ public class CultivarsFrame extends IXInternalFrame {
     
     @Override
     public void setSelection(int level){
-        if(level >= 0){
+        if(level >= 0 && jXTable1.getRowCount() > 0){
             level = Math.min(level, jXTable1.getRowCount()) - 1;
             jXTable1.setRowSelectionInterval(level, level);
         }
