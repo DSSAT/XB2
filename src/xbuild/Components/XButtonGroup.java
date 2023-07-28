@@ -161,10 +161,8 @@ public class XButtonGroup extends ButtonGroup {
 
         ((XRadioButton) b).setSelectedItem(modelItems, value);
 
-        b.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                buttonStateChanged(evt, (JRadioButton) b);
-            }
+        b.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+            buttonStateChanged(evt, (JRadioButton) b);
         });
     }
 
@@ -175,7 +173,7 @@ public class XButtonGroup extends ButtonGroup {
             for (ModelItem item : modelItems) {
                 if (rdButton.getText().equalsIgnoreCase(item.description)) {
                     this.value = item.key;
-                    UpdateComponent.updateModel(model, fieldName, value);
+                    UpdateComponent.updateModel(this, model, fieldName, value);
                     break;
                 }
             }

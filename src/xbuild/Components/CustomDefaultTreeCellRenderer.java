@@ -1,6 +1,7 @@
 package xbuild.Components;
 
 import Extensions.Icons;
+import FileXModel.FileX;
 import FileXService.FileXValidationService;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,6 +23,8 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         boolean enabled = true;
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
         String nodeName = node.toString();
+        
+        Component treeCellRendererComponent = super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
         if (node.getParent() != null && !nodeName.equals("General Information")) {
             enabled = FileXValidationService.IsGeneralValid();
@@ -29,9 +32,7 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
 
         if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
-        }
-
-        Component treeCellRendererComponent = super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+        }        
 
         if (nodeName.equals("General Information") || nodeName.equals("Fields") || nodeName.equals("Cultivars") || nodeName.equals("Planting") || nodeName.equals("Simulation Controls") || nodeName.equals("Treatments")) {
             Font font = treeCellRendererComponent.getFont();
@@ -39,8 +40,18 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
                     Collections.singletonMap(
                             TextAttribute.WEIGHT, TextAttribute.WEIGHT_ULTRABOLD));
 
-            treeCellRendererComponent.setFont(font);       
-        } else {
+            treeCellRendererComponent.setFont(font);
+        } 
+        else if(node.getParent() == null && FileX.isDirty){            
+            Font font = treeCellRendererComponent.getFont();
+            font = font.deriveFont(
+                    Collections.singletonMap(
+                            TextAttribute.WEIGHT, TextAttribute.WEIGHT_ULTRABOLD));
+
+            treeCellRendererComponent.setFont(font);
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        }
+        else {
             Font font = treeCellRendererComponent.getFont();
             font = font.deriveFont(
                     Collections.singletonMap(

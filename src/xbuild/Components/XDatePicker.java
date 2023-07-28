@@ -33,22 +33,18 @@ public class XDatePicker extends JXDatePicker {
     }
     
     private void setFocusLost(){
-        this.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                performFocusLost();
-            }
+        this.addActionListener((java.awt.event.ActionEvent evt) -> {
+            performFocusLost();
         });
         
-        this.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                performFocusLost();
-            }
+        this.addPropertyChangeListener((java.beans.PropertyChangeEvent evt) -> {
+            performFocusLost();
         });
     }
 
     public void performFocusLost() {
         this.value = this.getDate();
 
-        UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
     }
 }

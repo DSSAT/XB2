@@ -148,7 +148,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                     String val = getFieldValue(selectItem, codeField);
 
                     if (val != null && !"".equals(val)) {
-                        UpdateComponent.updateModel(model, fieldName, val);
+                        UpdateComponent.updateModel(this, model, fieldName, val);
                     }
                 } catch (Exception ex) {
 

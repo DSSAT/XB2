@@ -50,6 +50,7 @@ import javax.swing.tree.TreePath;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XInternalFrame;
+import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.MenuDirection;
 import xbuild.Events.NewFrameEvent;
 import xbuild.Events.SelectionEvent;
@@ -495,6 +496,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         generalFrame.show();
 
         generalFrame.addMyEventListener(this);
+        
+        setAddDeleteButton();
+        setPrevNextButton();
+        
+        FileX.isReady = true;
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
@@ -513,6 +519,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         } else {
             saveFile();
         }
+        
+        FileX.isDirty = false;
+        EventQueue.invokeLater(() -> {
+                jXTree1.repaint();
+            });
     }//GEN-LAST:event_jMenuSaveFileActionPerformed
 
     private void saveFile() {
@@ -541,54 +552,21 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             target = f.getPath().replace(f.getName(), "");            
         }
         
-        File file = new File(target + "\\" + root.getUserObject().toString());
+        File file = new File(target + "\\" + root.getUserObject().toString().replace("*", ""));
         FileXService.SaveFile(file);
-
-//        JFileChooser fc = new JFileChooser(target);
-//        fc.setSelectedFile(f);
-//
-//        fc.setName(root.getUserObject().toString());
-//        int returnVal = fc.showSaveDialog(this);
-//
-//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            File file = fc.getSelectedFile();
-//            if(file.exists()) {
-//                if(JOptionPane.showConfirmDialog(null, "Do you want to save this file?", "File already existing", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                    FileXService.SaveFile(file);
-//                }
-//                else {
-//                    return;
-//                }
-//            }
-//            FileXService.SaveFile(file);
-//        }
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
 
-        int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(FileX.isDirty){
+            int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if (confirmSave == 2) // Cancel
-        {
-            return;
-        } else if (confirmSave == 0) //Yes
-        {
-            saveFile();
-        }
-
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-        DefaultMutableTreeNode simsChild = null;
-        for (int i = 0; i < root.getChildCount(); i++) {
-            DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
-            if (child.toString().equals("Simulation Controls")) {
-                simsChild = child;
-                break;
+            if (confirmSave == 2) // Cancel
+            {
+                return;
+            } else if (confirmSave == 0) //Yes
+            {
+                saveFile();
             }
-        }
-
-        if (simsChild != null) {
-            simsChild.removeAllChildren();
-            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-            model.reload(simsChild);
         }
 
         jMenuNewFile.setEnabled(true);
@@ -603,6 +581,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         FileX.CloseFile();
         setPrevNextButton();
+        setAddDeleteButton();
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
@@ -661,9 +640,12 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             jMenuSaveFile.setEnabled(true);
             jMenuCloseFile.setEnabled(true);
             jMenuOpenFile.setEnabled(false);
-
-            //checkTreatment();
+            
+            FileX.isReady = true;
         }
+        
+        setAddDeleteButton();
+        setPrevNextButton();
     }//GEN-LAST:event_jMenuOpenFileActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1328,6 +1310,17 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     @Override
     public void myAction(SelectionEvent e) {
         bnDeleteLevel.setEnabled(e.canDelete());
+    }
+    
+    @Override
+    public void myAction(FieldUpdateEvent e) {
+        if(FileX.isReady && !FileX.isDirty){
+            FileX.isDirty = true;
+            
+            EventQueue.invokeLater(() -> {
+                jXTree1.repaint();
+            });
+        }
     }
     
     private void showTargetFrame(String frameName, int select, ArrayList<String> nodeList, MenuDirection direction) {

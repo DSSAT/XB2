@@ -25,6 +25,8 @@ public class FileX {
     public static WstaType wstaType;
     
     public static boolean isFileOpenned;
+    public static boolean isReady;
+    public static boolean isDirty;
     private static String fileName;
     
     public static String GetAbsoluteFileName(){
@@ -36,6 +38,8 @@ public class FileX {
     }
 
     public static void NewFileX() {
+        isReady = false;
+        isDirty = false;
         general = new GeneralInformation();
         fieldList = new FieldList();
         initialList = new InitialConditionList();
@@ -56,6 +60,8 @@ public class FileX {
     }
 
     public static void CloseFile() {
+        isReady = false;
+        isDirty = false;
         general = null;
         fieldList = null;
         initialList = null;

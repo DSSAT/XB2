@@ -68,7 +68,7 @@ public class XSelectTextField extends JTextField {
             this.value = null;
         }
 
-        UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
     }   
 
     @Override
@@ -92,7 +92,7 @@ public class XSelectTextField extends JTextField {
             if(code.equals(value)){
                 super.setText(m.Description);
                 this.value = value;
-                UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+                UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
                 break;
             }
         }

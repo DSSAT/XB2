@@ -8,6 +8,7 @@ package xbuild;
 import DSSATModel.Setup;
 import java.awt.event.*;
 import javax.swing.JFrame;
+import xbuild.Components.UpdateComponent;
 
 /**
  *
@@ -23,6 +24,8 @@ public class Main {
         MainForm mainForm = new MainForm();
         mainForm.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainForm.show();
+        
+        UpdateComponent.setEventListener(mainForm);
         
         final Setup setup = new Setup();
         if(setup.GetDSSATPath() == null)

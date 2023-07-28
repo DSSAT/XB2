@@ -56,6 +56,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         txtInstituteCode.Init(FileX.general, "InstituteCode", FileX.general.InstituteCode);
         txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
         txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
+        
         txtExperimentNumber.Init(FileX.general, "ExperimentNumber", Utils.ParseInteger(FileX.general.ExperimentNumber));
         cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200)}, "CropCode");
 

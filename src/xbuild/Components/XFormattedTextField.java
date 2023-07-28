@@ -65,23 +65,25 @@ public class XFormattedTextField extends JFormattedTextField {
                     break;
                 case Float:
                     try {
-                        this.value = Float.parseFloat(val);
-                    } catch (Exception ex) {
+                        this.value = Float.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
                 case Integer:
                     try {
-                        this.value = Integer.parseInt(val);
-                    } catch (Exception ex) {
+                        this.value = Integer.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
             }
         } else {
             this.value = null;
         }
         
-        UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
     }
 }

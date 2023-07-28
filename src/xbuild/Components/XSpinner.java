@@ -87,7 +87,7 @@ public class XSpinner extends JSpinner {
         else{
             Utils.setTimeout(() -> {
                 this.value = this.getValue();
-                UpdateComponent.updateModel(this.model, this.fieldName, this.value.toString());
+                UpdateComponent.updateModel(this, this.model, this.fieldName, this.value.toString());
             }, 100);
         }
     }
@@ -96,7 +96,7 @@ public class XSpinner extends JSpinner {
         Utils.setTimeout(() -> {
             this.textField.setText("");
             this.value = null;
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
         }, 300);
     }
     
