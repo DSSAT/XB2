@@ -11,6 +11,7 @@ import FileXModel.FileX;
 import FileXModel.ModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
+import FileXModel.ManagementList;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
@@ -128,6 +129,15 @@ public class InitialConditionFrame extends IXInternalFrame {
     }
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
 
@@ -1096,5 +1106,20 @@ public class InitialConditionFrame extends IXInternalFrame {
         }
         
         return soil;
+    }
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.initialList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Initial Conditions";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
     }
 }

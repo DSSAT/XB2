@@ -6,6 +6,7 @@ import FileXModel.FileX;
 import FileXModel.ModelXBase;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
+import FileXModel.ManagementList;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -68,6 +69,15 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     }
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
     
@@ -511,4 +521,19 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     private xbuild.Components.XTextField txtDescription;
     private javax.swing.JFormattedTextField txtEFIR;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.irrigations;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Irrigation";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

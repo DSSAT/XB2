@@ -4,6 +4,7 @@ import DSSATModel.PlantDistributionList;
 import DSSATModel.PlantingMethodList;
 import Extensions.Variables;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Planting;
 import java.awt.event.FocusListener;
@@ -92,6 +93,14 @@ public class PlantingFrame extends IXInternalFrame {
         return true;
     }
 
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -633,4 +642,19 @@ public class PlantingFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtPPOP;
     private xbuild.Components.XFormattedTextField txtSPRL;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.plantings;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Planting";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

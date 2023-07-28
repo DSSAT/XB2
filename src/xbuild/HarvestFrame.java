@@ -8,6 +8,7 @@ import Extensions.Variables;
 import FileXModel.FileX;
 import FileXModel.Harvest;
 import FileXModel.HarvestApplication;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
@@ -90,8 +91,18 @@ public class HarvestFrame extends IXInternalFrame {
     public boolean isPrevButtonEnabled(){
         return true;
     }
+    
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
 
@@ -483,4 +494,19 @@ public class HarvestFrame extends IXInternalFrame {
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.harvestList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Harvest";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

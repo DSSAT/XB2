@@ -8,6 +8,7 @@ import DSSATModel.CropList;
 import DSSATModel.ExperimentType;
 import DSSATModel.WstaType;
 import Extensions.Utils;
+import FileXModel.ManagementList;
 import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.*;
@@ -804,5 +805,10 @@ public class GeneralInfoFrame extends IXInternalFrame {
     @Override
     public boolean isNextButtonEnabled() {
         return FileXValidationService.IsGeneralValid();
+    }
+
+    @Override
+    public ManagementList getManagementList() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

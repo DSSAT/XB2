@@ -3,6 +3,7 @@ package xbuild;
 import DSSATModel.TillageImplementList;
 import Extensions.Variables;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Tillage;
 import FileXModel.TillageApplication;
@@ -110,8 +111,18 @@ public class TillageFrame extends IXInternalFrame {
     public boolean isPrevButtonEnabled(){
         return true;
     }
+    
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
 
@@ -443,4 +454,19 @@ public class TillageFrame extends IXInternalFrame {
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.tillageList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Tillage";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

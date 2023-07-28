@@ -12,6 +12,7 @@
 package xbuild;
 
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import xbuild.Components.IXInternalFrame;
@@ -136,5 +137,10 @@ public class GeneralNotesFrame extends IXInternalFrame implements KeyListener {
         txtNotes.setText(txt);
         
         FileX.general.Notes = txtNotes.getText();
+    }
+
+    @Override
+    public ManagementList getManagementList() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

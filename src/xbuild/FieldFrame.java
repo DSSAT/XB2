@@ -22,6 +22,7 @@ import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
@@ -878,6 +879,15 @@ public class FieldFrame extends IXInternalFrame {
     public boolean isNextButtonEnabled(){
         return true;
     }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private xbuild.Components.XDropdownTableComboBox cbFLDT;
@@ -951,4 +961,19 @@ public class FieldFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtYCRD;
     private javax.swing.ButtonGroup wstaTypeGroup;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.fieldList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Fields";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

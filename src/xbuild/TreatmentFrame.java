@@ -11,8 +11,6 @@
 
 package xbuild;
 
-import xbuild.Events.RemoveLevelEvent;
-import xbuild.Events.AddLevelEvent;
 import xbuild.Events.UpdateLevelEvent;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
@@ -20,6 +18,7 @@ import FileXModel.Treatment;
 import FileXModel.FileX;
 import FileXDialog.CultivarDialog;
 import FileXDialog.FieldDialog;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.Point;
@@ -31,6 +30,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.SelectionEvent;
 
 /**
  *
@@ -62,6 +62,23 @@ public class TreatmentFrame extends IXInternalFrame  {
     @Override
     public boolean isPrevButtonEnabled(){
         return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return jXTable1.getSelectedRow() >= 0;
+    }
+    
+    @Override
+    public void setSelection(int level){
+        if(level >= 0){
+            level = Math.min(level, jXTable1.getRowCount()) - 1;
+            jXTable1.setRowSelectionInterval(level, level);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -172,6 +189,8 @@ public class TreatmentFrame extends IXInternalFrame  {
         else if(col == 12 + addCol) ShowEnvironment(col, row, p);
         else if(col == 13 + addCol) ShowHarvest(col, row, p);
         else if(col == 14 + addCol) ShowSimulation(col, row, p);
+        
+        l.myAction(new SelectionEvent(this, row >= 0));
     }//GEN-LAST:event_jXTable1MouseClicked
 
 
@@ -719,5 +738,20 @@ public class TreatmentFrame extends IXInternalFrame  {
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(2));
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(1));
         }
+    }
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.treatments;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Treatments";
+    }
+    
+    @Override
+    public int getLevel(){
+        return jXTable1.getSelectedRow();
     }
 }

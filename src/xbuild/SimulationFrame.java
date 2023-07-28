@@ -16,6 +16,7 @@ import DSSATModel.*;
 import DSSATModel.SimulationStart;
 import Extensions.Variables;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
@@ -105,9 +106,19 @@ public class SimulationFrame extends IXInternalFrame {
     public boolean isPrevButtonEnabled(){
         return true;
     }
+    
     @Override
     public boolean isNextButtonEnabled(){
         return FileXValidationService.IsMinimumRequired();
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
     }
 
     /**
@@ -2655,4 +2666,14 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XTextField txtRTIME;
     private xbuild.Components.XSpinner xSpinner1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.simulationList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Simulation Controls";
+    }
 }

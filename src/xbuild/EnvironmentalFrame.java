@@ -5,6 +5,7 @@ import Extensions.Variables;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.Rectangle;
 import java.awt.event.FocusListener;
@@ -76,6 +77,15 @@ public class EnvironmentalFrame extends IXInternalFrame {
     }
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
 
@@ -375,4 +385,19 @@ public class EnvironmentalFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel lblLevel1;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.environmentals;
+    }
+    
+    @Override
+    public String getManagementName(){
+        return "Environmental Modifications";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

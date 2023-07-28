@@ -14,14 +14,13 @@ import xbuild.Events.AddLevelEvent;
 import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.CropList;
+import FileXModel.ManagementList;
 import ListDialog.CultivarListDialog;
-import java.awt.EventQueue;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
+import xbuild.Events.SelectionEvent;
 import xbuild.Events.UpdateLevelEvent;
 
 /**
@@ -160,6 +159,7 @@ public class CultivarsFrame extends IXInternalFrame {
                 }
             });
         }
+        l.myAction(new SelectionEvent(this, jXTable1.getSelectedRow() >= 0));
     }//GEN-LAST:event_jXTable1MouseClicked
 
     public void AddNewCultivar() {
@@ -191,14 +191,33 @@ public class CultivarsFrame extends IXInternalFrame {
             }
         });
     }
-    
+
     @Override
-    public boolean isPrevButtonEnabled(){
+    public boolean isPrevButtonEnabled() {
         return true;
     }
+
     @Override
-    public boolean isNextButtonEnabled(){
+    public boolean isNextButtonEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean isAddButtonEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isDeleteButtonEnabled() {
+        return jXTable1.getSelectedRow() >= 0;
+    }
+    
+    @Override
+    public void setSelection(int level){
+        if(level >= 0){
+            level = Math.min(level, jXTable1.getRowCount()) - 1;
+            jXTable1.setRowSelectionInterval(level, level);
+        }
     }
 
     private Object[] SetRow(Cultivar cul) {
@@ -220,5 +239,20 @@ public class CultivarsFrame extends IXInternalFrame {
             DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
             model.addRow(SetRow((Cultivar) FileX.cultivars.GetAtIndex(i)));
         }
+    }
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.cultivars;
+    }
+
+    @Override
+    public String getManagementName() {
+        return "Cultivars";
+    }
+
+    @Override
+    public int getLevel() {
+        return jXTable1.getSelectedRow() + 1;
     }
 }

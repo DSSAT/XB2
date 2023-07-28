@@ -16,4 +16,5 @@ public interface XEventListener {
     public abstract void myAction (UpdateLevelEvent e);
     public abstract void myAction (ValidationEvent e);
     public abstract void myAction (NewFrameEvent e);
+    public abstract void myAction (SelectionEvent e);
 }

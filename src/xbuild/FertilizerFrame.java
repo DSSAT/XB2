@@ -6,6 +6,7 @@ import Extensions.Variables;
 import FileXModel.Fertilizer;
 import FileXModel.FertilizerApplication;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
@@ -92,6 +93,14 @@ public class FertilizerFrame extends IXInternalFrame {
         return true;
     }
 
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -488,4 +497,19 @@ public class FertilizerFrame extends IXInternalFrame {
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.fertilizerList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Fertilizer";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

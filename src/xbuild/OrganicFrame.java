@@ -4,6 +4,7 @@ import DSSATModel.FertilizerMethodList;
 import DSSATModel.ResiduesList;
 import Extensions.Variables;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Organic;
 import FileXModel.OrganicApplication;
@@ -90,8 +91,18 @@ public class OrganicFrame extends IXInternalFrame {
     public boolean isPrevButtonEnabled(){
         return true;
     }
+    
     @Override
     public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
         return true;
     }
 
@@ -468,4 +479,19 @@ public class OrganicFrame extends IXInternalFrame {
     private javax.swing.JRadioButton rdReportedDates;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.organicList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Organic Amendments";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }
