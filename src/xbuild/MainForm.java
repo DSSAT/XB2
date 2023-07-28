@@ -281,7 +281,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         });
         jScrollPane1.setViewportView(jXTree1);
 
-        bnPrevious.setText("PREVIOUS");
+        bnPrevious.setText("Previous Section");
         bnPrevious.setEnabled(false);
         bnPrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,7 +289,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
 
-        bnNext.setText("NEXT");
+        bnNext.setText("Next Section");
         bnNext.setEnabled(false);
         bnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +297,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
 
-        bnAddLevel.setText("Add");
+        bnAddLevel.setText("Add Level");
         bnAddLevel.setEnabled(false);
         bnAddLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,7 +305,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             }
         });
 
-        bnDeleteLevel.setText("Delete");
+        bnDeleteLevel.setText("Delete Level");
         bnDeleteLevel.setEnabled(false);
         bnDeleteLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,13 +415,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnAddLevel)
+                        .addComponent(bnAddLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnDeleteLevel)
-                        .addGap(18, 18, 18)
-                        .addComponent(bnPrevious)
+                        .addComponent(bnDeleteLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(bnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext)
+                        .addComponent(bnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(

@@ -220,13 +220,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="desktopPane" pref="962" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="bnAddLevel" min="-2" max="-2" attributes="0"/>
+                      <Component id="bnAddLevel" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnDeleteLevel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bnPrevious" min="-2" max="-2" attributes="0"/>
+                      <Component id="bnDeleteLevel" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="bnPrevious" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnNext" min="-2" max="-2" attributes="0"/>
+                      <Component id="bnNext" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -279,7 +279,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="bnPrevious">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PREVIOUS"/>
+        <Property name="text" type="java.lang.String" value="Previous Section"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -288,7 +288,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bnNext">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NEXT"/>
+        <Property name="text" type="java.lang.String" value="Next Section"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -297,7 +297,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bnAddLevel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="Add Level"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -306,7 +306,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bnDeleteLevel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="text" type="java.lang.String" value="Delete Level"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
