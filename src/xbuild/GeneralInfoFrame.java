@@ -42,11 +42,12 @@ public class GeneralInfoFrame extends IXInternalFrame {
         }
 
         if (FileX.general.ExperimentNumber == null || "".equals(FileX.general.ExperimentNumber)) {
-            FileX.general.ExperimentNumber = "1";
+            FileX.general.ExperimentNumber = "01";
         }
 
         txtInstituteCode.setDocument(new LimitDocument(2));
         txtSiteCode.setDocument(new LimitDocument(2));
+        txtYear.setDocument(new LimitDocument(4));
 
         cbFileType.setInit(FileX.general, "FileType", FileX.general.FileType.toString());
         if (FileX.general.FileType == ExperimentType.Experimental) {
@@ -55,9 +56,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         txtInstituteCode.Init(FileX.general, "InstituteCode", FileX.general.InstituteCode);
         txtSiteCode.Init(FileX.general, "SiteCode", FileX.general.SiteCode);
-        txtYear.Init(FileX.general, "Year", Utils.ParseInteger(FileX.general.Year));
+        txtYear.Init(FileX.general, "Year", FileX.general.Year);
         
-        txtExperimentNumber.Init(FileX.general, "ExperimentNumber", Utils.ParseInteger(FileX.general.ExperimentNumber));
+        txtExperimentNumber.Init(FileX.general, "ExperimentNumber", FileX.general.ExperimentNumber);
         cbCrop.setInit(FileX.general.crop, "CropCode", FileX.general.crop.CropCode, CropList.GetAll(), new XColumn[]{new XColumn("CropName", "Crop Name", 200)}, "CropCode");
 
         txtExperimentName.Init(FileX.general, "ExperimentName", FileX.general.ExperimentName);
@@ -113,11 +114,11 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbCrop = new xbuild.Components.XDropdownTableComboBox();
-        txtYear = new xbuild.Components.XSpinner();
-        txtExperimentNumber = new xbuild.Components.XSpinner();
         jXLabel21 = new org.jdesktop.swingx.JXLabel();
         jXLabel28 = new org.jdesktop.swingx.JXLabel();
         jXLabel29 = new org.jdesktop.swingx.JXLabel();
+        txtYear = new xbuild.Components.XFormattedTextField();
+        txtExperimentNumber = new xbuild.Components.XFormattedTextField();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         txtExperimentName = new xbuild.Components.XTextField();
@@ -227,24 +228,35 @@ public class GeneralInfoFrame extends IXInternalFrame {
             }
         });
 
-        txtYear.setEditor(new javax.swing.JSpinner.NumberEditor(txtYear, "0"));
-        txtYear.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                txtYearStateChanged(evt);
-            }
-        });
-
-        txtExperimentNumber.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                txtExperimentNumberStateChanged(evt);
-            }
-        });
-
         jXLabel21.setText("Please enter 2 Characters");
 
         jXLabel28.setText("Please enter 2 Characters");
 
         jXLabel29.setText("Please enter 4 Characters");
+
+        txtYear.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        try {
+            txtYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtYear.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtYearFocusLost(evt);
+            }
+        });
+
+        txtExperimentNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        try {
+            txtExperimentNumber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtExperimentNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtExperimentNumberFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
@@ -280,18 +292,18 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbFileType, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtExperimentNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtExperimentNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                             .addComponent(txtSiteCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtInstituteCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtInstituteCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jXLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -303,47 +315,48 @@ public class GeneralInfoFrame extends IXInternalFrame {
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jXPanel1Layout.createSequentialGroup()
-                                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbFileType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtInstituteCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jXLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31))
                             .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtSiteCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jXLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(7, 7, 7)
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jXLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
-                            .addComponent(txtExperimentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5))
-                            .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(10, 10, 10)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(14, 14, 14)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(12, 12, 12)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel1Layout.createSequentialGroup()
+                        .addComponent(cbFileType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtInstituteCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSiteCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jXLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtExperimentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(cbCrop, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -375,7 +388,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
                         .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                         .addComponent(txtPeople, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtExperimentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         jXPanel2Layout.setVerticalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,7 +623,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
                         .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,10 +640,6 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtExperimentNumberStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtExperimentNumberStateChanged
-        updateTree();
-    }//GEN-LAST:event_txtExperimentNumberStateChanged
 
     private void txtInstituteCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInstituteCodeFocusLost
         updateTree();
@@ -652,6 +661,11 @@ public class GeneralInfoFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_cbCropActionPerformed
 
+    
+    private void txtExperimentNumberStateChangedCopy(javax.swing.event.ChangeEvent evt) {                                                 
+        updateTree();
+    } 
+    
     private void cbFileTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFileTypeActionPerformed
         switch (cbFileType.getSelectedItem().toString()) {
             case "Experimental":
@@ -686,18 +700,17 @@ public class GeneralInfoFrame extends IXInternalFrame {
         actionPerformed(new ActionEvent(this, 0, "Update"));
     }//GEN-LAST:event_cbFileTypeActionPerformed
 
-    private void txtYearStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtYearStateChanged
-        Object year = txtYear.getValue();
-        if (year != null && year.toString().length() > 4) {
-            EventQueue.invokeLater(() -> {
-                txtYear.setValue(Integer.valueOf(year.toString().substring(0, 4)));
-                actionPerformed(new ActionEvent(this, 0, "Update"));
-            });
-        } else {
-            EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
-        }
-    }//GEN-LAST:event_txtYearStateChanged
+    private void txtYearFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtYearFocusLost
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+    }//GEN-LAST:event_txtYearFocusLost
 
+    private void txtExperimentNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtExperimentNumberFocusLost
+        if(!"".equals(txtExperimentNumber.getText()) && Integer.parseInt(txtExperimentNumber.getText().trim()) < 9){
+            txtExperimentNumber.setText("0" + Integer.valueOf(txtExperimentNumber.getText().trim()));
+        }
+        
+        EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
+    }//GEN-LAST:event_txtExperimentNumberFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private xbuild.Components.XDropdownTableComboBox cbCrop;
@@ -745,7 +758,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel lblLevel1;
     private xbuild.Components.XTextField txtAddress;
     private xbuild.Components.XTextField txtExperimentName;
-    private xbuild.Components.XSpinner txtExperimentNumber;
+    private xbuild.Components.XFormattedTextField txtExperimentNumber;
     private xbuild.Components.XFormattedTextField txtHAREA;
     private xbuild.Components.XFormattedTextField txtHARM;
     private xbuild.Components.XFormattedTextField txtHLEN;
@@ -760,7 +773,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     private xbuild.Components.XTextField txtPeople;
     private xbuild.Components.XTextField txtSite;
     private xbuild.Components.XTextField txtSiteCode;
-    private xbuild.Components.XSpinner txtYear;
+    private xbuild.Components.XFormattedTextField txtYear;
     // End of variables declaration//GEN-END:variables
 
     public void actionPerformed(ActionEvent e) {
@@ -774,7 +787,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     protected String SetDocumentName() {
         String doc = "FileX";
         try {
-            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getValue().toString().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(), 2, '0');
+            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getText().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(), 2, '0');
             if (cbFileType.getSelectedItem().toString().equals("Experimental") && !"".equals(FileX.general.crop.CropCode)) {
                 Crop crop = (Crop) cbCrop.getSelectedItem();
 
