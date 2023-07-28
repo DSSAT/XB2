@@ -116,11 +116,15 @@ public class CultivarDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = 0;
+        int returnLevel = level;
         if(returnLevel > 0){
             Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(level - 1);
             returnLevel = cul.GetLevel();
         }
+        else{
+            returnLevel = 0;
+        }
+            
         return returnLevel;
     }
 

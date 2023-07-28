@@ -112,11 +112,15 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = 0;
+        int returnLevel = level;
         if(returnLevel > 0){
             Fertilizer fertil = (Fertilizer)FileX.fertilizerList.GetAtIndex(level - 1);
             returnLevel = fertil.GetLevel();
         }
+        else{
+            returnLevel = 0;
+        }
+        
         return returnLevel;
     }
 

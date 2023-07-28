@@ -114,11 +114,15 @@ public class HarvestlDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = 0;
+        int returnLevel = level;
         if(returnLevel > 0){
             Harvest harvest = (Harvest) FileX.harvestList.GetAtIndex(level - 1);
             returnLevel = harvest.GetLevel();
         }
+        else{
+            returnLevel = 0;
+        }
+        
         return returnLevel;
     }
 

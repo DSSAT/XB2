@@ -113,11 +113,15 @@ public class SimulationDialog extends javax.swing.JDialog {
 
     public Integer GetLevel()
     {
-        int returnLevel = 0;
+        int returnLevel = level;
         if(returnLevel > 0){
             Simulation sim = (Simulation)FileX.simulationList.GetAtIndex(level - 1);
             returnLevel = sim.GetLevel();
         }
+        else{
+            returnLevel = 0;
+        }
+        
         return returnLevel;
     }
 
