@@ -452,7 +452,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private void jMenuRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRefreshMouseClicked
         Setup setup = new Setup();
-        new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+        new LoadingDataFrame(setup.GetDSSATPath()).show();
 }//GEN-LAST:event_jMenuRefreshMouseClicked
 
     private void jSetupMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSetupMenuMouseClicked
@@ -464,7 +464,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             public void windowClosed(WindowEvent evt) {
                 if (frame.IsOk) {
                     Setup setup = new Setup();
-                    new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+                    new LoadingDataFrame(setup.GetDSSATPath()).show();
                 }
             }
         });
@@ -585,7 +585,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
-        JFileChooser fc = new JFileChooser(new Setup().GetDefaultPath());
+        JFileChooser fc = new JFileChooser(new Setup().GetDSSATPath());
         FileFilter filter1 = new ExtensionFileFilter("File x", new String[]{"x", "X"});
 
         fc.setFileFilter(filter1);

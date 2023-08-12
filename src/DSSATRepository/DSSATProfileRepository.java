@@ -1,8 +1,10 @@
 package DSSATRepository;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,11 +16,9 @@ import xbuild.LoadingDataFrame;
  * @author Jazzy
  */
 public class DSSATProfileRepository {
-    private String version;
-    private String rootPath;
+    private final String rootPath;
     
-    public DSSATProfileRepository(String version, String rootPath){
-        this.version = version;
+    public DSSATProfileRepository(String rootPath){
         this.rootPath = rootPath;
     }
     
@@ -30,7 +30,22 @@ public class DSSATProfileRepository {
             
         // <editor-fold defaultstate="collapsed" desc="DSSATPRO.vxx">
         try {
-            file = new FileReader(rootPath + "\\DSSATPRO." + version);
+            
+            File directoryPath = new File(rootPath);
+            
+            FilenameFilter textFilefilter = (File dir, String name) -> {
+                String lowercaseName = name.toLowerCase();
+                return lowercaseName.contains("dssatpro.v");
+            };
+            
+            String dssatProfile = "";
+            
+            File filesList[] = directoryPath.listFiles(textFilefilter);
+            for(File f : filesList) {
+                dssatProfile = f.getAbsolutePath();
+            }            
+            
+            file = new FileReader(dssatProfile);
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }

@@ -50,7 +50,6 @@ public class FileXService {
             }
         }
         
-        new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
         FileX.isFileOpenned = true;
     }
     
@@ -82,8 +81,6 @@ public class FileXService {
         
         try {
             writer.close();
-            
-            new Setup().SetDefaultPath(file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(FileX.class.getName()).log(Level.SEVERE, null, ex);
         }

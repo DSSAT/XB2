@@ -36,12 +36,12 @@ public class Main {
             frame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent evt) {
-                    new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+                    new LoadingDataFrame(setup.GetDSSATPath()).show();
                 } 
             });
         }
         else
-            new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+            new LoadingDataFrame(setup.GetDSSATPath()).show();
     }
 
 }
