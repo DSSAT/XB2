@@ -224,9 +224,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="bnDeleteLevel" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                      <Component id="bnPrevious" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="bnPrevious" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnNext" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="bnNext" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
