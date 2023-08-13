@@ -8,8 +8,6 @@ package FileXModel;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -70,5 +68,10 @@ public class TreatmentList extends ManagementList {
         }
         
         return newSource;
+    }
+
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

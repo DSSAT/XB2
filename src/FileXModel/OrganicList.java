@@ -40,4 +40,17 @@ public class OrganicList extends ManagementList {
         
         return newSource;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MR == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

@@ -39,4 +39,17 @@ public class EnvironmentalList extends ManagementList {
         
         return newSource;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).ME == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

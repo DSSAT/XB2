@@ -39,4 +39,17 @@ public class FieldList extends ManagementList {
         
         return newfield;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).FL == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

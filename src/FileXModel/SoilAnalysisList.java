@@ -42,5 +42,11 @@ public class SoilAnalysisList extends ManagementList {
         }
         
         return newSource;
+    }
+
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = FileX.treatments.treatments.stream().anyMatch(treatment -> treatment.SA == level);
+        return isUsed;
     }    
 }

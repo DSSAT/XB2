@@ -1441,36 +1441,42 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     
     private void removeLevel(){
         if (JOptionPane.showConfirmDialog(new JXFrame(), "Do you want to delete this level") == 0) {
+            
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
 
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
-            model.removeNodeFromParent(node);
-
-            desktopPane.removeAll();
-            desktopPane.repaint();
-
             ManagementList modelList = GetManagementList(parentNode.toString());
             int level = modelList.GetIndex(getLevel(node.toString()));
-            modelList.RemoveAt(level);
+            
+            if(!modelList.IsUseInTreatment(level + 1)){
+                modelList.RemoveAt(level);
+                model.removeNodeFromParent(node);
 
-            EventQueue.invokeLater(() -> {                
-                for (int i = level; i < modelList.GetSize(); i++) {                    
-                    ModelXBase m = modelList.GetAtIndex(i);
+                desktopPane.removeAll();
+                desktopPane.repaint();
 
-                    if (m.getClass() == Treatment.class && FileX.general.FileType == ExperimentType.Sequential) {
+                EventQueue.invokeLater(() -> {
+                    for (int i = level; i < modelList.GetSize(); i++) {
+                        ModelXBase m = modelList.GetAtIndex(i);
 
-                    } else {
-                        m.SetLevel(m.GetLevel() - 1);
-                        DefaultMutableTreeNode child = (DefaultMutableTreeNode) parentNode.getChildAt(i);
-                        String newName = "Level " + m.GetLevel() + ": " + m.GetName();
-                        child.setUserObject(newName);
-                    }                    
-                }
-                model.reload(parentNode);
-                jXTree1.setSelectionPath(new TreePath(parentNode.getPath()));
-            });
+                        if (m.getClass() == Treatment.class && FileX.general.FileType == ExperimentType.Sequential) {
+
+                        } else {
+                            m.SetLevel(m.GetLevel() - 1);
+                            DefaultMutableTreeNode child = (DefaultMutableTreeNode) parentNode.getChildAt(i);
+                            String newName = "Level " + m.GetLevel() + ": " + m.GetName();
+                            child.setUserObject(newName);
+                        }
+                    }
+                    model.reload(parentNode);
+                    jXTree1.setSelectionPath(new TreePath(parentNode.getPath()));
+                });
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "<html>Cannot remove this level<br>This level is use in treatments", "Invalid!", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     

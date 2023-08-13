@@ -48,4 +48,17 @@ public class SimulationList extends ManagementList {
         
         return newSim;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).SM == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

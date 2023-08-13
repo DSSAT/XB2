@@ -41,4 +41,17 @@ public class CultivarList extends ManagementList {
     public ModelXBase Clone(int sourceIndex, String newName) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).CU == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

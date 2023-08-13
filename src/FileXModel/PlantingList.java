@@ -33,4 +33,17 @@ public class PlantingList extends ManagementList {
         model.SetLevel(newLevel);
         return model;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MP == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

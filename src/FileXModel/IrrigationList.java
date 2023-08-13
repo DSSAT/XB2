@@ -39,4 +39,17 @@ public class IrrigationList extends ManagementList {
         
         return newSource;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MI == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }

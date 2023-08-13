@@ -39,4 +39,17 @@ public class HarvestList extends ManagementList {
         model.SetLevel(newLevel);
         return model;
     }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MH == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
+    }
 }
