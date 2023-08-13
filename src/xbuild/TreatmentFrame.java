@@ -16,21 +16,17 @@ import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.Treatment;
 import FileXModel.FileX;
-import FileXDialog.CultivarDialog;
-import FileXDialog.FieldDialog;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
-import java.awt.Point;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import xbuild.Components.CultivarTableCellEditor;
 import xbuild.Components.IXInternalFrame;
-import xbuild.Events.SelectionEvent;
+import xbuild.Components.TreatmentTableCellEditor;
 
 /**
  *
@@ -109,7 +105,7 @@ public class TreatmentFrame extends IXInternalFrame  {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false
+                true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,15 +116,13 @@ public class TreatmentFrame extends IXInternalFrame  {
                 return canEdit [columnIndex];
             }
         });
-        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jXTable1MouseClicked(evt);
-            }
-        });
+        jXTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jXTable1);
         if (jXTable1.getColumnModel().getColumnCount() > 0) {
             jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
             jXTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jXTable1.getColumnModel().getColumn(5).setCellEditor(null);
+            jXTable1.getColumnModel().getColumn(5).setCellRenderer(null);
         }
 
         lblLevel1.setText("Treatments");
@@ -160,39 +154,6 @@ public class TreatmentFrame extends IXInternalFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        int row = jXTable1.getSelectedRow();
-
-        if(row > jXTable1.getRowCount());
-        int col = jXTable1.getSelectedColumn();
-
-        //jXTable1.getColumnModel().getColumn(col).getWidth();
-        Point p = jXTable1.getLocationOnScreen();
-        
-        for(int i = 0;i < col;i++)
-            p.x += jXTable1.getColumnModel().getColumn(i).getWidth();
-
-        p.y += (row + 1) * jXTable1.getRowHeight();
-
-        int addCol = FileX.general.FileType == ExperimentType.Sequential ? 3 : 0;
-
-        if(col == 2 + addCol) ShowCultivar(col, row, p);
-        else if(col == 3 + addCol) ShowField(col, row, p);
-        else if(col == 4 + addCol) ShowSoilAnalysis(col, row, p);
-        else if(col == 5 + addCol) ShowInitial(col, row, p);
-        else if(col == 6 + addCol) ShowPlant(col, row, p);
-        else if(col == 7 + addCol) ShowIrrigation(col, row, p);
-        else if(col == 8 + addCol) ShowFertilizer(col, row, p);
-        else if(col == 9 + addCol) ShowOrganic(col, row, p);
-        else if(col == 10 + addCol) ShowChemical(col, row, p);
-        else if(col == 11 + addCol) ShowTillage(col, row, p);
-        else if(col == 12 + addCol) ShowEnvironment(col, row, p);
-        else if(col == 13 + addCol) ShowHarvest(col, row, p);
-        else if(col == 14 + addCol) ShowSimulation(col, row, p);
-        
-        l.myAction(new SelectionEvent(this, row >= 0));
-    }//GEN-LAST:event_jXTable1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -200,395 +161,6 @@ public class TreatmentFrame extends IXInternalFrame  {
     private org.jdesktop.swingx.JXLabel lblLevel1;
     // End of variables declaration//GEN-END:variables
 
-    private void ShowCultivar(final int col, final int row, Point p) {
-        final CultivarDialog dialog = new CultivarDialog();
-        dialog.setLocation(p);
-        dialog.show();
-        
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).CU = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowField(final int col, final int row, Point p) {
-        final FieldDialog dialog = new FieldDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).FL = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowSoilAnalysis(final int col, final int row, Point p) {
-        final FileXDialog.SoilAnalysisDialog dialog = new FileXDialog.SoilAnalysisDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).SA = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowInitial(final int col, final int row, Point p) {
-        final FileXDialog.InitialDialog dialog = new FileXDialog.InitialDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).IC = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowSimulation(final int col, final int row, Point p) {
-        final FileXDialog.SimulationDialog dialog = new FileXDialog.SimulationDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).SM = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowHarvest(final int col, final int row, Point p) {
-        final FileXDialog.HarvestlDialog dialog = new FileXDialog.HarvestlDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MH = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowEnvironment(final int col, final int row, Point p) {
-        final FileXDialog.EnvironmentalDialog dialog = new FileXDialog.EnvironmentalDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).ME = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowTillage(final int col, final int row, Point p) {
-        final FileXDialog.TillageDialog dialog = new FileXDialog.TillageDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MT = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowChemical(final int col, final int row, Point p) {
-        final FileXDialog.ChemicalDialog dialog = new FileXDialog.ChemicalDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MC = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowOrganic(final int col, final int row, Point p) {
-        final FileXDialog.OrganicDialog dialog = new FileXDialog.OrganicDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MR = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowFertilizer(final int col, final int row, Point p) {
-        final FileXDialog.FertilizerDialog dialog = new FileXDialog.FertilizerDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MF = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowIrrigation(final int col, final int row, Point p) {
-        final FileXDialog.IrrigationDialog dialog = new FileXDialog.IrrigationDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MI = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
-
-    private void ShowPlant(final int col, final int row, Point p) {
-        final FileXDialog.PlantingDialog dialog = new FileXDialog.PlantingDialog();
-        dialog.setLocation(p);
-        dialog.show();
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Integer level = dialog.GetLevel();
-                if(level != null){
-                    ((Treatment)FileX.treatments.GetAtIndex(row)).MP = level;
-                    LoadTreament();
-                }
-            }
-        });
-    }
 
     private void LoadTreament() {
         EventQueue.invokeLater(() -> {
@@ -721,17 +293,50 @@ public class TreatmentFrame extends IXInternalFrame  {
             
             ((Treatment)FileX.treatments.GetAtIndex(row)).TNAME = (String) tbModel1.getValueAt(row, 4);
             ((Treatment)FileX.treatments.GetAtIndex(row)).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
+            
+            int removeCol = 0;
             if (FileX.general.FileType == ExperimentType.Sequential) {
                 ((Treatment)FileX.treatments.GetAtIndex(row)).R = (String) tbModel1.getValueAt(row, 1);
                 ((Treatment)FileX.treatments.GetAtIndex(row)).O = (String) tbModel1.getValueAt(row, 2);
                 ((Treatment)FileX.treatments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
+                
+                removeCol = 3;
             }
+            
+            ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 5 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 6 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 7 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 8 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MP = Utils.ParseInteger(tbModel1.getValueAt(row, 9 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MI = Utils.ParseInteger(tbModel1.getValueAt(row, 10 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MF = Utils.ParseInteger(tbModel1.getValueAt(row, 11 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MR = Utils.ParseInteger(tbModel1.getValueAt(row, 12 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MC = Utils.ParseInteger(tbModel1.getValueAt(row, 13 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MT = Utils.ParseInteger(tbModel1.getValueAt(row, 14 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).ME = Utils.ParseInteger(tbModel1.getValueAt(row, 15 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MH = Utils.ParseInteger(tbModel1.getValueAt(row, 16 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).SM = Utils.ParseInteger(tbModel1.getValueAt(row, 17 - removeCol));
             
             l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treatments.GetAtIndex(row).GetName(), row));
         });
         
         jXTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
         jXTable1.getColumnModel().getColumn(4).setPreferredWidth(200);
+        
+        jXTable1.getColumnModel().getColumn(5).setCellEditor(new CultivarTableCellEditor());
+        jXTable1.getColumnModel().getColumn(6).setCellEditor(new TreatmentTableCellEditor(FileX.fieldList));
+        jXTable1.getColumnModel().getColumn(7).setCellEditor(new TreatmentTableCellEditor(FileX.soilAnalysis));
+        jXTable1.getColumnModel().getColumn(8).setCellEditor(new TreatmentTableCellEditor(FileX.initialList));
+        jXTable1.getColumnModel().getColumn(9).setCellEditor(new TreatmentTableCellEditor(FileX.plantings));
+        jXTable1.getColumnModel().getColumn(10).setCellEditor(new TreatmentTableCellEditor(FileX.irrigations));
+        jXTable1.getColumnModel().getColumn(11).setCellEditor(new TreatmentTableCellEditor(FileX.fertilizerList));
+        jXTable1.getColumnModel().getColumn(12).setCellEditor(new TreatmentTableCellEditor(FileX.organicList));
+        jXTable1.getColumnModel().getColumn(13).setCellEditor(new TreatmentTableCellEditor(FileX.chemicalList));
+        jXTable1.getColumnModel().getColumn(14).setCellEditor(new TreatmentTableCellEditor(FileX.tillageList));
+        jXTable1.getColumnModel().getColumn(15).setCellEditor(new TreatmentTableCellEditor(FileX.environmentals));
+        jXTable1.getColumnModel().getColumn(16).setCellEditor(new TreatmentTableCellEditor(FileX.harvestList));
+        jXTable1.getColumnModel().getColumn(17).setCellEditor(new TreatmentTableCellEditor(FileX.simulationList));
+       
         
         if(ExperimentType.Sequential != FileX.general.FileType){
             jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(3));

@@ -5,8 +5,6 @@
 
 package FileXModel;
 
-import DSSATModel.WstaType;
-
 /**
  *
  * @author Jazzy
