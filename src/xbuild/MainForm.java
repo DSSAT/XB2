@@ -49,6 +49,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import xbuild.Components.CustomDefaultTreeCellRenderer;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputDialog;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.MenuDirection;
@@ -1385,41 +1386,53 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private void addNewLevel(DefaultMutableTreeNode node, ManagementList modelList){
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
-            String nodeName = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", defaultName);
-            if (nodeName.length() > 0) {
-                int level = 0;
-                for (ModelXBase m : modelList.GetAll()) {
-                    if (m.GetName().equalsIgnoreCase(nodeName)) {
-                        JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
-                        return;
+            
+            InputDialog input = "Treatments".equals(node.toString()) ? new InputDialog(this, true, defaultName, 14) : new InputDialog(this, true, defaultName);
+            input.show();
+            
+            input.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(input.isOK()){
+                        String nodeName = input.getDescription();
+
+                        if (nodeName.length() > 0) {
+                            int level = 0;
+                            for (ModelXBase m : modelList.GetAll()) {
+                                if (m.GetName().equalsIgnoreCase(nodeName)) {
+                                    JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
+                                    return;
+                                }
+                                level = m.GetLevel();
+                            }
+
+                            level++;
+
+                            modelList.AddNew(nodeName, level, -1);
+
+                            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+
+                            String newName = "Level " + level + ": " + nodeName;
+
+                            newNode.setUserObject(newName);
+                            node.add(newNode);
+
+                            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                            model.reload(node);
+
+                            jXTree1.expandAll();
+                            int[] rows = jXTree1.getSelectionRows();
+                            //int selectRow = GetNodeIndex((DefaultMutableTreeNode)jXTree1.getModel().getRoot(), node.getUserObject().toString());
+
+                            jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
+
+                            IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
+
+                            ShowFrame(frame);
+                        }                        
                     }
-                    level = m.GetLevel();
                 }
-
-                level++;
-                
-                modelList.AddNew(nodeName, level, -1);
-                
-                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-
-                String newName = "Level " + level + ": " + nodeName;
-
-                newNode.setUserObject(newName);
-                node.add(newNode);
-
-                DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-                model.reload(node);
-
-                jXTree1.expandAll();
-                int[] rows = jXTree1.getSelectionRows();
-                //int selectRow = GetNodeIndex((DefaultMutableTreeNode)jXTree1.getModel().getRoot(), node.getUserObject().toString());
-
-                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
-
-                IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
-
-                ShowFrame(frame);
-            }
+            });
         } else if (modelList != null && "Cultivars".equals(node.toString())) {
             CultivarsFrame currentFrame = (CultivarsFrame) desktopPane.getSelectedFrame();
             currentFrame.AddNewCultivar();

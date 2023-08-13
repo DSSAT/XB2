@@ -25,6 +25,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.CultivarTableCellEditor;
+import xbuild.Components.DescriptionTableCellEditor;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.TreatmentTableCellEditor;
 
@@ -322,6 +323,8 @@ public class TreatmentFrame extends IXInternalFrame  {
         
         jXTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
         jXTable1.getColumnModel().getColumn(4).setPreferredWidth(200);
+        
+        jXTable1.getColumnModel().getColumn(4).setCellEditor(new DescriptionTableCellEditor());
         
         jXTable1.getColumnModel().getColumn(5).setCellEditor(new CultivarTableCellEditor());
         jXTable1.getColumnModel().getColumn(6).setCellEditor(new TreatmentTableCellEditor(FileX.fieldList));
