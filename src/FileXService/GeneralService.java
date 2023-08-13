@@ -143,7 +143,7 @@ public class GeneralService {
         
         // <editor-fold defaultstate="collapsed" desc="GENERAL">
         pw.println("*EXP.DETAILS: " + general.InstituteCode + general.SiteCode + general.Year.substring(2,4) + Utils.PadLeft(general.ExperimentNumber, 2, '0') + 
-                (general.crop != null ? general.crop.CropCode : "")
+                (general.crop != null && general.crop.CropCode != null && !"".equals(general.crop.CropCode) ? general.crop.CropCode : "")
                 + " " + (general.ExperimentName != null && !"".equals(general.ExperimentName) ? general.ExperimentName : ""));
         pw.println();
         pw.println("*GENERAL");

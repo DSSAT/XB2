@@ -295,28 +295,25 @@ public class TreatmentFrame extends IXInternalFrame  {
             ((Treatment)FileX.treatments.GetAtIndex(row)).TNAME = (String) tbModel1.getValueAt(row, 4);
             ((Treatment)FileX.treatments.GetAtIndex(row)).N = Utils.ParseInteger(tbModel1.getValueAt(row, 0));
             
-            int removeCol = 0;
             if (FileX.general.FileType == ExperimentType.Sequential) {
                 ((Treatment)FileX.treatments.GetAtIndex(row)).R = (String) tbModel1.getValueAt(row, 1);
                 ((Treatment)FileX.treatments.GetAtIndex(row)).O = (String) tbModel1.getValueAt(row, 2);
                 ((Treatment)FileX.treatments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
-                
-                removeCol = 3;
             }
             
-            ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 5 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 6 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 7 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 8 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MP = Utils.ParseInteger(tbModel1.getValueAt(row, 9 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MI = Utils.ParseInteger(tbModel1.getValueAt(row, 10 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MF = Utils.ParseInteger(tbModel1.getValueAt(row, 11 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MR = Utils.ParseInteger(tbModel1.getValueAt(row, 12 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MC = Utils.ParseInteger(tbModel1.getValueAt(row, 13 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MT = Utils.ParseInteger(tbModel1.getValueAt(row, 14 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).ME = Utils.ParseInteger(tbModel1.getValueAt(row, 15 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).MH = Utils.ParseInteger(tbModel1.getValueAt(row, 16 - removeCol));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).SM = Utils.ParseInteger(tbModel1.getValueAt(row, 17 - removeCol));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 5));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 6));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 7));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 8));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MP = Utils.ParseInteger(tbModel1.getValueAt(row, 9));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MI = Utils.ParseInteger(tbModel1.getValueAt(row, 10));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MF = Utils.ParseInteger(tbModel1.getValueAt(row, 11));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MR = Utils.ParseInteger(tbModel1.getValueAt(row, 12));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MC = Utils.ParseInteger(tbModel1.getValueAt(row, 13));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MT = Utils.ParseInteger(tbModel1.getValueAt(row, 14));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).ME = Utils.ParseInteger(tbModel1.getValueAt(row, 15));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).MH = Utils.ParseInteger(tbModel1.getValueAt(row, 16));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).SM = Utils.ParseInteger(tbModel1.getValueAt(row, 17));
             
             l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treatments.GetAtIndex(row).GetName(), row));
         });
