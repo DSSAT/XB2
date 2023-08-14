@@ -768,7 +768,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="wstaTypeGroup"/>
                 </Property>
-                <Property name="label" type="java.lang.String" value="Gen"/>
+                <Property name="text" type="java.lang.String" value="Gen (WTG)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdClimate">
@@ -776,7 +776,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="wstaTypeGroup"/>
                 </Property>
-                <Property name="label" type="java.lang.String" value="Climate"/>
+                <Property name="text" type="java.lang.String" value="Climate (CLI)"/>
               </Properties>
             </Component>
           </SubComponents>

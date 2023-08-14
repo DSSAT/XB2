@@ -564,10 +564,10 @@ public class FieldFrame extends IXInternalFrame {
         rdWth.setLabel("WTH");
 
         wstaTypeGroup.add(rdGen);
-        rdGen.setLabel("Gen");
+        rdGen.setText("Gen (WTG)");
 
         wstaTypeGroup.add(rdClimate);
-        rdClimate.setLabel("Climate");
+        rdClimate.setText("Climate (CLI)");
 
         javax.swing.GroupLayout jXPanel8Layout = new javax.swing.GroupLayout(jXPanel8);
         jXPanel8.setLayout(jXPanel8Layout);
