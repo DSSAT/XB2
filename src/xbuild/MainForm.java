@@ -1387,7 +1387,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
-            InputDialog input = "Treatments".equals(node.toString()) ? new InputDialog(this, true, defaultName, 14) : new InputDialog(this, true, defaultName);
+            InputDialog input = "Treatments".equals(node.toString()) ? new InputDialog(this, true, defaultName, 25) : new InputDialog(this, true, defaultName);
             input.show();
             
             input.addWindowListener(new java.awt.event.WindowAdapter() {

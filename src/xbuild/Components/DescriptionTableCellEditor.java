@@ -16,7 +16,7 @@ public class DescriptionTableCellEditor extends AbstractCellEditor implements Ta
     private final JTextField textEditor;
     public DescriptionTableCellEditor(){
         textEditor = new JTextField();
-        textEditor.setDocument(new LimitDocument(14));
+        textEditor.setDocument(new LimitDocument(25));
     }
     
     @Override
