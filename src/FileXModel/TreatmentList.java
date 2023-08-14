@@ -72,6 +72,6 @@ public class TreatmentList extends ManagementList {
 
     @Override
     public boolean IsUseInTreatment(int level) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return false;
     }
 }
