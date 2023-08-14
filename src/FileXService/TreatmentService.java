@@ -26,10 +26,7 @@ public class TreatmentService {
             boolean bTreatment = false;
             
             while ((strRead = br.readLine()) != null) {
-                if("".equals(strRead.trim())){
-                    continue;
-                }
-                else if (strRead.trim().startsWith("*TREATMENTS")) {
+                if (strRead.trim().startsWith("*TREATMENTS")) {
                     bTreatment = true;
 
                 } else if (bTreatment && !bTreatmentHeader && strRead.trim().startsWith("@")) {
@@ -40,9 +37,8 @@ public class TreatmentService {
                     bTreatment = false;
                     bTreatmentHeader = false;
                 }
-                else if (bTreatment && bTreatmentHeader) {
+                else if (bTreatment && bTreatmentHeader && !"".equals(strRead.trim()) && !strRead.trim().startsWith("!")) {
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
-                    
                     Treatment treatment = new Treatment();
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));

@@ -39,6 +39,10 @@ public class FertilizerService {
                         bFertilizerHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME
                     Fertilizer fertil;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());

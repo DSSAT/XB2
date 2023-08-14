@@ -38,6 +38,10 @@ public class PlantingDetailService {
                         bPlantingHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@P PDATE EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL                        PLNAME
                     Planting planting = new Planting();
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());

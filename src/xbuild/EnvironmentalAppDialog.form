@@ -38,7 +38,6 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="spDaylength" max="32767" attributes="0"/>
                   <Component id="cbDaylengthFactor" alignment="0" pref="184" max="32767" attributes="1"/>
                   <Component id="cbRadiationFactor" alignment="0" max="32767" attributes="1"/>
                   <Component id="txtMaxTemp" alignment="0" max="32767" attributes="0"/>
@@ -53,14 +52,15 @@
                   <Component id="cbHumidityFactor" alignment="0" max="32767" attributes="1"/>
                   <Component id="txtWind" alignment="0" max="32767" attributes="0"/>
                   <Component id="cbWindFactor" alignment="0" max="32767" attributes="1"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="dpDate" alignment="1" max="32767" attributes="1"/>
+                  <Component id="spDaylength" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="bnCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="txtRadiation" alignment="0" max="32767" attributes="0"/>
-                  <Component id="dpDate" alignment="1" max="32767" attributes="1"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,8 +92,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jXLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spDaylength" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jXLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spDaylength" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cbDaylengthFactor" min="-2" max="-2" attributes="0"/>
@@ -188,7 +188,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtMaxTemp">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -203,7 +203,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtMinTemp">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -218,7 +218,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtPrecipitation">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -233,7 +233,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtCo2">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -248,7 +248,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtHumidity">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -263,7 +263,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtWind">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
+          <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -338,8 +338,6 @@
         <Property name="text" type="java.lang.String" value="Date"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="spDaylength">
-    </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel10">
       <Properties>
         <Property name="text" type="java.lang.String" value="hours"/>
@@ -380,19 +378,27 @@
         <Property name="text" type="java.lang.String" value="km/hours"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="txtRadiation">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0.0" subtype="-1" type="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="Variables.getDateFormatString()" type="code"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="spDaylength">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0.00" subtype="-1" type="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtRadiation">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0.00" subtype="-1" type="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
   </SubComponents>

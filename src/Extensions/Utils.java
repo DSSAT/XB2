@@ -38,6 +38,22 @@ public class Utils {
         }
         return val;
     }
+    
+    public static Double GetDouble(String Header, String value, String field, int fieldLength) {
+        int start = Header.indexOf(field) + field.length() - fieldLength - 1;
+        Double val = null;
+
+        if (start >= 0) {
+            int stop = Math.min(start + fieldLength + 1, value.length());
+
+            String tmp = value.substring(start, stop).trim();
+
+            if (tmp != null && !"".equals(tmp)) {
+                val = Double.valueOf(tmp);
+            }
+        }
+        return val;
+    }
 
     public static Date GetDate(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field) + field.length() - fieldLength - 1;
@@ -158,6 +174,18 @@ public class Utils {
         }
         return val;
     }
+    
+    public static String DoubleToString(Double value) {
+        DecimalFormat df = new DecimalFormat("##.##");
+        String val = df.format(value);
+
+        if (val.length() > 3) {
+            if (val.substring(val.length() - 2).equals("00")) {
+                val = val.substring(0, val.length() - 2);
+            }
+        }
+        return val;
+    }
 
     public static String PadLeft(String value, int count, char character) {
         if (value == null) {
@@ -215,6 +243,13 @@ public class Utils {
     public static String PadLeft(Float value, int count, char character) {
         if (value == null) {
             value = -99F;
+        }
+        return PadLeft(value.toString(), count, character);
+    }
+    
+    public static String PadLeft(Double value, int count, char character) {
+        if (value == null) {
+            value = -99d;
         }
         return PadLeft(value.toString(), count, character);
     }

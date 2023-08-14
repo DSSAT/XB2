@@ -40,6 +40,10 @@ public class TillageService {
                         bTillageHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@T TDATE TIMPL  TDEP TNAME
                     Tillage tillage;
                     TillageApplication tillageApp = new TillageApplication();

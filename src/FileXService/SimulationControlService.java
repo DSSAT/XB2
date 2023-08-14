@@ -104,8 +104,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 2 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //WATER NITRO SYMBI PHOSP POTAS DISES  CHEM  TILL   CO2
                     boolean isAdd = false;
@@ -131,8 +131,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 3 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //WTHER INCON LIGHT EVAPO INFIL PHOTO HYDRO NSWIT MESOM MESEV MESOL
                     boolean isAdd = false;
@@ -162,8 +162,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 4 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //PLANT IRRIG FERTI RESID HARVS
                     boolean isAdd = false;
@@ -187,8 +187,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 5 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //FNAME OVVEW SUMRY FROPT GROUT CAOUT WAOUT NIOUT MIOUT DIOUT VBOSE CHOUT OPOUT
                     boolean isAdd = false;
@@ -215,7 +215,7 @@ public class SimulationControlService {
                     sim.OPOUT = Utils.GetString(simOutputHeader, tmp, "OPOUT", 5);
                     sim.FMOPT = Utils.GetString(simOutputHeader, tmp, "FMOPT", 5);
 
-                    if(sim.FMOPT == "" || sim.FMOPT == null)
+                    if("".equals(sim.FMOPT) || sim.FMOPT == null)
                         sim.FMOPT = "A";
 
                     if(isAdd) {
@@ -224,8 +224,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 6 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //PFRST PLAST PH2OL PH2OU PH2OD PSTMX PSTMN
                     boolean isAdd = false;
@@ -261,8 +261,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 7 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //IMDEP ITHRL ITHRU IROFF IMETH IRAMT IREFF
                     boolean isAdd = false;
@@ -288,8 +288,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 8 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //NMDEP NMTHR NAMNT NCODE NAOFF
                     boolean isAdd = false;
@@ -312,8 +312,8 @@ public class SimulationControlService {
                     }
                 }
                 else if (bSimulation && nSimulation == 9 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     // RIPCN RTIME RIDEP
                     boolean isAdd = false;
@@ -335,8 +335,8 @@ public class SimulationControlService {
                     nSimulation = -1;
                 }
                 else if (bSimulation && nSimulation == 10 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
-                    Simulation sim = null;
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim());
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
                     //HFRST HLAST HPCNP HPCNR
                     boolean isAdd = false;

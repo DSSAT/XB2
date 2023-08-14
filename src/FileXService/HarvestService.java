@@ -39,6 +39,10 @@ public class HarvestService {
                         bHarvestHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME
                     Harvest harvest;
                     HarvestApplication harvestApp = new HarvestApplication();

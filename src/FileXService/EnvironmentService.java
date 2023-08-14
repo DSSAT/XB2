@@ -19,7 +19,7 @@ public class EnvironmentService {
         try {
             FileReader fReader = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fReader);
-            String strRead = null;
+            String strRead;
             
             String environmentHeader = "";
             boolean bEnvironmentHeader = false;
@@ -40,6 +40,9 @@ public class EnvironmentService {
                         bEnvironmentHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
                     //@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME
                     Environmental env;
                     EnvironmentApplication envApp = new EnvironmentApplication();
@@ -54,25 +57,29 @@ public class EnvironmentService {
                         env = (Environmental)environmentals.GetAt(level);
                     }
 
+                    try{
                     envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
                     envApp.EDAY_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDAY", 1));
-                    envApp.EDAY = Utils.GetInteger(environmentHeader, tmp, "EDAY ", 3);
+                    envApp.EDAY = Utils.GetDouble(environmentHeader, tmp, "EDAY ", 3);
                     envApp.ERAD_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAD", 1));
-                    envApp.ERAD = Utils.GetFloat(environmentHeader, tmp, "ERAD ", 3);
+                    envApp.ERAD = Utils.GetDouble(environmentHeader, tmp, "ERAD ", 3);
                     envApp.EMAX_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMAX", 1));
-                    envApp.EMAX = Utils.GetFloat(environmentHeader, tmp, "EMAX ", 3);
+                    envApp.EMAX = Utils.GetDouble(environmentHeader, tmp, "EMAX ", 3);
                     envApp.EMIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMIN", 1));
-                    envApp.EMIN = Utils.GetFloat(environmentHeader, tmp, "EMIN ", 3);
+                    envApp.EMIN = Utils.GetDouble(environmentHeader, tmp, "EMIN ", 3);
                     envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAIN", 1));
-                    envApp.ERAIN = Utils.GetFloat(environmentHeader, tmp, "ERAIN", 3);
+                    envApp.ERAIN = Utils.GetDouble(environmentHeader, tmp, "ERAIN", 3);
                     envApp.ECO2_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ECO2", 1));
-                    envApp.ECO2 = Utils.GetFloat(environmentHeader, tmp, "ECO2 ", 3);
+                    envApp.ECO2 = Utils.GetDouble(environmentHeader, tmp, "ECO2 ", 3);
                     envApp.EDEW_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDEW", 1));
-                    envApp.EDEW = Utils.GetFloat(environmentHeader, tmp, "EDEW ", 3);
+                    envApp.EDEW = Utils.GetDouble(environmentHeader, tmp, "EDEW ", 3);
                     envApp.EWIND_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EWIND", 1));
-                    envApp.EWIND = Utils.GetFloat(environmentHeader, tmp, " EWIND", 3);
+                    envApp.EWIND = Utils.GetDouble(environmentHeader, tmp, " EWIND", 3);
                     env.ENVNAME = Utils.GetString(environmentHeader, tmp, "ENVNAME", tmp.length() - environmentHeader.indexOf("ENVNAME"));
                     env.AddApp(envApp);
+                    }catch(Exception ee){
+                        System.out.println(ee.getMessage());
+                    }
 
                     if(isAdd) {
                         environmentals.AddNew(env);

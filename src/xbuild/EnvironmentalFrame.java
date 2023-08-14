@@ -323,36 +323,36 @@ public class EnvironmentalFrame extends IXInternalFrame {
             row.add("");
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.ERAD), envApp.ERAD_Fact.Code, jXTable2.getCellRect(2, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.ERAD), envApp.ERAD_Fact.Code, jXTable2.getCellRect(2, 1, true)));
         } catch (Exception e) {
             row.add("");
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.EMAX), envApp.EMAX_Fact.Code, jXTable2.getCellRect(3, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.EMAX), envApp.EMAX_Fact.Code, jXTable2.getCellRect(3, 1, true)));
         } catch (Exception e) {
             row.add("");
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.EMIN), envApp.EMIN_Fact.Code, jXTable2.getCellRect(4, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.EMIN), envApp.EMIN_Fact.Code, jXTable2.getCellRect(4, 1, true)));
         } catch (Exception e) {
             row.add("");
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.ERAIN), envApp.ERAIN_Fact.Code, jXTable2.getCellRect(5, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.ERAIN), envApp.ERAIN_Fact.Code, jXTable2.getCellRect(5, 1, true)));
         } catch (Exception e) {
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.ECO2), envApp.ECO2_Fact.Code, jXTable2.getCellRect(6, 1, true)));
-        } catch (Exception e) {
-            row.add("");
-        }
-        try {
-            row.add(SetText(Utils.FloatToString(envApp.EDEW), envApp.EDEW_Fact.Code, jXTable2.getCellRect(7, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.ECO2), envApp.ECO2_Fact.Code, jXTable2.getCellRect(6, 1, true)));
         } catch (Exception e) {
             row.add("");
         }
         try {
-            row.add(SetText(Utils.FloatToString(envApp.EWIND), envApp.EWIND_Fact.Code, jXTable2.getCellRect(8, 1, true)));
+            row.add(SetText(Utils.DoubleToString(envApp.EDEW), envApp.EDEW_Fact.Code, jXTable2.getCellRect(7, 1, true)));
+        } catch (Exception e) {
+            row.add("");
+        }
+        try {
+            row.add(SetText(Utils.DoubleToString(envApp.EWIND), envApp.EWIND_Fact.Code, jXTable2.getCellRect(8, 1, true)));
         } catch (Exception e) {
             row.add("");
         }

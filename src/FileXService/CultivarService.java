@@ -36,6 +36,9 @@ public class CultivarService {
                         bCultivarHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
                     //@C CR INGENO CNAME
                     Cultivar cul = new Cultivar();
                     Integer level = Integer.valueOf(strRead.substring(0, 2).trim());

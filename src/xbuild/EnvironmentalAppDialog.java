@@ -41,9 +41,6 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         Dimension winSize = getSize();
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
 
-        spDaylength.setEditor(new JSpinner.NumberEditor(spDaylength, "##"));
-        //txtRadiation.setEditor(new JTextField(null, null, WIDTH).NumberEditor(txtYear,"####"));
-
         DefaultComboBoxModel dm1 = (DefaultComboBoxModel) cbDaylengthFactor.getModel();
         DefaultComboBoxModel dm2 = (DefaultComboBoxModel) cbRadiationFactor.getModel();
         DefaultComboBoxModel dm3 = (DefaultComboBoxModel) cbMaxTempFactor.getModel();
@@ -81,7 +78,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtRadiation.setText(Utils.FloatToString(envApp.ERAD));
+            txtRadiation.setValue(envApp.ERAD);
         } catch (Exception e) {
         }
         try {
@@ -89,7 +86,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtMaxTemp.setText(Utils.FloatToString(envApp.EMAX));
+            txtMaxTemp.setValue(envApp.EMAX);
         } catch (Exception e) {
         }
         try {
@@ -97,7 +94,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtMinTemp.setText(Utils.FloatToString(envApp.EMIN));
+            txtMinTemp.setValue(envApp.EMIN);
         } catch (Exception e) {
         }
         try {
@@ -105,7 +102,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtPrecipitation.setText(Utils.FloatToString(envApp.ERAIN));
+            txtPrecipitation.setValue(envApp.ERAIN);
         } catch (Exception e) {
         }
         try {
@@ -113,7 +110,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtCo2.setText(Utils.FloatToString(envApp.ECO2));
+            txtCo2.setValue(envApp.ECO2);
         } catch (Exception e) {
         }
         try {
@@ -121,7 +118,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtHumidity.setText(Utils.FloatToString(envApp.EDEW));
+            txtHumidity.setValue(envApp.EDEW);
         } catch (Exception e) {
         }
         try {
@@ -129,7 +126,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         try {
-            txtWind.setText(Utils.FloatToString(envApp.EWIND));
+            txtWind.setValue(envApp.EWIND);
         } catch (Exception e) {
         }
         try {
@@ -173,7 +170,6 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
         jXLabel9 = new org.jdesktop.swingx.JXLabel();
-        spDaylength = new javax.swing.JSpinner();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
         jXLabel12 = new org.jdesktop.swingx.JXLabel();
@@ -182,29 +178,30 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         jXLabel15 = new org.jdesktop.swingx.JXLabel();
         jXLabel16 = new org.jdesktop.swingx.JXLabel();
         jXLabel17 = new org.jdesktop.swingx.JXLabel();
-        txtRadiation = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
+        spDaylength = new javax.swing.JFormattedTextField();
+        txtRadiation = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         dpDate.setFormats(Variables.getDateFormat());
 
-        txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMaxTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtMinTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtMinTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMinTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtPrecipitation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtPrecipitation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtPrecipitation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtCo2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtCo2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtCo2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtHumidity.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHumidity.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtHumidity.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtWind.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtWind.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtWind.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Daylength");
@@ -265,10 +262,13 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         jXLabel17.setText("km/hours");
 
-        txtRadiation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
-        txtRadiation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
         jLabel1.setText(Variables.getDateFormatString());
+
+        spDaylength.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        spDaylength.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtRadiation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtRadiation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,7 +288,6 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spDaylength)
                     .addComponent(cbDaylengthFactor, 0, 184, Short.MAX_VALUE)
                     .addComponent(cbRadiationFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaxTemp)
@@ -303,13 +302,14 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
                     .addComponent(cbHumidityFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtWind)
                     .addComponent(cbWindFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spDaylength)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bnCancel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtRadiation)
-                    .addComponent(dpDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtRadiation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,8 +335,8 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spDaylength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spDaylength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbDaylengthFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -414,61 +414,60 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
             envApp.ODATE = null;
         }
         try {
-            envApp.EDAY = (Integer) spDaylength.getValue();
-            envApp.EDAY_Fact = EnvironmentFactorList.GetAt(1, (String) cbDaylengthFactor.getSelectedItem());
+            envApp.EDAY = (Double)spDaylength.getValue();
         } catch (Exception e) {
-            envApp.EDAY = null;
-            envApp.EDAY_Fact = null;
+            envApp.EDAY = 0.0;
         }
+        envApp.EDAY_Fact = EnvironmentFactorList.GetAt(1, (String) cbDaylengthFactor.getSelectedItem());
+        
         try {
-            envApp.ERAD = Float.parseFloat(txtRadiation.getText());
-            envApp.ERAD_Fact = EnvironmentFactorList.GetAt(1, (String) cbRadiationFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.ERAD = null;
-            envApp.ERAD_Fact = null;
+            envApp.ERAD = (Double)txtRadiation.getValue();
+        } catch (Exception e) {
+            envApp.ERAD = 0.0;
         }
+        envApp.ERAD_Fact = EnvironmentFactorList.GetAt(1, (String) cbRadiationFactor.getSelectedItem());
+        
         try {
-            envApp.EMAX = Float.parseFloat(txtMaxTemp.getText());
-            envApp.EMAX_Fact = EnvironmentFactorList.GetAt(1, (String) cbMaxTempFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.EMAX = null;
-            envApp.EMAX_Fact = null;
+            envApp.EMAX = (Double)txtMaxTemp.getValue();
+        } catch (Exception e) {
+            envApp.EMAX = 0.0;
         }
+        envApp.EMAX_Fact = EnvironmentFactorList.GetAt(1, (String) cbMaxTempFactor.getSelectedItem());
+        
         try {
-            envApp.EMIN = Float.parseFloat(txtMinTemp.getText());
-            envApp.EMIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbMinTempFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.EMIN = null;
-            envApp.EMIN_Fact = null;
+            envApp.EMIN = (Double)txtMinTemp.getValue();
+        } catch (Exception e) {
+            envApp.EMIN = 0.0;
         }
+        envApp.EMIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbMinTempFactor.getSelectedItem());
+        
         try {
-            envApp.ERAIN = Float.parseFloat(txtPrecipitation.getText());
-            envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbPrecipitationFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.ERAIN = null;
-            envApp.ERAIN_Fact = null;
+            envApp.ERAIN = (Double)txtPrecipitation.getValue();
+        } catch (Exception e) {
+            envApp.ERAIN = 0.0;
         }
+        envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbPrecipitationFactor.getSelectedItem());
+        
         try {
-            envApp.ECO2 = Float.parseFloat(txtCo2.getText());
-            envApp.ECO2_Fact = EnvironmentFactorList.GetAt(1, (String) cbCo2Factor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.ECO2 = null;
-            envApp.ECO2_Fact = null;
+            envApp.ECO2 = (Double)txtCo2.getValue();
+        } catch (Exception e) {
+            envApp.ECO2 = 0.0;
         }
+        envApp.ECO2_Fact = EnvironmentFactorList.GetAt(1, (String) cbCo2Factor.getSelectedItem());
+        
         try {
-            envApp.EDEW = Float.parseFloat(txtHumidity.getText());
-            envApp.EDEW_Fact = EnvironmentFactorList.GetAt(1, (String) cbHumidityFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.EDEW = null;
-            envApp.EDEW_Fact = null;
+            envApp.EDEW = (Double)txtHumidity.getValue();
+        } catch (Exception e) {
+            envApp.EDEW = 0.0;
         }
+        envApp.EDEW_Fact = EnvironmentFactorList.GetAt(1, (String) cbHumidityFactor.getSelectedItem());
+        
         try {
-            envApp.EWIND = Float.parseFloat(txtWind.getText());
-            envApp.EWIND_Fact = EnvironmentFactorList.GetAt(1, (String) cbWindFactor.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
-            envApp.EWIND = null;
-            envApp.EWIND_Fact = null;
+            envApp.EWIND = (Double)txtWind.getValue();
+        } catch (Exception e) {
+            envApp.EWIND = 0.0;
         }
+        envApp.EWIND_Fact = EnvironmentFactorList.GetAt(1, (String) cbWindFactor.getSelectedItem());
 
         dispose();
     }//GEN-LAST:event_jButton1MouseClicked
@@ -518,7 +517,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXLabel jXLabel7;
     private org.jdesktop.swingx.JXLabel jXLabel8;
     private org.jdesktop.swingx.JXLabel jXLabel9;
-    private javax.swing.JSpinner spDaylength;
+    private javax.swing.JFormattedTextField spDaylength;
     private javax.swing.JFormattedTextField txtCo2;
     private javax.swing.JFormattedTextField txtHumidity;
     private javax.swing.JFormattedTextField txtMaxTemp;

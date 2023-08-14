@@ -47,6 +47,9 @@ public class InitialConditionService {
                         bInitHeader2 = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
                     //@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICREP ICRID ICNAME
                     InitialCondition init = new InitialCondition();
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
@@ -71,6 +74,9 @@ public class InitialConditionService {
                         bInit = false;
                         bInitHeader1 = false;
                         bInitHeader2 = false;
+                        continue;
+                    }
+                    else if(strRead.trim().startsWith("!")){
                         continue;
                     }
                     //@C  ICBL  SH2O  SNH4  SNO3
