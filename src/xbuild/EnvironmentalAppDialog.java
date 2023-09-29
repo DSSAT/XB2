@@ -414,56 +414,56 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
             envApp.ODATE = null;
         }
         try {
-            envApp.EDAY = (Double)spDaylength.getValue();
+            envApp.EDAY = Utils.ParseDouble(spDaylength.getValue());
         } catch (Exception e) {
             envApp.EDAY = 0.0;
         }
         envApp.EDAY_Fact = EnvironmentFactorList.GetAt(1, (String) cbDaylengthFactor.getSelectedItem());
         
         try {
-            envApp.ERAD = (Double)txtRadiation.getValue();
+            envApp.ERAD = Utils.ParseDouble(txtRadiation.getValue());
         } catch (Exception e) {
             envApp.ERAD = 0.0;
         }
         envApp.ERAD_Fact = EnvironmentFactorList.GetAt(1, (String) cbRadiationFactor.getSelectedItem());
         
         try {
-            envApp.EMAX = (Double)txtMaxTemp.getValue();
+            envApp.EMAX = Utils.ParseDouble(txtMaxTemp.getValue());
         } catch (Exception e) {
             envApp.EMAX = 0.0;
         }
         envApp.EMAX_Fact = EnvironmentFactorList.GetAt(1, (String) cbMaxTempFactor.getSelectedItem());
         
         try {
-            envApp.EMIN = (Double)txtMinTemp.getValue();
+            envApp.EMIN = Utils.ParseDouble(txtMinTemp.getValue());
         } catch (Exception e) {
             envApp.EMIN = 0.0;
         }
         envApp.EMIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbMinTempFactor.getSelectedItem());
         
         try {
-            envApp.ERAIN = (Double)txtPrecipitation.getValue();
+            envApp.ERAIN = Utils.ParseDouble(txtPrecipitation.getValue());
         } catch (Exception e) {
             envApp.ERAIN = 0.0;
         }
         envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(1, (String) cbPrecipitationFactor.getSelectedItem());
         
         try {
-            envApp.ECO2 = (Double)txtCo2.getValue();
+            envApp.ECO2 = Utils.ParseDouble(txtCo2.getValue());
         } catch (Exception e) {
             envApp.ECO2 = 0.0;
         }
         envApp.ECO2_Fact = EnvironmentFactorList.GetAt(1, (String) cbCo2Factor.getSelectedItem());
         
         try {
-            envApp.EDEW = (Double)txtHumidity.getValue();
+            envApp.EDEW = Utils.ParseDouble(txtHumidity.getValue());
         } catch (Exception e) {
             envApp.EDEW = 0.0;
         }
         envApp.EDEW_Fact = EnvironmentFactorList.GetAt(1, (String) cbHumidityFactor.getSelectedItem());
         
         try {
-            envApp.EWIND = (Double)txtWind.getValue();
+            envApp.EWIND = Utils.ParseDouble(txtWind.getValue());
         } catch (Exception e) {
             envApp.EWIND = 0.0;
         }
