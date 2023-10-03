@@ -12,9 +12,10 @@ package FileXModel;
 public class EnvironmentalList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Environmental model = new Environmental(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     
@@ -37,5 +38,18 @@ public class EnvironmentalList extends ManagementList {
         }
         
         return newSource;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).ME == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

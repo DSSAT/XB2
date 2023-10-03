@@ -12,9 +12,10 @@ package FileXModel;
 public class FertilizerList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Fertilizer model = new Fertilizer(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     
@@ -37,5 +38,18 @@ public class FertilizerList extends ManagementList {
         }
         
         return newSource;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MF == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

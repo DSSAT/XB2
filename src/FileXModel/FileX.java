@@ -21,10 +21,12 @@ public class FileX {
     public static HarvestList harvestList;
     public static ChemicalList chemicalList;
     public static SimulationList simulationList;
-    public static TreatmentList treaments;
+    public static TreatmentList treatments;
     public static WstaType wstaType;
     
     public static boolean isFileOpenned;
+    public static boolean isReady;
+    public static boolean isDirty;
     private static String fileName;
     
     public static String GetAbsoluteFileName(){
@@ -36,6 +38,8 @@ public class FileX {
     }
 
     public static void NewFileX() {
+        isReady = false;
+        isDirty = false;
         general = new GeneralInformation();
         fieldList = new FieldList();
         initialList = new InitialConditionList();
@@ -50,12 +54,14 @@ public class FileX {
         harvestList = new HarvestList();
         chemicalList = new ChemicalList();
         simulationList = new SimulationList();
-        treaments = new TreatmentList();
+        treatments = new TreatmentList();
 
         fileName = null;
     }
 
     public static void CloseFile() {
+        isReady = false;
+        isDirty = false;
         general = null;
         fieldList = null;
         initialList = null;
@@ -70,7 +76,7 @@ public class FileX {
         harvestList = null;
         chemicalList = null;
         simulationList = null;
-        treaments = null;
+        treatments = null;
 
         fileName = null;
         isFileOpenned = false;

@@ -1,7 +1,7 @@
 package xbuild.Components;
 
 import DSSATModel.Setup;
-import FileXModel.FileX;
+import FileXModel.ManagementList;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -23,6 +23,19 @@ public abstract class IXInternalFrame extends JInternalFrame {
 
     protected XEventListener l;
     protected Setup setup = new Setup();
+    
+    public abstract ManagementList getManagementList();
+    public String getManagementName(){
+        return "";
+    }
+    
+    public int getLevel(){
+        return 0;
+    }
+    
+    public void setSelection(int level){
+        
+    }
 
     public void updatePanelName(String name) {
 
@@ -32,6 +45,28 @@ public abstract class IXInternalFrame extends JInternalFrame {
 
     }
 
+    public void addMyEventListener(XEventListener l) {
+        if (this.l == null) {
+            this.l = l;
+        }
+    }
+    
+    public boolean isPrevButtonEnabled(){
+        return false;
+    }
+    
+    public boolean isNextButtonEnabled(){
+        return false;
+    }
+    
+    public boolean isAddButtonEnabled(){
+        return false;
+    }
+    
+    public boolean isDeleteButtonEnabled(){
+        return false;
+    }
+    
     protected int getLevel(String nodeName) {
         String[] level1 = nodeName.split(":");
         String[] level2 = level1[0].split(" ");
@@ -43,12 +78,6 @@ public abstract class IXInternalFrame extends JInternalFrame {
         String[] level1 = nodeName.split(":");
 
         return level1[1].trim();
-    }
-
-    public void addMyEventListener(XEventListener l) {
-        if (this.l == null) {
-            this.l = l;
-        }
     }
 
     protected void setImage(JLabel imagePanel, String imageFile) {

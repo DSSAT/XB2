@@ -22,6 +22,7 @@ import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
+import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
@@ -29,8 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
 
@@ -114,7 +113,20 @@ public class FieldFrame extends IXInternalFrame {
             }
 
             EventQueue.invokeLater(() -> {
+                cbWSTA.setInit(null, "WSTA", field.WSTA != null && field.WSTA.length() >= 4 ? field.WSTA.substring(0, 4) : "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
                 cbWSTACode.setInit(field, "WSTA", field.WSTA, loadWSTACode(field.WSTA));
+                
+                rdWth.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
+                
+                rdGen.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
+                
+                rdClimate.addItemListener((java.awt.event.ItemEvent evt) -> {
+                    radioWSTAItemStateChanged(evt);
+                });
             });
 
         }
@@ -232,8 +244,6 @@ public class FieldFrame extends IXInternalFrame {
         lblLevel = new org.jdesktop.swingx.JXLabel();
         txtDescription = new xbuild.Components.XTextField();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
-        bnPrevious = new javax.swing.JButton();
-        bnNext = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
         popupMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -552,27 +562,12 @@ public class FieldFrame extends IXInternalFrame {
 
         wstaTypeGroup.add(rdWth);
         rdWth.setLabel("WTH");
-        rdWth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
-            }
-        });
 
         wstaTypeGroup.add(rdGen);
-        rdGen.setLabel("Gen");
-        rdGen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
-            }
-        });
+        rdGen.setText("Gen (WTG)");
 
         wstaTypeGroup.add(rdClimate);
-        rdClimate.setLabel("Climate");
-        rdClimate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdWthActionPerformed(evt);
-            }
-        });
+        rdClimate.setText("Climate (CLI)");
 
         javax.swing.GroupLayout jXPanel8Layout = new javax.swing.GroupLayout(jXPanel8);
         jXPanel8.setLayout(jXPanel8Layout);
@@ -748,52 +743,31 @@ public class FieldFrame extends IXInternalFrame {
         lblLevel1.setText("Fields");
         lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
-
-        bnNext.setText("NEXT");
-        bnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bnPrevious)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bnNext)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(99, 99, 99)))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnPrevious)
-                    .addComponent(bnNext))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -803,7 +777,7 @@ public class FieldFrame extends IXInternalFrame {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -836,22 +810,6 @@ public class FieldFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_cbSoilItemStateChanged
 
-    private void rdWthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdWthActionPerformed
-
-        cbWSTA.setSelectedIndex(-1);
-
-        if (rdWth.isSelected()) {
-            FileX.wstaType = WstaType.WTH;
-        } else if (rdGen.isSelected()) {
-            FileX.wstaType = WstaType.WTG;
-        } else if (rdClimate.isSelected()) {
-            FileX.wstaType = WstaType.CLI;
-        }
-
-        cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
-        cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
-    }//GEN-LAST:event_rdWthActionPerformed
-
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if (txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)) {
             l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
@@ -862,18 +820,22 @@ public class FieldFrame extends IXInternalFrame {
         field.WSTA = cbWSTACode.getSelectedItem().toString();
     }//GEN-LAST:event_cbWSTACodeActionPerformed
 
-    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Fields", MenuDirection.PREVIOUS));
-        });
-    }//GEN-LAST:event_bnPreviousActionPerformed
+    private void radioWSTAItemStateChanged(java.awt.event.ItemEvent evt) {                                       
+        try {
+            if (rdWth.isSelected()) {
+                FileX.wstaType = WstaType.WTH;
+            } else if (rdGen.isSelected()) {
+                FileX.wstaType = WstaType.WTG;
+            } else if (rdClimate.isSelected()) {
+                FileX.wstaType = WstaType.CLI;
+            }
 
-    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Fields", MenuDirection.NEXT));
-        });
-    }//GEN-LAST:event_bnNextActionPerformed
-
+            cbWSTA.setInit(null, "WSTA", "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
+            cbWSTACode.setInit(field, "WSTA", "", loadWSTACode(field.WSTA));
+        } catch (Exception ex) {
+        }
+    }
+    
     private List<String> loadWSTACode(String wCode) {
         ArrayList<String> items = new ArrayList<>();
 
@@ -908,10 +870,26 @@ public class FieldFrame extends IXInternalFrame {
 
         return items;
     }
+    
+    @Override
+    public boolean isPrevButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnNext;
-    private javax.swing.JButton bnPrevious;
     private xbuild.Components.XDropdownTableComboBox cbFLDT;
     private xbuild.Components.XDropdownTableComboBox cbFLHST;
     private xbuild.Components.XDropdownTableComboBox cbSLTX;
@@ -983,4 +961,19 @@ public class FieldFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtYCRD;
     private javax.swing.ButtonGroup wstaTypeGroup;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.fieldList;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Fields";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

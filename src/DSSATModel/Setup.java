@@ -15,7 +15,6 @@ public class Setup {
 
     private static String DSSATPath;
     private static String DSSATVersion;
-    private static String DefaultPath;
 
     public String GetDSSATPath() {
         if (DSSATPath == null) {
@@ -24,7 +23,8 @@ public class Setup {
                File file = new File(defaultDssatPath + "\\DSSATPRO.v" + i);
                File fileConfig = new File("XBuild.fle");
                 if (file.exists() && !fileConfig.exists()) {
-                    SaveFile(defaultDssatPath, "v" + i);
+                    DSSATVersion = "v" + i;
+                    SaveFile(defaultDssatPath);
                     return defaultDssatPath;
                 }
             }
@@ -32,19 +32,6 @@ public class Setup {
             GetFile();
         }
         return DSSATPath;
-    }
-
-    public String GetDefaultPath() {
-        if (DSSATPath == null) {
-            GetFile();
-        }
-
-        return DefaultPath == null || "".equals(DefaultPath) ? DSSATPath : DefaultPath;
-    }
-
-    public void SetDefaultPath(String path) {
-        DefaultPath = path;
-        SaveFile(DSSATPath, DSSATVersion);
     }
 
     public String GetDSSATVersion() {
@@ -77,9 +64,6 @@ public class Setup {
                             case "VERSION":
                                 DSSATVersion = tmp[1].trim();
                                 break;
-                            case "LATEST":
-                                DefaultPath = tmp[1].trim();
-                                break;
                             default:
                                 break;
                         }
@@ -103,7 +87,7 @@ public class Setup {
         }
     }
 
-    public void SaveFile(String path, String version) {
+    public void SaveFile(String path) {
         String xBuildCfg = "XBuild.fle";
         FileWriter writer = null;
         try {
@@ -113,11 +97,9 @@ public class Setup {
         }
         try (PrintWriter pw = new PrintWriter(writer)) {
             pw.println("DSSAT=" + path);
-            pw.println("VERSION=" + version);
-            pw.println("LATEST=" + DefaultPath);
+            pw.println("VERSION=" + DSSATVersion);
             
             DSSATPath = path;
-            DSSATVersion = version;
         }
         try {
             writer.close();

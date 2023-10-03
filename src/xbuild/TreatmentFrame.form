@@ -34,16 +34,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblLevel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="796" max="32767" attributes="0"/>
-                      <Component id="bnAddLayer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnDeleteLayer" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="bnPrevious" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bnNext" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="656" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -53,47 +44,17 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bnPrevious" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnNext" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="lblLevel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bnAddLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblLevel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bnDeleteLayer" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="654" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="585" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="bnAddLayer">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/Plus.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Add"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnAddLayerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnDeleteLayer">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/Minus.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnDeleteLayerActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -110,7 +71,7 @@
                 <Column editable="true" title="&lt;html&gt;Rot.&lt;br&gt;Option&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="&lt;html&gt;Crop&lt;br&gt;Comp.&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="Description" type="java.lang.Object"/>
-                <Column editable="false" title="Cultivar" type="java.lang.Object"/>
+                <Column editable="true" title="Cultivar" type="java.lang.Object"/>
                 <Column editable="false" title="Field" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;Soil&lt;br&gt;Anal.&lt;html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;Init.&lt;br&gt;Cond.&lt;html&gt;" type="java.lang.Object"/>
@@ -141,6 +102,25 @@
                   <Title/>
                   <Editor/>
                   <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <ComponentRef name="null"/>
+                  </Editor>
+                  <Renderer editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <ComponentRef name="null"/>
+                  </Renderer>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
@@ -205,39 +185,19 @@
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jXTable1MouseClicked"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
     <Component class="org.jdesktop.swingx.JXLabel" name="lblLevel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Treatment"/>
+        <Property name="text" type="java.lang.String" value="Treatments"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnPrevious">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="PREVIOUS"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnPreviousActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bnNext">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="NEXT"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnNextActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -1,8 +1,5 @@
 package FileXService;
 
-import DSSATModel.Setup;
-import DSSATModel.WeatherStation;
-import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
 import FileXModel.*;
 import java.io.File;
@@ -50,20 +47,8 @@ public class FileXService {
                     FileX.wstaType = WstaType.WTG;
                     break;
             }
-            
-//            for(ModelXBase x : FileX.fieldList.GetAll()){
-//                FieldDetail f = (FieldDetail)x;
-//                WeatherStation w = WeatherStationList.GetAt(f.WSTA, FileX.wstaType);
-//                if(w == null && !f.WSTA.equals("-99")){
-//                    WeatherStation w1 = WeatherStationList.GetAt(f.WSTA.substring(0, 4), FileX.wstaType);
-//                    if(w1 != null){
-//                        f.WSTA = w1.Code;
-//                    }
-//                }
-//            }
         }
         
-        new Setup().SetDefaultPath(fileName.getPath().replace(fileName.getName(), ""));
         FileX.isFileOpenned = true;
     }
     
@@ -95,8 +80,6 @@ public class FileXService {
         
         try {
             writer.close();
-            
-            new Setup().SetDefaultPath(file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(FileX.class.getName()).log(Level.SEVERE, null, ex);
         }

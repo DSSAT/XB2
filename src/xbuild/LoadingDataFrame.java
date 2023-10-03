@@ -35,7 +35,6 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
     /** Creates new form LoadingData */
     private Task task;
     protected String dir;
-    protected String version;
     private boolean isValid = true;   
 
     class Task extends SwingWorker<Void, Void> {
@@ -74,7 +73,7 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
 
             try{
                 taskOutput.append("Loading DSSAT profile....\n");
-                DSSATProfileService dssatProfileService = new DSSATProfileService(version, dir);
+                DSSATProfileService dssatProfileService = new DSSATProfileService(dir);
                 dssatProfileService.Parse();
             }
             catch(Exception ex){
@@ -124,9 +123,8 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
         }
     }
 
-    public LoadingDataFrame(String dir, String version) {
+    public LoadingDataFrame(String dir) {
         this.dir = dir;
-        this.version = version;
 
         initComponents();
 

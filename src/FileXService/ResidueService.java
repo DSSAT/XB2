@@ -39,6 +39,10 @@ public class ResidueService {
                         bOrganicHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@R RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET RENAME
                     Organic organic;
                     OrganicApplication organicApp = new OrganicApplication();

@@ -53,9 +53,9 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
             Component c = super.prepareRenderer(renderer, row, column);
             c.setForeground(Color.BLACK);
             if (highlighter.isHighlightableRow(row)) {
-                c.setBackground(new Color(255, 200, 200));
+                c.setBackground(new Color(201, 226, 250));
             } else if (isRowSelected(row)) {
-                c.setBackground(Color.GREEN);
+                c.setBackground(new Color(184, 207, 229));
             } else {
                 c.setBackground(Color.WHITE);
             }
@@ -148,7 +148,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                     String val = getFieldValue(selectItem, codeField);
 
                     if (val != null && !"".equals(val)) {
-                        UpdateComponent.updateModel(model, fieldName, val);
+                        UpdateComponent.updateModel(this, model, fieldName, val);
                     }
                 } catch (Exception ex) {
 
@@ -352,7 +352,6 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         protected ComboTablePopup(JComboBox<Object> combo, JTable table) {
             super(combo);
             this.table = table;
-
             int allWidth = 0;
             for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
                 allWidth += table.getColumnModel().getColumn(i).getPreferredWidth();

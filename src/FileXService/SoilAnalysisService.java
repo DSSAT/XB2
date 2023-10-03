@@ -46,9 +46,12 @@ public class SoilAnalysisService {
                         bSoilHeader2 = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
                     //@A SADAT  SMHB  SMPX  SMKE  SANAME
                     SoilAnalysis soil = new SoilAnalysis();
-                    Integer level = Integer.parseInt(tmp.substring(0, 2).trim()) - 1;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                     soil.SetLevel(level);
                     soil.SADAT = Utils.GetDate(soilHeader1, tmp, "SADAT", 5);
                     soil.SMHB = Utils.GetString(soilHeader1, tmp, " SMHB", 5);
@@ -62,6 +65,9 @@ public class SoilAnalysisService {
                         bSoil = false;
                         bSoilHeader1 = false;
                         bSoilHeader2 = false;
+                        continue;
+                    }
+                    else if(strRead.trim().startsWith("!")){
                         continue;
                     }
                     //@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC

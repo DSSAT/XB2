@@ -30,14 +30,28 @@ public class CultivarList extends ManagementList {
 //    }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Cultivar model = new Cultivar(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
 
     @Override
     public ModelXBase Clone(int sourceIndex, String newName) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).CU == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

@@ -14,9 +14,10 @@ import java.util.ArrayList;
 public class OrganicList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Organic model = new Organic(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     
@@ -38,5 +39,18 @@ public class OrganicList extends ManagementList {
         }
         
         return newSource;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MR == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

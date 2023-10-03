@@ -39,6 +39,10 @@ public class ChemicalApplicationService {
                         bChemicalHeader = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME
                     Chemical chem;
                     ChemicalApplication chemApp = new ChemicalApplication();

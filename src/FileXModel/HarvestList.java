@@ -33,9 +33,23 @@ public class HarvestList extends ManagementList {
     }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Harvest model = new Harvest(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MH == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

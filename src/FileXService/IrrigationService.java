@@ -46,6 +46,9 @@ public class IrrigationService {
                         bIrrigHeader2 = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
                     //@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME
                     Irrigation irrig = new Irrigation();
                     Integer level = Integer.valueOf(strRead.substring(0, 2).trim());
@@ -61,6 +64,10 @@ public class IrrigationService {
                         bIrrigHeader2 = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@I IDATE  IROP IRVAL
                     try {
                         Integer level = Integer.valueOf(tmp.substring(0, 2).trim());

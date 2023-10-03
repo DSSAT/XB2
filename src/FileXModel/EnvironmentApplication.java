@@ -16,21 +16,21 @@ import java.util.logging.Logger;
  */
 public class EnvironmentApplication implements Cloneable {
     public Date ODATE;
-    public Integer EDAY;
+    public Double EDAY;
     public EnvironmentFactor EDAY_Fact;
-    public Float ERAD;
+    public Double ERAD;
     public EnvironmentFactor ERAD_Fact;
-    public Float EMAX;
+    public Double EMAX;
     public EnvironmentFactor EMAX_Fact;
-    public Float EMIN;
+    public Double EMIN;
     public EnvironmentFactor EMIN_Fact;
-    public Float ERAIN;
+    public Double ERAIN;
     public EnvironmentFactor ERAIN_Fact;
-    public Float ECO2;
+    public Double ECO2;
     public EnvironmentFactor ECO2_Fact;
-    public Float EDEW;
+    public Double EDEW;
     public EnvironmentFactor EDEW_Fact;
-    public Float EWIND;
+    public Double EWIND;
     public EnvironmentFactor EWIND_Fact;
     
     public Date getOrder(){

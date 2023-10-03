@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class DSSATProfileService {
     private final DSSATProfileRepository dssatProfileRepository;
     
-    public DSSATProfileService(String version, String rootPath){
-        this.dssatProfileRepository = new DSSATProfileRepository(version, rootPath);
+    public DSSATProfileService(String rootPath){
+        this.dssatProfileRepository = new DSSATProfileRepository(rootPath);
     }
     
     public void Parse() throws Exception {

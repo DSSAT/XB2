@@ -40,7 +40,7 @@ public class XComboBox extends JComboBox {
 
         if (value == null || "".equals(value)) {
             this.value = items.get(0).index;
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
         } else {
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).index.equals(value)) {
@@ -71,7 +71,7 @@ public class XComboBox extends JComboBox {
         if(model != null){
             if (value == null || "".equals(value)) {
                 this.value = !this.items.isEmpty() ? this.items.get(0).index : "";
-                UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+                UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
             } else {
                 for (int i = 0; i < this.items.size(); i++) {
                     if (this.items.get(i).index.equals(value) || this.items.get(i).item.equals(value)) {
@@ -109,7 +109,7 @@ public class XComboBox extends JComboBox {
         
         if (value == null || "".equals(value)) {
             this.value = this.items.get(0).index;
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
         } else {
             for (int i = 0; i < this.items.size(); i++) {
                 if (this.items.get(i).index.equals(value)) {
@@ -131,10 +131,10 @@ public class XComboBox extends JComboBox {
         int index = this.getSelectedIndex();
         if(index >= 0){
                 this.value = items.get(index).item;
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
         }
         else{
-            UpdateComponent.updateModel(this.model, this.fieldName, "");
+            UpdateComponent.updateModel(this, this.model, this.fieldName, "");
         }
     }
 }

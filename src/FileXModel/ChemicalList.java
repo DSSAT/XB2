@@ -33,9 +33,23 @@ public class ChemicalList extends ManagementList {
     }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Chemical model = new Chemical(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MC == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

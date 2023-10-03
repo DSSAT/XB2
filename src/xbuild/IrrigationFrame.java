@@ -6,6 +6,7 @@ import FileXModel.FileX;
 import FileXModel.ModelXBase;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
+import FileXModel.ManagementList;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -14,8 +15,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import xbuild.Components.IXInternalFrame;
-import xbuild.Events.MenuDirection;
-import xbuild.Events.NewFrameEvent;
 import xbuild.Events.UpdateLevelEvent;
 
 /**
@@ -62,6 +61,24 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
             rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
             rdReportedDates.setEnabled(!FileX.isFileOpenned || irrig.GetSize() == 0);
         });
+    }
+    
+    @Override
+    public boolean isPrevButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isNextButtonEnabled(){
+        return true;
+    }
+    
+    @Override
+    public boolean isAddButtonEnabled(){
+        return true;
+    }
+    @Override
+    public boolean isDeleteButtonEnabled(){
+        return true;
     }
     
     private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
@@ -161,8 +178,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         txtEFIR = new javax.swing.JFormattedTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         lblLevel1 = new org.jdesktop.swingx.JXLabel();
-        bnPrevious = new javax.swing.JButton();
-        bnNext = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -296,20 +311,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         lblLevel1.setText("Irrigation");
         lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        bnPrevious.setText("PREVIOUS");
-        bnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnPreviousActionPerformed(evt);
-            }
-        });
-
-        bnNext.setText("NEXT");
-        bnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnNextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -322,21 +323,13 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                         .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bnPrevious)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnNext)))
+                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnPrevious)
-                    .addComponent(bnNext))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -344,7 +337,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -447,18 +440,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
-    private void bnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPreviousActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Irrigation", MenuDirection.PREVIOUS));
-        });
-    }//GEN-LAST:event_bnPreviousActionPerformed
-
-    private void bnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNextActionPerformed
-        EventQueue.invokeLater(() -> {
-            l.myAction(new NewFrameEvent(this, "Irrigation", MenuDirection.NEXT));
-        });
-    }//GEN-LAST:event_bnNextActionPerformed
-
     @Override
     public void keyTyped(KeyEvent e) {
         Update();
@@ -526,8 +507,6 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLayer;
     private javax.swing.JButton bnDeleteLayer;
-    private javax.swing.JButton bnNext;
-    private javax.swing.JButton bnPrevious;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
@@ -542,4 +521,19 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     private xbuild.Components.XTextField txtDescription;
     private javax.swing.JFormattedTextField txtEFIR;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ManagementList getManagementList() {
+        return FileX.irrigations;
+    }
+    
+    @Override
+    public String getManagementName() {
+        return "Irrigation";
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
+    }
 }

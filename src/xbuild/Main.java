@@ -8,6 +8,7 @@ package xbuild;
 import DSSATModel.Setup;
 import java.awt.event.*;
 import javax.swing.JFrame;
+import xbuild.Components.UpdateComponent;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Main {
         mainForm.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainForm.show();
         
+        UpdateComponent.setEventListener(mainForm);
+        
         final Setup setup = new Setup();
         if(setup.GetDSSATPath() == null)
         {
@@ -33,12 +36,12 @@ public class Main {
             frame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent evt) {
-                    new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+                    new LoadingDataFrame(setup.GetDSSATPath()).show();
                 } 
             });
         }
         else
-            new LoadingDataFrame(setup.GetDSSATPath(), setup.GetDSSATVersion()).show();
+            new LoadingDataFrame(setup.GetDSSATPath()).show();
     }
 
 }

@@ -14,12 +14,13 @@ import Extensions.Utils;
 public class FieldList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name)
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel)
     {
         FieldDetail f = new FieldDetail(name);
         int expNo = GetSize() + Utils.ParseInteger(FileX.general.ExperimentNumber);
         f.ID_FIELD = FileX.general.InstituteCode + FileX.general.SiteCode + FileX.general.Year.substring(2) + Utils.PadLeft(expNo, 2, '0');
         modelList.add(f);
+        f.SetLevel(newLevel);
         return f;
     }
     
@@ -37,5 +38,18 @@ public class FieldList extends ManagementList {
         }
         
         return newfield;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).FL == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

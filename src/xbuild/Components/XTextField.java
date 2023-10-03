@@ -65,7 +65,7 @@ public class XTextField extends JTextField {
                     break;
                 case Float:
                     try {
-                    this.value = Float.parseFloat(val);
+                    this.value = Float.valueOf(val);
                 } catch (NumberFormatException ex) {
                     this.setText("");
                 }
@@ -76,12 +76,12 @@ public class XTextField extends JTextField {
             this.value = null;
         }
         
-        UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+        UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
     }
      
     @Override
      public void setText(String value){
-         super.setText(value.toString());
+         super.setText(value);
          this.value = value;
      }
 }

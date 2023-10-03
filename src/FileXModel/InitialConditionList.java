@@ -12,9 +12,10 @@ package FileXModel;
 public class InitialConditionList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         InitialCondition model = new InitialCondition(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     
@@ -49,5 +50,19 @@ public class InitialConditionList extends ManagementList {
         }
         
         return newSource;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).IC == level) {
+                isUsed = true;
+                break;
+            }
+        }
+                
+        return isUsed;
     }
 }

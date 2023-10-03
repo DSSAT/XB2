@@ -27,9 +27,23 @@ public class PlantingList extends ManagementList {
     }
 
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         Planting model = new Planting(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
+    }
+    
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = false;
+        
+        for (ModelXBase treatment : FileX.treatments.GetAll()) {
+            if (((Treatment) treatment).MP == level) {
+                isUsed = true;
+                break;
+            }
+        }
+        return isUsed;
     }
 }

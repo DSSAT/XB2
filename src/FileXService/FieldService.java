@@ -43,6 +43,10 @@ public class FieldService {
                         bFieldHeader2 = false;
                         continue;
                     }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
                     //@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME
                     FieldDetail field = new FieldDetail();
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
@@ -66,6 +70,9 @@ public class FieldService {
                         bField = false;
                         bFieldHeader1 = false;
                         bFieldHeader2 = false;
+                        continue;
+                    }
+                    else if(strRead.trim().startsWith("!")){
                         continue;
                     }
                     //@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR

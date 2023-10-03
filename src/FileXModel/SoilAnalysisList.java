@@ -12,9 +12,10 @@ package FileXModel;
 public class SoilAnalysisList extends ManagementList {   
        
     @Override
-    public ModelXBase AddNew(String name) {
+    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
         SoilAnalysis model = new SoilAnalysis(name);
         modelList.add(model);
+        model.SetLevel(newLevel);
         return model;
     }
     
@@ -41,5 +42,11 @@ public class SoilAnalysisList extends ManagementList {
         }
         
         return newSource;
+    }
+
+    @Override
+    public boolean IsUseInTreatment(int level) {
+        boolean isUsed = FileX.treatments.treatments.stream().anyMatch(treatment -> treatment.SA == level);
+        return isUsed;
     }    
 }

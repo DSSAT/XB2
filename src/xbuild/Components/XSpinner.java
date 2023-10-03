@@ -6,7 +6,6 @@
 package xbuild.Components;
 
 import Extensions.Utils;
-import java.awt.event.ItemListener;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeListener;
@@ -88,7 +87,7 @@ public class XSpinner extends JSpinner {
         else{
             Utils.setTimeout(() -> {
                 this.value = this.getValue();
-                UpdateComponent.updateModel(this.model, this.fieldName, this.value.toString());
+                UpdateComponent.updateModel(this, this.model, this.fieldName, this.value.toString());
             }, 100);
         }
     }
@@ -97,12 +96,13 @@ public class XSpinner extends JSpinner {
         Utils.setTimeout(() -> {
             this.textField.setText("");
             this.value = null;
-            UpdateComponent.updateModel(this.model, this.fieldName, this.value);
+            UpdateComponent.updateModel(this, this.model, this.fieldName, this.value);
         }, 300);
     }
     
     @Override
     public Object getValue(){
+        try{
         if(this.textField == null || "".equals(this.textField.getText())){
             return null;
         }
@@ -111,20 +111,26 @@ public class XSpinner extends JSpinner {
             switch (this.fieldType) {
                 case Float:
                     try {
-                        this.value = Float.parseFloat(val);
-                    } catch (Exception ex) {
+                        this.value = Float.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
                 case Integer:
                     try {
-                        this.value = Integer.parseInt(val);
-                    } catch (Exception ex) {
+                        this.value = Integer.valueOf(val);
+                    } catch (NumberFormatException ex) {
                         this.value = null;
                     }
                     break;
+
             }
             return this.value;
+        }
+        }
+        catch(Exception ex){
+            return null;
         }
     }
     
