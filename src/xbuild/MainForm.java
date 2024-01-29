@@ -164,7 +164,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         BufferedImage image = null;
         try {
-            image = ImageIO.read(getClass().getResource("/icons/32/XBuild.png"));
+            image = ImageIO.read(getClass().getResource("/icons/32/XB2Logo.png"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
