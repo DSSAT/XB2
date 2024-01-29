@@ -439,6 +439,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleName(" XB2 v0.8.0.0.");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
