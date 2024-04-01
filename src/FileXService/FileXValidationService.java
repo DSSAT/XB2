@@ -51,6 +51,10 @@ public class FileXValidationService {
 
         return isValid;
     }
+    
+    public static boolean IsCropEnabled(){
+        return FileX.general != null && FileX.general.crop != null && FileX.general.crop.Enabled;
+    }
 
     public static boolean IsFieldsValid() {
         boolean isValid = true;

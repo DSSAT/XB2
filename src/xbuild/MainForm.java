@@ -19,18 +19,16 @@ import DSSATModel.ExperimentType;
 import DSSATModel.Setup;
 import DSSATModel.SimulationControlDefaults;
 import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Treatment;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.*;
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -162,14 +160,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.setVisible(false);
         jXTree1.setCellRenderer(new CustomDefaultTreeCellRenderer());
 
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResource("/icons/32/XB2Logo.png"));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        setIconImage(image);
+        setIconImage(Variables.getIconImage(getClass()));
     }
 
     /**
@@ -266,7 +257,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(" XB2 v0.7.0.0.");
+        setTitle(" XB2 v0.8.0.0.");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -556,6 +547,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
         
         File file = new File(target + "\\" + root.getUserObject().toString().replace("*", ""));
+        File path = new File(file.getPath().replace(file.getName(), "" ));
+        
+        if (!path.exists()) {
+            path.mkdirs();
+        }
         FileXService.SaveFile(file);
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
@@ -676,7 +672,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             enabled = FileXValidationService.IsGeneralValid();
         }
 
-        if (nodeName.equals("Treatments")) {
+        if (nodeName.equals("Cultivars")) {
+            enabled = FileXValidationService.IsCropEnabled()
+                    && FileXValidationService.IsGeneralValid();
+        }
+        else if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
         }
 
@@ -1491,7 +1491,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 isValid = true;
             } else if (!FileXValidationService.IsGeneralValid()) {
                 isValid = false;
-            } else if ("Treatments".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsMinimumRequired()) {
+            } 
+            else if ("Cultivars".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsCropEnabled()){
+                isValid = false;
+            }
+            else if ("Treatments".equalsIgnoreCase(node.toString()) && !FileXValidationService.IsMinimumRequired()) {
                 isValid = false;
             }
 

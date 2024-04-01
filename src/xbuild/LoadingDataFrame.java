@@ -160,6 +160,7 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
         taskOutput = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Variables.getIconImage(getClass()));
 
         taskOutput.setColumns(20);
         taskOutput.setRows(5);

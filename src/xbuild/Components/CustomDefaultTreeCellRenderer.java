@@ -29,8 +29,12 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         if (node.getParent() != null && !nodeName.equals("General Information")) {
             enabled = FileXValidationService.IsGeneralValid();
         }
-
-        if (nodeName.equals("Treatments")) {
+        
+        if (nodeName.equals("Cultivars")) {
+            enabled = FileXValidationService.IsCropEnabled()
+                    && FileXValidationService.IsGeneralValid();
+        }
+        else if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
         }        
 

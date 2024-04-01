@@ -17,6 +17,7 @@ import FileXModel.FileX;
 import DSSATModel.CultivarList;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
+import Extensions.Variables;
 import FileXModel.Cultivar;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -66,6 +67,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Variables.getIconImage(getClass()));
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {

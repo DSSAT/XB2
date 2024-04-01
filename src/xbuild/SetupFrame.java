@@ -12,6 +12,7 @@
 package xbuild;
 
 import DSSATModel.Setup;
+import Extensions.Variables;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFileChooser;
@@ -56,6 +57,7 @@ public class SetupFrame extends JXFrame {
         jbCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(Variables.getIconImage(getClass()));
         setStartPosition(org.jdesktop.swingx.JXFrame.StartPosition.CenterInScreen);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(0, 102, 255)), "Setup DSSAT Directory"));

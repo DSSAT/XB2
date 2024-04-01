@@ -14,6 +14,8 @@ import java.awt.EventQueue;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
 
@@ -23,6 +25,8 @@ import xbuild.Components.XColumn;
  */
 public class GeneralInfoFrame extends IXInternalFrame {
 
+    private Crop cropOriginal;
+            
     public IXInternalFrame NewFrame() {
         return new GeneralInfoFrame();
     }
@@ -86,6 +90,12 @@ public class GeneralInfoFrame extends IXInternalFrame {
         }
 
         cbFileType.setEnabled(!FileX.isFileOpenned);
+        
+        try {
+            cropOriginal = (Crop) FileX.general.crop.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(GeneralInfoFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -653,8 +663,25 @@ public class GeneralInfoFrame extends IXInternalFrame {
         if (cbCrop.getSelectedItem() != null && cbCrop.getSelectedItem().getClass() == Crop.class) {
             Crop crop = (Crop) cbCrop.getSelectedItem();
 
-            if (crop != null && !"".equals(crop.CropCode)) {
+            if (crop != null && !"".equals(crop.CropCode) && 
+                    (cropOriginal == null || !cropOriginal.CropCode.equals(crop.CropCode))) {
                 setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
+                
+                try{
+                    cropOriginal = crop.clone();
+                }
+                catch(Exception ex){
+                    
+                }
+                
+                FileX.general.crop.Enabled = crop.Enabled;
+                
+                if(!crop.Enabled){
+                    PopupDialog dl = new PopupDialog(null, true);
+                    dl.setTitle("Warning");
+                    dl.setMessage("The crop is not enabled: " + crop.CropCode + ", " + crop.CropName);
+                    dl.show();
+                }
             }
 
             updateTree();
