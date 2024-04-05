@@ -561,10 +561,10 @@ public class FieldFrame extends IXInternalFrame {
         });
 
         wstaTypeGroup.add(rdWth);
-        rdWth.setLabel("WTH");
+        rdWth.setText("Observed (WTH)");
 
         wstaTypeGroup.add(rdGen);
-        rdGen.setText("Gen (WTG)");
+        rdGen.setText("Generated (WTG)");
 
         wstaTypeGroup.add(rdClimate);
         rdClimate.setText("Climate (CLI)");

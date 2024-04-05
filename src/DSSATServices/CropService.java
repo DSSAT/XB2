@@ -52,6 +52,7 @@ public class CropService extends DSSATServiceBase {
                         CultivarList.AddNew(crop, culFile);
                     }
                     else{
+                        crop.Enabled = false;
                         CultivarList.AddNew(crop, "");
                     }
                 } catch (Exception ex) {

@@ -1,8 +1,11 @@
 package Extensions;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -66,5 +69,16 @@ public class Variables {
     
     public static String getDateFormatString(){
         return getDatePattern();
+    }
+    
+    public static BufferedImage getIconImage(Class<?> objectClass){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(objectClass.getResource("/icons/32/XB2Logo.png"));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return image;
     }
 }

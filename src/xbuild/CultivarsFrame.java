@@ -15,6 +15,7 @@ import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.CropList;
 import FileXModel.ManagementList;
+import FileXService.FileXValidationService;
 import ListDialog.CultivarListDialog;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -204,7 +205,7 @@ public class CultivarsFrame extends IXInternalFrame {
 
     @Override
     public boolean isAddButtonEnabled() {
-        return true;
+        return FileXValidationService.IsCropEnabled() && FileXValidationService.IsGeneralValid();
     }
 
     @Override

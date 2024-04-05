@@ -9,12 +9,24 @@ package DSSATModel;
  *
  * @author Jazzy
  */
-public class Crop {
+public class Crop implements Cloneable {
     public String CropCode;
     public String CropName;
+    public boolean Enabled;
+    
+    public Crop(){
+        CropCode = "";
+        CropName = "";
+        Enabled = true;
+    }
     
     @Override
     public String toString(){
         return CropName;
-    } 
+    }
+    
+    @Override
+    public Crop clone() throws CloneNotSupportedException{
+        return (Crop)super.clone();
+    }
 }
