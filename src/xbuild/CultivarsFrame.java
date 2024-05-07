@@ -132,7 +132,7 @@ public class CultivarsFrame extends IXInternalFrame {
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if (evt.getClickCount() == 2) {
-            int nRow = jXTable1.getSelectedRow();
+            int nRow = jXTable1.getSelectedRow() + 1;
             Cultivar culEdit = (Cultivar) FileX.cultivars.GetAt(nRow);
 
             final CultivarListDialog dialog = new CultivarListDialog(null, culEdit, true);

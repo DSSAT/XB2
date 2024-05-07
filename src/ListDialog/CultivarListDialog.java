@@ -199,7 +199,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
             cbCrop.setVisible(false);
             jLabel1.setVisible(false);
             jLabel2.setVisible(false);
-            cbCultivar.setInit(null, "INGENO", cul != null ? cul.INGENO : "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CropCode");
+            cbCultivar.setInit(null, "INGENO", cul != null ? cul.INGENO : "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CulCode");
             this.setPreferredSize(new Dimension(this.getPreferredSize().width, 590));
             
             EventQueue.invokeLater(() -> {
