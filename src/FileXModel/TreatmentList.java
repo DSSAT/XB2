@@ -35,6 +35,8 @@ public class TreatmentList extends ManagementList {
                 Integer r = Utils.ParseInteger(((Treatment)FileX.treatments.GetAtIndex(FileX.treatments.GetSize() - 1)).R);
                 model.R = r.toString();
             }
+            
+            model.TNAME = name;
         }
         else{
             model = new Treatment(name);

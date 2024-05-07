@@ -945,8 +945,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             javax.swing.plaf.InternalFrameUI ui = frame.getUI();
             ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
 
-            desktopPane.add(frame);
-            try {
+            try{
+                desktopPane.add(frame);            
                 frame.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -1389,10 +1389,16 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            int currentLevel = "Treatments".equals(node.toString()) ? currentFrame.getLevel() : -1;
+            if(currentLevel >= 0){
+                defaultName = FileX.treatments.GetAt(currentLevel + 1).GetName();
+            }
+                            
             InputDialog input = "Treatments".equals(node.toString()) ? new InputDialog(this, true, defaultName, 25) : new InputDialog(this, true, defaultName);
             input.show();
             
-            input.addWindowListener(new java.awt.event.WindowAdapter() {
+            input.addWindowListener(new java.awt.event.WindowAdapter() {                
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if(input.isOK()){
@@ -1409,8 +1415,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                             }
 
                             level++;
+                            
 
-                            modelList.AddNew(nodeName, level, -1);
+                            modelList.AddNew(nodeName, level, currentLevel);
 
                             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
@@ -1506,18 +1513,26 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 }
 
                 currentFrameName = nodeName;
-                IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
-
-                if (frame != null) {
+                IXInternalFrame frame;
+                int level = node.getParent().getIndex(node);
+                
+                if("Treatments".equalsIgnoreCase(node.toString())){
+                    frame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                    level = frame.getLevel();
+                }
+                else{
+                    frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
+                    
+                    if (frame != null) {
                     ShowFrame(frame);
                     frame.addMyEventListener(this);
-                    
-                    int level = node.getParent().getIndex(node);
+
                     frame.setSelection(level + 1);
                     
                     EventQueue.invokeLater(() -> {
                         bnDeleteLevel.setEnabled(frame.isDeleteButtonEnabled());
                     });                    
+                }
                 }
             }
         }

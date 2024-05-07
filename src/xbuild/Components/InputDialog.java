@@ -25,6 +25,7 @@ public class InputDialog extends javax.swing.JDialog {
         super(parent, modal);
         commonConstructor(parent, defaultDescription);
         txtDescription.setDocument(new LimitDocument(maxChar));
+        txtDescription.setText(defaultDescription);
     }
     
     private void commonConstructor(java.awt.Frame parent, String defaultDescription){
