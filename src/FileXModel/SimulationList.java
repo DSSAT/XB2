@@ -19,7 +19,14 @@ public class SimulationList extends ManagementList {
         Simulation model = SimulationControlDefaults.Get(FileX.general.FileType);
         model.SetName(name);
         
-        CropModel cm = CropModelList.GetByCrop(FileX.general.crop.CropCode);
+        String cropCode = FileX.general.crop.CropCode;
+        if("".equals(cropCode) && FileX.cultivars.GetSize() > 0){
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAt(newLevel <= FileX.cultivars.GetSize() ? newLevel : FileX.cultivars.GetSize());
+            cropCode = cul.CR;
+        }
+        
+        CropModel cm = CropModelList.GetByCrop(cropCode);        
+        
         if (cm != null) {
             model.SMODEL = cm.ModelCode;
         }
