@@ -71,14 +71,14 @@
                 <Column editable="true" title="&lt;html&gt;Rot.&lt;br&gt;Option&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="&lt;html&gt;Crop&lt;br&gt;Comp.&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="true" title="Description" type="java.lang.Object"/>
-                <Column editable="true" title="Cultivar" type="java.lang.Object"/>
                 <Column editable="false" title="Field" type="java.lang.Object"/>
+                <Column editable="false" title="&lt;html&gt;Initial&lt;br&gt;Conditions&lt;html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;Soil&lt;br&gt;Anal.&lt;html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="&lt;html&gt;Init.&lt;br&gt;Cond.&lt;html&gt;" type="java.lang.Object"/>
-                <Column editable="false" title="Plant" type="java.lang.Object"/>
-                <Column editable="false" title="Irrigat." type="java.lang.Object"/>
-                <Column editable="false" title="Fertil." type="java.lang.Object"/>
-                <Column editable="false" title="Resid." type="java.lang.Object"/>
+                <Column editable="true" title="Cultivar" type="java.lang.Object"/>
+                <Column editable="false" title="Planting" type="java.lang.Object"/>
+                <Column editable="false" title="Irrigation" type="java.lang.Object"/>
+                <Column editable="false" title="Fertililizers" type="java.lang.Object"/>
+                <Column editable="false" title="&lt;html&gt;Organic&lt;br&gt;Amendments&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Chem&lt;br&gt;App.&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                 <Column editable="false" title="Tillage" type="java.lang.Object"/>
                 <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;center&apos;&gt;Env.&lt;br&gt;Mod&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
@@ -115,12 +115,8 @@
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
-                  <Editor editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="null"/>
-                  </Editor>
-                  <Renderer editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="null"/>
-                  </Renderer>
+                  <Editor/>
+                  <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
