@@ -257,7 +257,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(" XB2 v0.8.0.0.");
+        setTitle(" XB2 v0.9.0.0.");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -430,7 +430,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
 
-        getAccessibleContext().setAccessibleName(" XB2 v0.8.0.0.");
+        getAccessibleContext().setAccessibleName(" XB2 v0.9.0.0.");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

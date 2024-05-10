@@ -192,7 +192,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value=" XB2 v0.8.0.0."/>
+    <Property name="title" type="java.lang.String" value=" XB2 v0.9.0.0."/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
