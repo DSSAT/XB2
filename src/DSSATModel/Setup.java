@@ -18,7 +18,7 @@ public class Setup {
 
     public String GetDSSATPath() {
         if (DSSATPath == null) {
-            String defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
+            String defaultDssatPath = System.getProperty("user.dir");
             for(int i = 47;i <= 49;i++){
                File file = new File(defaultDssatPath + "\\DSSATPRO.v" + i);
                File fileConfig = new File("XBuild.fle");
