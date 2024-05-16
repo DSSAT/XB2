@@ -855,8 +855,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
         ArrayList<String> nodeList = new ArrayList<>();
         getCellIndex(rootNode, nodeList);
+        
+        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+        String management = currentFrame.getManagementName();
 
-        int mIndex = menuAll.indexOf(currentFrameName) + 1;
+        int mIndex = menuAll.indexOf(management) + 1;
 
         String frameName = menuAll.get(mIndex);
         int select = nodeList.indexOf(frameName);
