@@ -15,13 +15,23 @@ public class Setup {
 
     private static String DSSATPath;
     private static String DSSATVersion;
+    private static String XB2Path;
 
-    public String GetDSSATPath() {
+    public String GetDSSATPath() {        
         if (DSSATPath == null) {
-            String defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
+            String defaultDssatPath;
+            if(Paths.get("Tools").toAbsolutePath().toFile().exists()){
+                defaultDssatPath = Paths.get("").toAbsolutePath().toString();
+                XB2Path = Paths.get("Tools\\XB2").toAbsolutePath().toString();
+            }
+            else{
+                defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
+                XB2Path = Paths.get("").toAbsolutePath().toString();
+            }
+            
             for(int i = 47;i <= 49;i++){
                File file = new File(defaultDssatPath + "\\DSSATPRO.v" + i);
-               File fileConfig = new File("XBuild.fle");
+               File fileConfig = new File(XB2Path + "\\XBuild.fle");
                 if (file.exists() && !fileConfig.exists()) {
                     DSSATVersion = "v" + i;
                     SaveFile(defaultDssatPath);
@@ -42,7 +52,7 @@ public class Setup {
     }
 
     protected void GetFile() {
-        String xBuildCfg = "XBuild.fle";
+        String xBuildCfg = XB2Path + "\\XBuild.fle";
         File file = new File(xBuildCfg);
         if (file.exists()) {
             FileReader fileRead = null;
@@ -88,7 +98,7 @@ public class Setup {
     }
 
     public void SaveFile(String path) {
-        String xBuildCfg = "XBuild.fle";
+        String xBuildCfg = XB2Path + "\\XBuild.fle";
         FileWriter writer = null;
         try {
             writer = new FileWriter(xBuildCfg);
