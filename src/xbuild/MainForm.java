@@ -41,6 +41,7 @@ import FileXService.FileXValidationService;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
@@ -258,6 +259,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" XB2 v0.9.0.0.");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jXTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -441,7 +447,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 }//GEN-LAST:event_jXTree1ValueChanged
 
     private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
-        dispose();
+        if(onClose()){
+            dispose();
+        }
     }//GEN-LAST:event_jMenuExitMouseClicked
 
     private void jMenuRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRefreshMouseClicked
@@ -555,16 +563,24 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         FileXService.SaveFile(file);
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
+        onClose();
+    }//GEN-LAST:event_jMenuCloseFileActionPerformed
 
+    private boolean onClose(){
+        
+        boolean result = false;
+        
         if(FileX.isDirty){
             int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (confirmSave == 2) // Cancel
             {
-                return;
-            } else if (confirmSave == 0) //Yes
+                return false;
+            }
+            else if (confirmSave == 0) //Yes
             {
                 saveFile();
+                result = true;
             }
         }
 
@@ -581,8 +597,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         FileX.CloseFile();
         setPrevNextButton();
         setAddDeleteButton();
-    }//GEN-LAST:event_jMenuCloseFileActionPerformed
-
+        
+        return true;
+    }
+    
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
         JFileChooser fc = new JFileChooser(new Setup().GetDSSATPath());
         FileFilter filter1 = new ExtensionFileFilter("File x", new String[]{"x", "X"});
@@ -907,6 +925,12 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         
         removeLevel();
     }//GEN-LAST:event_bnDeleteLevelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(!onClose()){
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLevel;
