@@ -1387,7 +1387,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     
     private void addNewLevel(DefaultMutableTreeNode node, ManagementList modelList){
         if (modelList != null && !"Cultivars".equals(node.toString())) {
-            String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN" : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
+            String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN_" + (modelList.GetSize() + 1) : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
             IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
             int currentLevel = "Treatments".equals(node.toString()) ? currentFrame.getLevel() : -1;
