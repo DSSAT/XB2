@@ -299,8 +299,8 @@ public class TreatmentFrame extends IXInternalFrame  {
                 ((Treatment)FileX.treatments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
             }
             
-            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 5));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 6));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 5));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 6));
             ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 7));
             ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 8));
             ((Treatment)FileX.treatments.GetAtIndex(row)).MP = Utils.ParseInteger(tbModel1.getValueAt(row, 9));

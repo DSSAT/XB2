@@ -900,7 +900,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int[] selectRows = {0};
         GetNodeIndex(rootNode, managementName, selectRows);
         
-        jXTree1.setSelectionRow(selectRows[0] + currentFrame.getLevel());
+        jXTree1.setSelectionRow(selectRows[0] + currentFrame.getLevel() + ("Treatments".equals(managementName) ? 1 : 0));
         
         removeLevel();
     }//GEN-LAST:event_bnDeleteLevelActionPerformed
@@ -1390,7 +1390,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN_" + (modelList.GetSize() + 1) : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
             IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            int currentLevel = "Treatments".equals(node.toString()) ? currentFrame.getLevel() : -1;
+            int currentLevel = "Treatments".equals(node.toString()) && modelList.GetSize() > 0 ? currentFrame.getLevel() : -1;
+            
             if(currentLevel >= 0){
                 defaultName = FileX.treatments.GetAt(currentLevel + 1).GetName();
             }
@@ -1480,7 +1481,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                         }
                     }
                     model.reload(parentNode);
+                    
                     jXTree1.setSelectionPath(new TreePath(parentNode.getPath()));
+                    if(modelList.GetSize() > 0){
+
+                        int select = jXTree1.getSelectionRows()[0];
+                        jXTree1.setSelectionRow(select + (level < modelList.GetSize() ? level + 1 : level));
+                    }
                 });
             }
             else {
