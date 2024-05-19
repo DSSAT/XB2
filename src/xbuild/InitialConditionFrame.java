@@ -874,7 +874,7 @@ public class InitialConditionFrame extends IXInternalFrame {
             
             if(water == -99){
                 water = 100f;
-                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Using default value for water.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
             }
             calculateWater(water);
         } else if ("".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
@@ -885,7 +885,7 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
             if(nitrogen == -99){
                 nitrogen = 25f;
-                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Using default value for nitrogen.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
             }
             calculateNitrogen(nitrogen);
         } else if (!"".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
