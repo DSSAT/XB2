@@ -50,7 +50,7 @@ public class SoilRepository extends DSSATRepositoryBase {
                         else if(strRead.startsWith("@  SLB") && isProfile){
                             isProfile = false;
                         }
-                        else if(!strRead.startsWith("!") && strRead.length() >= 100 && isProfile){
+                        else if(!strRead.startsWith("!") && strRead.length() >= 90 && isProfile){
                             int index = soilList.size() - 1;
                             if(index >= 0){
                                 String tmp = soilList.get(index);

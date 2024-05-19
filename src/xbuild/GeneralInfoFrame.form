@@ -268,6 +268,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtInstituteCodeFocusLost"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInstituteCodeKeyReleased"/>
           </Events>
         </Component>
         <Component class="xbuild.Components.XTextField" name="txtSiteCode">
@@ -276,6 +277,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSiteCodeFocusLost"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSiteCodeKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="imagePanel">

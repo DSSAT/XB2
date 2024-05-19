@@ -975,6 +975,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             try{
                 desktopPane.add(frame);            
                 frame.setMaximum(true);
+                
+                EventQueue.invokeLater(() -> {
+                    frame.initialData();
+                });
+                
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1464,7 +1469,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                             jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
 
                             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
-
                             ShowFrame(frame);
                         }                        
                     }

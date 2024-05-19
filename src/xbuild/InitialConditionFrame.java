@@ -12,12 +12,14 @@ import FileXModel.ModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
 import FileXModel.ManagementList;
+import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
@@ -594,6 +596,11 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3.setText("<html>Nitrogen<br/>(kg/ha)</html>");
 
         txtWater.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtWater.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtWaterFocusLost(evt);
+            }
+        });
         txtWater.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtWaterKeyReleased(evt);
@@ -601,6 +608,11 @@ public class InitialConditionFrame extends IXInternalFrame {
         });
 
         txtNitrogen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtNitrogen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNitrogenFocusLost(evt);
+            }
+        });
         txtNitrogen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNitrogenKeyReleased(evt);
@@ -754,9 +766,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -853,11 +865,51 @@ public class InitialConditionFrame extends IXInternalFrame {
 
     private void bnRecalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRecalculateActionPerformed
         if (!"".equals(txtWater.getText()) && "".equals(txtNitrogen.getText())) {
-            calculateWater(Utils.ParseFloat(txtWater.getValue()));
+            float water = Utils.ParseFloat(txtWater.getValue());
+                    
+            if((water < 0 || water > 100) && water != -99){
+                JOptionPane.showMessageDialog(this, "Water cen be only between 0 and 100.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(water == -99){
+                water = 100f;
+                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            }
+            calculateWater(water);
         } else if ("".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
-            calculateNitrogen(Utils.ParseFloat(txtNitrogen.getValue()));
+            float nitrogen = Utils.ParseFloat(txtNitrogen.getValue());
+            if(nitrogen < 0 && nitrogen != -99){
+                JOptionPane.showMessageDialog(this, "Nitrogen cen be only positive.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(nitrogen == -99){
+                nitrogen = 25f;
+                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            }
+            calculateNitrogen(nitrogen);
         } else if (!"".equals(txtWater.getText()) && !"".equals(txtNitrogen.getText())) {
-            calculateInitialCondition(Utils.ParseFloat(txtWater.getValue()), Utils.ParseFloat(txtNitrogen.getValue()));
+            float water = Utils.ParseFloat(txtWater.getValue());
+            float nitrogen = Utils.ParseFloat(txtNitrogen.getValue());
+            
+            if((water < 0 || water > 100) && water != -99){
+                JOptionPane.showMessageDialog(this, "Water cen be only between 0 and 100.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(water == -99){
+                water = 100f;
+                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            if(nitrogen < 0 && nitrogen != -99){
+                JOptionPane.showMessageDialog(this, "Nitrogen cen be only positive.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(nitrogen == -99){
+                nitrogen = 25f;
+                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            }
+            calculateInitialCondition(water, nitrogen);
         }
     }//GEN-LAST:event_bnRecalculateActionPerformed
 
@@ -868,6 +920,22 @@ public class InitialConditionFrame extends IXInternalFrame {
     private void txtNitrogenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitrogenKeyReleased
         setRecalculateButtonEnabled();
     }//GEN-LAST:event_txtNitrogenKeyReleased
+
+    private void txtWaterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtWaterFocusLost
+        if(txtWater.getText().equals("")){
+            EventQueue.invokeLater(() -> {
+                    txtWater.setText("");
+                });
+        }
+    }//GEN-LAST:event_txtWaterFocusLost
+
+    private void txtNitrogenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitrogenFocusLost
+        if(txtNitrogen.getText().equals("")){
+            EventQueue.invokeLater(() -> {
+                    txtNitrogen.setText("");
+                });
+        }
+    }//GEN-LAST:event_txtNitrogenFocusLost
 
     private void setRecalculateButtonEnabled() {
         bnRecalculate.setEnabled(!"".equals(txtWater.getText()) || !"".equals(txtNitrogen.getText()));
@@ -964,24 +1032,40 @@ public class InitialConditionFrame extends IXInternalFrame {
             tbModel.removeRow(0);
         }
 
-        for (int i = 0; i <= init.GetSize(); i++) {
+        if(init.GetSize() > 0){
+            for (int i = 0; i < init.GetSize(); i++) {
+                InitialConditionApplication initApp = new InitialConditionApplication();
+                InitialConditionApplication app = init.GetApp(i);
 
-            InitialConditionApplication initApp = new InitialConditionApplication();
-            InitialConditionApplication app = init.GetApp(i);
+                initApp.ICBL = app.ICBL;
+                initApp.SH2O = i <= size ? Water_Calculated.get(i) : app.SH2O;
+                initApp.SNH4 = app.SNH4;
+                initApp.SNO3 = app.SNO3;
 
-            initApp.ICBL = app.ICBL;
-            initApp.SH2O = i <= size ? Water_Calculated.get(i) : app.SH2O;
-            initApp.SNH4 = app.SNH4;
-            initApp.SNO3 = app.SNO3;
+                if (i <= size) {
+                    app.ICBL = initApp.ICBL;
+                    app.SH2O = initApp.SH2O;
+                    app.SNH4 = initApp.SNH4;
+                    app.SNO3 = initApp.SNO3;
+                }
 
-            if (i <= size) {
-                app.ICBL = initApp.ICBL;
-                app.SH2O = initApp.SH2O;
-                app.SNH4 = initApp.SNH4;
-                app.SNO3 = initApp.SNO3;
+                tbModel.addRow(SetRow(initApp));
             }
-
-            tbModel.addRow(SetRow(initApp));
+        }
+        else{
+            int i = 0;
+            for (SoilProfile profile : soil.GetSoilProfiles()) {
+                InitialConditionApplication initApp = new InitialConditionApplication();
+                
+                initApp.ICBL = profile.SLB;
+                initApp.SH2O = Water_Calculated.get(i);
+                initApp.SNH4 = profile.SDUL;
+                initApp.SNO3 = 66f;
+                
+                
+                tbModel.addRow(SetRow(initApp));
+                i++;
+            }
         }
     }
 
@@ -1121,5 +1205,10 @@ public class InitialConditionFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+    
+    @Override
+    public void initialData(){
+        calculateInitialCondition(100f, 25f);
     }
 }

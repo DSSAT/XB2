@@ -67,6 +67,10 @@ public abstract class IXInternalFrame extends JInternalFrame {
         return false;
     }
     
+    public void initialData(){
+        
+    }
+    
     protected int getLevel(String nodeName) {
         String[] level1 = nodeName.split(":");
         String[] level2 = level1[0].split(" ");

@@ -204,11 +204,21 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 txtInstituteCodeFocusLost(evt);
             }
         });
+        txtInstituteCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtInstituteCodeKeyReleased(evt);
+            }
+        });
 
         txtSiteCode.setColumns(2);
         txtSiteCode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSiteCodeFocusLost(evt);
+            }
+        });
+        txtSiteCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSiteCodeKeyReleased(evt);
             }
         });
 
@@ -738,6 +748,18 @@ public class GeneralInfoFrame extends IXInternalFrame {
         
         EventQueue.invokeLater(() -> actionPerformed(new ActionEvent(this, 0, "Update")));
     }//GEN-LAST:event_txtExperimentNumberFocusLost
+
+    private void txtInstituteCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInstituteCodeKeyReleased
+        int position = txtInstituteCode.getCaretPosition();
+        txtInstituteCode.setText(txtInstituteCode.getText().toUpperCase());
+        txtInstituteCode.setCaretPosition(position);
+    }//GEN-LAST:event_txtInstituteCodeKeyReleased
+
+    private void txtSiteCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSiteCodeKeyReleased
+        int position = txtSiteCode.getCaretPosition();
+        txtSiteCode.setText(txtSiteCode.getText().toUpperCase());
+        txtSiteCode.setCaretPosition(position);
+    }//GEN-LAST:event_txtSiteCodeKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private xbuild.Components.XDropdownTableComboBox cbCrop;
