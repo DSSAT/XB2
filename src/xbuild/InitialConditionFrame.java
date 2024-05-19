@@ -898,7 +898,7 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
             if(water == -99){
                 water = 100f;
-                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Using default value for water.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
             }
             
             if(nitrogen < 0 && nitrogen != -99){
@@ -907,7 +907,7 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
             if(nitrogen == -99){
                 nitrogen = 25f;
-                JOptionPane.showMessageDialog(this, "Using default value.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Using default value for nitrogen.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
             }
             calculateInitialCondition(water, nitrogen);
         }
@@ -922,17 +922,33 @@ public class InitialConditionFrame extends IXInternalFrame {
     }//GEN-LAST:event_txtNitrogenKeyReleased
 
     private void txtWaterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtWaterFocusLost
-        if(txtWater.getText().equals("")){
+        String text = txtWater.getText();
+        float value = Utils.ParseFloat(txtWater.getText());
+        
+        if(text.equals("")){
             EventQueue.invokeLater(() -> {
                     txtWater.setText("");
+                });
+        }        
+        else if(value == 0){
+            EventQueue.invokeLater(() -> {
+                    txtWater.setText("0");
                 });
         }
     }//GEN-LAST:event_txtWaterFocusLost
 
     private void txtNitrogenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitrogenFocusLost
-        if(txtNitrogen.getText().equals("")){
+        String text = txtNitrogen.getText();
+        float value = Utils.ParseFloat(txtNitrogen.getText());
+        
+        if(text.equals("")){
             EventQueue.invokeLater(() -> {
                     txtNitrogen.setText("");
+                });
+        }        
+        else if(value == 0){
+            EventQueue.invokeLater(() -> {
+                    txtNitrogen.setText("0");
                 });
         }
     }//GEN-LAST:event_txtNitrogenFocusLost
