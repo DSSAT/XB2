@@ -17,10 +17,9 @@ import Extensions.Variables;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.AdjustmentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -30,12 +29,14 @@ import javax.swing.*;
  *
  * @author Jazzy
  */
-public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChangeListener {
+public class LoadingDataFrame extends javax.swing.JFrame {
 
     /** Creates new form LoadingData */
     private Task task;
     protected String dir;
     private boolean isValid = true;   
+    private boolean isDone = false;
+    private String validationMessage = ""; 
 
     class Task extends SwingWorker<Void, Void> {
         /*
@@ -48,7 +49,7 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
             setProgress(0);
             Variables.setLocale(getLocale());
             
-            ArrayList<DSSATServiceBase> parseList = new ArrayList<>();
+            ArrayList<DSSATServiceBase> parseList = new ArrayList<>();            
             
             parseList.add(new CropService(dir));
             parseList.add(new ChemicalService(dir));
@@ -70,39 +71,63 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
             parseList.add(new GrowthStageService(dir));
             parseList.add(new SoilService(dir));
             parseList.add(new WeatherService(dir));
+            
+            jScrollPane2.getVerticalScrollBar().addAdjustmentListener((AdjustmentEvent e) -> {ttt(e);});
 
             try{
-                taskOutput.append("Loading DSSAT profile....\n");
+                validationMessage += "Loading DSSAT profile....";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
                 DSSATProfileService dssatProfileService = new DSSATProfileService(dir);
                 dssatProfileService.Parse();
+                
+                validationMessage += "<font color='green'>!Done</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
             }
             catch(Exception ex){
-                taskOutput.append("!DSSATPro loading error: " + ex.getMessage() + " \n");
+                validationMessage += "<font color='red'>!Error</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
                 isValid = false;
             }
             
-            parseList.forEach(service -> {
+            for(DSSATServiceBase service : parseList) {
                 try {
-                    taskOutput.append("Loading " + service.getName() + "....\n");
+                    validationMessage += "Loading " + service.getName() + "....";
+                    jLabel1.setText("<html>" + validationMessage + "</html>");
                     
                     service.Parse();
-                } catch (Exception ex) {
-                    taskOutput.append(ex.getMessage() + "\n");
+                    
+                    validationMessage += "<font color='green'>!Done</font><br>";
+                    jLabel1.setText("<html>" + validationMessage + "</html>");
+                } catch (Exception ex) {                   
+                    validationMessage += "<font color='red'>!Error</font>";
+                    for(String message : ex.getMessage().split("\n")){
+                        validationMessage += "<div style='padding-left:25px'><font color='red'>" + message + "</font></div>";
+                    }
+                    
+                    jLabel1.setText("<html>" + validationMessage + "</html>");
                     isValid = false;
                 }
-            });
+            }
             
             try{
-                taskOutput.append("Loading Simulation Default....\n");
+                validationMessage += "Loading Simulation Default....";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+                    
                 SimulationDefaultService simulationDefaultService = new SimulationDefaultService(dir);
                 simulationDefaultService.Parse();
+                
+                validationMessage += "<font color='green'>!Done</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
             }
             catch(Exception ex){
-                taskOutput.append("!Simulation Default loading error: " + ex.getMessage() + " \n");
+                validationMessage += "<font color='red'>!Error</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
                 isValid = false;
             }
             
             Icons.Init(getClass());
+            
+            isDone = true;
 
             return null;
         }
@@ -114,13 +139,18 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
         public void done() {
             //setCursor(null); //turn off the wait cursor
             if(isValid){
-                taskOutput.append("Done!\n");
+                validationMessage += "<font color='green'>!Done</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+                
                 dispose();
-            }
-            else
-                taskOutput.append("ERROR!\n");                
+            }              
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
+    }
+    
+    private void ttt(AdjustmentEvent e) {
+        if(!isDone)
+            e.getAdjustable().setValue(e.getAdjustable().getMaximum());
     }
 
     public LoadingDataFrame(String dir) {
@@ -140,7 +170,7 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
             public void windowOpened(WindowEvent evt){
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                tt();
+                startTask();
             }
         });
     }
@@ -156,71 +186,57 @@ public class LoadingDataFrame extends javax.swing.JFrame implements PropertyChan
 
         pb = new javax.swing.JProgressBar();
         l = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        taskOutput = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(Variables.getIconImage(getClass()));
 
-        taskOutput.setColumns(20);
-        taskOutput.setRows(5);
-        jScrollPane1.setViewportView(taskOutput);
+        jLabel1.setText("jLabel1");
+        jScrollPane2.setViewportView(jLabel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                    .addComponent(l, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pb, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(l))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pb, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(l)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tt() {
+    private void startTask() {
         // TODO add your handling code here:
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //Instances of javax.swing.SwingWorker are not reusuable, so
         //we create new instances as needed.
         task = new Task();
-        task.addPropertyChangeListener(this);
         task.execute();
-    }
-
-    public void propertyChange(PropertyChangeEvent evt) {
-        if ("progress".equals(evt.getPropertyName())) {
-            int progress = (Integer) evt.getNewValue();
-            pb.setValue(progress);
-            taskOutput.append(String.format(
-                    " Completed %d%% of task.\n", task.getProgress()));
-            //taskOutput.setSelectionStart(taskOutput.getRows()-1);
-            //taskOutput.setSelectionEnd(taskOutput.getRows()-1);
-            //taskOutput.setCaretPosition(taskOutput.getRows()-1);
-        }
     }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel l;
     private javax.swing.JProgressBar pb;
-    private javax.swing.JTextArea taskOutput;
     // End of variables declaration//GEN-END:variables
 
 }
