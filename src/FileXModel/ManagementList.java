@@ -63,6 +63,18 @@ public abstract class ManagementList {
         return -1;
     }
     
+    public int GetIndex(ModelXBase model){
+        int index = 1;
+        for(ModelXBase x : GetAll()){
+            if(model == x){
+                return index;
+            }
+            index++;
+        }
+        
+        return -1;
+    }
+    
     public ModelXBase GetAtIndex(int index){
         return modelList.get(index);
     }

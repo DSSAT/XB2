@@ -43,9 +43,9 @@ public class TreatmentService {
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
                     if (FileX.general.FileType == ExperimentType.Sequential) {
-                        treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
-                        treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
-                        treatment.C = Utils.GetString(treatmentHeader, strRead, "C", 1);
+                        treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
+                        treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
+                        treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
                     }
                     
                     treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);

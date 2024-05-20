@@ -785,7 +785,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         ManagementList modelList = GetManagementList(parentNode.toString());
         
-        ModelXBase model = modelList.GetAt(getLevel(node.toString()));
+        int[] selectRows = {0};
+        GetNodeIndex(parentNode, node.toString(), selectRows);
+        int level = selectRows[0] - 1;        
+        ModelXBase model = modelList.GetAt(level);
         String oldName = model.GetName();
 
         String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", oldName);
@@ -814,7 +817,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
         ManagementList modelList = GetManagementList(parentNode.toString());
-        int level = modelList.GetIndex(getLevel(node.toString()));
+        int[] selectRows = {0};
+        GetNodeIndex(parentNode, node.toString(), selectRows);
+        int level = selectRows[0] - 1;
 
         if (modelList.MoveUp(level)) {
 
@@ -848,7 +853,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
         ManagementList modelList = GetManagementList(parentNode.toString());
-        int level = modelList.GetIndex(getLevel(node.toString()));
+        int[] selectRows = {0};
+        GetNodeIndex(parentNode, node.toString(), selectRows);
+        int level = selectRows[0] - 1;
 
         if (modelList.MoveDown(level)) {
             EventQueue.invokeLater(() -> {
@@ -1421,7 +1428,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN_" + (modelList.GetSize() + 1) : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+             IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
             int currentLevel = "Treatments".equals(node.toString()) && modelList.GetSize() > 0 ? currentFrame.getLevel() : -1;
             
             if(currentLevel >= 0){
@@ -1446,11 +1453,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                                 }
                                 level = m.GetLevel();
                             }
-
                             level++;
                             
-
-                            modelList.AddNew(nodeName, level, currentLevel);
+                            ModelXBase newModel = modelList.AddNew(nodeName, level, currentLevel);
 
                             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
@@ -1466,7 +1471,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                             int[] rows = jXTree1.getSelectionRows();
                             //int selectRow = GetNodeIndex((DefaultMutableTreeNode)jXTree1.getModel().getRoot(), node.getUserObject().toString());
 
-                            jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
+                            jXTree1.setSelectionRow(rows[0] + modelList.GetIndex(newModel));
 
                             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
                             ShowFrame(frame);
@@ -1489,9 +1494,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
             ManagementList modelList = GetManagementList(parentNode.toString());
-            int level = modelList.GetIndex(getLevel(node.toString()));
+            int[] selectRows = {0};
+            GetNodeIndex(parentNode, node.toString(), selectRows);
+            int level = selectRows[0] - 1;
             
-            if(!modelList.IsUseInTreatment(level + 1)){
+            if(!modelList.IsUseInTreatment(level)){
                 modelList.RemoveAt(level);
                 model.removeNodeFromParent(node);
 

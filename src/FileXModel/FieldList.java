@@ -45,7 +45,8 @@ public class FieldList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).FL == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.FL != null && treat.FL == level) {
                 isUsed = true;
                 break;
             }

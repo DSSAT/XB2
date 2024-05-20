@@ -47,7 +47,8 @@ public class CultivarList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).CU == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.CU != null && treat.CU == level) {
                 isUsed = true;
                 break;
             }

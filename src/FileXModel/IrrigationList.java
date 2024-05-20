@@ -45,7 +45,8 @@ public class IrrigationList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MI == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MI != null && treat.MI == level) {
                 isUsed = true;
                 break;
             }

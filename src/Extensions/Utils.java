@@ -107,7 +107,7 @@ public class Utils {
         Integer val = null;
 
         if (start >= 0) {
-            int stop = start + fieldLength + 1;
+            int stop = start + fieldLength;
 
             String tmp = value.substring(start, stop).trim();
 

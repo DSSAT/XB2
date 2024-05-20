@@ -45,7 +45,8 @@ public class ChemicalList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MC == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MC != null && treat.MC == level) {
                 isUsed = true;
                 break;
             }
