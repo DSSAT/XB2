@@ -102,19 +102,14 @@ public class Utils {
         return val;
     }
 
-    public static Integer GetInteger(String Header, String value, String field, int fieldLength) {
-        int start = Header.indexOf(field.startsWith("@") ? field : " " + field) + field.length() - fieldLength;
+    public static Integer GetInteger(String Header, String value, String field, int fieldLength) {        
+        String tmp = GetString(Header, value, field, fieldLength);
+        
         Integer val = null;
-
-        if (start >= 0) {
-            int stop = start + fieldLength;
-
-            String tmp = value.substring(start, stop).trim();
-
-            if (!"".equals(tmp) && !tmp.equals("-99")) {
-                val = Integer.valueOf(tmp);
-            }
+        if (!"".equals(tmp) && !tmp.equals("-99")) {
+            val = Integer.valueOf(tmp);
         }
+
         return val;
     }
 
