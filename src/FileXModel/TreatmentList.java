@@ -8,6 +8,8 @@ package FileXModel;
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -32,8 +34,9 @@ public class TreatmentList extends ManagementList {
                 model.SetLevel(FileX.treatments.GetSize() + 1);
             }
             else{
-                Integer r = Utils.ParseInteger(((Treatment)FileX.treatments.GetAtIndex(FileX.treatments.GetSize() - 1)).R);
-                model.R = r.toString();
+                //Integer r = Utils.ParseInteger(((Treatment)FileX.treatments.GetAtIndex(FileX.treatments.GetSize() - 1)).R);
+                newLevel = model.GetLevel();
+                model.R = getRotationNumber(newLevel);
             }
             
             model.TNAME = name;
@@ -43,8 +46,6 @@ public class TreatmentList extends ManagementList {
             model.SetLevel(FileX.general.FileType == ExperimentType.Sequential ? 1 : newLevel);
         }
         
-        
-        
         if(FileX.treatments.GetSize() == 0){
             model.CU = FileX.cultivars.GetAtIndex(0).GetLevel();
             model.FL = FileX.fieldList.GetAtIndex(0).GetLevel();
@@ -53,6 +54,26 @@ public class TreatmentList extends ManagementList {
         }
         model.SetLevel(newLevel);
         modelList.add(model);
+        
+        if(FileX.general.FileType == ExperimentType.Sequential){
+            Collections.sort(modelList, (Object o1, Object o2) -> {
+                Treatment t1 = (Treatment) o1;
+                Treatment t2 = (Treatment) o2;
+
+                if(t1.GetLevel().compareTo(t2.GetLevel()) == 0)
+                    return Utils.ParseInteger(t1.R).compareTo(Utils.ParseInteger(t2.R));
+                else
+                    return t1.GetLevel().compareTo(t2.GetLevel());
+            });
+            
+            Integer r = 1;
+            for(ModelXBase m : modelList) {
+                Treatment t = (Treatment) m;
+                t.R = r.toString();
+                r++;
+            }
+        }
+        
         return model;
     }
 
@@ -71,9 +92,28 @@ public class TreatmentList extends ManagementList {
         
         return newSource;
     }
+    
+    @Override
+    public ModelXBase GetAt(int level)
+    {
+        return modelList.get(level - 1);
+    }
 
     @Override
     public boolean IsUseInTreatment(int level) {
         return false;
+    }
+    
+    private String getRotationNumber(int level){
+        Integer r = 0;
+        for(ModelXBase model : modelList){
+            Treatment treatment = (Treatment)model;
+            if(treatment.GetLevel() == level && r < Utils.ParseInteger(treatment.R)){
+                r = Utils.ParseInteger(treatment.R);
+            }
+        }
+        r++;
+        
+        return r.toString();
     }
 }

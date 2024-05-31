@@ -43,25 +43,25 @@ public class TreatmentService {
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
                     if (FileX.general.FileType == ExperimentType.Sequential) {
-                        treatment.R = Utils.GetString(treatmentHeader, strRead, "R", 1);
-                        treatment.O = Utils.GetString(treatmentHeader, strRead, "O", 1);
-                        treatment.C = Utils.GetString(treatmentHeader, strRead, "C", 1);
+                        treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
+                        treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
+                        treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
                     }
                     
                     treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);
-                    treatment.CU = Utils.GetInteger(treatmentHeader, strRead, "CU", 2);
-                    treatment.FL = Utils.GetInteger(treatmentHeader, strRead, "FL", 2);
-                    treatment.SA = Utils.GetInteger(treatmentHeader, strRead, "SA", 2);
-                    treatment.IC = Utils.GetInteger(treatmentHeader, strRead, "IC", 2);
-                    treatment.MP = Utils.GetInteger(treatmentHeader, strRead, "MP", 2);
-                    treatment.MI = Utils.GetInteger(treatmentHeader, strRead, "MI", 2);
-                    treatment.MF = Utils.GetInteger(treatmentHeader, strRead, "MF", 2);
-                    treatment.MR = Utils.GetInteger(treatmentHeader, strRead, "MR", 2);
-                    treatment.MC = Utils.GetInteger(treatmentHeader, strRead, "MC", 2);
-                    treatment.MT = Utils.GetInteger(treatmentHeader, strRead, "MT", 2);
-                    treatment.ME = Utils.GetInteger(treatmentHeader, strRead, "ME", 2);
-                    treatment.MH = Utils.GetInteger(treatmentHeader, strRead, "MH", 2);
-                    treatment.SM = Utils.GetInteger(treatmentHeader, strRead, "SM", 2);
+                    treatment.CU = Utils.GetInteger(treatmentHeader, strRead, " CU", 3);
+                    treatment.FL = Utils.GetInteger(treatmentHeader, strRead, " FL", 3);
+                    treatment.SA = Utils.GetInteger(treatmentHeader, strRead, " SA", 3);
+                    treatment.IC = Utils.GetInteger(treatmentHeader, strRead, " IC", 3);
+                    treatment.MP = Utils.GetInteger(treatmentHeader, strRead, " MP", 3);
+                    treatment.MI = Utils.GetInteger(treatmentHeader, strRead, " MI", 3);
+                    treatment.MF = Utils.GetInteger(treatmentHeader, strRead, " MF", 3);
+                    treatment.MR = Utils.GetInteger(treatmentHeader, strRead, " MR", 3);
+                    treatment.MC = Utils.GetInteger(treatmentHeader, strRead, " MC", 3);
+                    treatment.MT = Utils.GetInteger(treatmentHeader, strRead, " MT", 3);
+                    treatment.ME = Utils.GetInteger(treatmentHeader, strRead, " ME", 3);
+                    treatment.MH = Utils.GetInteger(treatmentHeader, strRead, " MH", 3);
+                    treatment.SM = Utils.GetInteger(treatmentHeader, strRead, " SM", 3);
                     treatments.AddNew(treatment);
                 }
             }

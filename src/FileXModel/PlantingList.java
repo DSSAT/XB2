@@ -39,7 +39,8 @@ public class PlantingList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MP == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MP != null && treat.MP == level) {
                 isUsed = true;
                 break;
             }

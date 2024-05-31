@@ -26,14 +26,15 @@ public class Utils {
     public static Float GetFloat(String Header, String value, String field, int fieldLength) {
         int start = Header.indexOf(field) + field.length() - fieldLength - 1;
         Float val = null;
-
-        if (start >= 0) {
+        if (start >= 0 && start < Header.indexOf(field)) {
             int stop = Math.min(start + fieldLength + 1, value.length());
 
-            String tmp = value.substring(start, stop).trim();
+            if(stop > start){
+                String tmp = value.substring(start, stop).trim();
 
-            if (tmp != null && !"".equals(tmp)) {
-                val = Float.valueOf(tmp);
+                if (tmp != null && !"".equals(tmp)) {
+                    val = Float.valueOf(tmp);
+                }
             }
         }
         return val;
@@ -101,19 +102,14 @@ public class Utils {
         return val;
     }
 
-    public static Integer GetInteger(String Header, String value, String field, int fieldLength) {
-        int start = Header.indexOf(field.startsWith("@") ? field : " " + field) + field.length() - fieldLength;
+    public static Integer GetInteger(String Header, String value, String field, int fieldLength) {        
+        String tmp = GetString(Header, value, field, fieldLength);
+        
         Integer val = null;
-
-        if (start >= 0) {
-            int stop = start + fieldLength + 1;
-
-            String tmp = value.substring(start, stop).trim();
-
-            if (!"".equals(tmp) && !tmp.equals("-99")) {
-                val = Integer.valueOf(tmp);
-            }
+        if (!"".equals(tmp) && !tmp.equals("-99")) {
+            val = Integer.valueOf(tmp);
         }
+
         return val;
     }
 

@@ -45,7 +45,8 @@ public class TillageList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MT == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MT != null && treat.MT == level) {
                 isUsed = true;
                 break;
             }

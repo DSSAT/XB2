@@ -46,7 +46,8 @@ public class OrganicList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MR == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MR != null && treat.MR == level) {
                 isUsed = true;
                 break;
             }

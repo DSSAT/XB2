@@ -30,12 +30,15 @@ public class SoilRepository extends DSSATRepositoryBase {
             File sPath = new File(rootPath + "\\Soil");
             File soilFileList[] = sPath.listFiles(new ExtendFilter(".sol"));
             
+            
             for (File sFile : soilFileList) {
                 FileReader fileRead = new FileReader(sFile);
                 BufferedReader sReader = new BufferedReader(fileRead);
 
                 String strRead = "";
                 Boolean isProfile = false;
+                int line = 1;
+                
                 while ((strRead = sReader.readLine()) != null) {
                     if(strRead != null && !"".equals(strRead)){
                         if(strRead.startsWith("*") && !strRead.toLowerCase().startsWith("*soils") && strRead.length() > 36){
@@ -50,11 +53,11 @@ public class SoilRepository extends DSSATRepositoryBase {
                         else if(strRead.startsWith("@  SLB") && isProfile){
                             isProfile = false;
                         }
-                        else if(!strRead.startsWith("!") && strRead.length() >= 100 && isProfile){
+                        else if(!strRead.startsWith("!") && strRead.length() >= 90 && isProfile){
                             int index = soilList.size() - 1;
                             if(index >= 0){
                                 String tmp = soilList.get(index);
-                                tmp += "|" + strRead;
+                                tmp += "|" + strRead + "^File: " + sFile.getName() + ", Line: " + line;
                                 try{
                                     soilList.set(index, tmp);
                                 }
@@ -68,7 +71,8 @@ public class SoilRepository extends DSSATRepositoryBase {
                     else{
                         isProfile = false;
                     }
-                        
+                    
+                    line++;
                 }
                 fileRead.close();
                 sReader.close();

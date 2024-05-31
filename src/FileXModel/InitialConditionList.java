@@ -57,7 +57,8 @@ public class InitialConditionList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).IC == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.IC != null && treat.IC == level) {
                 isUsed = true;
                 break;
             }

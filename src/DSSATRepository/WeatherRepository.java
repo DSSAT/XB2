@@ -49,6 +49,8 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 boolean is4 = false;
                 boolean isCli = false;
                 boolean isR = false;
+                
+                int line = 1;
 
                 while ((strWRead = wReader.readLine()) != null) {
                     if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("**WEATHER") || strWRead.startsWith("$WEATHER") || strWRead.startsWith("*CLIMATE")) {
@@ -63,25 +65,26 @@ public class WeatherRepository extends DSSATRepositoryBase {
                     } else if(strWRead.startsWith("@YRDAY")){
                         isR = true;
                     } else if (is2) {
-                        wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode;
+                        wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
                         break;
                     } else if (is4) {
-                        wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode;
+                        wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
                         break;
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
-                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode;
+                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
                         break;
                     }
                     else if(isR){
                         number = fullName.substring(6, 8).trim();
-                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode;
+                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
                         break;
                     }
+                    line++;
                 }
 
             }

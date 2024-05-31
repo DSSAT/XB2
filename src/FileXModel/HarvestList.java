@@ -45,7 +45,8 @@ public class HarvestList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MH == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MH != null && treat.MH == level) {
                 isUsed = true;
                 break;
             }

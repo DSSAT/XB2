@@ -61,7 +61,8 @@ public class SimulationList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).SM == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.SM != null && treat.SM == level) {
                 isUsed = true;
                 break;
             }

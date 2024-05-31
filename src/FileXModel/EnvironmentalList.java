@@ -45,7 +45,8 @@ public class EnvironmentalList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).ME == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.ME != null && treat.ME == level) {
                 isUsed = true;
                 break;
             }

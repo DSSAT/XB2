@@ -45,7 +45,8 @@ public class FertilizerList extends ManagementList {
         boolean isUsed = false;
         
         for (ModelXBase treatment : FileX.treatments.GetAll()) {
-            if (((Treatment) treatment).MF == level) {
+            Treatment treat = (Treatment) treatment;
+            if (treat.MF != null && treat.MF == level) {
                 isUsed = true;
                 break;
             }
