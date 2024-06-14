@@ -208,10 +208,10 @@ public class GeneralService {
         else if(general.FileType == ExperimentType.Seasonal){
             fileXType = "SN";
         }
-        else if(general.FileType == ExperimentType.Seasonal){
+        else if(general.FileType == ExperimentType.Sequential){
             fileXType = "SQ";
         }
-        else if(general.FileType == ExperimentType.Seasonal){
+        else if(general.FileType == ExperimentType.Spatial){
             fileXType = "GS";
         }
         
