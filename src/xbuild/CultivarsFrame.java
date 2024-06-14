@@ -21,6 +21,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.SelectionEvent;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -132,8 +133,8 @@ public class CultivarsFrame extends IXInternalFrame {
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if (evt.getClickCount() == 2) {
-            int nRow = jXTable1.getSelectedRow() + 1;
-            Cultivar culEdit = (Cultivar) FileX.cultivars.GetAt(nRow);
+            int nRow = jXTable1.getSelectedRow();
+            Cultivar culEdit = (Cultivar) FileX.cultivars.GetAt(nRow + 1);
 
             final CultivarListDialog dialog = new CultivarListDialog(null, culEdit, true);
             dialog.show();
@@ -155,6 +156,8 @@ public class CultivarsFrame extends IXInternalFrame {
                         culEdit.CNAME = cul.CulName;
 
                         l.myAction(new UpdateLevelEvent(this, "Cultivars", "Level " + (nRow + 1) + ": " + culEdit.GetName(), nRow));
+                        
+                        l.myAction((new FieldUpdateEvent(this)));
                     }
                     dialog.SetNull();
                 }
@@ -186,6 +189,7 @@ public class CultivarsFrame extends IXInternalFrame {
                         FileX.cultivars.AddNew(c);
 
                         l.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
+                        l.myAction((new FieldUpdateEvent(this)));
                     });
                 }
                 dialog.SetNull();
