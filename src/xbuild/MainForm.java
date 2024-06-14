@@ -1498,7 +1498,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             GetNodeIndex(parentNode, node.toString(), selectRows);
             int level = selectRows[0] - 1;
             
-            if(!modelList.IsUseInTreatment(level)){
+            if(!modelList.IsUseInTreatment(level + 1)){
                 modelList.RemoveAt(level);
                 model.removeNodeFromParent(node);
 
