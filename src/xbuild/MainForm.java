@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -51,6 +52,7 @@ import xbuild.Components.IXInternalFrame;
 import xbuild.Components.InputDialog;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.FieldUpdateEvent;
+import xbuild.Events.LevelSelectionChangedEvent;
 import xbuild.Events.MenuDirection;
 import xbuild.Events.NewFrameEvent;
 import xbuild.Events.SelectionEvent;
@@ -68,6 +70,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
      * Creates new form MainForm
      */
     protected Content content;
+    
+    private TreeSelectionListener treeListener = (TreeSelectionEvent evt) -> {
+        showFrame();
+    };
 
     private final HashMap<String, String> mainMenuList = new HashMap<String, String>() {
         {
@@ -162,6 +168,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.setCellRenderer(new CustomDefaultTreeCellRenderer());
 
         setIconImage(Variables.getIconImage(getClass()));
+        
+        jXTree1.addTreeSelectionListener(treeListener);
     }
 
     /**
@@ -270,11 +278,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jXTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jXTree1MouseReleased(evt);
-            }
-        });
-        jXTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jXTree1ValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(jXTree1);
@@ -436,15 +439,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
 
-        getAccessibleContext().setAccessibleName(" XB2 v0.11.0.0.");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    @SuppressWarnings("empty-statement")
-    private void jXTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jXTree1ValueChanged
-        showFrame();
-}//GEN-LAST:event_jXTree1ValueChanged
 
     private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
         if(onClose()){
@@ -502,7 +498,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         setAddDeleteButton();
         setPrevNextButton();
         
-        FileX.isReady = true;
+        setFileDirty(true);
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
@@ -521,13 +517,16 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         } else {
             saveFile();
         }
-        
-        FileX.isDirty = false;
+        setFileDirty(false);
+    }//GEN-LAST:event_jMenuSaveFileActionPerformed
+
+    private void setFileDirty(boolean isDirty) {
+        FileX.isDirty = isDirty;
         EventQueue.invokeLater(() -> {
                 jXTree1.repaint();
             });
-    }//GEN-LAST:event_jMenuSaveFileActionPerformed
-
+    }
+    
     private void saveFile() {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
@@ -918,7 +917,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();        
         ManagementList modelList = currentFrame.getManagementList();        
 
-        addNewLevel(parentNode, modelList);
+        addNewLevel(parentNode, modelList, false);
     }//GEN-LAST:event_bnAddLevelActionPerformed
 
     private void bnDeleteLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLevelActionPerformed
@@ -1000,17 +999,29 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
         for (int i = 0; i < root.getChildCount(); i++) {
             DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
-            if (child.toString().equals(parentNode)) {
-                for (int n = 0; n < child.getChildCount(); n++) {
-                    DefaultMutableTreeNode leaf = (DefaultMutableTreeNode) child.getChildAt(n);
-                    if (leaf.toString().equals(childNode)) {
+            
+            for (int n = 0; n < child.getChildCount(); n++) {
+                DefaultMutableTreeNode leaf = (DefaultMutableTreeNode) child.getChildAt(n);
+                if (child.toString().equals(parentNode) && leaf.toString().equals(childNode)) {
+                    leaf.removeAllChildren();
+                    DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                    model.reload(leaf);
 
-                        leaf.removeAllChildren();
-                        DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-                        model.reload(leaf);
+                    returnNode = leaf;
+                    break;
+                }
 
-                        returnNode = leaf;
-                        break;
+                if(leaf.toString().equals(parentNode)){
+                    for (int l = 0; l < leaf.getChildCount(); l++){
+                        DefaultMutableTreeNode lv = (DefaultMutableTreeNode) leaf.getChildAt(l);
+                        if (lv.toString().equals(childNode)) {
+                            lv.removeAllChildren();
+                            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+                            model.reload(lv);
+
+                            returnNode = lv;
+                            break;
+                        }
                     }
                 }
             }
@@ -1019,9 +1030,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }
     
     private boolean GetNodeIndex(DefaultMutableTreeNode root, String childNode, int[] index) {
-
-        //int index = 0;
-
         for (int i = 0; i < root.getChildCount(); i++) {
             DefaultMutableTreeNode m = (DefaultMutableTreeNode) root.getChildAt(i);
             index[0]++;
@@ -1034,22 +1042,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     return true;
                 }
             }
-
-//            for (int n = 0; n < m.getChildCount(); n++) {
-//                DefaultMutableTreeNode leaf = (DefaultMutableTreeNode) m.getChildAt(n);
-//                index++;
-//                if (leaf.toString().equals(childNode)) {
-//                    return index;
-//                }
-//                
-//                for (int l = 0; l < leaf.getChildCount(); l++) {
-//                    DefaultMutableTreeNode level = (DefaultMutableTreeNode) leaf.getChildAt(l);
-//                    index++;
-//                    if (level.toString().equals(childNode)) {
-//                        return index;
-//                    }
-//                }
-//            }
         }
         return false;
     }
@@ -1357,12 +1349,24 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     @Override
     public void myAction(FieldUpdateEvent e) {
         if(FileX.isReady && !FileX.isDirty){
-            FileX.isDirty = true;
-            
-            EventQueue.invokeLater(() -> {
-                jXTree1.repaint();
-            });
+            setFileDirty(true);
         }
+    }
+    
+    @Override
+    public void myAction(LevelSelectionChangedEvent e){
+        int[] selectRows = {0};
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+        GetNodeIndex(root, e.getManagementName(), selectRows);
+        int select = selectRows[0];
+        
+        jXTree1.removeTreeSelectionListener(treeListener);
+        
+        jXTree1.expandRow(select);
+        jXTree1.setSelectionRow(select + e.getLevel() + 1);
+        jXTree1.scrollRowToVisible(select + e.getLevel() + 1);
+        
+        jXTree1.addTreeSelectionListener(treeListener);
     }
     
     private void showTargetFrame(String frameName, int select, ArrayList<String> nodeList, MenuDirection direction) {
@@ -1421,18 +1425,17 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         ManagementList modelList = (ManagementList) GetManagementList(node.toString());
 
-        addNewLevel(node, modelList);
+        addNewLevel(node, modelList, true);
     }
     
-    private void addNewLevel(DefaultMutableTreeNode node, ManagementList modelList){
+    private void addNewLevel(DefaultMutableTreeNode node, ManagementList modelList, boolean isAddNew){
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) ? "UNKNOWN_" + (modelList.GetSize() + 1) : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
             
-             IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-            int currentLevel = "Treatments".equals(node.toString()) && modelList.GetSize() > 0 ? currentFrame.getLevel() : -1;
-            
-            if(currentLevel >= 0){
-                defaultName = FileX.treatments.GetAt(currentLevel + 1).GetName();
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+                    
+            if("Treatments".equals(node.toString()) && modelList.GetSize() > 0 && !isAddNew){
+                defaultName = currentFrame.getDescription();
             }
                             
             InputDialog input = "Treatments".equals(node.toString()) ? new InputDialog(this, true, defaultName, 25) : new InputDialog(this, true, defaultName);
@@ -1455,11 +1458,16 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                             }
                             level++;
                             
-                            ModelXBase newModel = modelList.AddNew(nodeName, level, currentLevel);
+                            ModelXBase currentModel = null;
+                            if ("Treatments".equals(node.toString()) && modelList.GetSize() > 0 && !isAddNew) {
+                                currentModel = currentFrame.getModel();
+                            }
+                            
+                            ModelXBase newModel = modelList.AddNew(nodeName, level, currentModel);
 
                             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
-                            String newName = "Level " + level + ": " + nodeName;
+                            String newName = "Level " + newModel.GetLevel() + ": " + nodeName;
 
                             newNode.setUserObject(newName);
                             node.add(newNode);
@@ -1469,12 +1477,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
                             jXTree1.expandAll();
                             int[] rows = jXTree1.getSelectionRows();
-                            //int selectRow = GetNodeIndex((DefaultMutableTreeNode)jXTree1.getModel().getRoot(), node.getUserObject().toString());
 
                             jXTree1.setSelectionRow(rows[0] + modelList.GetIndex(newModel));
 
                             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());
                             ShowFrame(frame);
+                            
+                            setFileDirty(true);
                         }                        
                     }
                 }
@@ -1488,22 +1497,19 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private void removeLevel(){
         if (JOptionPane.showConfirmDialog(new JXFrame(), "Do you want to delete this level") == 0) {
             
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+            IXInternalFrame frame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            DefaultMutableTreeNode node = GetNode(frame.getManagementName(), frame.getTitle());//(DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
 
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
             ManagementList modelList = GetManagementList(parentNode.toString());
-            int[] selectRows = {0};
-            GetNodeIndex(parentNode, node.toString(), selectRows);
-            int level = selectRows[0] - 1;
+            
+            int level = frame.getLevel() - 1;           
             
             if(!modelList.IsUseInTreatment(level + 1)){
                 modelList.RemoveAt(level);
-                model.removeNodeFromParent(node);
-
-                desktopPane.removeAll();
-                desktopPane.repaint();
+                model.removeNodeFromParent(node);                
 
                 EventQueue.invokeLater(() -> {
                     for (int i = level; i < modelList.GetSize(); i++) {
@@ -1522,9 +1528,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     
                     jXTree1.setSelectionPath(new TreePath(parentNode.getPath()));
                     if(modelList.GetSize() > 0){
-
                         int select = jXTree1.getSelectionRows()[0];
                         jXTree1.setSelectionRow(select + (level < modelList.GetSize() ? level + 1 : level));
+                        
+                        setFileDirty(true);
                     }
                 });
             }
@@ -1563,7 +1570,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 
                 if("Treatments".equalsIgnoreCase(node.toString())){
                     frame = (IXInternalFrame) desktopPane.getSelectedFrame();
-                    level = frame.getLevel();
+                    //level = frame.getLevel();
                 }
                 else{
                     frame = XInternalFrame.newInstance(mainMenuList.get(nodeName), node.toString());

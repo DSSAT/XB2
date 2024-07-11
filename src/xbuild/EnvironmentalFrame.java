@@ -23,21 +23,14 @@ public class EnvironmentalFrame extends IXInternalFrame {
 
     private Environmental environment;
     private int selectedRowIndex = -1;
-    private Integer level;
     /**
      * Creates new form EnvironmentalFrame
+     * @param nodeName
      */
     public EnvironmentalFrame(String nodeName) {
+        super(FileX.environmentals, nodeName);
         initComponents();
-        
-        level = 0;
-        for(ModelXBase env : FileX.environmentals.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.environment = (Environmental)env;
-                break;
-            }
-        }
+        this.environment = (Environmental)model;
 
         LoadEnvApp();
         
@@ -304,7 +297,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? environment.ENVNAME != null : !txtDescription.getText().equals(environment.ENVNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Environmental Modifications", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Environmental Modifications", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

@@ -2,6 +2,7 @@ package xbuild.Components;
 
 import DSSATModel.Setup;
 import FileXModel.ManagementList;
+import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -21,20 +22,42 @@ import xbuild.Events.XEventListener;
  */
 public abstract class IXInternalFrame extends JInternalFrame {
 
-    protected XEventListener l;
+    protected XEventListener listener;
     protected Setup setup = new Setup();
+    protected ModelXBase model;
+    
+    protected Integer level;
     
     public abstract ManagementList getManagementList();
+   
+    
+    public IXInternalFrame(ManagementList managementList, String name){
+        level = 0;
+        
+        if(managementList != null && !"".equals(name) ){
+            for (ModelXBase xModel : managementList.GetAll()) {
+                level++;
+                if (getLevel(name) == level) {
+                    model = xModel;
+                    break;
+                }
+            }
+        }
+        if(!"".equals(name)){
+            setTitle(name);
+        }
+    }
+    
     public String getManagementName(){
         return "";
     }
     
     public int getLevel(){
-        return 0;
+        return level;
     }
     
     public void setSelection(int level){
-        
+        this.level = level;
     }
 
     public void updatePanelName(String name) {
@@ -46,8 +69,8 @@ public abstract class IXInternalFrame extends JInternalFrame {
     }
 
     public void addMyEventListener(XEventListener l) {
-        if (this.l == null) {
-            this.l = l;
+        if (this.listener == null) {
+            this.listener = l;
         }
     }
     
@@ -69,6 +92,14 @@ public abstract class IXInternalFrame extends JInternalFrame {
     
     public void initialData(){
         
+    }
+    
+    public String getDescription(){
+        return model.GetName();
+    }
+    
+    public ModelXBase getModel(){
+        return model;
     }
     
     protected int getLevel(String nodeName) {

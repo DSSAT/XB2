@@ -18,4 +18,5 @@ public interface XEventListener {
     public abstract void myAction (NewFrameEvent e);
     public abstract void myAction (SelectionEvent e);
     public abstract void myAction (FieldUpdateEvent e);
+    public abstract void myAction (LevelSelectionChangedEvent e);
 }

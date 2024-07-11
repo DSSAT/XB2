@@ -31,27 +31,27 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class InitialConditionFrame extends IXInternalFrame {
 
-    private InitialCondition init;
+    private final InitialCondition init;
     private int selectedRowIndex = -1;
-    private Integer level;
 
     /**
      * Creates new form InitialConditionFrame
      *
      * @param nodeName
      */
-    public InitialConditionFrame(String nodeName) {
+    public InitialConditionFrame(String nodeName){
+        super(FileX.initialList, nodeName);
         initComponents();
 
-        init = null;
-        level = 0;
-        for (ModelXBase intTemp : FileX.initialList.GetAll()) {
-            level++;
-            if (getLevel(nodeName) == level) {
-                init = (InitialCondition) intTemp;
-                break;
-            }
-        }
+        init = (InitialCondition) model;
+//        level = 0;
+//        for (ModelXBase intTemp : FileX.initialList.GetAll()) {
+//            level++;
+//            if (getLevel(nodeName) == level) {
+//                init = (InitialCondition) intTemp;
+//                break;
+//            }
+//        }
 
         dpICDAT.Init(init, "ICDAT", init.ICDAT);
 
@@ -849,7 +849,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if (txtDescription.getText() == null ? init.ICNAME != null : !txtDescription.getText().equals(init.ICNAME)) {
-            l.myAction(new UpdateLevelEvent(this, "Initial Conditions", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Initial Conditions", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

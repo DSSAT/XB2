@@ -21,6 +21,8 @@ import FileXModel.ModelXBase;
 import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +30,7 @@ import xbuild.Components.CultivarTableCellEditor;
 import xbuild.Components.DescriptionTableCellEditor;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.TreatmentTableCellEditor;
+import xbuild.Events.LevelSelectionChangedEvent;
 
 /**
  *
@@ -35,15 +38,29 @@ import xbuild.Components.TreatmentTableCellEditor;
  */
 public class TreatmentFrame extends IXInternalFrame  {
 
+    private final ListSelectionListener listSelectionListener = (ListSelectionEvent e) -> {
+        selectionChanged();
+    };
+    
     public JInternalFrame NewFrame(){
         return new TreatmentFrame();
     }
     
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
+        super(null, null);
         initComponents();
         
-        LoadTreament();        
+        LoadTreament();
+        
+        jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
+    }
+    
+    private void selectionChanged(){
+        if(jXTable1.getSelectedRow() != level){
+            level = jXTable1.getSelectedRow();
+            listener.myAction((new LevelSelectionChangedEvent(this, "Treatments", level)));
+        }
     }
     
     @Override
@@ -70,11 +87,16 @@ public class TreatmentFrame extends IXInternalFrame  {
         return jXTable1.getSelectedRow() >= 0;
     }
     
+    
     @Override
     public void setSelection(int level){
         if(level >= 0){
+            jXTable1.getSelectionModel().removeListSelectionListener(listSelectionListener);
+            
             level = Math.min(level, jXTable1.getRowCount()) - 1;
             jXTable1.setRowSelectionInterval(level, level);
+            
+            jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
         }
     }
 
@@ -313,7 +335,7 @@ public class TreatmentFrame extends IXInternalFrame  {
             ((Treatment)FileX.treatments.GetAtIndex(row)).MH = Utils.ParseInteger(tbModel1.getValueAt(row, 16));
             ((Treatment)FileX.treatments.GetAtIndex(row)).SM = Utils.ParseInteger(tbModel1.getValueAt(row, 17));
             
-            l.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + (row+1) + ": " + FileX.treatments.GetAtIndex(row).GetName(), row));
+            listener.myAction(new UpdateLevelEvent(this, "Treatments", "Level " + ((Treatment)FileX.treatments.GetAtIndex(row)).N + ": " + FileX.treatments.GetAtIndex(row).GetName(), row));
         });
         
         jXTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -354,7 +376,46 @@ public class TreatmentFrame extends IXInternalFrame  {
     }
     
     @Override
+    public ModelXBase getModel(){
+        try{
+            int index = jXTable1.getSelectedRow();
+            Treatment treatment = (Treatment) FileX.treatments.GetAtIndex(index);
+            
+            return treatment;
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
+    
+    @Override
     public int getLevel(){
-        return jXTable1.getSelectedRow();
+        return jXTable1.getSelectedRow() + 1;
+    }
+    
+    @Override
+    public String getTitle(){
+        try{
+            int index = jXTable1.getSelectedRow();
+            Treatment treatment = (Treatment) FileX.treatments.GetAtIndex(index);
+            
+            return "Level " + treatment.GetLevel() + ": " + treatment.GetName();
+        }
+        catch(Exception ex){
+            return "";
+        }
+    }
+    
+    @Override
+    public String getDescription(){
+        try{
+            int index = jXTable1.getSelectedRow();
+            Treatment treatment = (Treatment) FileX.treatments.GetAtIndex(index);
+            
+            return treatment.GetName();
+        }
+        catch(Exception ex){
+            return "";
+        }
     }
 }

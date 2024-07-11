@@ -26,23 +26,15 @@ public class HarvestFrame extends IXInternalFrame {
 
     protected Harvest harvestApp;
     private int selectedRowIndex = -1;
-    private Integer level;
     
     /**
      * Creates new form HarvestFrame
      * @param nodeName
      */
     public HarvestFrame(String nodeName) {
+        super(FileX.harvestList, nodeName);
         initComponents();
-        
-        level = 0;
-        for(ModelXBase harv : FileX.harvestList.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.harvestApp = (Harvest)harv;
-                break;
-            }
-        }
+        this.harvestApp = (Harvest) model;
 
         LoadHarvestApp();
         
@@ -354,7 +346,7 @@ public class HarvestFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? harvestApp.HNAME != null : !txtDescription.getText().equals(harvestApp.HNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Harvest", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Harvest", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

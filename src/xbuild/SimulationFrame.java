@@ -35,9 +35,6 @@ public class SimulationFrame extends IXInternalFrame {
 
     private Simulation sim;
 
-    private Boolean bUpdate = false;
-    private Integer level;
-
     /**
      * Creates new form SimulationFrame
      *
@@ -45,20 +42,12 @@ public class SimulationFrame extends IXInternalFrame {
      */
     
     public SimulationFrame (String nodeName){
-        level = 0;
-        for (ModelXBase s : FileX.simulationList.GetAll()) {
-            level++;
-            if(getLevel(nodeName) == level){
-                sim = (Simulation)s;
-                break;
-            }
-        }
+        super(FileX.simulationList, nodeName);
+        sim = (Simulation) model;
 
         initComponents();
         initComponentsValues();
         initEvents();
-
-        bUpdate = true;
         
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(sim, "SNAME", sim.SNAME);
@@ -122,6 +111,11 @@ public class SimulationFrame extends IXInternalFrame {
     @Override
     public boolean isDeleteButtonEnabled(){
         return true;
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
     }
 
     /**
@@ -2472,13 +2466,13 @@ public class SimulationFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? sim.SNAME != null : !txtDescription.getText().equals(sim.SNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Simulation Controls", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Simulation Controls", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
     private void dpSDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpSDATEPropertyChange
         try {
-            l.myAction(new ValidationEvent(this));
+            listener.myAction(new ValidationEvent(this));
         } catch (Exception ex) {
 
         }

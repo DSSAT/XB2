@@ -4,7 +4,7 @@ package FileXModel;
  *
  * @author Jazz
  */
-public abstract class ModelXBase implements IModelXBase {
+public abstract class ModelXBase implements IModelXBase, Cloneable {
     
     private Integer level;
     
@@ -14,5 +14,9 @@ public abstract class ModelXBase implements IModelXBase {
     
     public void SetLevel(int level){
         this.level = level;
+    }
+    
+    public ModelXBase Clone() throws CloneNotSupportedException{
+        return (ModelXBase) clone();
     }
 }

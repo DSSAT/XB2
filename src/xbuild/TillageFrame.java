@@ -23,23 +23,24 @@ public class TillageFrame extends IXInternalFrame {
 
     protected Tillage tillage;
     private int selectedRowIndex = -1;
-    private Integer level;
     /**
      * Creates new form TillageFrame
      * @param nodeName
      */
     public TillageFrame(String nodeName) {
+        super(FileX.tillageList, nodeName);
         initComponents();
+        this.tillage = (Tillage) model;
         
-        for(ModelXBase til : FileX.tillageList.GetAll()){
-            int nodeLevel = getLevel(nodeName);
-            String nodeDesc = getDescription(nodeName);
-            
-            if(til.GetLevel() == nodeLevel && til.GetName().equals(nodeDesc)){   
-                level = nodeLevel;
-                this.tillage = (Tillage)til;
-            }
-        }
+//        for(ModelXBase til : FileX.tillageList.GetAll()){
+//            int nodeLevel = getLevel(nodeName);
+//            String nodeDesc = getDescription(nodeName);
+//            
+//            if(til.GetLevel() == nodeLevel && til.GetName().equals(nodeDesc)){   
+//                level = nodeLevel;
+//                this.tillage = (Tillage)til;
+//            }
+//        }
 
         LoadTillage();
         
@@ -390,7 +391,7 @@ public class TillageFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? tillage.TNAME != null : !txtDescription.getText().equals(tillage.TNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Tillage", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Tillage", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

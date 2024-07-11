@@ -12,7 +12,7 @@ package FileXModel;
 public class InitialConditionList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         InitialCondition model = new InitialCondition(name);
         modelList.add(model);
         model.SetLevel(newLevel);

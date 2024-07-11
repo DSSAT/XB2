@@ -23,19 +23,11 @@ public class PlantingFrame extends IXInternalFrame {
      * Creates new form PlantingFrame
      */
     protected Planting planting;
-    private Integer level;
 
     public PlantingFrame(String nodeName) {
+        super(FileX.plantings, nodeName);
         initComponents();
-        
-        level = 0;
-        for(ModelXBase p : FileX.plantings.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.planting = (Planting)p;
-                break;
-            }
-        }
+        this.planting = (Planting) model;
         
         dpPDATE.Init(planting, "PDATE", planting.PDATE);
         dpEDATE.Init(planting, "EDATE", planting.EDATE);
@@ -558,12 +550,12 @@ public class PlantingFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? planting.PLNAME != null : !txtDescription.getText().equals(planting.PLNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Planting", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Planting", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
     private void cbPLMEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPLMEItemStateChanged
-        l.myAction(new ValidationEvent(this));
+        listener.myAction(new ValidationEvent(this));
     }//GEN-LAST:event_cbPLMEItemStateChanged
 
     private void cbPLMEItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPLMEItemStateChanged1
@@ -571,12 +563,12 @@ public class PlantingFrame extends IXInternalFrame {
     }//GEN-LAST:event_cbPLMEItemStateChanged1
 
     private void txtPLDPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPLDPKeyReleased
-        l.myAction(new ValidationEvent(this));
+        listener.myAction(new ValidationEvent(this));
     }//GEN-LAST:event_txtPLDPKeyReleased
 
     private void dpPDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpPDATEPropertyChange
         try{
-            l.myAction(new ValidationEvent(this));
+            listener.myAction(new ValidationEvent(this));
         }
         catch(Exception ex){
 
@@ -584,7 +576,7 @@ public class PlantingFrame extends IXInternalFrame {
     }//GEN-LAST:event_dpPDATEPropertyChange
 
     private void dpPDATEFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dpPDATEFocusLost
-        l.myAction(new ValidationEvent(this));
+        listener.myAction(new ValidationEvent(this));
     }//GEN-LAST:event_dpPDATEFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

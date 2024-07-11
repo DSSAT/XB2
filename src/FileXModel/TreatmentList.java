@@ -9,7 +9,6 @@ import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -19,12 +18,12 @@ public class TreatmentList extends ManagementList {
     protected ArrayList<Treatment> treatments = new ArrayList<>();
 
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         Treatment model;//new Treatment(name);
         
-        if(currentLevel >= 0){
+        if(currentModel != null){
             try {
-                model = ((Treatment)FileX.treatments.GetAtIndex(currentLevel)).Clone();
+                model = (Treatment) currentModel.Clone();
             } catch (CloneNotSupportedException ex) {
                 model = new Treatment(name);
                 model.SetLevel(FileX.general.FileType == ExperimentType.Sequential ? 1 : newLevel);

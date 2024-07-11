@@ -38,6 +38,7 @@ public class Treatment extends ModelXBase implements Cloneable {
         TNAME = name;
     }
     
+    @Override
     public Treatment Clone() throws CloneNotSupportedException {
         try {
             return (Treatment) super.clone();

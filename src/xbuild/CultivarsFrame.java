@@ -19,9 +19,12 @@ import FileXService.FileXValidationService;
 import ListDialog.CultivarListDialog;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Events.FieldUpdateEvent;
+import xbuild.Events.LevelSelectionChangedEvent;
 import xbuild.Events.SelectionEvent;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -31,15 +34,21 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class CultivarsFrame extends IXInternalFrame {
 
+    private final ListSelectionListener listSelectionListener = (ListSelectionEvent e) -> {
+        selectionChanged();
+    };
     /**
      * Creates new form CultivarsFrame
      */
     public CultivarsFrame() {
+        super(FileX.cultivars, "");
         initComponents();
 
         LoadCultivar();
 
         setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
+        
+        jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
     }
 
     /**
@@ -131,6 +140,13 @@ public class CultivarsFrame extends IXInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void selectionChanged(){
+        if(jXTable1.getSelectedRow() != level){
+            level = jXTable1.getSelectedRow();
+            listener.myAction((new LevelSelectionChangedEvent(this, "Cultivars", level)));
+        }
+    }
+    
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
         if (evt.getClickCount() == 2) {
             int nRow = jXTable1.getSelectedRow();
@@ -155,15 +171,15 @@ public class CultivarsFrame extends IXInternalFrame {
                         culEdit.INGENO = cul.CulCode;
                         culEdit.CNAME = cul.CulName;
 
-                        l.myAction(new UpdateLevelEvent(this, "Cultivars", "Level " + (nRow + 1) + ": " + culEdit.GetName(), nRow));
+                        listener.myAction(new UpdateLevelEvent(this, "Cultivars", "Level " + (nRow + 1) + ": " + culEdit.GetName(), nRow));
                         
-                        l.myAction((new FieldUpdateEvent(this)));
+                        listener.myAction((new FieldUpdateEvent(this)));
                     }
                     dialog.SetNull();
                 }
             });
         }
-        l.myAction(new SelectionEvent(this, jXTable1.getSelectedRow() >= 0));
+        listener.myAction(new SelectionEvent(this, jXTable1.getSelectedRow() >= 0));
     }//GEN-LAST:event_jXTable1MouseClicked
 
     public void AddNewCultivar() {
@@ -188,8 +204,8 @@ public class CultivarsFrame extends IXInternalFrame {
 
                         FileX.cultivars.AddNew(c);
 
-                        l.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
-                        l.myAction((new FieldUpdateEvent(this)));
+                        listener.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
+                        listener.myAction((new FieldUpdateEvent(this)));
                     });
                 }
                 dialog.SetNull();
@@ -241,8 +257,8 @@ public class CultivarsFrame extends IXInternalFrame {
 
     private void LoadCultivar() {
         for (int i = 0; i < FileX.cultivars.GetSize(); i++) {
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            model.addRow(SetRow((Cultivar) FileX.cultivars.GetAtIndex(i)));
+            DefaultTableModel tableModel = (DefaultTableModel) jXTable1.getModel();
+            tableModel.addRow(SetRow((Cultivar) FileX.cultivars.GetAtIndex(i)));
         }
     }
 
@@ -259,5 +275,18 @@ public class CultivarsFrame extends IXInternalFrame {
     @Override
     public int getLevel() {
         return jXTable1.getSelectedRow() + 1;
+    }
+    
+    @Override
+    public String getTitle(){
+        try{
+            int index = jXTable1.getSelectedRow();
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(index);
+            
+            return "Level " + cul.GetLevel() + ": " + cul.GetName();
+        }
+        catch(Exception ex){
+            return "";
+        }
     }
 }

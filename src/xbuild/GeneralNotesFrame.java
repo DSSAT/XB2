@@ -29,6 +29,7 @@ public class GeneralNotesFrame extends IXInternalFrame implements KeyListener {
     
     /** Creates new form GeneralNotesFrame */
     public GeneralNotesFrame() {
+        super(null, null);
         initComponents();
 
         txtNotes.setText(FileX.general.Notes);

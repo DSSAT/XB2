@@ -148,6 +148,13 @@ public class CultivarListDialog extends javax.swing.JDialog {
         cultivars = new ArrayList<>();
         
         DSSATModel.Cultivar c = (DSSATModel.Cultivar)cbCultivar.getSelectedItem();
+        if(c == null){
+            Crop crop = (Crop) cbCrop.getSelectedItem();
+            c = new DSSATModel.Cultivar();
+            c.CropCode = crop.CropCode;
+            c.CulCode = "-99";
+            c.CulName = "-99";
+        }
         cultivars.add(c);
         
         dispose();

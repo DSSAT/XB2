@@ -32,6 +32,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     }
 
     public GeneralInfoFrame() {
+        super(null, "");
         initComponents();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy", Locale.US);
@@ -828,7 +829,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     public void actionPerformed(ActionEvent e) {
         try {
             XEvent my = new XEvent(this, SetDocumentName());
-            l.myAction(my);
+            listener.myAction(my);
         } catch (Exception ex) {
         }
     }

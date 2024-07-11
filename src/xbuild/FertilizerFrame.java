@@ -22,24 +22,16 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class FertilizerFrame extends IXInternalFrame {
 
-    protected Fertilizer fertil;
+    private Fertilizer fertil;
     private int selectedRowIndex = -1;
-    private Integer level;
     /**
      * Creates new form FertilizerFrame
      * @param nodeName
      */
     public FertilizerFrame(String nodeName) {
+        super(FileX.fertilizerList, nodeName);
         initComponents();
-        
-        level = 0;
-        for(ModelXBase fer : FileX.fertilizerList.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.fertil = (Fertilizer)fer;
-                break;
-            }
-        }
+        this.fertil = (Fertilizer)model;
 
         LoadFertilizer();
         
@@ -371,7 +363,7 @@ public class FertilizerFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? fertil.FERNAME != null : !txtDescription.getText().equals(fertil.FERNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Fertilizer", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Fertilizer", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

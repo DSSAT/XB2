@@ -23,24 +23,16 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
-    protected Irrigation irrig;
+    private Irrigation irrig;
     private int selectedRowIndex = -1;
-    private Integer level;
     /**
      * Creates new form IrrigationFrame
      * @param nodeName
      */
     public IrrigationFrame(String nodeName) {
+        super(FileX.irrigations, nodeName);
         initComponents();
-        
-        level = 0;
-        for(ModelXBase ir : FileX.irrigations.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.irrig = (Irrigation)ir;
-                break;
-            }
-        }
+        this.irrig = (Irrigation) model;
         
         txtEFIR.addKeyListener(this);
 
@@ -436,7 +428,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? irrig.IRNAME != null : !txtDescription.getText().equals(irrig.IRNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Irrigation", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Irrigation", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
