@@ -12,7 +12,7 @@ package FileXModel;
 public class FertilizerList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         Fertilizer model = new Fertilizer(name);
         modelList.add(model);
         model.SetLevel(newLevel);

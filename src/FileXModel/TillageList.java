@@ -12,7 +12,7 @@ package FileXModel;
 public class TillageList extends ManagementList {
 
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         Tillage model = new Tillage(name);
         modelList.add(model);
         model.SetLevel(newLevel);

@@ -275,7 +275,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jXTree1MouseReleased"/>
-            <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jXTree1ValueChanged"/>
           </Events>
         </Component>
       </SubComponents>

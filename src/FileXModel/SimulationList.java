@@ -15,7 +15,7 @@ import DSSATModel.SimulationControlDefaults;
  */
 public class SimulationList extends ManagementList {   
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel) {
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         Simulation model = SimulationControlDefaults.Get(FileX.general.FileType);
         model.SetName(name);
         

@@ -24,22 +24,15 @@ public class ChemicalFrame extends IXInternalFrame {
 
     protected Chemical chem;
     private int selectedRowIndex = -1;
-    private Integer level;
     /**
      * Creates new form ChemicalFrame
      * @param nodeName
      */
     public ChemicalFrame(String nodeName) {
+        super(FileX.chemicalList, nodeName);
         initComponents();
         
-        level = 0;
-        for(ModelXBase ch : FileX.chemicalList.GetAll()){
-            level++;
-            if(getLevel(nodeName) == level){
-                this.chem = (Chemical)ch;
-                break;
-            }
-        }
+        this.chem = (Chemical)model;
         
         LoadChemical();
         
@@ -383,7 +376,7 @@ public class ChemicalFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? chem.CHNAME != null : !txtDescription.getText().equals(chem.CHNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Chemical Applications", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Chemical Applications", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

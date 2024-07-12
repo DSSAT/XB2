@@ -35,9 +35,6 @@ public class SimulationFrame extends IXInternalFrame {
 
     private Simulation sim;
 
-    private Boolean bUpdate = false;
-    private Integer level;
-
     /**
      * Creates new form SimulationFrame
      *
@@ -45,20 +42,12 @@ public class SimulationFrame extends IXInternalFrame {
      */
     
     public SimulationFrame (String nodeName){
-        level = 0;
-        for (ModelXBase s : FileX.simulationList.GetAll()) {
-            level++;
-            if(getLevel(nodeName) == level){
-                sim = (Simulation)s;
-                break;
-            }
-        }
+        super(FileX.simulationList, nodeName);
+        sim = (Simulation) model;
 
         initComponents();
         initComponentsValues();
         initEvents();
-
-        bUpdate = true;
         
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(sim, "SNAME", sim.SNAME);
@@ -122,6 +111,11 @@ public class SimulationFrame extends IXInternalFrame {
     @Override
     public boolean isDeleteButtonEnabled(){
         return true;
+    }
+    
+    @Override
+    public int getLevel(){
+        return level;
     }
 
     /**
@@ -319,11 +313,11 @@ public class SimulationFrame extends IXInternalFrame {
         lbResidueHarvested = new org.jdesktop.swingx.JXLabel();
         lbProductHarvestedUnit = new org.jdesktop.swingx.JXLabel();
         lbResidueHarvestedUnit = new org.jdesktop.swingx.JXLabel();
-        txtHFRST = new xbuild.Components.XFormattedTextField();
         txtHPCNP = new xbuild.Components.XFormattedTextField();
         txtHPCNR = new xbuild.Components.XFormattedTextField();
         jXRadioGroup15 = new org.jdesktop.swingx.JXRadioGroup();
         jLabel3 = new javax.swing.JLabel();
+        dpHFRST = new xbuild.Components.XDatePicker();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
         jXPanel16 = new org.jdesktop.swingx.JXPanel();
         rdOVVEW_Y = new xbuild.Components.XRadioButton();
@@ -1503,9 +1497,6 @@ public class SimulationFrame extends IXInternalFrame {
 
         lbResidueHarvestedUnit.setText("%");
 
-        txtHFRST.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtHFRST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
         txtHPCNP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHPCNP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
@@ -1515,6 +1506,8 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup15.setLayout(new javax.swing.BoxLayout(jXRadioGroup15, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel3.setText(Variables.getDateFormatString());
+
+        dpHFRST.setFormats(Variables.getDateFormat());
 
         javax.swing.GroupLayout jXPanel22Layout = new javax.swing.GroupLayout(jXPanel22);
         jXPanel22.setLayout(jXPanel22Layout);
@@ -1540,12 +1533,13 @@ public class SimulationFrame extends IXInternalFrame {
                                 .addComponent(txtHPCNP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbProductHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtHFRST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jXPanel22Layout.createSequentialGroup()
-                                .addComponent(dpHLAST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dpHFRST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dpHLAST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel3)))
-                        .addGap(0, 69, Short.MAX_VALUE)))
+                        .addGap(0, 57, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jXPanel22Layout.setVerticalGroup(
@@ -1556,7 +1550,7 @@ public class SimulationFrame extends IXInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbHarvestEarliest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHFRST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpHFRST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbHarvestLatest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2103,6 +2097,35 @@ public class SimulationFrame extends IXInternalFrame {
         snNREPS.Init(sim, "NREPS", sim.NREPS);
         txtRSEED.Init(sim, "RSEED", sim.RSEED);
         snFROPT.Init(sim, "FROPT", sim.FROPT);
+        
+        dpPFRST.Init(sim, "PFRST", sim.PFRST);
+        dpPLAST.Init(sim, "PLAST", sim.PLAST);
+        txtPSTMX.Init(sim, "PSTMX", sim.PSTMX);
+        txtPSTMN.Init(sim, "PSTMN", sim.PSTMN);
+        txtPH2OL.Init(sim, "PH2OL", sim.PH2OL);
+        txtPH2OU.Init(sim, "PH2OU", sim.PH2OU);
+        txtPH2OD.Init(sim, "PH2OD", sim.PH2OD);
+        
+        txtIMDEP.Init(sim, "IMDEP", sim.IMDEP);
+        txtITHRL.Init(sim, "ITHRL", sim.ITHRL);
+        txtITHRU.Init(sim, "ITHRU", sim.ITHRU);
+        txtIROFF.Init(sim, "IROFF", sim.IROFF);
+        txtIRAMT.Init(sim, "IRAMT", sim.IRAMT);
+        txtIREFF.Init(sim, "IREFF", sim.IREFF);
+        
+        txtNMDEP.Init(sim, "NMDEP", sim.NMDEP);
+        txtNMTHR.Init(sim, "NMTHR", sim.NMTHR);
+        txtNAMNT.Init(sim, "NAMNT", sim.NAMNT);
+        txtNAOFF.Init(sim, "NAOFF", sim.NAOFF);
+        
+        txtRIPCN.Init(sim, "RIPCN", sim.RIPCN);
+        txtRTIME.Init(sim, "RTIME", sim.RTIME);
+        txtRIDEP.Init(sim, "RIDEP", sim.RIDEP);
+        
+        dpHFRST.Init(sim, "HFRST", sim.HFRST);
+        dpHLAST.Init(sim, "HLAST", sim.HLAST);
+        txtHPCNP.Init(sim, "HPCNP", sim.HPCNP);
+        txtHPCNR.Init(sim, "HPCNR", sim.HPCNR);
     }
     
     private void initEvents(){
@@ -2111,44 +2134,32 @@ public class SimulationFrame extends IXInternalFrame {
         fertilizerStateChanged();
         harvestStateChanged();
         groupPlanting.GetButtons().forEach(bt -> {
-            bt.addChangeListener(new javax.swing.event.ChangeListener() {
-                @Override
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    plantStateChanged();
-                }
+            bt.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+                plantStateChanged();
             });
         });
         
         groupIrrigation.GetButtons().forEach(bt -> {
-            bt.addChangeListener(new javax.swing.event.ChangeListener() {
-                @Override
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    irrigStateChanged();
-                }
+            bt.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+                irrigStateChanged();
             });
         });
         
         groupManagementNitrogen.GetButtons().forEach(bt -> {
-            bt.addChangeListener(new javax.swing.event.ChangeListener() {
-                @Override
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    fertilizerStateChanged();
-                }
+            bt.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+                fertilizerStateChanged();
             });
         });
         
         groupHarvest.GetButtons().forEach(bt -> {
-            bt.addChangeListener(new javax.swing.event.ChangeListener() {
-                @Override
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    harvestStateChanged();
-                }
+            bt.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
+                harvestStateChanged();
             });
         });
     }
     
     private void plantStateChanged(){
-        boolean enabled = "R".equals(sim.PLANT) ? false : true;
+        boolean enabled = !"R".equals(sim.PLANT);
 
         for (int i = 0; i < panelDate.getComponentCount(); i++) {
             panelDate.getComponent(i).setEnabled(enabled);
@@ -2162,281 +2173,306 @@ public class SimulationFrame extends IXInternalFrame {
     }
     
     private void irrigStateChanged(){
-            if ("A".equals(sim.IRRIG)) {
+        if (null == sim.IRRIG) {   
             lbManagementDepth.setEnabled(true);
-            txtIMDEP.enable(true);
+            txtIMDEP.setEnabled(true);
             lbManagementUnit.setEnabled(true);
             lbThreshold.setEnabled(true);
-            txtITHRL.enable(true);
+            txtITHRL.setEnabled(true);
             lbThresholdUnit.setEnabled(true);
             lbEndPoint.setEnabled(true);
-            txtITHRU.enable(true);
+            txtITHRU.setEnabled(true);
             lbEndPointUnit.setEnabled(true);
             lbEndApplication.setEnabled(true);
-            txtIROFF.enable(true);
-            lbEndApplicationUnit.setEnabled(true);
-            lbAmount.setEnabled(false);
-            txtIRAMT.enable(false);
-            lbAmountUnit.setEnabled(false);
-            lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
-            lbMethod.setEnabled(true);
-            cbIMETH.enable(true);
-        } else if ("D".equals(sim.IRRIG)) {
-            lbManagementDepth.setEnabled(true);
-            txtIMDEP.enable(true);
-            lbManagementUnit.setEnabled(true);
-            lbThreshold.setEnabled(true);
-            txtITHRL.enable(true);
-            lbThresholdUnit.setEnabled(true);
-            lbEndPoint.setEnabled(true);
-            txtITHRU.enable(true);
-            lbEndPointUnit.setEnabled(true);
-            lbEndApplication.setEnabled(true);
-            txtIROFF.enable(true);
+            txtIROFF.setEnabled(true);
             lbEndApplicationUnit.setEnabled(true);
             lbAmount.setEnabled(true);
-            txtIRAMT.enable(true);
+            txtIRAMT.setEnabled(false);
             lbAmountUnit.setEnabled(true);
             lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
+            txtIREFF.setEnabled(true);
             lbMethod.setEnabled(true);
-            cbIMETH.enable(true);
-        } else if ("F".equals(sim.IRRIG)) {
-
-            lbManagementDepth.setEnabled(true);
-            txtIMDEP.enable(true);
-            lbManagementUnit.setEnabled(true);
-            lbThreshold.setEnabled(true);
-            txtITHRL.enable(true);
-            lbThresholdUnit.setEnabled(true);
-            lbEndPoint.setEnabled(true);
-            txtITHRU.enable(true);
-            lbEndPointUnit.setEnabled(true);
-            lbEndApplication.setEnabled(true);
-            txtIROFF.enable(true);
-            lbEndApplicationUnit.setEnabled(true);
-            lbAmount.setEnabled(true);
-            txtIRAMT.enable(true);
-            lbAmountUnit.setEnabled(true);
-            lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
-            lbMethod.setEnabled(true);
-            cbIMETH.enable(true);
-
-        } else if ("N".equals(sim.IRRIG)) {
-            lbManagementDepth.setEnabled(false);
-            txtIMDEP.enable(false);
-            lbManagementUnit.setEnabled(false);
-            lbThreshold.setEnabled(false);
-            txtITHRL.enable(false);
-            lbThresholdUnit.setEnabled(false);
-            lbEndPoint.setEnabled(false);
-            txtITHRU.enable(false);
-            lbEndPointUnit.setEnabled(false);
-            lbEndApplication.setEnabled(false);
-            txtIROFF.enable(false);
-            lbEndApplicationUnit.setEnabled(false);
-            lbAmount.setEnabled(false);
-            txtIRAMT.enable(false);
-            lbAmountUnit.setEnabled(false);
-            lbEfficiencyFraction.setEnabled(false);
-            txtIREFF.enable(false);
-            lbMethod.setEnabled(false);
-            cbIMETH.enable(false);
-        } else if ("R".equals(sim.IRRIG)) {
-            lbManagementDepth.setEnabled(true);
-            txtIMDEP.enable(true);
-            lbManagementUnit.setEnabled(true);
-            lbThreshold.setEnabled(true);
-            txtITHRL.enable(true);
-            lbThresholdUnit.setEnabled(true);
-            lbEndPoint.setEnabled(true);
-            txtITHRU.enable(true);
-            lbEndPointUnit.setEnabled(true);
-            lbEndApplication.setEnabled(true);
-            txtIROFF.enable(false);
-            lbEndApplicationUnit.setEnabled(true);
-            lbAmount.setEnabled(true);
-            txtIRAMT.enable(true);
-            lbAmountUnit.setEnabled(true);
-            lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
-            lbMethod.setEnabled(true);
-            cbIMETH.enable(true);
-        } else {
-            lbManagementDepth.setEnabled(true);
-            txtIMDEP.enable(true);
-            lbManagementUnit.setEnabled(true);
-            lbThreshold.setEnabled(true);
-            txtITHRL.enable(true);
-            lbThresholdUnit.setEnabled(true);
-            lbEndPoint.setEnabled(true);
-            txtITHRU.enable(true);
-            lbEndPointUnit.setEnabled(true);
-            lbEndApplication.setEnabled(true);
-            txtIROFF.enable(true);
-            lbEndApplicationUnit.setEnabled(true);
-            lbAmount.setEnabled(true);
-            txtIRAMT.enable(false);
-            lbAmountUnit.setEnabled(true);
-            lbEfficiencyFraction.setEnabled(true);
-            txtIREFF.enable(true);
-            lbMethod.setEnabled(true);
-            cbIMETH.enable(true);
+            cbIMETH.setEnabled(true);
+        } else switch (sim.IRRIG) {
+            case "A":
+                lbManagementDepth.setEnabled(true);
+                txtIMDEP.setEnabled(true);
+                lbManagementUnit.setEnabled(true);
+                lbThreshold.setEnabled(true);
+                txtITHRL.setEnabled(true);
+                lbThresholdUnit.setEnabled(true);
+                lbEndPoint.setEnabled(true);
+                txtITHRU.setEnabled(true);
+                lbEndPointUnit.setEnabled(true);
+                lbEndApplication.setEnabled(true);
+                txtIROFF.setEnabled(true);
+                lbEndApplicationUnit.setEnabled(true);
+                lbAmount.setEnabled(false);
+                txtIRAMT.setEnabled(false);
+                lbAmountUnit.setEnabled(false);
+                lbEfficiencyFraction.setEnabled(true);
+                txtIREFF.setEnabled(true);
+                lbMethod.setEnabled(true);
+                cbIMETH.setEnabled(true);
+                break;
+            case "D":
+                lbManagementDepth.setEnabled(true);
+                txtIMDEP.setEnabled(true);
+                lbManagementUnit.setEnabled(true);
+                lbThreshold.setEnabled(true);
+                txtITHRL.setEnabled(true);
+                lbThresholdUnit.setEnabled(true);
+                lbEndPoint.setEnabled(true);
+                txtITHRU.setEnabled(true);
+                lbEndPointUnit.setEnabled(true);
+                lbEndApplication.setEnabled(true);
+                txtIROFF.setEnabled(true);
+                lbEndApplicationUnit.setEnabled(true);
+                lbAmount.setEnabled(true);
+                txtIRAMT.setEnabled(true);
+                lbAmountUnit.setEnabled(true);
+                lbEfficiencyFraction.setEnabled(true);
+                txtIREFF.setEnabled(true);
+                lbMethod.setEnabled(true);
+                cbIMETH.setEnabled(true);
+                break;
+            case "F":
+                lbManagementDepth.setEnabled(true);
+                txtIMDEP.setEnabled(true);
+                lbManagementUnit.setEnabled(true);
+                lbThreshold.setEnabled(true);
+                txtITHRL.setEnabled(true);
+                lbThresholdUnit.setEnabled(true);
+                lbEndPoint.setEnabled(true);
+                txtITHRU.setEnabled(true);
+                lbEndPointUnit.setEnabled(true);
+                lbEndApplication.setEnabled(true);
+                txtIROFF.setEnabled(true);
+                lbEndApplicationUnit.setEnabled(true);
+                lbAmount.setEnabled(true);
+                txtIRAMT.setEnabled(true);
+                lbAmountUnit.setEnabled(true);
+                lbEfficiencyFraction.setEnabled(true);
+                txtIREFF.setEnabled(true);
+                lbMethod.setEnabled(true);
+                cbIMETH.setEnabled(true);
+                break;
+            case "N":
+                lbManagementDepth.setEnabled(false);
+                txtIMDEP.setEnabled(false);
+                lbManagementUnit.setEnabled(false);
+                lbThreshold.setEnabled(false);
+                txtITHRL.setEnabled(false);
+                lbThresholdUnit.setEnabled(false);
+                lbEndPoint.setEnabled(false);
+                txtITHRU.setEnabled(false);
+                lbEndPointUnit.setEnabled(false);
+                lbEndApplication.setEnabled(false);
+                txtIROFF.setEnabled(false);
+                lbEndApplicationUnit.setEnabled(false);
+                lbAmount.setEnabled(false);
+                txtIRAMT.setEnabled(false);
+                lbAmountUnit.setEnabled(false);
+                lbEfficiencyFraction.setEnabled(false);
+                txtIREFF.setEnabled(false);
+                lbMethod.setEnabled(false);
+                cbIMETH.setEnabled(false);
+                break;
+            case "R":
+                lbManagementDepth.setEnabled(true);
+                txtIMDEP.setEnabled(true);
+                lbManagementUnit.setEnabled(true);
+                lbThreshold.setEnabled(true);
+                txtITHRL.setEnabled(true);
+                lbThresholdUnit.setEnabled(true);
+                lbEndPoint.setEnabled(true);
+                txtITHRU.setEnabled(true);
+                lbEndPointUnit.setEnabled(true);
+                lbEndApplication.setEnabled(true);
+                txtIROFF.setEnabled(false);
+                lbEndApplicationUnit.setEnabled(true);
+                lbAmount.setEnabled(true);
+                txtIRAMT.setEnabled(true);
+                lbAmountUnit.setEnabled(true);
+                lbEfficiencyFraction.setEnabled(true);
+                txtIREFF.setEnabled(true);
+                lbMethod.setEnabled(true);
+                cbIMETH.setEnabled(true);
+                break;
+            default:
+                lbManagementDepth.setEnabled(true);
+                txtIMDEP.setEnabled(true);
+                lbManagementUnit.setEnabled(true);
+                lbThreshold.setEnabled(true);
+                txtITHRL.setEnabled(true);
+                lbThresholdUnit.setEnabled(true);
+                lbEndPoint.setEnabled(true);
+                txtITHRU.setEnabled(true);
+                lbEndPointUnit.setEnabled(true);
+                lbEndApplication.setEnabled(true);
+                txtIROFF.setEnabled(true);
+                lbEndApplicationUnit.setEnabled(true);
+                lbAmount.setEnabled(true);
+                txtIRAMT.setEnabled(false);
+                lbAmountUnit.setEnabled(true);
+                lbEfficiencyFraction.setEnabled(true);
+                txtIREFF.setEnabled(true);
+                lbMethod.setEnabled(true);
+                cbIMETH.setEnabled(true);
+                break;
         }
     }
     
     private void fertilizerStateChanged(){
         if("D".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(false);
-            txtNMDEP.enable(false);
+            txtNMDEP.setEnabled(false);
             lbNitrogenDepthUnit.setEnabled(false);
             lbNitrogenThreshold.setEnabled(false);
-            txtNMTHR.enable(false);
+            txtNMTHR.setEnabled(false);
             lbNitrogenThresholdUnit.setEnabled(false);
             lbAmountPerApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            cbNCODE.enable(false);
+            cbNCODE.setEnabled(false);
         }
         else if("F".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(true);
-            txtNMDEP.enable(true);
+            txtNMDEP.setEnabled(true);
             lbNitrogenDepthUnit.setEnabled(true);
             lbNitrogenThreshold.setEnabled(true);
-            txtNMTHR.enable(true);
+            txtNMTHR.setEnabled(true);
             lbNitrogenThresholdUnit.setEnabled(true);
             lbAmountPerApplication.setEnabled(true);
-            txtNAOFF.enable(true);
+            txtNAOFF.setEnabled(true);
             lbEndOfApplication.setEnabled(true);
-            txtNAOFF.enable(true);
+            txtNAOFF.setEnabled(true);
             lbEndOfApplicationUnit.setEnabled(true);
             lbMaterial.setEnabled(true);
-            cbNCODE.enable(true);
+            cbNCODE.setEnabled(true);
         }
         else if("N".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(false);
-            txtNMDEP.enable(false);
+            txtNMDEP.setEnabled(false);
             lbNitrogenDepthUnit.setEnabled(false);
             lbNitrogenThreshold.setEnabled(false);
-            txtNMTHR.enable(false);
+            txtNMTHR.setEnabled(false);
             lbNitrogenThresholdUnit.setEnabled(false);
             lbAmountPerApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            cbNCODE.enable(false);
+            cbNCODE.setEnabled(false);
         }
         else if("R".equalsIgnoreCase(sim.FERTI)){
             lbNitrogenDepth.setEnabled(false);
-            txtNMDEP.enable(false);
+            txtNMDEP.setEnabled(false);
             lbNitrogenDepthUnit.setEnabled(false);
             lbNitrogenThreshold.setEnabled(false);
-            txtNMTHR.enable(false);
+            txtNMTHR.setEnabled(false);
             lbNitrogenThresholdUnit.setEnabled(false);
             lbAmountPerApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplication.setEnabled(false);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplicationUnit.setEnabled(false);
             lbMaterial.setEnabled(false);
-            cbNCODE.enable(false);
+            cbNCODE.setEnabled(false);
         }
         else {
             lbNitrogenDepth.setEnabled(true);
-            txtNMDEP.enable(true);
+            txtNMDEP.setEnabled(true);
             lbNitrogenDepthUnit.setEnabled(true);
             lbNitrogenThreshold.setEnabled(true);
-            txtNMTHR.enable(true);
+            txtNMTHR.setEnabled(true);
             lbNitrogenThresholdUnit.setEnabled(true);
             lbAmountPerApplication.setEnabled(true);
-            txtNAOFF.enable(false);
+            txtNAOFF.setEnabled(false);
             lbEndOfApplication.setEnabled(true);
-            txtNAOFF.enable(true);
+            txtNAOFF.setEnabled(true);
             lbEndOfApplicationUnit.setEnabled(true);
             lbMaterial.setEnabled(true);
-            cbNCODE.enable(true);
+            cbNCODE.setEnabled(true);
         }
     }
     
     private void harvestStateChanged(){
         if("A".equalsIgnoreCase(sim.HARVS)){
             lbHarvestEarliest.setEnabled(true);
-            txtHFRST.setEnabled(true);
+            dpHFRST.setEnabled(true);
             lbHarvestLatest.setEnabled(true);
             dpHLAST.setEnabled(true);
             lbProductHarvested.setEnabled(true);
-            txtHPCNP.enable(true);
+            txtHPCNP.setEnabled(true);
             lbProductHarvestedUnit.setEnabled(true);
             lbResidueHarvested.setEnabled(true);
-            txtHPCNR.enable(true);
+            txtHPCNR.setEnabled(true);
             lbResidueHarvestedUnit.setEnabled(true);
         }
         else if("D".equalsIgnoreCase(sim.HARVS)){
             lbHarvestEarliest.setEnabled(false);
-            txtHFRST.setEnabled(false);
+            dpHFRST.setEnabled(false);
             lbHarvestLatest.setEnabled(false);
             dpHLAST.setEnabled(false);
             lbProductHarvested.setEnabled(false);
-            txtHPCNP.enable(false);
+            txtHPCNP.setEnabled(false);
             lbProductHarvestedUnit.setEnabled(false);
             lbResidueHarvested.setEnabled(false);
-            txtHPCNR.enable(false);
+            txtHPCNR.setEnabled(false);
             lbResidueHarvestedUnit.setEnabled(false);
         }
         else if("R".equalsIgnoreCase(sim.HARVS)){
             lbHarvestEarliest.setEnabled(false);
-            txtHFRST.setEnabled(false);
+            dpHFRST.setEnabled(false);
             lbHarvestLatest.setEnabled(false);
             dpHLAST.setEnabled(false);
             lbProductHarvested.setEnabled(false);
-            txtHPCNP.enable(false);
+            txtHPCNP.setEnabled(false);
             lbProductHarvestedUnit.setEnabled(false);
             lbResidueHarvested.setEnabled(false);
-            txtHPCNR.enable(false);
+            txtHPCNR.setEnabled(false);
             lbResidueHarvestedUnit.setEnabled(false);
         }
         else if("M".equalsIgnoreCase(sim.HARVS)){
             lbHarvestEarliest.setEnabled(false);
-            txtHFRST.setEnabled(false);
+            dpHFRST.setEnabled(false);
             lbHarvestLatest.setEnabled(false);
             dpHLAST.setEnabled(false);
             lbProductHarvested.setEnabled(false);
-            txtHPCNP.enable(false);
+            txtHPCNP.setEnabled(false);
             lbProductHarvestedUnit.setEnabled(false);
             lbResidueHarvested.setEnabled(false);
-            txtHPCNR.enable(false);
+            txtHPCNR.setEnabled(false);
             lbResidueHarvestedUnit.setEnabled(false);
         }
         else{
             lbHarvestEarliest.setEnabled(true);
-            txtHFRST.setEnabled(true);
+            dpHFRST.setEnabled(true);
             lbHarvestLatest.setEnabled(true);
             dpHLAST.setEnabled(true);
             lbProductHarvested.setEnabled(true);
-            txtHPCNP.enable(true);
+            txtHPCNP.setEnabled(true);
             lbProductHarvestedUnit.setEnabled(true);
             lbResidueHarvested.setEnabled(true);
-            txtHPCNR.enable(true);
+            txtHPCNR.setEnabled(true);
             lbResidueHarvestedUnit.setEnabled(true);
         }
     }                                         
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? sim.SNAME != null : !txtDescription.getText().equals(sim.SNAME)){
-            l.myAction(new UpdateLevelEvent(this, "Simulation Controls", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Simulation Controls", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
     private void dpSDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpSDATEPropertyChange
         try {
-            l.myAction(new ValidationEvent(this));
+            listener.myAction(new ValidationEvent(this));
         } catch (Exception ex) {
 
         }
@@ -2447,6 +2483,7 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XDropdownTableComboBox cbCrop;
     private xbuild.Components.XDropdownTableComboBox cbIMETH;
     private xbuild.Components.XDropdownTableComboBox cbNCODE;
+    private xbuild.Components.XDatePicker dpHFRST;
     private xbuild.Components.XDatePicker dpHLAST;
     private xbuild.Components.XDatePicker dpPFRST;
     private xbuild.Components.XDatePicker dpPLAST;
@@ -2652,7 +2689,6 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XSpinner snNREPS;
     private xbuild.Components.XSpinner snNYERS;
     private xbuild.Components.XTextField txtDescription;
-    private xbuild.Components.XFormattedTextField txtHFRST;
     private xbuild.Components.XFormattedTextField txtHPCNP;
     private xbuild.Components.XFormattedTextField txtHPCNR;
     private xbuild.Components.XTextField txtIMDEP;

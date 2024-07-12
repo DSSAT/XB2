@@ -14,7 +14,7 @@ import Extensions.Utils;
 public class FieldList extends ManagementList {
     
     @Override
-    public ModelXBase AddNew(String name, int newLevel, int currentLevel)
+    public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel)
     {
         FieldDetail f = new FieldDetail(name);
         int expNo = GetSize() + Utils.ParseInteger(FileX.general.ExperimentNumber);

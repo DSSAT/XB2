@@ -23,29 +23,29 @@ import xbuild.Events.UpdateLevelEvent;
 public class SoilAnalysisFrame extends IXInternalFrame {
 
     private SoilAnalysis soilAnalysis;
-    private Integer level;
     private int selectedRowIndex = -1;
     /**
      * Creates new form SoilAnalysisFrame
      * @param nodeName
      */
     public SoilAnalysisFrame(String nodeName) {
+        super(FileX.soilAnalysis, nodeName);
         initComponents();
+        this.soilAnalysis = (SoilAnalysis) model;
         
-        level = 0;
-        for(ModelXBase s: FileX.soilAnalysis.GetAll()){
-            
-            int nodeLevel = getLevel(nodeName);
-            String nodeDesc = getDescription(nodeName);
-            
-            if(s.GetLevel() == nodeLevel && s.GetName().equals(nodeDesc)){   
-                level = nodeLevel;
-                this.soilAnalysis = (SoilAnalysis)s;
-            }
-        }
+//        level = 0;
+//        for(ModelXBase s: FileX.soilAnalysis.GetAll()){
+//            
+//            int nodeLevel = getLevel(nodeName);
+//            String nodeDesc = getDescription(nodeName);
+//            
+//            if(s.GetLevel() == nodeLevel && s.GetName().equals(nodeDesc)){   
+//                level = nodeLevel;
+//                this.soilAnalysis = (SoilAnalysis)s;
+//            }
+//        }
         
         dpAnalysisDate.Init(soilAnalysis, "SADAT", soilAnalysis.SADAT);
-
         
         cbSMHB.setInit(soilAnalysis, "SMHB", soilAnalysis.SMHB, SoilAnalysisMethodPhList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
         cbSMKE.setInit(soilAnalysis, "SMKE", soilAnalysis.SMKE, SoilAnalysisMethodPotassiumList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 200)}, "Code");
@@ -53,8 +53,8 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         
         for(int i = 0;i < soilAnalysis.GetSize();i++)
         {
-            DefaultTableModel model = (DefaultTableModel) jXTable2.getModel();
-            model.addRow(SetRow(soilAnalysis.GetLayer(i)));
+            DefaultTableModel tableModel = (DefaultTableModel) jXTable2.getModel();
+            tableModel.addRow(SetRow(soilAnalysis.GetLayer(i)));
         }
         
         lblLevel.setText("Level " + level.toString());
@@ -437,7 +437,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if(txtDescription.getText() == null ? soilAnalysis.SANAME != null : !txtDescription.getText().equals(soilAnalysis.SANAME)){
-            l.myAction(new UpdateLevelEvent(this, "Soil Analysis", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Soil Analysis", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

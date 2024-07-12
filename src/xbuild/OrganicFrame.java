@@ -22,25 +22,17 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class OrganicFrame extends IXInternalFrame {
 
-    protected Organic organic;
+    private Organic organic;
     private int selectedRowIndex = -1;
-    private Integer level;
 
     /**
      * Creates new form OrganicFrame
      * @param nodeName
      */
     public OrganicFrame(String nodeName) {
+        super(FileX.organicList, nodeName);
         initComponents();
-
-        level = 0;
-        for (ModelXBase org : FileX.organicList.GetAll()) {
-            level++;
-            if (getLevel(nodeName) == level) {
-                this.organic = (Organic) org;
-                break;
-            }
-        }
+        this.organic = (Organic) model;
 
         LoadOrganic();
 
@@ -382,7 +374,7 @@ public class OrganicFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if (txtDescription.getText() == null ? organic.RENAME != null : !txtDescription.getText().equals(organic.RENAME)) {
-            l.myAction(new UpdateLevelEvent(this, "Organic Amendments", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Organic Amendments", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

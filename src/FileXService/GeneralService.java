@@ -51,10 +51,8 @@ public class GeneralService {
             while ((strRead = br.readLine()) != null) {
                 if (strRead.trim().startsWith("*EXP.DETAILS:")) {
                     String temp = strRead.substring(13, strRead.length()).trim();
-                    String startS = general.InstituteCode + general.SiteCode + general.Year.substring(2, 4) + general.ExperimentNumber;
-                    if (general.crop != null) {
-                        startS += general.crop.CropCode;
-                    }
+                    String startS = general.InstituteCode + general.SiteCode + general.Year.substring(2, 4) + general.ExperimentNumber + getFileXType();
+
                     if (temp.startsWith(startS)) {
                         temp = temp.replaceFirst(startS, "").trim();
                     }
@@ -208,10 +206,10 @@ public class GeneralService {
         else if(general.FileType == ExperimentType.Seasonal){
             fileXType = "SN";
         }
-        else if(general.FileType == ExperimentType.Seasonal){
+        else if(general.FileType == ExperimentType.Sequential){
             fileXType = "SQ";
         }
-        else if(general.FileType == ExperimentType.Seasonal){
+        else if(general.FileType == ExperimentType.Spatial){
             fileXType = "GS";
         }
         

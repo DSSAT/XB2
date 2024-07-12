@@ -40,7 +40,6 @@ import xbuild.Events.ValidationEvent;
 public class FieldFrame extends IXInternalFrame {
 
     private FieldDetail field;
-    private Integer level;
 
     /**
      * Creates new form FieldPanel
@@ -48,15 +47,9 @@ public class FieldFrame extends IXInternalFrame {
      * @param nodeName
      */
     public FieldFrame(String nodeName) {
-        field = null;
-        level = 0;
-        for (ModelXBase f : FileX.fieldList.GetAll()) {
-            level++;
-            if (getLevel(nodeName) == level) {
-                field = (FieldDetail) f;
-                break;
-            }
-        }
+        super(FileX.fieldList, nodeName);
+        field = (FieldDetail) model;
+        
         if (field == null) {
             field = new FieldDetail(nodeName);
         }
@@ -791,7 +784,7 @@ public class FieldFrame extends IXInternalFrame {
                 WeatherStation w = ((WeatherStation) cbWSTA.getSelectedItem());
                 cbWSTACode.setModel(loadWSTACode(w.Code), w.Code);
                 
-                l.myAction(new ValidationEvent(this));
+                listener.myAction(new ValidationEvent(this));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -803,7 +796,7 @@ public class FieldFrame extends IXInternalFrame {
             if (cbSoil.getSelectedIndex() >= 0) {
                 Soil s = ((Soil) cbSoil.getSelectedItem());
                 cbSoilCode.setModel(loadSoilCode(s.Code), s.Code);
-                l.myAction(new ValidationEvent(this));
+                listener.myAction(new ValidationEvent(this));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -812,7 +805,7 @@ public class FieldFrame extends IXInternalFrame {
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
         if (txtDescription.getText() == null ? field.FLNAME != null : !txtDescription.getText().equals(field.FLNAME)) {
-            l.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
+            listener.myAction(new UpdateLevelEvent(this, "Fields", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 

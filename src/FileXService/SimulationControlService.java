@@ -348,7 +348,12 @@ public class SimulationControlService {
                         sim = (Simulation)simulationList.GetAt(level);
                     }
 
-                    sim.HFRST = Utils.GetFloat(simHarvestHeader, tmp, "HFRST", 5);
+                    try{
+                        sim.HFRST = Utils.GetDate(simHarvestHeader, tmp, "HFRST", 5);
+                    }
+                    catch(Exception ex){
+                        
+                    }
                     try{
                         sim.HLAST = Utils.GetDate(simHarvestHeader, tmp, "HLAST", 5);
                     }
@@ -509,7 +514,7 @@ public class SimulationControlService {
                 pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" HA         ");
-                pw.print(" " + Utils.PadLeft(sim.HFRST, 5, ' '));
+                pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HFRST), 5, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HLAST), 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNR, 5, ' '));
