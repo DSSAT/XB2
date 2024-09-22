@@ -208,9 +208,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jMenuRefresh = new javax.swing.JMenu();
         jSetupMenu = new javax.swing.JMenu();
         jMenuHelp = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuAbout = new javax.swing.JMenuItem();
 
         jMenuItemSimAdd.setText("Add New");
         jMenuItemSimAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +264,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         jPopupMenuItem.add(jPopupMenuSimItemMoveDown);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(" XB2 v0.12.0.0.");
+        setTitle("XB2 v" + Variables.getVersion());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -383,24 +381,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
         jMenuHelp.setText("Help");
 
-        jMenuItem1.setText("Content");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem1MouseClicked(evt);
-            }
-        });
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAbout.setText("About");
+        jMenuAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuAboutActionPerformed(evt);
             }
         });
-        jMenuHelp.add(jMenuItem1);
-
-        jMenuItem2.setText("Technical Support");
-        jMenuHelp.add(jMenuItem2);
-
-        jMenuItem3.setText("About");
-        jMenuHelp.add(jMenuItem3);
+        jMenuHelp.add(jMenuAbout);
 
         jMenuBar1.add(jMenuHelp);
 
@@ -663,15 +650,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         setAddDeleteButton();
         setPrevNextButton();
     }//GEN-LAST:event_jMenuOpenFileActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
-        desktopPane.add(content);
-        content.show();
-    }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
         int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
@@ -938,20 +916,23 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jMenuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAboutActionPerformed
+        final AboutDialog dialog = new AboutDialog(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuAboutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnAddLevel;
     private javax.swing.JButton bnDeleteLevel;
     private javax.swing.JButton bnNext;
     private javax.swing.JButton bnPrevious;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCloseFile;
     private javax.swing.JMenuItem jMenuExit;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemSimAdd;
     private javax.swing.JMenuItem jMenuNewFile;
     private javax.swing.JMenuItem jMenuOpenFile;

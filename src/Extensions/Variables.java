@@ -81,4 +81,8 @@ public class Variables {
         
         return image;
     }
+    
+    public static String getVersion(){
+        return "v0.12.0.0";
+    }
 }
