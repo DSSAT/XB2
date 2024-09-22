@@ -27,7 +27,7 @@ public class ChemicalApplicationService {
             while ((strRead = br.readLine()) != null) {
                 String tmp = strRead;
 
-                if (tmp.trim().startsWith("*CHEMICAL APPLICATIONS")) {
+                if (tmp.trim().startsWith("*CHEMICAL APPLICATIONS") || tmp.trim().startsWith("*FERTILIZERS (INORGANIC)")) {
                     bChemical = true;
 
                 } else if (bChemical && !bChemicalHeader && tmp.trim().startsWith("@")) {

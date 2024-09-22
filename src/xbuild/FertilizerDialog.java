@@ -131,22 +131,22 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
         txtFDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        txtFDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtFAMN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtFAMP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtFAMK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtFAMC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        txtFAMO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFAMO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jXLabel1.setText("Fertilizer Material");
@@ -380,9 +380,9 @@ public class FertilizerDialog extends javax.swing.JDialog {
         {
             try
             {
-                ferApp.FDAY = Integer.parseInt(txtFDATE.getText());
+                ferApp.FDAY = Integer.valueOf(txtFDATE.getText());
             }
-            catch(Exception ex)
+            catch(NumberFormatException ex)
             {
                 ferApp.FDAY = null;
             }
@@ -401,49 +401,49 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
         try
         {
-            ferApp.FDEP = Integer.parseInt(txtFDEP.getText());
+            ferApp.FDEP = Float.valueOf(txtFDEP.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FDEP = null;
         }
         try
         {
-            ferApp.FAMN = Integer.parseInt(txtFAMN.getText());
+            ferApp.FAMN = Float.valueOf(txtFAMN.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FAMN = null;
         }
         try
         {
-            ferApp.FAMP = Integer.parseInt(txtFAMP.getText());
+            ferApp.FAMP = Float.valueOf(txtFAMP.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FAMP = null;
         }
         try
         {
-            ferApp.FAMK = Integer.parseInt(txtFAMK.getText());
+            ferApp.FAMK = Float.valueOf(txtFAMK.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FAMK = null;
         }
         try
         {
-            ferApp.FAMC = Integer.parseInt(txtFAMC.getText());
+            ferApp.FAMC = Float.valueOf(txtFAMC.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FAMC = null;
         }
         try
         {
-            ferApp.FAMO = Integer.parseInt(txtFAMO.getText());
+            ferApp.FAMO = Float.valueOf(txtFAMO.getText());
         }
-        catch(Exception ex)
+        catch(NumberFormatException ex)
         {
             ferApp.FAMO = null;
         }

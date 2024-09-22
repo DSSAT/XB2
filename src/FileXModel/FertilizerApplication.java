@@ -18,12 +18,12 @@ public class FertilizerApplication implements Cloneable {
     public Integer FDAY;
     public String FMCD;
     public String FACD;
-    public Integer FDEP;
-    public Integer FAMN;
-    public Integer FAMP;
-    public Integer FAMK;
-    public Integer FAMC;
-    public Integer FAMO;
+    public Float FDEP;
+    public Float FAMN;
+    public Float FAMP;
+    public Float FAMK;
+    public Float FAMC;
+    public Float FAMO;
     public String FOCD;
     
     public Date getOrder(){
