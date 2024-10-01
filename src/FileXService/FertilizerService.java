@@ -66,12 +66,12 @@ public class FertilizerService {
 
                     fertilApp.FMCD = Utils.GetString(fertilizerHeader, tmp, " FMCD", 5);
                     fertilApp.FACD = Utils.GetString(fertilizerHeader, tmp, " FACD", 5);
-                    fertilApp.FDEP = Utils.GetInteger(fertilizerHeader, tmp, "FDEP", 5);
-                    fertilApp.FAMN = Utils.GetInteger(fertilizerHeader, tmp, "FAMN", 5);
-                    fertilApp.FAMP = Utils.GetInteger(fertilizerHeader, tmp, "FAMP", 5);
-                    fertilApp.FAMK = Utils.GetInteger(fertilizerHeader, tmp, "FAMK", 5);
-                    fertilApp.FAMC = Utils.GetInteger(fertilizerHeader, tmp, "FAMC", 5);
-                    fertilApp.FAMO = Utils.GetInteger(fertilizerHeader, tmp, "FAMO", 5);
+                    fertilApp.FDEP = Utils.GetFloat(fertilizerHeader, tmp, "FDEP", 5);
+                    fertilApp.FAMN = Utils.GetFloat(fertilizerHeader, tmp, "FAMN", 5);
+                    fertilApp.FAMP = Utils.GetFloat(fertilizerHeader, tmp, "FAMP", 5);
+                    fertilApp.FAMK = Utils.GetFloat(fertilizerHeader, tmp, "FAMK", 5);
+                    fertilApp.FAMC = Utils.GetFloat(fertilizerHeader, tmp, "FAMC", 5);
+                    fertilApp.FAMO = Utils.GetFloat(fertilizerHeader, tmp, "FAMO", 5);
                     fertilApp.FOCD = Utils.GetString(fertilizerHeader, tmp, " FOCD", 5);
                     fertil.FERNAME = Utils.GetString(fertilizerHeader, tmp, "FERNAME", tmp.length() - fertilizerHeader.indexOf("FERNAME"));
                     fertil.AddApp(fertilApp);
