@@ -35,14 +35,16 @@ public class SimulationFrame extends IXInternalFrame {
 
     private Simulation sim;
 
-    /**
-     * Creates new form SimulationFrame
-     *
-     * @param nodeName
-     */
+    public SimulationFrame (){
+        super();
+    }
     
     public SimulationFrame (String nodeName){
-        super(FileX.simulationList, nodeName);
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         sim = (Simulation) model;
 
         initComponents();
@@ -2721,5 +2723,15 @@ public class SimulationFrame extends IXInternalFrame {
     @Override
     public String getManagementName() {
         return "Simulation Controls";
+    }
+
+    @Override
+    public String getParentName() {
+        return "Simulation Controls";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Simulation();
     }
 }

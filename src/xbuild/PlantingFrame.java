@@ -23,31 +23,39 @@ public class PlantingFrame extends IXInternalFrame {
      * Creates new form PlantingFrame
      */
     protected Planting planting;
+    
+    public PlantingFrame(){
+        super();
+    }
 
     public PlantingFrame(String nodeName) {
-        super(FileX.plantings, nodeName);
-        initComponents();
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         this.planting = (Planting) model;
         
-        dpPDATE.Init(planting, "PDATE", planting.PDATE);
-        dpEDATE.Init(planting, "EDATE", planting.EDATE);
+        initComponents();
+        dpPDATE.Init(this.planting, "PDATE", this.planting.PDATE);
+        dpEDATE.Init(this.planting, "EDATE", this.planting.EDATE);
         
         
-        txtPAGE.Init(planting, "PAGE", planting.PAGE);
-        txtPENV.Init(planting, "PENV", planting.PENV);
-        txtPLDP.Init(planting, "PLDP", planting.PLDP);
-        cbPLDS.setInit(planting, "PLDS", planting.PLDS, PlantDistributionList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
-        cbPLME.setInit(planting, "PLME", planting.PLME, PlantingMethodList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
-        txtPLPH.Init(planting, "PLPH", planting.PLPH);
-        txtPLRD.Init(planting, "PLRD", planting.PLRD);
-        txtPLRS.Init(planting, "PLRS", planting.PLRS);
-        txtPLWT.Init(planting, "PLWT", planting.PLWT);
-        txtPPOE.Init(planting, "PPOE", planting.PPOE);
-        txtPPOP.Init(planting, "PPOP", planting.PPOP);
-        txtSPRL.Init(planting, "SPRL", planting.SPRL);        
+        txtPAGE.Init(this.planting, "PAGE", this.planting.PAGE);
+        txtPENV.Init(this.planting, "PENV", this.planting.PENV);
+        txtPLDP.Init(this.planting, "PLDP", this.planting.PLDP);
+        cbPLDS.setInit(this.planting, "PLDS", this.planting.PLDS, PlantDistributionList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
+        cbPLME.setInit(this.planting, "PLME", this.planting.PLME, PlantingMethodList.GetAll(), new XColumn[] { new  XColumn("Description", "Description", 250)}, "Code");
+        txtPLPH.Init(this.planting, "PLPH", this.planting.PLPH);
+        txtPLRD.Init(this.planting, "PLRD", this.planting.PLRD);
+        txtPLRS.Init(this.planting, "PLRS", this.planting.PLRS);
+        txtPLWT.Init(this.planting, "PLWT", this.planting.PLWT);
+        txtPPOE.Init(this.planting, "PPOE", this.planting.PPOE);
+        txtPPOP.Init(this.planting, "PPOP", this.planting.PPOP);
+        txtSPRL.Init(this.planting, "SPRL", this.planting.SPRL);        
         
         lblLevel.setText("Level " + level.toString());
-        txtDescription.Init(planting, "PLNAME", planting.PLNAME);
+        txtDescription.Init(this.planting, "PLNAME", this.planting.PLNAME);
         
         setImage(imagePanel, "Plant2.jpg");
     }
@@ -646,7 +654,17 @@ public class PlantingFrame extends IXInternalFrame {
     }
     
     @Override
+    public String getParentName() {
+        return "Management";
+    }
+    
+    @Override
     public int getLevel(){
         return level;
+    }
+    
+    @Override
+    public ModelXBase newModel(){
+        return new Planting();
     }
 }

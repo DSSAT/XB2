@@ -24,26 +24,18 @@ public class SoilAnalysisFrame extends IXInternalFrame {
 
     private SoilAnalysis soilAnalysis;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form SoilAnalysisFrame
-     * @param nodeName
-     */
+    
+    public SoilAnalysisFrame() {
+        super();
+    }
     public SoilAnalysisFrame(String nodeName) {
-        super(FileX.soilAnalysis, nodeName);
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         initComponents();
         this.soilAnalysis = (SoilAnalysis) model;
-        
-//        level = 0;
-//        for(ModelXBase s: FileX.soilAnalysis.GetAll()){
-//            
-//            int nodeLevel = getLevel(nodeName);
-//            String nodeDesc = getDescription(nodeName);
-//            
-//            if(s.GetLevel() == nodeLevel && s.GetName().equals(nodeDesc)){   
-//                level = nodeLevel;
-//                this.soilAnalysis = (SoilAnalysis)s;
-//            }
-//        }
         
         dpAnalysisDate.Init(soilAnalysis, "SADAT", soilAnalysis.SADAT);
         
@@ -61,7 +53,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         txtDescription.Init(soilAnalysis, "SANAME", soilAnalysis.SANAME);
         
         setImage(imagePanel, "SoilAnal2.jpg");
-        
     }
     
     /**
@@ -133,7 +124,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         txtDescription = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lblLevel1 = new org.jdesktop.swingx.JXLabel();
         lblLevel2 = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -147,7 +137,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
             }
         });
 
-        jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Determination Method", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+		jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jXLabel2.setText("pH");
 
@@ -197,7 +187,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil Analysis Layers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jXPanel2.setPreferredSize(new java.awt.Dimension(460, 446));
 
         bnAddLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Plus.png"))); // NOI18N
@@ -259,7 +249,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bnDeleteLayer))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         jXPanel2Layout.setVerticalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,9 +273,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         imagePanel.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel1.setText(Variables.getDateFormatString());
-
-        lblLevel1.setText("Initial Conditions");
-        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         lblLevel2.setText("Soil Analysis");
         lblLevel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -315,11 +302,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                         .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblLevel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 365, Short.MAX_VALUE)
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 365, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,11 +325,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -476,7 +453,6 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXTable jXTable2;
     private org.jdesktop.swingx.JXLabel lblLevel;
-    private org.jdesktop.swingx.JXLabel lblLevel1;
     private org.jdesktop.swingx.JXLabel lblLevel2;
     private xbuild.Components.XTextField txtDescription;
     // End of variables declaration//GEN-END:variables
@@ -494,5 +470,15 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Environment";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new SoilAnalysis();
     }
 }

@@ -12,7 +12,7 @@
 package xbuild;
 
 import FileXModel.FileX;
-import FileXModel.ManagementList;
+import FileXModel.ModelXBase;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import xbuild.Components.IXInternalFrame;
@@ -29,7 +29,7 @@ public class GeneralNotesFrame extends IXInternalFrame implements KeyListener {
     
     /** Creates new form GeneralNotesFrame */
     public GeneralNotesFrame() {
-        super(null, null);
+        super();
         initComponents();
 
         txtNotes.setText(FileX.general.Notes);
@@ -141,7 +141,12 @@ public class GeneralNotesFrame extends IXInternalFrame implements KeyListener {
     }
 
     @Override
-    public ManagementList getManagementList() {
+    public String getParentName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ModelXBase newModel() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

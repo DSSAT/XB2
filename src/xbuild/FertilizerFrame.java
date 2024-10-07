@@ -29,7 +29,7 @@ public class FertilizerFrame extends IXInternalFrame {
      * @param nodeName
      */
     public FertilizerFrame(String nodeName) {
-        super(FileX.fertilizerList, nodeName);
+        super(nodeName);
         initComponents();
         this.fertil = (Fertilizer)model;
 
@@ -510,5 +510,15 @@ public class FertilizerFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Fertilizer();
     }
 }

@@ -20,6 +20,9 @@ import DSSATModel.SoilTextureList;
 import DSSATModel.WeatherStation;
 import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
+import static DSSATModel.WstaType.CLI;
+import static DSSATModel.WstaType.WTG;
+import static DSSATModel.WstaType.WTH;
 import Extensions.LimitDocument;
 import FileXModel.FileX;
 import FileXModel.ManagementList;
@@ -40,22 +43,22 @@ import xbuild.Events.ValidationEvent;
 public class FieldFrame extends IXInternalFrame {
 
     private FieldDetail field;
-
-    /**
-     * Creates new form FieldPanel
-     *
-     * @param nodeName
-     */
-    public FieldFrame(String nodeName) {
-        super(FileX.fieldList, nodeName);
-        field = (FieldDetail) model;
-        
-        if (field == null) {
-            field = new FieldDetail(nodeName);
-        }
-
+    
+    public FieldFrame(){
+        super();
+    }
+    
+    public FieldFrame(String name){
+        super(name);
+    }
+    
+    
+    @Override
+    protected void initFrame(){
         initComponents();
-
+        
+        field = (FieldDetail)model;
+        
         txtID_FIELD.setDocument(new LimitDocument(8));
 
         cbWSTA.setInit(null, "WSTA", field.WSTA != null && field.WSTA.length() >= 4 ? field.WSTA.substring(0, 4) : "", WeatherStationList.GetAll(FileX.wstaType), new XColumn[]{new XColumn("StationName", "Station Name", 400), new XColumn("Code", "WSTA", 100), new XColumn("Begin", "Begin", 100), new XColumn("Number", "Number", 100)}, "Code");
@@ -968,5 +971,15 @@ public class FieldFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Environment";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new FieldDetail();
     }
 }

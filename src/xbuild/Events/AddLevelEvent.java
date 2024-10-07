@@ -1,12 +1,10 @@
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author Jazz
  */
-public class AddLevelEvent extends EventObject {
+public class AddLevelEvent extends XBaseEvent {
     private String name;
     private String parent;
     

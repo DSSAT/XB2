@@ -1,12 +1,10 @@
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author Jazz
  */
-public class NewFrameEvent extends EventObject {
+public class NewFrameEvent extends XBaseEvent {
     private final String currentFrame;
     private final MenuDirection direction;
     
