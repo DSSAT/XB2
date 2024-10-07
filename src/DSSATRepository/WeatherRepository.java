@@ -20,14 +20,17 @@ public class WeatherRepository extends DSSATRepositoryBase {
     @Override
     public ArrayList<String> Parse(String wstaType, String extension) throws Exception {
         ArrayList<String> weatherList = new ArrayList<>();
-        String wed = null;
+        String weatherDir = null;
         try {
-            wed = DssatProfile.GetAt("WED");
+            weatherDir = DssatProfile.GetAt(wstaType);
         } catch (Exception e) {
             throw e;
         }
 
-        File w = new File(wed + wstaType);
+        File w = new File(weatherDir);
+        if (!w.exists()) {
+            throw new Exception("Please check your weather folder: " + weatherDir + "!!");
+        }
         File fList[] = w.listFiles(new ExtendFilter("." + extension));
 
         for (File file : fList) {
@@ -41,15 +44,17 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 fullCode = file.getName().substring(0, 8);
             }
 
-            try ( FileReader fileRead = new FileReader(file);  BufferedReader wReader = new BufferedReader(fileRead)) {
+            try (FileReader fileRead = new FileReader(file); BufferedReader wReader = new BufferedReader(fileRead)) {
                 String strWRead;
                 String wsta = "";
+                String insi = "";
 
                 boolean is2 = false;
                 boolean is4 = false;
                 boolean isCli = false;
                 boolean isR = false;
-                
+                boolean isInsi = false;
+
                 int line = 1;
 
                 while ((strWRead = wReader.readLine()) != null) {
@@ -62,28 +67,36 @@ public class WeatherRepository extends DSSATRepositoryBase {
                         is4 = true;
                     } else if (strWRead.startsWith("@START")) {
                         isCli = true;
-                    } else if(strWRead.startsWith("@YRDAY")){
+                    } else if (strWRead.startsWith("@YRDAY")) {
                         isR = true;
+                    } else if (strWRead.startsWith("@") && strWRead.contains("INSI")) {
+                        isInsi = true;
                     } else if (is2) {
-                        wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
+                        wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        break;
+                        is2 = false;
                     } else if (is4) {
-                        wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
+                        wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        break;
+                        is4 = false;
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
-                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
+                        wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        break;
-                    }
-                    else if(isR){
+                        isCli = false;
+                    } else if (isR) {
                         number = fullName.substring(6, 8).trim();
-                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode + "^File: " + file.getName() + ", Line: " + line;
+                        wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        break;
+                        isR = false;
+                    } 
+                    else if (isInsi) {
+                        if (!"".equals(strWRead) && !strWRead.startsWith(("!"))) {
+                            insi = strWRead.substring(0, Math.min(7, strWRead.length() - 1)).trim() + "^File: " + file.getName() + ", Line: " + line;
+                        }
+                        isInsi = false;
                     }
+
                     line++;
                 }
 
