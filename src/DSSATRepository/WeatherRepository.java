@@ -58,7 +58,10 @@ public class WeatherRepository extends DSSATRepositoryBase {
                 int line = 1;
 
                 while ((strWRead = wReader.readLine()) != null) {
-                    if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("**WEATHER") || strWRead.startsWith("$WEATHER") || strWRead.startsWith("*CLIMATE")) {
+                    if("".equals(strWRead) || strWRead.startsWith("!")){
+                        continue;
+                    }
+                    else if (strWRead.startsWith("*WEATHER") || strWRead.startsWith("**WEATHER") || strWRead.startsWith("$WEATHER") || strWRead.startsWith("*CLIMATE")) {
                         String WSTAName = strWRead.substring(strWRead.indexOf(":") + 1, strWRead.length()).trim();
                         wsta = code + ":" + (!"".equals(WSTAName) ? WSTAName : code);
                     } else if (strWRead.startsWith("@DATE")) {
@@ -91,15 +94,12 @@ public class WeatherRepository extends DSSATRepositoryBase {
                         isR = false;
                     } 
                     else if (isInsi) {
-                        if (!"".equals(strWRead) && !strWRead.startsWith(("!"))) {
-                            insi = strWRead.substring(0, Math.min(7, strWRead.length() - 1)).trim() + "^File: " + file.getName() + ", Line: " + line;
-                        }
+                        insi = strWRead.substring(0, Math.min(7, strWRead.length() - 1)).trim() + "^File: " + file.getName() + ", Line: " + line;
                         isInsi = false;
                     }
 
                     line++;
                 }
-
             }
         }
         return weatherList;
