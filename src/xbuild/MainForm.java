@@ -1578,6 +1578,11 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         boolean isChangeValid = true;
 
         if (node != null && node.getParent() != null) {
+            if("Environment".equals(node.toString()) || "Management".equals(node.toString())){
+                return false;
+            }
+            
+            
             if ("General Information".equalsIgnoreCase(node.toString())) {
                 isValid = true;
             } else if (!FileXValidationService.IsGeneralValid()) {
