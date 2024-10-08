@@ -54,7 +54,7 @@ public class CropService extends DSSATServiceBase {
 
                 for (File ci : culList) {
                     if (culFile.equals("")) {
-                        culFile = genoTypeDir + ci.getName();
+                        culFile = genoTypeDir + "\\" + ci.getName();
                     }
                 }
                 if (culFile != null && !"".equals(culFile)) {
