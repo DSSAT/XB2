@@ -9,6 +9,7 @@ import DSSATModel.ExperimentType;
 import DSSATModel.WstaType;
 import Extensions.Utils;
 import FileXModel.ManagementList;
+import FileXModel.ModelXBase;
 import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.*;
@@ -32,7 +33,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     }
 
     public GeneralInfoFrame() {
-        super(null, "");
+        super("");
         initComponents();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy", Locale.US);
@@ -873,11 +874,21 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
     @Override
     public ManagementList getManagementList() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
     
     @Override
     public String getManagementName(){
         return "General Information";
+    }
+
+    @Override
+    public String getParentName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

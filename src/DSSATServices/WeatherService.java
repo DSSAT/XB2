@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class WeatherService extends DSSATServiceBase {
 
     private final WeatherRepository weatherRepository;
-    private final String[] wstaTypes = new String[]{"", "/Gen", "/Climate"};
+    private final String[] wstaTypes = new String[]{"WED", "WGD", "CLD"};
     private final WstaType[] wstaExtensions = new WstaType[]{WstaType.WTH, WstaType.WTG, WstaType.CLI};
 
     public WeatherService(String rootPath) {
@@ -27,9 +27,11 @@ public class WeatherService extends DSSATServiceBase {
         boolean isValid = true;
         String invalidResult = "";
 
-        try {
-            WeatherStationList.Clear();
-            for (int i = 0; i < 3; i++) {
+        WeatherStationList.Clear();
+        for (int i = 0; i < 3; i++) {
+
+            try {
+
                 WstaType type = wstaExtensions[i];
                 ArrayList<String> weatherList = this.weatherRepository.Parse(wstaTypes[i], type.toString());
 
@@ -37,12 +39,17 @@ public class WeatherService extends DSSATServiceBase {
                     try {
                         WeatherStation wsta = new WeatherStation();
                         String tmp[] = w.split("\\^")[0].split(":");
-                        if (tmp.length == 5) {
+                        if (tmp.length == 6) {
                             wsta.Code = tmp[0];
                             wsta.StationName = tmp[1];
                             wsta.Begin = Integer.parseInt(tmp[2]);
                             wsta.Number = Integer.parseInt(tmp[3]);
                             wsta.Type = type;
+                            
+                            if(tmp[5].length() > 4){
+                                isValid = false;
+                                invalidResult += "\nINSI length exceed 4 characters: " + tmp[5] + " : " + w.split("\\^")[1];
+                            }
 
                             if (wsta.Begin >= 50 && wsta.Begin <= 99) {
                                 wsta.Begin += 1900;
@@ -61,15 +68,16 @@ public class WeatherService extends DSSATServiceBase {
                                 wstaExist.Number = Math.max(wstaExist.Begin + wstaExist.Number - wstaExist.Begin, wsta.Begin + wsta.Number - wstaExist.Begin);
                             }
                         }
-                    }
-                    catch(Exception ex){
+                    } catch (Exception ex) {
                         isValid = false;
-                        invalidResult += "\n" + w.split("\\^")[1];
+                        invalidResult += "\n" + w.split("\\^")[2];
                     }
                 }
+
+            } catch (Exception ex) {
+                isValid = false;
+                invalidResult += "\n" + ex.getMessage();
             }
-        } catch (Exception ex) {
-            isValid = false;
         }
 
         if (!isValid) {

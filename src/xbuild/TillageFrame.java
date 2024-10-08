@@ -23,24 +23,16 @@ public class TillageFrame extends IXInternalFrame {
 
     protected Tillage tillage;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form TillageFrame
-     * @param nodeName
-     */
+    public TillageFrame() {
+        super();
+    }
     public TillageFrame(String nodeName) {
-        super(FileX.tillageList, nodeName);
+        super(nodeName);
+    }
+    
+    protected void initFrame(){
         initComponents();
         this.tillage = (Tillage) model;
-        
-//        for(ModelXBase til : FileX.tillageList.GetAll()){
-//            int nodeLevel = getLevel(nodeName);
-//            String nodeDesc = getDescription(nodeName);
-//            
-//            if(til.GetLevel() == nodeLevel && til.GetName().equals(nodeDesc)){   
-//                level = nodeLevel;
-//                this.tillage = (Tillage)til;
-//            }
-//        }
 
         LoadTillage();
         
@@ -469,5 +461,15 @@ public class TillageFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Tillage();
     }
 }

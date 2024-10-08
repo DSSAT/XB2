@@ -16,6 +16,7 @@ import Extensions.Icons;
 import Extensions.Variables;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.WindowAdapter;
@@ -125,6 +126,15 @@ public class LoadingDataFrame extends javax.swing.JFrame {
                 isValid = false;
             }
             
+            if(isValid){
+                validationMessage += "<font color='green'>!Done</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+            }
+            else{
+                validationMessage += "<font color='red'>!Some of configurations are failed</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+            }
+            
             Icons.Init(getClass());
             
             isDone = true;
@@ -137,13 +147,10 @@ public class LoadingDataFrame extends javax.swing.JFrame {
          */
         @Override
         public void done() {
-            //setCursor(null); //turn off the wait cursor
-            if(isValid){
-                validationMessage += "<font color='green'>!Done</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                
+            if (isValid) {
                 dispose();
-            }              
+            }
+            
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -184,7 +191,6 @@ public class LoadingDataFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pb = new javax.swing.JProgressBar();
         l = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
@@ -200,22 +206,21 @@ public class LoadingDataFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pb, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(l))
-                    .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pb, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(l)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(l))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,7 +241,6 @@ public class LoadingDataFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel l;
-    private javax.swing.JProgressBar pb;
     // End of variables declaration//GEN-END:variables
 
 }

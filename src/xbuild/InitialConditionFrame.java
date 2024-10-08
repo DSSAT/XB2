@@ -31,27 +31,24 @@ import xbuild.Events.UpdateLevelEvent;
  */
 public class InitialConditionFrame extends IXInternalFrame {
 
-    private final InitialCondition init;
+    private InitialCondition init;
     private int selectedRowIndex = -1;
 
-    /**
-     * Creates new form InitialConditionFrame
-     *
-     * @param nodeName
-     */
+    public InitialConditionFrame(){
+        super();
+    }
+
+    
     public InitialConditionFrame(String nodeName){
-        super(FileX.initialList, nodeName);
+        super(nodeName);
+        
+    }
+    
+    @Override
+    protected void initFrame(){
         initComponents();
 
         init = (InitialCondition) model;
-//        level = 0;
-//        for (ModelXBase intTemp : FileX.initialList.GetAll()) {
-//            level++;
-//            if (getLevel(nodeName) == level) {
-//                init = (InitialCondition) intTemp;
-//                break;
-//            }
-//        }
 
         dpICDAT.Init(init, "ICDAT", init.ICDAT);
 
@@ -1226,5 +1223,15 @@ public class InitialConditionFrame extends IXInternalFrame {
     @Override
     public void initialData(){
         calculateInitialCondition(100f, 25f);
+    }
+
+    @Override
+    public String getParentName() {
+        return "Environment";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new InitialCondition();
     }
 }

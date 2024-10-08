@@ -14,13 +14,22 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import xbuild.Events.AddLevelEvent;
+import xbuild.Events.FieldUpdateEvent;
+import xbuild.Events.LevelSelectionChangedEvent;
+import xbuild.Events.NewFrameEvent;
+import xbuild.Events.RemoveLevelEvent;
+import xbuild.Events.SelectionEvent;
+import xbuild.Events.UpdateLevelEvent;
+import xbuild.Events.ValidationEvent;
+import xbuild.Events.XEvent;
 import xbuild.Events.XEventListener;
 
 /**
  *
  * @author Jazz
  */
-public abstract class IXInternalFrame extends JInternalFrame {
+public abstract class IXInternalFrame extends JInternalFrame implements XEventListener {
 
     protected XEventListener listener;
     protected Setup setup = new Setup();
@@ -28,11 +37,31 @@ public abstract class IXInternalFrame extends JInternalFrame {
     
     protected Integer level;
     
-    public abstract ManagementList getManagementList();
-   
+    protected boolean isDirty = false;
     
-    public IXInternalFrame(ManagementList managementList, String name){
+    public abstract String getParentName();
+    public abstract ModelXBase newModel();
+    
+   
+    public IXInternalFrame(){
+        ManagementList managementList = getManagementList();
+        if(managementList != null) {
+            level = managementList.GetSize() + 1;
+            setTitle("UNKNOWN_" + (managementList.GetSize() + 1));
+            
+            model = newModel();
+        }        
+        
+        listener = this;
+        UpdateComponent.setEventListener(this);
+        
+        initFrame();
+    }
+    
+    public IXInternalFrame(String name){
         level = 0;
+        
+        ManagementList managementList = getManagementList();
         
         if(managementList != null && !"".equals(name) ){
             for (ModelXBase xModel : managementList.GetAll()) {
@@ -46,6 +75,16 @@ public abstract class IXInternalFrame extends JInternalFrame {
         if(!"".equals(name)){
             setTitle(name);
         }
+        
+        initFrame();
+    }
+    
+    public ManagementList getManagementList(){
+        return null;
+    }
+    
+    protected void initFrame(){
+        
     }
     
     public String getManagementName(){
@@ -102,12 +141,29 @@ public abstract class IXInternalFrame extends JInternalFrame {
         return model;
     }
     
+    public boolean isFormDirty(){
+        return isDirty;
+    }
+    
+    public ModelXBase addNewModel(){        
+        ManagementList ml = getManagementList();
+        model.SetLevel(ml.GetSize() + 1);
+        ml.AddNew(model);
+        
+        return model;
+    }
+    
+    public int getIndex(){
+        return getManagementList().GetIndex(model);
+    }
+    
     protected int getLevel(String nodeName) {
         String[] level1 = nodeName.split(":");
         String[] level2 = level1[0].split(" ");
 
         return Integer.parseInt(level2[1]);
     }
+    
 
     protected String getDescription(String nodeName) {
         String[] level1 = nodeName.split(":");
@@ -146,5 +202,52 @@ public abstract class IXInternalFrame extends JInternalFrame {
                 }
             }
         });
+    }
+    
+    @Override
+    public void myAction(FieldUpdateEvent e) {
+        EventQueue.invokeLater(() -> {
+                    isDirty = true;
+                });
+    }
+
+    @Override
+    public void myAction(XEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(AddLevelEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(RemoveLevelEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(UpdateLevelEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(ValidationEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(NewFrameEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(SelectionEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void myAction(LevelSelectionChangedEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -48,7 +48,7 @@ public class TreatmentFrame extends IXInternalFrame  {
     
     /** Creates new form TreatmentFrame */
     public TreatmentFrame() {
-        super(null, null);
+        super();
         initComponents();
         
         LoadTreament();
@@ -417,5 +417,15 @@ public class TreatmentFrame extends IXInternalFrame  {
         catch(Exception ex){
             return "";
         }
+    }
+
+    @Override
+    public String getParentName() {
+        return getManagementName();
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return null;
     }
 }

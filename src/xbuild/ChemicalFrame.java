@@ -24,98 +24,101 @@ public class ChemicalFrame extends IXInternalFrame {
 
     protected Chemical chem;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form ChemicalFrame
-     * @param nodeName
-     */
+
+    public ChemicalFrame() {
+        super();
+    }
+
     public ChemicalFrame(String nodeName) {
-        super(FileX.chemicalList, nodeName);
+        super(nodeName);
+    }
+
+    @Override
+    protected void initFrame() {
         initComponents();
-        
-        this.chem = (Chemical)model;
-        
+        chem = (Chemical) model;
         LoadChemical();
-        
+
         lblLevel.setText("Level " + level.toString());
         txtDescription.Init(chem, "CHNAME", chem.CHNAME);
-        
+
         rdDaysAfterPlanting.addChangeListener((javax.swing.event.ChangeEvent evt) -> {
             rdDaysAfterPlantingStateChanged(evt);
         });
-        
+
         EventQueue.invokeLater(() -> {
             rdDaysAfterPlantingStateChanged(null);
-            
+
             rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
             rdReportedDates.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
         });
-        
+
         setImage(imagePanel, "irrigation2.jpg");
     }
-    
-    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {                                                 
-        if(rdDaysAfterPlanting.isSelected())
-        {
+
+    private void rdDaysAfterPlantingStateChanged(javax.swing.event.ChangeEvent evt) {
+        if (rdDaysAfterPlanting.isSelected()) {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("Days After Planting");
-            if(chem.GetApps() != null){
+            if (chem.GetApps() != null) {
                 chem.GetApps().forEach(h -> {
                     h.CDATE = null;
                 });
             }
-        }
-        else
-        {
+        } else {
             TableColumn col = jXTable1.getColumn(0);
             col.setHeaderValue("<html><p align='center'>Date<br>" + Variables.getDateFormatString() + "</p></html>");
-            if(chem.GetApps() != null){
+            if (chem.GetApps() != null) {
                 chem.GetApps().forEach(harvest -> {
                     harvest.CDAY = null;
                 });
             }
-        }        
+        }
     }
-    
+
     /**
      *
      * @param name
      */
     @Override
-    public void updatePanelName(String name){
+    public void updatePanelName(String name) {
         FocusListener[] listens = txtDescription.getListeners(FocusListener.class);
-        for(FocusListener li : listens)
+        for (FocusListener li : listens) {
             txtDescription.removeFocusListener(li);
-        
+        }
+
         Integer level = 0;
         for (ModelXBase f : FileX.chemicalList.GetAll()) {
             level++;
-            if(getLevel(name) == level){                
+            if (getLevel(name) == level) {
                 lblLevel.setText("Level " + level.toString());
                 txtDescription.setText(getDescription(name));
                 break;
             }
         }
-        
-        for(FocusListener li : listens)
+
+        for (FocusListener li : listens) {
             this.addFocusListener(li);
+        }
     }
-    
+
     @Override
-    public boolean isPrevButtonEnabled(){
+    public boolean isPrevButtonEnabled() {
         return true;
     }
-    
+
     @Override
-    public boolean isNextButtonEnabled(){
+    public boolean isNextButtonEnabled() {
         return true;
     }
-    
+
     @Override
-    public boolean isAddButtonEnabled(){
+    public boolean isAddButtonEnabled() {
         return true;
     }
+
     @Override
-    public boolean isDeleteButtonEnabled(){
+    public boolean isDeleteButtonEnabled() {
         return true;
     }
 
@@ -309,17 +312,18 @@ public class ChemicalFrame extends IXInternalFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 ChemicalApplication chemApp = chemDialog.GetData();
-                if(chemApp != null){
+                if (chemApp != null) {
                     DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
 
-                    while(model.getRowCount() > 0)
+                    while (model.getRowCount() > 0) {
                         model.removeRow(0);
-                    
+                    }
+
                     chem.AddApp(chemApp);
-                    
-                    for (int i = 0; i < chem.GetSize(); i++) {                        
+
+                    for (int i = 0; i < chem.GetSize(); i++) {
                         model.addRow(SetRow(chem.GetApp(i)));
-                    }                    
+                    }
                 }
                 chemDialog.SetNull();
             }
@@ -332,18 +336,17 @@ public class ChemicalFrame extends IXInternalFrame {
         model.removeRow(nRow);
 
         chem.RemoveAt(nRow);
-        
+
         EventQueue.invokeLater(() -> {
             rdDaysAfterPlantingStateChanged(null);
-            
+
             rdDaysAfterPlanting.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
             rdReportedDates.setEnabled(!FileX.isFileOpenned || chem.GetSize() == 0);
         });
     }//GEN-LAST:event_bnDeleteApplicationActionPerformed
 
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
-        if(evt.getClickCount() == 2)
-        {
+        if (evt.getClickCount() == 2) {
             final ChemicalDialog chemDialog = new ChemicalDialog(null, true, rdDaysAfterPlanting.isSelected(), chem.GetApp(jXTable1.getSelectedRow()));
             chemDialog.show();
 
@@ -351,23 +354,22 @@ public class ChemicalFrame extends IXInternalFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     ChemicalApplication chemApp = chemDialog.GetData();
-                    if(chemApp != null){
+                    if (chemApp != null) {
                         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
                         Object[] row = SetRow(chemApp);
-                        for (int n = 0; n < row.length; n++)
+                        for (int n = 0; n < row.length; n++) {
                             model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
+                        }
                     }
                     chemDialog.SetNull();
                 }
             });
-        }
-        else {
+        } else {
             int nRow = jXTable1.getSelectedRow();
 
-            if(nRow != selectedRowIndex){
+            if (nRow != selectedRowIndex) {
                 selectedRowIndex = nRow;
-            }
-            else{
+            } else {
                 selectedRowIndex = -1;
                 jXTable1.clearSelection();
             }
@@ -375,7 +377,7 @@ public class ChemicalFrame extends IXInternalFrame {
     }//GEN-LAST:event_jXTable1MouseClicked
 
     private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        if(txtDescription.getText() == null ? chem.CHNAME != null : !txtDescription.getText().equals(chem.CHNAME)){
+        if (txtDescription.getText() == null ? chem.CHNAME != null : !txtDescription.getText().equals(chem.CHNAME)) {
             listener.myAction(new UpdateLevelEvent(this, "Chemical Applications", "Level " + level + ": " + txtDescription.getText(), level - 1));
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
@@ -383,14 +385,15 @@ public class ChemicalFrame extends IXInternalFrame {
     private void LoadChemical() {
 
         DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-        for(int i = 0;i < chem.GetSize();i++)
-        {
-            if(chem.GetApp(i).CDATE != null){
-                rdReportedDates.setSelected(true);
-            }else{
-                rdDaysAfterPlanting.setSelected(true);
+        if (chem != null) {
+            for (int i = 0; i < chem.GetSize(); i++) {
+                if (chem.GetApp(i).CDATE != null) {
+                    rdReportedDates.setSelected(true);
+                } else {
+                    rdDaysAfterPlanting.setSelected(true);
+                }
+                model.addRow(SetRow(chem.GetApp(i)));
             }
-            model.addRow(SetRow(chem.GetApp(i)));
         }
     }
 
@@ -401,48 +404,35 @@ public class ChemicalFrame extends IXInternalFrame {
         Object CHME;
         Object CHDEP;
         Object CHT;
-        try
-        {
+        try {
             day = Variables.getDateFormat().format(chemApp.CDATE);
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             day = chemApp.CDAY.toString();
         }
 
-        try
-        {
+        try {
             CHCOD = ChemicalMaterialList.GetAt(chemApp.CHCOD).Description;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             CHCOD = "";
         }
-        try
-        {
+        try {
             CHAMT = chemApp.CHAMT;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             CHAMT = "";
         }
-        try
-        {
+        try {
             CHME = FertilizerMethodList.GetAt(chemApp.CHME).Description;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             CHME = "";
         }
-        try
-        {
+        try {
             CHDEP = chemApp.CHDEP;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             CHDEP = "";
         }
-        try
-        {
+        try {
             CHT = chemApp.CHT;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             CHT = "";
         }
         return new Object[]{day, CHCOD, CHAMT, CHME, CHDEP, CHT};
@@ -468,14 +458,24 @@ public class ChemicalFrame extends IXInternalFrame {
     public ManagementList getManagementList() {
         return FileX.chemicalList;
     }
-    
+
     @Override
     public String getManagementName() {
         return "Chemical Applications";
     }
-    
+
     @Override
-    public int getLevel(){
+    public int getLevel() {
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Chemical();
     }
 }

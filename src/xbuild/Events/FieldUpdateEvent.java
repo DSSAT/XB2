@@ -1,12 +1,10 @@
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author JAZZJAIKLA
  */
-public class FieldUpdateEvent extends EventObject {    
+public class FieldUpdateEvent extends XBaseEvent {    
     public FieldUpdateEvent(Object o){
         super(o);
     }

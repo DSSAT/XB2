@@ -25,12 +25,17 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
     private Irrigation irrig;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form IrrigationFrame
-     * @param nodeName
-     */
+    
+    public IrrigationFrame() {
+        super();
+    }
+    
     public IrrigationFrame(String nodeName) {
-        super(FileX.irrigations, nodeName);
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         initComponents();
         this.irrig = (Irrigation) model;
         
@@ -527,5 +532,15 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management"; 
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Irrigation();
     }
 }

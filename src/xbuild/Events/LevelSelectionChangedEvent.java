@@ -1,12 +1,10 @@
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author JAZZJAIKLA
  */
-public class LevelSelectionChangedEvent extends EventObject {
+public class LevelSelectionChangedEvent extends XBaseEvent {
  
     private String managementName;
     private int level;
