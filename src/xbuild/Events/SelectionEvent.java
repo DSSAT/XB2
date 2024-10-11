@@ -1,12 +1,10 @@
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author JAZZJAIKLA
  */
-public class SelectionEvent extends EventObject {
+public class SelectionEvent extends XBaseEvent {
     
     private boolean canDel;
     

@@ -5,13 +5,11 @@
 
 package xbuild.Events;
 
-import java.util.*;
-
 /**
  *
  * @author Jazzy
  */
-public class XEvent extends EventObject {
+public class XEvent extends XBaseEvent {
     String n;
     public XEvent(Object o, String n)
     {

@@ -15,6 +15,7 @@ import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.CropList;
 import FileXModel.ManagementList;
+import FileXModel.ModelXBase;
 import FileXService.FileXValidationService;
 import ListDialog.CultivarListDialog;
 import java.awt.event.WindowEvent;
@@ -41,7 +42,7 @@ public class CultivarsFrame extends IXInternalFrame {
      * Creates new form CultivarsFrame
      */
     public CultivarsFrame() {
-        super(FileX.cultivars, "");
+        super("");
         initComponents();
 
         LoadCultivar();
@@ -288,5 +289,15 @@ public class CultivarsFrame extends IXInternalFrame {
         catch(Exception ex){
             return "";
         }
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Cultivar();
     }
 }

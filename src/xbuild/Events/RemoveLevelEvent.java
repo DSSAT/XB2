@@ -4,13 +4,11 @@
  */
 package xbuild.Events;
 
-import java.util.EventObject;
-
 /**
  *
  * @author PCMIWS16
  */
-public class RemoveLevelEvent extends EventObject {
+public class RemoveLevelEvent extends XBaseEvent {
     private String name;
     private String parent;
     

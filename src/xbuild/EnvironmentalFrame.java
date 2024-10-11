@@ -23,12 +23,17 @@ public class EnvironmentalFrame extends IXInternalFrame {
 
     private Environmental environment;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form EnvironmentalFrame
-     * @param nodeName
-     */
+    
+    public EnvironmentalFrame() {
+        super();
+    }
+    
     public EnvironmentalFrame(String nodeName) {
-        super(FileX.environmentals, nodeName);
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         initComponents();
         this.environment = (Environmental)model;
 
@@ -392,5 +397,15 @@ public class EnvironmentalFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Environment";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Environmental();
     }
 }

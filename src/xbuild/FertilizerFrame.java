@@ -24,12 +24,17 @@ public class FertilizerFrame extends IXInternalFrame {
 
     private Fertilizer fertil;
     private int selectedRowIndex = -1;
-    /**
-     * Creates new form FertilizerFrame
-     * @param nodeName
-     */
+    
+    public FertilizerFrame() {
+        super();
+    }
+    
     public FertilizerFrame(String nodeName) {
-        super(FileX.fertilizerList, nodeName);
+        super(nodeName);
+    }
+    
+    @Override
+    protected void initFrame(){
         initComponents();
         this.fertil = (Fertilizer)model;
 
@@ -510,5 +515,15 @@ public class FertilizerFrame extends IXInternalFrame {
     @Override
     public int getLevel(){
         return level;
+    }
+
+    @Override
+    public String getParentName() {
+        return "Management";
+    }
+
+    @Override
+    public ModelXBase newModel() {
+        return new Fertilizer();
     }
 }
