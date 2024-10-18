@@ -115,7 +115,7 @@ public class EnvironmentalFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align=center>Date</p></html>", "<html><p align=center>Day length<br>hours</p></html>", "<html><p align=center>Radiation<br>MJ/m2/d</p></html>", "<html><p align=center>Max Temp<br>C&deg;</p></html>", "<html><p align=center>Min Temp<br>C&deg;</p></html>", "<html><p align=center>Precipitation<br>mm</p></html>", "<html><p align='cente'r>CO<sub>2</sub><br>vpm</p></html>", "<html><p align=center>Relative Humidity<br>(Rel Humid)<br>%</p></html>", "<html><p align=center>Wind<br>km/hour</p></html>"
+                "<html><p align=center>Date</p></html>", "<html><p align=center>Day length<br>hours</p></html>", "<html><p align=center>Radiation<br>MJ/m<sup>2</sup>/d</p></html>", "<html><p align=center>Max Temp<br>C&deg;</p></html>", "<html><p align=center>Min Temp<br>C&deg;</p></html>", "<html><p align=center>Precipitation<br>mm</p></html>", "<html><p align='cente'r>CO<sub>2</sub><br>vpm</p></html>", "<html><p align=center>Relative Humidity<br>(Rel Humid)<br>%</p></html>", "<html><p align=center>Wind<br>km/hour</p></html>"
             }
         ) {
             boolean[] canEdit = new boolean [] {

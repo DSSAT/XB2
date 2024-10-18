@@ -216,7 +216,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         jXLabel6.setText("<html>CO<sub>2</sub></html>");
 
-        jXLabel7.setText("Humidity %");
+        jXLabel7.setText("Relative Humidity");
 
         jXLabel8.setText("Wind");
 
@@ -250,9 +250,9 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         jXLabel11.setText("<html>MJ/m<sup>2</sup>/d</html>");
 
-        jXLabel12.setText("<html><sup>๐</sup>C</html>");
+        jXLabel12.setText("<html>C&deg;</html>");
 
-        jXLabel13.setText("<html><sup>๐</sup>C</html>");
+        jXLabel13.setText("<html>C&deg;</html>");
 
         jXLabel14.setText("mm");
 
@@ -288,7 +288,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbDaylengthFactor, 0, 184, Short.MAX_VALUE)
+                    .addComponent(cbDaylengthFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbRadiationFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaxTemp)
                     .addComponent(cbMaxTempFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
