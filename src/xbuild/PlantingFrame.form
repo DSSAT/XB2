@@ -310,12 +310,12 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel14">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;plants m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;plants/m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;plants m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;plants/m&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XDatePicker" name="dpEDATE">
@@ -616,7 +616,7 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel23">
           <Properties>
-            <Property name="text" type="java.lang.String" value="C"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;C&amp;deg;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel24">

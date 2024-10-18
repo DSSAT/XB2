@@ -192,9 +192,9 @@ public class PlantingFrame extends IXInternalFrame {
 
         jXLabel10.setText("cm");
 
-        jXLabel14.setText("<html>plants m<sup>2</sup></html>");
+        jXLabel14.setText("<html>plants/m<sup>2</sup></html>");
 
-        jXLabel13.setText("<html>plants m<sup>2</sup></html>");
+        jXLabel13.setText("<html>plants/m<sup>2</sup></html>");
 
         dpEDATE.setFormats(Variables.getDateFormat());
 
@@ -434,7 +434,7 @@ public class PlantingFrame extends IXInternalFrame {
 
         jXLabel21.setText("Initial Sprout Length");
 
-        jXLabel23.setText("C");
+        jXLabel23.setText("<html>C&deg;</html>");
 
         jXLabel24.setText("if appropiate");
 
