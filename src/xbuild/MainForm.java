@@ -560,7 +560,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private boolean onClose() {
 
         if (FileX.isDirty) {
-            int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
+            int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want to save the file?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (confirmSave == 2) // Cancel
             {
