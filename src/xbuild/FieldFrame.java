@@ -32,6 +32,7 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.List;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
@@ -270,12 +271,15 @@ public class FieldFrame extends IXInternalFrame {
 
         txtXCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtXCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtXCRD.setInputVerifier(new InputNumberVerifier());
 
         txtYCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtYCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtYCRD.setInputVerifier(new InputNumberVerifier());
 
         txtELEV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtELEV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtELEV.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
         jXPanel6.setLayout(jXPanel6Layout);
@@ -320,24 +324,31 @@ public class FieldFrame extends IXInternalFrame {
 
         txtAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAREA.setInputVerifier(new InputNumberVerifier());
 
         txtFLWR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLWR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLWR.setInputVerifier(new InputNumberVerifier());
 
         txtFLSA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLSA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtFLSA.setInputVerifier(new InputNumberVerifier());
 
         txtSLAS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLAS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLAS.setInputVerifier(new InputNumberVerifier());
 
         txtFHDUR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFHDUR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFHDUR.setInputVerifier(new InputNumberVerifier());
 
         txtSLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLEN.setInputVerifier(new InputNumberVerifier());
 
         txtFLOB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLOB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLOB.setInputVerifier(new InputNumberVerifier());
 
         jXLabel15.setText("<html>m<sup>2</sup></html>");
 
@@ -488,9 +499,11 @@ public class FieldFrame extends IXInternalFrame {
 
         txtFLDS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLDS.setInputVerifier(new InputNumberVerifier());
 
         txtFLDD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLDD.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel5Layout = new javax.swing.GroupLayout(jXPanel5);
         jXPanel5.setLayout(jXPanel5Layout);
@@ -513,7 +526,7 @@ public class FieldFrame extends IXInternalFrame {
                         .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addComponent(cbFLDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -616,12 +629,14 @@ public class FieldFrame extends IXInternalFrame {
         jXLabel3.setText("Depth");
 
         txtSLDP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLDP.setInputVerifier(new InputNumberVerifier());
 
         jXLabel4.setText("cm");
 
         jXLabel5.setText("Surface Stones");
 
         txtFLST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLST.setInputVerifier(new InputNumberVerifier());
 
         jXLabel2.setText("Surface Texture");
 
@@ -773,7 +788,7 @@ public class FieldFrame extends IXInternalFrame {
                 .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

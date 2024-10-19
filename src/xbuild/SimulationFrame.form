@@ -347,8 +347,18 @@
                   </Layout>
                   <SubComponents>
                     <Component class="xbuild.Components.XSpinner" name="snNYERS">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="xbuild.Components.XSpinner" name="snNREPS">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel1">
                       <Properties>
@@ -387,6 +397,9 @@
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new InputNumberVerifier()" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1363,11 +1376,17 @@
                                 <Component class="xbuild.Components.XTextField" name="txtPSTMX">
                                   <Properties>
                                     <Property name="horizontalAlignment" type="int" value="4"/>
+                                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new InputNumberVerifier()" type="code"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                                 <Component class="xbuild.Components.XTextField" name="txtPSTMN">
                                   <Properties>
                                     <Property name="horizontalAlignment" type="int" value="4"/>
+                                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new InputNumberVerifier()" type="code"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -1440,16 +1459,25 @@
                                 <Component class="xbuild.Components.XTextField" name="txtPH2OL">
                                   <Properties>
                                     <Property name="horizontalAlignment" type="int" value="4"/>
+                                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new InputNumberVerifier()" type="code"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                                 <Component class="xbuild.Components.XTextField" name="txtPH2OU">
                                   <Properties>
                                     <Property name="horizontalAlignment" type="int" value="4"/>
+                                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new InputNumberVerifier()" type="code"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                                 <Component class="xbuild.Components.XTextField" name="txtPH2OD">
                                   <Properties>
                                     <Property name="horizontalAlignment" type="int" value="4"/>
+                                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new InputNumberVerifier()" type="code"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                                 <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel21">
@@ -1662,31 +1690,49 @@
                             <Component class="xbuild.Components.XTextField" name="txtIMDEP">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtITHRL">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtITHRU">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtIROFF">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtIRAMT">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtIREFF">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="lbManagementDepth">
@@ -1886,6 +1932,9 @@
                             <Component class="xbuild.Components.XTextField" name="txtNAOFF">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="lbNitrogenDepth">
@@ -1934,6 +1983,9 @@
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                                   <Format format="#0.00" subtype="-1" type="0"/>
                                 </Property>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XFormattedTextField" name="txtNMTHR">
@@ -1942,6 +1994,9 @@
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                                   <Format format="#0.00" subtype="-1" type="0"/>
                                 </Property>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XFormattedTextField" name="txtNAMNT">
@@ -1949,6 +2004,9 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                                   <Format format="#0.00" subtype="-1" type="0"/>
+                                </Property>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -2073,18 +2131,27 @@
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                                 <Property name="enabled" type="boolean" value="false"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtRTIME">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                                 <Property name="enabled" type="boolean" value="false"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XTextField" name="txtRIDEP">
                               <Properties>
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                                 <Property name="enabled" type="boolean" value="false"/>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="org.jdesktop.swingx.JXLabel" name="lbIncorporationPercentage">
@@ -2291,6 +2358,9 @@
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                                   <Format format="#0.00" subtype="-1" type="0"/>
                                 </Property>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
+                                </Property>
                               </Properties>
                             </Component>
                             <Component class="xbuild.Components.XFormattedTextField" name="txtHPCNR">
@@ -2298,6 +2368,9 @@
                                 <Property name="horizontalAlignment" type="int" value="4"/>
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                                   <Format format="#0.00" subtype="-1" type="0"/>
+                                </Property>
+                                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new InputNumberVerifier()" type="code"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -2855,6 +2928,11 @@
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
                     </Container>
                     <Component class="xbuild.Components.XSpinner" name="snFROPT">
+                      <Properties>
+                        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new InputNumberVerifier()" type="code"/>
+                        </Property>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

@@ -9,6 +9,7 @@ import FileXModel.ModelXBase;
 import FileXModel.Planting;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
@@ -211,6 +212,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPPOP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPPOP.setInputVerifier(new InputNumberVerifier());
         txtPPOP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -218,8 +220,10 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPPOE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPPOE.setInputVerifier(new InputNumberVerifier());
 
         txtPLRS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLRS.setInputVerifier(new InputNumberVerifier());
         txtPLRS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -227,6 +231,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPLRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLRD.setInputVerifier(new InputNumberVerifier());
         txtPLRD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -234,6 +239,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPLDP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLDP.setInputVerifier(new InputNumberVerifier());
         txtPLDP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -411,14 +417,19 @@ public class PlantingFrame extends IXInternalFrame {
         jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Transplant"));
 
         txtPLWT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLWT.setInputVerifier(new InputNumberVerifier());
 
         txtPENV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPENV.setInputVerifier(new InputNumberVerifier());
 
         txtPAGE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPAGE.setInputVerifier(new InputNumberVerifier());
 
         txtPLPH.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLPH.setInputVerifier(new InputNumberVerifier());
 
         txtSPRL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSPRL.setInputVerifier(new InputNumberVerifier());
 
         jXLabel15.setText("Planting Material Dry Weight");
 

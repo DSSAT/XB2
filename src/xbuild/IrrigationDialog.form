@@ -125,6 +125,9 @@
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format format="#0" subtype="-1" type="0"/>
         </Property>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new InputNumberVerifier()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="lbDate">
@@ -148,6 +151,9 @@
           <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new InputNumberVerifier()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel4">

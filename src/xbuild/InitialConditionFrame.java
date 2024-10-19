@@ -22,6 +22,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
 
@@ -226,9 +227,11 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         txtICRT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICRT.setInputVerifier(new InputNumberVerifier());
 
         txtICND.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICND.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICND.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
         jXPanel3.setLayout(jXPanel3Layout);
@@ -283,9 +286,11 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         txtICWD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICWD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtICWD.setInputVerifier(new InputNumberVerifier());
 
         txtICRES.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRES.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICRES.setInputVerifier(new InputNumberVerifier());
 
         jXLabel9.setText("Water Table Depth");
 
@@ -337,6 +342,10 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         jXPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rhizobia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        snICRN.setInputVerifier(new InputNumberVerifier());
+
+        snICRE.setInputVerifier(new InputNumberVerifier());
+
         jXLabel7.setText("Number");
 
         jXLabel8.setText("Effectiveness");
@@ -387,9 +396,11 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         txtICREN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICREN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICREN.setInputVerifier(new InputNumberVerifier());
 
         txtICREP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICREP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICREP.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel7Layout = new javax.swing.GroupLayout(jXPanel7);
         jXPanel7.setLayout(jXPanel7Layout);
@@ -435,9 +446,11 @@ public class InitialConditionFrame extends IXInternalFrame {
 
         txtICRIP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRIP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICRIP.setInputVerifier(new InputNumberVerifier());
 
         txtICRID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtICRID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtICRID.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
         jXPanel6.setLayout(jXPanel6Layout);
@@ -552,7 +565,7 @@ public class InitialConditionFrame extends IXInternalFrame {
 
             },
             new String [] {
-                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm<sup>3</sup>/cm<sup>3</sup></p></html>", "<html><p align='center'>Ammonium (NH<sub>4</sub>)<br>g[N]/Mg [soil]</p></html>", "<html><p align='center'>Nitrate (NO<sub>3</sub>)<br>g[N]/Mg [soil]</p></html>"
+                "<html><p align='center'>Depth<br>base of layer<br>cm</p></html>", "<html><p align='center'>Volumetric Water<br>cm<sup>3</sup>/cm<sup>3</sup></p></html>", "<html><p align='center'>Ammonium (NH<sub>4</sub>)<br>g[N]/Mg<sup>-1</sup> [soil]</p></html>", "<html><p align='center'>Nitrate (NO<sub>3</sub>)<br>g[N]/Mg<sup>-1</sup> [soil]</p></html>"
             }
         ) {
             Class[] types = new Class [] {
@@ -593,6 +606,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jLabel3.setText("<html>Nitrogen<br/>(kg/ha)</html>");
 
         txtWater.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtWater.setInputVerifier(new InputNumberVerifier());
         txtWater.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtWaterFocusLost(evt);
@@ -605,6 +619,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         });
 
         txtNitrogen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtNitrogen.setInputVerifier(new InputNumberVerifier());
         txtNitrogen.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNitrogenFocusLost(evt);

@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -439,20 +440,26 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         txtPAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtPAREA.setInputVerifier(new InputNumberVerifier());
 
         txtPRNO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPRNO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtPRNO.setInputVerifier(new InputNumberVerifier());
 
         txtPLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtPLEN.setInputVerifier(new InputNumberVerifier());
 
         txtPLDR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLDR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtPLDR.setInputVerifier(new InputNumberVerifier());
 
         txtPLSP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPLSP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtPLSP.setInputVerifier(new InputNumberVerifier());
 
         txtPLAY.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLAY.setInputVerifier(new InputNumberVerifier());
 
         jXLabel11.setText("Gross Plot Area per rep");
 
@@ -542,12 +549,15 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         txtHRNO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHRNO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtHRNO.setInputVerifier(new InputNumberVerifier());
 
         txtHAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHAREA.setInputVerifier(new InputNumberVerifier());
 
         txtHLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtHLEN.setInputVerifier(new InputNumberVerifier());
 
         txtHARM.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -657,7 +667,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();

@@ -16,6 +16,7 @@ import DSSATModel.FertilizerMaterialList;
 import DSSATModel.FertilizerMethodList;
 import Extensions.Variables;
 import java.awt.*;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -130,24 +131,31 @@ public class FertilizerDialog extends javax.swing.JDialog {
         });
 
         txtFDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtFDATE.setInputVerifier(new InputNumberVerifier());
 
         txtFDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFDEP.setInputVerifier(new InputNumberVerifier());
 
         txtFAMN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFAMN.setInputVerifier(new InputNumberVerifier());
 
         txtFAMP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFAMP.setInputVerifier(new InputNumberVerifier());
 
         txtFAMK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFAMK.setInputVerifier(new InputNumberVerifier());
 
         txtFAMC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFAMC.setInputVerifier(new InputNumberVerifier());
 
         txtFAMO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtFAMO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFAMO.setInputVerifier(new InputNumberVerifier());
 
         jXLabel1.setText("Fertilizer Material");
 

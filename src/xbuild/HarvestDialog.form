@@ -148,6 +148,9 @@
     <Component class="javax.swing.JFormattedTextField" name="txtHDATE">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new InputNumberVerifier()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHPC">
@@ -156,6 +159,9 @@
           <Format format="#0.0" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new InputNumberVerifier()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHBPC">
@@ -164,6 +170,9 @@
           <Format format="#0.0" subtype="-1" type="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new InputNumberVerifier()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bnOK">

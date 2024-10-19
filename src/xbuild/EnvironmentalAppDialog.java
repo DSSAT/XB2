@@ -17,6 +17,7 @@ import Extensions.Utils;
 import Extensions.Variables;
 import java.awt.*;
 import javax.swing.*;
+import xbuild.Components.InputNumberVerifier;
 
 /**
  *
@@ -188,21 +189,27 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMaxTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMaxTemp.setInputVerifier(new InputNumberVerifier());
 
         txtMinTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMinTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMinTemp.setInputVerifier(new InputNumberVerifier());
 
         txtPrecipitation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtPrecipitation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrecipitation.setInputVerifier(new InputNumberVerifier());
 
         txtCo2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtCo2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCo2.setInputVerifier(new InputNumberVerifier());
 
         txtHumidity.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtHumidity.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHumidity.setInputVerifier(new InputNumberVerifier());
 
         txtWind.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtWind.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtWind.setInputVerifier(new InputNumberVerifier());
 
         jXLabel1.setText("Daylength");
 
@@ -266,9 +273,11 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         spDaylength.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         spDaylength.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        spDaylength.setInputVerifier(new InputNumberVerifier());
 
         txtRadiation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtRadiation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRadiation.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

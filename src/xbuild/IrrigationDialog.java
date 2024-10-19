@@ -17,6 +17,7 @@ import Extensions.Variables;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -99,6 +100,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         lbDay.setText("Day");
 
         txtIDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtIDATE.setInputVerifier(new InputNumberVerifier());
 
         lbDate.setText("Date");
 
@@ -111,6 +113,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
 
         txtIRVAL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtIRVAL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIRVAL.setInputVerifier(new InputNumberVerifier());
 
         jXLabel4.setText("Amount of Water");
 

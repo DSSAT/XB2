@@ -16,6 +16,7 @@ import Extensions.Variables;
 import FileXModel.TillageApplication;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -95,6 +96,7 @@ public class TillageDialog extends javax.swing.JDialog {
 
         txtTDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtTDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTDEP.setInputVerifier(new InputNumberVerifier());
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +119,8 @@ public class TillageDialog extends javax.swing.JDialog {
         jXLabel3.setText("Tillage Depth");
 
         jLabel1.setText(Variables.getDateFormatString());
+
+        txtTDAY.setInputVerifier(new InputNumberVerifier());
 
         lbDay.setText("Day");
 

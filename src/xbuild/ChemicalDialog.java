@@ -18,6 +18,7 @@ import Extensions.Variables;
 import FileXModel.ChemicalApplication;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -114,9 +115,11 @@ public class ChemicalDialog extends javax.swing.JDialog {
 
         txtCHAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtCHAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCHAMT.setInputVerifier(new InputNumberVerifier());
 
         txtCHDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCHDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCHDEP.setInputVerifier(new InputNumberVerifier());
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +154,8 @@ public class ChemicalDialog extends javax.swing.JDialog {
         jLabel1.setText(Variables.getDateFormatString());
 
         lbDay.setText("Day");
+
+        txtCDAY.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

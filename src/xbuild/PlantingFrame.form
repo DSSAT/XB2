@@ -339,6 +339,9 @@
         <Component class="xbuild.Components.XFormattedTextField" name="txtPPOP">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
@@ -347,11 +350,17 @@
         <Component class="xbuild.Components.XFormattedTextField" name="txtPPOE">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLRS">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
@@ -360,6 +369,9 @@
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLRD">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
@@ -368,6 +380,9 @@
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLDP">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPLDPKeyReleased"/>
@@ -557,26 +572,41 @@
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLWT">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPENV">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPAGE">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtPLPH">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="xbuild.Components.XFormattedTextField" name="txtSPRL">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new InputNumberVerifier()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel15">

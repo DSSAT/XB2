@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.InitialConditionApplication;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import xbuild.Components.InputNumberVerifier;
 
 /**
  *
@@ -69,15 +70,19 @@ public class InitialDialog extends javax.swing.JDialog {
 
         txtICBL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtICBL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtICBL.setInputVerifier(new InputNumberVerifier());
 
         txtSH2O.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
         txtSH2O.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSH2O.setInputVerifier(new InputNumberVerifier());
 
         txtSNH4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSNH4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSNH4.setInputVerifier(new InputNumberVerifier());
 
         txtSNO3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSNO3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSNO3.setInputVerifier(new InputNumberVerifier());
 
         jXLabel1.setText("Depth, Base of Layer");
 

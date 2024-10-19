@@ -22,6 +22,7 @@ import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.RadioButtonAlignment;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
@@ -397,6 +398,10 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Runs", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        snNYERS.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        snNREPS.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         jXLabel1.setText("Years");
 
         jXLabel2.setText("Replications");
@@ -440,6 +445,7 @@ public class SimulationFrame extends IXInternalFrame {
 
         txtRSEED.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRSEED.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtRSEED.setInputVerifier(new InputNumberVerifier());
 
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("*");
@@ -955,8 +961,10 @@ public class SimulationFrame extends IXInternalFrame {
         jXLabel23.setText("<html>C<sup>๐</sup></html>");
 
         txtPSTMX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPSTMX.setInputVerifier(new InputNumberVerifier());
 
         txtPSTMN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPSTMN.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout panelSoilTemperatureLayout = new javax.swing.GroupLayout(panelSoilTemperature);
         panelSoilTemperature.setLayout(panelSoilTemperatureLayout);
@@ -995,10 +1003,13 @@ public class SimulationFrame extends IXInternalFrame {
         panelSoilWater.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Soil Water", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         txtPH2OL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPH2OL.setInputVerifier(new InputNumberVerifier());
 
         txtPH2OU.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPH2OU.setInputVerifier(new InputNumberVerifier());
 
         txtPH2OD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPH2OD.setInputVerifier(new InputNumberVerifier());
 
         jXLabel21.setText("Lower");
 
@@ -1121,16 +1132,22 @@ public class SimulationFrame extends IXInternalFrame {
         jXPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Irrigation and Water Management", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         txtIMDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIMDEP.setInputVerifier(new InputNumberVerifier());
 
         txtITHRL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtITHRL.setInputVerifier(new InputNumberVerifier());
 
         txtITHRU.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtITHRU.setInputVerifier(new InputNumberVerifier());
 
         txtIROFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIROFF.setInputVerifier(new InputNumberVerifier());
 
         txtIRAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIRAMT.setInputVerifier(new InputNumberVerifier());
 
         txtIREFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIREFF.setInputVerifier(new InputNumberVerifier());
 
         lbManagementDepth.setText("Management Depth");
 
@@ -1269,6 +1286,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fertilization", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         txtNAOFF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNAOFF.setInputVerifier(new InputNumberVerifier());
 
         lbNitrogenDepth.setText("Depth");
 
@@ -1288,12 +1306,15 @@ public class SimulationFrame extends IXInternalFrame {
 
         txtNMDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNMDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNMDEP.setInputVerifier(new InputNumberVerifier());
 
         txtNMTHR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNMTHR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNMTHR.setInputVerifier(new InputNumberVerifier());
 
         txtNAMNT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNAMNT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNAMNT.setInputVerifier(new InputNumberVerifier());
 
         jXRadioGroup13.setLayout(new javax.swing.BoxLayout(jXRadioGroup13, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -1385,12 +1406,15 @@ public class SimulationFrame extends IXInternalFrame {
 
         txtRIPCN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRIPCN.setEnabled(false);
+        txtRIPCN.setInputVerifier(new InputNumberVerifier());
 
         txtRTIME.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRTIME.setEnabled(false);
+        txtRTIME.setInputVerifier(new InputNumberVerifier());
 
         txtRIDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRIDEP.setEnabled(false);
+        txtRIDEP.setInputVerifier(new InputNumberVerifier());
 
         lbIncorporationPercentage.setText("Incorporation Percentage");
         lbIncorporationPercentage.setEnabled(false);
@@ -1501,9 +1525,11 @@ public class SimulationFrame extends IXInternalFrame {
 
         txtHPCNP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHPCNP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtHPCNP.setInputVerifier(new InputNumberVerifier());
 
         txtHPCNR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtHPCNR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtHPCNR.setInputVerifier(new InputNumberVerifier());
 
         jXRadioGroup15.setLayout(new javax.swing.BoxLayout(jXRadioGroup15, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -1809,6 +1835,8 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup16.setLayout(new javax.swing.BoxLayout(jXRadioGroup16, javax.swing.BoxLayout.LINE_AXIS));
 
         jXRadioGroup17.setLayout(new javax.swing.BoxLayout(jXRadioGroup17, javax.swing.BoxLayout.LINE_AXIS));
+
+        snFROPT.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel16Layout = new javax.swing.GroupLayout(jXPanel16);
         jXPanel16.setLayout(jXPanel16Layout);
