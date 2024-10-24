@@ -12,6 +12,7 @@ import FileXModel.ModelXBase;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
 import FileXModel.ManagementList;
+import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
@@ -21,6 +22,7 @@ import java.util.Collections;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
@@ -190,6 +192,7 @@ public class InitialConditionFrame extends IXInternalFrame {
         jXLabel19 = new org.jdesktop.swingx.JXLabel();
         txtICRIP = new xbuild.Components.XFormattedTextField();
         txtICRID = new xbuild.Components.XFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel20 = new org.jdesktop.swingx.JXLabel();
         bnAddLayer = new javax.swing.JButton();
@@ -334,6 +337,11 @@ public class InitialConditionFrame extends IXInternalFrame {
         jXLabel1.setText("Measurement Date");
 
         dpICDAT.setFormats(Variables.getDateFormat());
+        dpICDAT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpICDATActionPerformed(evt);
+            }
+        });
         dpICDAT.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpICDATPropertyChange(evt);
@@ -484,6 +492,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel7.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel7.setText("*");
+
         javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
         jXPanel1.setLayout(jXPanel1Layout);
         jXPanel1Layout.setHorizontalGroup(
@@ -492,9 +503,11 @@ public class InitialConditionFrame extends IXInternalFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
+                        .addGap(160, 160, 160)
                         .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6))
@@ -510,9 +523,9 @@ public class InitialConditionFrame extends IXInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(217, 217, 217)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jXPanel1Layout.setVerticalGroup(
             jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +536,8 @@ public class InitialConditionFrame extends IXInternalFrame {
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dpICDAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -965,6 +979,13 @@ public class InitialConditionFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtNitrogenFocusLost
 
+    private void dpICDATActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpICDATActionPerformed
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpICDAT.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpICDATActionPerformed
+
     private void setRecalculateButtonEnabled() {
         bnRecalculate.setEnabled(!"".equals(txtWater.getText()) || !"".equals(txtNitrogen.getText()));
     }
@@ -984,6 +1005,7 @@ public class InitialConditionFrame extends IXInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -1248,5 +1270,10 @@ public class InitialConditionFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel() {
         return new InitialCondition();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isInitialConditionValid((InitialCondition) model);
     }
 }

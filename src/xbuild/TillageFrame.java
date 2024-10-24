@@ -30,6 +30,7 @@ public class TillageFrame extends IXInternalFrame {
         super(nodeName);
     }
     
+    @Override
     protected void initFrame(){
         initComponents();
         this.tillage = (Tillage) model;
@@ -471,5 +472,10 @@ public class TillageFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel() {
         return new Tillage();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
     }
 }

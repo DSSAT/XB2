@@ -21,6 +21,9 @@ import FileXModel.ModelXBase;
 import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.RadioButtonAlignment;
@@ -2503,6 +2506,12 @@ public class SimulationFrame extends IXInternalFrame {
     private void dpSDATEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpSDATEPropertyChange
         try {
             listener.myAction(new ValidationEvent(this));
+            
+            boolean isValid = FileXValidationService.isSimulationDateValid((Date)evt.getNewValue());
+            if(!isValid){
+                JOptionPane.showMessageDialog(new JXFrame(), "Simulation date must be before or on Planting date", "ERROR", 0);
+            }
+            
         } catch (Exception ex) {
 
         }
@@ -2761,5 +2770,10 @@ public class SimulationFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel() {
         return new Simulation();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isSimulationControlValid((Simulation) model);
     }
 }

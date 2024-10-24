@@ -14,9 +14,12 @@ package xbuild;
 import FileXModel.IrrigationApplication;
 import DSSATModel.IrrigationMethodList;
 import Extensions.Variables;
+import FileXService.FileXValidationService;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
@@ -211,6 +214,10 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
 
     private void dpIDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpIDATEActionPerformed
         Update();
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpIDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
     }//GEN-LAST:event_dpIDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed

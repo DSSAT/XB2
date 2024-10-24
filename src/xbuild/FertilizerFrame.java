@@ -526,4 +526,9 @@ public class FertilizerFrame extends IXInternalFrame {
     public ModelXBase newModel() {
         return new Fertilizer();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

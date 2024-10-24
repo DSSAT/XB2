@@ -226,7 +226,7 @@ public class CultivarsFrame extends IXInternalFrame {
 
     @Override
     public boolean isAddButtonEnabled() {
-        return FileXValidationService.IsCropEnabled() && FileXValidationService.IsGeneralValid();
+        return FileXValidationService.IsCropEnabled() && FileXValidationService.isGeneralValid();
     }
 
     @Override
@@ -299,5 +299,10 @@ public class CultivarsFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel() {
         return new Cultivar();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isCultivarsValid((Cultivar)model);
     }
 }

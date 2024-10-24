@@ -9,9 +9,12 @@ import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
+import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
@@ -125,19 +128,25 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         imagePanel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblLevel2 = new org.jdesktop.swingx.JXLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jXLabel1.setText("Analysis Date");
 
         dpAnalysisDate.setFormats(Variables.getDateFormat());
+        dpAnalysisDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpAnalysisDateActionPerformed(evt);
+            }
+        });
         dpAnalysisDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dpAnalysisDatePropertyChange(evt);
             }
         });
 
-		jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jXPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Determination Method", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jXLabel2.setText("pH");
 
@@ -277,6 +286,9 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         lblLevel2.setText("Soil Analysis");
         lblLevel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        jLabel2.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel2.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -291,9 +303,11 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(226, 226, 226)
+                                .addGap(171, 171, 171)
                                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
                                 .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel1))
@@ -315,10 +329,12 @@ public class SoilAnalysisFrame extends IXInternalFrame {
                             .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(dpAnalysisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -418,6 +434,13 @@ public class SoilAnalysisFrame extends IXInternalFrame {
         }
     }//GEN-LAST:event_txtDescriptionFocusLost
 
+    private void dpAnalysisDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpAnalysisDateActionPerformed
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpAnalysisDate.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpAnalysisDateActionPerformed
+
     private Object[] SetRow(SoilAnalysisLayer soilLayer) {
 
         Object[] row = new Object[]{
@@ -444,6 +467,7 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     private xbuild.Components.XDatePicker dpAnalysisDate;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel2;
@@ -480,5 +504,10 @@ public class SoilAnalysisFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel() {
         return new SoilAnalysis();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isSoilAnalysisValid((SoilAnalysis) model);
     }
 }

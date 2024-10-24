@@ -27,12 +27,12 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         Component treeCellRendererComponent = super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
         if (node.getParent() != null && !nodeName.equals("General Information")) {
-            enabled = FileXValidationService.IsGeneralValid();
+            enabled = FileXValidationService.isGeneralValid();
         }
         
         if (nodeName.equals("Cultivars")) {
             enabled = FileXValidationService.IsCropEnabled()
-                    && FileXValidationService.IsGeneralValid();
+                    && FileXValidationService.isGeneralValid();
         }
         else if (nodeName.equals("Treatments")) {
             enabled = FileXValidationService.IsMinimumRequired();
@@ -71,19 +71,25 @@ public class CustomDefaultTreeCellRenderer extends DefaultTreeCellRenderer {
         
         String nodeParentName = node.getParent() != null ? node.getParent().toString() : "";
         
-        if((nodeName.equals("General Information") && !FileXValidationService.IsGeneralValid())
-                || (nodeName.equals("Fields") && !FileXValidationService.IsFieldsValid())
-                || (nodeName.equals("Cultivars") && !FileXValidationService.IsCultivarsValid())
-                || (nodeName.equals("Planting") && !FileXValidationService.IsPlantingsValid())
-                || (nodeName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlsValid()))
+        if((nodeName.equals("General Information") && !FileXValidationService.isGeneralValid())
+                || (nodeName.equals("Fields") && !FileXValidationService.isFieldsValid())
+                || (nodeName.equals("Cultivars") && !FileXValidationService.isCultivarsValid())
+                || (nodeName.equals("Planting") && !FileXValidationService.isPlantingsValid())
+                || (nodeName.equals("Simulation Controls") && !FileXValidationService.isSimulationControlsValid())
+                || (nodeName.equals("Initial Conditions") && !FileXValidationService.isInitialConditionValid())
+                || (nodeName.equals("Soil Analysis") && !FileXValidationService.isSoilAnalysisValid()))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
-        else if(node.isLeaf() && nodeParentName.equals("Fields") && !FileXValidationService.IsFieldValid(nodeName))
+        else if(node.isLeaf() && nodeParentName.equals("Fields") && !FileXValidationService.isFieldValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
-        else if(node.isLeaf() && nodeParentName.equals("Planting") && !FileXValidationService.IsPlantingValid(nodeName))
+        else if(node.isLeaf() && nodeParentName.equals("Initial Conditions") && !FileXValidationService.isInitialConditionValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
-        else if(node.isLeaf() && nodeParentName.equals("Simulation Controls") && !FileXValidationService.IsSimulationControlValid(nodeName))
+        else if(node.isLeaf() && nodeParentName.equals("Soil Analysis") && !FileXValidationService.isSoilAnalysisValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));
-        else if(nodeName.equals("Treatments") && !FileXValidationService.IsTreatmentValid(nodeName))
+        else if(node.isLeaf() && nodeParentName.equals("Planting") && !FileXValidationService.isPlantingValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(node.isLeaf() && nodeParentName.equals("Simulation Controls") && !FileXValidationService.isSimulationControlValid(nodeName))
+            treeCellRendererComponent.setForeground(new Color(200, 20, 20));
+        else if(nodeName.equals("Treatments") && !FileXValidationService.isTreatmentValid(nodeName))
             treeCellRendererComponent.setForeground(new Color(200, 20, 20));        
 
         return treeCellRendererComponent;

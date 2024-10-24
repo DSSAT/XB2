@@ -15,8 +15,10 @@ import FileXModel.EnvironmentApplication;
 import DSSATModel.EnvironmentFactorList;
 import Extensions.Utils;
 import Extensions.Variables;
+import FileXService.FileXValidationService;
 import java.awt.*;
 import javax.swing.*;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.InputNumberVerifier;
 
 /**
@@ -186,6 +188,11 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         dpDate.setFormats(Variables.getDateFormat());
+        dpDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpDateActionPerformed(evt);
+            }
+        });
 
         txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMaxTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -494,6 +501,13 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         envApp = null;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
+
+    private void dpDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpDateActionPerformed
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpDate.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpDateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

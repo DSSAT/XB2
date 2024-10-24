@@ -15,7 +15,10 @@ import FileXModel.*;
 import DSSATModel.FertilizerMaterialList;
 import DSSATModel.FertilizerMethodList;
 import Extensions.Variables;
+import FileXService.FileXValidationService;
 import java.awt.*;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
@@ -330,6 +333,11 @@ public class FertilizerDialog extends javax.swing.JDialog {
 
     private void dpFDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpFDATEActionPerformed
         Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpFDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
 }//GEN-LAST:event_dpFDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed

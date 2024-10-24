@@ -10,6 +10,20 @@ import java.util.logging.Logger;
  */
 public class XInternalFrame {
 
+    public static IXInternalFrame newInstance(String frameName) {
+        try {
+            Class<?> clazz = Class.forName("xbuild." + frameName);
+            Constructor<?> ctor = clazz.getConstructor();
+            Object[] object = null;
+            IXInternalFrame instance = (IXInternalFrame) ctor.newInstance(object);
+
+            return instance;
+        } catch (Exception ex) {
+            Logger.getLogger(XInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public static IXInternalFrame newInstance(String frameName, String nodeName) {
 
         try {

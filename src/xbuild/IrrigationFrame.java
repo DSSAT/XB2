@@ -543,4 +543,9 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     public ModelXBase newModel() {
         return new Irrigation();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

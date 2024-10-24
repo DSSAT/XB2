@@ -499,4 +499,9 @@ public class OrganicFrame extends IXInternalFrame {
     public ModelXBase newModel() {
         return new Organic();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

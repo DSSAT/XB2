@@ -428,4 +428,9 @@ public class TreatmentFrame extends IXInternalFrame  {
     public ModelXBase newModel() {
         return null;
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

@@ -7,6 +7,7 @@ import FileXModel.FileX;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Planting;
+import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.InputNumberVerifier;
@@ -677,5 +678,10 @@ public class PlantingFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel(){
         return new Planting();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isPlantingValid((Planting)model);
     }
 }

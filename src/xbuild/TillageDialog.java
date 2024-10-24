@@ -14,8 +14,11 @@ package xbuild;
 import DSSATModel.TillageImplementList;
 import Extensions.Variables;
 import FileXModel.TillageApplication;
+import FileXService.FileXValidationService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
@@ -93,6 +96,11 @@ public class TillageDialog extends javax.swing.JDialog {
         });
 
         dpTDATE.setFormats(Variables.getDateFormat());
+        dpTDATE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpTDATEActionPerformed(evt);
+            }
+        });
 
         txtTDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtTDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -197,6 +205,15 @@ public class TillageDialog extends javax.swing.JDialog {
         if(!isOK)
             SetNull();
     }//GEN-LAST:event_formWindowClosed
+
+    private void dpTDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpTDATEActionPerformed
+        Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpTDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpTDATEActionPerformed
 
     private void Update() {
         if(bDay)

@@ -478,4 +478,9 @@ public class ChemicalFrame extends IXInternalFrame {
     public ModelXBase newModel() {
         return new Chemical();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

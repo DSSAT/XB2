@@ -514,4 +514,9 @@ public class HarvestFrame extends IXInternalFrame {
     public ModelXBase newModel() {
         return new Harvest();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

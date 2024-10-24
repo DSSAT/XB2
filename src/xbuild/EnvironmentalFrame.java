@@ -408,4 +408,9 @@ public class EnvironmentalFrame extends IXInternalFrame {
     public ModelXBase newModel() {
         return new Environmental();
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

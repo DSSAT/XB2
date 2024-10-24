@@ -24,9 +24,11 @@ import static DSSATModel.WstaType.CLI;
 import static DSSATModel.WstaType.WTG;
 import static DSSATModel.WstaType.WTH;
 import Extensions.LimitDocument;
+import Extensions.Utils;
 import FileXModel.FileX;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
+import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -995,6 +997,15 @@ public class FieldFrame extends IXInternalFrame {
 
     @Override
     public ModelXBase newModel() {
-        return new FieldDetail();
+        FieldDetail f = new FieldDetail();
+        int expNo = getManagementList().GetSize() + Utils.ParseInteger(FileX.general.ExperimentNumber) - 1;
+        f.ID_FIELD = FileX.general.InstituteCode + FileX.general.SiteCode + FileX.general.Year.substring(2) + Utils.PadLeft(expNo, 2, '0');
+        
+        return f;
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isFieldValid((FieldDetail)model);
     }
 }

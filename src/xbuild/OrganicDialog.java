@@ -15,8 +15,11 @@ import DSSATModel.FertilizerMethodList;
 import DSSATModel.ResiduesList;
 import Extensions.Variables;
 import FileXModel.OrganicApplication;
+import FileXService.FileXValidationService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
@@ -328,6 +331,11 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     private void dpRDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpRDATEActionPerformed
         Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpRDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
     }//GEN-LAST:event_dpRDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed

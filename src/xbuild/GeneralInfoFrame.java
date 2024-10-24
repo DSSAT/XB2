@@ -687,7 +687,9 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
             if (crop != null && !"".equals(crop.CropCode) && 
                     (cropOriginal == null || !cropOriginal.CropCode.equals(crop.CropCode))) {
-                setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
+                setImage(imagePanel, crop.CropCode + "2.jpg");
+                
+                FileX.general.crop = crop;
                 
                 try{
                     cropOriginal = crop.clone();
@@ -879,7 +881,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
     @Override
     public boolean isNextButtonEnabled() {
-        return FileXValidationService.IsGeneralValid();
+        return FileXValidationService.isGeneralValid();
     }
 
     @Override
@@ -899,6 +901,11 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
     @Override
     public ModelXBase newModel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return FileX.general;
+    }
+    
+    @Override
+    public boolean isModelValid(){
+        return FileXValidationService.isGeneralValid();
     }
 }
