@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import xbuild.Events.AddLevelEvent;
 import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.LevelSelectionChangedEvent;
@@ -53,6 +52,10 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
             model = newModel();
         }        
 
+        
+        listener = this;
+        UpdateComponent.setEventListener(this);
+        
         initFrame();
     }
     
@@ -79,7 +82,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
         if(!"".equals(name)){
             setTitle(name);
         }
-        
+
         initFrame();
     }
     
