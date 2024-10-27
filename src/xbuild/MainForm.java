@@ -738,9 +738,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         if (frame == null) {
             frame = XInternalFrame.newInstance(mainMenuList.get(node.toString()), nodeName);
         }
-        if (!ShowFrame(frame)) {
-            return;
-        }
+        
+        ShowFrame(frame);
     }//GEN-LAST:event_jXTree1MouseReleased
 
     private void jMenuItemSimAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSimAddActionPerformed
@@ -1023,6 +1022,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 frame.setMaximum(true);
 
                 EventQueue.invokeLater(() -> {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+                    int level = node.getParent().getIndex(node);
+                    frame.setSelection(level + 1);
+                    
                     frame.initialData();
 
                     setPrevNextButton();
