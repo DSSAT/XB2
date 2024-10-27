@@ -1024,6 +1024,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                 EventQueue.invokeLater(() -> {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
                     int level = node.getParent().getIndex(node);
+                    frame.addMyEventListener(this);
                     frame.setSelection(level + 1);
                     
                     frame.initialData();
