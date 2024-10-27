@@ -808,7 +808,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int[] selectRows = {0};
         GetNodeIndex(parentNode, node.toString(), selectRows);
         int level = selectRows[0] - 1;
-        ModelXBase model = modelList.GetAt(level);
+        ModelXBase model = modelList.GetAtIndex(level);
         String oldName = model.GetName();
 
         String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", oldName);
@@ -1094,6 +1094,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         for (int i = 0; i < root.getChildCount(); i++) {
             DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
 
+            if(child.toString().equals(parentNode) && child.toString().equals(childNode)){
+                return child;
+            }
+            
             for (int n = 0; n < child.getChildCount(); n++) {
                 DefaultMutableTreeNode leaf = (DefaultMutableTreeNode) child.getChildAt(n);
                 if (child.toString().equals(parentNode) && leaf.toString().equals(childNode)) {

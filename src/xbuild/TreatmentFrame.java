@@ -31,6 +31,7 @@ import xbuild.Components.DescriptionTableCellEditor;
 import xbuild.Components.IXInternalFrame;
 import xbuild.Components.TreatmentTableCellEditor;
 import xbuild.Events.LevelSelectionChangedEvent;
+import xbuild.Events.XEventListener;
 
 /**
  *
@@ -458,5 +459,10 @@ public class TreatmentFrame extends IXInternalFrame  {
     @Override
     public boolean isModelValid() {
         return true;
+    }
+    
+    @Override
+    public void addMyEventListener(XEventListener l) {
+        this.listener = l;
     }
 }

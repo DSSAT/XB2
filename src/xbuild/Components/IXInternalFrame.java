@@ -52,7 +52,6 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
             model = newModel();
         }        
 
-        
         listener = this;
         UpdateComponent.setEventListener(this);
         
