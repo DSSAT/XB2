@@ -7,7 +7,6 @@ package DSSATModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,11 +14,11 @@ import java.util.List;
  * @author Jazzy
  */
 public class CropModelList {
-    protected static HashMap cropModels = new HashMap();
+    protected static List<CropModel> cropModels = new ArrayList<>();
 
     public static void AddNew(CropModel cropModel)
     {
-        cropModels.put(cropModel.ModelCode, cropModel);
+        cropModels.add(cropModel);
     }
     
     public static void Clear(){
@@ -28,55 +27,39 @@ public class CropModelList {
 
     public static CropModel GetAt(String ModelCode)
     {
-        CropModel cropModel = null;
-        try{
-            cropModel = (CropModel) cropModels.get(ModelCode);
+        for(int i = 0;i < cropModels.size();i++)
+        {
+            if(cropModels.get(i).ModelCode.equals(ModelCode))
+                return cropModels.get(i);
         }
-        catch(Exception ex) {}
-
-        return cropModel;
+        return null;
     }
     
     public static CropModel GetByCrop(String CropCode)
     {
-        CropModel cropModel = null;
-        try {
-            Object[] objects = cropModels.values().toArray();
-            for (Object object : objects) {
-                if(((CropModel) object).Code.endsWith(CropCode)) {
-                    cropModel = (CropModel) object;
-                    break;
-                }                    
-            }
-        } catch (Exception ex) {
+        for(int i = 0;i < cropModels.size();i++)
+        {
+            if(cropModels.get(i).Code.equals(CropCode))
+                return cropModels.get(i);
         }
-
-        return cropModel;
+        return null;
     }
 
     public static CropModel GetAt(int n)
     {
-        CropModel cropModel = null;
         try{
-            Object[] object = cropModels.values().toArray();
-            cropModel = (CropModel) object[n];
+            return cropModels.get(n);
         }
         catch(Exception ex) {}
 
-        return cropModel;
+        return null;
     }
     
     public static List<CropModel> GetAll()
     {
-        List<CropModel> cropModelList = new ArrayList<>();
-        Object[] objects = cropModels.values().toArray();
-        for (Object object : objects) {
-            cropModelList.add((CropModel) object);
-        }
-
-        Collections.sort(cropModelList, (BaseModel c1, BaseModel c2) -> c1.Code.compareTo(c2.Description));
+        Collections.sort(cropModels, (CropModel c1, CropModel c2) -> c1.compare(c2));
         
-        return cropModelList;
+        return cropModels;
     }
 
     public static int size()
