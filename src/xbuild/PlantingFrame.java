@@ -460,7 +460,7 @@ public class PlantingFrame extends IXInternalFrame {
 
         jXLabel21.setText("Initial Sprout Length");
 
-        jXLabel23.setText("<html>C&deg;</html>");
+        jXLabel23.setText("<html>&deg;C</html>");
 
         jXLabel24.setText("if appropiate");
 

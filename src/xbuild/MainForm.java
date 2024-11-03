@@ -163,28 +163,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             newPath = evt.getNewLeadSelectionPath();
         };
 
-//        this.treeListener = (TreeSelectionEvent evt) -> {
-//
-//            removeTreeEvents();
-//            if((oldPath != null && oldPath.getLastPathComponent() == evt.getOldLeadSelectionPath().getLastPathComponent())
-//                    && (newPath != null && newPath.getLastPathComponent() == evt.getNewLeadSelectionPath().getLastPathComponent())){
-//                setTreeEvents(evt.getOldLeadSelectionPath());
-//                oldPath = null;
-//                newPath = null;
-//                return;
-//            }
-//            
-//            oldPath = evt.getOldLeadSelectionPath();
-//            newPath = evt.getNewLeadSelectionPath();
-//        
-//            if (!showFrame()) {
-//                setTreeEvents(evt.getOldLeadSelectionPath());
-//            } else {
-//                setTreeEvents(evt.getNewLeadSelectionPath());
-//            }
-//            
-//            addTreeEvent();
-//        };
         initComponents();
 
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -708,8 +686,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             return;
         }
 
-        if (node.getParent() != null && mainMenuList.keySet().contains(node.toString()) && !menuIgnore.contains(node.toString())) {
-            if (SwingUtilities.isRightMouseButton(evt)) {
+        if (node.getParent() != null && mainMenuList.keySet().contains(node.toString())) {
+            if (SwingUtilities.isRightMouseButton(evt) && !menuIgnore.contains(node.toString())) {
                 jPopupMenuAdd.show(evt.getComponent(), evt.getX(), evt.getY());
                 return;
             } else {

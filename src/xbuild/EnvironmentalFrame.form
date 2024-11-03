@@ -180,8 +180,8 @@
                             <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Date&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                             <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Day length&lt;br&gt;hours&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                             <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Radiation&lt;br&gt;MJ/m&lt;sup&gt;2&lt;/sup&gt;/d&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                            <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Max Temp&lt;br&gt;C&amp;deg;&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                            <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Min Temp&lt;br&gt;C&amp;deg;&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                            <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Max Temp&lt;br&gt;&amp;deg;C&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
+                            <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Min Temp&lt;br&gt;&amp;deg;C&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                             <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Precipitation&lt;br&gt;mm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                             <Column editable="false" title="&lt;html&gt;&lt;p align=&apos;cente&apos;r&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;br&gt;vpm&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
                             <Column editable="false" title="&lt;html&gt;&lt;p align=center&gt;Relative Humidity&lt;br&gt;(Rel Humid)&lt;br&gt;%&lt;/p&gt;&lt;/html&gt;" type="java.lang.Object"/>
