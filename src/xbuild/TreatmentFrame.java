@@ -127,14 +127,14 @@ public class TreatmentFrame extends IXInternalFrame  {
 
             },
             new String [] {
-                "Level", "<html>Rot.<br>Number</html>", "<html>Rot.<br>Option</html>", "<html>Crop<br>Comp.</html>", "Description", "Field", "<html>Initial<br>Conditions<html>", "<html>Soil<br>Anal.<html>", "Cultivar", "Planting", "Irrigation", "Fertililizers", "<html>Organic<br>Amendments</html>", "<html><p align='center'>Chem<br>App.</p></html>", "Tillage", "<html><p align='center'>Env.<br>Mod</p></html>", "Harvest", "<html><p align='center'>Sim.<br>Contr.</p></html>"
+                "Level", "<html>Rot.<br>Number</html>", "<html>Rot.<br>Option</html>", "<html>Crop<br>Comp.</html>", "Description", "Cultivar", "Field", "<html>Initial<br>Conditions<html>", "<html>Soil<br>Anal.<html>", "Planting", "Irrigation", "Fertililizers", "<html>Organic<br>Amendments</html>", "<html><p align='center'>Chem<br>App.</p></html>", "Tillage", "<html><p align='center'>Env.<br>Mod</p></html>", "Harvest", "<html><p align='center'>Sim.<br>Contr.</p></html>"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false, false, false, true, false, false, false, false, false, false, false, false, false
+                true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -193,7 +193,7 @@ public class TreatmentFrame extends IXInternalFrame  {
                 .addContainerGap()
                 .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -268,29 +268,30 @@ public class TreatmentFrame extends IXInternalFrame  {
                 row[4] = "";
             }
             try {
-                row[5] = treatment.FL;
+                row[5] = treatment.CU;
             } catch (Exception e) {
                 row[5] = "";
             }
             try {
-                row[6] = treatment.IC;
+                row[6] = treatment.FL;
             } catch (Exception e) {
                 row[6] = "";
             }
             try {
-                row[7] = treatment.SA;
+                row[7] = treatment.IC;
             } catch (Exception e) {
                 row[7] = "";
             }
             try {
-                row[8] = treatment.CU;
+                row[8] = treatment.SA;
             } catch (Exception e) {
                 row[8] = "";
             }
+            
             try {
                 row[9] = treatment.MP;
             } catch (Exception e) {
-                row[0] = "";
+                row[9] = "";
             }
             try {
                 row[10] = treatment.MI;
@@ -348,10 +349,10 @@ public class TreatmentFrame extends IXInternalFrame  {
                 ((Treatment)FileX.treatments.GetAtIndex(row)).C = (String) tbModel1.getValueAt(row, 3);
             }
             
-            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 5));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 6));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 7));
-            ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 8));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).CU = Utils.ParseInteger(tbModel1.getValueAt(row, 5));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).FL = Utils.ParseInteger(tbModel1.getValueAt(row, 6));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).IC = Utils.ParseInteger(tbModel1.getValueAt(row, 7));
+            ((Treatment)FileX.treatments.GetAtIndex(row)).SA = Utils.ParseInteger(tbModel1.getValueAt(row, 8));            
             ((Treatment)FileX.treatments.GetAtIndex(row)).MP = Utils.ParseInteger(tbModel1.getValueAt(row, 9));
             ((Treatment)FileX.treatments.GetAtIndex(row)).MI = Utils.ParseInteger(tbModel1.getValueAt(row, 10));
             ((Treatment)FileX.treatments.GetAtIndex(row)).MF = Utils.ParseInteger(tbModel1.getValueAt(row, 11));
@@ -370,10 +371,11 @@ public class TreatmentFrame extends IXInternalFrame  {
         
         jXTable1.getColumnModel().getColumn(4).setCellEditor(new DescriptionTableCellEditor());
         
-        jXTable1.getColumnModel().getColumn(5).setCellEditor(new TreatmentTableCellEditor(FileX.fieldList));
-        jXTable1.getColumnModel().getColumn(6).setCellEditor(new TreatmentTableCellEditor(FileX.initialList));
-        jXTable1.getColumnModel().getColumn(7).setCellEditor(new TreatmentTableCellEditor(FileX.soilAnalysis));
-        jXTable1.getColumnModel().getColumn(8).setCellEditor(new CultivarTableCellEditor());
+        jXTable1.getColumnModel().getColumn(5).setCellEditor(new CultivarTableCellEditor());
+        jXTable1.getColumnModel().getColumn(6).setCellEditor(new TreatmentTableCellEditor(FileX.fieldList));
+        jXTable1.getColumnModel().getColumn(7).setCellEditor(new TreatmentTableCellEditor(FileX.initialList));
+        jXTable1.getColumnModel().getColumn(8).setCellEditor(new TreatmentTableCellEditor(FileX.soilAnalysis));
+        
         jXTable1.getColumnModel().getColumn(9).setCellEditor(new TreatmentTableCellEditor(FileX.plantings));
         jXTable1.getColumnModel().getColumn(10).setCellEditor(new TreatmentTableCellEditor(FileX.irrigations));
         jXTable1.getColumnModel().getColumn(11).setCellEditor(new TreatmentTableCellEditor(FileX.fertilizerList));
