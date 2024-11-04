@@ -596,8 +596,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                   <Component id="jXLabel25" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Component id="txtID_FIELD" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtID_FIELD" min="-2" pref="179" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jXPanel5" pref="512" max="32767" attributes="1"/>
                           </Group>
@@ -615,6 +617,7 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jXLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtID_FIELD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel8" min="-2" max="-2" attributes="0"/>
@@ -757,6 +760,14 @@
                     <Property name="text" type="java.lang.String" value="Field ID"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="0" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="*"/>
+                  </Properties>
+                </Component>
                 <Container class="org.jdesktop.swingx.JXPanel" name="jXPanel8">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -785,7 +796,7 @@
                                       <Component id="rdGen" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Component id="rdClimate" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="cbWSTA" min="-2" pref="297" max="-2" attributes="0"/>
