@@ -5,9 +5,12 @@ import Extensions.Utils;
 import FileXModel.Cultivar;
 import FileXModel.FieldDetail;
 import FileXModel.FileX;
+import FileXModel.InitialCondition;
 import FileXModel.ModelXBase;
 import FileXModel.Planting;
 import FileXModel.Simulation;
+import FileXModel.SoilAnalysis;
+import java.util.Date;
 
 /**
  *
@@ -25,7 +28,7 @@ public class FileXValidationService {
         return names.length > 1 ? node.split(":")[1].trim() : "";
     }
 
-    public static boolean IsGeneralValid() {
+    public static boolean isGeneralValid() {
         boolean isValid = true;
 
         if (FileX.general != null && 
@@ -41,13 +44,13 @@ public class FileXValidationService {
     }
 
     public static boolean IsMinimumRequired() {
-        boolean isValid = IsGeneralValid() &&
+        boolean isValid = isGeneralValid() &&
                 FileX.fieldList != null && FileX.fieldList.GetSize() > 0
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).WSTA)
                 && !Utils.IsEmpty(((FieldDetail) FileX.fieldList.GetAtIndex(0)).ID_SOIL)
                 && FileX.cultivars != null && FileX.cultivars.GetSize() > 0
-                && FileX.plantings != null && FileX.plantings.GetSize() > 0 && IsPlantingValid(FileX.plantings.GetAtIndex(0).GetName())
-                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0 && IsSimulationControlValid(FileX.simulationList.GetAtIndex(0).GetName());
+                && FileX.plantings != null && FileX.plantings.GetSize() > 0 && isPlantingValid(FileX.plantings.GetAtIndex(0).GetName())
+                && FileX.simulationList != null && FileX.simulationList.GetSize() > 0 && isSimulationControlValid(FileX.simulationList.GetAtIndex(0).GetName());
 
         return isValid;
     }
@@ -56,7 +59,7 @@ public class FileXValidationService {
         return FileX.general != null && FileX.general.crop != null && FileX.general.crop.Enabled;
     }
 
-    public static boolean IsFieldsValid() {
+    public static boolean isFieldsValid() {
         boolean isValid = true;
 
         if (FileX.fieldList == null || FileX.fieldList.GetSize() == 0) {
@@ -64,34 +67,105 @@ public class FileXValidationService {
         } else {
             for (ModelXBase field : FileX.fieldList.GetAll()) {
                 FieldDetail f = (FieldDetail) field;
-                if (f.WSTA == null || "".equals(f.WSTA)) {
-                    isValid = false;
-                } else if (f.ID_SOIL == null || "".equals(f.ID_SOIL)) {
-                    isValid = false;
-                }
+                isValid &= isFieldValid(f);
             }
         }
         return isValid;
     }
 
-    public static boolean IsFieldValid(String node) {
+    public static boolean isFieldValid(String node) {
         boolean isValid = true;
 
         for (ModelXBase field : FileX.fieldList.GetAll()) {
             FieldDetail f = (FieldDetail) field;
             if (f.FLNAME == null ? getNodeName(node) == null : f.FLNAME.equals(getNodeName(node))) {
-                if (f.WSTA == null || "".equals(f.WSTA)) {
-                    isValid = false;
-                } else if (f.ID_SOIL == null || "".equals(f.ID_SOIL)) {
-                    isValid = false;
-                }
+                isValid &= isFieldValid(f);
             }
         }
 
         return isValid;
     }
+    
+    public static boolean isFieldValid(FieldDetail field) {
+        boolean isValid = true;
+        
+        if (field.WSTA == null || "".equals(field.WSTA)) {
+            isValid = false;
+        } else if (field.ID_SOIL == null || "".equals(field.ID_SOIL)) {
+            isValid = false;
+        }
 
-    public static boolean IsCultivarsValid() {
+        return isValid;
+    }
+    
+    public static boolean isInitialConditionValid(){
+        boolean isValid = true;
+
+        if (FileX.initialList != null) {
+            for (ModelXBase init : FileX.initialList.GetAll()) {
+                InitialCondition initc = (InitialCondition) init;
+                isValid &= isInitialConditionValid(initc);
+            }
+        }
+
+        return isValid;
+    }
+    
+    public static boolean isInitialConditionValid(String node){
+        boolean isValid = true;
+        
+        for (ModelXBase init : FileX.initialList.GetAll()) {
+            InitialCondition initc = (InitialCondition) init;
+            if (initc.ICNAME == null ? getNodeName(node) == null : initc.ICNAME.equals(getNodeName(node))) {
+                isValid &= isInitialConditionValid(initc);
+            }
+        }
+        
+        return isValid;
+    }
+    
+    public static boolean isInitialConditionValid(InitialCondition init){
+        boolean isValid = true;
+        
+        isValid &= init.ICDAT != null;
+        
+        return isValid;
+    }
+    
+    public static boolean isSoilAnalysisValid(){
+        boolean isValid = true;
+
+        if (FileX.soilAnalysis != null) {
+            for (ModelXBase soil : FileX.soilAnalysis.GetAll()) {
+                isValid &= isSoilAnalysisValid((SoilAnalysis) soil);
+            }
+        }
+
+        return isValid;
+    }
+    
+    public static boolean isSoilAnalysisValid(String node){
+        boolean isValid = true;
+        
+        for (ModelXBase soil : FileX.soilAnalysis.GetAll()) {
+            SoilAnalysis s = (SoilAnalysis) soil;
+            if (s.SANAME == null ? getNodeName(node) == null : s.SANAME.equals(getNodeName(node))) {
+                isValid &= isSoilAnalysisValid(s);
+            }
+        }
+        
+        return isValid;
+    }
+    
+    public static boolean isSoilAnalysisValid(SoilAnalysis soil){
+        boolean isValid = true;
+        
+        isValid &= soil.SADAT != null;
+        
+        return isValid;
+    }
+
+    public static boolean isCultivarsValid() {
         boolean isValid = true;
 
         if (FileX.cultivars == null || FileX.cultivars.GetSize() == 0) {
@@ -99,15 +173,23 @@ public class FileXValidationService {
         } else {
             for (ModelXBase cul : FileX.cultivars.GetAll()) {
                 Cultivar c = (Cultivar) cul;
-                if (c.CR == null || "".equals(c.CR)) {
-                    isValid = false;
-                }
+                isValid &= isCultivarsValid(c);
             }
         }
         return isValid;
     }
+    
+    public static boolean isCultivarsValid(Cultivar cultivar) {
+        boolean isValid = true;
 
-    public static boolean IsPlantingsValid() {
+        if (cultivar.CR == null || "".equals(cultivar.CR)) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    public static boolean isPlantingsValid() {
         boolean isValid = true;
 
         if (FileX.plantings == null || FileX.plantings.GetSize() == 0) {
@@ -115,54 +197,46 @@ public class FileXValidationService {
         } else {
             for (ModelXBase planting : FileX.plantings.GetAll()) {
                 Planting p = (Planting) planting;
-                if (p.PDATE == null) {
-                    isValid = false;
-                } else if (p.PLME == null || "".equals(p.PLME)) {
-                    isValid = false;
-                } else if (p.PLDS == null || "".equals(p.PLDS)) {
-                    isValid = false;
-                } else if (p.PLRS == null) {
-                    isValid = false;
-                } else if (p.PLRD == null) {
-                    isValid = false;
-                } else if (p.PLDP == null) {
-                    isValid = false;
-                } else if (p.PPOP == null) {
-                    isValid = false;
-                }
-
+                isValid &= isPlantingValid(p);
             }
         }
         return isValid;
     }
 
-    public static boolean IsPlantingValid(String node) {
+    public static boolean isPlantingValid(String node) {
         boolean isValid = true;
 
         for (ModelXBase planting : FileX.plantings.GetAll()) {
             Planting p = (Planting) planting;
             if (p.PLNAME.equals(getNodeName(node))) {
-                if (p.PDATE == null) {
-                    isValid = false;
-                } else if (p.PLME == null || "".equals(p.PLME)) {
-                    isValid = false;
-                } else if (p.PLDS == null || "".equals(p.PLDS)) {
-                    isValid = false;
-                } else if (p.PLRS == null) {
-                    isValid = false;
-                } else if (p.PLRD == null) {
-                    isValid = false;
-                } else if (p.PLDP == null) {
-                    isValid = false;
-                } else if (p.PPOP == null) {
-                    isValid = false;
-                }
+                isValid &= isPlantingValid(p);
             }
         }
         return isValid;
     }
 
-    public static boolean IsSimulationControlsValid() {
+    public static boolean isPlantingValid(Planting planting) {
+        boolean isValid = true;
+
+        if (planting.PDATE == null) {
+            isValid = false;
+        } else if (planting.PLME == null || "".equals(planting.PLME)) {
+            isValid = false;
+        } else if (planting.PLDS == null || "".equals(planting.PLDS)) {
+            isValid = false;
+        } else if (planting.PLRS == null) {
+            isValid = false;
+        } else if (planting.PLRD == null) {
+            isValid = false;
+        } else if (planting.PLDP == null) {
+            isValid = false;
+        } else if (planting.PPOP == null) {
+            isValid = false;
+        }
+        return isValid;
+    }
+    
+    public static boolean isSimulationControlsValid() {
         boolean isValid = true;
         if (FileX.simulationList == null || FileX.simulationList.GetSize() == 0) {
             isValid = false;
@@ -170,28 +244,62 @@ public class FileXValidationService {
             for (ModelXBase simulation : FileX.simulationList.GetAll()) {
                 Simulation s = (Simulation) simulation;
                 if (s.SDATE == null) {
-                    isValid = false;
+                    isValid &= isSimulationControlValid(s);
                 }
             }
         }
         return isValid;
     }
 
-    public static boolean IsSimulationControlValid(String node) {
+    public static boolean isSimulationControlValid(String node) {
         boolean isValid = true;
 
         for (ModelXBase simulation : FileX.simulationList.GetAll()) {
             Simulation s = (Simulation) simulation;
             if (s.SNAME.equals(getNodeName(node))) {
-                if (s.SDATE == null) {
-                    isValid = false;
-                }
+                isValid = isSimulationControlValid(s);
             }
         }
         return isValid;
     }
     
-    public static boolean IsTreatmentValid(String node) {
+    public static boolean isSimulationControlValid(Simulation simulation) {
+        boolean isValid = true;
+        
+        if (simulation.SDATE == null) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+    
+    public static boolean isSimulationDateValid(Date simulationDate) {
+        boolean isValid = true;
+        
+        if(FileX.plantings != null){
+            for (ModelXBase planting : FileX.plantings.GetAll()) {
+                Planting p = (Planting) planting;
+                isValid &= simulationDate.before(p.PDATE) || simulationDate.equals(p.PDATE);
+            }
+        }
+
+        return isValid;
+    }
+    
+    public static boolean isAfterSimulationDate(Date date) {
+        boolean isValid = true;
+        
+        if(FileX.simulationList != null){
+            for (ModelXBase sim : FileX.simulationList.GetAll()) {
+                Simulation s = (Simulation) sim;
+                isValid &= date.after(s.SDATE) || date.equals(s.SDATE);
+            }
+        }
+
+        return isValid;
+    }
+    
+    public static boolean isTreatmentValid(String node) {
         return FileX.treatments != null && FileX.treatments.GetSize() > 0;
     }
 }

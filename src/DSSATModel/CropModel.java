@@ -16,4 +16,14 @@ public class CropModel extends BaseModel {
     public String toString(){
         return Description;
     }
+    
+    public int compare(CropModel c2){
+        int compare = this.ModelCode.compareTo(c2.ModelCode);
+        
+        if(compare == 0){
+            compare = this.Code.compareTo(c2.Code);
+        }
+        
+        return compare;
+    }
 }

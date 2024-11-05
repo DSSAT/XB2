@@ -12,7 +12,7 @@ import DSSATModel.ExperimentType;
  *
  * @author Jazzy
  */
-public class GeneralInformation {
+public class GeneralInformation extends ModelXBase {
     public GeneralInformation (){
         FileType = ExperimentType.Experimental;
     }
@@ -40,4 +40,14 @@ public class GeneralInformation {
     public Integer HRNO;        /* Harvest row number */
     public Float HLEN;      /* Harvest row length, m */
     public String HARM;     /* Harvest method */
+
+    @Override
+    public String GetName() {
+        return "";
+    }
+
+    @Override
+    public void SetName(String name) {
+
+    }
 }

@@ -23,7 +23,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.List;
 import xbuild.Components.XColumn;
 
 /**
@@ -67,6 +66,7 @@ public class CultivarListDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Select Cultivars");
         setIconImage(Variables.getIconImage(getClass()));
 
         bnOK.setText("OK");

@@ -16,8 +16,12 @@ import DSSATModel.ChemicalMaterialList;
 import DSSATModel.FertilizerMethodList;
 import Extensions.Variables;
 import FileXModel.ChemicalApplication;
+import FileXService.FileXValidationService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -111,12 +115,19 @@ public class ChemicalDialog extends javax.swing.JDialog {
         });
 
         dpCDATE.setFormats(Variables.getDateFormat());
+        dpCDATE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpCDATEActionPerformed(evt);
+            }
+        });
 
         txtCHAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtCHAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCHAMT.setInputVerifier(new InputNumberVerifier());
 
         txtCHDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCHDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCHDEP.setInputVerifier(new InputNumberVerifier());
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +162,8 @@ public class ChemicalDialog extends javax.swing.JDialog {
         jLabel1.setText(Variables.getDateFormatString());
 
         lbDay.setText("Day");
+
+        txtCDAY.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,6 +269,15 @@ public class ChemicalDialog extends javax.swing.JDialog {
         if(!isOK)
             SetNull();
     }//GEN-LAST:event_formWindowClosed
+
+    private void dpCDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpCDATEActionPerformed
+        Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpCDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpCDATEActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;

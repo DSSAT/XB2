@@ -14,6 +14,7 @@ package xbuild;
 import FileXModel.SoilAnalysisLayer;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import xbuild.Components.InputNumberVerifier;
 
 /**
  *
@@ -80,30 +81,39 @@ public class SoilAnalysisDialog extends javax.swing.JDialog {
 
         txtSABL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSABL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSABL.setInputVerifier(new InputNumberVerifier());
 
         txtSADM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtSADM.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSADM.setInputVerifier(new InputNumberVerifier());
 
         txtSAOC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSAOC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSAOC.setInputVerifier(new InputNumberVerifier());
 
         txtSANI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSANI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSANI.setInputVerifier(new InputNumberVerifier());
 
         txtSAPHW.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtSAPHW.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSAPHW.setInputVerifier(new InputNumberVerifier());
 
         txtSAPHB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtSAPHB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSAPHB.setInputVerifier(new InputNumberVerifier());
 
         txtSAKE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtSAKE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSAKE.setInputVerifier(new InputNumberVerifier());
 
         txtSAPX.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtSAPX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSAPX.setInputVerifier(new InputNumberVerifier());
 
         txtSASC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtSASC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSASC.setInputVerifier(new InputNumberVerifier());
 
         jXLabel1.setText("Depth, Base of Layer");
 

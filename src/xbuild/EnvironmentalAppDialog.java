@@ -15,8 +15,11 @@ import FileXModel.EnvironmentApplication;
 import DSSATModel.EnvironmentFactorList;
 import Extensions.Utils;
 import Extensions.Variables;
+import FileXService.FileXValidationService;
 import java.awt.*;
 import javax.swing.*;
+import org.jdesktop.swingx.JXFrame;
+import xbuild.Components.InputNumberVerifier;
 
 /**
  *
@@ -185,24 +188,35 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         dpDate.setFormats(Variables.getDateFormat());
+        dpDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpDateActionPerformed(evt);
+            }
+        });
 
         txtMaxTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMaxTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMaxTemp.setInputVerifier(new InputNumberVerifier());
 
         txtMinTemp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtMinTemp.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMinTemp.setInputVerifier(new InputNumberVerifier());
 
         txtPrecipitation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtPrecipitation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrecipitation.setInputVerifier(new InputNumberVerifier());
 
         txtCo2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtCo2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCo2.setInputVerifier(new InputNumberVerifier());
 
         txtHumidity.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtHumidity.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHumidity.setInputVerifier(new InputNumberVerifier());
 
         txtWind.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtWind.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtWind.setInputVerifier(new InputNumberVerifier());
 
         jXLabel1.setText("Daylength");
 
@@ -216,7 +230,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         jXLabel6.setText("<html>CO<sub>2</sub></html>");
 
-        jXLabel7.setText("Humidity %");
+        jXLabel7.setText("Relative Humidity");
 
         jXLabel8.setText("Wind");
 
@@ -250,9 +264,9 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         jXLabel11.setText("<html>MJ/m<sup>2</sup>/d</html>");
 
-        jXLabel12.setText("<html><sup>๐</sup>C</html>");
+        jXLabel12.setText("<html>C&deg;</html>");
 
-        jXLabel13.setText("<html><sup>๐</sup>C</html>");
+        jXLabel13.setText("<html>C&deg;</html>");
 
         jXLabel14.setText("mm");
 
@@ -266,9 +280,11 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
 
         spDaylength.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         spDaylength.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        spDaylength.setInputVerifier(new InputNumberVerifier());
 
         txtRadiation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtRadiation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRadiation.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,7 +304,7 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
                     .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbDaylengthFactor, 0, 184, Short.MAX_VALUE)
+                    .addComponent(cbDaylengthFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbRadiationFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaxTemp)
                     .addComponent(cbMaxTempFactor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -485,6 +501,13 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
         envApp = null;
         dispose();
     }//GEN-LAST:event_bnCancelActionPerformed
+
+    private void dpDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpDateActionPerformed
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpDate.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
+    }//GEN-LAST:event_dpDateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

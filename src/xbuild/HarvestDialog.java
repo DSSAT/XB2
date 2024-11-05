@@ -17,8 +17,12 @@ import DSSATModel.GrowthStageList;
 import DSSATModel.HarvestComponentList;
 import DSSATModel.HarvestSizeList;
 import Extensions.Variables;
+import FileXService.FileXValidationService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -130,12 +134,15 @@ public class HarvestDialog extends javax.swing.JDialog {
         });
 
         txtHDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHDATE.setInputVerifier(new InputNumberVerifier());
 
         txtHPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtHPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHPC.setInputVerifier(new InputNumberVerifier());
 
         txtHBPC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtHBPC.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHBPC.setInputVerifier(new InputNumberVerifier());
 
         bnOK.setText("OK");
         bnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +261,11 @@ public class HarvestDialog extends javax.swing.JDialog {
 
     private void dpHDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpHDATEActionPerformed
         Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpHDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
 }//GEN-LAST:event_dpHDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed

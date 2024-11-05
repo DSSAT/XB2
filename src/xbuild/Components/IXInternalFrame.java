@@ -41,7 +41,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
     
     public abstract String getParentName();
     public abstract ModelXBase newModel();
-    
+    public abstract boolean isModelValid();
    
     public IXInternalFrame(){
         ManagementList managementList = getManagementList();
@@ -51,7 +51,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
             
             model = newModel();
         }        
-        
+
         listener = this;
         UpdateComponent.setEventListener(this);
         
@@ -72,10 +72,16 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
                 }
             }
         }
+        
+        if(model == null){
+            model = newModel();
+            model.SetName(name);
+        }
+        
         if(!"".equals(name)){
             setTitle(name);
         }
-        
+
         initFrame();
     }
     
@@ -145,6 +151,10 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
         return isDirty;
     }
     
+    public void setFormDirty(boolean isDirty){
+        this.isDirty = isDirty;
+    }
+    
     public ModelXBase addNewModel(){        
         ManagementList ml = getManagementList();
         model.SetLevel(ml.GetSize() + 1);
@@ -161,7 +171,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
         String[] level1 = nodeName.split(":");
         String[] level2 = level1[0].split(" ");
 
-        return Integer.parseInt(level2[1]);
+        return level2.length > 1 ? Integer.parseInt(level2[1]) : -1;
     }
     
 

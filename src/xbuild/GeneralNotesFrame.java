@@ -149,4 +149,9 @@ public class GeneralNotesFrame extends IXInternalFrame implements KeyListener {
     public ModelXBase newModel() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public boolean isModelValid() {
+        return true;
+    }
 }

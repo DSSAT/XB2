@@ -16,24 +16,25 @@ public class InputDialog extends javax.swing.JDialog {
     private boolean isOK = false;
     private String description;     
     
-    public InputDialog(java.awt.Frame parent, boolean modal, String defaultDescription) {
+    public InputDialog(java.awt.Frame parent, boolean modal, String defaultDescription, String title) {
         super(parent, modal);
-        commonConstructor(parent, defaultDescription);
+        commonConstructor(parent, defaultDescription, title);
     }
     
-    public InputDialog(java.awt.Frame parent, boolean modal, String defaultDescription, int maxChar) {
+    public InputDialog(java.awt.Frame parent, boolean modal, String defaultDescription, int maxChar, String title) {
         super(parent, modal);
-        commonConstructor(parent, defaultDescription);
+        commonConstructor(parent, defaultDescription, title);
         txtDescription.setDocument(new LimitDocument(maxChar));
         txtDescription.setText(defaultDescription);
     }
     
-    private void commonConstructor(java.awt.Frame parent, String defaultDescription){
+    private void commonConstructor(java.awt.Frame parent, String defaultDescription, String title){
         initComponents();
         txtDescription.setText(defaultDescription);
         
         this.setLocationByPlatform(true);
         this.setLocationRelativeTo(parent);
+        setTitle(title);
     }
 
     /**

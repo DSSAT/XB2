@@ -15,8 +15,12 @@ import DSSATModel.FertilizerMethodList;
 import DSSATModel.ResiduesList;
 import Extensions.Variables;
 import FileXModel.OrganicApplication;
+import FileXService.FileXValidationService;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import org.jdesktop.swingx.JXFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 
 /**
@@ -120,6 +124,7 @@ public class OrganicDialog extends javax.swing.JDialog {
 
         txtRDATE.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtRDATE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRDATE.setInputVerifier(new InputNumberVerifier());
 
         dpRDATE.setFormats(Variables.getDateFormat());
         dpRDATE.addActionListener(new java.awt.event.ActionListener() {
@@ -130,21 +135,27 @@ public class OrganicDialog extends javax.swing.JDialog {
 
         txtRAMT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtRAMT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRAMT.setInputVerifier(new InputNumberVerifier());
 
         txtRESN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtRESN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRESN.setInputVerifier(new InputNumberVerifier());
 
         txtRESP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtRESP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRESP.setInputVerifier(new InputNumberVerifier());
 
         txtRESK.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtRESK.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRESK.setInputVerifier(new InputNumberVerifier());
 
         txtRINP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtRINP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRINP.setInputVerifier(new InputNumberVerifier());
 
         txtRDEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtRDEP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtRDEP.setInputVerifier(new InputNumberVerifier());
 
         lbDay.setText("Day");
 
@@ -320,6 +331,11 @@ public class OrganicDialog extends javax.swing.JDialog {
 
     private void dpRDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpRDATEActionPerformed
         Update();
+        
+        boolean isValid = FileXValidationService.isAfterSimulationDate(dpRDATE.getDate());
+        if (!isValid) {
+            JOptionPane.showMessageDialog(new JXFrame(), "Date is defined prior to the start of simulation date.", "ERROR", 0);
+        }
     }//GEN-LAST:event_dpRDATEActionPerformed
 
     private void bnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnOKActionPerformed

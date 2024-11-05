@@ -7,8 +7,10 @@ import FileXModel.FileX;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
 import FileXModel.Planting;
+import FileXService.FileXValidationService;
 import java.awt.event.FocusListener;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
@@ -110,6 +112,11 @@ public class PlantingFrame extends IXInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
+        lblLevel1 = new org.jdesktop.swingx.JXLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
@@ -160,11 +167,20 @@ public class PlantingFrame extends IXInternalFrame {
         jXLabel23 = new org.jdesktop.swingx.JXLabel();
         jXLabel24 = new org.jdesktop.swingx.JXLabel();
         jXLabel25 = new org.jdesktop.swingx.JXLabel();
-        lblLevel = new org.jdesktop.swingx.JXLabel();
-        txtDescription = new xbuild.Components.XTextField();
-        lblLevel1 = new org.jdesktop.swingx.JXLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
+
+        lblLevel1.setText("Planting");
+        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sowing", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -192,9 +208,9 @@ public class PlantingFrame extends IXInternalFrame {
 
         jXLabel10.setText("cm");
 
-        jXLabel14.setText("<html>plants m<sup>2</sup></html>");
+        jXLabel14.setText("<html>plants/m<sup>2</sup></html>");
 
-        jXLabel13.setText("<html>plants m<sup>2</sup></html>");
+        jXLabel13.setText("<html>plants/m<sup>2</sup></html>");
 
         dpEDATE.setFormats(Variables.getDateFormat());
 
@@ -211,6 +227,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPPOP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPPOP.setInputVerifier(new InputNumberVerifier());
         txtPPOP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -218,8 +235,10 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPPOE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPPOE.setInputVerifier(new InputNumberVerifier());
 
         txtPLRS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLRS.setInputVerifier(new InputNumberVerifier());
         txtPLRS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -227,6 +246,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPLRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLRD.setInputVerifier(new InputNumberVerifier());
         txtPLRD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -234,6 +254,7 @@ public class PlantingFrame extends IXInternalFrame {
         });
 
         txtPLDP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLDP.setInputVerifier(new InputNumberVerifier());
         txtPLDP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPLDPKeyReleased(evt);
@@ -411,14 +432,19 @@ public class PlantingFrame extends IXInternalFrame {
         jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Transplant"));
 
         txtPLWT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLWT.setInputVerifier(new InputNumberVerifier());
 
         txtPENV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPENV.setInputVerifier(new InputNumberVerifier());
 
         txtPAGE.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPAGE.setInputVerifier(new InputNumberVerifier());
 
         txtPLPH.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPLPH.setInputVerifier(new InputNumberVerifier());
 
         txtSPRL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSPRL.setInputVerifier(new InputNumberVerifier());
 
         jXLabel15.setText("Planting Material Dry Weight");
 
@@ -434,7 +460,7 @@ public class PlantingFrame extends IXInternalFrame {
 
         jXLabel21.setText("Initial Sprout Length");
 
-        jXLabel23.setText("C");
+        jXLabel23.setText("<html>&deg;C</html>");
 
         jXLabel24.setText("if appropiate");
 
@@ -474,7 +500,7 @@ public class PlantingFrame extends IXInternalFrame {
                         .addComponent(txtPLWT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jXLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,17 +534,32 @@ public class PlantingFrame extends IXInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblLevel.setText("Level");
-        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 761, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(20, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 533, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
-        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDescriptionFocusLost(evt);
-            }
-        });
-
-        lblLevel1.setText("Planting");
-        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -527,15 +568,16 @@ public class PlantingFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,11 +588,9 @@ public class PlantingFrame extends IXInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -602,6 +642,8 @@ public class PlantingFrame extends IXInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel10;
     private org.jdesktop.swingx.JXLabel jXLabel11;
@@ -666,5 +708,10 @@ public class PlantingFrame extends IXInternalFrame {
     @Override
     public ModelXBase newModel(){
         return new Planting();
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isPlantingValid((Planting)model);
     }
 }

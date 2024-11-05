@@ -24,14 +24,17 @@ import static DSSATModel.WstaType.CLI;
 import static DSSATModel.WstaType.WTG;
 import static DSSATModel.WstaType.WTH;
 import Extensions.LimitDocument;
+import Extensions.Utils;
 import FileXModel.FileX;
 import FileXModel.ManagementList;
 import FileXModel.ModelXBase;
+import FileXService.FileXValidationService;
 import java.awt.EventQueue;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.List;
 import xbuild.Components.IXInternalFrame;
+import xbuild.Components.InputNumberVerifier;
 import xbuild.Components.XColumn;
 import xbuild.Events.UpdateLevelEvent;
 import xbuild.Events.ValidationEvent;
@@ -173,6 +176,11 @@ public class FieldFrame extends IXInternalFrame {
         popupMenu1 = new java.awt.PopupMenu();
         menuItem1 = new java.awt.MenuItem();
         wstaTypeGroup = new javax.swing.ButtonGroup();
+        lblLevel = new org.jdesktop.swingx.JXLabel();
+        txtDescription = new xbuild.Components.XTextField();
+        lblLevel1 = new org.jdesktop.swingx.JXLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
         jXLabel11 = new org.jdesktop.swingx.JXLabel();
@@ -216,6 +224,7 @@ public class FieldFrame extends IXInternalFrame {
         cbFLDT = new xbuild.Components.XDropdownTableComboBox();
         txtID_FIELD = new xbuild.Components.XTextField();
         jXLabel25 = new org.jdesktop.swingx.JXLabel();
+        jLabel7 = new javax.swing.JLabel();
         jXPanel8 = new org.jdesktop.swingx.JXPanel();
         jXLabel26 = new org.jdesktop.swingx.JXLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -237,9 +246,6 @@ public class FieldFrame extends IXInternalFrame {
         cbSoilCode = new xbuild.Components.XComboBox();
         cbSLTX = new xbuild.Components.XDropdownTableComboBox();
         imagePanel = new javax.swing.JLabel();
-        lblLevel = new org.jdesktop.swingx.JXLabel();
-        txtDescription = new xbuild.Components.XTextField();
-        lblLevel1 = new org.jdesktop.swingx.JXLabel();
 
         popupMenu1.setLabel("popupMenu1");
         popupMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -253,6 +259,18 @@ public class FieldFrame extends IXInternalFrame {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(744, 631));
+
+        lblLevel.setText("Level");
+        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
+
+        lblLevel1.setText("Fields");
+        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         jXPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Additional Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         jXPanel2.setPreferredSize(new java.awt.Dimension(635, 360));
@@ -270,12 +288,15 @@ public class FieldFrame extends IXInternalFrame {
 
         txtXCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtXCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtXCRD.setInputVerifier(new InputNumberVerifier());
 
         txtYCRD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtYCRD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtYCRD.setInputVerifier(new InputNumberVerifier());
 
         txtELEV.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtELEV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtELEV.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel6Layout = new javax.swing.GroupLayout(jXPanel6);
         jXPanel6.setLayout(jXPanel6Layout);
@@ -320,24 +341,31 @@ public class FieldFrame extends IXInternalFrame {
 
         txtAREA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtAREA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAREA.setInputVerifier(new InputNumberVerifier());
 
         txtFLWR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLWR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLWR.setInputVerifier(new InputNumberVerifier());
 
         txtFLSA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLSA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        txtFLSA.setInputVerifier(new InputNumberVerifier());
 
         txtSLAS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLAS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLAS.setInputVerifier(new InputNumberVerifier());
 
         txtFHDUR.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFHDUR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFHDUR.setInputVerifier(new InputNumberVerifier());
 
         txtSLEN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSLEN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLEN.setInputVerifier(new InputNumberVerifier());
 
         txtFLOB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLOB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLOB.setInputVerifier(new InputNumberVerifier());
 
         jXLabel15.setText("<html>m<sup>2</sup></html>");
 
@@ -488,9 +516,11 @@ public class FieldFrame extends IXInternalFrame {
 
         txtFLDS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLDS.setInputVerifier(new InputNumberVerifier());
 
         txtFLDD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFLDD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLDD.setInputVerifier(new InputNumberVerifier());
 
         javax.swing.GroupLayout jXPanel5Layout = new javax.swing.GroupLayout(jXPanel5);
         jXPanel5.setLayout(jXPanel5Layout);
@@ -513,7 +543,7 @@ public class FieldFrame extends IXInternalFrame {
                         .addComponent(txtFLDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addComponent(cbFLDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -535,6 +565,9 @@ public class FieldFrame extends IXInternalFrame {
         );
 
         jXLabel25.setText("Field ID");
+
+        jLabel7.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel7.setText("*");
 
         jXPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Weather Station", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jXPanel8.setName(""); // NOI18N
@@ -582,7 +615,7 @@ public class FieldFrame extends IXInternalFrame {
                         .addComponent(rdGen)
                         .addGap(33, 33, 33)
                         .addComponent(rdClimate)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(jXPanel8Layout.createSequentialGroup()
                         .addComponent(cbWSTA, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -616,12 +649,14 @@ public class FieldFrame extends IXInternalFrame {
         jXLabel3.setText("Depth");
 
         txtSLDP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSLDP.setInputVerifier(new InputNumberVerifier());
 
         jXLabel4.setText("cm");
 
         jXLabel5.setText("Surface Stones");
 
         txtFLST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtFLST.setInputVerifier(new InputNumberVerifier());
 
         jXLabel2.setText("Surface Texture");
 
@@ -700,8 +735,10 @@ public class FieldFrame extends IXInternalFrame {
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jXPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -714,7 +751,8 @@ public class FieldFrame extends IXInternalFrame {
                     .addGroup(jXPanel1Layout.createSequentialGroup()
                         .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jXLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtID_FIELD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -727,38 +765,52 @@ public class FieldFrame extends IXInternalFrame {
                 .addGap(28, 28, 28))
         );
 
-        lblLevel.setText("Level");
-        lblLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1103, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(99, 99, 99)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(46, 46, 46)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
+        );
 
-        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDescriptionFocusLost(evt);
-            }
-        });
-
-        lblLevel1.setText("Fields");
-        lblLevel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -769,11 +821,9 @@ public class FieldFrame extends IXInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -896,6 +946,9 @@ public class FieldFrame extends IXInternalFrame {
     private javax.swing.JLabel imagePanel;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     private org.jdesktop.swingx.JXLabel jXLabel10;
     private org.jdesktop.swingx.JXLabel jXLabel11;
@@ -980,6 +1033,15 @@ public class FieldFrame extends IXInternalFrame {
 
     @Override
     public ModelXBase newModel() {
-        return new FieldDetail();
+        FieldDetail f = new FieldDetail();
+        int expNo = getManagementList().GetSize() + Utils.ParseInteger(FileX.general.ExperimentNumber) - 1;
+        f.ID_FIELD = FileX.general.InstituteCode + FileX.general.SiteCode + FileX.general.Year.substring(2) + Utils.PadLeft(expNo, 2, '0');
+        
+        return f;
+    }
+
+    @Override
+    public boolean isModelValid() {
+        return FileXValidationService.isFieldValid((FieldDetail)model);
     }
 }
