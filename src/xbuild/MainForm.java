@@ -941,9 +941,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_bnDeleteLevelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (!onClose()) {
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        }
+        onClose();
+        dispose();
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAboutActionPerformed
