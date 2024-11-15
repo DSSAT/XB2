@@ -6,8 +6,9 @@ package xbuild;
 
 import DSSATModel.Setup;
 import java.awt.event.*;
-import java.io.IOException;
-import java.net.ServerSocket;
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -24,23 +25,10 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    private static int instanceStatus = 0;
-    private static ServerSocket servers;
 
     public static void main(String[] args) {
 
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                closeConnection();
-            }
-        });
-
-        while (instanceStatus == 0) {
-            assertNoOtherInstanceRunning();
-        }
-
-        if (instanceStatus == 2) {
+        if(lockInstance()){
             JOptionPane.showMessageDialog(new JXFrame(), "XB2 is already opened.", "ERROR", 0);
             System.exit(0);
             return;
@@ -49,18 +37,6 @@ public class Main {
         MainForm mainForm = new MainForm();
         mainForm.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainForm.show();
-
-        mainForm.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent evt){
-                closeConnection();
-            }
-            
-            @Override
-            public void windowClosed(WindowEvent evt) {
-                closeConnection();
-            }
-        });
 
         UpdateComponent.setEventListener(mainForm);
 
@@ -79,26 +55,31 @@ public class Main {
             new LoadingDataFrame(setup.GetDSSATPath()).show();
         }
     }
-
-    public static void assertNoOtherInstanceRunning() {
-        new Thread(() -> {
-            try {
-                servers = new ServerSocket(9000);
-                instanceStatus = 1;
-                servers.accept();
-            } catch (IOException e) {
-                instanceStatus = 2;
+    
+    private static boolean lockInstance() {
+        final String lockFile = "XB2.lock" ;
+        
+        try {            
+            final File file = new File(lockFile);
+            final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+            final FileLock fileLock = randomAccessFile.getChannel().tryLock();
+            if (fileLock != null) {
+                Runtime.getRuntime().addShutdownHook(new Thread() {
+                    public void run() {
+                        try {
+                            fileLock.release();
+                            randomAccessFile.close();
+                            file.delete();
+                        } catch (Exception e) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Unable to remove lock file: " + lockFile, e);
+                        }
+                    }
+                });
+                return false;
             }
-        }).start();
-    }
-
-    public static void closeConnection() {
-        if (servers != null) {
-            try {
-                servers.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (Exception e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Unable to create and/or lock file: " + lockFile, e);
         }
+        return true;
     }
 }
