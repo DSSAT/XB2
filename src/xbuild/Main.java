@@ -44,20 +44,13 @@ public class Main {
         if (setup.GetDSSATPath() == null) {
             SetupFrame frame = new SetupFrame();
             frame.show();
-
-            frame.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent evt) {
-                    new LoadingDataFrame(setup.GetDSSATPath()).show();
-                }
-            });
         } else {
             new LoadingDataFrame(setup.GetDSSATPath()).show();
         }
     }
     
     private static boolean lockInstance() {
-        final String lockFile = "XB2.lock" ;
+        final String lockFile = ".lock.instance.XB2" ;
         
         try {            
             final File file = new File(lockFile);
