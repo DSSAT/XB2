@@ -48,4 +48,10 @@ Thumbs.db
 *.zip
 build/
 XBuild.fle
-nbproject/
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
