@@ -146,7 +146,7 @@ public final class AboutDialog extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Fabio Augusto Antunes de Oliveira & Gerrit Hoogenboom ");
+        jLabel10.setText("Fabio Oliveira & Gerrit Hoogenboom ");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
