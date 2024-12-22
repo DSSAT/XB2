@@ -51,7 +51,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="947" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="956" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblLevel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -276,9 +276,6 @@
                         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                           <Format format="#0.00" subtype="-1" type="0"/>
                         </Property>
-                        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new InputNumberVerifier()" type="code"/>
-                        </Property>
                       </Properties>
                     </Component>
                     <Component class="xbuild.Components.XFormattedTextField" name="txtYCRD">
@@ -286,9 +283,6 @@
                         <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                           <Format format="#0.00" subtype="-1" type="0"/>
-                        </Property>
-                        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new InputNumberVerifier()" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
