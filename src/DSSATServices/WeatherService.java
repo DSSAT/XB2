@@ -4,6 +4,7 @@ import DSSATRepository.WeatherRepository;
 import DSSATModel.WeatherStation;
 import DSSATModel.WeatherStationList;
 import DSSATModel.WstaType;
+import Extensions.Utils;
 import java.util.ArrayList;
 
 /**
@@ -43,7 +44,15 @@ public class WeatherService extends DSSATServiceBase {
                             wsta.Code = tmp[0];
                             wsta.StationName = tmp[1];
                             wsta.Begin = Integer.parseInt(tmp[2]);
-                            wsta.Number = Integer.parseInt(tmp[3]);
+                            
+                            boolean isNumber = false;
+                            try{
+                                wsta.Number = Integer.valueOf(tmp[3]).toString();
+                                isNumber = true;
+                            }
+                            catch(Exception ex) {
+                                wsta.Number = tmp[3];
+                            }
                             wsta.Type = type;
                             
                             if(tmp[5].length() > 4){
@@ -65,7 +74,14 @@ public class WeatherService extends DSSATServiceBase {
                             } else {
                                 wstaExist.FullCode.add(tmp[4]);
                                 wstaExist.Begin = Math.min(wsta.Begin, wstaExist.Begin);
-                                wstaExist.Number = Math.max(wstaExist.Begin + wstaExist.Number - wstaExist.Begin, wsta.Begin + wsta.Number - wstaExist.Begin);
+                                if(isNumber){
+                                    Integer noExist = Utils.TryParseInteger(wstaExist.Number);
+                                    Integer no = Math.max(noExist, wsta.Begin + Math.max(noExist, Utils.ParseInteger(wsta.Number)) - wstaExist.Begin);
+                                    wstaExist.Number = no.toString();
+                                }
+                                else{
+                                    wstaExist.Number = tmp[3];
+                                }
                             }
                         }
                     } catch (Exception ex) {

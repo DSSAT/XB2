@@ -16,7 +16,7 @@ public class WeatherStation {
     public String StationName;
     public WstaType Type;
     public int Begin;
-    public int Number;
+    public String Number;
     public ArrayList<String> FullCode;
     
     public WeatherStation(){
