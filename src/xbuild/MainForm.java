@@ -41,7 +41,6 @@ import FileXService.FileXValidationService;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -94,23 +93,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         }
     };
 
-    private final ArrayList<String> menuNoFrame = new ArrayList<String>() {
-        {
-            add("Fields");
-            add("Initial Conditions");
-            add("Soil Analysis");
-            add("Environmental Modifications");
-            add("Planting");
-            add("Irrigation");
-            add("Fertilizer");
-            add("Organic Amendments");
-            add("Tillage");
-            add("Harvest");
-            add("Chemical Applications");
-            add("Simulation Controls");
-
-        }
-    };
     private final ArrayList<String> menuIgnore = new ArrayList<String>() {
         {
             add("General Information");
@@ -658,7 +640,12 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_jMenuOpenFileActionPerformed
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
-        int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+            jXTree1.setSelectionRow(row);
+        }
+        
+        int row = jXTree1.getSelectionRows()[0];
         
         jXTree1.setSelectionRow(row);
 
@@ -690,7 +677,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             if (SwingUtilities.isRightMouseButton(evt) && !menuIgnore.contains(node.toString())) {
                 jPopupMenuAdd.show(evt.getComponent(), evt.getX(), evt.getY());
                 return;
-            } else {
+            }
+            else if(node.getChildCount() > 0 && !nodeName.equals("General Information")) {
+                jXTree1.setSelectionRow(row + 1);
+                jXTree1MouseReleased(evt);
+                return;
+            }
+            else {
                 IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(nodeName));
                 ShowFrame(frame);
                 return;
@@ -709,8 +702,6 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             
             return;
         }
-
-        
 
         IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(node.getParent().toString()), nodeName);
         if (frame == null) {

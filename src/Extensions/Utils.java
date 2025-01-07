@@ -33,7 +33,11 @@ public class Utils {
                 String tmp = value.substring(start, stop).trim();
 
                 if (tmp != null && !"".equals(tmp)) {
-                    val = Float.valueOf(tmp);
+                    try {
+                        val = Float.valueOf(tmp);
+                    } catch (NumberFormatException ex) {
+                        
+                    }
                 }
             }
         }
@@ -120,6 +124,21 @@ public class Utils {
         }
         val = Integer.valueOf(value.toString());
 
+        return val;
+    }
+    
+    public static Integer TryParseInteger(Object value) {
+        Integer val;
+        if (value == null) {
+            return 0;
+        }
+        
+        try{
+            val = Integer.valueOf(value.toString());
+        }
+        catch(NumberFormatException e){
+            val = 0;
+        }
         return val;
     }
 
