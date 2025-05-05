@@ -8,5 +8,6 @@ public enum ExperimentType {
     Experimental,
     Sequential,
     Seasonal,
-    Spatial
+    Spatial,
+    Forecast
 }

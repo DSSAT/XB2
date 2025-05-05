@@ -69,15 +69,20 @@ public class Utils {
 
             String tmp = value.substring(start, stop).trim();
 
-            if (!tmp.equals("-99")) {
+            if (!tmp.equals("-99") && !"".equals(tmp)) {
                 try {
-                    Integer year = Integer.valueOf(tmp.substring(0, 2));
-                    if (year >= 60) {
-                        year += 1900;
-                    } else {
-                        year += 2000;
+                    int yearDigits = tmp.length() == 7 ? 2 : 0;
+                    Integer year = Integer.valueOf(tmp.substring(0, 2 + yearDigits));
+                    
+                    if(tmp.length() == 5){
+                        if (year >= 60) {
+                            year += 1900;
+                        } else {
+                            year += 2000;
+                        }
                     }
-                    int day = Integer.parseInt(tmp.substring(2, 5));
+                    
+                    int day = Integer.parseInt(tmp.substring(2 + yearDigits, 5 + yearDigits));
 
                     int month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
                     month[1] += ((year % 4) == 0) ? 1 : 0;
@@ -323,14 +328,18 @@ public class Utils {
     }
 
     public static String JulianDate(Date date) {
-        String d = "";
+        return JulianDate(date, "yy");
+    }
+    
+    public static String JulianDate(Date date, String yearFormat) {
+        String d;
 
         try {
             Calendar ca = Calendar.getInstance();
             ca.setTime(date);
 
             Locale l = new Locale("en", "US");
-            SimpleDateFormat df = new SimpleDateFormat("yy", l);
+            SimpleDateFormat df = new SimpleDateFormat(yearFormat, l);
 
             d = df.format(date) + PadLeft(((Integer) ca.get(Calendar.DAY_OF_YEAR)).toString(), 3, '0');
         } catch (Exception e) {

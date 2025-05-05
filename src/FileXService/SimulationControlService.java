@@ -1,5 +1,6 @@
 package FileXService;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.FileX;
 import FileXModel.Simulation;
@@ -31,6 +32,7 @@ public class SimulationControlService {
             String simNitrogenHeader = "";
             String simResidueHeader = "";
             String simHarvestHeader = "";
+            String simForecastHeader = "";
             
             boolean bSimulation = false;
             int nSimulation = 0;
@@ -70,6 +72,9 @@ public class SimulationControlService {
                 } else if (bSimulation && tmp.trim().startsWith("@N HARVEST")) {
                     simHarvestHeader = tmp.trim();
                     nSimulation = 10;
+                } else if (bSimulation && tmp.trim().startsWith("@N SIMDATES")) {
+                    simForecastHeader = tmp.trim();
+                    nSimulation = 11;
                 }
 
                 else if (bSimulation && nSimulation == 1 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
@@ -368,6 +373,33 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
+                else if (bSimulation && nSimulation == 11 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    Simulation sim;
+                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
+
+                    //@N SIMDATES    ENDAT    SDUR   FODAT  FSTRYR  FENDYR FWFILE           FONAME
+                    boolean isAdd = false;
+                    if(!simulationList.IsLevelExists(level)) {
+                        sim = new Simulation();
+                        sim.SetLevel(level);
+                        isAdd = true;
+                    } else {
+                        sim = (Simulation)simulationList.GetAt(level);
+                    }
+                    
+                    sim.ENDAT = Utils.GetDate(simForecastHeader, tmp, "ENDAT", 8);
+                    sim.SDUR = Utils.GetInteger(simForecastHeader, tmp, "   SDUR", 7);
+                    sim.FODAT = Utils.GetDate(simForecastHeader, tmp, "FODAT", 8);
+                    sim.FSTRYR = Utils.GetInteger(simForecastHeader, tmp, "FSTRYR", 7);
+                    sim.FENDYR = Utils.GetInteger(simForecastHeader, tmp, "FENDYR", 7);
+                    sim.FWFILE = Utils.GetString(simForecastHeader, tmp, "FWFILE", 16);
+                    sim.FONAME = Utils.GetString(simForecastHeader, tmp, "FONAME", tmp.length() - simForecastHeader.indexOf("FONAME"));
+
+                    if(isAdd) {
+                        simulationList.AddNew(sim);
+                    }
+                    nSimulation = -1;
+                }
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -519,6 +551,22 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.HPCNP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNR, 5, ' '));
                 pw.println();
+                
+                
+                if(FileX.general.FileType == ExperimentType.Forecast){
+                    pw.println("@N SIMDATES    ENDAT    SDUR   FODAT  FSTRYR  FENDYR FWFILE           FONAME");
+                    pw.print(Utils.PadLeft(level, 2, ' '));
+                    pw.print(" SI       ");
+                    pw.print(" " + Utils.PadLeft(Utils.JulianDate(sim.ENDAT, "yyyy"), 7, ' '));
+                    pw.print(" " + Utils.PadLeft(sim.SDUR, 7, ' '));
+                    pw.print(" " + Utils.PadLeft(Utils.JulianDate(sim.FODAT, "yyyy"), 7, ' '));
+                    pw.print(" " + Utils.PadLeft(sim.FSTRYR, 7, ' '));
+                    pw.print(" " + Utils.PadLeft(sim.FENDYR, 7, ' '));
+                    pw.print(" " + Utils.PadRight(sim.FWFILE, 16, ' '));
+                    pw.print(" " + sim.FONAME);
+                    pw.println();
+                }
+                
                 pw.println();
             }
         }

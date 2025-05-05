@@ -29,6 +29,8 @@ public class GeneralService {
                 general.FileType = ExperimentType.Seasonal;
             } else if (xFile.endsWith("GSX")) {
                 general.FileType = ExperimentType.Spatial;
+            } else if (xFile.endsWith("FCX")) {
+                general.FileType = ExperimentType.Forecast;
             } else {
                 general.FileType = ExperimentType.Experimental;
                 try {
@@ -211,6 +213,9 @@ public class GeneralService {
         }
         else if(general.FileType == ExperimentType.Spatial){
             fileXType = "GS";
+        }
+        else if(general.FileType == ExperimentType.Forecast){
+            fileXType = "FC";
         }
         
         return fileXType;

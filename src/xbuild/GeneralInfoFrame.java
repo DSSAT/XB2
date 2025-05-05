@@ -193,7 +193,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jXLabel3.setText("Site Code");
         jXLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        cbFileType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Experimental", "Sequential", "Seasonal", "Spatial" }));
+        cbFileType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Experimental", "Sequential", "Seasonal", "Spatial", "Forecast" }));
         cbFileType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFileTypeActionPerformed(evt);
@@ -763,6 +763,11 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 cbCrop.setSelectedIndex(-1);
                 FileX.general.crop = new Crop();
                 break;
+            case "Forecast":
+                cbCrop.setEnabled(false);
+                cbCrop.setSelectedIndex(-1);
+                FileX.general.crop = new Crop();
+                break;
             default:
                 break;
         }
@@ -888,6 +893,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
                 doc += ".SNX";
             } else if (cbFileType.getSelectedItem().toString().equals("Spatial")) {
                 doc += ".GSX";
+            } else if (cbFileType.getSelectedItem().toString().equals("Forecast")) {
+                doc += ".FCX";
             }
         } catch (Exception ex) {
         }
