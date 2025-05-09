@@ -33,6 +33,9 @@ public class SimulationDefaultService {
                     case Spatial:
                         fileName = rootPath + "\\Tools\\XBuild\\Simulate_Spatial.def";
                         break;
+                    case Forecast:
+                        fileName = rootPath + "\\Tools\\XBuild\\Simulate_Forecast.def";
+                        break;
                     default:
                         break;
                 }

@@ -521,6 +521,8 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
                     target = DssatProfile.GetAt("AQD");
                 } else if (FileX.general.FileType == ExperimentType.Spatial) {
                     target = DssatProfile.GetAt("APD");
+                } else if (FileX.general.FileType == ExperimentType.Forecast) {
+                    target = DssatProfile.GetAt("YFD");
                 } else {
                     target = new Setup().GetDSSATPath();
                 }

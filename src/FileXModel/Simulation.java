@@ -128,6 +128,16 @@ public class Simulation extends ModelXBase implements Cloneable {
     public String FMOPT;
     // </editor-fold>
     
+    // <editor-fold defaultstate=collapsed" desc"FORECAST">
+    public Date ENDAT;  //End of simulation date
+    public Integer SDUR;    //Maximum duration of one season
+    public Date FODAT;  //Forecast date
+    public Integer FSTRYR;  //Ensenble start year
+    public Integer FENDYR;  //Ensemblelast year 
+    public String FWFILE;//: Forecast weather file
+    public String FONAME;//: Yield forecast name
+    // </editor-fold>
+    
     @Override
     public Simulation clone() throws CloneNotSupportedException {
         Simulation sim = (Simulation)super.clone();    // return shallow copy
