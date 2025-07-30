@@ -389,7 +389,7 @@ public class SimulationControlService {
                     
                     sim.ENDAT = Utils.GetDate(simForecastHeader, tmp, "ENDAT", 8);
                     sim.SDUR = Utils.GetInteger(simForecastHeader, tmp, "   SDUR", 7);
-                    sim.FODAT = Utils.GetDate(simForecastHeader, tmp, "FODAT", 8);
+                    sim.FODAT = Utils.GetDate(simForecastHeader, tmp, "FODAT", 7);
                     sim.FSTRYR = Utils.GetInteger(simForecastHeader, tmp, "FSTRYR", 7);
                     sim.FENDYR = Utils.GetInteger(simForecastHeader, tmp, "FENDYR", 7);
                     sim.FWFILE = Utils.GetString(simForecastHeader, tmp, "FWFILE", 16);
