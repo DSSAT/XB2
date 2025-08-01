@@ -66,12 +66,9 @@ public class UpdateComponent {
                     }
                 }
                 else if(field.getType() == Date.class && (field.get(model) != null || value != null)){
-                    if((field.get(model) == null && value != null)
-                            || ((Date)field.get(model)).getDate() != ((Date)value).getDate()
-                            || ((Date)field.get(model)).getMonth()!= ((Date)value).getMonth()
-                            || ((Date)field.get(model)).getYear()!= ((Date)value).getYear()){
+                    if(field.get(model) != value)
+                    {
                         field.set(model, value);
-                        //eventListener.myAction(new FieldUpdateEvent(component));
                         publishEvents(component);
                     }
                 }
