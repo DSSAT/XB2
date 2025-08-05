@@ -16,13 +16,15 @@ import Extensions.Icons;
 import Extensions.Variables;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.*;
+import xbuild.Events.LoadingDoneEvent;
+import xbuild.Events.LoadingEventListener;
+import xbuild.Events.XEventListener;
 
 
 
@@ -38,6 +40,9 @@ public class LoadingDataFrame extends javax.swing.JFrame {
     private boolean isValid = true;   
     private boolean isDone = false;
     private String validationMessage = ""; 
+    
+    protected XEventListener listener;
+    private LoadingEventListener laodingEvent;
 
     class Task extends SwingWorker<Void, Void> {
         /*
@@ -152,6 +157,8 @@ public class LoadingDataFrame extends javax.swing.JFrame {
             }
             
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            
+            laodingEvent.onLoaded(new LoadingDoneEvent(this));
         }
     }
     
@@ -180,6 +187,10 @@ public class LoadingDataFrame extends javax.swing.JFrame {
                 startTask();
             }
         });
+    }
+    
+    public void addListener(LoadingEventListener lEvent){
+        this.laodingEvent = lEvent;
     }
 
     /** This method is called from within the constructor to

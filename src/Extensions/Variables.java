@@ -83,6 +83,6 @@ public class Variables {
     }
     
     public static String getVersion(){
-        return "v1.3.0.0";
+        return "v1.4.0.0";
     }
 }
