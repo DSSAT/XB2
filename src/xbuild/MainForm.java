@@ -586,59 +586,10 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         int returnVal = fc.showOpenDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            ResetTree();
-
             File file = fc.getSelectedFile();
 
-            FileXService.OpenFileX(file);
-
-            DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-            root.setUserObject(file.getName());
-
-            AddTreeMenu("Environment", "Fields");
-            AddTreeMenu("Environment", "Initial Conditions");
-            AddTreeMenu("Environment", "Soil Analysis");
-            AddTreeMenu("Environment", "Environmental Modifications");
-            AddTreeMenu("Management", "Cultivars");
-            AddTreeMenu("Management", "Planting");
-            AddTreeMenu("Management", "Irrigation");
-            AddTreeMenu("Management", "Fertilizer");
-            AddTreeMenu("Management", "Organic Amendments");
-            AddTreeMenu("Management", "Tillage");
-            AddTreeMenu("Management", "Harvest");
-            AddTreeMenu("Management", "Chemical Applications");
-            AddTreeMenu(root, "Simulation Controls");
-            AddTreeMenu(root, "Treatments");
-
-            jXTree1.collapseAll();
-            jXTree1.expandAll();
-            jXTree1.setVisible(true);
-
-            GeneralInfoFrame generalFrame = new GeneralInfoFrame();
-
-            setRootPaneCheckingEnabled(false);
-            javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
-            ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
-
-            desktopPane.add(generalFrame);
-            try {
-                generalFrame.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            generalFrame.show();
-            generalFrame.addMyEventListener(this);
-
-            jMenuNewFile.setEnabled(false);
-            jMenuSaveFile.setEnabled(true);
-            jMenuCloseFile.setEnabled(true);
-            jMenuOpenFile.setEnabled(false);
-
-            FileX.isReady = true;
+            openFile(file);
         }
-
-        setAddDeleteButton();
-        setPrevNextButton();
     }//GEN-LAST:event_jMenuOpenFileActionPerformed
 
     private void jXTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTree1MouseReleased
@@ -1716,6 +1667,62 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             bnAddLevel.setEnabled(false);
             bnDeleteLevel.setEnabled(false);
         }
+    }
+
+    public void openFile(File file) {
+        
+        EventQueue.invokeLater(() -> {
+            ResetTree();
+        
+            FileXService.OpenFileX(file);
+
+            DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+            root.setUserObject(file.getName());
+
+            AddTreeMenu("Environment", "Fields");
+            AddTreeMenu("Environment", "Initial Conditions");
+            AddTreeMenu("Environment", "Soil Analysis");
+            AddTreeMenu("Environment", "Environmental Modifications");
+            AddTreeMenu("Management", "Cultivars");
+            AddTreeMenu("Management", "Planting");
+            AddTreeMenu("Management", "Irrigation");
+            AddTreeMenu("Management", "Fertilizer");
+            AddTreeMenu("Management", "Organic Amendments");
+            AddTreeMenu("Management", "Tillage");
+            AddTreeMenu("Management", "Harvest");
+            AddTreeMenu("Management", "Chemical Applications");
+            AddTreeMenu(root, "Simulation Controls");
+            AddTreeMenu(root, "Treatments");
+
+            jXTree1.collapseAll();
+            jXTree1.expandAll();
+            jXTree1.setVisible(true);
+
+            GeneralInfoFrame generalFrame = new GeneralInfoFrame();
+
+            setRootPaneCheckingEnabled(false);
+            javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
+
+            desktopPane.add(generalFrame);
+            try {
+                generalFrame.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            generalFrame.show();
+            generalFrame.addMyEventListener(this);
+
+            jMenuNewFile.setEnabled(false);
+            jMenuSaveFile.setEnabled(true);
+            jMenuCloseFile.setEnabled(true);
+            jMenuOpenFile.setEnabled(false);
+
+            FileX.isReady = true;
+
+            setAddDeleteButton();
+            setPrevNextButton();
+        });
     }
 }
 
