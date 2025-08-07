@@ -87,6 +87,7 @@ public class SoilAnalysisService {
                         soilLayer.SAKE = Utils.GetFloat(soilHeader2, tmp, "SAKE", 5);
                         soilLayer.SASC = Utils.GetFloat(soilHeader2, tmp, "SASC", 5);
                         soil.AddLayer(soilLayer);
+                        bSoilHeader2 = false;
 
                     } catch (NumberFormatException numberFormatException) {
                     }
