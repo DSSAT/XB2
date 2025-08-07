@@ -52,6 +52,8 @@ import xbuild.Components.InputDialog;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.LevelSelectionChangedEvent;
+import xbuild.Events.LoadingDoneEvent;
+import xbuild.Events.LoadingEventListener;
 import xbuild.Events.MenuDirection;
 import xbuild.Events.NewFrameEvent;
 import xbuild.Events.SelectionEvent;
@@ -429,7 +431,17 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private void jMenuRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRefreshMouseClicked
         Setup setup = new Setup();
-        new LoadingDataFrame(setup.GetDSSATPath()).show();
+        LoadingDataFrame loadingFrame = new LoadingDataFrame(setup.GetDSSATPath());
+        loadingFrame.setVisible(true);
+        loadingFrame.startTask();
+        loadingFrame.addListener(new LoadingEventListener() {
+            @Override
+            public void onLoaded(LoadingDoneEvent e) {
+                if(e.isValid()) {
+                    loadingFrame.setVisible(false);
+                }
+            }
+        });
 }//GEN-LAST:event_jMenuRefreshMouseClicked
 
     private void jSetupMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSetupMenuMouseClicked

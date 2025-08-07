@@ -79,9 +79,9 @@ public class TreatmentService {
                 Treatment treat = (Treatment) treatments.GetAtIndex(i);
                 pw.print(Utils.PadLeft(treat.GetLevel(), 2, ' '));
                 
-                if(FileX.general.FileType != ExperimentType.Sequential)
-                    pw.print(" 1 0 0");
-                else{
+//                if(FileX.general.FileType != ExperimentType.Sequential)
+//                    pw.print(" 1 0 0");
+//                else{
                     try {
                         if (!"".equals(treat.R)) {
                             pw.print(' ' + treat.R.substring(0, 1));
@@ -109,7 +109,7 @@ public class TreatmentService {
                     } catch (Exception e) {
                         pw.print(' ' + "0");
                     }
-                }               
+//                }               
                 
                 try {
                     if (!"".equals(treat.TNAME)) {

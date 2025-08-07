@@ -34,10 +34,10 @@ public class SoilAnalysisService {
                 } else if (bSoil && !bSoilHeader1 && !bSoilHeader2 && tmp.trim().startsWith("@")) {
                     soilHeader1 = tmp.trim();
                     bSoilHeader1 = true;
-                } else if (bSoil && bSoilHeader1 && !bSoilHeader2 && tmp.trim().startsWith("@")) {
+                } else if (bSoil && bSoilHeader1 && tmp.trim().startsWith("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC")) {
                     soilHeader2 = tmp.trim();
                     bSoilHeader2 = true;
-                } else if (bSoil && bSoilHeader1 && bSoilHeader2 && tmp.trim().startsWith("@")) {
+                } else if (bSoil && bSoilHeader1 && bSoilHeader2 && tmp.trim().startsWith("@") && !tmp.trim().startsWith("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC")) {
                     bSoilHeader2 = false;
                 }else if (bSoil && bSoilHeader1 && !bSoilHeader2) {
                     if ("".equals(tmp.trim())) {
@@ -87,7 +87,7 @@ public class SoilAnalysisService {
                         soilLayer.SAKE = Utils.GetFloat(soilHeader2, tmp, "SAKE", 5);
                         soilLayer.SASC = Utils.GetFloat(soilHeader2, tmp, "SASC", 5);
                         soil.AddLayer(soilLayer);
-                        bSoilHeader2 = false;
+//                        bSoilHeader2 = false;
 
                     } catch (NumberFormatException numberFormatException) {
                     }

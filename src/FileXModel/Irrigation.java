@@ -16,13 +16,13 @@ import java.util.Comparator;
 public class Irrigation extends ModelXBase implements Cloneable {
 
     protected ArrayList<IrrigationApplication>  irrigApps = new ArrayList<>();
-    public Float EFIR;
-    //IDEP
-    //ITHR
-    //IEPT
-    //IOFF  
-    //IAME
-    //int IAMT  = 1
+    public Integer EFIR;
+    public Integer IDEP;
+    public Integer ITHR;
+    public Integer IEPT;
+    public String IOFF;
+    public String IAME;
+    public Integer IAMT;
     public String IRNAME;
 
     public Irrigation(String IRNAME)

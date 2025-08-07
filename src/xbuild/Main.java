@@ -41,12 +41,9 @@ public class Main{
         UpdateComponent.setEventListener(mainForm);
 
         final Setup setup = new Setup();
-        if (setup.GetDSSATPath() == null) {
-            SetupFrame frame = new SetupFrame();
-            frame.setVisible(true);
-        } 
         
         LoadingDataFrame loadingFrame =  new LoadingDataFrame(setup.GetDSSATPath());
+//        loadingFrame.setVisible(true);
         loadingFrame.startTask();
         
         loadingFrame.addListener(new LoadingEventListenerImpl(args, mainForm));

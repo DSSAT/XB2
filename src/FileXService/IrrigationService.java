@@ -53,7 +53,13 @@ public class IrrigationService {
                     Irrigation irrig = new Irrigation();
                     Integer level = Integer.valueOf(strRead.substring(0, 2).trim());
                     irrig.SetLevel(level);
-                    irrig.EFIR = Utils.GetFloat(irrigHeader1, tmp, "  EFIR", 5);
+                    irrig.EFIR = Utils.GetInteger(irrigHeader1, tmp, "EFIR", 5);
+                    irrig.IDEP = Utils.GetInteger(irrigHeader1, tmp, "IDEP", 5);
+                    irrig.ITHR = Utils.GetInteger(irrigHeader1, tmp, "ITHR", 5);
+                    irrig.IEPT = Utils.GetInteger(irrigHeader1, tmp, "IEPT", 5);
+                    irrig.IOFF = Utils.GetString(irrigHeader1, tmp, " IOFF", 5);
+                    irrig.IAME = Utils.GetString(irrigHeader1, tmp, " IAME", 5);
+                    irrig.IAMT = Utils.GetInteger(irrigHeader1, tmp, "IAMT", 5);
 
                     irrig.IRNAME = Utils.GetString(irrigHeader1, tmp, "IRNAME", tmp.length() - irrigHeader1.indexOf("IRNAME"));
                     irrigations.AddNew(irrig);
@@ -106,7 +112,13 @@ public class IrrigationService {
                 pw.println("@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadLeft(irrig.EFIR, 5, ' '));
-                pw.print("   -99   -99   -99   -99   -99     1");
+                pw.print(" " + Utils.PadLeft(irrig.IDEP, 5, ' '));
+                pw.print(" " + Utils.PadLeft(irrig.ITHR, 5, ' '));
+                pw.print(" " + Utils.PadLeft(irrig.IEPT, 5, ' '));
+                pw.print(" " + Utils.PadLeft(irrig.IOFF, 5, ' '));
+                pw.print(" " + Utils.PadLeft(irrig.IAME, 5, ' '));
+                pw.print(" " + Utils.PadLeft(irrig.IAMT, 5, ' '));
+                //pw.print("   -99   -99   -99   -99   -99     1");
                 if (irrig.IRNAME != null) {
                     pw.print(" " + irrig.IRNAME);
                 } else {

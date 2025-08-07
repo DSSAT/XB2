@@ -21,6 +21,9 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.*;
 import xbuild.Events.LoadingDoneEvent;
 import xbuild.Events.LoadingEventListener;
@@ -40,6 +43,8 @@ public class LoadingDataFrame extends javax.swing.JFrame {
     private boolean isValid = true;   
     private boolean isDone = false;
     private String validationMessage = ""; 
+    private final Object messageLock = new Object();
+    private final AtomicBoolean hasError = new AtomicBoolean(false); 
     
     protected XEventListener listener;
     private LoadingEventListener laodingEvent;
@@ -95,28 +100,45 @@ public class LoadingDataFrame extends javax.swing.JFrame {
                 isValid = false;
             }
             
-            for(DSSATServiceBase service : parseList) {
-                try {
-                    validationMessage += "Loading " + service.getName() + "....";
-                    jLabel1.setText("<html>" + validationMessage + "</html>");
-                    
-                    service.Parse();
-                    
-                    validationMessage += "<font color='green'>!Done</font><br>";
-                    jLabel1.setText("<html>" + validationMessage + "</html>");
-                    
-                    if("Crop".equals(service.getName())){
-                        laodingEvent.onLoaded(new LoadingDoneEvent(this));
+            // Process services in parallel
+//            ConcurrentHashMap<String, String> serviceResults = new ConcurrentHashMap<>();
+            
+            CompletableFuture<Void>[] futures = parseList.stream()
+                .map(service -> CompletableFuture.runAsync(() -> {
+                    try {
+                        synchronized(messageLock) {
+                            validationMessage += "Loading " + service.getName() + "....<br>";
+                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
+                        }
+                        
+                        service.Parse();
+                        
+                        synchronized(messageLock) {
+                            validationMessage += "<font color='green'>" + service.getName() + " Done!</font><br>";
+                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
+                        }
+                        
+                    } catch (Exception ex) {
+                        hasError.set(true);
+                        synchronized(messageLock) {
+                            validationMessage += "<font color='red'>" + service.getName() + " Error!</font><br>";
+                            for(String message : ex.getMessage().split("\n")){
+                                validationMessage += "<div style='padding-left:25px'><font color='red'>" + message + "</font></div>";
+                            }
+                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
+                        }
                     }
-                } catch (Exception ex) {                   
-                    validationMessage += "<font color='red'>!Error</font>";
-                    for(String message : ex.getMessage().split("\n")){
-                        validationMessage += "<div style='padding-left:25px'><font color='red'>" + message + "</font></div>";
-                    }
-                    
-                    jLabel1.setText("<html>" + validationMessage + "</html>");
+                }))
+                .toArray(CompletableFuture[]::new);
+            
+            // Wait for all services to complete
+            try {
+                CompletableFuture.allOf(futures).join();
+                if (hasError.get()) {
                     isValid = false;
                 }
+            } catch (Exception ex) {
+                isValid = false;
             }
             
             try{
@@ -158,6 +180,8 @@ public class LoadingDataFrame extends javax.swing.JFrame {
         public void done() {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             
+            laodingEvent.onLoaded(new LoadingDoneEvent(this, isValid));
+            
             if(!isValid){
                 setVisible(true);
             }
@@ -180,15 +204,6 @@ public class LoadingDataFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         Dimension winSize = getSize();
         setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowOpened(WindowEvent evt){
-                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-                startTask();
-            }
-        });
     }
     
     public void addListener(LoadingEventListener lEvent){
