@@ -675,7 +675,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private void jPopupMenuSimItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemCopyActionPerformed
         // TODO add your handling code here:
+        copyLevel();
+    }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
+
+    
+    private void copyLevel(){
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        int[] rows = jXTree1.getSelectionRows();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
 
         ManagementList modelList = GetManagementList(parentNode.toString());
@@ -708,18 +714,16 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(parentNode);
-            jXTree1.expandAll();
 
-            int[] rows = jXTree1.getSelectionRows();
             if (rows.length > 0) {
-                jXTree1.setSelectionRow(rows[0] + FileX.simulationList.GetSize());
+                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
             }
 
             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
             ShowFrame(frame);
         }
-    }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
-
+    }
+    
     private void jPopupMenuSimItemRenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemRenameActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
@@ -857,19 +861,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_bnPreviousActionPerformed
 
     private void bnAddLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLevelActionPerformed
-        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-
-        String managementName = currentFrame.getManagementName();
-
-        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-        int[] selectRows = {0};
-        GetNodeIndex(rootNode, managementName, selectRows);
-        jXTree1.setSelectionRow(selectRows[0]);
-
-        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        ManagementList modelList = currentFrame.getManagementList();
-
-        addNewLevel(parentNode, modelList, false);
+        copyLevel();
     }//GEN-LAST:event_bnAddLevelActionPerformed
 
     private void bnDeleteLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLevelActionPerformed
