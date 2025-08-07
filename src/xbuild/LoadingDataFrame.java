@@ -104,6 +104,10 @@ public class LoadingDataFrame extends javax.swing.JFrame {
                     
                     validationMessage += "<font color='green'>!Done</font><br>";
                     jLabel1.setText("<html>" + validationMessage + "</html>");
+                    
+                    if("Crop".equals(service.getName())){
+                        laodingEvent.onLoaded(new LoadingDoneEvent(this));
+                    }
                 } catch (Exception ex) {                   
                     validationMessage += "<font color='red'>!Error</font>";
                     for(String message : ex.getMessage().split("\n")){
@@ -152,13 +156,11 @@ public class LoadingDataFrame extends javax.swing.JFrame {
          */
         @Override
         public void done() {
-            if (isValid) {
-                dispose();
-            }
-            
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             
-            laodingEvent.onLoaded(new LoadingDoneEvent(this));
+            if(!isValid){
+                setVisible(true);
+            }
         }
     }
     
@@ -238,7 +240,7 @@ public class LoadingDataFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void startTask() {
+    public void startTask() {
         // TODO add your handling code here:
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //Instances of javax.swing.SwingWorker are not reusuable, so
