@@ -21,8 +21,10 @@ public class FieldService {
             
             String fieldHeader1 = "";
             String fieldHeader2 = "";
+            String fieldHeader3 = "";
             boolean bFieldHeader1 = false;
             boolean bFieldHeader2 = false;
+            boolean bFieldHeader3 = false;
             boolean bField = false;
             
             while ((strRead = br.readLine()) != null) {
@@ -36,7 +38,10 @@ public class FieldService {
                 } else if (bField && bFieldHeader1 && !bFieldHeader2 && tmp.trim().startsWith("@")) {
                     fieldHeader2 = tmp.trim();
                     bFieldHeader2 = true;
-                } else if (bField && bFieldHeader1 && !bFieldHeader2) {
+                } else if(bField && bFieldHeader1 && bFieldHeader2 && tmp.trim().startsWith("@") && tmp.trim().endsWith("PMWD PMALB")){
+                    fieldHeader3 = tmp.trim();
+                    bFieldHeader3 = true;                    
+                } else if (bField && bFieldHeader1 && !bFieldHeader2 && !bFieldHeader3) {
                     if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
@@ -65,7 +70,7 @@ public class FieldService {
                     field.FLNAME = Utils.GetString(fieldHeader1, tmp, "FLNAME", tmp.length() - fieldHeader1.indexOf("FLNAME"));
 
                     fieldList.AddNew(field);
-                } else if (bField && bFieldHeader1 && bFieldHeader2) {
+                } else if (bField && bFieldHeader1 && bFieldHeader2 && !bFieldHeader3) {
                     if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
@@ -91,6 +96,27 @@ public class FieldService {
                         field.FLHST = Utils.GetString(fieldHeader2, tmp, "FLHST", 5);
                         field.FHDUR = Utils.GetFloat(fieldHeader2, tmp, "FHDUR", 5);
                     } catch (NumberFormatException numberFormatException) {
+                    }
+                } else if(bField && bFieldHeader1 && bFieldHeader2 && bFieldHeader3 ){
+                    if ("".equals(tmp.trim())) {
+                        bField = false;
+                        bFieldHeader1 = false;
+                        bFieldHeader2 = false;
+                        bFieldHeader3 = false;
+                        continue;
+                    }
+                    else if(strRead.trim().startsWith("!")){
+                        continue;
+                    }
+                    
+                    try {
+                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
+                        FieldDetail field = (FieldDetail)fieldList.GetAt(level);
+                        
+                        field.PMWD = Utils.GetFloat(fieldHeader3, tmp, "PMWD", 5);
+                        field.PMALB = Utils.GetFloat(fieldHeader3, tmp, "PMALB", 5);
+                    }
+                    catch (NumberFormatException numberFormatException) {
                     }
                 }
             }
@@ -142,6 +168,16 @@ public class FieldService {
                 pw.print(" " + Utils.PadLeft(field.SLAS, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.FLHST, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.FHDUR, 5, ' '));
+                pw.println();
+            }
+            
+            pw.println("@l  PMWD PMALB");
+            for (int i = 0; i < fieldList.GetSize(); i++) {
+                Integer level = i + 1;
+                FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
+                pw.print(Utils.PadLeft(level, 2, ' '));
+                pw.print(" " + Utils.PadLeft(field.PMWD, 5, ' '));
+                pw.print(" " + Utils.PadLeft(field.PMALB, 5, ' '));
                 pw.println();
             }
         }
