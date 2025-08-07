@@ -367,6 +367,12 @@ public class SimulationControlService {
                     }
                     sim.HPCNP = Utils.GetFloat(simHarvestHeader, tmp, "HPCNP", 5);
                     sim.HPCNR = Utils.GetFloat(simHarvestHeader, tmp, "HPCNR", 5);
+                    sim.HMFRQ = Utils.GetInteger(simHarvestHeader, tmp, "HMFRQ", 5);
+                    sim.HMGDD = Utils.GetInteger(simHarvestHeader, tmp, "HMGDD", 5);
+                    sim.HMCUT = Utils.GetFloat(simHarvestHeader, tmp, "HMCUT", 5);
+                    sim.HMMOW = Utils.GetInteger(simHarvestHeader, tmp, "HMMOW", 5);
+                    sim.HRSPL = Utils.GetInteger(simHarvestHeader, tmp, "HRSPL", 5);
+                    sim.HMVS = Utils.GetInteger(simHarvestHeader, tmp, "HMVS", 5);
 
                     if(isAdd) {
                         simulationList.AddNew(sim);
@@ -543,13 +549,19 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.RIDEP, 5, ' '));
                 pw.println();
 
-                pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR");
+                pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR HMFRQ HMGDD HMCUT HMMOW HRSPL HMVS");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" HA         ");
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HFRST), 5, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HLAST), 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNR, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMFRQ, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMGDD, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMCUT, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMMOW, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HRSPL, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMVS, 4, ' '));
                 pw.println();
                 
                 
