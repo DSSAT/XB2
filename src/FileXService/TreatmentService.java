@@ -42,11 +42,10 @@ public class TreatmentService {
                     Treatment treatment = new Treatment();
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
-                    if (FileX.general.FileType == ExperimentType.Sequential) {
-                        treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
-                        treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
-                        treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
-                    }
+                    
+                    treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
+                    treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
+                    treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
                     
                     treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);
                     treatment.CU = Utils.GetInteger(treatmentHeader, strRead, " CU", 3);
