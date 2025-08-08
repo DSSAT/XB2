@@ -40,8 +40,9 @@ public class FieldDetail extends ModelXBase implements Cloneable {
     public Float SLAS;
     public String FLHST;
     public Float FHDUR;
-    public Float PMWD;
     public Float PMALB;
+    public Integer BDWD;
+    public Integer BDHT;
     
     public FieldDetail clone() throws CloneNotSupportedException {
         return (FieldDetail)super.clone();

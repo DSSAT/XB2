@@ -38,7 +38,7 @@ public class FieldService {
                 } else if (bField && bFieldHeader1 && !bFieldHeader2 && tmp.trim().startsWith("@")) {
                     fieldHeader2 = tmp.trim();
                     bFieldHeader2 = true;
-                } else if(bField && bFieldHeader1 && bFieldHeader2 && tmp.trim().startsWith("@") && tmp.trim().endsWith("PMWD PMALB")){
+                } else if(bField && bFieldHeader1 && bFieldHeader2 && tmp.trim().startsWith("@") && tmp.trim().endsWith("PMALB  BDWD  BDHT")){
                     fieldHeader3 = tmp.trim();
                     bFieldHeader3 = true;                    
                 } else if (bField && bFieldHeader1 && !bFieldHeader2 && !bFieldHeader3) {
@@ -113,8 +113,9 @@ public class FieldService {
                         Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
                         
-                        field.PMWD = Utils.GetFloat(fieldHeader3, tmp, "PMWD", 5);
                         field.PMALB = Utils.GetFloat(fieldHeader3, tmp, "PMALB", 5);
+                        field.BDWD = Utils.GetInteger(fieldHeader3, tmp, "BDWD", 5);
+                        field.BDHT = Utils.GetInteger(fieldHeader3, tmp, "BDHT", 5);
                     }
                     catch (NumberFormatException numberFormatException) {
                     }
@@ -171,13 +172,14 @@ public class FieldService {
                 pw.println();
             }
             
-            pw.println("@l  PMWD PMALB");
+            pw.println("@L  PMALB  BDWD  BDHT");
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 Integer level = i + 1;
                 FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
                 pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" " + Utils.PadLeft(field.PMWD, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.PMALB, 5, ' '));
+                pw.print(" " + Utils.PadLeft(field.PMALB, 6, ' '));
+                pw.print(" " + Utils.PadLeft(field.BDWD, 5, ' '));
+                pw.print(" " + Utils.PadLeft(field.BDHT, 5, ' '));
                 pw.println();
             }
         }
