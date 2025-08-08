@@ -14,21 +14,6 @@ import java.util.ArrayList;
 public class CultivarList extends ManagementList {
     protected ArrayList<Cultivar> cultivars = new ArrayList<>();
 
-//    public void AddNew(Cultivar cul)
-//    {
-//        cultivars.add(cul);
-//    }
-//
-//    public void RemoveAt(int level)
-//    {
-//        cultivars.remove(level);
-//    }
-//
-//    public void SetAt(int level, Cultivar cul)
-//    {
-//        cultivars.set(level, cul);
-//    }
-
     @Override
     public ModelXBase AddNew(String name, int newLevel, ModelXBase currentModel) {
         Cultivar model = new Cultivar(name);
@@ -39,7 +24,20 @@ public class CultivarList extends ManagementList {
 
     @Override
     public ModelXBase Clone(int sourceIndex, String newName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cultivar source = (Cultivar) modelList.get(sourceIndex);
+        Cultivar newSource = null;
+        
+        try{
+            newSource = new Cultivar();
+            newSource.CNAME = source.CNAME;
+            newSource.CR = source.CR;
+            newSource.INGENO = source.INGENO;
+        }
+        catch(Exception ex){
+            
+        }
+        
+        return newSource;
     }
 
     @Override

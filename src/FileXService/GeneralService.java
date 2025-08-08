@@ -150,7 +150,7 @@ public class GeneralService {
 
         pw.println("@PEOPLE");
         if (general.People != null && !"".equals(general.People)) {
-            pw.println(general.People);
+            pw.println(" " + general.People);
 
         } else {
             pw.println("-99");
@@ -159,7 +159,7 @@ public class GeneralService {
         }
         pw.println("@ADDRESS");
         if (general.Adress != null && !"".equals(general.Adress)) {
-            pw.println(general.Adress);
+            pw.println(" " + general.Adress);
 
         } else {
             pw.println("-99");
@@ -167,7 +167,7 @@ public class GeneralService {
         }
         pw.println("@SITE");
         if (general.Site != null && !"".equals(general.Site)) {
-            pw.println(general.Site);
+            pw.println(" " + general.Site);
 
         } else {
             pw.println("-99");

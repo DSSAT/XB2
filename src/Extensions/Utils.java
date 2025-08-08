@@ -115,7 +115,7 @@ public class Utils {
         String tmp = GetString(Header, value, field, fieldLength);
         
         Integer val = null;
-        if (!"".equals(tmp) && !tmp.equals("-99")) {
+        if (tmp != null && !"".equals(tmp) && !tmp.equals("-99")) {
             val = Integer.valueOf(tmp);
         }
 

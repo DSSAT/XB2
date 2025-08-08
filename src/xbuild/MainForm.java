@@ -657,7 +657,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             jPopupMenuSimItemCopy.setEnabled(true);
             jPopupMenuSimItemRename.setEnabled(true);
             if ("Cultivars".equals(node.getParent().toString())) {
-                jPopupMenuSimItemCopy.setEnabled(false);
+//                jPopupMenuSimItemCopy.setEnabled(false);
                 jPopupMenuSimItemRename.setEnabled(false);
             }
 
@@ -693,20 +693,27 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     
     private void copyLevel(){
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        int[] rows = jXTree1.getSelectionRows();
+        //int[] rows = jXTree1.getSelectionRows();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
-
         ManagementList modelList = GetManagementList(parentNode.toString());
-        String newName = modelList.GetCopyName(node.toString().split(":")[1].trim());
+        int index = modelList.GetIndex(getLevel(node.toString()));
+        String r;
+        
+        if("Cultivars".equals(parentNode.toString())){
+            r = modelList.GetCopyName(modelList.GetAtIndex(index).GetName());
+        }
+        else {
+            
+            String newName = modelList.GetCopyName(node.toString().split(":")[1].trim());
 
-        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
+            r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
+        }
         if (r.length() > 0) {
             if (modelList.GetAt(r) != null) {
                 JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
                 return;
             }
-
-            int index = modelList.GetIndex(getLevel(node.toString()));
+            
             ModelXBase modelClone = modelList.Clone(index, r);
 
             if (modelClone.getClass() == Treatment.class && FileX.general.FileType == ExperimentType.Sequential) {
@@ -727,9 +734,22 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(parentNode);
 
-            if (rows.length > 0) {
-                jXTree1.setSelectionRow(rows[0] + modelList.GetSize());
-            }
+//            if (rows.length > 0) {
+
+            DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+            ArrayList<String> nodeList = new ArrayList<>();
+            getCellIndex(rootNode, nodeList);
+        
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            String management = currentFrame.getManagementName();
+
+            int mIndex = menuAll.indexOf(management);
+
+            String frameName = menuAll.get(mIndex);
+            int select = nodeList.indexOf(frameName);
+            
+            jXTree1.setSelectionRow(select + modelList.GetSize());
+//            }
 
             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
             ShowFrame(frame);

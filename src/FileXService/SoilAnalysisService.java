@@ -120,9 +120,9 @@ public class SoilAnalysisService {
                 }
                 pw.println();
                 if (soil.GetSize() > 0) {
+                    pw.println("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC");
                     for (int n = 0; n < soil.GetSize(); n++) {
                         SoilAnalysisLayer soilLayer = soil.GetLayer(n);
-                        pw.println("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC");
                         pw.print(Utils.PadLeft(level, 2, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SABL, 5, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SADM, 5, ' '));
