@@ -426,6 +426,9 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
         if (onClose()) {
             dispose();
+            
+Runtime.getRuntime().halt(0);
+
         }
     }//GEN-LAST:event_jMenuExitMouseClicked
 
@@ -696,6 +699,12 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
         //int[] rows = jXTree1.getSelectionRows();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
         ManagementList modelList = GetManagementList(parentNode.toString());
+        
+        if(modelList == null || modelList.GetSize() == 0){
+            addLevel();
+            return;
+        }
+        
         int index = modelList.GetIndex(getLevel(node.toString()));
         String r;
         

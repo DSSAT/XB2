@@ -101,12 +101,12 @@ public class FertilizerService {
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(ferApp.FDATE != null)
-                        pw.print(" " + Utils.PadRight(Utils.JulianDate(ferApp.FDATE), 5, ' '));
+                        pw.print(" " + Utils.PadLeft(Utils.JulianDate(ferApp.FDATE), 5, ' '));
                     else
                         pw.print(" " + Utils.PadLeft(ferApp.FDAY, 5, ' '));
 
-                    pw.print(" " + Utils.PadRight(ferApp.FMCD, 5, ' '));
-                    pw.print(" " + Utils.PadRight(ferApp.FACD, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(ferApp.FMCD, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(ferApp.FACD, 5, ' '));
                     pw.print(" " + Utils.PadLeft(ferApp.FDEP, 5, ' '));
                     pw.print(" " + Utils.PadLeft(ferApp.FAMN, 5, ' '));
                     pw.print(" " + Utils.PadLeft(ferApp.FAMP, 5, ' '));

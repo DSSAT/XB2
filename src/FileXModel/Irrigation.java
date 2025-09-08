@@ -16,7 +16,7 @@ import java.util.Comparator;
 public class Irrigation extends ModelXBase implements Cloneable {
 
     protected ArrayList<IrrigationApplication>  irrigApps = new ArrayList<>();
-    public Integer EFIR;
+    public Float EFIR;
     public Integer IDEP;
     public Integer ITHR;
     public Integer IEPT;

@@ -103,7 +103,7 @@ public class InitialConditionService {
     
     public static void Extract(PrintWriter pw){
         // <editor-fold defaultstate="collapsed" desc="Initial Condition">
-        DecimalFormat df2 = new DecimalFormat("0.00");
+        DecimalFormat df1 = new DecimalFormat("0.0");
         DecimalFormat df3 = new DecimalFormat("0.000");
         
         if (initialList.GetSize() > 0) {
@@ -116,7 +116,7 @@ public class InitialConditionService {
                 pw.println("@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICRIP ICRID ICNAME");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadLeft(init.PCR, 5, ' '));
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(init.ICDAT), 5, ' '));
+                pw.print(" " + Utils.PadLeft(Utils.JulianDate(init.ICDAT), 5, ' '));
                 pw.print(" " + Utils.PadLeft(init.ICRT, 5, ' '));
                 pw.print(" " + Utils.PadLeft(init.ICND, 5, ' '));
                 pw.print(" " + Utils.PadLeft(init.ICRN, 5, ' '));
@@ -139,10 +139,10 @@ public class InitialConditionService {
                     for (int n = 0; n < init.GetSize(); n++) {
                         InitialConditionApplication initApp = init.GetApp(n);
                         pw.print(Utils.PadLeft(level, 2, ' '));
-                        pw.print(" " + Utils.PadLeft(initApp.ICBL, 5, ' '));
-                        pw.print(" " + Utils.PadLeft(df3.format(initApp.SH2O), 5, ' '));
-                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNH4), 5, ' ', true));
-                        pw.print(" " + Utils.PadLeft(df2.format(initApp.SNO3), 5, ' ', true));
+                        pw.print(" " + Utils.PadLeft(initApp.ICBL.toString(), 5, ' ', false));
+                        pw.print(" " + Utils.PadLeft(df3.format(initApp.SH2O), 5, ' ', false));
+                        pw.print(" " + Utils.PadLeft(df1.format(initApp.SNH4), 5, ' ', false));
+                        pw.print(" " + Utils.PadLeft(df1.format(initApp.SNO3), 5, ' ', false));
                         pw.println();
                     }
                 }

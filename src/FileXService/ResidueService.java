@@ -64,7 +64,7 @@ public class ResidueService {
                     }
 
                     organicApp.RCOD = Utils.GetString(organicHeader, tmp, " RCOD", 5);
-                    organicApp.RAMT = Utils.GetInteger(organicHeader, tmp, "RAMT", 5);
+                    organicApp.RAMT = Utils.GetInteger(organicHeader, tmp, " RAMT", 6);
                     organicApp.RESN = Utils.GetFloat(organicHeader, tmp, "RESN", 5);
                     organicApp.RESP = Utils.GetFloat(organicHeader, tmp, "RESP", 5);
                     organicApp.RESK = Utils.GetFloat(organicHeader, tmp, "RESK", 5);

@@ -102,7 +102,7 @@ public class TillageService {
                         pw.print(" " + Utils.PadLeft("-99", 5, ' '));
                     }
 
-                    pw.print(" " + Utils.PadRight(tilApp.TIMPL, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(tilApp.TIMPL, 5, ' '));
                     pw.print(" " + Utils.PadLeft(tilApp.TDEP, 5, ' '));
                     if (tillage.TNAME != null) {
                         pw.print(" " + tillage.TNAME);

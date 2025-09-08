@@ -53,7 +53,7 @@ public class IrrigationService {
                     Irrigation irrig = new Irrigation();
                     Integer level = Integer.valueOf(strRead.substring(0, 2).trim());
                     irrig.SetLevel(level);
-                    irrig.EFIR = Utils.GetInteger(irrigHeader1, tmp, "EFIR", 5);
+                    irrig.EFIR = Utils.GetFloat(irrigHeader1, tmp, "EFIR", 5);
                     irrig.IDEP = Utils.GetInteger(irrigHeader1, tmp, "IDEP", 5);
                     irrig.ITHR = Utils.GetInteger(irrigHeader1, tmp, "ITHR", 5);
                     irrig.IEPT = Utils.GetInteger(irrigHeader1, tmp, "IEPT", 5);
@@ -136,7 +136,7 @@ public class IrrigationService {
                         else
                             pw.print(" " + Utils.PadLeft(irrigApp.IDAY, 5, ' '));
 
-                        pw.print(" " + Utils.PadRight(irrigApp.IROP, 5, ' '));
+                        pw.print(" " + Utils.PadLeft(irrigApp.IROP, 5, ' '));
                         pw.print(" " + Utils.PadLeft(irrigApp.IRVAL, 5, ' '));
                         pw.println();
                     }

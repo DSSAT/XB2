@@ -2300,41 +2300,33 @@
                                                           <Group type="102" attributes="0">
                                                               <Group type="103" groupAlignment="1" attributes="0">
                                                                   <Group type="102" attributes="0">
-                                                                      <Group type="103" groupAlignment="1" attributes="0">
-                                                                          <Group type="102" attributes="0">
-                                                                              <Component id="dpHFRST" min="-2" max="-2" attributes="0"/>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                                                  <Component id="dpHLAST" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                                                  <Component id="txtHPCNP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                                  <Component id="lbProductHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                                                  <Component id="txtHPCNR" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                                  <Component id="lbResidueHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                                                  <Component id="txtHMFRQ" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                                  <Component id="lbResidueHarvestedUnit1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                          </Group>
-                                                                          <Group type="102" attributes="0">
-                                                                              <Component id="lbHarvestEarliest" min="-2" max="-2" attributes="0"/>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Component id="lbHarvestLatest" min="-2" max="-2" attributes="0"/>
-                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                              <Component id="lbProductHarvested" min="-2" max="-2" attributes="0"/>
-                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                              <Component id="lbResidueHarvested" min="-2" max="-2" attributes="0"/>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Component id="lbResidueHarvested1" min="-2" max="-2" attributes="0"/>
-                                                                          </Group>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="dpHFRST" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbHarvestEarliest" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="dpHLAST" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbHarvestLatest" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHPCNP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbProductHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbProductHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHPCNR" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHMFRQ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvestedUnit1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvested1" alignment="3" min="-2" max="-2" attributes="0"/>
                                                                       </Group>
                                                                       <EmptySpace max="-2" attributes="0"/>
                                                                       <Component id="txtHMGDD" min="-2" max="-2" attributes="0"/>

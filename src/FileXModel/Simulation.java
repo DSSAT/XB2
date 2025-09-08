@@ -103,6 +103,7 @@ public class Simulation extends ModelXBase implements Cloneable {
 
     // <editor-fold defaultstate="collapsed" desc="HARVEST">
     public Date HFRST;
+    public Integer HFRST_Init;
     public Date HLAST;
     public Integer HLAST_Day;
     public Float HPCNP;

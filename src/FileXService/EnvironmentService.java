@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -97,6 +98,8 @@ public class EnvironmentService {
             pw.println();
             pw.println("*ENVIRONMENT MODIFICATIONS");
             pw.println("@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME");
+            
+            DecimalFormat df1 = new DecimalFormat("0.0");
 
             for (int i = 0; i < environmentals.GetSize(); i++) {
                 Environmental env = (Environmental) environmentals.GetAtIndex(i);
@@ -113,21 +116,21 @@ public class EnvironmentService {
                     }
 
                     pw.print(" " + envApp.EDAY_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDAY, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EDAY.toString(), 4, ' ', false));
                     pw.print(" " + envApp.ERAD_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ERAD, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.ERAD.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EMAX_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMAX, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EMAX.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EMIN_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMIN, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EMIN.toString(), 4, ' ', false));
                     pw.print(" " + envApp.ERAIN_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ERAIN, 4, ' '));
+                    pw.print(Utils.PadLeft(df1.format(envApp.ERAIN), 4, ' '));
                     pw.print(" " + envApp.ECO2_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ECO2, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.ECO2.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EDEW_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDEW, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EDEW.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EWIND_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EWIND, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EWIND.toString(), 4, ' ', false));
                     if (env.ENVNAME != null) {
                         pw.print(" " + env.ENVNAME);
                     } else {

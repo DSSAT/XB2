@@ -42,18 +42,21 @@ public class FieldService {
                     fieldHeader3 = tmp.trim();
                     bFieldHeader3 = true;                    
                 } else if (bField && bFieldHeader1 && !bFieldHeader2 && !bFieldHeader3) {
+                    FieldDetail field = new FieldDetail();
+                    
                     if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
                         bFieldHeader2 = false;
                         continue;
                     }
-                    else if(strRead.trim().startsWith("!")){
-                        continue;
+                    else if(tmp.trim().startsWith("!")){
+                        tmp = tmp.substring(1);
+                        field.setEnabled(false);
                     }
                     
                     //@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME
-                    FieldDetail field = new FieldDetail();
+                    
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                     field.SetLevel(level);
                     field.ID_FIELD = Utils.GetString(fieldHeader1, tmp, "ID_FIELD", 8);
@@ -63,7 +66,7 @@ public class FieldService {
                     field.FLDT = Utils.GetString(fieldHeader1, tmp, " FLDT", 5);
                     field.FLDD = Utils.GetFloat(fieldHeader1, tmp, "FLDD", 5);
                     field.FLDS = Utils.GetFloat(fieldHeader1, tmp, "FLDS", 5);
-                    field.FLST = Utils.GetFloat(fieldHeader1, tmp, " FLST", 5);
+                    field.FLST = Utils.GetString(fieldHeader1, tmp, " FLST", 5);
                     field.SLTX = Utils.GetString(fieldHeader1, tmp, "SLTX", 5);
                     field.SLDP = Utils.GetFloat(fieldHeader1, tmp, "SLDP", 5);
                     field.ID_SOIL = Utils.GetString(fieldHeader1, tmp, "ID_SOIL", 10);
@@ -71,20 +74,24 @@ public class FieldService {
 
                     fieldList.AddNew(field);
                 } else if (bField && bFieldHeader1 && bFieldHeader2 && !bFieldHeader3) {
+                    boolean isEnabled = true;
+                    
                     if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
                         bFieldHeader2 = false;
                         continue;
                     }
-                    else if(strRead.trim().startsWith("!")){
-                        continue;
+                    else if(tmp.trim().startsWith("!")){
+                        tmp = tmp.substring(1);
+                        isEnabled = false;
                     }
                     //@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR
 
                     try {
                         Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
+                        field.setEnabled(isEnabled);
 
                         field.XCRD = Utils.GetFloat(fieldHeader2, tmp, "XCRD", 15);
                         field.YCRD = Utils.GetFloat(fieldHeader2, tmp, "YCRD", 15);
@@ -98,6 +105,8 @@ public class FieldService {
                     } catch (NumberFormatException numberFormatException) {
                     }
                 } else if(bField && bFieldHeader1 && bFieldHeader2 && bFieldHeader3 ){
+                    boolean isEnabled = true;
+                    
                     if ("".equals(tmp.trim())) {
                         bField = false;
                         bFieldHeader1 = false;
@@ -105,13 +114,15 @@ public class FieldService {
                         bFieldHeader3 = false;
                         continue;
                     }
-                    else if(strRead.trim().startsWith("!")){
-                        continue;
+                    else if(tmp.trim().startsWith("!")){
+                        tmp = tmp.substring(1);
+                        isEnabled = false;
                     }
                     
                     try {
                         Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
+                        field.setEnabled(isEnabled);
                         
                         field.PMALB = Utils.GetFloat(fieldHeader3, tmp, "PMALB", 5);
                         field.BDWD = Utils.GetInteger(fieldHeader3, tmp, "BDWD", 5);
@@ -143,7 +154,7 @@ public class FieldService {
                 pw.print(" " + Utils.PadLeft(field.FLDT, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.FLDD, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.FLDS, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.FLST, 5, ' '));
+                pw.print(" " + Utils.PadLeft(field.FLST, 5, "0".equals(field.FLST) ? '0' : ' '));
                 pw.print(" " + Utils.PadRight(field.SLTX, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.SLDP, 4, ' '));
                 pw.print("  " + Utils.PadRight(field.ID_SOIL, 10, ' '));
@@ -172,12 +183,12 @@ public class FieldService {
                 pw.println();
             }
             
-            pw.println("@L  PMALB  BDWD  BDHT");
+            pw.println("@L PMALB  BDWD  BDHT");
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 Integer level = i + 1;
                 FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
                 pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" " + Utils.PadLeft(field.PMALB, 6, ' '));
+                pw.print(" " + Utils.PadLeft(field.PMALB, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.BDWD, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.BDHT, 5, ' '));
                 pw.println();

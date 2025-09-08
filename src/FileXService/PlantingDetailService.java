@@ -81,7 +81,7 @@ public class PlantingDetailService {
                 Integer level = plants.GetLevel();
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.PDATE), 5, ' '));
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.EDATE), 5, ' '));
+                pw.print(" " + Utils.PadLeft(Utils.JulianDate(plants.EDATE), 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PPOP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PPOE, 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PLME, 5, ' '));

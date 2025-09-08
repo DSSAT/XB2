@@ -483,7 +483,7 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     protected void Update() {
         try
         {
-            irrig.EFIR = Integer.valueOf(txtEFIR.getText());
+            irrig.EFIR = Float.valueOf(txtEFIR.getText());
         }
         catch(NumberFormatException ex)
         {

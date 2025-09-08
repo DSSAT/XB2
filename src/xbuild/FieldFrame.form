@@ -1030,14 +1030,13 @@
                                       <Component id="jXLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jXLabel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtFLST" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtFLST" min="-2" pref="121" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="cbSoil" min="-2" pref="264" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbSoilCode" max="32767" attributes="0"/>
+                                      <Component id="cbSoilCode" pref="116" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="cbSLTX" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -1060,7 +1059,7 @@
                                   <Component id="jXLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cbSLTX" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtSLDP" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1068,8 +1067,8 @@
                                       <Component id="jXLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="txtFLST" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jXLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtFLST" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -1116,16 +1115,6 @@
                         <Property name="text" type="java.lang.String" value="Surface Stones"/>
                       </Properties>
                     </Component>
-                    <Component class="xbuild.Components.XFormattedTextField" name="txtFLST">
-                      <Properties>
-                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                          <Format format="#0.00" subtype="-1" type="0"/>
-                        </Property>
-                        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="new InputNumberVerifier()" type="code"/>
-                        </Property>
-                      </Properties>
-                    </Component>
                     <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel2">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Surface Texture"/>
@@ -1139,6 +1128,8 @@
                     <Component class="xbuild.Components.XComboBox" name="cbSoilCode">
                     </Component>
                     <Component class="xbuild.Components.XDropdownTableComboBox" name="cbSLTX">
+                    </Component>
+                    <Component class="xbuild.Components.XTextField" name="txtFLST">
                     </Component>
                   </SubComponents>
                 </Container>

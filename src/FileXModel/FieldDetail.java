@@ -27,7 +27,7 @@ public class FieldDetail extends ModelXBase implements Cloneable {
     public String FLDT;
     public Float FLDD;
     public Float FLDS;
-    public Float FLST;
+    public String FLST;
     public String SLTX;
     public Float SLDP;
     public String ID_SOIL;

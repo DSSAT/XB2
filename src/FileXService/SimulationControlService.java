@@ -8,7 +8,6 @@ import FileXModel.SimulationList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
-
 /**
  *
  * @author Jazzy
@@ -357,7 +356,11 @@ public class SimulationControlService {
                         sim.HFRST = Utils.GetDate(simHarvestHeader, tmp, "HFRST", 5);
                     }
                     catch(Exception ex){
-                        
+                        sim.HFRST_Init = Utils.GetInteger(simHarvestHeader, tmp, "HFRST", 5);
+//                        if(sim.HFRST == null && sim.HFRST_Init != null){
+//                            LocalDate localDate = LocalDate.of(1900, 1, 1);
+//                            sim.HFRST = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//                        }
                     }
                     try{
                         sim.HLAST = Utils.GetDate(simHarvestHeader, tmp, "HLAST", 5);
@@ -552,8 +555,8 @@ public class SimulationControlService {
                 pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR HMFRQ HMGDD HMCUT HMMOW HRSPL HMVS");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" HA         ");
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HFRST), 5, ' '));
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HLAST), 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HFRST_Init == null ? Utils.JulianDate(sim.HFRST) : sim.HFRST_Init.toString(), 5, ' '));
+                pw.print(" " + Utils.PadLeft(Utils.JulianDate(sim.HLAST), 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNR, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HMFRQ, 5, ' '));
