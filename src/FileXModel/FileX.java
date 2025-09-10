@@ -23,6 +23,7 @@ public class FileX {
     public static SimulationList simulationList;
     public static TreatmentList treatments;
     public static WstaType wstaType;
+    public static FileXCommentList comments;
     
     public static boolean isFileOpenned;
     public static boolean isReady;
@@ -55,6 +56,9 @@ public class FileX {
         chemicalList = new ChemicalList();
         simulationList = new SimulationList();
         treatments = new TreatmentList();
+        comments = new FileXCommentList();
+        
+        
 
         fileName = null;
     }
@@ -77,6 +81,8 @@ public class FileX {
         chemicalList = null;
         simulationList = null;
         treatments = null;
+        
+        comments = null;
 
         fileName = null;
         isFileOpenned = false;

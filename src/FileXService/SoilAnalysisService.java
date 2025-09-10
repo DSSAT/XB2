@@ -1,7 +1,10 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.soilAnalysis;
+import FileXModel.Section;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
 import java.io.BufferedReader;
@@ -47,6 +50,11 @@ public class SoilAnalysisService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(soilAnalysis.GetSize() > 0){
+                            l = soilAnalysis.GetAtIndex(soilAnalysis.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Soil1, strRead);
                         continue;
                     }
                     //@A SADAT  SMHB  SMPX  SMKE  SANAME
@@ -68,6 +76,11 @@ public class SoilAnalysisService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(soilAnalysis.GetSize() > 0){
+                            l = soilAnalysis.GetAtIndex(soilAnalysis.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Soil2, strRead);
                         continue;
                     }
                     //@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC
@@ -119,6 +132,11 @@ public class SoilAnalysisService {
                     pw.print("  -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Soil1)) {
+                    pw.println(comment.description);
+                }
+                
                 if (soil.GetSize() > 0) {
                     pw.println("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC");
                     for (int n = 0; n < soil.GetSize(); n++) {
@@ -134,6 +152,10 @@ public class SoilAnalysisService {
                         pw.print(" " + Utils.PadLeft(soilLayer.SAKE, 5, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SASC, 5, ' '));
                         pw.println();
+                    }
+                    
+                    for (Comment comment : comments.getAll(level, Section.Soil2)) {
+                        pw.println(comment.description);
                     }
                 }
             }

@@ -1,9 +1,12 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.irrigations;
 import FileXModel.Irrigation;
 import FileXModel.IrrigationApplication;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -47,6 +50,11 @@ public class IrrigationService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(irrigations.GetSize() > 0){
+                            l = irrigations.GetAtIndex(irrigations.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Irrigation1, strRead);
                         continue;
                     }
                     //@I  EFIR  IDEP  ITHR  IEPT  IOFF  IAME  IAMT IRNAME
@@ -71,6 +79,11 @@ public class IrrigationService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(irrigations.GetSize() > 0){
+                            l = irrigations.GetAtIndex(irrigations.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Irrigation2, strRead);
                         continue;
                     }
                     
@@ -125,6 +138,11 @@ public class IrrigationService {
                     pw.print(" -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Irrigation1)) {
+                    pw.println(comment.description);
+                }
+                
                 if (irrig.GetSize() > 0) {
                     pw.println("@I IDATE  IROP IRVAL");
                     for (int n = 0; n < irrig.GetSize(); n++) {
@@ -139,6 +157,10 @@ public class IrrigationService {
                         pw.print(" " + Utils.PadLeft(irrigApp.IROP, 5, ' '));
                         pw.print(" " + Utils.PadLeft(irrigApp.IRVAL, 5, ' '));
                         pw.println();
+                    }
+                    
+                    for (Comment comment : comments.getAll(level, Section.Irrigation2)) {
+                        pw.println(comment.description);
                     }
                 }
             }

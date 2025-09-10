@@ -3,7 +3,10 @@ package FileXService;
 import Extensions.Utils;
 import FileXModel.Chemical;
 import FileXModel.ChemicalApplication;
+import FileXModel.Comment;
 import static FileXModel.FileX.chemicalList;
+import static FileXModel.FileX.comments;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -33,13 +36,18 @@ public class ChemicalApplicationService {
                 } else if (bChemical && !bChemicalHeader && tmp.trim().startsWith("@")) {
                     chemicalHeader = tmp.trim();
                     bChemicalHeader = true;
-                } else if (bChemical && bChemicalHeader && !tmp.trim().startsWith("!")) {
+                } else if (bChemical && bChemicalHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bChemical = false;
                         bChemicalHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(chemicalList.GetSize() > 0){
+                            l = chemicalList.GetAtIndex(chemicalList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Chemical, strRead);
                         continue;
                     }
                     
@@ -87,10 +95,11 @@ public class ChemicalApplicationService {
             pw.println("@C CDATE CHCOD CHAMT  CHME CHDEP   CHT..CHNAME");
             for (int i = 0; i < chemicalList.GetSize(); i++) {
                 Chemical chem = (Chemical)chemicalList.GetAtIndex(i);
+                Integer level = chem.GetLevel();
+                
                 for (int n = 0; n < chem.GetSize(); n++) {
                     ChemicalApplication chemApp = chem.GetApp(n);
-
-                    Integer level = chem.GetLevel();
+    
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {
@@ -113,6 +122,10 @@ public class ChemicalApplicationService {
                         pw.print("  -99");
                     }
                     pw.println();
+                }
+                
+                for (Comment comment : comments.getAll(level, Section.Chemical)) {
+                    pw.println(comment.description);
                 }
             }
         }

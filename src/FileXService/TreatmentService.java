@@ -1,14 +1,15 @@
 package FileXService;
 
-import DSSATModel.ExperimentType;
 import Extensions.Utils;
-import FileXModel.FileX;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import FileXModel.Treatment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import static FileXModel.FileX.treatments;
+import FileXModel.Section;
 
 /**
  *
@@ -37,7 +38,15 @@ public class TreatmentService {
                     bTreatment = false;
                     bTreatmentHeader = false;
                 }
-                else if (bTreatment && bTreatmentHeader && !"".equals(strRead.trim()) && !strRead.trim().startsWith("!")) {
+                else if (bTreatment && bTreatmentHeader && !"".equals(strRead.trim())) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(treatments.GetSize() > 0){
+                            l = treatments.GetAtIndex(treatments.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Treatment, strRead);
+                        continue;
+                    }
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     Treatment treatment = new Treatment();
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
@@ -77,7 +86,8 @@ public class TreatmentService {
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treatments.GetSize(); i++) {
                 Treatment treat = (Treatment) treatments.GetAtIndex(i);
-                pw.print(Utils.PadLeft(treat.GetLevel(), 2, ' '));
+                int level = treat.GetLevel();
+                pw.print(Utils.PadLeft(level, 2, ' '));
                 
 //                if(FileX.general.FileType != ExperimentType.Sequential)
 //                    pw.print(" 1 0 0");
@@ -199,6 +209,10 @@ public class TreatmentService {
                     pw.print("  0");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Treatment)) {
+                    pw.println(comment.description);
+                }
             }
         }
         // </editor-fold>

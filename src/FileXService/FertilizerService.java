@@ -1,9 +1,12 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
 import FileXModel.Fertilizer;
 import FileXModel.FertilizerApplication;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.fertilizerList;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -33,13 +36,18 @@ public class FertilizerService {
                 } else if (bFertilizer && !bFertilizerHeader && tmp.trim().startsWith("@")) {
                     fertilizerHeader = tmp.trim();
                     bFertilizerHeader = true;
-                } else if (bFertilizer && bFertilizerHeader && !tmp.trim().startsWith("!")) {
+                } else if (bFertilizer && bFertilizerHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bFertilizer = false;
                         bFertilizerHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(fertilizerList.GetSize() > 0){
+                            l = fertilizerList.GetAtIndex(fertilizerList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Fertilizer, strRead);
                         continue;
                     }
                     
@@ -94,10 +102,11 @@ public class FertilizerService {
             pw.println("@F FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD FERNAME");
             for (int i = 0; i < fertilizerList.GetSize(); i++) {
                 Fertilizer fertil = (Fertilizer)fertilizerList.GetAtIndex(i);
+                Integer level = fertil.GetLevel();
+                
                 for (int n = 0; n < fertil.GetSize(); n++) {
                     FertilizerApplication ferApp = fertil.GetApp(n);
-
-                    Integer level = fertil.GetLevel();
+                    
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(ferApp.FDATE != null)
@@ -120,6 +129,10 @@ public class FertilizerService {
                         pw.print(" -99");
                     }
                     pw.println();
+                }
+                
+                for (Comment comment : comments.getAll(level, Section.Fertilizer)) {
+                    pw.println(comment.description);
                 }
             }
         }

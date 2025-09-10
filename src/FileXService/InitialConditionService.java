@@ -1,9 +1,12 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.initialList;
 import FileXModel.InitialCondition;
 import FileXModel.InitialConditionApplication;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -48,6 +51,11 @@ public class InitialConditionService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(initialList.GetSize() > 0){
+                            l = initialList.GetAtIndex(initialList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.InitialCondition1, strRead);
                         continue;
                     }
                     //@C   PCR ICDAT  ICRT  ICND  ICRN  ICRE  ICWD ICRES ICREN ICREP ICREP ICRID ICNAME
@@ -77,6 +85,11 @@ public class InitialConditionService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(initialList.GetSize() > 0){
+                            l = initialList.GetAtIndex(initialList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.InitialCondition2, strRead);
                         continue;
                     }
                     //@C  ICBL  SH2O  SNH4  SNO3
@@ -133,6 +146,11 @@ public class InitialConditionService {
                     pw.print(" -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.InitialCondition1)) {
+                    pw.println(comment.description);
+                }
+                
                 if (init.GetSize() > 0) {
                     pw.println("@C  ICBL  SH2O  SNH4  SNO3");
 
@@ -144,6 +162,10 @@ public class InitialConditionService {
                         pw.print(" " + Utils.PadLeft(df1.format(initApp.SNH4), 5, ' ', false));
                         pw.print(" " + Utils.PadLeft(df1.format(initApp.SNO3), 5, ' ', false));
                         pw.println();
+                    }
+                    
+                    for (Comment comment : comments.getAll(level, Section.InitialCondition2)) {
+                        pw.println(comment.description);
                     }
                 }
             }
