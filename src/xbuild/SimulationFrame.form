@@ -118,7 +118,7 @@
                           </Group>
                           <Component id="lblLevel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="176" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -136,7 +136,7 @@
                   <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="665" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="582" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -215,7 +215,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="imagePanel" min="-2" pref="200" max="-2" attributes="0"/>
-                          <EmptySpace pref="275" max="32767" attributes="0"/>
+                          <EmptySpace pref="427" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -436,7 +436,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                           <Component id="jXPanel13" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="562" max="32767" attributes="0"/>
+                          <EmptySpace pref="714" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -876,7 +876,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -900,7 +900,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -924,7 +924,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -948,7 +948,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -972,7 +972,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -996,7 +996,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1020,7 +1020,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1044,7 +1044,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1068,7 +1068,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1099" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -1131,7 +1131,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel15" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="453" max="32767" attributes="0"/>
+                                  <EmptySpace pref="605" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1538,7 +1538,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel19" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="560" max="32767" attributes="0"/>
+                                  <EmptySpace pref="712" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1809,7 +1809,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel20" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="494" max="32767" attributes="0"/>
+                                  <EmptySpace pref="646" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2024,7 +2024,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel21" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="726" max="32767" attributes="0"/>
+                                  <EmptySpace pref="878" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2202,7 +2202,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel22" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="602" max="32767" attributes="0"/>
+                                  <EmptySpace pref="496" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2211,7 +2211,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jXPanel22" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="183" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2231,40 +2231,56 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lbHarvestEarliest" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbHarvestLatest" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbProductHarvested" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbResidueHarvested" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested4" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested5" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested6" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jXRadioGroup15" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtHPCNR" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="lbResidueHarvestedUnit" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtHPCNP" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="lbProductHarvestedUnit" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="dpHFRST" max="32767" attributes="0"/>
-                                                          <Component id="dpHLAST" max="32767" attributes="1"/>
-                                                      </Group>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtHPCNP" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="lbProductHarvestedUnit" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="dpHFRST" max="32767" attributes="0"/>
+                                                  <Component id="dpHLAST" min="-2" max="-2" attributes="1"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="txtHMFRQ" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHPCNR" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHMGDD" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHMCUT" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHMMOW" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHRSPL" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtHMVS" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lbResidueHarvestedUnit" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit2" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jXLabel49" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jXRadioGroup15" min="-2" pref="378" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -2274,31 +2290,80 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jXRadioGroup15" pref="106" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jXRadioGroup15" min="-2" pref="84" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lbHarvestEarliest" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dpHFRST" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                                  <Group type="102" attributes="0">
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="dpHFRST" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbHarvestEarliest" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="dpHLAST" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbHarvestLatest" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHPCNP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbProductHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbProductHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHPCNR" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                                          <Component id="txtHMFRQ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvestedUnit1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                          <Component id="lbResidueHarvested1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Component id="txtHMGDD" min="-2" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="lbResidueHarvested2" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                                  <Component id="txtHMCUT" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="lbResidueHarvestedUnit2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Component id="lbResidueHarvested3" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                          <Component id="txtHMMOW" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jXLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Component id="lbResidueHarvested4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="txtHRSPL" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResidueHarvestedUnit3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="lbResidueHarvested5" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbHarvestLatest" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dpHLAST" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtHMVS" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvested6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbResidueHarvestedUnit4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbProductHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtHPCNP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbProductHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbResidueHarvested" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtHPCNR" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbResidueHarvestedUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <EmptySpace pref="9" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2381,6 +2446,103 @@
                                 </Property>
                               </Properties>
                             </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHMFRQ">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHMGDD">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHMCUT">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0.00" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHMMOW">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHRSPL">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="xbuild.Components.XFormattedTextField" name="txtHMVS">
+                              <Properties>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                                  <Format format="#0" subtype="-1" type="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Mow havest frequency"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvestedUnit1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="days"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Growing degree days required to trigger a new automatic mow event"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested3">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Mow cutting height"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested4">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Stubble mass after mowing"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested5">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Stubble percent leaf"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvested6">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Residual vegetative stage after mowing"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvestedUnit2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="cm"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvestedUnit3">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="%"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="lbResidueHarvestedUnit4">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="range 0- 80"/>
+                              </Properties>
+                            </Component>
+                            <Component class="org.jdesktop.swingx.JXLabel" name="jXLabel49">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="kg/ha"/>
+                              </Properties>
+                            </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -2404,7 +2566,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jXPanel16" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="532" max="32767" attributes="0"/>
+                          <EmptySpace pref="684" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2976,7 +3138,7 @@
                               </Group>
                               <Component id="jXLabel48" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="257" max="32767" attributes="0"/>
+                          <EmptySpace pref="409" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

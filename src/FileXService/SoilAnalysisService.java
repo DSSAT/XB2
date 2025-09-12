@@ -1,7 +1,10 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.soilAnalysis;
+import FileXModel.Section;
 import FileXModel.SoilAnalysis;
 import FileXModel.SoilAnalysisLayer;
 import java.io.BufferedReader;
@@ -34,10 +37,10 @@ public class SoilAnalysisService {
                 } else if (bSoil && !bSoilHeader1 && !bSoilHeader2 && tmp.trim().startsWith("@")) {
                     soilHeader1 = tmp.trim();
                     bSoilHeader1 = true;
-                } else if (bSoil && bSoilHeader1 && !bSoilHeader2 && tmp.trim().startsWith("@")) {
+                } else if (bSoil && bSoilHeader1 && tmp.trim().startsWith("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC")) {
                     soilHeader2 = tmp.trim();
                     bSoilHeader2 = true;
-                } else if (bSoil && bSoilHeader1 && bSoilHeader2 && tmp.trim().startsWith("@")) {
+                } else if (bSoil && bSoilHeader1 && bSoilHeader2 && tmp.trim().startsWith("@") && !tmp.trim().startsWith("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC")) {
                     bSoilHeader2 = false;
                 }else if (bSoil && bSoilHeader1 && !bSoilHeader2) {
                     if ("".equals(tmp.trim())) {
@@ -47,6 +50,11 @@ public class SoilAnalysisService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(soilAnalysis.GetSize() > 0){
+                            l = soilAnalysis.GetAtIndex(soilAnalysis.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Soil1, strRead);
                         continue;
                     }
                     //@A SADAT  SMHB  SMPX  SMKE  SANAME
@@ -68,6 +76,11 @@ public class SoilAnalysisService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(soilAnalysis.GetSize() > 0){
+                            l = soilAnalysis.GetAtIndex(soilAnalysis.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Soil2, strRead);
                         continue;
                     }
                     //@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC
@@ -87,6 +100,7 @@ public class SoilAnalysisService {
                         soilLayer.SAKE = Utils.GetFloat(soilHeader2, tmp, "SAKE", 5);
                         soilLayer.SASC = Utils.GetFloat(soilHeader2, tmp, "SASC", 5);
                         soil.AddLayer(soilLayer);
+//                        bSoilHeader2 = false;
 
                     } catch (NumberFormatException numberFormatException) {
                     }
@@ -118,10 +132,15 @@ public class SoilAnalysisService {
                     pw.print("  -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Soil1)) {
+                    pw.println(comment.description);
+                }
+                
                 if (soil.GetSize() > 0) {
+                    pw.println("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC");
                     for (int n = 0; n < soil.GetSize(); n++) {
                         SoilAnalysisLayer soilLayer = soil.GetLayer(n);
-                        pw.println("@A  SABL  SADM  SAOC  SANI SAPHW SAPHB  SAPX  SAKE  SASC");
                         pw.print(Utils.PadLeft(level, 2, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SABL, 5, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SADM, 5, ' '));
@@ -133,6 +152,10 @@ public class SoilAnalysisService {
                         pw.print(" " + Utils.PadLeft(soilLayer.SAKE, 5, ' '));
                         pw.print(" " + Utils.PadLeft(soilLayer.SASC, 5, ' '));
                         pw.println();
+                    }
+                    
+                    for (Comment comment : comments.getAll(level, Section.Soil2)) {
+                        pw.println(comment.description);
                     }
                 }
             }

@@ -72,10 +72,10 @@ public class FileXService {
         IrrigationService.Extract(pw);
         FertilizerService.Extract(pw);
         ResidueService.Extract(pw);
-        ChemicalApplicationService.Extract(pw);
-        HarvestService.Extract(pw);
-        EnvironmentService.Extract(pw);
         TillageService.Extract(pw);
+        EnvironmentService.Extract(pw);
+        HarvestService.Extract(pw);        
+        ChemicalApplicationService.Extract(pw);
         SimulationControlService.Extract(pw);        
         
         try {

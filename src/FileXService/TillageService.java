@@ -1,7 +1,10 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.tillageList;
+import FileXModel.Section;
 import FileXModel.Tillage;
 import FileXModel.TillageApplication;
 import java.io.BufferedReader;
@@ -34,13 +37,18 @@ public class TillageService {
                 } else if (bTillage && !bTillageHeader && tmp.trim().startsWith("@")) {
                     tillageHeader = tmp.trim();
                     bTillageHeader = true;
-                } else if (bTillage && bTillageHeader && !tmp.trim().startsWith("!")) {
+                } else if (bTillage && bTillageHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bTillage = false;
                         bTillageHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(tillageList.GetSize() > 0){
+                            l = tillageList.GetAtIndex(tillageList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Tillage, strRead);
                         continue;
                     }
                     
@@ -87,10 +95,12 @@ public class TillageService {
             pw.println("@T TDATE TIMPL  TDEP TNAME");
             for (int i = 0; i < tillageList.GetSize(); i++) {
                 Tillage tillage = (Tillage)tillageList.GetAtIndex(i);
+                Integer level = tillage.GetLevel();
+                
                 for (int n = 0; n < tillage.GetSize(); n++) {
                     TillageApplication tilApp = tillage.GetApp(n);
 
-                    Integer level = tillage.GetLevel();
+                    
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {
@@ -102,7 +112,7 @@ public class TillageService {
                         pw.print(" " + Utils.PadLeft("-99", 5, ' '));
                     }
 
-                    pw.print(" " + Utils.PadRight(tilApp.TIMPL, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(tilApp.TIMPL, 5, ' '));
                     pw.print(" " + Utils.PadLeft(tilApp.TDEP, 5, ' '));
                     if (tillage.TNAME != null) {
                         pw.print(" " + tillage.TNAME);
@@ -110,6 +120,10 @@ public class TillageService {
                         pw.print(" -99");
                     }
                     pw.println();
+                }
+                
+                for (Comment comment : comments.getAll(level, Section.Tillage)) {
+                    pw.println(comment.description);
                 }
             }
         }

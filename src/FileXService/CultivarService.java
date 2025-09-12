@@ -1,8 +1,11 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
 import FileXModel.Cultivar;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.cultivars;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -37,6 +40,11 @@ public class CultivarService {
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(cultivars.GetSize() > 0){
+                            l = cultivars.GetAtIndex(cultivars.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Cultivar, strRead);
                         continue;
                     }
                     //@C CR INGENO CNAME
@@ -68,6 +76,10 @@ public class CultivarService {
                 pw.print(" " + Utils.PadLeft(cul.INGENO, 6, ' '));
                 pw.print(" " + Utils.PadLeft(cul.CNAME, 0, ' '));
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Cultivar)) {
+                    pw.println(comment.description);
+                }
             }
         }
 

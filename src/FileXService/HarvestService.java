@@ -1,9 +1,12 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.harvestList;
 import FileXModel.Harvest;
 import FileXModel.HarvestApplication;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -33,13 +36,18 @@ public class HarvestService {
                 } else if (bHarvest && !bHarvestHeader && tmp.trim().startsWith("@")) {
                     harvestHeader = tmp.trim();
                     bHarvestHeader = true;
-                } else if (bHarvest && bHarvestHeader && !tmp.trim().startsWith("!")) {
+                } else if (bHarvest && bHarvestHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bHarvest = false;
                         bHarvestHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(harvestList.GetSize() > 0){
+                            l = harvestList.GetAtIndex(harvestList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Harvest, strRead);
                         continue;
                     }
                     
@@ -88,10 +96,11 @@ public class HarvestService {
             pw.println("@H HDATE  HSTG  HCOM HSIZE   HPC  HBPC HNAME");
             for (int i = 0; i < harvestList.GetSize(); i++) {
                 Harvest harvest = (Harvest)harvestList.GetAtIndex(i);
+                Integer level = harvest.GetLevel();
+                
                 for (int n = 0; n < harvest.GetSize(); n++) {
                     HarvestApplication harvestApp = harvest.GetApp(n);
 
-                    Integer level = harvest.GetLevel();
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     if(harvestApp.HDATE != null)
@@ -116,6 +125,10 @@ public class HarvestService {
                         pw.print(" -99");
                     }
                     pw.println();
+                }
+                
+                for (Comment comment : comments.getAll(level, Section.Harvest)) {
+                    pw.println(comment.description);
                 }
             }
         }

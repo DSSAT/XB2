@@ -26,7 +26,34 @@ public class IrrigationList extends ManagementList {
         try{
             newSource = new Irrigation();
             newSource.IRNAME = newName;
-            newSource.EFIR = source.EFIR;
+            
+            if(source.EFIR != null){
+                newSource.EFIR = source.EFIR;
+            }
+            
+            if(source.IAME != null){
+                newSource.IAME = source.IAME;
+            }
+            
+            if(source.IAMT != null){
+                newSource.IAMT = source.IAMT;
+            }
+            
+            if(source.IDEP != null){
+                newSource.IDEP = source.IDEP;
+            }
+            
+            if(source.IEPT != null){
+                newSource.IEPT = source.IEPT;
+            }
+            
+            if(source.IOFF != null){
+                newSource.IOFF = source.IOFF;
+            }
+            
+            if(source.ITHR != null){
+                newSource.ITHR = source.ITHR;
+            }
             
             for(IrrigationApplication ir : source.GetApps()) {
                 IrrigationApplication ia = (IrrigationApplication) ir.Clone();                

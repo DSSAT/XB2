@@ -150,7 +150,7 @@ public class GeneralService {
 
         pw.println("@PEOPLE");
         if (general.People != null && !"".equals(general.People)) {
-            pw.println(general.People);
+            pw.println(" " + general.People);
 
         } else {
             pw.println("-99");
@@ -159,7 +159,7 @@ public class GeneralService {
         }
         pw.println("@ADDRESS");
         if (general.Adress != null && !"".equals(general.Adress)) {
-            pw.println(general.Adress);
+            pw.println(" " + general.Adress);
 
         } else {
             pw.println("-99");
@@ -167,36 +167,36 @@ public class GeneralService {
         }
         pw.println("@SITE");
         if (general.Site != null && !"".equals(general.Site)) {
-            pw.println(general.Site);
+            pw.println(" " + general.Site);
 
         } else {
             pw.println("-99");
         }
 
+        // <editor-fold defaultstate="collapsed" desc="PLOT">
+        
+        pw.println("@ PAREA  PRNO  PLEN  PLDR  PLSP  PLAY HAREA  HRNO  HLEN  HARM.........");
+        pw.print(Utils.PadLeft(general.PAREA, 7, ' '));
+
+        pw.print(Utils.PadLeft(general.PRNO, 6, ' '));
+        pw.print(Utils.PadLeft(general.PLEN, 6, ' '));
+        pw.print(Utils.PadLeft(general.PLDR, 6, ' '));
+        pw.print(Utils.PadLeft(general.PLSP, 6, ' '));
+        pw.print(Utils.PadLeft(general.PLAY, 6, ' '));
+        pw.print(Utils.PadLeft(general.HAREA, 6, ' '));
+        pw.print(Utils.PadLeft(general.HRNO, 6, ' '));
+        pw.print(Utils.PadLeft(general.HLEN, 6, ' '));
+        pw.print("  " + general.HARM);
+        pw.println();
+        // </editor-fold>
+        
         if (general.Notes != null && !"".equals(general.Notes)) {
             pw.println("@NOTES");
             String[] tmp = general.Notes.split("\n");
             for(int i = 0;i < tmp.length;i++)
                 pw.println(tmp[i]);
         }
-
-        // <editor-fold defaultstate="collapsed" desc="PLOT">
-        if (general.PAREA != null && general.PRNO != null && general.PLEN != null && general.PLDR != null && general.PLSP != null && general.PLAY != null
-                && general.HAREA != null && general.HRNO != null && general.HLEN != null && general.HARM != null) {
-            pw.println("@ PAREA  PRNO  PLEN  PLDR  PLSP  PLAY HAREA  HRNO  HLEN  HARM.........");
-            pw.print(Utils.PadLeft(general.PAREA, 7, ' '));
-
-            pw.print(Utils.PadLeft(general.PRNO, 6, ' '));
-            pw.print(Utils.PadLeft(general.PLEN, 6, ' '));
-            pw.print(Utils.PadLeft(general.PLDR, 6, ' '));
-            pw.print(Utils.PadLeft(general.PLSP, 6, ' '));
-            pw.print(Utils.PadLeft(general.PLAY, 6, ' '));
-            pw.print(Utils.PadLeft(general.HAREA, 6, ' '));
-            pw.print(Utils.PadLeft(general.HRNO, 6, ' '));
-            pw.print(Utils.PadLeft(general.HLEN, 6, ' '));
-            pw.print(Utils.PadLeft(general.HARM, 15, ' '));
-        }
-        // </editor-fold>
+        
         // </editor-fold>
     }
     

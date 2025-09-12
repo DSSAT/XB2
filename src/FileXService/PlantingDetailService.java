@@ -1,8 +1,11 @@
 package FileXService;
 
 import Extensions.Utils;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.plantings;
 import FileXModel.Planting;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -32,13 +35,18 @@ public class PlantingDetailService {
                 } else if (bPlanting && !bPlantingHeader && tmp.trim().startsWith("@")) {
                     plantingHeader = tmp.trim();
                     bPlantingHeader = true;
-                } else if (bPlanting && bPlantingHeader && !tmp.trim().startsWith("!")) {
+                } else if (bPlanting && bPlantingHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bPlanting = false;
                         bPlantingHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(plantings.GetSize() > 0){
+                            l = plantings.GetAtIndex(plantings.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Planting, strRead);
                         continue;
                     }
                     
@@ -81,7 +89,7 @@ public class PlantingDetailService {
                 Integer level = plants.GetLevel();
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.PDATE), 5, ' '));
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(plants.EDATE), 5, ' '));
+                pw.print(" " + Utils.PadLeft(Utils.JulianDate(plants.EDATE), 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PPOP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PPOE, 5, ' '));
                 pw.print(" " + Utils.PadLeft(plants.PLME, 5, ' '));
@@ -100,6 +108,10 @@ public class PlantingDetailService {
                     pw.print("                        -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Planting)) {
+                    pw.println(comment.description);
+                }
             }
         }
         // </editor-fold>

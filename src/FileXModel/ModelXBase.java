@@ -5,7 +5,6 @@ package FileXModel;
  * @author Jazz
  */
 public abstract class ModelXBase implements IModelXBase, Cloneable {
-    
     private Integer level;
     
     public Integer GetLevel(){

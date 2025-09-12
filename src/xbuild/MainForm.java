@@ -52,6 +52,8 @@ import xbuild.Components.InputDialog;
 import xbuild.Components.XInternalFrame;
 import xbuild.Events.FieldUpdateEvent;
 import xbuild.Events.LevelSelectionChangedEvent;
+import xbuild.Events.LoadingDoneEvent;
+import xbuild.Events.LoadingEventListener;
 import xbuild.Events.MenuDirection;
 import xbuild.Events.NewFrameEvent;
 import xbuild.Events.SelectionEvent;
@@ -424,12 +426,25 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
         if (onClose()) {
             dispose();
+            
+Runtime.getRuntime().halt(0);
+
         }
     }//GEN-LAST:event_jMenuExitMouseClicked
 
     private void jMenuRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRefreshMouseClicked
         Setup setup = new Setup();
-        new LoadingDataFrame(setup.GetDSSATPath()).show();
+        LoadingDataFrame loadingFrame = new LoadingDataFrame(setup.GetDSSATPath());
+        loadingFrame.setVisible(true);
+        loadingFrame.startTask();
+        loadingFrame.addListener(new LoadingEventListener() {
+            @Override
+            public void onLoaded(LoadingDoneEvent e) {
+                if(e.isValid()) {
+                    loadingFrame.setVisible(false);
+                }
+            }
+        });
 }//GEN-LAST:event_jMenuRefreshMouseClicked
 
     private void jSetupMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSetupMenuMouseClicked
@@ -645,7 +660,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
             jPopupMenuSimItemCopy.setEnabled(true);
             jPopupMenuSimItemRename.setEnabled(true);
             if ("Cultivars".equals(node.getParent().toString())) {
-                jPopupMenuSimItemCopy.setEnabled(false);
+//                jPopupMenuSimItemCopy.setEnabled(false);
                 jPopupMenuSimItemRename.setEnabled(false);
             }
 
@@ -675,20 +690,39 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private void jPopupMenuSimItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemCopyActionPerformed
         // TODO add your handling code here:
+        copyLevel();
+    }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
+
+    
+    private void copyLevel(){
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        //int[] rows = jXTree1.getSelectionRows();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
-
         ManagementList modelList = GetManagementList(parentNode.toString());
-        String newName = modelList.GetCopyName(node.toString().split(":")[1].trim());
+        
+        if(modelList == null || modelList.GetSize() == 0){
+            addLevel();
+            return;
+        }
+        
+        int index = modelList.GetIndex(getLevel(node.toString()));
+        String r;
+        
+        if("Cultivars".equals(parentNode.toString())){
+            r = modelList.GetCopyName(modelList.GetAtIndex(index).GetName());
+        }
+        else {
+            
+            String newName = modelList.GetCopyName(node.toString().split(":")[1].trim());
 
-        String r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
+            r = JOptionPane.showInputDialog(new JXFrame(), "Please enter your description", newName);
+        }
         if (r.length() > 0) {
             if (modelList.GetAt(r) != null) {
                 JOptionPane.showMessageDialog(new JXFrame(), "This name is already add", "ERROR", 0);
                 return;
             }
-
-            int index = modelList.GetIndex(getLevel(node.toString()));
+            
             ModelXBase modelClone = modelList.Clone(index, r);
 
             if (modelClone.getClass() == Treatment.class && FileX.general.FileType == ExperimentType.Sequential) {
@@ -708,18 +742,29 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(parentNode);
-            jXTree1.expandAll();
 
-            int[] rows = jXTree1.getSelectionRows();
-            if (rows.length > 0) {
-                jXTree1.setSelectionRow(rows[0] + FileX.simulationList.GetSize());
-            }
+//            if (rows.length > 0) {
+
+            DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+            ArrayList<String> nodeList = new ArrayList<>();
+            getCellIndex(rootNode, nodeList);
+        
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            String management = currentFrame.getManagementName();
+
+            int mIndex = menuAll.indexOf(management);
+
+            String frameName = menuAll.get(mIndex);
+            int select = nodeList.indexOf(frameName);
+            
+            jXTree1.setSelectionRow(select + modelList.GetSize());
+//            }
 
             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
             ShowFrame(frame);
         }
-    }//GEN-LAST:event_jPopupMenuSimItemCopyActionPerformed
-
+    }
+    
     private void jPopupMenuSimItemRenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPopupMenuSimItemRenameActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
@@ -857,19 +902,7 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
     }//GEN-LAST:event_bnPreviousActionPerformed
 
     private void bnAddLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLevelActionPerformed
-        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
-
-        String managementName = currentFrame.getManagementName();
-
-        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-        int[] selectRows = {0};
-        GetNodeIndex(rootNode, managementName, selectRows);
-        jXTree1.setSelectionRow(selectRows[0]);
-
-        DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        ManagementList modelList = currentFrame.getManagementList();
-
-        addNewLevel(parentNode, modelList, false);
+        copyLevel();
     }//GEN-LAST:event_bnAddLevelActionPerformed
 
     private void bnDeleteLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLevelActionPerformed

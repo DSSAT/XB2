@@ -1,14 +1,15 @@
 package FileXService;
 
-import DSSATModel.ExperimentType;
 import Extensions.Utils;
-import FileXModel.FileX;
+import FileXModel.Comment;
+import static FileXModel.FileX.comments;
 import FileXModel.Treatment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import static FileXModel.FileX.treatments;
+import FileXModel.Section;
 
 /**
  *
@@ -37,16 +38,23 @@ public class TreatmentService {
                     bTreatment = false;
                     bTreatmentHeader = false;
                 }
-                else if (bTreatment && bTreatmentHeader && !"".equals(strRead.trim()) && !strRead.trim().startsWith("!")) {
+                else if (bTreatment && bTreatmentHeader && !"".equals(strRead.trim())) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(treatments.GetSize() > 0){
+                            l = treatments.GetAtIndex(treatments.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Treatment, strRead);
+                        continue;
+                    }
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     Treatment treatment = new Treatment();
                     //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
                     treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
-                    if (FileX.general.FileType == ExperimentType.Sequential) {
-                        treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
-                        treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
-                        treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
-                    }
+                    
+                    treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
+                    treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
+                    treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
                     
                     treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);
                     treatment.CU = Utils.GetInteger(treatmentHeader, strRead, " CU", 3);
@@ -78,11 +86,12 @@ public class TreatmentService {
             pw.println("@N R O C TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM");
             for (int i = 0; i < treatments.GetSize(); i++) {
                 Treatment treat = (Treatment) treatments.GetAtIndex(i);
-                pw.print(Utils.PadLeft(treat.GetLevel(), 2, ' '));
+                int level = treat.GetLevel();
+                pw.print(Utils.PadLeft(level, 2, ' '));
                 
-                if(FileX.general.FileType != ExperimentType.Sequential)
-                    pw.print(" 1 0 0");
-                else{
+//                if(FileX.general.FileType != ExperimentType.Sequential)
+//                    pw.print(" 1 0 0");
+//                else{
                     try {
                         if (!"".equals(treat.R)) {
                             pw.print(' ' + treat.R.substring(0, 1));
@@ -110,7 +119,7 @@ public class TreatmentService {
                     } catch (Exception e) {
                         pw.print(' ' + "0");
                     }
-                }               
+//                }               
                 
                 try {
                     if (!"".equals(treat.TNAME)) {
@@ -200,6 +209,10 @@ public class TreatmentService {
                     pw.print("  0");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Treatment)) {
+                    pw.println(comment.description);
+                }
             }
         }
         // </editor-fold>

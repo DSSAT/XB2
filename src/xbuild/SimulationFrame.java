@@ -324,6 +324,23 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup15 = new org.jdesktop.swingx.JXRadioGroup();
         jLabel3 = new javax.swing.JLabel();
         dpHFRST = new xbuild.Components.XDatePicker();
+        txtHMFRQ = new xbuild.Components.XFormattedTextField();
+        txtHMGDD = new xbuild.Components.XFormattedTextField();
+        txtHMCUT = new xbuild.Components.XFormattedTextField();
+        txtHMMOW = new xbuild.Components.XFormattedTextField();
+        txtHRSPL = new xbuild.Components.XFormattedTextField();
+        txtHMVS = new xbuild.Components.XFormattedTextField();
+        lbResidueHarvested1 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvestedUnit1 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvested2 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvested3 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvested4 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvested5 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvested6 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvestedUnit2 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvestedUnit3 = new org.jdesktop.swingx.JXLabel();
+        lbResidueHarvestedUnit4 = new org.jdesktop.swingx.JXLabel();
+        jXLabel49 = new org.jdesktop.swingx.JXLabel();
         jXPanel6 = new org.jdesktop.swingx.JXPanel();
         jXPanel16 = new org.jdesktop.swingx.JXPanel();
         rdOVVEW_Y = new xbuild.Components.XRadioButton();
@@ -502,7 +519,7 @@ public class SimulationFrame extends IXInternalFrame {
                     .addComponent(jXPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
         jXPanel2Layout.setVerticalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -722,7 +739,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel3Layout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jXPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addContainerGap(714, Short.MAX_VALUE))
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -742,7 +759,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup2.setLayout(jXRadioGroup2Layout);
         jXRadioGroup2Layout.setHorizontalGroup(
             jXRadioGroup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup2Layout.setVerticalGroup(
             jXRadioGroup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -755,7 +772,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup3.setLayout(jXRadioGroup3Layout);
         jXRadioGroup3Layout.setHorizontalGroup(
             jXRadioGroup3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup3Layout.setVerticalGroup(
             jXRadioGroup3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,7 +785,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup4.setLayout(jXRadioGroup4Layout);
         jXRadioGroup4Layout.setHorizontalGroup(
             jXRadioGroup4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup4Layout.setVerticalGroup(
             jXRadioGroup4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -781,7 +798,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup5.setLayout(jXRadioGroup5Layout);
         jXRadioGroup5Layout.setHorizontalGroup(
             jXRadioGroup5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup5Layout.setVerticalGroup(
             jXRadioGroup5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,7 +811,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup6.setLayout(jXRadioGroup6Layout);
         jXRadioGroup6Layout.setHorizontalGroup(
             jXRadioGroup6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup6Layout.setVerticalGroup(
             jXRadioGroup6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,7 +824,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup7.setLayout(jXRadioGroup7Layout);
         jXRadioGroup7Layout.setHorizontalGroup(
             jXRadioGroup7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup7Layout.setVerticalGroup(
             jXRadioGroup7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -820,7 +837,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup8.setLayout(jXRadioGroup8Layout);
         jXRadioGroup8Layout.setHorizontalGroup(
             jXRadioGroup8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup8Layout.setVerticalGroup(
             jXRadioGroup8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -833,7 +850,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup9.setLayout(jXRadioGroup9Layout);
         jXRadioGroup9Layout.setHorizontalGroup(
             jXRadioGroup9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup9Layout.setVerticalGroup(
             jXRadioGroup9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -846,7 +863,7 @@ public class SimulationFrame extends IXInternalFrame {
         jXRadioGroup10.setLayout(jXRadioGroup10Layout);
         jXRadioGroup10Layout.setHorizontalGroup(
             jXRadioGroup10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1251, Short.MAX_VALUE)
         );
         jXRadioGroup10Layout.setVerticalGroup(
             jXRadioGroup10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1130,7 +1147,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(453, Short.MAX_VALUE))
+                .addContainerGap(605, Short.MAX_VALUE))
         );
         jXPanel7Layout.setVerticalGroup(
             jXPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1284,7 +1301,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(560, Short.MAX_VALUE))
+                .addContainerGap(712, Short.MAX_VALUE))
         );
         jXPanel8Layout.setVerticalGroup(
             jXPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1403,7 +1420,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         jXPanel9Layout.setVerticalGroup(
             jXPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1508,7 +1525,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(726, Short.MAX_VALUE))
+                .addContainerGap(878, Short.MAX_VALUE))
         );
         jXPanel10Layout.setVerticalGroup(
             jXPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1550,64 +1567,150 @@ public class SimulationFrame extends IXInternalFrame {
 
         dpHFRST.setFormats(Variables.getDateFormat());
 
+        txtHMFRQ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtHMGDD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtHMCUT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtHMMOW.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtHRSPL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtHMVS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        lbResidueHarvested1.setText("Mow havest frequency");
+
+        lbResidueHarvestedUnit1.setText("days");
+
+        lbResidueHarvested2.setText("Growing degree days required to trigger a new automatic mow event");
+
+        lbResidueHarvested3.setText("Mow cutting height");
+
+        lbResidueHarvested4.setText("Stubble mass after mowing");
+
+        lbResidueHarvested5.setText("Stubble percent leaf");
+
+        lbResidueHarvested6.setText("Residual vegetative stage after mowing");
+
+        lbResidueHarvestedUnit2.setText("cm");
+
+        lbResidueHarvestedUnit3.setText("%");
+
+        lbResidueHarvestedUnit4.setText("range 0- 80");
+
+        jXLabel49.setText("kg/ha");
+
         javax.swing.GroupLayout jXPanel22Layout = new javax.swing.GroupLayout(jXPanel22);
         jXPanel22.setLayout(jXPanel22Layout);
         jXPanel22Layout.setHorizontalGroup(
             jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel22Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbHarvestEarliest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbHarvestLatest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbProductHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbResidueHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel22Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jXRadioGroup15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbHarvestEarliest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbHarvestLatest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbProductHarvested, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel22Layout.createSequentialGroup()
+                        .addComponent(txtHPCNP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbProductHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel22Layout.createSequentialGroup()
+                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dpHFRST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dpHLAST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
+                    .addGroup(jXPanel22Layout.createSequentialGroup()
+                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtHMFRQ, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHPCNR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHMGDD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHMCUT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHMMOW, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHRSPL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHMVS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel22Layout.createSequentialGroup()
-                                .addComponent(txtHPCNR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbResidueHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel22Layout.createSequentialGroup()
-                                .addComponent(txtHPCNP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbProductHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jXPanel22Layout.createSequentialGroup()
-                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(dpHFRST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dpHLAST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))
-                        .addGap(0, 57, Short.MAX_VALUE)))
+                            .addComponent(lbResidueHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResidueHarvestedUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResidueHarvestedUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResidueHarvestedUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResidueHarvestedUnit4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jXRadioGroup15, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jXPanel22Layout.setVerticalGroup(
             jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jXRadioGroup15, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXRadioGroup15, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbHarvestEarliest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpHFRST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel22Layout.createSequentialGroup()
+                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jXPanel22Layout.createSequentialGroup()
+                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jXPanel22Layout.createSequentialGroup()
+                                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jXPanel22Layout.createSequentialGroup()
+                                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(dpHFRST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbHarvestEarliest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(dpHLAST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(lbHarvestLatest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(txtHPCNP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbProductHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbProductHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(txtHPCNR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbResidueHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbResidueHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(txtHMFRQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbResidueHarvestedUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbResidueHarvested1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtHMGDD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(lbResidueHarvested2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtHMCUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbResidueHarvestedUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lbResidueHarvested3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtHMMOW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jXLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbResidueHarvested4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtHRSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResidueHarvestedUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbResidueHarvested5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbHarvestLatest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpHLAST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbProductHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHPCNP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbProductHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jXPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbResidueHarvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHPCNR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbResidueHarvestedUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                    .addComponent(txtHMVS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvested6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResidueHarvestedUnit4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jXPanel11Layout = new javax.swing.GroupLayout(jXPanel11);
@@ -1617,14 +1720,14 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(602, Short.MAX_VALUE))
+                .addContainerGap(496, Short.MAX_VALUE))
         );
         jXPanel11Layout.setVerticalGroup(
             jXPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Harvest", jXPanel11);
@@ -1936,7 +2039,7 @@ public class SimulationFrame extends IXInternalFrame {
             .addGroup(jXPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jXPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addContainerGap(684, Short.MAX_VALUE))
         );
         jXPanel6Layout.setVerticalGroup(
             jXPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2018,7 +2121,7 @@ public class SimulationFrame extends IXInternalFrame {
                                 .addComponent(txtFENDYR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtFSTRYR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jXLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE))
         );
         jXForecastPanelLayout.setVerticalGroup(
             jXForecastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2083,7 +2186,7 @@ public class SimulationFrame extends IXInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 302, Short.MAX_VALUE)))
+                        .addGap(0, 176, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2096,7 +2199,7 @@ public class SimulationFrame extends IXInternalFrame {
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
         );
 
         pack();
@@ -2287,6 +2390,12 @@ public class SimulationFrame extends IXInternalFrame {
         dpHLAST.Init(sim, "HLAST", sim.HLAST);
         txtHPCNP.Init(sim, "HPCNP", sim.HPCNP);
         txtHPCNR.Init(sim, "HPCNR", sim.HPCNR);
+        txtHMFRQ.Init(sim, "HMFRQ", sim.HMFRQ);
+        txtHMGDD.Init(sim, "HMGDD", sim.HMGDD);
+        txtHMCUT.Init(sim, "HMCUT", sim.HMCUT);
+        txtHMMOW.Init(sim, "HMMOW", sim.HMMOW);
+        txtHRSPL.Init(sim, "HRSPL", sim.HRSPL);
+        txtHMVS.Init(sim, "HMVS", sim.HMVS);
         
         if(FileX.general.FileType != ExperimentType.Forecast){
             jTabbedPane2.remove(5);
@@ -2760,6 +2869,7 @@ public class SimulationFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel jXLabel46;
     private org.jdesktop.swingx.JXLabel jXLabel47;
     private org.jdesktop.swingx.JXLabel jXLabel48;
+    private org.jdesktop.swingx.JXLabel jXLabel49;
     private org.jdesktop.swingx.JXLabel jXLabel5;
     private org.jdesktop.swingx.JXLabel jXLabel6;
     private org.jdesktop.swingx.JXLabel jXLabel7;
@@ -2832,7 +2942,17 @@ public class SimulationFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel lbProductHarvested;
     private org.jdesktop.swingx.JXLabel lbProductHarvestedUnit;
     private org.jdesktop.swingx.JXLabel lbResidueHarvested;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested1;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested2;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested3;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested4;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested5;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvested6;
     private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit1;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit2;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit3;
+    private org.jdesktop.swingx.JXLabel lbResidueHarvestedUnit4;
     private org.jdesktop.swingx.JXLabel lbThreshold;
     private org.jdesktop.swingx.JXLabel lbThresholdUnit;
     private org.jdesktop.swingx.JXLabel lblLevel;
@@ -2884,8 +3004,14 @@ public class SimulationFrame extends IXInternalFrame {
     private xbuild.Components.XTextField txtFONAME;
     private xbuild.Components.XFormattedTextField txtFSTRYR;
     private xbuild.Components.XTextField txtFWFILE;
+    private xbuild.Components.XFormattedTextField txtHMCUT;
+    private xbuild.Components.XFormattedTextField txtHMFRQ;
+    private xbuild.Components.XFormattedTextField txtHMGDD;
+    private xbuild.Components.XFormattedTextField txtHMMOW;
+    private xbuild.Components.XFormattedTextField txtHMVS;
     private xbuild.Components.XFormattedTextField txtHPCNP;
     private xbuild.Components.XFormattedTextField txtHPCNR;
+    private xbuild.Components.XFormattedTextField txtHRSPL;
     private xbuild.Components.XTextField txtIMDEP;
     private xbuild.Components.XTextField txtIRAMT;
     private xbuild.Components.XTextField txtIREFF;

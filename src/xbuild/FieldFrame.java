@@ -95,7 +95,11 @@ public class FieldFrame extends IXInternalFrame {
         txtFLSA.Init(field, "FLSA", field.FLSA);
         txtSLAS.Init(field, "SLAS", field.SLAS);
         txtFHDUR.Init(field, "FHDUR", field.FHDUR);
-
+        
+        txtPMALB.Init(field, "PMALB", field.PMALB);
+        txtBDWD.Init(field, "BDWD", field.BDWD);
+        txtBDHT.Init(field, "BDHT", field.BDHT);
+        
         cbFLHST.setInit(field, "FLHST", field.FLHST, FieldHistoryList.GetAll(), new XColumn[]{new XColumn("Description", "Description", 300)}, "Code");
 
         if (FileX.wstaType != null) {
@@ -212,6 +216,15 @@ public class FieldFrame extends IXInternalFrame {
         jXLabel27 = new org.jdesktop.swingx.JXLabel();
         jXLabel29 = new org.jdesktop.swingx.JXLabel();
         cbFLHST = new xbuild.Components.XDropdownTableComboBox();
+        jXPanel4 = new org.jdesktop.swingx.JXPanel();
+        txtBDWD = new xbuild.Components.XFormattedTextField();
+        jXLabel30 = new org.jdesktop.swingx.JXLabel();
+        jXLabel31 = new org.jdesktop.swingx.JXLabel();
+        txtPMALB = new xbuild.Components.XFormattedTextField();
+        jXLabel32 = new org.jdesktop.swingx.JXLabel();
+        jXLabel33 = new org.jdesktop.swingx.JXLabel();
+        txtBDHT = new xbuild.Components.XFormattedTextField();
+        jXLabel34 = new org.jdesktop.swingx.JXLabel();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jXPanel5 = new org.jdesktop.swingx.JXPanel();
         jXLabel10 = new org.jdesktop.swingx.JXLabel();
@@ -240,11 +253,11 @@ public class FieldFrame extends IXInternalFrame {
         txtSLDP = new xbuild.Components.XFormattedTextField();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
         jXLabel5 = new org.jdesktop.swingx.JXLabel();
-        txtFLST = new xbuild.Components.XFormattedTextField();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
         cbSoil = new xbuild.Components.XDropdownTableComboBox();
         cbSoilCode = new xbuild.Components.XComboBox();
         cbSLTX = new xbuild.Components.XDropdownTableComboBox();
+        txtFLST = new xbuild.Components.XTextField();
         imagePanel = new javax.swing.JLabel();
 
         popupMenu1.setLabel("popupMenu1");
@@ -475,13 +488,82 @@ public class FieldFrame extends IXInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jXPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Plastic Mulch", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        txtBDWD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtBDWD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jXLabel30.setText("Bed width");
+
+        jXLabel31.setText("cm");
+
+        txtPMALB.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPMALB.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jXLabel32.setText("Albedo of row cover material");
+
+        jXLabel33.setText("Bed height");
+
+        txtBDHT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtBDHT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jXLabel34.setText("cm");
+
+        javax.swing.GroupLayout jXPanel4Layout = new javax.swing.GroupLayout(jXPanel4);
+        jXPanel4.setLayout(jXPanel4Layout);
+        jXPanel4Layout.setHorizontalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jXPanel4Layout.createSequentialGroup()
+                        .addComponent(jXLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBDHT, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel4Layout.createSequentialGroup()
+                        .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jXLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPMALB, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jXPanel4Layout.createSequentialGroup()
+                                .addComponent(txtBDWD, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jXLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(12, 12, 12))
+        );
+        jXPanel4Layout.setVerticalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPMALB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBDWD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBDHT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
         jXPanel2Layout.setHorizontalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jXPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                    .addComponent(jXPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -489,10 +571,12 @@ public class FieldFrame extends IXInternalFrame {
         jXPanel2Layout.setVerticalGroup(
             jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXPanel2Layout.createSequentialGroup()
-                .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jXPanel2Layout.createSequentialGroup()
-                .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, Short.MAX_VALUE)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel2Layout.createSequentialGroup()
+                        .addComponent(jXPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jXPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -653,9 +737,6 @@ public class FieldFrame extends IXInternalFrame {
 
         jXLabel5.setText("Surface Stones");
 
-        txtFLST.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtFLST.setInputVerifier(new InputNumberVerifier());
-
         jXLabel2.setText("Surface Texture");
 
         cbSoil.addItemListener(new java.awt.event.ItemListener() {
@@ -684,13 +765,12 @@ public class FieldFrame extends IXInternalFrame {
                         .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel3Layout.createSequentialGroup()
                         .addComponent(cbSoil, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbSoilCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbSoilCode, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                     .addComponent(cbSLTX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -707,15 +787,15 @@ public class FieldFrame extends IXInternalFrame {
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbSLTX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(6, 6, 6)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSLDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFLST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -767,27 +847,23 @@ public class FieldFrame extends IXInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1103, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(99, 99, 99)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 913, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(46, 46, 46)
-                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(24, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -799,7 +875,7 @@ public class FieldFrame extends IXInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -820,7 +896,7 @@ public class FieldFrame extends IXInternalFrame {
                     .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -970,6 +1046,11 @@ public class FieldFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel jXLabel28;
     private org.jdesktop.swingx.JXLabel jXLabel29;
     private org.jdesktop.swingx.JXLabel jXLabel3;
+    private org.jdesktop.swingx.JXLabel jXLabel30;
+    private org.jdesktop.swingx.JXLabel jXLabel31;
+    private org.jdesktop.swingx.JXLabel jXLabel32;
+    private org.jdesktop.swingx.JXLabel jXLabel33;
+    private org.jdesktop.swingx.JXLabel jXLabel34;
     private org.jdesktop.swingx.JXLabel jXLabel4;
     private org.jdesktop.swingx.JXLabel jXLabel5;
     private org.jdesktop.swingx.JXLabel jXLabel6;
@@ -979,6 +1060,7 @@ public class FieldFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXPanel jXPanel3;
+    private org.jdesktop.swingx.JXPanel jXPanel4;
     private org.jdesktop.swingx.JXPanel jXPanel5;
     private org.jdesktop.swingx.JXPanel jXPanel6;
     private org.jdesktop.swingx.JXPanel jXPanel7;
@@ -991,6 +1073,8 @@ public class FieldFrame extends IXInternalFrame {
     private javax.swing.JRadioButton rdGen;
     private javax.swing.JRadioButton rdWth;
     private xbuild.Components.XFormattedTextField txtAREA;
+    private xbuild.Components.XFormattedTextField txtBDHT;
+    private xbuild.Components.XFormattedTextField txtBDWD;
     private xbuild.Components.XTextField txtDescription;
     private xbuild.Components.XFormattedTextField txtELEV;
     private xbuild.Components.XFormattedTextField txtFHDUR;
@@ -998,9 +1082,10 @@ public class FieldFrame extends IXInternalFrame {
     private xbuild.Components.XFormattedTextField txtFLDS;
     private xbuild.Components.XFormattedTextField txtFLOB;
     private xbuild.Components.XFormattedTextField txtFLSA;
-    private xbuild.Components.XFormattedTextField txtFLST;
+    private xbuild.Components.XTextField txtFLST;
     private xbuild.Components.XFormattedTextField txtFLWR;
     private xbuild.Components.XTextField txtID_FIELD;
+    private xbuild.Components.XFormattedTextField txtPMALB;
     private xbuild.Components.XFormattedTextField txtSLAS;
     private xbuild.Components.XFormattedTextField txtSLDP;
     private xbuild.Components.XFormattedTextField txtSLEN;

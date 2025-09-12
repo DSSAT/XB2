@@ -2,13 +2,17 @@ package FileXService;
 
 import DSSATModel.EnvironmentFactorList;
 import Extensions.Utils;
+import FileXModel.Comment;
 import FileXModel.EnvironmentApplication;
 import FileXModel.Environmental;
+import static FileXModel.FileX.comments;
 import static FileXModel.FileX.environmentals;
+import FileXModel.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -34,13 +38,18 @@ public class EnvironmentService {
                 } else if (bEnvironment && !bEnvironmentHeader && tmp.trim().startsWith("@")) {
                     environmentHeader = tmp.trim();
                     bEnvironmentHeader = true;
-                } else if (bEnvironment && bEnvironmentHeader && !tmp.trim().startsWith("!")) {
+                } else if (bEnvironment && bEnvironmentHeader) {
                     if ("".equals(tmp.trim()) || tmp.trim().startsWith("*")) {
                         bEnvironment = false;
                         bEnvironmentHeader = false;
                         continue;
                     }
                     else if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(environmentals.GetSize() > 0){
+                            l = environmentals.GetAtIndex(environmentals.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Environment, strRead);
                         continue;
                     }
                     //@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME
@@ -58,25 +67,25 @@ public class EnvironmentService {
                     }
 
                     try{
-                    envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
-                    envApp.EDAY_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDAY", 1));
-                    envApp.EDAY = Utils.GetDouble(environmentHeader, tmp, "EDAY ", 3);
-                    envApp.ERAD_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAD", 1));
-                    envApp.ERAD = Utils.GetDouble(environmentHeader, tmp, "ERAD ", 3);
-                    envApp.EMAX_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMAX", 1));
-                    envApp.EMAX = Utils.GetDouble(environmentHeader, tmp, "EMAX ", 3);
-                    envApp.EMIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMIN", 1));
-                    envApp.EMIN = Utils.GetDouble(environmentHeader, tmp, "EMIN ", 3);
-                    envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAIN", 1));
-                    envApp.ERAIN = Utils.GetDouble(environmentHeader, tmp, "ERAIN", 3);
-                    envApp.ECO2_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ECO2", 1));
-                    envApp.ECO2 = Utils.GetDouble(environmentHeader, tmp, "ECO2 ", 3);
-                    envApp.EDEW_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDEW", 1));
-                    envApp.EDEW = Utils.GetDouble(environmentHeader, tmp, "EDEW ", 3);
-                    envApp.EWIND_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EWIND", 1));
-                    envApp.EWIND = Utils.GetDouble(environmentHeader, tmp, " EWIND", 3);
-                    env.ENVNAME = Utils.GetString(environmentHeader, tmp, "ENVNAME", tmp.length() - environmentHeader.indexOf("ENVNAME"));
-                    env.AddApp(envApp);
+                        envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
+                        envApp.EDAY_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDAY", 1));
+                        envApp.EDAY = Utils.GetDouble(environmentHeader, tmp, "EDAY ", 3);
+                        envApp.ERAD_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAD", 1));
+                        envApp.ERAD = Utils.GetDouble(environmentHeader, tmp, "ERAD ", 3);
+                        envApp.EMAX_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMAX", 1));
+                        envApp.EMAX = Utils.GetDouble(environmentHeader, tmp, "EMAX ", 3);
+                        envApp.EMIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMIN", 1));
+                        envApp.EMIN = Utils.GetDouble(environmentHeader, tmp, "EMIN ", 3);
+                        envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAIN", 1));
+                        envApp.ERAIN = Utils.GetDouble(environmentHeader, tmp, "ERAIN", 3);
+                        envApp.ECO2_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ECO2", 1));
+                        envApp.ECO2 = Utils.GetDouble(environmentHeader, tmp, "ECO2 ", 3);
+                        envApp.EDEW_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDEW", 1));
+                        envApp.EDEW = Utils.GetDouble(environmentHeader, tmp, "EDEW ", 3);
+                        envApp.EWIND_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EWIND", 1));
+                        envApp.EWIND = Utils.GetDouble(environmentHeader, tmp, " EWIND", 3);
+                        env.ENVNAME = Utils.GetString(environmentHeader, tmp, "ENVNAME", tmp.length() - environmentHeader.indexOf("ENVNAME"));
+                        env.AddApp(envApp);
                     }catch(Exception ee){
                         System.out.println(ee.getMessage());
                     }
@@ -97,13 +106,17 @@ public class EnvironmentService {
             pw.println();
             pw.println("*ENVIRONMENT MODIFICATIONS");
             pw.println("@E ODATE EDAY  ERAD  EMAX  EMIN  ERAIN ECO2  EDEW  EWIND ENVNAME");
+            
+            DecimalFormat df1 = new DecimalFormat("0.0");
 
             for (int i = 0; i < environmentals.GetSize(); i++) {
                 Environmental env = (Environmental) environmentals.GetAtIndex(i);
+                Integer level = env.GetLevel();
+                
                 for (int n = 0; n < env.GetSize(); n++) {
                     EnvironmentApplication envApp = env.GetApp(n);
 
-                    Integer level = env.GetLevel();
+                    
                     pw.print(Utils.PadLeft(level, 2, ' '));
 
                     try {
@@ -113,27 +126,31 @@ public class EnvironmentService {
                     }
 
                     pw.print(" " + envApp.EDAY_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDAY, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EDAY.toString(), 4, ' ', false));
                     pw.print(" " + envApp.ERAD_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ERAD, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.ERAD.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EMAX_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMAX, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EMAX.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EMIN_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMIN, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EMIN.toString(), 4, ' ', false));
                     pw.print(" " + envApp.ERAIN_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ERAIN, 4, ' '));
+                    pw.print(Utils.PadLeft(df1.format(envApp.ERAIN), 4, ' '));
                     pw.print(" " + envApp.ECO2_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ECO2, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.ECO2.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EDEW_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDEW, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EDEW.toString(), 4, ' ', false));
                     pw.print(" " + envApp.EWIND_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EWIND, 4, ' '));
+                    pw.print(Utils.PadLeft(envApp.EWIND.toString(), 4, ' ', false));
                     if (env.ENVNAME != null) {
                         pw.print(" " + env.ENVNAME);
                     } else {
                         pw.print(" -99");
                     }
                     pw.println();
+                }
+                
+                for (Comment comment : comments.getAll(level, Section.Environment)) {
+                    pw.println(comment.description);
                 }
             }
         }

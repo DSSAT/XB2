@@ -36,22 +36,18 @@ public class Main{
 
         MainForm mainForm = new MainForm();
         mainForm.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainForm.show();
+        mainForm.setVisible(true);
 
         UpdateComponent.setEventListener(mainForm);
 
         final Setup setup = new Setup();
-        if (setup.GetDSSATPath() == null) {
-            SetupFrame frame = new SetupFrame();
-            frame.show();
-        } 
         
         LoadingDataFrame loadingFrame =  new LoadingDataFrame(setup.GetDSSATPath());
-        loadingFrame.show();
+//        loadingFrame.setVisible(true);
+        loadingFrame.startTask();
         
-        if(args.length > 0) {
-            loadingFrame.addListener(new LoadingEventListenerImpl(args, mainForm));
-        }
+        loadingFrame.addListener(new LoadingEventListenerImpl(args, mainForm));
+
     }
     
     private static boolean lockInstance() {
@@ -93,10 +89,12 @@ public class Main{
 
         @Override
         public void onLoaded(LoadingDoneEvent event) {
-            String fileNames[] = args[0].split(",");
-            
-            File file = new File(fileNames[1] + "\\" + fileNames[2]);
-            mainForm.openFile(file);
+            if(args.length > 0) {
+                String fileNames[] = args[0].split(",");
+
+                File file = new File(fileNames[1] + "\\" + fileNames[2]);
+                mainForm.openFile(file);
+            }
         }
     }
 }

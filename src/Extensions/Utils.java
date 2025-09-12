@@ -2,6 +2,8 @@ package Extensions;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -69,7 +71,7 @@ public class Utils {
 
             String tmp = value.substring(start, stop).trim();
 
-            if (!tmp.equals("-99") && !"".equals(tmp)) {
+             if (!tmp.equals("-99") && !"".equals(tmp)) {
                 try {
                     int yearDigits = tmp.length() == 7 ? 2 : 0;
                     Integer year = Integer.valueOf(tmp.substring(0, 2 + yearDigits));
@@ -103,8 +105,14 @@ public class Utils {
                     Calendar ca = Calendar.getInstance(Locale.US);
                     ca.set(year, nMonth, nDay);
                     val = ca.getTime();
-                } catch (NumberFormatException numberFormatException) {
+                } 
+                catch (NumberFormatException numberFormatException) {
                     throw numberFormatException;
+                }
+                catch(Exception ex){
+                    //LocalDate localDate = LocalDate.of(1900, 1, 1);
+                    //return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    throw ex;
                 }
             }
         }
@@ -115,7 +123,7 @@ public class Utils {
         String tmp = GetString(Header, value, field, fieldLength);
         
         Integer val = null;
-        if (!"".equals(tmp) && !tmp.equals("-99")) {
+        if (tmp != null && !"".equals(tmp) && !tmp.equals("-99")) {
             val = Integer.valueOf(tmp);
         }
 
@@ -222,18 +230,8 @@ public class Utils {
     }
 
     public static String PadLeft(String value, int count, char character) {
-        if (value == null) {
+        if (value == null || "".equals(value.trim()) || "-99.0".equals(value) || "-99.00".equals(value) || "-99.000".equals(value)) {
             value = "-99";
-        }
-        if ("".equals(value.trim())) {
-            value = "-99";
-        }
-
-        if (value.endsWith(".0")) {
-            value = value.replace(".0", "");
-        }
-        if (value.endsWith(".00")) {
-            value = value.replace(".00", "");
         }
 
         for (int i = value.length(); i < count; i++) {
@@ -258,6 +256,9 @@ public class Utils {
             if (value.endsWith(".00")) {
                 value = value.replace(".00", "");
             }
+            if (value.endsWith(".000")) {
+                value = value.replace(".000", "");
+            }
         }
 
         for (int i = value.length(); i < count; i++) {
@@ -278,7 +279,7 @@ public class Utils {
         if (value == null) {
             value = -99F;
         }
-        return PadLeft(value.toString(), count, character);
+        return PadLeft(value.toString(), count, character, false);
     }
     
     public static String PadLeft(Double value, int count, char character) {
@@ -303,18 +304,8 @@ public class Utils {
     }
 
     public static String PadRight(String value, int count, char character) {
-        if (value == null) {
+        if (value == null || "".equals(value.trim()) || "-99.0".equals(value) || "-99.00".equals(value) || "-99.000".equals(value)) {
             value = "-99";
-        }
-        if ("".equals(value.trim())) {
-            value = "-99";
-        }
-
-        if (value.endsWith(".0")) {
-            value = value.replace(".0", "");
-        }
-        if (value.endsWith(".00")) {
-            value = value.replace(".00", "");
         }
 
         for (int i = value.length(); i < count; i++) {

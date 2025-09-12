@@ -2,13 +2,15 @@ package FileXService;
 
 import DSSATModel.ExperimentType;
 import Extensions.Utils;
+import FileXModel.Comment;
 import FileXModel.FileX;
+import static FileXModel.FileX.comments;
+import FileXModel.Section;
 import FileXModel.Simulation;
 import FileXModel.SimulationList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
-
 /**
  *
  * @author Jazzy
@@ -77,7 +79,16 @@ public class SimulationControlService {
                     nSimulation = 11;
                 }
 
-                else if (bSimulation && nSimulation == 1 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 1 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation1, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -108,7 +119,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 2 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 2 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation2, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -135,7 +155,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 3 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 3 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation3, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -166,7 +195,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 4 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 4 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation4, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -191,7 +229,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 5 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 5 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation5, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -228,7 +275,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 6 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 6 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation6, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -265,7 +321,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 7 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 7 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation7, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -292,7 +357,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 8 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 8 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation8, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -316,7 +390,16 @@ public class SimulationControlService {
                         simulationList.AddNew(sim);
                     }
                 }
-                else if (bSimulation && nSimulation == 9 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 9 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation9, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -339,7 +422,16 @@ public class SimulationControlService {
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 10 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 10 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation10, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -357,7 +449,11 @@ public class SimulationControlService {
                         sim.HFRST = Utils.GetDate(simHarvestHeader, tmp, "HFRST", 5);
                     }
                     catch(Exception ex){
-                        
+                        sim.HFRST_Init = Utils.GetInteger(simHarvestHeader, tmp, "HFRST", 5);
+//                        if(sim.HFRST == null && sim.HFRST_Init != null){
+//                            LocalDate localDate = LocalDate.of(1900, 1, 1);
+//                            sim.HFRST = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//                        }
                     }
                     try{
                         sim.HLAST = Utils.GetDate(simHarvestHeader, tmp, "HLAST", 5);
@@ -367,13 +463,28 @@ public class SimulationControlService {
                     }
                     sim.HPCNP = Utils.GetFloat(simHarvestHeader, tmp, "HPCNP", 5);
                     sim.HPCNR = Utils.GetFloat(simHarvestHeader, tmp, "HPCNR", 5);
+                    sim.HMFRQ = Utils.GetInteger(simHarvestHeader, tmp, "HMFRQ", 5);
+                    sim.HMGDD = Utils.GetInteger(simHarvestHeader, tmp, "HMGDD", 5);
+                    sim.HMCUT = Utils.GetFloat(simHarvestHeader, tmp, "HMCUT", 5);
+                    sim.HMMOW = Utils.GetInteger(simHarvestHeader, tmp, "HMMOW", 5);
+                    sim.HRSPL = Utils.GetInteger(simHarvestHeader, tmp, "HRSPL", 5);
+                    sim.HMVS = Utils.GetInteger(simHarvestHeader, tmp, "HMVS", 5);
 
                     if(isAdd) {
                         simulationList.AddNew(sim);
                     }
                     nSimulation = -1;
                 }
-                else if (bSimulation && nSimulation == 11 && !tmp.trim().startsWith("!") && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                else if (bSimulation && nSimulation == 11 && !"".equals(tmp.trim()) && !tmp.trim().startsWith("@  AUTOMATIC MANAGEMENT")) {
+                    if(strRead.trim().startsWith("!")){
+                        int l = 1;
+                        if(simulationList.GetSize() > 0){
+                            l = simulationList.GetAtIndex(simulationList.GetSize() - 1).GetLevel();
+                        }
+                        comments.addComment(l, Section.Simulation11, strRead);
+                        continue;
+                    }
+                    
                     Simulation sim;
                     Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
 
@@ -432,6 +543,10 @@ public class SimulationControlService {
                     pw.print(" -99");
                 }
                 pw.println();
+                
+                for (Comment comment : comments.getAll(level, Section.Simulation1)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N OPTIONS     WATER NITRO SYMBI PHOSP POTAS DISES  CHEM  TILL   CO2");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -446,6 +561,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.TILL, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.CO2, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation2)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N METHODS     WTHER INCON LIGHT EVAPO INFIL PHOTO HYDRO NSWIT MESOM MESEV MESOL");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -462,6 +580,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.MESEV, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.MESOL, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation3)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N MANAGEMENT  PLANT IRRIG FERTI RESID HARVS");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -472,6 +593,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.RESID, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HARVS, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation4)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N OUTPUTS     FNAME OVVEW SUMRY FROPT GROUT CAOUT WAOUT NIOUT MIOUT DIOUT VBOSE CHOUT OPOUT FMOPT");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -491,6 +615,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.OPOUT, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.FMOPT, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation5)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println();
                 pw.println("@  AUTOMATIC MANAGEMENT");
@@ -512,6 +639,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.PSTMX, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.PSTMN, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation6)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N IRRIGATION  IMDEP ITHRL ITHRU IROFF IMETH IRAMT IREFF");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -524,6 +654,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.IRAMT, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.IREFF, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation7)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N NITROGEN    NMDEP NMTHR NAMNT NCODE NAOFF");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -534,6 +667,9 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadRight(sim.NCODE, 5, ' '));
                 pw.print(" " + Utils.PadRight(sim.NAOFF, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation8)) {
+                    pw.println(comment.description);
+                }
 
                 pw.println("@N RESIDUES    RIPCN RTIME RIDEP");
                 pw.print(Utils.PadLeft(level, 2, ' '));
@@ -542,16 +678,27 @@ public class SimulationControlService {
                 pw.print(" " + Utils.PadLeft(sim.RTIME, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.RIDEP, 5, ' '));
                 pw.println();
+                for (Comment comment : comments.getAll(level, Section.Simulation9)) {
+                    pw.println(comment.description);
+                }
 
-                pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR");
+                pw.println("@N HARVEST     HFRST HLAST HPCNP HPCNR HMFRQ HMGDD HMCUT HMMOW HRSPL HMVS");
                 pw.print(Utils.PadLeft(level, 2, ' '));
                 pw.print(" HA         ");
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HFRST), 5, ' '));
-                pw.print(" " + Utils.PadRight(Utils.JulianDate(sim.HLAST), 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HFRST_Init == null ? Utils.JulianDate(sim.HFRST) : sim.HFRST_Init.toString(), 5, ' '));
+                pw.print(" " + Utils.PadLeft(Utils.JulianDate(sim.HLAST), 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNP, 5, ' '));
                 pw.print(" " + Utils.PadLeft(sim.HPCNR, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMFRQ, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMGDD, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMCUT, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMMOW, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HRSPL, 5, ' '));
+                pw.print(" " + Utils.PadLeft(sim.HMVS, 4, ' '));
                 pw.println();
-                
+                for (Comment comment : comments.getAll(level, Section.Simulation10)) {
+                    pw.println(comment.description);
+                }
                 
                 if(FileX.general.FileType == ExperimentType.Forecast){
                     pw.println("@N SIMDATES    ENDAT    SDUR   FODAT  FSTRYR  FENDYR FWFILE           FONAME");
@@ -565,6 +712,10 @@ public class SimulationControlService {
                     pw.print(" " + Utils.PadRight(sim.FWFILE, 16, ' '));
                     pw.print(" " + sim.FONAME);
                     pw.println();
+                    
+                    for (Comment comment : comments.getAll(level, Section.Simulation11)) {
+                        pw.println(comment.description);
+                    }
                 }
                 
                 pw.println();
