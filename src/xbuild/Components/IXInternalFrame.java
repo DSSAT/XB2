@@ -38,6 +38,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
     protected Integer level;
     
     protected boolean isDirty = false;
+    protected boolean isNew = false;
     
     public abstract String getParentName();
     public abstract ModelXBase newModel();
@@ -56,6 +57,7 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
         UpdateComponent.setEventListener(this);
         
         initFrame();
+        isNew = true;
     }
     
     public IXInternalFrame(String name){
@@ -149,6 +151,10 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
     
     public boolean isFormDirty(){
         return isDirty;
+    }
+    
+    public boolean isNewLevel(){
+        return isNew;
     }
     
     public void setFormDirty(boolean isDirty){
