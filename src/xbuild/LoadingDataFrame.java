@@ -18,11 +18,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.AdjustmentEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.*;
 import xbuild.Events.LoadingDoneEvent;
@@ -79,7 +76,6 @@ public class LoadingDataFrame extends javax.swing.JFrame {
             parseList.add(new HarvestSizeService(dir));
             parseList.add(new FieldHistoryService(dir));
             parseList.add(new SimulationService(dir));
-            parseList.add(new GrowthStageService(dir));
             parseList.add(new SoilService(dir));
             parseList.add(new WeatherService(dir));
             
@@ -147,6 +143,22 @@ public class LoadingDataFrame extends javax.swing.JFrame {
                     
                 SimulationDefaultService simulationDefaultService = new SimulationDefaultService(dir);
                 simulationDefaultService.Parse();
+                
+                validationMessage += "<font color='green'>!Done</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+            }
+            catch(Exception ex){
+                validationMessage += "<font color='red'>!Error</font><br>";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+                isValid = false;
+            }
+            
+            try{
+                GrowthStageService gService = new GrowthStageService(dir);
+                validationMessage += "Loading " + gService.getName() + " Default....";
+                jLabel1.setText("<html>" + validationMessage + "</html>");
+                    
+                gService.Parse();
                 
                 validationMessage += "<font color='green'>!Done</font><br>";
                 jLabel1.setText("<html>" + validationMessage + "</html>");

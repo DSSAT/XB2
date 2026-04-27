@@ -37,6 +37,7 @@ public class GrowthStageService extends DSSATServiceBase {
                     growth.Description = tmp.substring(12, 81).trim();
 
                     Crop crop = CropList.GetAtName(tmp.substring(82, tmp.length()));
+                    
                     if (crop != null) {
                         growth.crop = crop;
                         GrowthStageList.AddNew(growth);

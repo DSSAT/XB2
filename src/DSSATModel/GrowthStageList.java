@@ -54,17 +54,19 @@ public class GrowthStageList {
     public static List<GrowthStage>GetAt(Crop crop)
     {
         List<GrowthStage> gList = new ArrayList<>();
-        
-        
+                
         growthStage.forEach(growth -> {
             cultivars.GetAll().forEach(cul -> {
                 if(growth.crop.CropCode.equalsIgnoreCase(((FileXModel.Cultivar)cul).CR)){
-                    gList.add(growth);
+                    boolean exists = gList.stream().anyMatch(g -> g.Code.equals(growth.Code));
+                    if (!exists) {
+                        gList.add(growth);
+                    }
                 }
             });
         });
         
-        Collections.sort(gList, (GrowthStage g1, GrowthStage g2) -> g1.Description.compareTo(g2.Description));
+        Collections.sort(gList, (GrowthStage g1, GrowthStage g2) -> g1.Code.compareTo(g2.Code));
 
         return gList;
     }

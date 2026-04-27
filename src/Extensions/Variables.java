@@ -28,7 +28,7 @@ public class Variables {
     
     private static String getDatePattern(){
         if (DATE_FORMAT == null || "".equals(DATE_FORMAT.trim())) {
-            DateFormat formatter = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, getLocale());            
+            DateFormat formatter = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, Locale.US);            
             
             String pattern = ((SimpleDateFormat) formatter).toPattern();
             String localPattern = ((SimpleDateFormat) formatter).toLocalizedPattern();

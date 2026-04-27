@@ -467,4 +467,9 @@ public class TreatmentFrame extends IXInternalFrame  {
     public void addMyEventListener(XEventListener l) {
         this.listener = l;
     }
+    
+    @Override
+    public boolean isFormDirty(){
+        return false;
+    }
 }

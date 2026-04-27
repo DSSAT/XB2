@@ -522,6 +522,12 @@ Runtime.getRuntime().halt(0);
     }
 
     private void saveFile() {
+        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+        
+        if(!saveFormConfirmation(currentFrame)){
+            return;
+        }
+        
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
 
         String target;
@@ -695,6 +701,12 @@ Runtime.getRuntime().halt(0);
 
     
     private void copyLevel(){
+        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+        
+        if(!saveFormConfirmation(currentFrame)){
+            return;
+        }
+        
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
         //int[] rows = jXTree1.getSelectionRows();
         DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
@@ -743,13 +755,10 @@ Runtime.getRuntime().halt(0);
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(parentNode);
 
-//            if (rows.length > 0) {
-
             DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
             ArrayList<String> nodeList = new ArrayList<>();
             getCellIndex(rootNode, nodeList);
         
-            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
             String management = currentFrame.getManagementName();
 
             int mIndex = menuAll.indexOf(management);
@@ -758,7 +767,6 @@ Runtime.getRuntime().halt(0);
             int select = nodeList.indexOf(frameName);
             
             jXTree1.setSelectionRow(select + modelList.GetSize());
-//            }
 
             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(parentNode.toString()), newNode.toString());
             ShowFrame(frame);
@@ -997,7 +1005,7 @@ Runtime.getRuntime().halt(0);
     }
     
     private boolean saveFormConfirmation(IXInternalFrame currentFrame) {
-        if (currentFrame.isFormDirty()) {
+        if (currentFrame.isFormDirty() && currentFrame.isNewLevel()) {
             int confirmSave = JOptionPane.showConfirmDialog(null, "Do you want to save this section?", "XB2", JOptionPane.YES_NO_CANCEL_OPTION);
             if (confirmSave == 2) {
                 return false;
@@ -1385,9 +1393,17 @@ Runtime.getRuntime().halt(0);
                 }
             }
         }
+        
+        IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+        currentFrame.setFormDirty(true);
 
-        DefaultMutableTreeNode childUpdate = (DefaultMutableTreeNode) targetNode.getChildAt(e.getRow());
-        childUpdate.setUserObject(e.getName());
+        try{
+            DefaultMutableTreeNode childUpdate = (DefaultMutableTreeNode) targetNode.getChildAt(e.getRow());
+            childUpdate.setUserObject(e.getName());
+        }
+        catch(Exception error){
+            
+        }
 
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
@@ -1617,6 +1633,16 @@ Runtime.getRuntime().halt(0);
 
                         setFileDirty(true);
                     }
+                    
+                    DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+                    String nodeName = lastNode.toString().equals(parentNode.toString()) ? "" : lastNode.toString();
+                    
+                    IXInternalFrame newFrame = XInternalFrame.newInstance(mainMenuList.get(lastNode.getParent().toString()), nodeName);
+                    if (newFrame == null) {
+                        newFrame = XInternalFrame.newInstance(mainMenuList.get(lastNode.toString()), nodeName);
+                    }
+
+                    ShowFrame(newFrame);
                 });
             } else {
                 JOptionPane.showMessageDialog(this, "<html>Cannot remove this level<br>This level is use in treatments", "Invalid!", JOptionPane.ERROR_MESSAGE);
@@ -1785,10 +1811,12 @@ class ExtensionFileFilter extends FileFilter {
         }
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public boolean accept(File file) {
         if (file.isDirectory()) {
             return true;
