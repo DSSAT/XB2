@@ -208,7 +208,7 @@ public class FileXValidationService {
 
         for (ModelXBase planting : FileX.plantings.GetAll()) {
             Planting p = (Planting) planting;
-            if (p.PLNAME.equals(getNodeName(node))) {
+            if (p.PLNAME != null && p.PLNAME.equals(getNodeName(node))) {
                 isValid &= isPlantingValid(p);
             }
         }

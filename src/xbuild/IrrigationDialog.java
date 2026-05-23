@@ -319,6 +319,9 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         }
         else
         {
+            if (irrigApp.IDATE == null) {
+                irrigApp.IDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpIDATE.setDate(irrigApp.IDATE);

@@ -362,6 +362,9 @@ public class HarvestDialog extends javax.swing.JDialog {
         }
         else
         {
+            if (harvestApp.HDATE == null) {
+                harvestApp.HDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpHDATE.setDate(harvestApp.HDATE);

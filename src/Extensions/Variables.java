@@ -31,7 +31,7 @@ public class Variables {
             DateFormat formatter = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, Locale.US);            
             
             String pattern = ((SimpleDateFormat) formatter).toPattern();
-            String localPattern = ((SimpleDateFormat) formatter).toLocalizedPattern();
+            String localPattern = pattern;
             if(!localPattern.contains("MM"))
                 localPattern = localPattern.replaceAll("M", "MM");
             if(!localPattern.contains("dd"))

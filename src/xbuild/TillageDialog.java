@@ -267,6 +267,9 @@ public class TillageDialog extends javax.swing.JDialog {
         }
         else
         {
+            if (tilApp.TDATE == null) {
+                tilApp.TDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpTDATE.setDate(tilApp.TDATE);

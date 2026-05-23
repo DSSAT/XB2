@@ -17,6 +17,21 @@
     <!-- Version -->
     <property name="version" value="v1.6.0.0" />
 
+    <target name="-pre-compile">
+        <mkdir dir="build/mock-classes"/>
+        <javac srcdir="mock-src"
+               destdir="build/mock-classes"
+               source="1.8"
+               target="1.8"
+               includeantruntime="false">
+            <include name="org/jdesktop/swingx/JXTable.java"/>
+        </javac>
+        <mkdir dir="${build.classes.dir}/org/jdesktop/swingx"/>
+        <copy file="build/mock-classes/org/jdesktop/swingx/JXTable$CellEditorRemover.class"
+              tofile="${build.classes.dir}/org/jdesktop/swingx/JXTable$CellEditorRemover.class"/>
+        <delete dir="build/mock-classes"/>
+    </target>
+
     <target name="-post-jar" depends="compile" description="package, output to JAR">
         <property name="store.jar.name" value="XB2" />
 
