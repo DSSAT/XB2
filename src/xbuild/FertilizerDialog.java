@@ -495,6 +495,9 @@ public class FertilizerDialog extends javax.swing.JDialog {
         }
         else
         {
+            if (ferApp.FDATE == null) {
+                ferApp.FDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpFDATE.setDate(ferApp.FDATE);

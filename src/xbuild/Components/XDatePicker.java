@@ -22,12 +22,20 @@ public class XDatePicker extends JXDatePicker {
     }
 
     public void Init(Object model, String fieldName, Date value) {
+        Init(model, fieldName, value, false);
+    }
+
+    public void Init(Object model, String fieldName, Date value, boolean allowNull) {
         this.model = model;
         this.fieldName = fieldName;
-        this.value = value;
         
-        if(value != null)
-            this.setDate(value);
+        if (value == null && !allowNull) {
+            value = DefaultDateHelper.getDefaultDate();
+            UpdateComponent.updateModel(this, this.model, this.fieldName, value);
+        }
+        
+        this.value = value;
+        this.setDate(value);
         
         setFocusLost();
     }

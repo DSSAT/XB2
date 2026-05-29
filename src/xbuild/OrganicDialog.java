@@ -480,6 +480,9 @@ public class OrganicDialog extends javax.swing.JDialog {
         }
         else
         {
+            if (organicApp.RDATE == null) {
+                organicApp.RDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpRDATE.setDate(organicApp.RDATE);

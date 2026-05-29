@@ -369,6 +369,9 @@ public class ChemicalDialog extends javax.swing.JDialog {
         }
         else
         {
+            if (chemApp.CDATE == null) {
+                chemApp.CDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+            }
             try
             {
                 dpCDATE.setDate(chemApp.CDATE);

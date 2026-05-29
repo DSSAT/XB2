@@ -68,6 +68,9 @@ public class EnvironmentalAppDialog extends javax.swing.JDialog {
     }
 
     public void SetEnvApp(){
+        if (envApp.ODATE == null) {
+            envApp.ODATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+        }
         try {
             dpDate.setDate(envApp.ODATE);
         } catch (Exception e) {

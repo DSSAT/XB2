@@ -40,7 +40,7 @@ public class PlantingFrame extends IXInternalFrame {
         
         initComponents();
         dpPDATE.Init(this.planting, "PDATE", this.planting.PDATE);
-        dpEDATE.Init(this.planting, "EDATE", this.planting.EDATE);
+        dpEDATE.Init(this.planting, "EDATE", this.planting.EDATE, true);
         
         
         txtPAGE.Init(this.planting, "PAGE", this.planting.PAGE);
