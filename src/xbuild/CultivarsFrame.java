@@ -174,9 +174,17 @@ public class CultivarsFrame extends IXInternalFrame {
     }
     
     private void jXTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jXTable1MouseClicked
+        if(evt.getClickCount() == 1) {
+            int row = jXTable1.rowAtPoint(evt.getPoint());
+            if(row < 0) {
+                jXTable1.clearSelection();
+            }
+        }
+        
         if (evt.getClickCount() == 2) {
             int nRow = jXTable1.getSelectedRow();
-            Cultivar culEdit = (Cultivar) FileX.cultivars.GetAt(nRow + 1);
+            if (nRow >= 0) {
+                Cultivar culEdit = (Cultivar) FileX.cultivars.GetAt(nRow + 1);
 
             final CultivarListDialog dialog = new CultivarListDialog(null, culEdit, true);
             dialog.show();
@@ -204,6 +212,7 @@ public class CultivarsFrame extends IXInternalFrame {
                     dialog.SetNull();
                 }
             });
+            }
         }
         listener.myAction(new SelectionEvent(this, jXTable1.getSelectedRow() >= 0));
     }//GEN-LAST:event_jXTable1MouseClicked
@@ -232,6 +241,9 @@ public class CultivarsFrame extends IXInternalFrame {
 
                         listener.myAction(new AddLevelEvent(this, "Cultivars", "Level " + FileX.cultivars.GetSize() + ": " + c.GetName()));
                         listener.myAction((new FieldUpdateEvent(this)));
+                        
+                        int lastRow = jXTable1.getRowCount() - 1;
+                        jXTable1.setRowSelectionInterval(lastRow, lastRow);
                     });
                 }
                 dialog.SetNull();
