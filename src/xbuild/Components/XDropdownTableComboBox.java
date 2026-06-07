@@ -45,6 +45,11 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
     //private String fieldName;
     private String value;
     private String codeField;
+    private int popupMaxHeight = 500;
+
+    public void setPopupMaxHeight(int maxHeight) {
+        this.popupMaxHeight = maxHeight;
+    }
 
     protected transient HighlightListener highlighter = new HighlightListener();
     protected JTable table = new JTable() {
@@ -387,7 +392,7 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
                 Insets ins = scroll.getInsets();
                 int tableh = table.getPreferredSize().height;
                 int headerh = table.getTableHeader().getPreferredSize().height;
-                scroll.setPreferredSize(new Dimension(width, Math.min(500, tableh) + headerh + ins.top + ins.bottom));
+                scroll.setPreferredSize(new Dimension(width, Math.min(popupMaxHeight, tableh) + headerh + ins.top + ins.bottom));
                 super.removeAll();
                 super.add(scroll);
                 setRowSelection(comboBox.getSelectedIndex());

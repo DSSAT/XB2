@@ -39,6 +39,19 @@ public class TreatmentTableCellEditor extends AbstractCellEditor implements Tabl
                     new  XColumn("level", "Level", 50),
                     new  XColumn("description", "Description", 250)
                 }, "level");
+        
+        // Ensure editing stops when user selects from dropdown
+        combo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+            @Override
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+                // Fire editing stopped so the value is committed to the table model
+                javax.swing.SwingUtilities.invokeLater(() -> fireEditingStopped());
+            }
+            @Override
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
+        });
     }
     
     @Override
