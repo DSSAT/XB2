@@ -55,6 +55,20 @@ public class TreatmentFrame extends IXInternalFrame  {
         LoadTreament();
         
         jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
+        
+        jXTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (jXTable1.rowAtPoint(evt.getPoint()) == -1) {
+                    jXTable1.clearSelection();
+                }
+            }
+        });
+        
+        jScrollPane1.getViewport().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jXTable1.clearSelection();
+            }
+        });
     }
     
     private void selectionChanged(){
@@ -91,14 +105,17 @@ public class TreatmentFrame extends IXInternalFrame  {
     
     @Override
     public void setSelection(int level){
-        if(level >= 0){
-            jXTable1.getSelectionModel().removeListSelectionListener(listSelectionListener);
-            
-            level = Math.min(level, jXTable1.getRowCount()) - 1;
-            jXTable1.setRowSelectionInterval(level, level);
-            
-            jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
+        jXTable1.getSelectionModel().removeListSelectionListener(listSelectionListener);
+        
+        if(level >= 1 && level <= jXTable1.getRowCount()){
+            this.level = level - 1;
+            jXTable1.setRowSelectionInterval(this.level, this.level);
+        } else {
+            jXTable1.clearSelection();
+            this.level = -1;
         }
+        
+        jXTable1.getSelectionModel().addListSelectionListener(listSelectionListener);
     }
 
     /** This method is called from within the constructor to

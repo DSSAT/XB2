@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import xbuild.Components.XColumn;
 
 /**
@@ -150,8 +151,13 @@ public class CultivarListDialog extends javax.swing.JDialog {
         DSSATModel.Cultivar c = (DSSATModel.Cultivar)cbCultivar.getSelectedItem();
         if(c == null){
             Crop crop = (Crop) cbCrop.getSelectedItem();
+            if(crop == null){
+                // In Experimental mode before changing crop, use the global crop
+                crop = FileX.general.crop;
+            }
             c = new DSSATModel.Cultivar();
             c.CropCode = crop.CropCode;
+            c.CropName = crop.CropName;
             c.CulCode = "-99";
             c.CulName = "-99";
         }
@@ -208,12 +214,13 @@ public class CultivarListDialog extends javax.swing.JDialog {
             jLabel2.setVisible(false);
             cbCultivar.setInit(null, "INGENO", cul != null ? cul.INGENO : "", CultivarList.GetAt(FileX.general.crop), new XColumn[]{new XColumn("CulName", "Cultivar Name", 200)}, "CulCode");
             this.setPreferredSize(new Dimension(this.getPreferredSize().width, 590));
+            cbCultivar.setPopupMaxHeight(480);
             
-            EventQueue.invokeLater(() -> {
-            Utils.setTimeout(() -> {
-                cbCultivar.showPopup();
-            }, 50);
-        });
+            EventQueue.invokeLater(() -> {            
+                Utils.setTimeout(() -> {
+                    cbCultivar.showPopup();
+                }, 50);
+            });
         }
         else{
             cbCrop.setVisible(true);

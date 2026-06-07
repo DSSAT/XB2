@@ -910,7 +910,20 @@ Runtime.getRuntime().halt(0);
     }//GEN-LAST:event_bnPreviousActionPerformed
 
     private void bnAddLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddLevelActionPerformed
-        copyLevel();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
+        // Check if a specific level node (child of a management section) is selected
+        if (node != null && node.getParent() != null 
+                && !mainMenuList.keySet().contains(node.toString())
+                && node.getParent() instanceof DefaultMutableTreeNode) {
+            DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
+            if (mainMenuList.keySet().contains(parentNode.toString())) {
+                // A child level node is selected — copy it
+                copyLevel();
+                return;
+            }
+        }
+        // No specific level selected — add a new empty level
+        addLevel();
     }//GEN-LAST:event_bnAddLevelActionPerformed
 
     private void bnDeleteLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLevelActionPerformed
@@ -985,7 +998,10 @@ Runtime.getRuntime().halt(0);
 
                 EventQueue.invokeLater(() -> {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-                    int level = node.getParent().getIndex(node);
+                    int level = -1;
+                    if (node != null && node.getParent() != null) {
+                        level = node.getParent().getIndex(node);
+                    }
                     frame.addMyEventListener(this);
                     frame.setSelection(level + 1);
                     
@@ -1400,13 +1416,14 @@ Runtime.getRuntime().halt(0);
         try{
             DefaultMutableTreeNode childUpdate = (DefaultMutableTreeNode) targetNode.getChildAt(e.getRow());
             childUpdate.setUserObject(e.getName());
+            
+            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+            model.nodeChanged(childUpdate);
         }
         catch(Exception error){
-            
+            DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
+            model.reload(targetNode);
         }
-
-        DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
-        model.reload(targetNode);
     }
 
     @Override
@@ -1450,18 +1467,24 @@ Runtime.getRuntime().halt(0);
 
     @Override
     public void myAction(LevelSelectionChangedEvent e) {
-        int[] selectRows = {0};
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
-        GetNodeIndex(root, e.getManagementName(), selectRows);
-        int select = selectRows[0];
+        DefaultMutableTreeNode parentNode = findNode(root, e.getManagementName());
 
-        jXTree1.removeTreeSelectionListener(treeListener);
-
-        jXTree1.expandRow(select);
-        jXTree1.setSelectionRow(select + e.getLevel() + 1);
-        jXTree1.scrollRowToVisible(select + e.getLevel() + 1);
-
-        jXTree1.addTreeSelectionListener(treeListener);
+        if (parentNode != null) {
+            if (e.getLevel() >= 0 && e.getLevel() < parentNode.getChildCount()) {
+                DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) parentNode.getChildAt(e.getLevel());
+                
+                jXTree1.removeTreeSelectionListener(treeListener);
+                TreePath path = new TreePath(childNode.getPath());
+                jXTree1.setSelectionPath(path);
+                jXTree1.scrollPathToVisible(path);
+                jXTree1.addTreeSelectionListener(treeListener);
+            } else if (e.getLevel() < 0) {
+                jXTree1.removeTreeSelectionListener(treeListener);
+                jXTree1.clearSelection();
+                jXTree1.addTreeSelectionListener(treeListener);
+            }
+        }
     }
 
     private void showTargetFrame(String frameName, int select, ArrayList<String> nodeList, MenuDirection direction) {
@@ -1520,15 +1543,42 @@ Runtime.getRuntime().halt(0);
 
     private void addLevel() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jXTree1.getLastSelectedPathComponent();
-        ManagementList modelList = (ManagementList) GetManagementList(node.toString());
+        ManagementList modelList = node != null ? (ManagementList) GetManagementList(node.toString()) : null;
 
-        addNewLevel(node, modelList, true);
+        // If tree selection doesn't point to a management section, use the current frame
+        if (modelList == null) {
+            IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
+            if (currentFrame != null) {
+                String managementName = currentFrame.getManagementName();
+                modelList = GetManagementList(managementName);
+                DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+                node = findNode(rootNode, managementName);
+            }
+        }
+
+        if (node != null && modelList != null) {
+            addNewLevel(node, modelList, true);
+        }
+    }
+
+    private DefaultMutableTreeNode findNode(DefaultMutableTreeNode root, String name) {
+        if (root.toString().equals(name)) {
+            return root;
+        }
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DefaultMutableTreeNode child = (DefaultMutableTreeNode) root.getChildAt(i);
+            DefaultMutableTreeNode found = findNode(child, name);
+            if (found != null) {
+                return found;
+            }
+        }
+        return null;
     }
 
     private void addNewLevel(DefaultMutableTreeNode node, ManagementList modelList, boolean isAddNew) {
         if (modelList != null && !"Cultivars".equals(node.toString())) {
             String defaultName = !"Simulation Controls".equals(node.toString()) 
-                    ? "UNKNOWN_" + (modelList.GetSize() + 1) 
+                    ? String.valueOf(modelList.GetSize() + 1) 
                     : SimulationControlDefaults.Get(FileX.general.FileType).SNAME;
 
             IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
@@ -1575,9 +1625,10 @@ Runtime.getRuntime().halt(0);
                             model.reload(node);
 
                             jXTree1.expandAll();
-                            int[] rows = jXTree1.getSelectionRows();
-
-                            jXTree1.setSelectionRow(rows[0] + modelList.GetIndex(newModel));
+                            
+                            TreePath path = new TreePath(newNode.getPath());
+                            jXTree1.setSelectionPath(path);
+                            jXTree1.scrollPathToVisible(path);
 
                             IXInternalFrame frame = XInternalFrame.newInstance(mainMenuList.get(node.toString()), newName);
                             ShowFrame(frame);

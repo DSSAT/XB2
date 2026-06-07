@@ -25,11 +25,6 @@ public class SimulationList extends ManagementList {
             cropCode = cul.CR;
         }
         
-        CropModel cm = CropModelList.GetByCrop(cropCode);        
-        
-        if (cm != null) {
-            model.SMODEL = cm.ModelCode;
-        }
         if (FileX.plantings.GetSize() > 0 && newLevel <= FileX.plantings.GetSize()) {
             Planting pl = (Planting) FileX.plantings.GetAt(newLevel);
             model.SDATE = pl.PDATE;

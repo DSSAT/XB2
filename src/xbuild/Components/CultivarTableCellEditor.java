@@ -52,6 +52,18 @@ public class CultivarTableCellEditor extends AbstractCellEditor implements Table
                     new  XColumn("cropName", "Crop Name", 100),
                     new  XColumn("cultivar", "Culltivar", 250)
                 }, "level");
+        
+        // Ensure editing stops when user selects from dropdown
+        combo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent e) {}
+            @Override
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent e) {
+                javax.swing.SwingUtilities.invokeLater(() -> fireEditingStopped());
+            }
+            @Override
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent e) {}
+        });
     }
     
     @Override

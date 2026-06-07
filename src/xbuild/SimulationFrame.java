@@ -477,7 +477,7 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXLabel5.setText("Random Number Seed");
 
-        jXLabel6.setText("Crop Model");
+        jXLabel6.setText("Crop Module");
 
         txtRSEED.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtRSEED.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
@@ -987,9 +987,9 @@ public class SimulationFrame extends IXInternalFrame {
 
         jXLabel20.setText("Minimum");
 
-        jXLabel22.setText("<html>C<sup>๐</sup></html>");
+        jXLabel22.setText("<html>C<sup>&deg;</sup></html>");
 
-        jXLabel23.setText("<html>C<sup>๐</sup></html>");
+        jXLabel23.setText("<html>C<sup>&deg;</sup></html>");
 
         txtPSTMX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPSTMX.setInputVerifier(new InputNumberVerifier());
@@ -2355,7 +2355,10 @@ public class SimulationFrame extends IXInternalFrame {
         });
 
         dpSDATE.Init(sim, "SDATE", sim.SDATE);
+
         cbCrop.setInit(sim, "SMODEL", sim.SMODEL, CropModelList.GetAll(), new XColumn[] { new XColumn("ModelCode", "Model", 75), new  XColumn("Code", "Code", 75), new  XColumn("Description", "Description", 200)}, "ModelCode");
+
+
         //txtSMODEL.Init(sim, "SMODEL", sim.SMODEL, CropModelList.GetAll(), "ModelCode");
         snNYERS.Init(sim, "NYERS", sim.NYERS);
         snNREPS.Init(sim, "NREPS", sim.NREPS);
