@@ -35,6 +35,8 @@ public class XInternalFrame {
             IXInternalFrame instance = (IXInternalFrame) ctor.newInstance(object);
 
             return instance;
+        } catch (NoSuchMethodException ex) {
+            // Ignore and try default constructor
         } catch (Exception ex) {
             Logger.getLogger(XInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
