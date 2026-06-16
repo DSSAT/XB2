@@ -19,21 +19,42 @@ public class Setup {
     private static String DSSATVersion;
     private static String XB2Path;
 
+    public static void SetDSSATPath(String path) {
+        DSSATPath = path;
+    }
+
     public String GetDSSATPath() {
         if (DSSATPath == null) {
             String defaultDssatPath;
               
-            if(Paths.get("Tools").toAbsolutePath().toFile().exists()){
-                defaultDssatPath = Paths.get("").toAbsolutePath().toString();
-                XB2Path = Paths.get("Tools\\XB2").toAbsolutePath().toString();
+            // Try to resolve XB2Path based on the JAR location first
+            try {
+                java.net.URL jarUrl = Setup.class.getProtectionDomain().getCodeSource().getLocation();
+                if (jarUrl != null) {
+                    File jarFile = new File(jarUrl.toURI());
+                    if (jarFile.isFile()) {
+                        XB2Path = jarFile.getParentFile().getAbsolutePath();
+                    }
+                }
+            } catch (Exception e) {
+                // Ignore and fall back
             }
-            else if(Files.exists(Paths.get("").toAbsolutePath().resolveSibling("Tools"))) {
-                defaultDssatPath = Paths.get("").toAbsolutePath().getParent().toString();
-                XB2Path = Paths.get("").toAbsolutePath().resolveSibling("Tools").toString();
-            }
-            else{
-                defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
-                XB2Path = Paths.get("").toAbsolutePath().toString();
+
+            if (XB2Path == null || !(new File(XB2Path, "XBuild.fle").exists())) {
+                if(Paths.get("Tools").toAbsolutePath().toFile().exists()){
+                    defaultDssatPath = Paths.get("").toAbsolutePath().toString();
+                    XB2Path = Paths.get("Tools\\XB2").toAbsolutePath().toString();
+                }
+                else if(Files.exists(Paths.get("").toAbsolutePath().resolveSibling("Tools"))) {
+                    defaultDssatPath = Paths.get("").toAbsolutePath().getParent().toString();
+                    XB2Path = Paths.get("").toAbsolutePath().resolveSibling("Tools").toString();
+                }
+                else{
+                    defaultDssatPath = Paths.get("").toAbsolutePath().getParent().getParent().toString();
+                    XB2Path = Paths.get("").toAbsolutePath().toString();
+                }
+            } else {
+                defaultDssatPath = new File(XB2Path).getParentFile().getParentFile().getAbsolutePath();
             }
                         
             for(int i = 47;i <= 49;i++){

@@ -40,6 +40,21 @@ public class Main{
 
         UpdateComponent.setEventListener(mainForm);
 
+        if (args.length > 0) {
+            String dssatPath = null;
+            if (args.length == 1 && args[0].contains(",")) {
+                String[] fileNames = args[0].split(",");
+                if (fileNames.length > 0) {
+                    dssatPath = fileNames[0];
+                }
+            } else {
+                dssatPath = args[0];
+            }
+            if (dssatPath != null && new File(dssatPath).exists()) {
+                Setup.SetDSSATPath(dssatPath);
+            }
+        }
+
         final Setup setup = new Setup();
         
         LoadingDataFrame loadingFrame =  new LoadingDataFrame(setup.GetDSSATPath());
@@ -89,11 +104,28 @@ public class Main{
 
         @Override
         public void onLoaded(LoadingDoneEvent event) {
-            if(args.length > 0) {
-                String fileNames[] = args[0].split(",");
+            if (args.length > 0) {
+                try {
+                    File file = null;
+                    if (args.length == 1 && args[0].contains(",")) {
+                        String[] fileNames = args[0].split(",");
+                        if (fileNames.length >= 3) {
+                            file = new File(fileNames[1] + java.io.File.separator + fileNames[2]);
+                        }
+                    } else if (args.length == 2) {
+                        file = new File(args[1]);
+                    } else if (args.length >= 3) {
+                        file = new File(args[1], args[2]);
+                    } else if (args.length == 1) {
+                        file = new File(args[0]);
+                    }
 
-                File file = new File(fileNames[1] + "\\" + fileNames[2]);
-                mainForm.openFile(file);
+                    if (file != null) {
+                        mainForm.openFile(file);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Failed to parse command line arguments", ex);
+                }
             }
         }
     }
