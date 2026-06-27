@@ -46,19 +46,29 @@ public class SimulationMethodWeather {
     public static ArrayList<String[]> GetAll(WstaType wstaType)
     {
         ArrayList<String[]> simList = new ArrayList<>();
+        if (wstaType == null) {
+            simList.addAll(sims);
+            return simList;
+        }
         switch(wstaType){
             case WTH:
-                simList.add(GetAt("M"));
+                addIfPresent(simList, GetAt("M"));
                 break;
             case WTG:
-                simList.add(GetAt("G"));
+                addIfPresent(simList, GetAt("G"));
                 break;
             case CLI:
-                simList.add(GetAt("W"));
-                simList.add(GetAt("S"));
+                addIfPresent(simList, GetAt("W"));
+                addIfPresent(simList, GetAt("S"));
                 break;
         }
         
         return simList;
+    }
+
+    private static void addIfPresent(ArrayList<String[]> simList, String[] item) {
+        if (item != null) {
+            simList.add(item);
+        }
     }
 }

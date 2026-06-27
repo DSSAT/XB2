@@ -40,11 +40,12 @@ public class FileXService {
                 case "M":
                     FileX.wstaType = WstaType.WTH;
                     break;
-                case "S":
-                    FileX.wstaType = WstaType.CLI;
-                    break;
+                case "G":
                 case "W":
                     FileX.wstaType = WstaType.WTG;
+                    break;
+                case "S":
+                    FileX.wstaType = WstaType.CLI;
                     break;
             }
         }
