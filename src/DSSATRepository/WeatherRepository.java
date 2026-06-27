@@ -77,21 +77,21 @@ public class WeatherRepository extends DSSATRepositoryBase {
                     } else if (is2) {
                         wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        is2 = false;
+                        break;
                     } else if (is4) {
                         wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        is4 = false;
+                        break;
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
                         wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        isCli = false;
+                        break;
                     } else if (isR) {
                         number = fullName.substring(6, 8).trim();
                         wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
                         weatherList.add(wsta);
-                        isR = false;
+                        break;
                     } 
                     else if (isInsi) {
                         insi = strWRead.substring(0, Math.min(7, strWRead.length() - 1)).trim() + "^File: " + file.getName() + ", Line: " + line;

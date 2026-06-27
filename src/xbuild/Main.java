@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.swingx.JXFrame;
 import xbuild.Components.UpdateComponent;
 import xbuild.Events.LoadingDoneEvent;
+import xbuild.Events.LoadingDoneEvent.Phase;
 import xbuild.Events.LoadingEventListener;
 
 /**
@@ -58,10 +59,9 @@ public class Main{
         final Setup setup = new Setup();
         
         LoadingDataFrame loadingFrame =  new LoadingDataFrame(setup.GetDSSATPath());
-//        loadingFrame.setVisible(true);
-        loadingFrame.startTask();
-        
         loadingFrame.addListener(new LoadingEventListenerImpl(args, mainForm));
+        mainForm.setReferenceDataReady(false);
+        loadingFrame.startTask();
 
     }
     
@@ -104,28 +104,48 @@ public class Main{
 
         @Override
         public void onLoaded(LoadingDoneEvent event) {
-            if (args.length > 0) {
-                try {
-                    File file = null;
-                    if (args.length == 1 && args[0].contains(",")) {
-                        String[] fileNames = args[0].split(",");
-                        if (fileNames.length >= 3) {
-                            file = new File(fileNames[1] + java.io.File.separator + fileNames[2]);
-                        }
-                    } else if (args.length == 2) {
-                        file = new File(args[1]);
-                    } else if (args.length >= 3) {
-                        file = new File(args[1], args[2]);
-                    } else if (args.length == 1) {
-                        file = new File(args[0]);
-                    }
-
-                    if (file != null) {
-                        mainForm.openFile(file);
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Failed to parse command line arguments", ex);
+            if (event.getPhase() == Phase.ESSENTIAL) {
+                if (args.length > 0) {
+                    openFileFromArgs();
                 }
+            } else if (event.getPhase() == Phase.COMPLETE) {
+                mainForm.setReferenceDataReady(event.isValid());
+            }
+        }
+
+        private void openFileFromArgs() {
+            try {
+                File file = null;
+                if (args.length == 1 && args[0].contains(",")) {
+                    String[] fileNames = args[0].split(",");
+                    if (fileNames.length >= 3) {
+                        file = new File(fileNames[1] + java.io.File.separator + fileNames[2]);
+                    }
+                } else if (args.length == 2) {
+                    file = new File(args[1]);
+                } else if (args.length >= 3) {
+                    File f1 = new File(args[1]);
+                    if (f1.isFile()) {
+                        file = f1;
+                    } else if (f1.isDirectory()) {
+                        file = new File(args[1], args[2]);
+                    } else {
+                        try {
+                            Integer.parseInt(args[2]);
+                            file = f1;
+                        } catch (NumberFormatException e) {
+                            file = new File(args[1], args[2]);
+                        }
+                    }
+                } else if (args.length == 1) {
+                    file = new File(args[0]);
+                }
+
+                if (file != null) {
+                    mainForm.openFile(file);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Failed to parse command line arguments", ex);
             }
         }
     }

@@ -139,9 +139,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private TreeSelectionListener[] treeSelectionListener;
     private MouseAdapter[] mouseAdapter;
+    private boolean referenceDataReady = true;
+
+    public void setReferenceDataReady(boolean ready) {
+        this.referenceDataReady = ready;
+    }
 
     public MainForm() {
-        
         this.treeListener = (TreeSelectionEvent evt) -> {
             oldPath = evt.getOldLeadSelectionPath();
             newPath = evt.getNewLeadSelectionPath();
@@ -436,15 +440,19 @@ Runtime.getRuntime().halt(0);
         Setup setup = new Setup();
         LoadingDataFrame loadingFrame = new LoadingDataFrame(setup.GetDSSATPath());
         loadingFrame.setVisible(true);
-        loadingFrame.startTask();
+        setReferenceDataReady(false);
         loadingFrame.addListener(new LoadingEventListener() {
             @Override
             public void onLoaded(LoadingDoneEvent e) {
-                if(e.isValid()) {
-                    loadingFrame.setVisible(false);
+                if (e.getPhase() == LoadingDoneEvent.Phase.COMPLETE) {
+                    setReferenceDataReady(e.isValid());
+                    if (e.isValid()) {
+                        loadingFrame.setVisible(false);
+                    }
                 }
             }
         });
+        loadingFrame.startTask();
 }//GEN-LAST:event_jMenuRefreshMouseClicked
 
     private void jSetupMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSetupMenuMouseClicked
@@ -630,6 +638,10 @@ Runtime.getRuntime().halt(0);
 
         boolean enabled = true;
         String nodeName = node.toString();
+
+        if (!referenceDataReady && !"General Information".equals(nodeName)) {
+            return;
+        }
 
         if (node.getParent() != null && !nodeName.equals("General Information")) {
             enabled = FileXValidationService.isGeneralValid();
