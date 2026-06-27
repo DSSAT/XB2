@@ -1,8 +1,10 @@
 package FileXService;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.Comment;
 import static FileXModel.FileX.comments;
+import static FileXModel.FileX.general;
 import FileXModel.Treatment;
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,27 +51,36 @@ public class TreatmentService {
                     }
                     //TNAME.................... CU FL SA IC MP MI MF MR MC MT ME MH SM
                     Treatment treatment = new Treatment();
-                    //treatment.N = Utils.GetInteger(treatmentHeader, strRead, "@N", 2);
-                    treatment.SetLevel(Utils.GetInteger(treatmentHeader, strRead, "@N", 2));
+                    String treatmentLine = Utils.PadRight(strRead, treatmentHeader.length(), ' ');
+
+                    if (general.FileType == ExperimentType.Sequential) {
+                        int[] nr = Utils.parseSequenceNR(treatmentLine);
+                        treatment.SetLevel(nr[0]);
+                        treatment.R = String.valueOf(nr[1]);
+                        treatment.O = Utils.parseSequenceO(treatmentLine);
+                        treatment.C = Utils.parseSequenceC(treatmentLine);
+                        treatment.TNAME = treatmentLine.substring(8, Math.min(33, treatmentLine.length())).trim();
+                    } else {
+                        treatment.SetLevel(Utils.GetInteger(treatmentHeader, treatmentLine, "@N", 3));
+                        treatment.R = Utils.GetString(treatmentHeader, treatmentLine, " R", 2);
+                        treatment.O = Utils.GetString(treatmentHeader, treatmentLine, " O", 2);
+                        treatment.C = Utils.GetString(treatmentHeader, treatmentLine, " C", 2);
+                        treatment.TNAME = Utils.GetString(treatmentHeader, treatmentLine, "TNAME", 25);
+                    }
                     
-                    treatment.R = Utils.GetString(treatmentHeader, strRead, " R", 2);
-                    treatment.O = Utils.GetString(treatmentHeader, strRead, " O", 2);
-                    treatment.C = Utils.GetString(treatmentHeader, strRead, " C", 2);
-                    
-                    treatment.TNAME = Utils.GetString(treatmentHeader, strRead, "TNAME", 25);
-                    treatment.CU = Utils.GetInteger(treatmentHeader, strRead, " CU", 3);
-                    treatment.FL = Utils.GetInteger(treatmentHeader, strRead, " FL", 3);
-                    treatment.SA = Utils.GetInteger(treatmentHeader, strRead, " SA", 3);
-                    treatment.IC = Utils.GetInteger(treatmentHeader, strRead, " IC", 3);
-                    treatment.MP = Utils.GetInteger(treatmentHeader, strRead, " MP", 3);
-                    treatment.MI = Utils.GetInteger(treatmentHeader, strRead, " MI", 3);
-                    treatment.MF = Utils.GetInteger(treatmentHeader, strRead, " MF", 3);
-                    treatment.MR = Utils.GetInteger(treatmentHeader, strRead, " MR", 3);
-                    treatment.MC = Utils.GetInteger(treatmentHeader, strRead, " MC", 3);
-                    treatment.MT = Utils.GetInteger(treatmentHeader, strRead, " MT", 3);
-                    treatment.ME = Utils.GetInteger(treatmentHeader, strRead, " ME", 3);
-                    treatment.MH = Utils.GetInteger(treatmentHeader, strRead, " MH", 3);
-                    treatment.SM = Utils.GetInteger(treatmentHeader, strRead, " SM", 3);
+                    treatment.CU = getTreatmentInteger(treatmentHeader, treatmentLine, " CU", 3);
+                    treatment.FL = getTreatmentInteger(treatmentHeader, treatmentLine, " FL", 3);
+                    treatment.SA = getTreatmentInteger(treatmentHeader, treatmentLine, " SA", 3);
+                    treatment.IC = getTreatmentInteger(treatmentHeader, treatmentLine, " IC", 3);
+                    treatment.MP = getTreatmentInteger(treatmentHeader, treatmentLine, " MP", 3);
+                    treatment.MI = getTreatmentInteger(treatmentHeader, treatmentLine, " MI", 3);
+                    treatment.MF = getTreatmentInteger(treatmentHeader, treatmentLine, " MF", 3);
+                    treatment.MR = getTreatmentInteger(treatmentHeader, treatmentLine, " MR", 3);
+                    treatment.MC = getTreatmentInteger(treatmentHeader, treatmentLine, " MC", 3);
+                    treatment.MT = getTreatmentInteger(treatmentHeader, treatmentLine, " MT", 3);
+                    treatment.ME = getTreatmentInteger(treatmentHeader, treatmentLine, " ME", 3);
+                    treatment.MH = getTreatmentInteger(treatmentHeader, treatmentLine, " MH", 3);
+                    treatment.SM = getTreatmentInteger(treatmentHeader, treatmentLine, " SM", 3);
                     treatments.AddNew(treatment);
                 }
             }
@@ -87,39 +98,21 @@ public class TreatmentService {
             for (int i = 0; i < treatments.GetSize(); i++) {
                 Treatment treat = (Treatment) treatments.GetAtIndex(i);
                 int level = treat.GetLevel();
-                pw.print(Utils.PadLeft(level, 2, ' '));
-                
-//                if(FileX.general.FileType != ExperimentType.Sequential)
-//                    pw.print(" 1 0 0");
-//                else{
-                    try {
-                        if (!"".equals(treat.R)) {
-                            pw.print(' ' + treat.R.substring(0, 1));
-                        } else {
-                            pw.print(' ' + "0");
-                        }
-                    } catch (Exception e) {
-                        pw.print(' ' + "0");
+
+                if (general.FileType == ExperimentType.Sequential) {
+                    int r = Utils.ParseInteger(treat.R);
+                    if (r < 10) {
+                        pw.print(' ' + String.valueOf(level));
+                        pw.print(' ' + String.valueOf(r));
+                    } else {
+                        pw.print(' ' + Utils.formatSequenceNR(level, r));
                     }
-                    try {
-                        if (!"".equals(treat.O)) {
-                            pw.print(' ' + treat.O.substring(0, 1));
-                        } else {
-                            pw.print(' ' + "0");
-                        }
-                    } catch (Exception e) {
-                        pw.print(' ' + "0");
-                    }
-                    try {
-                        if (!"".equals(treat.C)) {
-                            pw.print(' ' + treat.C.substring(0, 1));
-                        } else {
-                            pw.print(' ' + "0");
-                        }
-                    } catch (Exception e) {
-                        pw.print(' ' + "0");
-                    }
-//                }               
+                    pw.print(' ' + Utils.formatTreatmentDigit(treat.O, "0"));
+                    pw.print(' ' + Utils.formatTreatmentDigit(treat.C, "0"));
+                } else {
+                    pw.print(Utils.PadLeft(level, 3, ' '));
+                    pw.print(" 1 0 0");
+                }
                 
                 try {
                     if (!"".equals(treat.TNAME)) {
@@ -216,5 +209,24 @@ public class TreatmentService {
             }
         }
         // </editor-fold>
+    }
+
+    private static Integer getTreatmentInteger(String header, String line, String field, int fieldLength) {
+        int start = header.indexOf(field);
+        if (start < 0) {
+            return null;
+        }
+
+        int stop = Math.min(start + fieldLength, line.length());
+        if (stop <= start) {
+            return null;
+        }
+
+        String tmp = line.substring(start, stop).trim();
+        if (tmp.isEmpty() || "-99".equals(tmp)) {
+            return null;
+        }
+
+        return Integer.valueOf(tmp);
     }
 }

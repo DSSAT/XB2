@@ -343,4 +343,64 @@ public class Utils {
     public static boolean IsEmpty(String text) {
         return text == null || "".equals(text.trim());
     }
+
+    public static String formatSequenceNR(int n, int r) {
+        return String.valueOf(n) + PadLeft(String.valueOf(r), 2, '0');
+    }
+
+    /**
+     * Sequence files use two treatment line formats:
+     * - R 1-9:  separate columns, e.g. " 1 2 1 0 Cotton12"
+     * - R 10-99: combined NR field, e.g. " 110 1 0 Fallow13F"
+     */
+    public static int[] parseSequenceNR(String line) {
+        String[] parts = line.trim().split("\\s+");
+        if (parts.length == 0) {
+            return new int[]{1, 1};
+        }
+
+        if (parts[0].length() == 1) {
+            int n = TryParseInteger(parts[0]);
+            int r = parts.length > 1 ? TryParseInteger(parts[1]) : 1;
+            return new int[]{n, r};
+        }
+
+        int n = Character.getNumericValue(parts[0].charAt(0));
+        int r = parts[0].length() > 1 ? TryParseInteger(parts[0].substring(1)) : 1;
+        return new int[]{n, r};
+    }
+
+    public static String parseSequenceO(String line) {
+        String[] parts = line.trim().split("\\s+");
+        if (parts.length == 0) {
+            return "0";
+        }
+        if (parts[0].length() == 1) {
+            return parts.length > 2 ? parts[2] : "0";
+        }
+        return parts.length > 1 ? parts[1] : "0";
+    }
+
+    public static String parseSequenceC(String line) {
+        String[] parts = line.trim().split("\\s+");
+        if (parts.length == 0) {
+            return "0";
+        }
+        if (parts[0].length() == 1) {
+            return parts.length > 3 ? parts[3] : "0";
+        }
+        return parts.length > 2 ? parts[2] : "0";
+    }
+
+    public static boolean isCombinedSequenceNR(String line) {
+        String[] parts = line.trim().split("\\s+");
+        return parts.length > 0 && parts[0].length() > 1;
+    }
+
+    public static String formatTreatmentDigit(String value, String defaultValue) {
+        if (value == null || "".equals(value.trim()) || "-99".equals(value.trim())) {
+            return defaultValue;
+        }
+        return value.trim().substring(0, 1);
+    }
 }
