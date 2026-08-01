@@ -65,7 +65,7 @@ public class FieldService {
                     
                     //@L ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX  SLDP  ID_SOIL    FLNAME
                     
-                    Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
+                    Integer level = Integer.valueOf(tmp.substring(0, Math.min(3, tmp.length())).trim());
                     field.SetLevel(level);
                     field.ID_FIELD = Utils.GetString(fieldHeader1, tmp, "ID_FIELD", 8);
                     field.WSTA = Utils.GetString(fieldHeader1, tmp, "WSTA", 8);
@@ -98,7 +98,7 @@ public class FieldService {
                     //@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR
 
                     try {
-                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, Math.min(3, tmp.length())).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
 
                         field.XCRD = Utils.GetFloat(fieldHeader2, tmp, "XCRD", 15);
@@ -129,7 +129,7 @@ public class FieldService {
                     }
                     
                     try {
-                        Integer level = Integer.valueOf(tmp.substring(0, 2).trim());
+                        Integer level = Integer.valueOf(tmp.substring(0, Math.min(3, tmp.length())).trim());
                         FieldDetail field = (FieldDetail)fieldList.GetAt(level);
                         
                         field.PMALB = Utils.GetFloat(fieldHeader3, tmp, "PMALB", 5);
@@ -154,8 +154,8 @@ public class FieldService {
             for (int i = 0; i < fieldList.GetSize(); i++) {
                 FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
                 Integer level = field.GetLevel();
-                pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" " + Utils.PadRight(field.ID_FIELD, 8, ' '));
+                pw.print(Utils.formatLevelField(level, 3));
+                pw.print(Utils.PadRight(field.ID_FIELD, 8, ' '));
                 pw.print(" " + Utils.PadRight(field.WSTA, 8, ' '));
                 pw.print(" " + Utils.PadLeft(field.FLSA, 5, ' '));
                 pw.print(" " + Utils.PadLeft(field.FLOB, 5, ' '));
@@ -180,42 +180,83 @@ public class FieldService {
             }
 
 
-            pw.println("@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR");
-            for (int i = 0; i < fieldList.GetSize(); i++) {
-                Integer level = i + 1;
-                FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
-                pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" " + Utils.PadLeft(field.XCRD, 15, ' '));
-                pw.print(" " + Utils.PadLeft(field.YCRD, 15, ' '));
-                pw.print(" " + Utils.PadLeft(field.ELEV, 9, ' '));
-                pw.print(" " + Utils.PadLeft(field.AREA, 17, ' '));
-                pw.print(" " + Utils.PadLeft(field.SLEN, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.FLWR, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.SLAS, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.FLHST, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.FHDUR, 5, ' '));
-                pw.println();
-                
-                for (Comment comment : comments.getAll(i, Section.Field2)) {
-                    pw.println(comment.description);
+            // Skip the coordinate block entirely when every value is empty (-99),
+            // matching DSSAT sample files that omit it (e.g. DTCM7099.GSX).
+            if (!isCoordinateBlockEmpty()) {
+                pw.println("@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR");
+                for (int i = 0; i < fieldList.GetSize(); i++) {
+                    Integer level = i + 1;
+                    FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
+                    pw.print(Utils.formatLevelField(level, 3));
+                    pw.print(Utils.PadLeft(field.XCRD, 15, ' '));
+                    pw.print(" " + Utils.PadLeft(field.YCRD, 15, ' '));
+                    pw.print(" " + Utils.PadLeft(field.ELEV, 9, ' '));
+                    pw.print(" " + Utils.PadLeft(field.AREA, 17, ' '));
+                    pw.print(" " + Utils.PadLeft(field.SLEN, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.FLWR, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.SLAS, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.FLHST, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.FHDUR, 5, ' '));
+                    pw.println();
+
+                    for (Comment comment : comments.getAll(i, Section.Field2)) {
+                        pw.println(comment.description);
+                    }
                 }
             }
-            
-            pw.println("@L PMALB  BDWD  BDHT");
-            for (int i = 0; i < fieldList.GetSize(); i++) {
-                Integer level = i + 1;
-                FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
-                pw.print(Utils.PadLeft(level, 2, ' '));
-                pw.print(" " + Utils.PadLeft(field.PMALB, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.BDWD, 5, ' '));
-                pw.print(" " + Utils.PadLeft(field.BDHT, 5, ' '));
-                pw.println();
-                
-                for (Comment comment : comments.getAll(i, Section.Field3)) {
-                    pw.println(comment.description);
+
+            // Likewise skip the flooding/bund block when every value is empty (-99).
+            if (!isBoundaryBlockEmpty()) {
+                pw.println("@L PMALB  BDWD  BDHT");
+                for (int i = 0; i < fieldList.GetSize(); i++) {
+                    Integer level = i + 1;
+                    FieldDetail field = (FieldDetail)fieldList.GetAtIndex(i);
+                    pw.print(Utils.formatLevelField(level, 3));
+                    pw.print(Utils.PadLeft(field.PMALB, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.BDWD, 5, ' '));
+                    pw.print(" " + Utils.PadLeft(field.BDHT, 5, ' '));
+                    pw.println();
+
+                    for (Comment comment : comments.getAll(i, Section.Field3)) {
+                        pw.println(comment.description);
+                    }
                 }
             }
         }
         // </editor-fold>
+    }
+
+    private static boolean isCoordinateBlockEmpty() {
+        for (int i = 0; i < fieldList.GetSize(); i++) {
+            FieldDetail f = (FieldDetail) fieldList.GetAtIndex(i);
+            if (!(isEmpty(f.XCRD) && isEmpty(f.YCRD) && isEmpty(f.ELEV) && isEmpty(f.AREA)
+                    && isEmpty(f.SLEN) && isEmpty(f.FLWR) && isEmpty(f.SLAS)
+                    && isEmpty(f.FLHST) && isEmpty(f.FHDUR))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isBoundaryBlockEmpty() {
+        for (int i = 0; i < fieldList.GetSize(); i++) {
+            FieldDetail f = (FieldDetail) fieldList.GetAtIndex(i);
+            if (!(isEmpty(f.PMALB) && isEmpty(f.BDWD) && isEmpty(f.BDHT))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isEmpty(Float value) {
+        return value == null || value == -99f;
+    }
+
+    private static boolean isEmpty(Integer value) {
+        return value == null || value == -99;
+    }
+
+    private static boolean isEmpty(String value) {
+        return value == null || value.trim().isEmpty() || "-99".equals(value.trim());
     }
 }

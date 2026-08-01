@@ -344,6 +344,21 @@ public class Utils {
         return text == null || "".equals(text.trim());
     }
 
+    /**
+     * Formats the @N / @L row-number column, which DSSAT lays out in a fixed
+     * {@code width}-column zone (3 for FileX). Values that fit are right-justified
+     * in the leading {@code width-1} columns followed by a separating space
+     * (" 1 ", "10 "); values that fill the whole zone consume that separator
+     * ("100"), so the columns after the number stay aligned past 99 rows.
+     */
+    public static String formatLevelField(int level, int width) {
+        String value = String.valueOf(level);
+        if (value.length() >= width) {
+            return value;
+        }
+        return PadLeft(value, width - 1, ' ') + " ";
+    }
+
     public static String formatSequenceNR(int n, int r) {
         return String.valueOf(n) + PadLeft(String.valueOf(r), 2, '0');
     }
@@ -390,11 +405,6 @@ public class Utils {
             return parts.length > 3 ? parts[3] : "0";
         }
         return parts.length > 2 ? parts[2] : "0";
-    }
-
-    public static boolean isCombinedSequenceNR(String line) {
-        String[] parts = line.trim().split("\\s+");
-        return parts.length > 0 && parts[0].length() > 1;
     }
 
     public static String formatTreatmentDigit(String value, String defaultValue) {
