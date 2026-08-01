@@ -33,8 +33,9 @@ public class WeatherRepository extends DSSATRepositoryBase {
         }
         File fList[] = w.listFiles(new ExtendFilter("." + extension));
 
-        for (File file : fList) {
+        java.util.List<String> syncWeatherList = java.util.Collections.synchronizedList(new ArrayList<>());
 
+        java.util.Arrays.stream(fList).parallel().forEach(file -> {
             String fullName = file.getName();
             String code = fullName.substring(0, 4);
             String number = "";
@@ -76,21 +77,21 @@ public class WeatherRepository extends DSSATRepositoryBase {
                         isInsi = true;
                     } else if (is2) {
                         wsta += ":" + strWRead.substring(0, 2) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
-                        weatherList.add(wsta);
+                        syncWeatherList.add(wsta);
                         break;
                     } else if (is4) {
                         wsta += ":" + strWRead.substring(0, 4) + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
-                        weatherList.add(wsta);
+                        syncWeatherList.add(wsta);
                         break;
                     } else if (isCli) {
                         number = strWRead.substring(8, 13).trim();
                         wsta += ":" + strWRead.substring(0, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
-                        weatherList.add(wsta);
+                        syncWeatherList.add(wsta);
                         break;
                     } else if (isR) {
                         number = fullName.substring(6, 8).trim();
                         wsta += ":" + fullName.substring(4, 6).trim() + ":" + number + ":" + fullCode + ":" + insi + "^File: " + file.getName() + ", Line: " + line;
-                        weatherList.add(wsta);
+                        syncWeatherList.add(wsta);
                         break;
                     } 
                     else if (isInsi) {
@@ -100,8 +101,13 @@ public class WeatherRepository extends DSSATRepositoryBase {
 
                     line++;
                 }
+            } catch (Exception e) {
+                // Ignore parsing errors for individual files
             }
-        }
+        });
+
+        weatherList.addAll(syncWeatherList);
+
         return weatherList;
     }
 }

@@ -19,7 +19,9 @@ public class SoilList {
     public static void AddNew(Soil soil)
     {
         soils.add(soil);
-        
+    }
+    
+    public static void Sort() {
         Collections.sort(soils, (Soil s1, Soil s2) -> s1.Description.compareTo(s2.Description));
     }
     
