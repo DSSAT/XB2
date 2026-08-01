@@ -2,6 +2,7 @@ package xbuild;
 
 import xbuild.Events.XEvent;
 import Extensions.LimitDocument;
+import FileXModel.Cultivar;
 import FileXModel.FileX;
 import DSSATModel.Crop;
 import DSSATModel.CropList;
@@ -712,9 +713,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
             if (crop != null && !"".equals(crop.CropCode) && 
                     (cropOriginal == null || !cropOriginal.CropCode.equals(crop.CropCode))) {
-                setImage(imagePanel, crop.CropCode + "2.jpg");
-                
                 FileX.general.crop = crop;
+                setCropImage();
                 
                 try{
                     cropOriginal = crop.clone();
@@ -778,6 +778,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
             jLabel5.setVisible(false);
         }
 
+        setCropImage();
         actionPerformed(new ActionEvent(this, 0, "Update"));
     }//GEN-LAST:event_cbFileTypeActionPerformed
 
@@ -901,10 +902,31 @@ public class GeneralInfoFrame extends IXInternalFrame {
         return doc;
     }
 
+    public void refreshCropImage() {
+        setCropImage();
+    }
+
     private void setCropImage() {
-        if (FileX.general.crop != null && !"".equals(FileX.general.crop.CropCode)) {
-            setImage(imagePanel, FileX.general.crop.CropCode + "2.jpg");
+        String cropCode = getCropCodeForImage();
+        if (cropCode != null && !cropCode.isEmpty()) {
+            setImage(imagePanel, cropCode + "2.jpg");
+        } else {
+            imagePanel.setIcon(null);
         }
+    }
+
+    private String getCropCodeForImage() {
+        if (FileX.general.FileType == ExperimentType.Experimental) {
+            if (FileX.general.crop != null && !"".equals(FileX.general.crop.CropCode)) {
+                return FileX.general.crop.CropCode;
+            }
+        } else if (FileX.cultivars != null && FileX.cultivars.GetSize() > 0) {
+            Cultivar cul = (Cultivar) FileX.cultivars.GetAtIndex(0);
+            if (cul != null && cul.CR != null && !"".equals(cul.CR)) {
+                return cul.CR;
+            }
+        }
+        return null;
     }
 
     private void updateTree() {

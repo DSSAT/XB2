@@ -1386,6 +1386,8 @@ Runtime.getRuntime().halt(0);
 
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
+
+        refreshGeneralInfoCropImage(e.getParent());
     }
 
     @Override
@@ -1430,6 +1432,8 @@ Runtime.getRuntime().halt(0);
         }
 
         model.reload(targetNode);
+
+        refreshGeneralInfoCropImage(e.getParent());
     }
 
     @Override
@@ -1467,6 +1471,22 @@ Runtime.getRuntime().halt(0);
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(targetNode);
         }
+
+        refreshGeneralInfoCropImage(e.getParent());
+    }
+
+    private void refreshGeneralInfoCropImage(String parent) {
+        if (!"Cultivars".equals(parent)) {
+            return;
+        }
+
+        EventQueue.invokeLater(() -> {
+            for (JInternalFrame frame : desktopPane.getAllFrames()) {
+                if (frame instanceof GeneralInfoFrame) {
+                    ((GeneralInfoFrame) frame).refreshCropImage();
+                }
+            }
+        });
     }
 
     @Override
