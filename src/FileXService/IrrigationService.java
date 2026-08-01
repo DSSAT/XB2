@@ -101,6 +101,9 @@ public class IrrigationService {
                         }
                         irrigApp.IROP = Utils.GetString(irrigHeader2, tmp, " IROP", 5);
                         irrigApp.IRVAL = Utils.GetFloat(irrigHeader2, tmp, "IRVAL", 5);
+                        if (irrigHeader2.contains("IIRV")) {
+                            irrigApp.IIRV = Utils.GetInteger(irrigHeader2, tmp, "IIRV", 5);
+                        }
                         irrig.AddApp(irrigApp);
 
                     } catch (NumberFormatException numberFormatException) {
@@ -144,7 +147,22 @@ public class IrrigationService {
                 }
                 
                 if (irrig.GetSize() > 0) {
-                    pw.println("@I IDATE  IROP IRVAL");
+                    boolean hasIIRV = false;
+                    if (isRice()) {
+                        for (int n = 0; n < irrig.GetSize(); n++) {
+                            if (irrig.GetApp(n).IIRV != null) {
+                                hasIIRV = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (hasIIRV) {
+                        pw.println("@I IDATE  IROP IRVAL  IIRV");
+                    } else {
+                        pw.println("@I IDATE  IROP IRVAL");
+                    }
+
                     for (int n = 0; n < irrig.GetSize(); n++) {
                         IrrigationApplication irrigApp = irrig.GetApp(n);
                         pw.print(Utils.PadLeft(level, 2, ' '));
@@ -156,6 +174,9 @@ public class IrrigationService {
 
                         pw.print(" " + Utils.PadLeft(irrigApp.IROP, 5, ' '));
                         pw.print(" " + Utils.PadLeft(irrigApp.IRVAL, 5, ' '));
+                        if (hasIIRV) {
+                            pw.print(" " + Utils.PadLeft(irrigApp.IIRV, 5, ' '));
+                        }
                         pw.println();
                     }
                     
@@ -166,5 +187,18 @@ public class IrrigationService {
             }
         }
         // </editor-fold>
+    }
+
+    private static boolean isRice() {
+        if (FileXModel.FileX.general.crop != null && "RI".equals(FileXModel.FileX.general.crop.CropCode)) {
+            return true;
+        }
+        if (FileXModel.FileX.cultivars != null && FileXModel.FileX.cultivars.GetSize() > 0) {
+            FileXModel.Cultivar cul = (FileXModel.Cultivar) FileXModel.FileX.cultivars.GetAtIndex(0);
+            if ("RI".equals(cul.CR)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

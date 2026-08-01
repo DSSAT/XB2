@@ -37,17 +37,33 @@ public class Irrigation extends ModelXBase implements Cloneable {
     public void AddApp(IrrigationApplication irrig)
     {
         irrigApps.add(irrig);
-        Collections.sort(irrigApps, irrig.IDATE != null ? Comparator.comparing(IrrigationApplication::getOrder) : Comparator.comparing(IrrigationApplication::getOrderDay));
+        Sort();
     }
 
     public void RemoveAt(int level)
     {
         irrigApps.remove(level);
+        Sort();
     }
 
     public void SetAt(int level, IrrigationApplication irrig)
     {
         irrigApps.set(level, irrig);
+        Sort();
+    }
+
+    public void Sort()
+    {
+        if (irrigApps != null && irrigApps.size() > 1) {
+            Collections.sort(irrigApps, (a, b) -> {
+                if (a.IDATE != null && b.IDATE != null) {
+                    return a.IDATE.compareTo(b.IDATE);
+                } else if (a.IDAY != null && b.IDAY != null) {
+                    return a.IDAY.compareTo(b.IDAY);
+                }
+                return 0;
+            });
+        }
     }
 
     public ArrayList<IrrigationApplication> GetApps()

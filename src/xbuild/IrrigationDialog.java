@@ -12,6 +12,11 @@
 package xbuild;
 
 import FileXModel.IrrigationApplication;
+import FileXModel.FileX;
+import FileXModel.ModelXBase;
+import FileXModel.Planting;
+import FileXModel.Simulation;
+import DSSATModel.IrrigationMethod;
 import DSSATModel.IrrigationMethodList;
 import Extensions.Variables;
 import FileXService.FileXValidationService;
@@ -29,10 +34,29 @@ import xbuild.Components.XColumn;
  */
 public class IrrigationDialog extends javax.swing.JDialog implements KeyListener {
 
+    public static class IrrigationTypeItem {
+        public Integer code;
+        public String description;
+
+        public IrrigationTypeItem(Integer code, String description) {
+            this.code = code;
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            if (code == 0) {
+                return "0";
+            }
+            return code + " - " + description;
+        }
+    }
+
     /** Creates new form IrrigationDialog */
     protected IrrigationApplication irrigApp;
     protected boolean bDay;
     private boolean isOK;
+    private org.jdesktop.swingx.JXLabel lbIIRV;
 
     public IrrigationDialog(java.awt.Frame parent, boolean modal, boolean bDay, IrrigationApplication irrigApp) {
         super(parent, modal);
@@ -57,6 +81,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         txtIDATE.addKeyListener(this);
         dpIDATE.addKeyListener(this);
         txtIRVAL.addKeyListener(this);
+        cbIIRV.addKeyListener(this);
 
         cbIROP.setInit(irrigApp, "IROP", irrigApp.IROP, IrrigationMethodList.GetAll(), 
                 new XColumn[] { 
@@ -64,6 +89,45 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                     new  XColumn("Description", "Description", 200)
                 }, "Code");
         
+        cbIIRV.addItem(new IrrigationTypeItem(0, ""));
+        for (DSSATModel.BaseModel method : IrrigationMethodList.GetAll()) {
+            try {
+                String codeStr = method.Code;
+                if (codeStr != null && codeStr.startsWith("IR")) {
+                    int num = Integer.parseInt(codeStr.substring(2));
+                    cbIIRV.addItem(new IrrigationTypeItem(num, method.Description));
+                }
+            } catch (Exception ex) {
+                // ignore
+            }
+        }
+        
+        boolean isRice = isRice();
+        lbIIRV.setVisible(isRice);
+        cbIIRV.setVisible(isRice);
+
+        cbIROP.addActionListener((java.awt.event.ActionEvent evt) -> {
+            if (isRice()) {
+                try {
+                    Object item = cbIROP.getSelectedItem();
+                    if (item instanceof DSSATModel.IrrigationMethod) {
+                        String irop = ((DSSATModel.IrrigationMethod) item).Code;
+                        if (irop != null && irop.startsWith("IR")) {
+                            int numPart = Integer.parseInt(irop.substring(2));
+                            for (int i = 0; i < cbIIRV.getItemCount(); i++) {
+                                IrrigationTypeItem typeItem = cbIIRV.getItemAt(i);
+                                if (typeItem.code == numPart) {
+                                    cbIIRV.setSelectedIndex(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    // ignore
+                }
+            }
+        });
         
         Load();
         
@@ -92,6 +156,8 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         bnCacel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbIROP = new xbuild.Components.XDropdownTableComboBox();
+        lbIIRV = new org.jdesktop.swingx.JXLabel();
+        cbIIRV = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -140,6 +206,8 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
 
         jLabel1.setText(Variables.getDateFormatString());
 
+        lbIIRV.setText("Irrigation Type");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +218,8 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                     .addComponent(lbDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIIRV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbIROP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,7 +239,8 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtIRVAL, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jXLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbIIRV, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(182, 182, 182)
                                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -202,6 +272,10 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbIROP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbIIRV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIIRV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnOK)
@@ -239,6 +313,7 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCacel;
     private javax.swing.JButton bnOK;
+    private javax.swing.JComboBox<IrrigationTypeItem> cbIIRV;
     private xbuild.Components.XDropdownTableComboBox cbIROP;
     private org.jdesktop.swingx.JXDatePicker dpIDATE;
     private javax.swing.JLabel jLabel1;
@@ -302,6 +377,12 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         {
             irrigApp.IRVAL = null;
         }
+        if (isRice()) {
+            IrrigationTypeItem selected = (IrrigationTypeItem) cbIIRV.getSelectedItem();
+            irrigApp.IIRV = selected != null ? selected.code : null;
+        } else {
+            irrigApp.IIRV = null;
+        }
     }
 
     protected void Load() {
@@ -320,7 +401,29 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         else
         {
             if (irrigApp.IDATE == null) {
-                irrigApp.IDATE = xbuild.Components.DefaultDateHelper.getDefaultDate();
+                java.util.Date defaultDate = null;
+                if (FileX.simulationList != null && FileX.simulationList.GetSize() > 0) {
+                    for (ModelXBase sim : FileX.simulationList.GetAll()) {
+                        Simulation s = (Simulation) sim;
+                        if (s.SDATE != null) {
+                            defaultDate = s.SDATE;
+                            break;
+                        }
+                    }
+                }
+                if (defaultDate == null && FileX.plantings != null && FileX.plantings.GetSize() > 0) {
+                    for (ModelXBase planting : FileX.plantings.GetAll()) {
+                        Planting p = (Planting) planting;
+                        if (p.PDATE != null) {
+                            defaultDate = p.PDATE;
+                            break;
+                        }
+                    }
+                }
+                if (defaultDate == null) {
+                    defaultDate = xbuild.Components.DefaultDateHelper.getDefaultDate();
+                }
+                irrigApp.IDATE = defaultDate;
             }
             try
             {
@@ -340,10 +443,39 @@ public class IrrigationDialog extends javax.swing.JDialog implements KeyListener
         {
             txtIRVAL.setText("");
         }
+        try
+        {
+            if (irrigApp.IIRV != null) {
+                for (int i = 0; i < cbIIRV.getItemCount(); i++) {
+                    if (cbIIRV.getItemAt(i).code.equals(irrigApp.IIRV)) {
+                        cbIIRV.setSelectedIndex(i);
+                        break;
+                    }
+                }
+            } else {
+                cbIIRV.setSelectedIndex(0);
+            }
+        }
+        catch(Exception ex)
+        {
+            cbIIRV.setSelectedIndex(0);
+        }
     }
 
     public void SetNull() {
         irrigApp = null;
     }
 
+    private boolean isRice() {
+        if (FileX.general.crop != null && "RI".equals(FileX.general.crop.CropCode)) {
+            return true;
+        }
+        if (FileX.cultivars != null && FileX.cultivars.GetSize() > 0) {
+            FileXModel.Cultivar cul = (FileXModel.Cultivar) FileX.cultivars.GetAtIndex(0);
+            if ("RI".equals(cul.CR)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

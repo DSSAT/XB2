@@ -18,6 +18,7 @@ public class IrrigationApplication implements Cloneable {
     public Integer IDAY;
     public String IROP;
     public Float IRVAL;
+    public Integer IIRV;
     
     public Date getOrder(){
         return IDATE;
