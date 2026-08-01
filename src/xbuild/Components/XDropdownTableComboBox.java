@@ -323,17 +323,28 @@ public class XDropdownTableComboBox<E extends Object> extends JComboBox<E> {
         return "";
     }
 
+    private class XMetalComboBoxUI extends MetalComboBoxUI {
+        @Override
+        protected ComboPopup createPopup() {
+            return new ComboTablePopup(comboBox, table);
+        }
+    }
+
     @Override
     public void updateUI() {
+        if (getUI() != null && getUI().getClass().getSimpleName().equals("XMetalComboBoxUI")) {
+            return;
+        }
         super.updateUI();
-        EventQueue.invokeLater(() -> {
-            setUI(new MetalComboBoxUI() {
-                @Override
-                protected ComboPopup createPopup() {
-                    return new ComboTablePopup(comboBox, table);
+        if (table != null) {
+            setUI(new XMetalComboBoxUI());
+        } else {
+            EventQueue.invokeLater(() -> {
+                if (getUI() == null || !getUI().getClass().getSimpleName().equals("XMetalComboBoxUI")) {
+                    setUI(new XMetalComboBoxUI());
                 }
             });
-        });
+        }
     }
 
     @Override
