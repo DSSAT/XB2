@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,37 +56,83 @@ public class FileXService {
         FileX.isFileOpenned = true;
     }
     
-    public static void SaveFile(File file) {
-        FileWriter writer;
-        try {
-            writer = new FileWriter(file);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            return;
-        }
-        PrintWriter pw = new PrintWriter(writer);
+    /**
+     * Writes to a temp file first, then replaces the target.
+     * On failure the original file is left unchanged.
+     * @return true if save succeeded
+     */
+    public static boolean SaveFile(File file) {
+        File tempFile = new File(file.getAbsolutePath() + ".tmp");
+        PrintWriter pw = null;
 
-        GeneralService.Extract(pw);
-        TreatmentService.Extract(pw);
-        CultivarService.Extract(pw);
-        FieldService.Extract(pw);
-        SoilAnalysisService.Extract(pw);
-        InitialConditionService.Extract(pw);
-        PlantingDetailService.Extract(pw);
-        IrrigationService.Extract(pw);
-        FertilizerService.Extract(pw);
-        ResidueService.Extract(pw);
-        TillageService.Extract(pw);
-        EnvironmentService.Extract(pw);
-        HarvestService.Extract(pw);        
-        ChemicalApplicationService.Extract(pw);
-        SimulationControlService.Extract(pw);        
-        
         try {
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(FileX.class.getName()).log(Level.SEVERE, null, ex);
+            pw = new PrintWriter(new FileWriter(tempFile));
+
+            GeneralService.Extract(pw);
+            TreatmentService.Extract(pw);
+            CultivarService.Extract(pw);
+            FieldService.Extract(pw);
+            SoilAnalysisService.Extract(pw);
+            InitialConditionService.Extract(pw);
+            PlantingDetailService.Extract(pw);
+            IrrigationService.Extract(pw);
+            FertilizerService.Extract(pw);
+            ResidueService.Extract(pw);
+            TillageService.Extract(pw);
+            EnvironmentService.Extract(pw);
+            HarvestService.Extract(pw);
+            ChemicalApplicationService.Extract(pw);
+            SimulationControlService.Extract(pw);
+
+            pw.flush();
+            if (pw.checkError()) {
+                throw new IOException("Error writing file content");
+            }
+            pw.close();
+            pw = null;
+
+            try {
+                replaceFile(tempFile, file);
+            } catch (IOException replaceFailed) {
+                throw replaceFailed;
+            }
+
+            FileX.isFileOpenned = false;
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(FileXService.class.getName()).log(Level.SEVERE, "Save failed: " + file.getAbsolutePath(), ex);
+            if (tempFile.exists() && !tempFile.delete()) {
+                tempFile.deleteOnExit();
+            }
+            return false;
+        } finally {
+            if (pw != null) {
+                pw.close();
+            }
         }
-        FileX.isFileOpenned = false;
+    }
+
+    private static void replaceFile(File tempFile, File file) throws IOException {
+        try {
+            Files.move(tempFile.toPath(), file.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.ATOMIC_MOVE);
+            return;
+        } catch (IOException atomicFailed) {
+            // Fall through to non-atomic replace.
+        }
+
+        try {
+            Files.move(tempFile.toPath(), file.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING);
+            return;
+        } catch (IOException moveFailed) {
+            // Windows may keep read handles open after OpenFileX; overwrite contents instead.
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                Files.copy(tempFile.toPath(), out);
+            } finally {
+                tempFile.delete();
+            }
+        }
     }
 }

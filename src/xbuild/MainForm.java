@@ -504,6 +504,14 @@ Runtime.getRuntime().halt(0);
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
+        if (!referenceDataReady) {
+            JOptionPane.showMessageDialog(this,
+                    "Please wait, loading data...",
+                    "XB2",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         if (FileX.treatments.GetSize() == 0) {
             final ConfirmDialog d = new ConfirmDialog(this, true);
             d.show();
@@ -519,7 +527,6 @@ Runtime.getRuntime().halt(0);
         } else {
             saveFile();
         }
-        setFileDirty(false);
     }//GEN-LAST:event_jMenuSaveFileActionPerformed
 
     private void setFileDirty(boolean isDirty) {
@@ -529,11 +536,11 @@ Runtime.getRuntime().halt(0);
         });
     }
 
-    private void saveFile() {
+    private boolean saveFile() {
         IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
         
-        if(!saveFormConfirmation(currentFrame)){
-            return;
+        if(currentFrame != null && !saveFormConfirmation(currentFrame)){
+            return false;
         }
         
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
@@ -569,7 +576,17 @@ Runtime.getRuntime().halt(0);
         if (!path.exists()) {
             path.mkdirs();
         }
-        FileXService.SaveFile(file);
+
+        boolean saved = FileXService.SaveFile(file);
+        if (saved) {
+            setFileDirty(false);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Could not save the file. Your original file was not changed.\nPlease try again.",
+                    "Save failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return saved;
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
         onClose();
@@ -585,7 +602,9 @@ Runtime.getRuntime().halt(0);
                 return false;
             } else if (confirmSave == 0) //Yes
             {
-                saveFile();
+                if (!saveFile()) {
+                    return false;
+                }
             }
         }
 
@@ -607,6 +626,14 @@ Runtime.getRuntime().halt(0);
     }
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
+        if (!referenceDataReady) {
+            JOptionPane.showMessageDialog(this,
+                    "Please wait, loading data...",
+                    "XB2",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         JFileChooser fc = new JFileChooser(new Setup().GetDSSATPath());
         FileFilter filter1 = new ExtensionFileFilter("File x", new String[]{"x", "X"});
 
@@ -951,7 +978,11 @@ Runtime.getRuntime().halt(0);
     }//GEN-LAST:event_bnDeleteLevelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        onClose();
+        if (!onClose()) {
+            setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+            return;
+        }
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         dispose();
     }//GEN-LAST:event_formWindowClosing
 
