@@ -392,23 +392,17 @@
                     <Property name="text" type="java.lang.String" value="Please enter 4 Characters"/>
                   </Properties>
                 </Component>
-                <Component class="xbuild.Components.XFormattedTextField" name="txtYear">
+                <Component class="xbuild.Components.XTextField" name="txtYear">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                      <Format format="####" subtype="-1" type="5"/>
-                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtYearFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="xbuild.Components.XFormattedTextField" name="txtExperimentNumber">
+                <Component class="xbuild.Components.XTextField" name="txtExperimentNumber">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                      <Format format="##" subtype="-1" type="5"/>
-                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtExperimentNumberFocusLost"/>

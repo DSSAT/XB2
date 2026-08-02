@@ -200,6 +200,40 @@ public class GeneralService {
         // </editor-fold>
     }
     
+    /**
+     * Builds the FileX file name from the committed model (not from the UI
+     * widgets), so callers such as the save routine always get a name that
+     * matches the current Institute/Site/Year/Experiment values.
+     */
+    public static String GetFileXName(){
+        String year = general.Year == null ? "" : general.Year;
+        if (year.length() >= 4) {
+            year = year.substring(2, 4);
+        }
+
+        String institute = general.InstituteCode == null ? "" : general.InstituteCode;
+        String site = general.SiteCode == null ? "" : general.SiteCode;
+        String expNumber = general.ExperimentNumber == null ? "" : general.ExperimentNumber;
+
+        String doc = institute + site + year + Utils.PadLeft(expNumber, 2, '0');
+
+        if (general.FileType == ExperimentType.Experimental) {
+            if (general.crop != null && general.crop.CropCode != null && !"".equals(general.crop.CropCode)) {
+                doc += "." + general.crop.CropCode + "X";
+            }
+        } else if (general.FileType == ExperimentType.Sequential) {
+            doc += ".SQX";
+        } else if (general.FileType == ExperimentType.Seasonal) {
+            doc += ".SNX";
+        } else if (general.FileType == ExperimentType.Spatial) {
+            doc += ".GSX";
+        } else if (general.FileType == ExperimentType.Forecast) {
+            doc += ".FCX";
+        }
+
+        return doc;
+    }
+
     private static String getFileXType(){
         String fileXType = "";
         if(general.crop != null && general.crop.CropCode != null && !"".equals(general.crop.CropCode)){

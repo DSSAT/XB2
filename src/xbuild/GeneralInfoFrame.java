@@ -55,7 +55,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
 
         txtInstituteCode.setDocument(new LimitDocument(2));
         txtSiteCode.setDocument(new LimitDocument(2));
-        txtYear.setDocument(new LimitDocument(4));
+        txtYear.setDocument(new LimitDocument(4, true));
+        txtExperimentNumber.setDocument(new LimitDocument(2, true));
 
         cbFileType.setInit(FileX.general, "FileType", FileX.general.FileType.toString());
         if (FileX.general.FileType == ExperimentType.Experimental) {
@@ -134,8 +135,8 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jXLabel21 = new org.jdesktop.swingx.JXLabel();
         jXLabel28 = new org.jdesktop.swingx.JXLabel();
         jXLabel29 = new org.jdesktop.swingx.JXLabel();
-        txtYear = new xbuild.Components.XFormattedTextField();
-        txtExperimentNumber = new xbuild.Components.XFormattedTextField();
+        txtYear = new xbuild.Components.XTextField();
+        txtExperimentNumber = new xbuild.Components.XTextField();
         jXPanel2 = new org.jdesktop.swingx.JXPanel();
         jXLabel7 = new org.jdesktop.swingx.JXLabel();
         txtExperimentName = new xbuild.Components.XTextField();
@@ -266,11 +267,6 @@ public class GeneralInfoFrame extends IXInternalFrame {
         jXLabel29.setText("Please enter 4 Characters");
 
         txtYear.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        try {
-            txtYear.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
         txtYear.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtYearFocusLost(evt);
@@ -278,11 +274,6 @@ public class GeneralInfoFrame extends IXInternalFrame {
         });
 
         txtExperimentNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        try {
-            txtExperimentNumber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
         txtExperimentNumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtExperimentNumberFocusLost(evt);
@@ -854,7 +845,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     private org.jdesktop.swingx.JXLabel lblLevel1;
     private xbuild.Components.XTextField txtAddress;
     private xbuild.Components.XTextField txtExperimentName;
-    private xbuild.Components.XFormattedTextField txtExperimentNumber;
+    private xbuild.Components.XTextField txtExperimentNumber;
     private xbuild.Components.XFormattedTextField txtHAREA;
     private xbuild.Components.XFormattedTextField txtHARM;
     private xbuild.Components.XFormattedTextField txtHLEN;
@@ -869,7 +860,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     private xbuild.Components.XTextField txtPeople;
     private xbuild.Components.XTextField txtSite;
     private xbuild.Components.XTextField txtSiteCode;
-    private xbuild.Components.XFormattedTextField txtYear;
+    private xbuild.Components.XTextField txtYear;
     // End of variables declaration//GEN-END:variables
 
     public void actionPerformed(ActionEvent e) {
@@ -883,7 +874,7 @@ public class GeneralInfoFrame extends IXInternalFrame {
     protected String SetDocumentName() {
         String doc = "FileX";
         try {
-            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getText().substring(2) + Utils.PadLeft(txtExperimentNumber.getValue().toString(), 2, '0');
+            doc = txtInstituteCode.getText() + txtSiteCode.getText() + txtYear.getText().substring(2) + Utils.PadLeft(txtExperimentNumber.getText().trim(), 2, '0');
             if (cbFileType.getSelectedItem().toString().equals("Experimental") && !"".equals(FileX.general.crop.CropCode)) {
                 Crop crop = (Crop) cbCrop.getSelectedItem();
 

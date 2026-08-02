@@ -14,10 +14,18 @@ import javax.swing.text.*;
 public class LimitDocument extends PlainDocument  {
 
     private int limit;
+    private boolean digitsOnly;
+
     public LimitDocument(int limit)
     {
+        this(limit, false);
+    }
+
+    public LimitDocument(int limit, boolean digitsOnly)
+    {
         super();
-    setLimit(limit);  // store the limit
+        setLimit(limit);  // store the limit
+        this.digitsOnly = digitsOnly;
     }
     public final int getLimit()
     {
@@ -27,7 +35,19 @@ public class LimitDocument extends PlainDocument  {
     public void insertString(int offset, String s, AttributeSet attributeSet)
         throws BadLocationException
     {
-        if(offset < limit) // if we haven't reached the limit, insert the string
+        if (s == null) {
+            return;
+        }
+
+        if (digitsOnly) {
+            for (int i = 0; i < s.length(); i++) {
+                if (!Character.isDigit(s.charAt(i))) {
+                    return; // reject the whole insertion if any char is not a digit
+                }
+            }
+        }
+
+        if (getLength() + s.length() <= limit) // only insert while within the limit
     {
         super.insertString(offset,s,attributeSet);
     } // otherwise, just lose the string

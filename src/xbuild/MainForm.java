@@ -38,6 +38,7 @@ import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
 import FileXService.FileXService;
 import FileXService.FileXValidationService;
+import FileXService.GeneralService;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -544,6 +545,20 @@ Runtime.getRuntime().halt(0);
         }
         
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+
+        // Commit the field the user may still be editing so the model (and the
+        // file name derived from it) reflect the latest keystrokes before saving.
+        Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+        if (focusOwner instanceof xbuild.Components.XTextField) {
+            ((xbuild.Components.XTextField) focusOwner).performFocusLost(null);
+        } else if (focusOwner instanceof xbuild.Components.XFormattedTextField) {
+            ((xbuild.Components.XFormattedTextField) focusOwner).performFocusLost(null);
+        }
+
+        // Rebuild the file name from the committed model so it is never stale
+        // (e.g. Institute/Site/Year/Experiment were changed but the identifier
+        // field had not lost focus before Save was pressed).
+        root.setUserObject(GeneralService.GetFileXName());
 
         String target;
 

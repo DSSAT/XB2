@@ -1,10 +1,12 @@
 package FileXService;
 
+import DSSATModel.ExperimentType;
 import Extensions.Utils;
 import FileXModel.Comment;
 import FileXModel.FieldDetail;
 import static FileXModel.FileX.comments;
 import static FileXModel.FileX.fieldList;
+import static FileXModel.FileX.general;
 import FileXModel.FileXCommentList;
 import FileXModel.Section;
 import java.io.BufferedReader;
@@ -180,9 +182,11 @@ public class FieldService {
             }
 
 
-            // Skip the coordinate block entirely when every value is empty (-99),
+            // Spatial (GSX) experiments always need both tiers; for other file
+            // types skip the coordinate block when every value is empty (-99),
             // matching DSSAT sample files that omit it (e.g. DTCM7099.GSX).
-            if (!isCoordinateBlockEmpty()) {
+            boolean isSpatial = general.FileType == ExperimentType.Spatial;
+            if (isSpatial || !isCoordinateBlockEmpty()) {
                 pw.println("@L ...........XCRD ...........YCRD .....ELEV .............AREA .SLEN .FLWR .SLAS FLHST FHDUR");
                 for (int i = 0; i < fieldList.GetSize(); i++) {
                     Integer level = i + 1;
@@ -205,8 +209,9 @@ public class FieldService {
                 }
             }
 
-            // Likewise skip the flooding/bund block when every value is empty (-99).
-            if (!isBoundaryBlockEmpty()) {
+            // Likewise skip the flooding/bund block when every value is empty
+            // (-99), except for Spatial files which always keep it.
+            if (isSpatial || !isBoundaryBlockEmpty()) {
                 pw.println("@L PMALB  BDWD  BDHT");
                 for (int i = 0; i < fieldList.GetSize(); i++) {
                     Integer level = i + 1;
