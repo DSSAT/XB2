@@ -39,6 +39,10 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
         initComponents();
         this.irrig = (Irrigation) model;
         
+        if (!isRice()) {
+            jXTable1.removeColumn(jXTable1.getColumnModel().getColumn(3));
+        }
+        
         txtEFIR.addKeyListener(this);
 
         LoadIrrigationApp();
@@ -217,14 +221,14 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
             },
             new String [] {
-                "Day", "<html><p align='center'>Amount of Water<br>mm</p></html>", "Operation"
+                "Day", "<html><p align='center'>Amount of Water<br>mm</p></html>", "Operation", "Irrigation Type"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -402,10 +406,15 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
 
     private void bnDeleteLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteLayerActionPerformed
         int nRow = jXTable1.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-        model.removeRow(nRow);
-
         irrig.RemoveAt(nRow);
+        
+        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+        while(model.getRowCount() > 0)
+            model.removeRow(0);
+        
+        for (int i = 0; i < irrig.GetSize(); i++) {                        
+            model.addRow(SetRow(irrig.GetApp(i)));
+        }
         
         EventQueue.invokeLater(() -> {
             rdDaysAfterPlantingStateChanged(null);
@@ -436,11 +445,15 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
                 public void windowClosed(WindowEvent e) {
                     IrrigationApplication irrigApp = appDialog.GetData();
                     if(irrigApp != null){
-                        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
                         irrig.SetAt(nRow, irrigApp);
-                        Object[] row = SetRow(irrigApp);
-                        for (int n = 0; n < row.length; n++)
-                            model.setValueAt(row[n], jXTable1.getSelectedRow(), n);
+                        
+                        DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
+                        while(model.getRowCount() > 0)
+                            model.removeRow(0);
+                        
+                        for (int i = 0; i < irrig.GetSize(); i++) {                        
+                            model.addRow(SetRow(irrig.GetApp(i)));
+                        }
                     }
                     appDialog.SetNull();
                 }
@@ -518,15 +531,29 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
             return new Object[]{
                 Variables.getDateFormat().format(irrigApp.IDATE),
                 irrigApp.IRVAL,
-                IrrigationMethodList.GetAt(irrigApp.IROP).Description
+                IrrigationMethodList.GetAt(irrigApp.IROP).Description,
+                getIIRVDescription(irrigApp.IIRV)
             };
         } catch (Exception ex) {
             return new Object[]{
                 irrigApp.IDAY,
                 irrigApp.IRVAL,
-                IrrigationMethodList.GetAt(irrigApp.IROP).Description
+                IrrigationMethodList.GetAt(irrigApp.IROP).Description,
+                getIIRVDescription(irrigApp.IIRV)
             };
         }
+    }
+
+    private String getIIRVDescription(Integer iirv) {
+        if (iirv == null) {
+            return "";
+        }
+        if (iirv == 0) {
+            return "0";
+        }
+        String iropCode = "IR" + String.format("%03d", iirv);
+        DSSATModel.BaseModel method = IrrigationMethodList.GetAt(iropCode);
+        return method != null ? method.Description : String.valueOf(iirv);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -577,5 +604,18 @@ public class IrrigationFrame extends IXInternalFrame implements KeyListener {
     @Override
     public boolean isModelValid() {
         return true;
+    }
+
+    private boolean isRice() {
+        if (FileX.general.crop != null && "RI".equals(FileX.general.crop.CropCode)) {
+            return true;
+        }
+        if (FileX.cultivars != null && FileX.cultivars.GetSize() > 0) {
+            FileXModel.Cultivar cul = (FileXModel.Cultivar) FileX.cultivars.GetAtIndex(0);
+            if ("RI".equals(cul.CR)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

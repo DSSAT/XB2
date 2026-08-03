@@ -1,5 +1,6 @@
 package FileXService;
 
+import DSSATModel.EnvironmentFactor;
 import DSSATModel.EnvironmentFactorList;
 import Extensions.Utils;
 import FileXModel.Comment;
@@ -68,21 +69,21 @@ public class EnvironmentService {
 
                     try{
                         envApp.ODATE = Utils.GetDate(environmentHeader, tmp, "ODATE", 5);
-                        envApp.EDAY_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDAY", 1));
+                        envApp.EDAY_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "EDAY", 1));
                         envApp.EDAY = Utils.GetDouble(environmentHeader, tmp, "EDAY ", 3);
-                        envApp.ERAD_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAD", 1));
+                        envApp.ERAD_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "ERAD", 1));
                         envApp.ERAD = Utils.GetDouble(environmentHeader, tmp, "ERAD ", 3);
-                        envApp.EMAX_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMAX", 1));
+                        envApp.EMAX_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "EMAX", 1));
                         envApp.EMAX = Utils.GetDouble(environmentHeader, tmp, "EMAX ", 3);
-                        envApp.EMIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EMIN", 1));
+                        envApp.EMIN_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "EMIN", 1));
                         envApp.EMIN = Utils.GetDouble(environmentHeader, tmp, "EMIN ", 3);
-                        envApp.ERAIN_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ERAIN", 1));
+                        envApp.ERAIN_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "ERAIN", 1));
                         envApp.ERAIN = Utils.GetDouble(environmentHeader, tmp, "ERAIN", 3);
-                        envApp.ECO2_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "ECO2", 1));
+                        envApp.ECO2_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "ECO2", 1));
                         envApp.ECO2 = Utils.GetDouble(environmentHeader, tmp, "ECO2 ", 3);
-                        envApp.EDEW_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EDEW", 1));
+                        envApp.EDEW_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "EDEW", 1));
                         envApp.EDEW = Utils.GetDouble(environmentHeader, tmp, "EDEW ", 3);
-                        envApp.EWIND_Fact = EnvironmentFactorList.GetAt(0, Utils.GetString(environmentHeader, tmp, "EWIND", 1));
+                        envApp.EWIND_Fact = resolveFactor(Utils.GetString(environmentHeader, tmp, "EWIND", 1));
                         envApp.EWIND = Utils.GetDouble(environmentHeader, tmp, " EWIND", 3);
                         env.ENVNAME = Utils.GetString(environmentHeader, tmp, "ENVNAME", tmp.length() - environmentHeader.indexOf("ENVNAME"));
                         env.AddApp(envApp);
@@ -125,22 +126,22 @@ public class EnvironmentService {
                         pw.print(" " + Utils.PadLeft("-99", 5, ' '));
                     }
 
-                    pw.print(" " + envApp.EDAY_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDAY.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.ERAD_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ERAD.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.EMAX_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMAX.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.EMIN_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EMIN.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.ERAIN_Fact.Code);
-                    pw.print(Utils.PadLeft(df1.format(envApp.ERAIN), 4, ' '));
-                    pw.print(" " + envApp.ECO2_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.ECO2.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.EDEW_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EDEW.toString(), 4, ' ', false));
-                    pw.print(" " + envApp.EWIND_Fact.Code);
-                    pw.print(Utils.PadLeft(envApp.EWIND.toString(), 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.EDAY_Fact));
+                    pw.print(Utils.PadLeft(envApp.EDAY != null ? envApp.EDAY.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.ERAD_Fact));
+                    pw.print(Utils.PadLeft(envApp.ERAD != null ? envApp.ERAD.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.EMAX_Fact));
+                    pw.print(Utils.PadLeft(envApp.EMAX != null ? envApp.EMAX.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.EMIN_Fact));
+                    pw.print(Utils.PadLeft(envApp.EMIN != null ? envApp.EMIN.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.ERAIN_Fact));
+                    pw.print(Utils.PadLeft(envApp.ERAIN != null ? df1.format(envApp.ERAIN) : null, 4, ' '));
+                    pw.print(" " + factorCode(envApp.ECO2_Fact));
+                    pw.print(Utils.PadLeft(envApp.ECO2 != null ? envApp.ECO2.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.EDEW_Fact));
+                    pw.print(Utils.PadLeft(envApp.EDEW != null ? envApp.EDEW.toString() : null, 4, ' ', false));
+                    pw.print(" " + factorCode(envApp.EWIND_Fact));
+                    pw.print(Utils.PadLeft(envApp.EWIND != null ? envApp.EWIND.toString() : null, 4, ' ', false));
                     if (env.ENVNAME != null) {
                         pw.print(" " + env.ENVNAME);
                     } else {
@@ -155,5 +156,23 @@ public class EnvironmentService {
             }
         }
         // </editor-fold>
+    }
+
+    private static EnvironmentFactor resolveFactor(String code) {
+        EnvironmentFactor fact = EnvironmentFactorList.GetAt(0, code);
+        if (fact != null) {
+            return fact;
+        }
+        if (code == null || "".equals(code.trim())) {
+            return null;
+        }
+        fact = new EnvironmentFactor();
+        fact.Code = code.trim();
+        fact.Description = code.trim();
+        return fact;
+    }
+
+    private static String factorCode(EnvironmentFactor fact) {
+        return fact != null && fact.Code != null ? fact.Code : "A";
     }
 }

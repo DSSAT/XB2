@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import xbuild.LoadingDataFrame;
 
 /**
  *
@@ -64,12 +63,12 @@ public class DSSATProfileRepository {
         try {
             br.close();
         } catch (IOException ex) {
-            Logger.getLogger(LoadingDataFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DSSATProfileRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             file.close();
         } catch (IOException ex) {
-            Logger.getLogger(LoadingDataFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DSSATProfileRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // </editor-fold>

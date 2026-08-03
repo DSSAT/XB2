@@ -77,6 +77,8 @@ public class SoilService extends DSSATServiceBase {
             }
         }
 
+        SoilList.Sort();
+
         if (!isValid) {
             throw new Exception(invalidResult);
         }

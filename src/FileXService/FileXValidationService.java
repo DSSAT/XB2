@@ -218,9 +218,8 @@ public class FileXValidationService {
     public static boolean isPlantingValid(Planting planting) {
         boolean isValid = true;
 
-        if (planting.PDATE == null) {
-            isValid = false;
-        } else if (planting.PLME == null || "".equals(planting.PLME)) {
+        // PDATE null represents -99 in the file (valid for automatic/F-mode planting per SIMULATION.CDE)
+        if (planting.PLME == null || "".equals(planting.PLME)) {
             isValid = false;
         } else if (planting.PLDS == null || "".equals(planting.PLDS)) {
             isValid = false;
@@ -235,7 +234,7 @@ public class FileXValidationService {
         }
         return isValid;
     }
-    
+
     public static boolean isSimulationControlsValid() {
         boolean isValid = true;
         if (FileX.simulationList == null || FileX.simulationList.GetSize() == 0) {
@@ -279,6 +278,9 @@ public class FileXValidationService {
         if(FileX.plantings != null){
             for (ModelXBase planting : FileX.plantings.GetAll()) {
                 Planting p = (Planting) planting;
+                if (p.PDATE == null) {
+                    continue;
+                }
                 isValid &= simulationDate.before(p.PDATE) || simulationDate.equals(p.PDATE);
             }
         }

@@ -20,6 +20,8 @@ import java.awt.Toolkit;
 import java.awt.event.AdjustmentEvent;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.*;
 import xbuild.Events.LoadingDoneEvent;
@@ -34,32 +36,134 @@ import xbuild.Events.XEventListener;
  */
 public class LoadingDataFrame extends javax.swing.JFrame {
 
+    private static final int IO_POOL_SIZE = 4;
+    private static final ExecutorService IO_EXECUTOR = Executors.newFixedThreadPool(IO_POOL_SIZE);
+
     /** Creates new form LoadingData */
-    private Task task;
+    private Phase1Task phase1Task;
     protected String dir;
-    private boolean isValid = true;   
+    private boolean isValid = true;
     private boolean isDone = false;
-    private String validationMessage = ""; 
+    private String validationMessage = "";
     private final Object messageLock = new Object();
-    private final AtomicBoolean hasError = new AtomicBoolean(false); 
-    
+    private final AtomicBoolean hasError = new AtomicBoolean(false);
+
     protected XEventListener listener;
     private LoadingEventListener laodingEvent;
 
-    class Task extends SwingWorker<Void, Void> {
-        /*
-         * Main task. Executed in background thread.
-         */
+    abstract class LoadingTask extends SwingWorker<Void, Void> {
+
+        protected boolean parseDssatProfile() {
+            try {
+                appendMessage("Loading DSSAT profile....");
+                DSSATProfileService dssatProfileService = new DSSATProfileService(dir);
+                dssatProfileService.Parse();
+                appendMessage("<font color='green'>!Done</font><br>");
+                return true;
+            } catch (Exception ex) {
+                appendMessage("<font color='red'>!Error</font><br>");
+                isValid = false;
+                return false;
+            }
+        }
+
+        protected void parseService(DSSATServiceBase service) {
+            try {
+                appendMessage("Loading " + service.getName() + "....<br>");
+                service.Parse();
+                appendMessage("<font color='green'>" + service.getName() + " Done!</font><br>");
+            } catch (Exception ex) {
+                hasError.set(true);
+                isValid = false;
+                appendMessage("<font color='red'>" + service.getName() + " Error!</font><br>");
+                if (ex.getMessage() != null) {
+                    for (String message : ex.getMessage().split("\n")) {
+                        appendMessage("<div style='padding-left:25px'><font color='red'>" + message + "</font></div>");
+                    }
+                }
+            }
+        }
+
+        protected void parseServicesInParallel(ArrayList<DSSATServiceBase> services) {
+            CompletableFuture<?>[] futures = services.stream()
+                    .map(service -> CompletableFuture.runAsync(() -> parseService(service), IO_EXECUTOR))
+                    .toArray(CompletableFuture[]::new);
+
+            try {
+                CompletableFuture.allOf(futures).join();
+                if (hasError.get()) {
+                    isValid = false;
+                }
+            } catch (Exception ex) {
+                isValid = false;
+            }
+        }
+
+        protected void appendMessage(String message) {
+            synchronized (messageLock) {
+                validationMessage += message;
+                SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
+            }
+        }
+
+        protected void fireLoaded(LoadingDoneEvent.Phase phase) {
+            if (laodingEvent != null) {
+                laodingEvent.onLoaded(new LoadingDoneEvent(this, isValid, phase));
+            }
+        }
+    }
+
+    class Phase1Task extends LoadingTask {
+
         @Override
         public Void doInBackground() {
-            //int progress = 0;
-            //Initialize progress property.
             setProgress(0);
             Variables.setLocale(getLocale());
-            
-            ArrayList<DSSATServiceBase> parseList = new ArrayList<>();            
-            
-            parseList.add(new CropService(dir));
+            isValid = true;
+            hasError.set(false);
+
+            jScrollPane2.getVerticalScrollBar().addAdjustmentListener((AdjustmentEvent e) -> {
+                ttt(e);
+            });
+
+            if (!parseDssatProfile()) {
+                return null;
+            }
+
+            parseService(new CropService(dir));
+            parseService(new SimulationService(dir));
+
+            try {
+                appendMessage("Loading Simulation Default....");
+                SimulationDefaultService simulationDefaultService = new SimulationDefaultService(dir);
+                simulationDefaultService.Parse();
+                appendMessage("<font color='green'>!Done</font><br>");
+            } catch (Exception ex) {
+                appendMessage("<font color='red'>!Error</font><br>");
+                isValid = false;
+            }
+
+            Icons.Init(getClass());
+
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            fireLoaded(LoadingDoneEvent.Phase.ESSENTIAL);
+
+            phase1Task = null;
+            Phase2Task phase2Task = new Phase2Task();
+            phase2Task.execute();
+        }
+    }
+
+    class Phase2Task extends LoadingTask {
+
+        @Override
+        public Void doInBackground() {
+            ArrayList<DSSATServiceBase> parseList = new ArrayList<>();
+
             parseList.add(new ChemicalService(dir));
             parseList.add(new DrainageService(dir));
             parseList.add(new SoilTextureService(dir));
@@ -75,134 +179,47 @@ public class LoadingDataFrame extends javax.swing.JFrame {
             parseList.add(new HarvestComponentService(dir));
             parseList.add(new HarvestSizeService(dir));
             parseList.add(new FieldHistoryService(dir));
-            parseList.add(new SimulationService(dir));
             parseList.add(new SoilService(dir));
             parseList.add(new WeatherService(dir));
-            
-            jScrollPane2.getVerticalScrollBar().addAdjustmentListener((AdjustmentEvent e) -> {ttt(e);});
 
-            try{
-                validationMessage += "Loading DSSAT profile....";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                DSSATProfileService dssatProfileService = new DSSATProfileService(dir);
-                dssatProfileService.Parse();
-                
-                validationMessage += "<font color='green'>!Done</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-            }
-            catch(Exception ex){
-                validationMessage += "<font color='red'>!Error</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                isValid = false;
-            }
-            
-            // Process services in parallel
-//            ConcurrentHashMap<String, String> serviceResults = new ConcurrentHashMap<>();
-            
-            CompletableFuture<Void>[] futures = parseList.stream()
-                .map(service -> CompletableFuture.runAsync(() -> {
-                    try {
-                        synchronized(messageLock) {
-                            validationMessage += "Loading " + service.getName() + "....<br>";
-                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
-                        }
-                        
-                        service.Parse();
-                        
-                        synchronized(messageLock) {
-                            validationMessage += "<font color='green'>" + service.getName() + " Done!</font><br>";
-                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
-                        }
-                        
-                    } catch (Exception ex) {
-                        hasError.set(true);
-                        synchronized(messageLock) {
-                            validationMessage += "<font color='red'>" + service.getName() + " Error!</font><br>";
-                            for(String message : ex.getMessage().split("\n")){
-                                validationMessage += "<div style='padding-left:25px'><font color='red'>" + message + "</font></div>";
-                            }
-                            SwingUtilities.invokeLater(() -> jLabel1.setText("<html>" + validationMessage + "</html>"));
-                        }
-                    }
-                }))
-                .toArray(CompletableFuture[]::new);
-            
-            // Wait for all services to complete
+            parseServicesInParallel(parseList);
+
             try {
-                CompletableFuture.allOf(futures).join();
-                if (hasError.get()) {
-                    isValid = false;
-                }
-            } catch (Exception ex) {
-                isValid = false;
-            }
-            
-            try{
-                validationMessage += "Loading Simulation Default....";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                    
-                SimulationDefaultService simulationDefaultService = new SimulationDefaultService(dir);
-                simulationDefaultService.Parse();
-                
-                validationMessage += "<font color='green'>!Done</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-            }
-            catch(Exception ex){
-                validationMessage += "<font color='red'>!Error</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                isValid = false;
-            }
-            
-            try{
                 GrowthStageService gService = new GrowthStageService(dir);
-                validationMessage += "Loading " + gService.getName() + " Default....";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-                    
+                appendMessage("Loading " + gService.getName() + " Default....");
                 gService.Parse();
-                
-                validationMessage += "<font color='green'>!Done</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-            }
-            catch(Exception ex){
-                validationMessage += "<font color='red'>!Error</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
+                appendMessage("<font color='green'>!Done</font><br>");
+            } catch (Exception ex) {
+                appendMessage("<font color='red'>!Error</font><br>");
                 isValid = false;
             }
-            
-            if(isValid){
-                validationMessage += "<font color='green'>!Done</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
+
+            if (isValid) {
+                appendMessage("<font color='green'>!Done</font><br>");
+            } else {
+                appendMessage("<font color='red'>!Some of configurations are failed</font><br>");
             }
-            else{
-                validationMessage += "<font color='red'>!Some of configurations are failed</font><br>";
-                jLabel1.setText("<html>" + validationMessage + "</html>");
-            }
-            
-            Icons.Init(getClass());
-            
+
             isDone = true;
 
             return null;
         }
 
-        /*
-         * Executed in event dispatching thread
-         */
         @Override
-        public void done() {
+        protected void done() {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-            
-            laodingEvent.onLoaded(new LoadingDoneEvent(this, isValid));
-            
-            if(!isValid){
+            fireLoaded(LoadingDoneEvent.Phase.COMPLETE);
+
+            if (!isValid) {
                 setVisible(true);
             }
         }
     }
-    
+
     private void ttt(AdjustmentEvent e) {
-        if(!isDone)
+        if (!isDone) {
             e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+        }
     }
 
     public LoadingDataFrame(String dir) {
@@ -215,10 +232,10 @@ public class LoadingDataFrame extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         Dimension winSize = getSize();
-        setLocation((screenWidth - winSize.width) / 2 , (screenHeight - winSize.height) / 2);
+        setLocation((screenWidth - winSize.width) / 2, (screenHeight - winSize.height) / 2);
     }
-    
-    public void addListener(LoadingEventListener lEvent){
+
+    public void addListener(LoadingEventListener lEvent) {
         this.laodingEvent = lEvent;
     }
 
@@ -268,14 +285,15 @@ public class LoadingDataFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void startTask() {
-        // TODO add your handling code here:
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        //Instances of javax.swing.SwingWorker are not reusuable, so
-        //we create new instances as needed.
-        task = new Task();
-        task.execute();
+        isDone = false;
+        validationMessage = "";
+        isValid = true;
+        hasError.set(false);
+        phase1Task = new Phase1Task();
+        phase1Task.execute();
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

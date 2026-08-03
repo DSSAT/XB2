@@ -215,7 +215,10 @@ public abstract class IXInternalFrame extends JInternalFrame implements XEventLi
                     imagePanel.setIcon(imageIcon);
                 } catch (IOException ex) {
                     Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
+                    imagePanel.setIcon(null);
                 }
+            } else {
+                imagePanel.setIcon(null);
             }
         });
     }

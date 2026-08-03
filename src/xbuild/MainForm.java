@@ -38,6 +38,7 @@ import javax.swing.tree.DefaultTreeModel;
 import org.jdesktop.swingx.JXFrame;
 import FileXService.FileXService;
 import FileXService.FileXValidationService;
+import FileXService.GeneralService;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,9 +140,13 @@ public class MainForm extends javax.swing.JFrame implements XEventListener {
 
     private TreeSelectionListener[] treeSelectionListener;
     private MouseAdapter[] mouseAdapter;
+    private boolean referenceDataReady = true;
+
+    public void setReferenceDataReady(boolean ready) {
+        this.referenceDataReady = ready;
+    }
 
     public MainForm() {
-        
         this.treeListener = (TreeSelectionEvent evt) -> {
             oldPath = evt.getOldLeadSelectionPath();
             newPath = evt.getNewLeadSelectionPath();
@@ -436,15 +441,19 @@ Runtime.getRuntime().halt(0);
         Setup setup = new Setup();
         LoadingDataFrame loadingFrame = new LoadingDataFrame(setup.GetDSSATPath());
         loadingFrame.setVisible(true);
-        loadingFrame.startTask();
+        setReferenceDataReady(false);
         loadingFrame.addListener(new LoadingEventListener() {
             @Override
             public void onLoaded(LoadingDoneEvent e) {
-                if(e.isValid()) {
-                    loadingFrame.setVisible(false);
+                if (e.getPhase() == LoadingDoneEvent.Phase.COMPLETE) {
+                    setReferenceDataReady(e.isValid());
+                    if (e.isValid()) {
+                        loadingFrame.setVisible(false);
+                    }
                 }
             }
         });
+        loadingFrame.startTask();
 }//GEN-LAST:event_jMenuRefreshMouseClicked
 
     private void jSetupMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSetupMenuMouseClicked
@@ -496,6 +505,14 @@ Runtime.getRuntime().halt(0);
     }//GEN-LAST:event_jMenuNewFileActionPerformed
 
     private void jMenuSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaveFileActionPerformed
+        if (!referenceDataReady) {
+            JOptionPane.showMessageDialog(this,
+                    "Please wait, loading data...",
+                    "XB2",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         if (FileX.treatments.GetSize() == 0) {
             final ConfirmDialog d = new ConfirmDialog(this, true);
             d.show();
@@ -511,7 +528,6 @@ Runtime.getRuntime().halt(0);
         } else {
             saveFile();
         }
-        setFileDirty(false);
     }//GEN-LAST:event_jMenuSaveFileActionPerformed
 
     private void setFileDirty(boolean isDirty) {
@@ -521,14 +537,28 @@ Runtime.getRuntime().halt(0);
         });
     }
 
-    private void saveFile() {
+    private boolean saveFile() {
         IXInternalFrame currentFrame = (IXInternalFrame) desktopPane.getSelectedFrame();
         
-        if(!saveFormConfirmation(currentFrame)){
-            return;
+        if(currentFrame != null && !saveFormConfirmation(currentFrame)){
+            return false;
         }
         
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+
+        // Commit the field the user may still be editing so the model (and the
+        // file name derived from it) reflect the latest keystrokes before saving.
+        Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+        if (focusOwner instanceof xbuild.Components.XTextField) {
+            ((xbuild.Components.XTextField) focusOwner).performFocusLost(null);
+        } else if (focusOwner instanceof xbuild.Components.XFormattedTextField) {
+            ((xbuild.Components.XFormattedTextField) focusOwner).performFocusLost(null);
+        }
+
+        // Rebuild the file name from the committed model so it is never stale
+        // (e.g. Institute/Site/Year/Experiment were changed but the identifier
+        // field had not lost focus before Save was pressed).
+        root.setUserObject(GeneralService.GetFileXName());
 
         String target;
 
@@ -561,7 +591,17 @@ Runtime.getRuntime().halt(0);
         if (!path.exists()) {
             path.mkdirs();
         }
-        FileXService.SaveFile(file);
+
+        boolean saved = FileXService.SaveFile(file);
+        if (saved) {
+            setFileDirty(false);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Could not save the file. Your original file was not changed.\nPlease try again.",
+                    "Save failed",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return saved;
     }
     private void jMenuCloseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCloseFileActionPerformed
         onClose();
@@ -577,7 +617,9 @@ Runtime.getRuntime().halt(0);
                 return false;
             } else if (confirmSave == 0) //Yes
             {
-                saveFile();
+                if (!saveFile()) {
+                    return false;
+                }
             }
         }
 
@@ -599,6 +641,14 @@ Runtime.getRuntime().halt(0);
     }
 
     private void jMenuOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpenFileActionPerformed
+        if (!referenceDataReady) {
+            JOptionPane.showMessageDialog(this,
+                    "Please wait, loading data...",
+                    "XB2",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         JFileChooser fc = new JFileChooser(new Setup().GetDSSATPath());
         FileFilter filter1 = new ExtensionFileFilter("File x", new String[]{"x", "X"});
 
@@ -618,8 +668,13 @@ Runtime.getRuntime().halt(0);
             int row = jXTree1.getClosestRowForLocation(evt.getX(), evt.getY());
             jXTree1.setSelectionRow(row);
         }
-        
-        int row = jXTree1.getSelectionRows()[0];
+
+        int[] selectionRows = jXTree1.getSelectionRows();
+        if (selectionRows == null || selectionRows.length == 0) {
+            return;
+        }
+
+        int row = selectionRows[0];
         
         jXTree1.setSelectionRow(row);
 
@@ -630,6 +685,10 @@ Runtime.getRuntime().halt(0);
 
         boolean enabled = true;
         String nodeName = node.toString();
+
+        if (!referenceDataReady && !"General Information".equals(nodeName)) {
+            return;
+        }
 
         if (node.getParent() != null && !nodeName.equals("General Information")) {
             enabled = FileXValidationService.isGeneralValid();
@@ -939,7 +998,11 @@ Runtime.getRuntime().halt(0);
     }//GEN-LAST:event_bnDeleteLevelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        onClose();
+        if (!onClose()) {
+            setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+            return;
+        }
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         dispose();
     }//GEN-LAST:event_formWindowClosing
 
@@ -1343,6 +1406,8 @@ Runtime.getRuntime().halt(0);
 
         DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
         model.reload(targetNode);
+
+        refreshGeneralInfoCropImage(e.getParent());
     }
 
     @Override
@@ -1387,6 +1452,8 @@ Runtime.getRuntime().halt(0);
         }
 
         model.reload(targetNode);
+
+        refreshGeneralInfoCropImage(e.getParent());
     }
 
     @Override
@@ -1424,6 +1491,22 @@ Runtime.getRuntime().halt(0);
             DefaultTreeModel model = (DefaultTreeModel) jXTree1.getModel();
             model.reload(targetNode);
         }
+
+        refreshGeneralInfoCropImage(e.getParent());
+    }
+
+    private void refreshGeneralInfoCropImage(String parent) {
+        if (!"Cultivars".equals(parent)) {
+            return;
+        }
+
+        EventQueue.invokeLater(() -> {
+            for (JInternalFrame frame : desktopPane.getAllFrames()) {
+                if (frame instanceof GeneralInfoFrame) {
+                    ((GeneralInfoFrame) frame).refreshCropImage();
+                }
+            }
+        });
     }
 
     @Override
@@ -1780,59 +1863,74 @@ Runtime.getRuntime().halt(0);
     }
 
     public void openFile(File file) {
-        
-        EventQueue.invokeLater(() -> {
-            ResetTree();
-        
-            FileXService.OpenFileX(file);
+        jMenuOpenFile.setEnabled(false);
+        setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
 
+        EventQueue.invokeLater(() -> {
+            for (JInternalFrame innerFrame : desktopPane.getAllFrames()) {
+                innerFrame.dispose();
+            }
+            ResetTree();
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
             root.setUserObject(file.getName());
-
-            AddTreeMenu("Environment", "Fields");
-            AddTreeMenu("Environment", "Initial Conditions");
-            AddTreeMenu("Environment", "Soil Analysis");
-            AddTreeMenu("Environment", "Environmental Modifications");
-            AddTreeMenu("Management", "Cultivars");
-            AddTreeMenu("Management", "Planting");
-            AddTreeMenu("Management", "Irrigation");
-            AddTreeMenu("Management", "Fertilizer");
-            AddTreeMenu("Management", "Organic Amendments");
-            AddTreeMenu("Management", "Tillage");
-            AddTreeMenu("Management", "Harvest");
-            AddTreeMenu("Management", "Chemical Applications");
-            AddTreeMenu(root, "Simulation Controls");
-            AddTreeMenu(root, "Treatments");
-
-            jXTree1.collapseAll();
-            jXTree1.expandAll();
             jXTree1.setVisible(true);
-
-            GeneralInfoFrame generalFrame = new GeneralInfoFrame();
-
-            setRootPaneCheckingEnabled(false);
-            javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
-            ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
-
-            desktopPane.add(generalFrame);
-            try {
-                generalFrame.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            generalFrame.show();
-            generalFrame.addMyEventListener(this);
-
-            jMenuNewFile.setEnabled(false);
-            jMenuSaveFile.setEnabled(true);
-            jMenuCloseFile.setEnabled(true);
-            jMenuOpenFile.setEnabled(false);
-
-            FileX.isReady = true;
-
-            setAddDeleteButton();
-            setPrevNextButton();
         });
+
+        new Thread(() -> {
+            FileXService.OpenFileX(file);
+
+            EventQueue.invokeLater(() -> {
+                ResetTree();
+            
+                DefaultMutableTreeNode root = (DefaultMutableTreeNode) jXTree1.getModel().getRoot();
+                root.setUserObject(file.getName());
+
+                AddTreeMenu("Environment", "Fields");
+                AddTreeMenu("Environment", "Initial Conditions");
+                AddTreeMenu("Environment", "Soil Analysis");
+                AddTreeMenu("Environment", "Environmental Modifications");
+                AddTreeMenu("Management", "Cultivars");
+                AddTreeMenu("Management", "Planting");
+                AddTreeMenu("Management", "Irrigation");
+                AddTreeMenu("Management", "Fertilizer");
+                AddTreeMenu("Management", "Organic Amendments");
+                AddTreeMenu("Management", "Tillage");
+                AddTreeMenu("Management", "Harvest");
+                AddTreeMenu("Management", "Chemical Applications");
+                AddTreeMenu(root, "Simulation Controls");
+                AddTreeMenu(root, "Treatments");
+
+                jXTree1.collapseAll();
+                jXTree1.expandAll();
+                jXTree1.setVisible(true);
+
+                GeneralInfoFrame generalFrame = new GeneralInfoFrame();
+
+                setRootPaneCheckingEnabled(false);
+                javax.swing.plaf.InternalFrameUI ui = generalFrame.getUI();
+                ((javax.swing.plaf.basic.BasicInternalFrameUI) ui).setNorthPane(null);
+
+                desktopPane.add(generalFrame);
+                try {
+                    generalFrame.setMaximum(true);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                generalFrame.show();
+                generalFrame.addMyEventListener(this);
+
+                jMenuNewFile.setEnabled(false);
+                jMenuSaveFile.setEnabled(true);
+                jMenuCloseFile.setEnabled(true);
+
+                FileX.isReady = true;
+
+                setAddDeleteButton();
+                setPrevNextButton();
+                
+                setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
+            });
+        }).start();
     }
 }
 

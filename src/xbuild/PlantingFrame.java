@@ -39,7 +39,7 @@ public class PlantingFrame extends IXInternalFrame {
         this.planting = (Planting) model;
         
         initComponents();
-        dpPDATE.Init(this.planting, "PDATE", this.planting.PDATE);
+        dpPDATE.Init(this.planting, "PDATE", this.planting.PDATE, true);
         dpEDATE.Init(this.planting, "EDATE", this.planting.EDATE, true);
         
         
