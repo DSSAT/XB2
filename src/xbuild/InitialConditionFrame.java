@@ -92,8 +92,18 @@ public class InitialConditionFrame extends IXInternalFrame {
         Collections.sort(soils);
         cbSoil.setInit(null, "", "", soils);
         if (!soils.isEmpty()) {
-            cbSoil.setSelectedIndex(0);
+            cbSoil.setSelectedIndex(getDefaultSoilIndex(soils));
         }
+
+        // Recalculate Volumetric Water / NH4 / NO3 whenever the user picks a
+        // different soil Profile - previously nothing happened on selection
+        // change, so the table kept showing values from whichever soil was
+        // selected when the frame opened.
+        cbSoil.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+                recalculateForSelectedProfile();
+            }
+        });
 
         setImage(imagePanel, "InCond2.jpg");
         setRecalculateButtonEnabled();
@@ -1133,16 +1143,44 @@ public class InitialConditionFrame extends IXInternalFrame {
             }
         }
         else{
+            // No rows exist yet (e.g. all layers were deleted) and only
+            // Water was recalculated, so seed NH4/NO3 with the same default
+            // 25 kg[N]/ha, 10%/90% NH4/NO3 split used elsewhere, derived
+            // from this Profile's bulk density - not a hardcoded/unrelated
+            // value.
+            ArrayList<Float> Depth_Calculated = new ArrayList<>();
+            ArrayList<Float> BulkDensity = new ArrayList<>();
+            boolean isdataMissing = false;
+            for (SoilProfile profile : soil.GetSoilProfiles()) {
+                Depth_Calculated.add(profile.SLB);
+                BulkDensity.add(profile.SBDM);
+                if (profile.SBDM == null) {
+                    isdataMissing = true;
+                }
+            }
+
+            Float BD_Average = 1.2f;
+            if (!isdataMissing) {
+                BD_Average = BulkDensity.get(0) * Depth_Calculated.get(0) / Depth_Calculated.get(size);
+                for (int j = 1; j < Depth_Calculated.size(); j++) {
+                    BD_Average += BulkDensity.get(j) * (Depth_Calculated.get(j) - Depth_Calculated.get(j - 1)) / Depth_Calculated.get(size);
+                }
+            }
+
+            float defaultNitrogen = 25f;
+            Float SNH4_Default = (0.1f * defaultNitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+            Float SNO3_Default = (0.9f * defaultNitrogen) / (0.1f * BD_Average * Depth_Calculated.get(size));
+
             int i = 0;
             for (SoilProfile profile : soil.GetSoilProfiles()) {
                 InitialConditionApplication initApp = new InitialConditionApplication();
-                
+
                 initApp.ICBL = profile.SLB;
                 initApp.SH2O = Water_Calculated.get(i);
-                initApp.SNH4 = profile.SDUL;
-                initApp.SNO3 = 66f;
-                
-                
+                initApp.SNH4 = SNH4_Default;
+                initApp.SNO3 = SNO3_Default;
+
+
                 tbModel.addRow(SetRow(initApp));
                 i++;
             }
@@ -1270,6 +1308,56 @@ public class InitialConditionFrame extends IXInternalFrame {
         }
         
         return soil;
+    }
+
+    /**
+     * Picks the combo box index matching the soil Profile actually assigned
+     * to the experiment's field, instead of always defaulting to whichever
+     * soil happens to sort first alphabetically.
+     */
+    private int getDefaultSoilIndex(ArrayList<String> soils) {
+        for (ModelXBase x : FileX.fieldList.GetAll()) {
+            FieldDetail f = (FieldDetail) x;
+            Soil soil = SoilList.GetAt(f.ID_SOIL);
+            if (soil != null) {
+                String s = soil.Description + " (" + soil.Code + ")";
+                int idx = soils.indexOf(s);
+                if (idx >= 0) {
+                    return idx;
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Recalculates the whole table for the currently selected Profile,
+     * reusing whatever Water/Nitrogen values the user already typed (falling
+     * back to the same 100% / 25 kg[N]/ha defaults used when the record is
+     * first created).
+     */
+    private void recalculateForSelectedProfile() {
+        if (getSelectedSoil() == null) {
+            return;
+        }
+
+        float water = 100f;
+        if (!"".equals(txtWater.getText())) {
+            float w = Utils.ParseFloat(txtWater.getValue());
+            if (w >= 0 && w <= 100) {
+                water = w;
+            }
+        }
+
+        float nitrogen = 25f;
+        if (!"".equals(txtNitrogen.getText())) {
+            float n = Utils.ParseFloat(txtNitrogen.getValue());
+            if (n >= 0) {
+                nitrogen = n;
+            }
+        }
+
+        calculateInitialCondition(water, nitrogen);
     }
 
     @Override
