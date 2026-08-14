@@ -15,7 +15,7 @@
     <description>Create XB2 Java app for DSSAT</description>
 
     <!-- Version -->
-    <property name="version" value="v1.10.0.0" />
+    <property name="version" value="v1.11.0.0" />
 
     <target name="-pre-compile">
         <mkdir dir="build/mock-classes"/>
